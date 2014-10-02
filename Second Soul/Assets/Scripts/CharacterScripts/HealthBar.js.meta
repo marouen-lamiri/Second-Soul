@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: 2682ef0a5adacfd4aa54367816f6d1c4
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - globepic: {fileID: 2800000, guid: f1509300ecf435a459794095c364b60d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
