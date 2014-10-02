@@ -1,10 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterScripts\EnergyBar.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterScripts\Pausing.js">
     <Files>
+      <File FileName="Assets\Scripts\CharacterScripts\Pausing.js" Line="24" Column="1" />
       <File FileName="Assets\Scripts\CharacterScripts\EnergyBar.js" Line="29" Column="42" />
-      <File FileName="Assets\Scripts\CharacterScripts\HealthBar.js" Line="10" Column="19" />
-      <File FileName="Assets\Scripts\CharacterScripts\EnergyBar.js" Line="45" Column="2" />
+      <File FileName="Assets\Scripts\CharacterScripts\HealthBar.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
