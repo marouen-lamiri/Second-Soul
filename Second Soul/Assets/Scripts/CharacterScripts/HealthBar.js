@@ -17,11 +17,11 @@ function OnGUI () {
 	{
 		healthpercent = 0;
 	}
-	if(healthpercent>0)
+	if(healthpercent> 100)
 	{
-		healthpercent = 0;
+		healthpercent = 100;
 	}
-	globeHeight= healthpercent+globesize;
+	globeHeight= healthpercent*globesize;
 	
 	//Drawing health Bar
 	GUI.BeginGroup(new Rect(20, Screen.height-(globeHeight+20), globesize,globesize));
@@ -38,6 +38,13 @@ function OnGUI () {
 	{
 		hp-=10;
 		if(hp<0)
+		{
 			hp = 0;
-	}	
+		}
+	}
+}
+
+function OntriggerEnter()
+{
+
 }

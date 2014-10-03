@@ -1,6 +1,4 @@
 ﻿#pragma strict
-
-#pragma strict
 var globeHeight:float;
 var globepic:Texture;
 var globesize:int;
@@ -8,7 +6,8 @@ var energy:float;
 var maxEnergy:float;
 var energyPercent:float;
 
-function Start () {
+function Start () 
+{
 
 }
 
@@ -19,11 +18,11 @@ function OnGUI () {
 	{
 		energyPercent = 0;
 	}
-	if(energyPercent>0)
+	if(energyPercent>100)
 	{
-		energyPercent = 0;
+		energyPercent = 100;
 	}
-	globeHeight= energyPercent+globesize;
+	globeHeight= energyPercent*globesize;
 	
 	//Drawing Energy Bar
 	GUI.BeginGroup(new Rect(Screen.width - 80, Screen.height-(globeHeight+20), globesize,globesize));
