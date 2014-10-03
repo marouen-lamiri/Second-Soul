@@ -40,11 +40,14 @@ function OnGUI () {
 		if(hp<0)
 		{
 			hp = 0;
+			Application.LoadLevel("GameOver");
 		}
 	}
 }
 
-function OntriggerEnter()
-{
-
-}
+function OnTriggerEnter () {
+    if (hp != 0) return;
+    //Load the level
+    Application.LoadLevel ("GameOver");
+     
+    }
