@@ -16,6 +16,7 @@ public class Mob : MonoBehaviour {
 	public AnimationClip die;
 
 	public double health;
+	public double maxHealth;
 	public double damage;
 
 	public float impactTime;
@@ -25,6 +26,7 @@ public class Mob : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//health = 100;
+		maxHealth = health;
 		hero = player.GetComponent<PlayerCombat> ();
 	}
 	
@@ -102,7 +104,7 @@ public class Mob : MonoBehaviour {
 	void OnMouseOver(){
 		//Debug.Log ("Mouse is over");
 		if (!isDead ()) {
-			player.GetComponent<PlayerCombat> ().enemy = gameObject;
+			player.GetComponent<PlayerCombat> ().enemy = this;
 		}
 	}
 

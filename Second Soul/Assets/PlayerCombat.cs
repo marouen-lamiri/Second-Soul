@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerCombat : MonoBehaviour {
 
-	public GameObject enemy;
+	public Mob enemy;
 
 	public AnimationClip attack;
 	public AnimationClip die;
