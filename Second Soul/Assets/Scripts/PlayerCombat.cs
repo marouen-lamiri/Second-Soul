@@ -11,8 +11,10 @@ public class PlayerCombat : MonoBehaviour {
 	public float range;
 
 	public double health;
+	public double maxhealth;
 	public double damage;
 	public double energy;
+	public double maxenergy;
 
 	public double impactTime;
 	public bool impacted;
@@ -20,6 +22,7 @@ public class PlayerCombat : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		enemy = null;
+		maxhealth = health;
 	}
 	
 	// Update is called once per frame
