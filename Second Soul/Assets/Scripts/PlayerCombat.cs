@@ -76,10 +76,14 @@ public class PlayerCombat : MonoBehaviour {
 		
 		if (animation[die.name].time > animation[die.name].length * 0.80) {
 			animation[die.name].speed = 0;
-			Application.LoadLevel("GameOver");
+			gameOverScreen();
 		}
 		
 		//RESPAWN/ETC...?
+	}
+
+	public void gameOverScreen (){
+		Application.LoadLevel("GameOver");
 	}
 
 	public bool inRange(){

@@ -1,11 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Editor\PlayerHealthBarTest.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Pausing.js">
     <Files>
-      <File FileName="Assets\Editor\PlayerHealthBarTest.cs" Line="26" Column="3" />
-      <File FileName="Assets\Editor\PlayerHealthBarTest.cs" Line="28" Column="1" />
-      <File FileName="Assets\Scripts\PlayerEnergyBar.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerCombat.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Pausing.js" Line="17" Column="14" />
+      <File FileName="Assets\Scripts\PlayerCombat.cs" Line="79" Column="21" />
+      <File FileName="Assets\Editor\PlayerEnergyBarTest.cs" Line="6" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
