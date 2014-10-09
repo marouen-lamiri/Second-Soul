@@ -82,8 +82,9 @@ public class PlayerCombat : MonoBehaviour {
 		//RESPAWN/ETC...?
 	}
 
-	public void gameOverScreen (){
+	public bool gameOverScreen (){
 		Application.LoadLevel("GameOver");
+		return true;
 	}
 
 	public bool inRange(){
