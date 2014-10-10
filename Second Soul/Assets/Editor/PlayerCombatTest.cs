@@ -1,10 +1,11 @@
 ﻿using System;
 using NUnit.Framework;
+using UnityEngine;
 
 public class PlayerCombatTest {
 
-	public PlayerCombat player;
-	public Mob enemy;
+	public PlayerCombat player = new PlayerCombat ();
+	public Mob enemy = new Mob ();
 
 	#if false
 		[Test]
@@ -19,18 +20,18 @@ public class PlayerCombatTest {
 	[Test]
 	public void DamageEnemy () {
 		// Arrange
-		// 1. Create player & enemy.
-		player = new PlayerCombat ();
-		enemy = new Mob ();
+		// 1. Enemy
+		double initHealth = 100;
+		enemy.health = 100;
 
-		// 2. Enemy health.
-		int initHealth = enemy.health;
+		// 2. Player
+		player.damage = 40;
 
 		// Act
-		enemy.GetComponent<Mob>().getHit(player.damage);
+		enemy.getHit(player.damage);
 
 		// Assert
-		Assert (enemy.health > initHealth);
+		Assert.That (enemy.health < initHealth);
 	}
 
 }
