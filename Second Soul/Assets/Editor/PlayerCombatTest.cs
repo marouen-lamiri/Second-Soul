@@ -24,13 +24,13 @@ public class PlayerCombatTest {
 		enemy = new Mob ();
 
 		// 2. Enemy health.
-		var initHealth = enemy.health;
+		int initHealth = enemy.health;
 
 		// Act
 		enemy.GetComponent<Mob>().getHit(player.damage);
 
 		// Assert
-		//Assert (enemy.health < initHealth); // <-- this gave an error so I commented out in order to run.
+		Assert (enemy.health > initHealth);
 	}
 
 }
