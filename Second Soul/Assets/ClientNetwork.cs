@@ -8,6 +8,8 @@ public class ClientNetwork : MonoBehaviour {
 	private string _messageLog = "";
 	string someInfo = "";
 	private NetworkPlayer _myNetworkPlayer;
+
+	public bool isConnectedToServer = false;
 	
 	public void Awake() {
 		AddNetworkView();
@@ -31,7 +33,7 @@ public class ClientNetwork : MonoBehaviour {
 	void OnGUI() {
 		if (Network.peerType == NetworkPeerType.Disconnected) {
 			if (GUI.Button(new Rect(100, 100, 150, 25), "Connect")) {
-				Network.Connect(serverIP, port);
+				ConnectToServer();
 			}
 		} else {
 			if (Network.peerType == NetworkPeerType.Client) {
@@ -48,6 +50,10 @@ public class ClientNetwork : MonoBehaviour {
 		}
 		
 		GUI.TextArea(new Rect(250, 100, 300, 300), _messageLog);
+	}
+
+	public void ConnectToServer() {
+		Network.Connect(serverIP, port);
 	}
 	
 	[RPC]
@@ -74,9 +80,11 @@ public class ClientNetwork : MonoBehaviour {
 		_messageLog += "Connected to server" + "\n";
 		// added:
 		//Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0);
+		isConnectedToServer = true;
 	}
 	void OnDisconnectedToServer() {
 		_messageLog += "Disco from server" + "\n";
+		isConnectedToServer = false;
 	}
 	
 	// fix RPC errors
