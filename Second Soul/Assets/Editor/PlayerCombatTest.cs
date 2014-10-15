@@ -1,31 +1,19 @@
 ﻿using System;
 using NUnit.Framework;
-using UnityEngine;
 
 public class PlayerCombatTest {
 
 	public PlayerCombat player = new PlayerCombat ();
 	public Mob enemy = new Mob ();
 
-	#if false
-		[Test]
-		public void EnemyInRange ()
-		{
-				// Arrange
-				// Act
-				// Assert
-		}
-	#endif
-
 	[Test]
-	public void DamageEnemy () {
+	public void DamageEnemy ([Random(1, 100, 5)] int initHealth, [Random(1, 20, 5)] int damageValue) {
 		// Arrange
 		// 1. Enemy
-		double initHealth = 100;
-		enemy.health = 100;
+		enemy.health = initHealth;
 
 		// 2. Player
-		player.damage = 40;
+		player.damage = damageValue;
 
 		// Act
 		enemy.getHit(player.damage);

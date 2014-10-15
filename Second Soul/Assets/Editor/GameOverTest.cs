@@ -6,7 +6,7 @@ public class GameOverTest{
 	public PlayerCombat player = new PlayerCombat();
 
 	[Test]
-	public void GameOverTestLoadScreen ([Random(0, 10, 10)] double value) {
+	public void GameOverTestLoadScreen () {
 		Assert.True (player.gameOverScreen() == true);
 	}
 }
