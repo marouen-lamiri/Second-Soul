@@ -5,7 +5,8 @@ public class Mob : MonoBehaviour {
 
 	public float speed;
 	public float range;
-	
+	public float aggroRange;
+	public bool hasAggro;
 	public CharacterController controller;
 	public Transform player;
 	private PlayerCombat hero;
@@ -18,6 +19,7 @@ public class Mob : MonoBehaviour {
 	public double health;
 	public double maxHealth;
 	public double damage;
+
 
 	public float impactTime;
 
@@ -35,17 +37,19 @@ public class Mob : MonoBehaviour {
 		//Debug.Log (inRange());
 		//Debug.Log (health);
 		if (!isDead ()) {
-			if (!inRange ()) {
+			if (!inRange ()&& (inAggroRange()||hasAggro)) {
+
+				hasAggro=true;
 				chase ();
 			} 
-			else {
+			else if(inRange ()) {
 				//animation.CrossFade (idle.name);
 				attack();
 			}
 		} 
 		else {
 			dieMethod();
-			Mob temp = Instantiate (hero.enemyP,new Vector3(345,0,972),Quaternion.identity) as Mob;
+			Mob temp = Instantiate (hero.enemyP,hero.spawnPosition,Quaternion.identity) as Mob;
 			temp.player=this.player;
 			hero.enemies.Add(temp);
 			Destroy (gameObject);
@@ -55,7 +59,9 @@ public class Mob : MonoBehaviour {
 	public bool inRange(){
 		return Vector3.Distance(transform.position, player.position)<range;
 	}
-
+	public bool inAggroRange(){
+		return Vector3.Distance(transform.position, player.position)<aggroRange;
+	}
 	private void attack(){
 		if (!hero.isDead ()) {
 			animation.CrossFade (attackClip.name);

@@ -11,7 +11,7 @@ public class PlayerCombat : MonoBehaviour {
 	public AnimationClip die;
 
 	public float range;
-
+	public Vector3 spawnPosition = new Vector3 (340, 0, 988);
 	public double health;
 	public double maxhealth;
 	public double damage;
@@ -25,7 +25,7 @@ public class PlayerCombat : MonoBehaviour {
 	void Start () {
 		enemy = null;
 		maxhealth = health;
-		Mob temp = Instantiate(enemyP,new Vector3(345,0,972),Quaternion.identity)as Mob;
+		Mob temp = Instantiate(enemyP,spawnPosition,Quaternion.identity)as Mob;
 		temp.player = this.transform;
 		enemies.Add (temp);
 	}
