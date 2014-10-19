@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class Mob : MonoBehaviour {
 
 	public float speed;
@@ -45,6 +45,10 @@ public class Mob : MonoBehaviour {
 		} 
 		else {
 			dieMethod();
+			Mob temp = Instantiate (hero.enemyP,new Vector3(345,0,972),Quaternion.identity) as Mob;
+			temp.player=this.player;
+			hero.enemies.Add(temp);
+			Destroy (gameObject);
 		}
 	}
 	
