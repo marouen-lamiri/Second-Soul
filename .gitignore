@@ -53,3 +53,20 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+Second Soul/Assembly-CSharp-Editor-vs.csproj
+Second Soul/Assets/Scene/Iteration 3.meta
+Second Soul/Assets/Scene/Iteration 3/monsterAggroRadius.unity
+Second Soul/Assets/Scene/Iteration 3/monsterAggroRadius.unity.meta
+Second Soul/Assets/Scene/Iteration 3/properSpawnSetup.unity.meta
+Second Soul/Assembly-CSharp-Editor.csproj
+Second Soul/Assembly-CSharp-firstpass-vs.csproj
+Second Soul/Assembly-CSharp-firstpass.csproj
+Second Soul/Assembly-CSharp-vs.csproj
+Second Soul/Assembly-CSharp.csproj
+Second Soul/Assembly-UnityScript-firstpass-vs.unityproj
+Second Soul/Assembly-UnityScript-firstpass.unityproj
+Second Soul/Assembly-UnityScript-vs.unityproj
+Second Soul/Assembly-UnityScript.unityproj
+*.meta
+*.prefab
+*.sln
