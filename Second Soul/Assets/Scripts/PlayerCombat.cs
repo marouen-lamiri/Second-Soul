@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerCombat : MonoBehaviour {
 
 	public Mob enemy;
-
+	public  List<Mob> enemies;
+	public Mob enemyP;
 	public AnimationClip attack;
 	public AnimationClip die;
 
 	public float range;
-
+	public Vector3 spawnPosition = new Vector3 (340, 0, 988);
 	public double health;
 	public double maxhealth;
 	public double damage;
@@ -23,11 +25,15 @@ public class PlayerCombat : MonoBehaviour {
 	void Start () {
 		enemy = null;
 		maxhealth = health;
+		Mob temp = Instantiate(enemyP,spawnPosition,Quaternion.identity)as Mob;
+		temp.player = this.transform;
+		enemies.Add (temp);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//Debug.Log (enemy);
+
 		Debug.Log (health);
 		if (!isDead ()) {
 			if (Input.GetKey (KeyCode.Space) && enemy != null && inRange ()) {
