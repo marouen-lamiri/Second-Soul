@@ -5,15 +5,18 @@ public class HealthBar : MonoBehaviour {
 
 	public PlayerCombat player;
 	public Mob enemy;
+	
 	public Texture2D healthFrame;
 	public Rect healthFrameRect;
 	float healthFrameWidth;
 	float healthFrameHeight;
+	
 	public Texture2D healthFill;
 	public Rect healthFillRect;
 	float healthFillWidth;
 	float healthFillHeight;
 	float healthPercent;
+	
 	//these "fixes" are to make the dimensions work for any size display
 	float healthFrameWidthFix = 0.46875f;
 	float healthFrameHeightFix = 0.0586f;
@@ -26,16 +29,24 @@ public class HealthBar : MonoBehaviour {
 		healthFrameHeight = (float)Screen.height*healthFrameHeightFix;
 		healthFillWidth = (float)Screen.width*healthFillWidthFix;
 		healthFillHeight =(float)Screen.height*healthFillHeightFix;
-		player = enemy.player.GetComponent<PlayerCombat> ();
+		//player = enemy.player.GetComponent<PlayerCombat> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		healthPercent =((float)enemy.health / (float)enemy.maxHealth);
+		
+		if(player.enemy!=null){
+			enemy = player.enemy.GetComponent<Mob> ();
+			healthPercent =((float)enemy.health / (float)enemy.maxHealth);
+		}
+		else{
+			enemy = null;
+			healthPercent = 0;
+		}
 	}
 	void OnGUI(){
 		//if statement to determine whether the enemy is this enemy
-		if (player.enemy == enemy) {
+		if (enemy != null) {
 			drawHealthBar ();
 			drawHealthFrame ();
 		}
