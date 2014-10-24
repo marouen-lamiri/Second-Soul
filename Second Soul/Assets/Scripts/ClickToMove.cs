@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ClickToMove : MonoBehaviour {
 
-	public float speed;
 	public CharacterController controller;
 
 	private Vector3 position;
@@ -55,7 +54,7 @@ public class ClickToMove : MonoBehaviour {
 			newRotation.z = 0;
 
 			transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 7);
-			controller.SimpleMove (transform.forward * speed);
+			controller.SimpleMove (transform.forward * controller.GetComponent<Fighter> ().speed);
 
 			animation.CrossFade(runClip.name);
 		}

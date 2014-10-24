@@ -1,13 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class Enemy : MonoBehaviour {
-
-	public float speed;
-	
-	public float attackRange;
-	public float aggroRange;
-	public bool hasAggro;
+public class Enemy : Character {
 	
 	public CharacterController controller;
 	
@@ -19,19 +13,13 @@ public class Enemy : MonoBehaviour {
 	public AnimationClip idleClip;
 	public AnimationClip dieClip;
 
-	public double health;
-	public double maxHealth;
-	public double damage;
-
-
-	public float impactTime;
-
-	public bool impacted;
+	public float aggroRange;
+	public bool hasAggro;
 	
 	// Use this for initialization
 	void Start () {
 		//health = 100;
-		maxHealth = health;
+		health = maxHealth;
 		player = playerTransform.GetComponent<Fighter> ();
 	}
 	
@@ -52,10 +40,6 @@ public class Enemy : MonoBehaviour {
 		} 
 		else {
 			dieMethod();
-			Enemy temp = Instantiate (player.enemyP,player.spawnPosition,Quaternion.identity) as Enemy;
-			temp.playerTransform=this.playerTransform;
-			player.enemies.Add(temp);
-			Destroy (gameObject);
 		}
 	}
 	
@@ -85,21 +69,6 @@ public class Enemy : MonoBehaviour {
 		transform.LookAt (playerTransform.position);
 		controller.SimpleMove (transform.forward * speed);
 		animation.CrossFade (runClip.name);
-	}
-
-	public void takeDamage(double damage){
-		health -= damage;
-
-		if (health <= 0) {
-			health = 0;
-		}
-	}
-
-	public bool isDead(){
-		if (health <= 0) {
-			return true;
-		}
-		return false;
 	}
 
 	private void dieMethod(){
