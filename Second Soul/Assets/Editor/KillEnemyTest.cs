@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class KillEnemyTest {
 	
-	public PlayerCombat player = new PlayerCombat ();
-	public Mob enemy = new Mob ();
+	public Fighter player = new Fighter ();
+	public Enemy enemy = new Enemy ();
 	
 	[Test]
 	public void KillEnemy ([Random(1, 100, 2)] int initHealth, [Random(1, 20, 2)] int damageValue) {
@@ -18,7 +18,7 @@ public class KillEnemyTest {
 
 		// Act
 		while (enemy.health > 0)
-			enemy.getHit(player.damage);
+			enemy.takeDamage(player.damage);
 
 		// Assert
 		Assert.IsTrue (enemy.isDead());

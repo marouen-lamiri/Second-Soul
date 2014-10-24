@@ -10,7 +10,7 @@ public class PlayerHealthBar : MonoBehaviour {
 	public double hp;
 	public double maxhp;
 	public double healthpercent;
-	public PlayerCombat player;
+	public Fighter player;
 
 	// Use this for initialization
 	void Start () {

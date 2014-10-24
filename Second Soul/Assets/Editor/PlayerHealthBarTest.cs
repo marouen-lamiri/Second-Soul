@@ -4,7 +4,7 @@ using NUnit.Framework;
 [TestFixture]
 public class PlayerHealthBarTest{
 
-	public PlayerCombat player = new PlayerCombat();
+	public Fighter player = new Fighter();
 	
 	[Test]
 	public void HealthBarLessOrEqualMaxHP ([Random(0, 10000, 5)] double value) {

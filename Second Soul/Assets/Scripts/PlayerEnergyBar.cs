@@ -9,13 +9,18 @@ public class PlayerEnergyBar : MonoBehaviour {
 	public double energy;
 	public double maxEnergy;
 	public double energyPercent;
-	public PlayerCombat player;
+	public Fighter player;
 	
 	void Start () 
 	{
 		energyPercent = 1;
 		energy = player.energy;
 		maxEnergy = energy;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		energy = player.energy;
 	}
 	
 	void OnGUI () {
@@ -37,9 +42,5 @@ public class PlayerEnergyBar : MonoBehaviour {
 		GUI.EndGroup();
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		energy = player.energy;
-	}
+
 }

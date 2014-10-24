@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 public class PlayerEnergyBarTest{
 
-	public PlayerCombat player = new PlayerCombat();
+	public Fighter player = new Fighter();
 	
 	[Test]
 	public void HealthBarLessOrEqualMaxHP ([Random(0, 100, 10)] double value) {

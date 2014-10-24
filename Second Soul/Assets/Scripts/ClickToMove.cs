@@ -8,8 +8,8 @@ public class ClickToMove : MonoBehaviour {
 
 	private Vector3 position;
 
-	public AnimationClip run;
-	public AnimationClip idle;
+	public AnimationClip runClip;
+	public AnimationClip idleClip;
 
 	public static bool attacking;
 
@@ -57,11 +57,11 @@ public class ClickToMove : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 7);
 			controller.SimpleMove (transform.forward * speed);
 
-			animation.CrossFade(run.name);
+			animation.CrossFade(runClip.name);
 		}
 		//Player not moving
 		else {
-			animation.CrossFade(idle.name);
+			animation.CrossFade(idleClip.name);
 		}
 	}
 }

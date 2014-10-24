@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class Mob : MonoBehaviour {
+public class Enemy : MonoBehaviour {
 
 	public float speed;
-	public float range;
+	
+	public float attackRange;
 	public float aggroRange;
 	public bool hasAggro;
+	
 	public CharacterController controller;
-	public Transform player;
-	private PlayerCombat hero;
+	
+	public Transform playerTransform;
+	private Fighter player;
 
 	public AnimationClip attackClip;
-	public AnimationClip run;
-	public AnimationClip idle;
-	public AnimationClip die;
+	public AnimationClip runClip;
+	public AnimationClip idleClip;
+	public AnimationClip dieClip;
 
 	public double health;
 	public double maxHealth;
@@ -29,7 +32,7 @@ public class Mob : MonoBehaviour {
 	void Start () {
 		//health = 100;
 		maxHealth = health;
-		hero = player.GetComponent<PlayerCombat> ();
+		player = playerTransform.GetComponent<Fighter> ();
 	}
 	
 	// Update is called once per frame
@@ -37,37 +40,38 @@ public class Mob : MonoBehaviour {
 		//Debug.Log (inRange());
 		//Debug.Log (health);
 		if (!isDead ()) {
-			if (!inRange ()&& (inAggroRange()||hasAggro)) {
+			if (!inAttackRange ()&& (inAggroRange()||hasAggro)) {
 
 				hasAggro=true;
-				chase ();
+				chasePlayer ();
 			} 
-			else if(inRange ()) {
+			else if(inAttackRange ()) {
 				//animation.CrossFade (idle.name);
 				attack();
 			}
 		} 
 		else {
 			dieMethod();
-			Mob temp = Instantiate (hero.enemyP,hero.spawnPosition,Quaternion.identity) as Mob;
-			temp.player=this.player;
-			hero.enemies.Add(temp);
+			Enemy temp = Instantiate (player.enemyP,player.spawnPosition,Quaternion.identity) as Enemy;
+			temp.playerTransform=this.playerTransform;
+			player.enemies.Add(temp);
 			Destroy (gameObject);
 		}
 	}
 	
-	public bool inRange(){
-		return Vector3.Distance(transform.position, player.position)<range;
+	public bool inAttackRange(){
+		return Vector3.Distance(transform.position, playerTransform.position)<attackRange;
 	}
 	public bool inAggroRange(){
-		return Vector3.Distance(transform.position, player.position)<aggroRange;
+		return Vector3.Distance(transform.position, playerTransform.position)<aggroRange;
 	}
+	
 	private void attack(){
-		if (!hero.isDead ()) {
+		if (!player.isDead ()) {
 			animation.CrossFade (attackClip.name);
 
 			if (animation [attackClip.name].time > animation [attackClip.name].length * impactTime && !impacted && animation [attackClip.name].time < 0.90 * animation [attackClip.name].length) {
-				hero.getHit (damage);
+				player.takeDamage (damage);
 				impacted = true;
 			}
 
@@ -77,13 +81,13 @@ public class Mob : MonoBehaviour {
 		}
 	}
 
-	private void chase(){
-		transform.LookAt (player.position);
+	private void chasePlayer(){
+		transform.LookAt (playerTransform.position);
 		controller.SimpleMove (transform.forward * speed);
-		animation.CrossFade (run.name);
+		animation.CrossFade (runClip.name);
 	}
 
-	public void getHit(double damage){
+	public void takeDamage(double damage){
 		health -= damage;
 
 		if (health <= 0) {
@@ -101,24 +105,23 @@ public class Mob : MonoBehaviour {
 	private void dieMethod(){
 		Destroy(controller);
 
-		player.GetComponent<PlayerCombat> ().enemy = null;
+		playerTransform.GetComponent<Fighter> ().enemy = null;
 		
-		animation.CrossFade (die.name);
+		animation.CrossFade (dieClip.name);
 		
-
-		if (animation[die.name].time > animation[die.name].length * 0.80) {
-			animation[die.name].speed = 0;
+		if (animation[dieClip.name].time > animation[dieClip.name].length * 0.80) {
+			animation[dieClip.name].speed = 0;
 		}
 	}
 
 	void OnMouseOver(){
 		//Debug.Log ("Mouse is over");
 		if (!isDead ()) {
-			player.GetComponent<PlayerCombat> ().enemy = this;
+			playerTransform.GetComponent<Fighter> ().enemy = this;
 		}
 	}
 
 	void OnMouseExit(){
-		player.GetComponent<PlayerCombat> ().enemy = null;
+		playerTransform.GetComponent<Fighter> ().enemy = null;
 	}
 }

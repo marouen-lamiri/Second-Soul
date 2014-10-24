@@ -3,8 +3,8 @@ using System.Collections;
 
 public class HealthBar : MonoBehaviour {
 
-	public PlayerCombat player;
-	public Mob enemy;
+	public Fighter player;
+	public Enemy enemy;
 	
 	public Texture2D healthFrame;
 	public Rect healthFrameRect;
@@ -15,6 +15,7 @@ public class HealthBar : MonoBehaviour {
 	public Rect healthFillRect;
 	float healthFillWidth;
 	float healthFillHeight;
+	
 	float healthPercent;
 	
 	//these "fixes" are to make the dimensions work for any size display
@@ -36,7 +37,7 @@ public class HealthBar : MonoBehaviour {
 	void Update () {
 		
 		if(player.enemy!=null){
-			enemy = player.enemy.GetComponent<Mob> ();
+			enemy = player.enemy.GetComponent<Enemy> ();
 			healthPercent =((float)enemy.health / (float)enemy.maxHealth);
 		}
 		else{

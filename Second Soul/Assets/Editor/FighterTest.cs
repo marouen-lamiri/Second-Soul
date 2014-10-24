@@ -3,8 +3,8 @@ using NUnit.Framework;
 
 public class PlayerCombatTest {
 
-	public PlayerCombat player = new PlayerCombat ();
-	public Mob enemy = new Mob ();
+	public Fighter player = new Fighter ();
+	public Enemy enemy = new Enemy ();
 
 	[Test]
 	public void DamageEnemy ([Random(1, 100, 5)] int initHealth, [Random(1, 20, 5)] int damageValue) {
@@ -16,7 +16,7 @@ public class PlayerCombatTest {
 		player.damage = damageValue;
 
 		// Act
-		enemy.getHit(player.damage);
+		enemy.takeDamage(player.damage);
 
 		// Assert
 		Assert.That (enemy.health < initHealth);

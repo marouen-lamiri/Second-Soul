@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DisplayPlayerStats : MonoBehaviour {
 
-	public PlayerCombat player;
+	public Fighter player;
 	public bool isStatsDisplayed = false;
 	public float countdown = 3.0f;
 	public Font myFont;
