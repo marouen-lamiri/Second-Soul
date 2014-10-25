@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\ClientNetwork.cs" />
-     <Compile Include="Assets\Scripts\ButtonRespawn.cs" />
      <Compile Include="Assets\Scripts\Character.cs" />
      <Compile Include="Assets\Scripts\ClickToMove.cs" />
      <Compile Include="Assets\Scripts\DisplayPlayerStats.cs" />

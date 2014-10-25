@@ -13,6 +13,7 @@ public class Fighter : Character {
 	void Start () {
 		enemy = null;
 		health = maxHealth;
+		startPosition = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -52,16 +53,12 @@ public class Fighter : Character {
 		
 		if (animation[dieClip.name].time > animation[dieClip.name].length * 0.80) {
 			animation[dieClip.name].speed = 0;
-			gameOverScreen();
 		}
 		
 		//RESPAWN/ETC...?
 	}
 
-	public bool gameOverScreen (){
-		Application.LoadLevel ("GameOver");
-		return true;
-	}
+
 
 	public bool inAttackRange(){
 		return Vector3.Distance(enemy.transform.position, transform.position) <= attackRange;

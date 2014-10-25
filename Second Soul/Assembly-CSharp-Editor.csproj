@@ -52,7 +52,6 @@
      <Compile Include="Assets\Editor\KillEnemyTest.cs" />
      <Compile Include="Assets\Editor\PlayerEnergyBarTest.cs" />
      <Compile Include="Assets\Editor\PlayerHealthBarTest.cs" />
-     <Compile Include="Assets\Editor\RespawnTest.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionComponentEditor.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionExplorerWindow.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionListRenderer.cs" />
@@ -162,6 +161,8 @@
       <Project>{45DF45F5-3538-9ABC-22A9-7ACD5E07DDB6}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
       <Project>{8400A744-01AC-F2D2-7625-0B1C46E856DF}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{D94BF160-8AAD-A249-77B8-A14043B2FE56}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript.unityproj">
       <Project>{5AFC5A7A-6201-9B94-80EC-D5DD659FB072}</Project>      <Name>Assembly-UnityScript</Name>    </ProjectReference>
   </ItemGroup>

@@ -52,7 +52,6 @@
      <Compile Include="Assets\Editor\KillEnemyTest.cs" />
      <Compile Include="Assets\Editor\PlayerEnergyBarTest.cs" />
      <Compile Include="Assets\Editor\PlayerHealthBarTest.cs" />
-     <Compile Include="Assets\Editor\RespawnTest.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionComponentEditor.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionExplorerWindow.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionListRenderer.cs" />
@@ -166,6 +165,8 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
       <Project>{45DF45F5-3538-9ABC-22A9-7ACD5E07DDB6}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp-vs.csproj">
+      <Project>{D94BF160-8AAD-A249-77B8-A14043B2FE56}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
