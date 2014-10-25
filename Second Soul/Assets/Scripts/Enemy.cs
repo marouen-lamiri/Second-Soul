@@ -21,6 +21,7 @@ public class Enemy : Character {
 	void Start () {
 		//health = 100;
 		health = maxHealth;
+		energy = maxEnergy;
 		player = playerTransform.GetComponent<Fighter> ();
 	}
 	

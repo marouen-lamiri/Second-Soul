@@ -13,6 +13,7 @@ public class Fighter : Character {
 	void Start () {
 		enemy = null;
 		health = maxHealth;
+		energy = maxEnergy;
 		startPosition = transform.position;
 	}
 	
