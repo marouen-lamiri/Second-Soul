@@ -10,7 +10,7 @@ public class DisplayPlayerStats : MonoBehaviour {
 	
 	void Update()
 	{
-		if (Input.GetKey ("s")) 
+		if (Input.GetKeyDown ("s")) 
 		{
 			boolChange ();
 		}

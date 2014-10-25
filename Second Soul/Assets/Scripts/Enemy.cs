@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 public class Enemy : Character {
 	
+	//Variable declaration
 	public CharacterController controller;
 	
 	public Transform playerTransform;
@@ -92,5 +93,5 @@ public class Enemy : Character {
 
 	void OnMouseExit(){
 		playerTransform.GetComponent<Fighter> ().enemy = null;
-	}
+	}	
 }

@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class Fighter : Character {
 
+	//Variable declaration
 	public Enemy enemy;
-	
 	public AnimationClip attackClip;
 	public AnimationClip dieClip;
 
@@ -59,7 +59,7 @@ public class Fighter : Character {
 	}
 
 	public bool gameOverScreen (){
-		Application.LoadLevel("GameOver");
+		Application.LoadLevel ("GameOver");
 		return true;
 	}
 
