@@ -1,10 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerEnergyBar.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Editor\GameOverTest.cs">
     <Files>
-      <File FileName="Assets\Scripts\DisplayPlayerStats.cs" Line="27" Column="110" />
-      <File FileName="Assets\Scripts\PlayerHealthBar.cs" Line="49" Column="47" />
-      <File FileName="Assets\Scripts\PlayerEnergyBar.cs" Line="50" Column="81" />
+      <File FileName="Assets\Editor\PlayerHealthBarTest.cs" Line="7" Column="2" />
+      <File FileName="Assets\Editor\PausingTests.cs" Line="19" Column="5" />
+      <File FileName="Assets\Scripts\GameOver.cs" Line="40" Column="4" />
+      <File FileName="Assets\Editor\GameOverTest.cs" Line="26" Column="3" />
+      <File FileName="Assets\Scripts\Pausing.cs" Line="18" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

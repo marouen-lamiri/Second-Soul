@@ -4,7 +4,7 @@ using NUnit.Framework;
 [TestFixture]
 public class PlayerHealthBarTest{
 
-	public Fighter player = new Fighter();
+	Fighter player = new Fighter();
 
 	//Tests if the player Health is higher than his maximum Health
 	[Test]

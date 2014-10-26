@@ -50,6 +50,7 @@
      <Compile Include="Assets\Editor\FighterTest.cs" />
      <Compile Include="Assets\Editor\GameOverTest.cs" />
      <Compile Include="Assets\Editor\KillEnemyTest.cs" />
+     <Compile Include="Assets\Editor\PausingTests.cs" />
      <Compile Include="Assets\Editor\PlayerEnergyBarTest.cs" />
      <Compile Include="Assets\Editor\PlayerHealthBarTest.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionComponentEditor.cs" />

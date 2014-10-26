@@ -4,7 +4,8 @@ using NUnit.Framework;
 
 public class GameOverTest{
 
-	public Character player = new Character();
+	Character player = new Character();
+	GameOver over = new GameOver();
 
 	[Test]
 	public void GameOverTestLoadScreenWithHealthZero () {
