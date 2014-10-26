@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Character : MonoBehaviour {
-	
+	public CharacterController controller;
+
 	public float speed;
 
 	public double health;

@@ -5,7 +5,7 @@ public class EnemyFactory : MonoBehaviour {
 
 	public Enemy enemyPrefab;
 	
-	public Vector3 spawnPosition = new Vector3 (340, 0, 988);
+	public Vector3 spawnPosition = new Vector3 (335, 0, 970);
 
 	public Fighter player;
 	
