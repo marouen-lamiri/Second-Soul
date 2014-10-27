@@ -1,37 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class Fighter : MonoBehaviour {
+public class Fighter : Character {
 
+	//Variable declaration
 	public Enemy enemy;
-	public  List<Enemy> enemies;
-	public Enemy enemyP;
-	
-	public AnimationClip attackClip;
-	public AnimationClip dieClip;
-
-	public float attackRange;
-	public Vector3 spawnPosition = new Vector3 (340, 0, 988);
-	
-	public double health;
-	public double maxhealth;
-	
-	public double energy;
-	public double maxenergy;
-	
-	public double damage;
-
-	public double impactTime;
-	public bool impacted;
 
 	// Use this for initialization
 	void Start () {
 		enemy = null;
-		maxhealth = health;
-		Enemy temp = Instantiate(enemyP,spawnPosition,Quaternion.identity)as Enemy;
-		temp.playerTransform = this.transform;
-		enemies.Add (temp);
+		health = maxHealth;
+		energy = maxEnergy;
+		startPosition = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -41,7 +21,7 @@ public class Fighter : MonoBehaviour {
 		
 		if (!isDead ()) {
 			if (Input.GetKey (KeyCode.Space) && enemy != null && inAttackRange ()) {
-				animation.Play (attackClip.name);
+				animateAttack();
 				ClickToMove.attacking = true;
 				transform.LookAt (enemy.transform.position);
 			}
@@ -66,36 +46,17 @@ public class Fighter : MonoBehaviour {
 		}
 	}
 
-	public void takeDamage(double damage){
-		health -= damage;
-		
-		if (health <= 0) {
-			health = 0;
-		}
-	}
-
-	public bool isDead(){
-		if (health <= 0) {
-			return true;
-		}
-		return false;
-	}
-
 	public void dieMethod(){
-		animation.CrossFade (dieClip.name);
+		animateDie();
 		
 		if (animation[dieClip.name].time > animation[dieClip.name].length * 0.80) {
 			animation[dieClip.name].speed = 0;
-			gameOverScreen();
 		}
 		
 		//RESPAWN/ETC...?
 	}
 
-	public bool gameOverScreen (){
-		Application.LoadLevel("GameOver");
-		return true;
-	}
+
 
 	public bool inAttackRange(){
 		return Vector3.Distance(enemy.transform.position, transform.position) <= attackRange;

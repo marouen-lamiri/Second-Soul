@@ -1,81 +1,107 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-public class Enemy : MonoBehaviour {
 
-	public float speed;
+public class Enemy : Character {
 	
-	public float attackRange;
-	public float aggroRange;
-	public bool hasAggro;
-	
-	public CharacterController controller;
-	
+	//Variable declaration
 	public Transform playerTransform;
 	private Fighter player;
 
-	public AnimationClip attackClip;
-	public AnimationClip runClip;
-	public AnimationClip idleClip;
-	public AnimationClip dieClip;
-
-	public double health;
-	public double maxHealth;
-	public double damage;
-
-
-	public float impactTime;
-
-	public bool impacted;
+	public float aggroRange;
+	public bool hasAggro;
 	
 	// Use this for initialization
-	void Start () {
+	void Start (){
 		//health = 100;
-		maxHealth = health;
+		health = maxHealth;
+		energy = maxEnergy;
 		player = playerTransform.GetComponent<Fighter> ();
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
+	void Update (){
 		//Debug.Log (inRange());
 		//Debug.Log (health);
 		if (!isDead ()) {
-			if (!inAttackRange ()&& (inAggroRange()||hasAggro)) {
-
-				hasAggro=true;
-				chasePlayer ();
-			} 
-			else if(inAttackRange ()) {
-				//animation.CrossFade (idle.name);
-				attack();
-			}
+			enemyAI ();
 		} 
 		else {
 			dieMethod();
-			Enemy temp = Instantiate (player.enemyP,player.spawnPosition,Quaternion.identity) as Enemy;
-			temp.playerTransform=this.playerTransform;
-			player.enemies.Add(temp);
-			Destroy (gameObject);
 		}
 	}
-	
-	public bool inAttackRange(){
-		return Vector3.Distance(transform.position, playerTransform.position)<attackRange;
+
+	public void enemyAI(){
+		if(!hasAggro){
+			if(inAwareRadius()){
+				if(hasDirectView()){
+					hasAggro = true;
+				}
+			}
+		}
+		else if(!inAttackRange () && hasAggro){
+			chasePlayer();
+			if(outAggroRange()){
+				loseAggro();
+			}
+		} 
+		else if(inAttackRange ()){
+			attack();
+		}	
 	}
+
+	public bool hasDirectView(){
+		Vector3 playerPosition = player.transform.position;
+		Vector3 enemyOrigin = new Vector3 (transform.position.x, transform.position.y + controller.height, transform.position.z);
+		Vector3 direction = new Vector3(playerPosition.x, playerPosition.y + player.controller.height, playerPosition.z) - enemyOrigin;
+		float distance = Vector3.Distance (player.transform.position, transform.position);
+
+		RaycastHit[] obstaclesHit;
+		obstaclesHit = Physics.RaycastAll(enemyOrigin, direction, distance);
+
+		if(obstaclesHit.Length > 1)
+			return false;
+		else
+			return true;
+	}
+
+	public bool inAwareRadius(){
+		Vector3 targetDir = player.transform.position - transform.position;
+		Vector3 forward = transform.forward;
+		float angle = Vector3.Angle(targetDir, forward);
+
+		float percentView = (180 - angle) / 180;
+		float viewRadiusPercent = 0.25f + 0.75f * percentView;
+
+		return Vector3.Distance(transform.position, playerTransform.position) < (aggroRange * viewRadiusPercent);
+	}
+
+	public bool inAttackRange(){
+		return Vector3.Distance(transform.position, playerTransform.position) < attackRange;
+	}
+
 	public bool inAggroRange(){
-		return Vector3.Distance(transform.position, playerTransform.position)<aggroRange;
+		return Vector3.Distance(transform.position, playerTransform.position) < aggroRange;
+	}
+
+	public bool outAggroRange(){
+		return Vector3.Distance(transform.position, playerTransform.position) > (aggroRange * 1.5);
+	}
+
+	public void loseAggro(){
+			hasAggro = false;
+			animateIdle();
 	}
 	
 	private void attack(){
-		if (!player.isDead ()) {
-			animation.CrossFade (attackClip.name);
+		if (!player.isDead ()){
+			animateAttack();
 
 			if (animation [attackClip.name].time > animation [attackClip.name].length * impactTime && !impacted && animation [attackClip.name].time < 0.90 * animation [attackClip.name].length) {
 				player.takeDamage (damage);
 				impacted = true;
 			}
 
-			if (animation [attackClip.name].time > 0.90 * animation [attackClip.name].length) {
+			if (animation [attackClip.name].time > 0.90 * animation [attackClip.name].length){
 				impacted = false;
 			}
 		}
@@ -84,22 +110,7 @@ public class Enemy : MonoBehaviour {
 	private void chasePlayer(){
 		transform.LookAt (playerTransform.position);
 		controller.SimpleMove (transform.forward * speed);
-		animation.CrossFade (runClip.name);
-	}
-
-	public void takeDamage(double damage){
-		health -= damage;
-
-		if (health <= 0) {
-			health = 0;
-		}
-	}
-
-	public bool isDead(){
-		if (health <= 0) {
-			return true;
-		}
-		return false;
+		animateRun();
 	}
 
 	private void dieMethod(){
@@ -107,21 +118,21 @@ public class Enemy : MonoBehaviour {
 
 		playerTransform.GetComponent<Fighter> ().enemy = null;
 		
-		animation.CrossFade (dieClip.name);
+		animateDie();
 		
-		if (animation[dieClip.name].time > animation[dieClip.name].length * 0.80) {
+		if (animation[dieClip.name].time > animation[dieClip.name].length * 0.80){
 			animation[dieClip.name].speed = 0;
 		}
 	}
 
 	void OnMouseOver(){
 		//Debug.Log ("Mouse is over");
-		if (!isDead ()) {
+		if (!isDead ()){
 			playerTransform.GetComponent<Fighter> ().enemy = this;
 		}
 	}
 
 	void OnMouseExit(){
 		playerTransform.GetComponent<Fighter> ().enemy = null;
-	}
+	}	
 }

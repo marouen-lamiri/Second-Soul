@@ -3,13 +3,9 @@ using System.Collections;
 
 public class ClickToMove : MonoBehaviour {
 
-	public float speed;
-	public CharacterController controller;
+	public Fighter player;
 
 	private Vector3 position;
-
-	public AnimationClip runClip;
-	public AnimationClip idleClip;
 
 	public static bool attacking;
 
@@ -20,7 +16,7 @@ public class ClickToMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!attacking) {
+		if (!attacking && player.health > 0) {
 			if (Input.GetMouseButton (0)) {
 					//Locate player click position
 					locatePosition ();
@@ -55,13 +51,13 @@ public class ClickToMove : MonoBehaviour {
 			newRotation.z = 0;
 
 			transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 7);
-			controller.SimpleMove (transform.forward * speed);
+			player.controller.SimpleMove (transform.forward * player.speed);
 
-			animation.CrossFade(runClip.name);
+			player.animateRun();
 		}
 		//Player not moving
 		else {
-			animation.CrossFade(idleClip.name);
+			player.animateIdle();
 		}
 	}
 }
