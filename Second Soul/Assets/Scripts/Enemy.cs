@@ -7,11 +7,6 @@ public class Enemy : Character {
 	public Transform playerTransform;
 	private Fighter player;
 
-	public AnimationClip attackClip;
-	public AnimationClip runClip;
-	public AnimationClip idleClip;
-	public AnimationClip dieClip;
-
 	public float aggroRange;
 	public bool hasAggro;
 	
@@ -94,12 +89,12 @@ public class Enemy : Character {
 
 	public void loseAggro(){
 			hasAggro = false;
-			animation.CrossFade (idleClip.name);
+			animateIdle();
 	}
 	
 	private void attack(){
 		if (!player.isDead ()){
-			animation.CrossFade (attackClip.name);
+			animateAttack();
 
 			if (animation [attackClip.name].time > animation [attackClip.name].length * impactTime && !impacted && animation [attackClip.name].time < 0.90 * animation [attackClip.name].length) {
 				player.takeDamage (damage);
@@ -115,7 +110,7 @@ public class Enemy : Character {
 	private void chasePlayer(){
 		transform.LookAt (playerTransform.position);
 		controller.SimpleMove (transform.forward * speed);
-		animation.CrossFade (runClip.name);
+		animateRun();
 	}
 
 	private void dieMethod(){
@@ -123,7 +118,7 @@ public class Enemy : Character {
 
 		playerTransform.GetComponent<Fighter> ().enemy = null;
 		
-		animation.CrossFade (dieClip.name);
+		animateDie();
 		
 		if (animation[dieClip.name].time > animation[dieClip.name].length * 0.80){
 			animation[dieClip.name].speed = 0;

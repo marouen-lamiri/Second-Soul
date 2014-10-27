@@ -5,8 +5,6 @@ public class Fighter : Character {
 
 	//Variable declaration
 	public Enemy enemy;
-	public AnimationClip attackClip;
-	public AnimationClip dieClip;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +21,7 @@ public class Fighter : Character {
 		
 		if (!isDead ()) {
 			if (Input.GetKey (KeyCode.Space) && enemy != null && inAttackRange ()) {
-				animation.Play (attackClip.name);
+				animateAttack();
 				ClickToMove.attacking = true;
 				transform.LookAt (enemy.transform.position);
 			}
@@ -49,7 +47,7 @@ public class Fighter : Character {
 	}
 
 	public void dieMethod(){
-		animation.CrossFade (dieClip.name);
+		animateDie();
 		
 		if (animation[dieClip.name].time > animation[dieClip.name].length * 0.80) {
 			animation[dieClip.name].speed = 0;

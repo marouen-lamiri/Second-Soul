@@ -18,6 +18,11 @@ public class Character : MonoBehaviour {
 	public double impactTime;
 	public bool impacted;
 	public Vector3 startPosition;
+	
+	public AnimationClip idleClip;
+	public AnimationClip runClip;
+	public AnimationClip attackClip;
+	public AnimationClip dieClip;
 
 	// Use this for initialization
 	void Start () {
@@ -54,5 +59,21 @@ public class Character : MonoBehaviour {
 
 	public float getInitialPositionZ(){
 		return startPosition.z;
+	}
+	
+	public void animateIdle(){
+		animation.CrossFade(idleClip.name);
+	}
+	
+	public void animateRun(){
+		animation.CrossFade(runClip.name);
+	}
+	
+	public void animateAttack(){
+		animation.CrossFade (attackClip.name);
+	}
+	
+	public void animateDie(){
+		animation.CrossFade (dieClip.name);
 	}
 }
