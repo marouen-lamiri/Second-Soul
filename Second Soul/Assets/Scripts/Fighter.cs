@@ -4,11 +4,12 @@ using System.Collections;
 public class Fighter : Character {
 
 	//Variable declaration
-	public Enemy enemy;
+	public bool attacking;
+	
 
 	// Use this for initialization
 	void Start () {
-		enemy = null;
+		target = null;
 		health = maxHealth;
 		energy = maxEnergy;
 		startPosition = transform.position;
@@ -19,46 +20,25 @@ public class Fighter : Character {
 		//Debug.Log (enemy);
 		//Debug.Log (health);
 		
-		if (!isDead ()) {
-			if (Input.GetKey (KeyCode.Space) && enemy != null && inAttackRange ()) {
-				animateAttack();
-				ClickToMove.attacking = true;
-				transform.LookAt (enemy.transform.position);
+		if (!isDead()){
+			if(!attackLocked()){
+				chasing = false;
+				if ((Input.GetMouseButtonDown (0) || Input.GetMouseButton (0)) && target != null){
+					if (inAttackRange()){
+						attack ();
+					}
+					else{
+						chaseTarget();
+					}
+				}
 			}
-
-			if (animation [attackClip.name].time > 0.9 * animation [attackClip.name].length) {
-				ClickToMove.attacking = false;
-				impacted = false;
-			}
-			attack ();
-		} 
-		else {
+		}
+		else{
 			dieMethod();
 		}
 	}
 
-	private void attack(){
-		if(enemy != null && animation.IsPlaying(attackClip.name) && !impacted){
-			if(animation[attackClip.name].time > (animation[attackClip.name].length * impactTime) && (animation[attackClip.name].time < 0.9 * animation[attackClip.name].length)){
-				enemy.GetComponent<Enemy>().takeDamage(damage);
-				impacted = true;
-			}
-		}
-	}
-
-	public void dieMethod(){
-		animateDie();
-		
-		if (animation[dieClip.name].time > animation[dieClip.name].length * 0.80) {
-			animation[dieClip.name].speed = 0;
-		}
-		
-		//RESPAWN/ETC...?
-	}
-
-
-
 	public bool inAttackRange(){
-		return Vector3.Distance(enemy.transform.position, transform.position) <= attackRange;
+		return Vector3.Distance(target.transform.position, transform.position) <= attackRange;
 	}
 }

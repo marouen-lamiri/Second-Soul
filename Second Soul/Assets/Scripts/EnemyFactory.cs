@@ -5,15 +5,18 @@ public class EnemyFactory : MonoBehaviour {
 
 	public Enemy enemyPrefab;
 	
-	public Vector3 spawnPosition = new Vector3 (335, 0, 970);
+	private Vector3 spawnPosition = new Vector3 (341, 0, 984);
+	private Vector3 spawnPosition2 = new Vector3 (328, 0, 984);
 
 	public Fighter player;
 	
 	// Use this for initialization
 	void Start () {
 		
-		Enemy temp = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity)as Enemy;
-		temp.playerTransform = player.transform;
+		Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity)as Enemy;
+		enemy.target = player;
+		Enemy enemy2 = Instantiate(enemyPrefab, spawnPosition2, Quaternion.identity)as Enemy;
+		enemy2.target = player;
 	}
 	
 	// Update is called once per frame

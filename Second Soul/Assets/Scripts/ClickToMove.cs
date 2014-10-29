@@ -7,27 +7,35 @@ public class ClickToMove : MonoBehaviour {
 
 	private Vector3 position;
 
-	public static bool attacking;
-
 	// Use this for initialization
 	void Start () {
 		position = transform.position;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (!attacking && player.health > 0) {
-			if (Input.GetMouseButton (0)) {
-					//Locate player click position
-					locatePosition ();
+	void Update (){
+		if(!player.isDead())
+		{
+			if(!player.chasing && !player.actionLocked()){
+				if(Input.GetMouseButton(0))
+				{
+					//Locate where the player clicked on the terrain
+					locatePosition();
+				}
+			 	//Move the player to the position
+				moveToPosition();
 			}
-
-			//move player to position
-			moveToPosition ();
-		} 
-		else {
-
 		}
+		else
+		{
+		}
+	}
+	
+	public void move () {
+		//Locate player click position
+		locatePosition ();
+		//move player to position
+		moveToPosition ();
 	}
 
 	void locatePosition(){

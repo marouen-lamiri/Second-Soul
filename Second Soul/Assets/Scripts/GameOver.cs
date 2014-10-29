@@ -6,7 +6,7 @@ public class GameOver : MonoBehaviour {
 	//Variable declaration
 	public bool isRespawned = false;
 	int scaleTime;
-	public Character player;
+	public Fighter player;
 	public Font myFont;
 
 	//Sets default value of variables
