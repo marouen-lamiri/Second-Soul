@@ -39,7 +39,7 @@ public class ClientNetwork : MonoBehaviour {
 			if (Network.peerType == NetworkPeerType.Client) {
 				GUI.Label(new Rect(100, 100, 150, 25), "client");
 				
-				if (GUI.Button(new Rect(100, 125, 150, 25), "Logut"))
+				if (GUI.Button(new Rect(100, 125, 150, 25), "Logout"))
 					Network.Disconnect();
 				
 				if (GUI.Button(new Rect(100, 150, 150, 25), "SendHello to server")) {
@@ -92,4 +92,19 @@ public class ClientNetwork : MonoBehaviour {
 	void ReceiveInfoFromClient(string someInfo) { }
 	[RPC]
 	void SendInfoToClient(string someInfo) { }
+
+
+	// this is spectating code, can go in both server and client cube/sphere code:
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+	{
+		if (stream.isWriting) {
+			Vector3 pos = transform.position;
+			stream.Serialize (ref pos);
+		}
+		else {
+			Vector3 receivedPosition = Vector3.zero;
+			stream.Serialize(ref receivedPosition);
+			transform.position = receivedPosition;
+		}
+	}
 }

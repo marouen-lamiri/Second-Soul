@@ -5,6 +5,8 @@ public class ServerNetwork : MonoBehaviour {
 	private int port = 25000;
 	private int playerCount = 0;
 	private string _messageLog = "";
+
+
 	
 	public void Awake() {
 		if (Network.peerType == NetworkPeerType.Disconnected)
@@ -28,7 +30,7 @@ public class ServerNetwork : MonoBehaviour {
 	// Immediately instantiate new connected player's character
 	// when successfully connected to the server.
 	//public Transform playerPrefab;
-	//moved code
+	//moved code 
 	
 	
 	public void Update() {
@@ -53,6 +55,14 @@ public class ServerNetwork : MonoBehaviour {
 				SendInfoToClient("Hello client!");
 		}
 		GUI.TextArea(new Rect(275, 100, 300, 300), _messageLog);
+
+		//
+		if (Network.peerType == NetworkPeerType.Disconnected)
+		{
+			//GUI.Label(new Rect(10, 10, 200, 20), "Status: Disconnected");
+			print ("Status: Disconnected.");
+		}
+
 	}
 	
 	void OnPlayerConnected(NetworkPlayer player) {
@@ -86,4 +96,19 @@ public class ServerNetwork : MonoBehaviour {
 	void SetPlayerInfo(NetworkPlayer player) { }
 	[RPC]
 	void ReceiveInfoFromServer(string someInfo) { }
+
+	// this is spectating code, can go in both server and client cube/sphere code:
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+	{
+		if (stream.isWriting) {
+			Vector3 pos = transform.position;
+			stream.Serialize (ref pos);
+		}
+		else {
+			Vector3 receivedPosition = Vector3.zero;
+			stream.Serialize(ref receivedPosition);
+			transform.position = receivedPosition;
+		}
+	}
+
 }
