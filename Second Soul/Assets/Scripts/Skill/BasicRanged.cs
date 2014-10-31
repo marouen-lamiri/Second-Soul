@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BasicRanged : MonoBehaviour {
+public class BasicRanged : BasicAttack {
 
 	// Use this for initialization
 	void Start () {

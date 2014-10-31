@@ -3,8 +3,7 @@ using System.Collections;
 
 public class ClickToMove : MonoBehaviour {
 
-	public Fighter player;
-
+	public Character player;
 	private Vector3 position;
 
 	// Use this for initialization
@@ -14,7 +13,7 @@ public class ClickToMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update (){
-		if(!player.isDead())
+		if(!player.isDead() && player.playerEnabled)
 		{
 			if(!player.chasing && !player.actionLocked()){
 				if(Input.GetMouseButton(0))

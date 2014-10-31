@@ -1,44 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Fighter : Character {
+public class Fighter : Player {
 
-	//Variable declaration
-	public bool attacking;
+	//Variable declaration	
 	
-
 	// Use this for initialization
 	void Start () {
-		target = null;
+		initializePlayer();
+		playerEnabled=true;
 		health = maxHealth;
 		energy = maxEnergy;
+		
+		target = null;
 		startPosition = transform.position;
+		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//Debug.Log (enemy);
 		//Debug.Log (health);
-		
-		if (!isDead()){
-			if(!attackLocked()){
-				chasing = false;
-				if ((Input.GetMouseButtonDown (0) || Input.GetMouseButton (0)) && target != null){
-					if (inAttackRange()){
-						attack ();
-					}
-					else{
-						chaseTarget();
-					}
-				}
-			}
+		playerLogic();
+		if(Input.GetKeyDown(KeyCode.E)){
+			playerEnabled = !playerEnabled;
 		}
-		else{
-			dieMethod();
-		}
-	}
-
-	public bool inAttackRange(){
-		return Vector3.Distance(target.transform.position, transform.position) <= attackRange;
 	}
 }

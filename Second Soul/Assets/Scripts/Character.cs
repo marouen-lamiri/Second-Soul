@@ -4,6 +4,8 @@ using System.Collections;
 public abstract class Character : MonoBehaviour {
 	public CharacterController controller;
 	
+	public bool playerEnabled;
+	
 	public Character target;
 
 	public float speed;
@@ -33,7 +35,6 @@ public abstract class Character : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 		skillLength = animation[attackClip.name].length;
 	}
 	
@@ -50,7 +51,7 @@ public abstract class Character : MonoBehaviour {
 		}
 	}
 	
-	public bool isDead(){
+	public virtual bool isDead(){
 		if (health <= 0) {
 			return true;
 		}
@@ -69,7 +70,7 @@ public abstract class Character : MonoBehaviour {
 		animateAttack();
 		
 		skillDurationLeft = skillLength;
-		
+		//Debug.Log (++attackcount);
 		StartCoroutine(applyAttackDamage(target));
 	}
 	
@@ -78,6 +79,7 @@ public abstract class Character : MonoBehaviour {
 		skillDurationLeft -= Time.deltaTime;
 		return actionLocked ();
 	}
+	
 	public bool actionLocked(){
 		if (skillDurationLeft > 0){
 			return true;
@@ -85,6 +87,10 @@ public abstract class Character : MonoBehaviour {
 		else{
 			return false;
 		}
+	}
+	
+	public bool inAttackRange(){
+		return Vector3.Distance(target.transform.position, transform.position) <= attackRange;
 	}
 	
 	IEnumerator applyAttackDamage(Character delayedTarget){

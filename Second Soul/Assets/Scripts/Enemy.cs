@@ -4,9 +4,11 @@ using System.Collections;
 public class Enemy : Character {
 	
 	//Variable declaration
-
+	public Sorcerer sorcerer;
 	public float aggroRange;
 	public bool hasAggro;
+	
+	ISkill activeSkill1;
 	
 	
 	// Use this for initialization
@@ -14,6 +16,9 @@ public class Enemy : Character {
 		//health = 100;
 		health = maxHealth;
 		energy = maxEnergy;
+		
+		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
+		
 	}
 
 	// Update is called once per frame
@@ -44,7 +49,8 @@ public class Enemy : Character {
 			}
 		} 
 		else if(inAttackRange () && !attackLocked()){
-			attack();
+			activeSkill1.setCaster(this);
+			activeSkill1.useSkill(target);
 		}	
 	}
 
@@ -72,10 +78,6 @@ public class Enemy : Character {
 		float viewRadiusPercent = 0.25f + 0.75f * percentView;
 
 		return Vector3.Distance(transform.position, target.transform.position) < (aggroRange * viewRadiusPercent);
-	}
-
-	public bool inAttackRange(){
-		return Vector3.Distance(transform.position, target.transform.position) < attackRange;
 	}
 
 	public bool inAggroRange(){
@@ -110,27 +112,32 @@ public class Enemy : Character {
 		Destroy(controller);
 		
 		target.target = null;
+		sorcerer.target = null;
 	}
 	
 	void OnMouseDrag(){
 		//Debug.Log ("Mouse is over");
 		if (!isDead ()){
 			target.target = this;
+			sorcerer.target = this;
 		}
 	}
 	
 	void OnMouseUp(){
 		target.target = null;
+		sorcerer.target = null;
 	}	
 
 	void OnMouseOver(){
 		//Debug.Log ("Mouse is over");
 		if (!isDead () && target.target == null){
 			target.target = this;
+			sorcerer.target = this;
 		}
 	}
 
 	void OnMouseExit(){
 		target.target = null;
+		sorcerer.target = null;
 	}	
 }

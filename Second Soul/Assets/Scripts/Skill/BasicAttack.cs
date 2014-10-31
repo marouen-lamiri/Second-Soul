@@ -3,14 +3,15 @@ using System.Collections;
 
 public abstract class BasicAttack : MonoBehaviour, ISkill {
 
-	public Character target;
-	public float damage;
+	protected Character caster;
+	//public Character target;
+	protected float damage;
 	
-	public float impactTime;
-	public bool impacted;
+	protected float impactTime;
+	//public bool impacted;
 	
-	public float skillLength;
-	public float skillDurationLeft;
+	protected float skillLength;
+	//public float skillDurationLeft;
 	
 	// Use this for initialization
 	void Start () {
@@ -22,14 +23,24 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	
 	}
 	
-	public void useSkill(){
+	//FIXME: cheat for avoiding generics
+	public void useSkill(Vector3 target){
+		Debug.Log ("wrong type passing: use skill");
+	}
+	
+	public void useSkill(Character target){
+		impactTime = 0.35f;
+		skillLength = animation[caster.attackClip.name].length;
+		damage = caster.damage;
+
 		transform.LookAt (target.transform.position);
-		target.target.animateAttack();
-		skillDurationLeft = skillLength;
+		caster.animateAttack();
+		caster.skillDurationLeft = skillLength;
 		
 		StartCoroutine(applyAttackDamage(target));
 	}
 	
+	/*
 	public bool attackLocked(){
 		skillDurationLeft -= Time.deltaTime;
 		return actionLocked ();
@@ -43,12 +54,18 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 			return false;
 		}
 	}
+	*/
 	
 	IEnumerator applyAttackDamage(Character delayedTarget){
 		yield return new WaitForSeconds(skillLength * impactTime);
+		
 		if (delayedTarget != null){
 			delayedTarget.takeDamage(damage);
 		}
+	}
+	
+	public void setCaster(Character caster){
+		this.caster = caster;
 	}
 	
 }
