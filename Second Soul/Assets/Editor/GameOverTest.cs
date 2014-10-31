@@ -2,9 +2,12 @@
 using Unity;
 using NUnit.Framework;
 
+
+[TestFixture]
 public class GameOverTest{
 
 	Fighter player = new Fighter();
+	GameOver over = new GameOver();
 
 	[Test]
 	public void GameOverTestLoadScreenWithHealthZero () {
@@ -22,5 +25,10 @@ public class GameOverTest{
 	public void GameOverTestLoadScreenWithHealthLessThanZero () {
 		player.health = -1;
 		Assert.True (player.isDead() == true);
+	}
+
+	[Test]
+	public void RespawnTestFalse () {
+		Assert.False (over.isRespawned);
 	}
 }
