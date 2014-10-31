@@ -26,4 +26,11 @@ public class Fighter : Player {
 			playerEnabled = !playerEnabled;
 		}
 	}
+
+	public override void loseEnergy(float energy){
+		this.energy -= energy;
+		if (energy < 0) {
+			energy = 0;
+		}
+	}
 }

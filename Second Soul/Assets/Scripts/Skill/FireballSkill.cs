@@ -5,13 +5,22 @@ public class FireballSkill : ProjectileSkill {
 
 	public FireballBehavior fireballPrefab;
 
+	new public float damage;
+	public float AOEDamage;
+	float AOEDamageModifier;
 	float damageModifier;
+
 	// Use this for initialization
 	void Start () {
 		spawnDistance = 2f;
 		travelDistance = 10f;
-		damageModifier = 1.5f;
+		damageModifier = 2f;
+		AOEDamageModifier = 0.5f;
 		speed = 10f;
+		damage = caster.damage * damageModifier;
+		AOEDamage = damage * AOEDamageModifier;
+
+		energyCost = 20;
 	}
 	
 	// Update is called once per frame
@@ -36,7 +45,7 @@ public class FireballSkill : ProjectileSkill {
 	
 	IEnumerator shootFireball(Vector3 target){
 		yield return new WaitForSeconds(skillLength * castTime);
-		
+		caster.loseEnergy (energyCost);
 		FireballBehavior fireball = Instantiate(fireballPrefab, caster.transform.position + spawnDistance * caster.transform.forward, caster.transform.rotation)as FireballBehavior;
 		fireball.fireballSkill = this;
 	}

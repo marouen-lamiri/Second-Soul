@@ -6,7 +6,7 @@ public abstract class RangedSkill : MonoBehaviour, ISkill {
 	protected Character caster;
 	
 	protected float damage;
-	
+	protected float energyCost;
 	protected float castTime;
 	
 	protected float skillLength;

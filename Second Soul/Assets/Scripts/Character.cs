@@ -50,7 +50,11 @@ public abstract class Character : MonoBehaviour {
 			health = 0;
 		}
 	}
-	
+
+	public virtual void loseEnergy(float energy){
+
+	}
+
 	public virtual bool isDead(){
 		if (health <= 0) {
 			return true;

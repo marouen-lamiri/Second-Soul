@@ -53,7 +53,6 @@ public class Enemy : Character {
 			activeSkill1.useSkill(target);
 		}	
 	}
-
 	public bool hasDirectView(){
 		Vector3 playerPosition = target.transform.position;
 		Vector3 enemyOrigin = new Vector3 (transform.position.x, transform.position.y + controller.height, transform.position.z);
@@ -110,7 +109,7 @@ public class Enemy : Character {
 
 	public void destroySelf(){
 		Destroy(controller);
-		
+		Destroy (this.GetComponent<CapsuleCollider>());
 		target.target = null;
 		sorcerer.target = null;
 	}
