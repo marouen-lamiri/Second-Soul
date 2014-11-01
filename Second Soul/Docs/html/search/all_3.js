@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['enemy',['Enemy',['../class_enemy.html',1,'Enemy'],['../class_fighter.html#addc36a302c224ad7407bec4c680c5937',1,'Fighter.enemy()'],['../class_health_bar.html#a378e645c5dc18ffb12e084322ce0a529',1,'HealthBar.enemy()']]],
-  ['enemy_2ecs',['Enemy.cs',['../_enemy_8cs.html',1,'']]],
-  ['enemyai',['enemyAI',['../class_enemy.html#abf382d0d602b31bf35123244a22e53d7',1,'Enemy']]],
-  ['enemyfactory',['EnemyFactory',['../class_enemy_factory.html',1,'']]],
-  ['enemyfactory_2ecs',['EnemyFactory.cs',['../_enemy_factory_8cs.html',1,'']]],
-  ['enemyprefab',['enemyPrefab',['../class_enemy_factory.html#a78fa53142f9b2c98bc0550b77bb7e5d8',1,'EnemyFactory']]],
-  ['energy',['energy',['../class_character.html#ad2d08f1243cb40a809f68ebae8336b62',1,'Character']]]
+  ['damage',['damage',['../class_character.html#ae66b8e62817e2090f57634ca4b0cfd3f',1,'Character.damage()'],['../class_basic_attack.html#a1714318839bd1c506b54bf89060200e1',1,'BasicAttack.damage()'],['../class_fireball_skill.html#a4b7073bb6da12958542f129bd8a71886',1,'FireballSkill.damage()'],['../class_ranged_skill.html#ab3d0823dcd712e0e53a1c7c537cd23a2',1,'RangedSkill.damage()']]],
+  ['destroyself',['destroySelf',['../class_enemy.html#a4c7586dfa1c80d7ae4ed746cc0c48113',1,'Enemy']]],
+  ['dieclip',['dieClip',['../class_character.html#abeff1b5530b0a4762f3efa2fb838bc38',1,'Character']]],
+  ['diemethod',['dieMethod',['../class_character.html#a7cfc361f6bcf1b2efee50c4fd30f619e',1,'Character']]],
+  ['displayplayerstats',['DisplayPlayerStats',['../class_display_player_stats.html',1,'']]],
+  ['displayplayerstats_2ecs',['DisplayPlayerStats.cs',['../_display_player_stats_8cs.html',1,'']]]
 ];

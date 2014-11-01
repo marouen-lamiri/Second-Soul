@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['enemy',['Enemy',['../class_enemy.html',1,'']]],
-  ['enemyfactory',['EnemyFactory',['../class_enemy_factory.html',1,'']]]
+  ['displayplayerstats',['DisplayPlayerStats',['../class_display_player_stats.html',1,'']]]
 ];

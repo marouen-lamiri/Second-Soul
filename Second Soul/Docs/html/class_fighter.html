@@ -85,7 +85,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="class_fighter-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Fighter Class Reference</div>  </div>
@@ -97,21 +96,32 @@ Inheritance diagram for Fighter:</div>
  <div class="center">
   <img src="class_fighter.png" usemap="#Fighter_map" alt=""/>
   <map id="Fighter_map" name="Fighter_map">
+<area href="class_player.html" alt="Player" shape="rect" coords="0,112,102,136"/>
 <area href="class_character.html" alt="Character" shape="rect" coords="0,56,102,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8921776f016e474032bc2fe8385a0f0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fighter.html#a8921776f016e474032bc2fe8385a0f0d">dieMethod</a> ()</td></tr>
-<tr class="separator:a8921776f016e474032bc2fe8385a0f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f03179ba632b22fa175ea4332e6d36a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fighter.html#a6f03179ba632b22fa175ea4332e6d36a">inAttackRange</a> ()</td></tr>
-<tr class="separator:a6f03179ba632b22fa175ea4332e6d36a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a192e0bad9c91c11bca20805c5671bd05"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fighter.html#a192e0bad9c91c11bca20805c5671bd05">loseEnergy</a> (float <a class="el" href="class_character.html#ad2d08f1243cb40a809f68ebae8336b62">energy</a>)</td></tr>
+<tr class="separator:a192e0bad9c91c11bca20805c5671bd05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_character"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_character')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_character.html">Character</a></td></tr>
-<tr class="memitem:aad538f8d2549afff6927c77b3badb1e8 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aad538f8d2549afff6927c77b3badb1e8">takeDamage</a> (double <a class="el" href="class_character.html#a7724e5daf12a7aa24f0cb97489da5dba">damage</a>)</td></tr>
+<tr class="memitem:aad538f8d2549afff6927c77b3badb1e8 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aad538f8d2549afff6927c77b3badb1e8">takeDamage</a> (double <a class="el" href="class_character.html#ae66b8e62817e2090f57634ca4b0cfd3f">damage</a>)</td></tr>
 <tr class="separator:aad538f8d2549afff6927c77b3badb1e8 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab22a059d8ce510b5211a820edf880f2 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aab22a059d8ce510b5211a820edf880f2">isDead</a> ()</td></tr>
-<tr class="separator:aab22a059d8ce510b5211a820edf880f2 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a081ba7d0e287ae6a00a628ef37f44523 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a081ba7d0e287ae6a00a628ef37f44523">isDead</a> ()</td></tr>
+<tr class="separator:a081ba7d0e287ae6a00a628ef37f44523 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa17c09da6656f5b0a561042524250b95 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa17c09da6656f5b0a561042524250b95">chaseTarget</a> ()</td></tr>
+<tr class="separator:aa17c09da6656f5b0a561042524250b95 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9ac03892548ae2f879d2af58f225114 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa9ac03892548ae2f879d2af58f225114">attack</a> ()</td></tr>
+<tr class="separator:aa9ac03892548ae2f879d2af58f225114 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd60100303e8034eb8f80682ad912a8 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a9cd60100303e8034eb8f80682ad912a8">attackLocked</a> ()</td></tr>
+<tr class="separator:a9cd60100303e8034eb8f80682ad912a8 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeebe09a7c9cf76323165fd3c024a6fd1 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aeebe09a7c9cf76323165fd3c024a6fd1">actionLocked</a> ()</td></tr>
+<tr class="separator:aeebe09a7c9cf76323165fd3c024a6fd1 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9ff3be8b0a95e6f6d9a8c3f4fd862ae inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ad9ff3be8b0a95e6f6d9a8c3f4fd862ae">inAttackRange</a> ()</td></tr>
+<tr class="separator:ad9ff3be8b0a95e6f6d9a8c3f4fd862ae inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cfc361f6bcf1b2efee50c4fd30f619e inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a7cfc361f6bcf1b2efee50c4fd30f619e">dieMethod</a> ()</td></tr>
+<tr class="separator:a7cfc361f6bcf1b2efee50c4fd30f619e inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a305f9f702b8e48bf5571b42ab737f87f inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a305f9f702b8e48bf5571b42ab737f87f">getInitialPositionX</a> ()</td></tr>
 <tr class="separator:a305f9f702b8e48bf5571b42ab737f87f inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa04c2f42f6c0464593a2c7543ec48de8 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa04c2f42f6c0464593a2c7543ec48de8">getInitialPositionY</a> ()</td></tr>
@@ -127,15 +137,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a18ccb6018456ee3d726e3ebd2adad174 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a18ccb6018456ee3d726e3ebd2adad174">animateDie</a> ()</td></tr>
 <tr class="separator:a18ccb6018456ee3d726e3ebd2adad174 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:addc36a302c224ad7407bec4c680c5937"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_enemy.html">Enemy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fighter.html#addc36a302c224ad7407bec4c680c5937">enemy</a></td></tr>
-<tr class="separator:addc36a302c224ad7407bec4c680c5937"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_attribs_class_player"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_player')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_player.html">Player</a></td></tr>
+<tr class="memitem:aabdd0b89c7b6682a72362492e7b5a6eb inherit pub_attribs_class_player"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#aabdd0b89c7b6682a72362492e7b5a6eb">attacking</a></td></tr>
+<tr class="separator:aabdd0b89c7b6682a72362492e7b5a6eb inherit pub_attribs_class_player"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_character"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_character')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_character.html">Character</a></td></tr>
 <tr class="memitem:a5be34f952665451bcd50ed057d1b07ea inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">CharacterController&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a5be34f952665451bcd50ed057d1b07ea">controller</a></td></tr>
 <tr class="separator:a5be34f952665451bcd50ed057d1b07ea inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af14576e42d1dfa4e67487e810d77e608 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#af14576e42d1dfa4e67487e810d77e608">playerEnabled</a></td></tr>
+<tr class="separator:af14576e42d1dfa4e67487e810d77e608 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a408273dba5567b7387407e6648248607 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_character.html">Character</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a408273dba5567b7387407e6648248607">target</a></td></tr>
+<tr class="separator:a408273dba5567b7387407e6648248607 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34ba4bab0f4e03bc819698826f483572 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a34ba4bab0f4e03bc819698826f483572">speed</a></td></tr>
 <tr class="separator:a34ba4bab0f4e03bc819698826f483572 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a912f4689de5acb36d97aa78ee45463c2 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a912f4689de5acb36d97aa78ee45463c2">chasing</a></td></tr>
+<tr class="separator:a912f4689de5acb36d97aa78ee45463c2 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e11890dcfa8a4614ff156dada82682c inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a9e11890dcfa8a4614ff156dada82682c">health</a></td></tr>
 <tr class="separator:a9e11890dcfa8a4614ff156dada82682c inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6d2a9a8ea39622d54abb082dca06c94 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#af6d2a9a8ea39622d54abb082dca06c94">maxHealth</a></td></tr>
@@ -146,10 +163,14 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a55bdc6474c29506ce902c89cd166955b inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac97af5d3bc566393b6afdb80fc30071b inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ac97af5d3bc566393b6afdb80fc30071b">attackRange</a></td></tr>
 <tr class="separator:ac97af5d3bc566393b6afdb80fc30071b inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7724e5daf12a7aa24f0cb97489da5dba inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a7724e5daf12a7aa24f0cb97489da5dba">damage</a></td></tr>
-<tr class="separator:a7724e5daf12a7aa24f0cb97489da5dba inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a188be84d9a72ed2619b838e763e3b4a0 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a188be84d9a72ed2619b838e763e3b4a0">impactTime</a></td></tr>
-<tr class="separator:a188be84d9a72ed2619b838e763e3b4a0 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66b8e62817e2090f57634ca4b0cfd3f inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae66b8e62817e2090f57634ca4b0cfd3f">damage</a></td></tr>
+<tr class="separator:ae66b8e62817e2090f57634ca4b0cfd3f inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cde5a1685aeb5d5aedb6790f16e2344 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a9cde5a1685aeb5d5aedb6790f16e2344">skillLength</a></td></tr>
+<tr class="separator:a9cde5a1685aeb5d5aedb6790f16e2344 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f679c8e3582766f0e0d9a23ed54366c inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a8f679c8e3582766f0e0d9a23ed54366c">skillDurationLeft</a></td></tr>
+<tr class="separator:a8f679c8e3582766f0e0d9a23ed54366c inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c9425a4b6ed4fe63e48b3ae020de0f inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a33c9425a4b6ed4fe63e48b3ae020de0f">impactTime</a></td></tr>
+<tr class="separator:a33c9425a4b6ed4fe63e48b3ae020de0f inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f0468bc84815ed9669e966b76f5a265 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a4f0468bc84815ed9669e966b76f5a265">impacted</a></td></tr>
 <tr class="separator:a4f0468bc84815ed9669e966b76f5a265 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae2ea0c56d89c74124889c338bcfefe8 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aae2ea0c56d89c74124889c338bcfefe8">startPosition</a></td></tr>
@@ -162,48 +183,43 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a1d8ccad5a059dc364fc0ea0b5aad2efe inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abeff1b5530b0a4762f3efa2fb838bc38 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">AnimationClip&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#abeff1b5530b0a4762f3efa2fb838bc38">dieClip</a></td></tr>
 <tr class="separator:abeff1b5530b0a4762f3efa2fb838bc38 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_player"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_player')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_player.html">Player</a></td></tr>
+<tr class="memitem:a86df444fc3bad0736410bb214a63707d inherit pro_methods_class_player"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a86df444fc3bad0736410bb214a63707d">initializePlayer</a> ()</td></tr>
+<tr class="separator:a86df444fc3bad0736410bb214a63707d inherit pro_methods_class_player"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abde066e805686cc64aecbea5f95e81fb inherit pro_methods_class_player"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#abde066e805686cc64aecbea5f95e81fb">playerLogic</a> ()</td></tr>
+<tr class="separator:abde066e805686cc64aecbea5f95e81fb inherit pro_methods_class_player"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a10c89dde4c737e6c02af022224aba2 inherit pro_methods_class_player"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a5a10c89dde4c737e6c02af022224aba2">attackLogic</a> ()</td></tr>
+<tr class="separator:a5a10c89dde4c737e6c02af022224aba2 inherit pro_methods_class_player"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_player"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_player')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_player.html">Player</a></td></tr>
+<tr class="memitem:afbad0758144e89150c02e23253fb0fe0 inherit pro_attribs_class_player"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_i_skill.html">ISkill</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#afbad0758144e89150c02e23253fb0fe0">activeSkill1</a></td></tr>
+<tr class="separator:afbad0758144e89150c02e23253fb0fe0 inherit pro_attribs_class_player"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8bae791c6f4aa6d44f7f4d39c9cd74c inherit pro_attribs_class_player"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_i_skill.html">ISkill</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#aa8bae791c6f4aa6d44f7f4d39c9cd74c">activeSkill2</a></td></tr>
+<tr class="separator:aa8bae791c6f4aa6d44f7f4d39c9cd74c inherit pro_attribs_class_player"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a8921776f016e474032bc2fe8385a0f0d"></a>
+<a class="anchor" id="a192e0bad9c91c11bca20805c5671bd05"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Fighter.dieMethod </td>
+          <td class="memname">override void Fighter.loseEnergy </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>energy</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a6f03179ba632b22fa175ea4332e6d36a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Fighter.inAttackRange </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="addc36a302c224ad7407bec4c680c5937"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_enemy.html">Enemy</a> Fighter.enemy</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Reimplemented from <a class="el" href="class_character.html#a93dd89b3867927ddb3261266ce5fdc37">Character</a>.</p>
 
 </div>
 </div>
@@ -213,7 +229,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 27 2014 15:27:09 for Second Soul by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 1 2014 15:55:08 for Second Soul by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

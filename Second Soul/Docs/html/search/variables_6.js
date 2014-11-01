@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['idleclip',['idleClip',['../class_character.html#a44b0d9b97ae45392f08342c36620b01e',1,'Character']]],
-  ['impacted',['impacted',['../class_character.html#a4f0468bc84815ed9669e966b76f5a265',1,'Character']]],
-  ['impacttime',['impactTime',['../class_character.html#a188be84d9a72ed2619b838e763e3b4a0',1,'Character']]],
-  ['isrespawned',['isRespawned',['../class_game_over.html#a34942feba23fee5f5b7e1cc8f7d4d998',1,'GameOver']]],
-  ['isstatsdisplayed',['isStatsDisplayed',['../class_display_player_stats.html#aa27fe0a3d7469fbd1cf74fe1fdb2a338',1,'DisplayPlayerStats']]]
+  ['hasaggro',['hasAggro',['../class_enemy.html#ac02071c9814c3e84bdd99f451bac3620',1,'Enemy']]],
+  ['health',['health',['../class_character.html#a9e11890dcfa8a4614ff156dada82682c',1,'Character']]],
+  ['healthfill',['healthFill',['../class_health_bar.html#a6e300ec128859bc7d1f57bd66a2d8bc1',1,'HealthBar']]],
+  ['healthfillrect',['healthFillRect',['../class_health_bar.html#aca9ec38d2bf6a94640c882e406a679b3',1,'HealthBar']]],
+  ['healthframe',['healthFrame',['../class_health_bar.html#a25f81e8659545a051bb64f00c47b5efe',1,'HealthBar']]],
+  ['healthframerect',['healthFrameRect',['../class_health_bar.html#a8f847a5e18099c1668fec32d5baa0299',1,'HealthBar']]]
 ];

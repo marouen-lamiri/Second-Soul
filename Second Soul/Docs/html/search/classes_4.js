@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['fighter',['Fighter',['../class_fighter.html',1,'']]]
+  ['enemy',['Enemy',['../class_enemy.html',1,'']]],
+  ['enemyfactory',['EnemyFactory',['../class_enemy_factory.html',1,'']]]
 ];

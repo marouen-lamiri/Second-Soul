@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['takedamage',['takeDamage',['../class_character.html#aad538f8d2549afff6927c77b3badb1e8',1,'Character']]]
+  ['outaggrorange',['outAggroRange',['../class_enemy.html#ae9dba942d893abccb3933e76cc64cb6d',1,'Enemy']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pause',['Pause',['../class_pausing.html#a5ea5081ba97bbec1c742da2646247302',1,'Pausing']]]
+  ['move',['move',['../class_click_to_move.html#a7fe8e7582116627b7bf53a5e452927f1',1,'ClickToMove']]]
 ];
