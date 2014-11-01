@@ -106,7 +106,7 @@ public abstract class Character : MonoBehaviour {
 	
 	public void dieMethod(){
 		//CancelInvoke("applyAttackDamage");
-		StopCoroutine(applyAttackDamage(target));
+		//StopCoroutine(applyAttackDamage(target));
 		animateDie();
 		
 		if (animation[dieClip.name].time > animation[dieClip.name].length * 0.80) {

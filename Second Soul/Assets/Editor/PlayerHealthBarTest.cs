@@ -10,7 +10,7 @@ public class PlayerHealthBarTest{
 	[Test]
 	public void healthBarLessOrEqualMaxHP () {
 		double regularHp = player.health;
-		double maxHp = 10000;
+		double maxHp = player.maxHealth;
 		Assert.That (regularHp <= maxHp);
 	}
 
