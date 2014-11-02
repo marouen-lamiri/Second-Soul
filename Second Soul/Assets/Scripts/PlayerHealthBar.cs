@@ -14,6 +14,7 @@ public class PlayerHealthBar : MonoBehaviour {
 	float ratioHeight;
 	public Fighter player;
 
+
 	//Initialization of variables
 	void Start () {
 		hp = player.health;
@@ -49,6 +50,7 @@ public class PlayerHealthBar : MonoBehaviour {
 		GUI.BeginGroup(new Rect(Screen.width * 0.02f, (Screen.height-(globeHeight+20)), globeSize, globeSize));
 		GUI.DrawTexture(new Rect(0, (-globeSize+globeHeight), globeSize, globeSize),globePic);
 		GUI.EndGroup();
+
 	}
 }
 

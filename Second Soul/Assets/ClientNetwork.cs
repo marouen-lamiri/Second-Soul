@@ -39,6 +39,8 @@ public class ClientNetwork : MonoBehaviour {
 			// connect:
 			if (Network.peerType == NetworkPeerType.Disconnected)
 				Network.InitializeServer(10, port, false);
+
+			// disable second soul:
 			
 		}
 		
@@ -76,13 +78,23 @@ public class ClientNetwork : MonoBehaviour {
 					ConnectToServer();
 //				}
 //			}
+
+			// disable controlling PC:
+
+			// or instead, spaw a new sorcerer:
+			//Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+			//sorcerer2 = Instantiate()
+
+			//Network.Instantiate(playerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+			//Network.Instantiate(sorcerer, new Vector3(349.2448f, 0, 973.0397f), Quaternion.identity, 0);
+
 		}
 
 		// after connecting if you're a client:
 		if (Network.peerType == NetworkPeerType.Client) {
 			GUI.Label(new Rect(100, 100, 150, 25), "client");
 			
-			if (GUI.Button(new Rect(100, 125, 150, 25), "Logout"))
+			if (GUI.Button(new Rect(100, 125, 150, 25), "Logout")) 
 				Network.Disconnect();
 			
 			if (GUI.Button(new Rect(100, 150, 150, 25), "SendHello to server")) {
@@ -153,7 +165,6 @@ public class ClientNetwork : MonoBehaviour {
 		isConnectedToServer = false;
 	}
 	
-	// fix RPC errors
 //	[RPC]
 //	void ReceiveInfoFromClient(string someInfo) { }
 //	[RPC]
@@ -170,16 +181,16 @@ public class ClientNetwork : MonoBehaviour {
 	// use networkView.isMine 
 
 	// this is spectating code, can go in both server and client cube/sphere code:
-	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
-	{
-		if (stream.isWriting) {
-			Vector3 pos = transform.position;
-			stream.Serialize (ref pos);
-		}
-		else {
-			Vector3 receivedPosition = Vector3.zero;
-			stream.Serialize(ref receivedPosition);
-			transform.position = receivedPosition;
-		}
-	}
+//	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+//	{
+//		if (stream.isWriting) {
+//			Vector3 pos = transform.position;
+//			stream.Serialize (ref pos);
+//		}
+//		else {
+//			Vector3 receivedPosition = Vector3.zero;
+//			stream.Serialize(ref receivedPosition);
+//			transform.position = receivedPosition;
+//		}
+//	}
 }
