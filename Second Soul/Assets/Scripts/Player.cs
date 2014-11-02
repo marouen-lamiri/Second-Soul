@@ -11,7 +11,7 @@ public abstract class Player : Character {
 	public  ISkill activeSkill2; // protected
 
 	// networking:
-	FighterNetworkScript fighterNetworkScript;
+	protected FighterNetworkScript fighterNetworkScript;
 	
 	// Use this for initialization
 	void Start () {

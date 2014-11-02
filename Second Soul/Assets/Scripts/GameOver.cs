@@ -40,6 +40,9 @@ public class GameOver : MonoBehaviour {
 			GUI.Label (new Rect (Screen.width/2 - 90, Screen.height/2 - 50, 300, 200),"<Color=red><size=15>This is the end of his story \nA story that will never be completed \nAn unfullifed Destiny \nHis destination is death \nOnly his regrets remain</size></Color>");
 			if (GUI.Button (new Rect (Screen.width/2 - 90, Screen.height/2 + 80, 95, 25), "-Respawn-")) {
 				Respawn ();
+				// networking respawn listener:
+				FighterNetworkScript fighterNetworkingScript = (FighterNetworkScript) GameObject.FindObjectOfType (typeof(FighterNetworkScript));
+				fighterNetworkingScript.onRespawn ();
 			}
 			if (GUI.Button (new Rect (Screen.width/2 + 10, Screen.height/2 + 80, 95, 25), "-Close-")){
 				Application.Quit();
@@ -52,7 +55,7 @@ public class GameOver : MonoBehaviour {
 		player.transform.position = new Vector3(player.getInitialPositionX(), player.getInitialPositionY(), player.getInitialPositionZ());
 		player.isDead ();
 		Death ();
-	}
+			}
 
 	void restoreHealthAndEnergy(){
 		player.health = player.maxHealth;

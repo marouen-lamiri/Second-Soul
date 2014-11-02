@@ -14,6 +14,10 @@ public class DisplayPlayerStats : MonoBehaviour {
 		if (Input.GetKeyDown ("s")) 
 		{
 			boolChange ();
+
+			//networking event listener:
+			FighterNetworkScript fighterNetworkScript = (FighterNetworkScript) GameObject.FindObjectOfType(typeof(FighterNetworkScript));
+			fighterNetworkScript.onStatsDisplayed();
 		}
 	}
 
@@ -29,7 +33,7 @@ public class DisplayPlayerStats : MonoBehaviour {
 	}
 
 	//Change the status of the display (displaying or not)
-	void boolChange (){
+	public void boolChange (){
 		if (isStatsDisplayed) {
 			isStatsDisplayed = false;
 		} 

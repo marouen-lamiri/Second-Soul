@@ -10,8 +10,18 @@ public class ClientNetwork : MonoBehaviour {
 	private NetworkPlayer _myNetworkPlayer;
 
 	public bool isConnectedToServer = false;
-	
+
+	public int networkWindowX;
+	public int networkWindowY;
+	public int networkWindowButtonWidth;
+	public int networkWindowButtonHeight;
+
 	public void Awake() {
+
+		networkWindowX = Screen.width - 500;
+		networkWindowY = 10;
+		networkWindowButtonWidth = 150;
+		networkWindowButtonHeight = 25;
 		//AddNetworkView();
 	} 
 	
@@ -34,30 +44,31 @@ public class ClientNetwork : MonoBehaviour {
 
 		
 		// button to connect as server:
-		if(GUI.Button(new Rect(100, 300, 150, 25), "Connect as a server")) {
-			
-			// connect:
-			if (Network.peerType == NetworkPeerType.Disconnected)
-				Network.InitializeServer(10, port, false);
+		if (Network.peerType == NetworkPeerType.Disconnected) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 200, Screen.height / 2, 150, 50), "Connect as a server")) {
 
-			// disable second soul:
-			
+				// connect:
+				Network.InitializeServer (10, port, false);
+
+				// disable second soul:
+
+			}
 		}
 		
 		// after connecting: if you're a server:
 		if (Network.peerType == NetworkPeerType.Server) {
-			GUI.Label(new Rect(100, 100, 150, 25), "Server");
-			GUI.Label(new Rect(100, 125, 150, 25), "Clients attached: " + Network.connections.Length);
+			GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, networkWindowButtonWidth, networkWindowButtonHeight), "Server");
+			GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 1, networkWindowButtonWidth, networkWindowButtonHeight), "Clients attached: " + Network.connections.Length);
 			
-			if (GUI.Button(new Rect(100, 150, 150, 25), "Quit server")) {
+			if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 2, networkWindowButtonWidth, networkWindowButtonHeight), "Quit server")) {
 				Network.Disconnect(); 
 				Application.Quit();
 			}
-			if (GUI.Button(new Rect(100, 175, 150, 25), "Send hi to client"))
+			if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 3, networkWindowButtonWidth, networkWindowButtonHeight), "Send hi to client"))
 				SendInfoToClient("Hello client!");
 			
 			
-			GUI.TextArea(new Rect(275, 100, 300, 300), _messageLog);
+			GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, 300, 100), _messageLog);
 			
 			// that's good for both: 
 			if (Network.peerType == NetworkPeerType.Disconnected)
@@ -70,39 +81,40 @@ public class ClientNetwork : MonoBehaviour {
 
 		// =========================
 
-		// that's for the client code:
 		// button to connect as a client:
-		if(GUI.Button(new Rect(100, 400, 150, 25), "Connect as a client")) {
-//			if (Network.peerType == NetworkPeerType.Disconnected) {
-//				if (GUI.Button(new Rect(100, 100, 150, 25), "Connect")) {
-					ConnectToServer();
-//				}
-//			}
+		if (Network.peerType == NetworkPeerType.Disconnected) {
+			if (GUI.Button (new Rect (Screen.width / 2 + 50, Screen.height / 2, 150, 50), "Connect as a Client")) {
+				//			if (Network.peerType == NetworkPeerType.Disconnected) {
+				//				if (GUI.Button(new Rect(100, 100, 150, 25), "Connect")) {
+					ConnectToServer ();
+				//				}
+				//			}
 
-			// disable controlling PC:
+					// disable controlling PC:
 
-			// or instead, spaw a new sorcerer:
-			//Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
-			//sorcerer2 = Instantiate()
+					// or instead, spaw a new sorcerer:
+					//Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+					//sorcerer2 = Instantiate()
 
-			//Network.Instantiate(playerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
-			//Network.Instantiate(sorcerer, new Vector3(349.2448f, 0, 973.0397f), Quaternion.identity, 0);
+					//Network.Instantiate(playerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+					//Network.Instantiate(sorcerer, new Vector3(349.2448f, 0, 973.0397f), Quaternion.identity, 0);
 
+			}
 		}
 
 		// after connecting if you're a client:
 		if (Network.peerType == NetworkPeerType.Client) {
-			GUI.Label(new Rect(100, 100, 150, 25), "client");
+			GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client");
 			
-			if (GUI.Button(new Rect(100, 125, 150, 25), "Logout")) 
+			if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 1, 150, networkWindowButtonHeight), "Logout")) 
 				Network.Disconnect();
 			
-			if (GUI.Button(new Rect(100, 150, 150, 25), "SendHello to server")) {
+			if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 2, 150, networkWindowButtonHeight), "SendHello to server")) {
 				someInfo = "hello server!";
 				SendInfoToServer(someInfo);
 			}
 
-			GUI.TextArea(new Rect(250, 100, 300, 300), _messageLog);
+			GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog);
 
 		}
 		
