@@ -32,6 +32,22 @@ public class FighterNetworkScript : MonoBehaviour {
 
 	}
 
+
+
+	// watch energy:
+	[RPC]
+	public void onEnergyLost(double energyValue) {
+		if(networkView.isMine){
+			networkView.RPC("setEnergy", RPCMode.Others, energyValue+"");
+		}
+	}
+	
+	[RPC]
+	void setEnergy(string energyValue) {
+		fighter.energy = Convert.ToDouble (energyValue);
+	}
+
+
 	// watch onStatsDisplayed:
 	[RPC]
 	public void onStatsDisplayed() {
@@ -49,7 +65,9 @@ public class FighterNetworkScript : MonoBehaviour {
 	// watch respawn:
 	[RPC]
 	public void onRespawn() {
-		networkView.RPC("setToRespawned", RPCMode.Others);
+		if (networkView.isMine) {
+			networkView.RPC ("setToRespawned", RPCMode.Others);
+		}
 	}
 	
 	[RPC]
@@ -61,7 +79,9 @@ public class FighterNetworkScript : MonoBehaviour {
 	// watch player's attack movement:
 	[RPC]
 	public void onAttackTriggered(string attackName) {
-		networkView.RPC("attackWithActiveSkill", RPCMode.Others, attackName+"");
+		if (networkView.isMine) {
+			networkView.RPC ("attackWithActiveSkill", RPCMode.Others, attackName + "");
+		}
 	}
 	[RPC]
 	void attackWithActiveSkill(string attackName) {
@@ -80,7 +100,9 @@ public class FighterNetworkScript : MonoBehaviour {
 	// watch player health:
 	[RPC]
 	private void onHealthPointsChanged(double healthValue) {
-		networkView.RPC("changeHealthPoints", RPCMode.Others, healthValue+"");
+		if (networkView.isMine) {
+			networkView.RPC ("changeHealthPoints", RPCMode.Others, healthValue + "");
+		}
 	}
 
 	[RPC]

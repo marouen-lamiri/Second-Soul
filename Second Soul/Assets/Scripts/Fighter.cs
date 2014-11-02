@@ -4,6 +4,7 @@ using System.Collections;
 public class Fighter : Player {
 
 	//Variable declaration	
+	FighterNetworkScript fighterNetworkScript;
 	
 	// Use this for initialization
 	void Start () {
@@ -15,6 +16,9 @@ public class Fighter : Player {
 		target = null;
 		startPosition = transform.position;
 		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
+
+		//networking:
+		fighterNetworkScript = (FighterNetworkScript)GameObject.FindObjectOfType (typeof(FighterNetworkScript));
 	}
 	
 	// Update is called once per frame
@@ -32,5 +36,8 @@ public class Fighter : Player {
 		if (energy < 0) {
 			energy = 0;
 		}
+
+		// networking event listener:
+		fighterNetworkScript.onEnergyLost (this.energy);
 	}
 }
