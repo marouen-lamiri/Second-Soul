@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['character',['Character',['../class_character.html',1,'']]],
-  ['character_2ecs',['Character.cs',['../_character_8cs.html',1,'']]],
-  ['clicktomove',['ClickToMove',['../class_click_to_move.html',1,'']]],
-  ['clicktomove_2ecs',['ClickToMove.cs',['../_click_to_move_8cs.html',1,'']]],
-  ['controller',['controller',['../class_character.html#a5be34f952665451bcd50ed057d1b07ea',1,'Character']]]
+  ['basicattack',['BasicAttack',['../class_basic_attack.html',1,'']]],
+  ['basicattack_2ecs',['BasicAttack.cs',['../_basic_attack_8cs.html',1,'']]],
+  ['basicmelee',['BasicMelee',['../class_basic_melee.html',1,'']]],
+  ['basicmelee_2ecs',['BasicMelee.cs',['../_basic_melee_8cs.html',1,'']]],
+  ['basicranged',['BasicRanged',['../class_basic_ranged.html',1,'']]],
+  ['basicranged_2ecs',['BasicRanged.cs',['../_basic_ranged_8cs.html',1,'']]]
 ];

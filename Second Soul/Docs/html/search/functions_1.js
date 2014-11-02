@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['diemethod',['dieMethod',['../class_fighter.html#a8921776f016e474032bc2fe8385a0f0d',1,'Fighter']]]
+  ['chasetarget',['chaseTarget',['../class_character.html#aa17c09da6656f5b0a561042524250b95',1,'Character']]]
 ];

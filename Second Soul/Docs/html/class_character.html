@@ -98,17 +98,32 @@ Inheritance diagram for Character:</div>
   <img src="class_character.png" usemap="#Character_map" alt=""/>
   <map id="Character_map" name="Character_map">
 <area href="class_enemy.html" alt="Enemy" shape="rect" coords="0,112,102,136"/>
-<area href="class_fighter.html" alt="Fighter" shape="rect" coords="112,112,214,136"/>
-<area href="class_sorcerer.html" alt="Sorcerer" shape="rect" coords="224,112,326,136"/>
+<area href="class_player.html" alt="Player" shape="rect" coords="112,112,214,136"/>
+<area href="class_fighter.html" alt="Fighter" shape="rect" coords="56,168,158,192"/>
+<area href="class_sorcerer.html" alt="Sorcerer" shape="rect" coords="168,168,270,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aad538f8d2549afff6927c77b3badb1e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aad538f8d2549afff6927c77b3badb1e8">takeDamage</a> (double <a class="el" href="class_character.html#a7724e5daf12a7aa24f0cb97489da5dba">damage</a>)</td></tr>
+<tr class="memitem:aad538f8d2549afff6927c77b3badb1e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aad538f8d2549afff6927c77b3badb1e8">takeDamage</a> (double <a class="el" href="class_character.html#ae66b8e62817e2090f57634ca4b0cfd3f">damage</a>)</td></tr>
 <tr class="separator:aad538f8d2549afff6927c77b3badb1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab22a059d8ce510b5211a820edf880f2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aab22a059d8ce510b5211a820edf880f2">isDead</a> ()</td></tr>
-<tr class="separator:aab22a059d8ce510b5211a820edf880f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93dd89b3867927ddb3261266ce5fdc37"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a93dd89b3867927ddb3261266ce5fdc37">loseEnergy</a> (float <a class="el" href="class_character.html#ad2d08f1243cb40a809f68ebae8336b62">energy</a>)</td></tr>
+<tr class="separator:a93dd89b3867927ddb3261266ce5fdc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a081ba7d0e287ae6a00a628ef37f44523"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a081ba7d0e287ae6a00a628ef37f44523">isDead</a> ()</td></tr>
+<tr class="separator:a081ba7d0e287ae6a00a628ef37f44523"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa17c09da6656f5b0a561042524250b95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa17c09da6656f5b0a561042524250b95">chaseTarget</a> ()</td></tr>
+<tr class="separator:aa17c09da6656f5b0a561042524250b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9ac03892548ae2f879d2af58f225114"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa9ac03892548ae2f879d2af58f225114">attack</a> ()</td></tr>
+<tr class="separator:aa9ac03892548ae2f879d2af58f225114"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd60100303e8034eb8f80682ad912a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a9cd60100303e8034eb8f80682ad912a8">attackLocked</a> ()</td></tr>
+<tr class="separator:a9cd60100303e8034eb8f80682ad912a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeebe09a7c9cf76323165fd3c024a6fd1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aeebe09a7c9cf76323165fd3c024a6fd1">actionLocked</a> ()</td></tr>
+<tr class="separator:aeebe09a7c9cf76323165fd3c024a6fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9ff3be8b0a95e6f6d9a8c3f4fd862ae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ad9ff3be8b0a95e6f6d9a8c3f4fd862ae">inAttackRange</a> ()</td></tr>
+<tr class="separator:ad9ff3be8b0a95e6f6d9a8c3f4fd862ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cfc361f6bcf1b2efee50c4fd30f619e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a7cfc361f6bcf1b2efee50c4fd30f619e">dieMethod</a> ()</td></tr>
+<tr class="separator:a7cfc361f6bcf1b2efee50c4fd30f619e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a305f9f702b8e48bf5571b42ab737f87f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a305f9f702b8e48bf5571b42ab737f87f">getInitialPositionX</a> ()</td></tr>
 <tr class="separator:a305f9f702b8e48bf5571b42ab737f87f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa04c2f42f6c0464593a2c7543ec48de8"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aa04c2f42f6c0464593a2c7543ec48de8">getInitialPositionY</a> ()</td></tr>
@@ -128,8 +143,14 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a5be34f952665451bcd50ed057d1b07ea"><td class="memItemLeft" align="right" valign="top">CharacterController&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a5be34f952665451bcd50ed057d1b07ea">controller</a></td></tr>
 <tr class="separator:a5be34f952665451bcd50ed057d1b07ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af14576e42d1dfa4e67487e810d77e608"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#af14576e42d1dfa4e67487e810d77e608">playerEnabled</a></td></tr>
+<tr class="separator:af14576e42d1dfa4e67487e810d77e608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a408273dba5567b7387407e6648248607"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_character.html">Character</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a408273dba5567b7387407e6648248607">target</a></td></tr>
+<tr class="separator:a408273dba5567b7387407e6648248607"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34ba4bab0f4e03bc819698826f483572"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a34ba4bab0f4e03bc819698826f483572">speed</a></td></tr>
 <tr class="separator:a34ba4bab0f4e03bc819698826f483572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a912f4689de5acb36d97aa78ee45463c2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a912f4689de5acb36d97aa78ee45463c2">chasing</a></td></tr>
+<tr class="separator:a912f4689de5acb36d97aa78ee45463c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e11890dcfa8a4614ff156dada82682c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a9e11890dcfa8a4614ff156dada82682c">health</a></td></tr>
 <tr class="separator:a9e11890dcfa8a4614ff156dada82682c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6d2a9a8ea39622d54abb082dca06c94"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#af6d2a9a8ea39622d54abb082dca06c94">maxHealth</a></td></tr>
@@ -140,10 +161,14 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a55bdc6474c29506ce902c89cd166955b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac97af5d3bc566393b6afdb80fc30071b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ac97af5d3bc566393b6afdb80fc30071b">attackRange</a></td></tr>
 <tr class="separator:ac97af5d3bc566393b6afdb80fc30071b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7724e5daf12a7aa24f0cb97489da5dba"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a7724e5daf12a7aa24f0cb97489da5dba">damage</a></td></tr>
-<tr class="separator:a7724e5daf12a7aa24f0cb97489da5dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a188be84d9a72ed2619b838e763e3b4a0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a188be84d9a72ed2619b838e763e3b4a0">impactTime</a></td></tr>
-<tr class="separator:a188be84d9a72ed2619b838e763e3b4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66b8e62817e2090f57634ca4b0cfd3f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ae66b8e62817e2090f57634ca4b0cfd3f">damage</a></td></tr>
+<tr class="separator:ae66b8e62817e2090f57634ca4b0cfd3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cde5a1685aeb5d5aedb6790f16e2344"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a9cde5a1685aeb5d5aedb6790f16e2344">skillLength</a></td></tr>
+<tr class="separator:a9cde5a1685aeb5d5aedb6790f16e2344"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f679c8e3582766f0e0d9a23ed54366c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a8f679c8e3582766f0e0d9a23ed54366c">skillDurationLeft</a></td></tr>
+<tr class="separator:a8f679c8e3582766f0e0d9a23ed54366c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c9425a4b6ed4fe63e48b3ae020de0f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a33c9425a4b6ed4fe63e48b3ae020de0f">impactTime</a></td></tr>
+<tr class="separator:a33c9425a4b6ed4fe63e48b3ae020de0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f0468bc84815ed9669e966b76f5a265"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a4f0468bc84815ed9669e966b76f5a265">impacted</a></td></tr>
 <tr class="separator:a4f0468bc84815ed9669e966b76f5a265"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae2ea0c56d89c74124889c338bcfefe8"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aae2ea0c56d89c74124889c338bcfefe8">startPosition</a></td></tr>
@@ -158,6 +183,21 @@ Public Attributes</h2></td></tr>
 <tr class="separator:abeff1b5530b0a4762f3efa2fb838bc38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aeebe09a7c9cf76323165fd3c024a6fd1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Character.actionLocked </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a7360948f9243e1706f67ab137f8e1e08"></a>
 <div class="memitem">
 <div class="memproto">
@@ -218,6 +258,66 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aa9ac03892548ae2f879d2af58f225114"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Character.attack </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9cd60100303e8034eb8f80682ad912a8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Character.attackLocked </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa17c09da6656f5b0a561042524250b95"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Character.chaseTarget </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7cfc361f6bcf1b2efee50c4fd30f619e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Character.dieMethod </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a305f9f702b8e48bf5571b42ab737f87f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -263,18 +363,69 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aab22a059d8ce510b5211a820edf880f2"></a>
+<a class="anchor" id="ad9ff3be8b0a95e6f6d9a8c3f4fd862ae"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Character.isDead </td>
+          <td class="memname">bool Character.inAttackRange </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a081ba7d0e287ae6a00a628ef37f44523"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Character.isDead </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_sorcerer.html#a60e6faafecff27de587d9637fa044ad2">Sorcerer</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a93dd89b3867927ddb3261266ce5fdc37"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Character.loseEnergy </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>energy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_fighter.html#a192e0bad9c91c11bca20805c5671bd05">Fighter</a>, and <a class="el" href="class_sorcerer.html#a60d358d24c5522de78fc56518605511c">Sorcerer</a>.</p>
 
 </div>
 </div>
@@ -319,6 +470,18 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a912f4689de5acb36d97aa78ee45463c2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Character.chasing</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a5be34f952665451bcd50ed057d1b07ea"></a>
 <div class="memitem">
 <div class="memproto">
@@ -331,12 +494,12 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7724e5daf12a7aa24f0cb97489da5dba"></a>
+<a class="anchor" id="ae66b8e62817e2090f57634ca4b0cfd3f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double Character.damage</td>
+          <td class="memname">float Character.damage</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -403,12 +566,12 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a188be84d9a72ed2619b838e763e3b4a0"></a>
+<a class="anchor" id="a33c9425a4b6ed4fe63e48b3ae020de0f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double Character.impactTime</td>
+          <td class="memname">float Character.impactTime</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -439,12 +602,48 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="af14576e42d1dfa4e67487e810d77e608"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Character.playerEnabled</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8308df4876079d5cf0839aabbf733aeb"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">AnimationClip Character.runClip</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8f679c8e3582766f0e0d9a23ed54366c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Character.skillDurationLeft</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9cde5a1685aeb5d5aedb6790f16e2344"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Character.skillLength</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -475,13 +674,25 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a408273dba5567b7387407e6648248607"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_character.html">Character</a> Character.target</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>D:/Documents/Guillaume/Unity Projects/Second-Soul/Second Soul/Assets/Scripts/<a class="el" href="_character_8cs.html">Character.cs</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 27 2014 15:27:09 for Second Soul by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 1 2014 15:55:08 for Second Soul by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

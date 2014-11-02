@@ -36,8 +36,8 @@ public class HealthBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if(player.enemy!=null){
-			enemy = player.enemy.GetComponent<Enemy> ();
+		if(player.target!=null){
+			enemy = player.target.GetComponent<Enemy> ();
 			healthPercent =((float)enemy.health / (float)enemy.maxHealth);
 		}
 		else{

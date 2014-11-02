@@ -11,6 +11,10 @@ Then we apply the smoothed values to the transform's position.
 
 // The target we are following
 var target : Transform;
+var sorcerer : Transform;
+var fighter : Transform;
+var enabledFighter = true;
+
 // The distance in the x-z plane to the target
 var distance = 10.0;
 // the height we want the camera to be above the target
@@ -21,9 +25,22 @@ var heightDamping = 2.0;
 
 // Place the script in the Camera-Control group in the component menu
 @script AddComponentMenu("Camera-Control/Smooth Follow")
-
+function Update(){
+	if(enabledFighter){
+		target = fighter;
+	}
+	else{
+		target = sorcerer;
+	}
+	
+	if (Input.GetKeyDown (KeyCode.E)){
+		enabledFighter = !enabledFighter;
+	}
+}
 
 function LateUpdate () {
+
+		
 	// Early out if we don't have a target
 	if (!target)
 		return;

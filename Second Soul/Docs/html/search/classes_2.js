@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['displayplayerstats',['DisplayPlayerStats',['../class_display_player_stats.html',1,'']]]
+  ['character',['Character',['../class_character.html',1,'']]],
+  ['clicktomove',['ClickToMove',['../class_click_to_move.html',1,'']]]
 ];

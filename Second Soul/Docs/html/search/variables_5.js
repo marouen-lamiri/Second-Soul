@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['hasaggro',['hasAggro',['../class_enemy.html#ac02071c9814c3e84bdd99f451bac3620',1,'Enemy']]],
-  ['health',['health',['../class_character.html#a9e11890dcfa8a4614ff156dada82682c',1,'Character']]],
-  ['healthfill',['healthFill',['../class_health_bar.html#a6e300ec128859bc7d1f57bd66a2d8bc1',1,'HealthBar']]],
-  ['healthfillrect',['healthFillRect',['../class_health_bar.html#aca9ec38d2bf6a94640c882e406a679b3',1,'HealthBar']]],
-  ['healthframe',['healthFrame',['../class_health_bar.html#a25f81e8659545a051bb64f00c47b5efe',1,'HealthBar']]],
-  ['healthframerect',['healthFrameRect',['../class_health_bar.html#a8f847a5e18099c1668fec32d5baa0299',1,'HealthBar']]]
+  ['globeheight',['globeHeight',['../class_player_energy_bar.html#a324027ed051febcca40247d098fa2a18',1,'PlayerEnergyBar.globeHeight()'],['../class_player_health_bar.html#ae9b094d72c42c586e147c9b9984a5f55',1,'PlayerHealthBar.globeHeight()']]],
+  ['globepic',['globePic',['../class_player_energy_bar.html#ac0528f4153047dd191dc2957ddc91048',1,'PlayerEnergyBar.globePic()'],['../class_player_health_bar.html#ad6f4dcc1b11563058e4de371cfde2238',1,'PlayerHealthBar.globePic()']]],
+  ['globesize',['globeSize',['../class_player_energy_bar.html#a39e349fd6101eba04f668e5019f54437',1,'PlayerEnergyBar.globeSize()'],['../class_player_health_bar.html#ac1854d375b27f0fbe53cfbc60d5c17d2',1,'PlayerHealthBar.globeSize()']]]
 ];
