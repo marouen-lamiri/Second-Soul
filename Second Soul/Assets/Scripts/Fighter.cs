@@ -25,7 +25,7 @@ public class Fighter : Character {
 				ClickToMove.attacking = true;
 				transform.LookAt (enemy.transform.position);
 			}
-
+			 
 			if (animation [attackClip.name].time > 0.9 * animation [attackClip.name].length) {
 				ClickToMove.attacking = false;
 				impacted = false;

@@ -2,16 +2,17 @@
 using System.Collections;
 
 public class ServerNetwork : MonoBehaviour {
+
+	public string serverIP = "127.0.0.1";
 	private int port = 25000;
 	private int playerCount = 0;
 	private string _messageLog = "";
-
+	string someInfo = "";
+	private NetworkPlayer _myNetworkPlayer;
 
 	
 	public void Awake() {
-		if (Network.peerType == NetworkPeerType.Disconnected)
-			Network.InitializeServer(10, port, false);
-		
+
 		//
 		// AddNetworkView();
 		//Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0); // error prefab not isntantiated.
@@ -42,27 +43,75 @@ public class ServerNetwork : MonoBehaviour {
 			transform.Translate(speed * moveDir * Time.deltaTime);
 		}
 	}
-	public void OnGUI() {
+	void OnGUI() {
+		
+		
+		// button to connect as server:
+		if(GUI.Button(new Rect(100, 300, 150, 25), "Connect as a server")) {
+			
+			// connect:
+			if (Network.peerType == NetworkPeerType.Disconnected)
+				Network.InitializeServer(10, port, false);
+			
+		}
+		
+		// after connecting: if you're a server:
 		if (Network.peerType == NetworkPeerType.Server) {
 			GUI.Label(new Rect(100, 100, 150, 25), "Server");
 			GUI.Label(new Rect(100, 125, 150, 25), "Clients attached: " + Network.connections.Length);
 			
 			if (GUI.Button(new Rect(100, 150, 150, 25), "Quit server")) {
-				Network.Disconnect();
+				Network.Disconnect(); 
 				Application.Quit();
 			}
 			if (GUI.Button(new Rect(100, 175, 150, 25), "Send hi to client"))
 				SendInfoToClient("Hello client!");
+			
+			
+			GUI.TextArea(new Rect(275, 100, 300, 300), _messageLog);
+			
+			// that's good for both: 
+			if (Network.peerType == NetworkPeerType.Disconnected)
+			{
+				//GUI.Label(new Rect(10, 10, 200, 20), "Status: Disconnected");
+				print ("Status: Disconnected.");
+			}
+			
 		}
-		GUI.TextArea(new Rect(275, 100, 300, 300), _messageLog);
+		
+		// =========================
+		
 
-		//
-		if (Network.peerType == NetworkPeerType.Disconnected)
-		{
-			//GUI.Label(new Rect(10, 10, 200, 20), "Status: Disconnected");
-			print ("Status: Disconnected.");
+		// button to connect as a client:
+		if(GUI.Button(new Rect(100, 400, 150, 25), "Connect as a client")) {
+			//			if (Network.peerType == NetworkPeerType.Disconnected) {
+			//				if (GUI.Button(new Rect(100, 100, 150, 25), "Connect")) {
+			ConnectToServer();
+			//				}
+			//			}
 		}
+		
+		// after connecting, if you're a client:
+		if (Network.peerType == NetworkPeerType.Client) {
+			GUI.Label(new Rect(100, 100, 150, 25), "client");
+			
+			if (GUI.Button(new Rect(100, 125, 150, 25), "Logout"))
+				Network.Disconnect();
+			
+			if (GUI.Button(new Rect(100, 150, 150, 25), "SendHello to server")) {
+				someInfo = "hello server!";
+				SendInfoToServer(someInfo);
+			}
+			
+			GUI.TextArea(new Rect(250, 100, 300, 300), _messageLog);
+			
+		}
+		
+		
+	}
 
+	private void ConnectToServer() {
+		Network.Connect(serverIP, port);
 	}
 	
 	void OnPlayerConnected(NetworkPlayer player) {
@@ -88,12 +137,29 @@ public class ServerNetwork : MonoBehaviour {
 		print (msg);
 		_messageLog += msg + "\n";
 	}
+
+	[RPC]
+	void SendInfoToServer(string msg){
+		msg = "CLIENT " + _myNetworkPlayer.guid + ": " + msg;
+		_messageLog += msg + "\n";
+		//someInfo = "Client " + _myNetworkPlayer.guid + ": hello server";
+		networkView.RPC("ReceiveInfoFromClient", RPCMode.Server, msg);
+	}
+
 	
 	// fix RPC errors
+	//[RPC]
+	//void SendInfoToServer() { }
+//	[RPC]
+//	void SetPlayerInfo(NetworkPlayer player) { }
+
 	[RPC]
-	void SendInfoToServer() { }
-	[RPC]
-	void SetPlayerInfo(NetworkPlayer player) { }
+	void SetPlayerInfo(NetworkPlayer player) {
+		_myNetworkPlayer = player;
+		someInfo = "Player setted";
+		networkView.RPC("ReceiveInfoFromClient", RPCMode.Server, someInfo);
+	}
+
 	[RPC]
 	void ReceiveInfoFromServer(string someInfo) { }
 
