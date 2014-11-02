@@ -4,9 +4,9 @@ using System.Collections;
 public class PlayerEnergyBar : MonoBehaviour {
 
 	//Variable
-	public float globeHeight;
+	float globeHeight = 64;
 	public Texture globePic;
-	public int globeSize;
+	int globeSize = 64;
 	double energy;
 	double maxEnergy;
 	double energyPercent;
@@ -47,7 +47,7 @@ public class PlayerEnergyBar : MonoBehaviour {
 		globeHeight = (float) energyPercent*globeSize;
 		
 		//Drawing Energy Bar
-		GUI.BeginGroup(new Rect(Screen.width * 0.02f, Screen.height-(globeHeight+20)*2f, globeSize, globeSize));
+		GUI.BeginGroup(new Rect(Screen.width * 0.9f , (Screen.height-(globeHeight+20)), globeSize, globeSize));
 		GUI.DrawTexture(new Rect(0, -globeSize+globeHeight, globeSize, globeSize),globePic);
 		GUI.EndGroup();
 	}
