@@ -32,14 +32,19 @@ public class FighterNetworkScript : MonoBehaviour {
 
 	}
 
-
-	//	activeSkill1.setCaster(this);
-	//	activeSkill1.useSkill(target);
-
-	//activeSkill2.setCaster(this);
-	//activeSkill2.useSkill(castPosition());
-
+	// watch respawn:
+	[RPC]
+	public void onRespawn() {
+		networkView.RPC("setToRespawned", RPCMode.Others);
+	}
 	
+	[RPC]
+	void setToRespawned() {
+		GameOver gameOver = (GameOver) GameObject.FindObjectOfType (typeof(GameOver));
+		gameOver.Respawn ();
+	}
+
+	// watch player's attack movement:
 	[RPC]
 	public void onAttackTriggered(string attackName) {
 		networkView.RPC("attackWithActiveSkill", RPCMode.Others, attackName+"");
@@ -57,7 +62,8 @@ public class FighterNetworkScript : MonoBehaviour {
 			fighter.animateAttack();
 		}
 	}
-	
+
+	// watch player health:
 	[RPC]
 	private void onHealthPointsChanged(double healthValue) {
 		networkView.RPC("changeHealthPoints", RPCMode.Others, healthValue+"");
