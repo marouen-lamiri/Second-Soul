@@ -32,9 +32,34 @@ public class FighterNetworkScript : MonoBehaviour {
 
 	}
 
+
+	//	activeSkill1.setCaster(this);
+	//	activeSkill1.useSkill(target);
+
+	//activeSkill2.setCaster(this);
+	//activeSkill2.useSkill(castPosition());
+
+	
+	[RPC]
+	public void onAttackTriggered(string attackName) {
+		networkView.RPC("attackWithActiveSkill", RPCMode.Others, attackName+"");
+	}
+	[RPC]
+	void attackWithActiveSkill(string attackName) {
+		if(attackName == "activeSkill1") {
+			//			fighter.activeSkill1.caster.animateAttack();
+			//			fighter.activeSkill1.setCaster(this);
+			//			fighter.activeSkill1.useSkill(target);
+			fighter.animateAttack();
+		} else if (attackName == "activeSkill2") {
+			//			fighter.activeSkill2.setCaster(this);
+			//			fighter.activeSkill2.useSkill(castPosition()); // TODO consider making a helper that calls these two, within Player.cs
+			fighter.animateAttack();
+		}
+	}
+	
 	[RPC]
 	private void onHealthPointsChanged(double healthValue) {
-		//rpc call.
 		networkView.RPC("changeHealthPoints", RPCMode.Others, healthValue+"");
 	}
 

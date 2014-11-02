@@ -7,12 +7,15 @@ public abstract class Player : Character {
 	public bool attacking;
 	//private Vector3 castPosition;
 	
-	protected ISkill activeSkill1;
-	protected ISkill activeSkill2;
+	public ISkill activeSkill1; // protected
+	public  ISkill activeSkill2; // protected
+
+	// networking:
+	FighterNetworkScript fighterNetworkScript;
 	
 	// Use this for initialization
 	void Start () {
-	
+		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
 	}
 	
 	// Update is called once per frame
@@ -43,6 +46,9 @@ public abstract class Player : Character {
 						//attack ();
 						activeSkill1.setCaster(this);
 						activeSkill1.useSkill(target);
+
+						// networking event listener:
+						fighterNetworkScript.onAttackTriggered("activeSkill1");
 					}
 					else{
 						chaseTarget();
@@ -55,6 +61,9 @@ public abstract class Player : Character {
 						//locatePosition();
 						activeSkill2.setCaster(this);
 						activeSkill2.useSkill(castPosition());
+
+						// networking event listener:
+						fighterNetworkScript.onAttackTriggered("activeSkill2");
 					}
 					else{
 						chaseTarget();
@@ -64,7 +73,7 @@ public abstract class Player : Character {
 		}
 	}
 	
-	private Vector3 castPosition(){
+	public Vector3 castPosition(){ // private
 		RaycastHit hit;
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
