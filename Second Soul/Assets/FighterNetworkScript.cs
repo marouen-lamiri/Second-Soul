@@ -32,6 +32,20 @@ public class FighterNetworkScript : MonoBehaviour {
 
 	}
 
+	// watch onStatsDisplayed:
+	[RPC]
+	public void onStatsDisplayed() {
+		if(networkView.isMine){
+			networkView.RPC("toggleStatsDisplayed", RPCMode.Others);
+		}
+	}
+	
+	[RPC]
+	void toggleStatsDisplayed() {
+		DisplayPlayerStats statsDisplayScript = (DisplayPlayerStats) GameObject.FindObjectOfType(typeof(DisplayPlayerStats));
+		statsDisplayScript.boolChange ();
+	}
+
 	// watch respawn:
 	[RPC]
 	public void onRespawn() {
