@@ -6,12 +6,20 @@ public class Pausing : MonoBehaviour {
 	//Variables
 	bool isPaused;
 	int TimeScale;
+	FighterNetworkScript fighterNetworkScript;
+
+	void Start() {
+		fighterNetworkScript = (FighterNetworkScript)GameObject.FindObjectOfType (typeof(FighterNetworkScript));
+	}
 
 	// Update is called once per frame, checks if p is pressed
 	void Update () {
 		if(Input.GetKeyDown("p"))
 		{
 			Pause();
+
+			// networking event listener:
+			fighterNetworkScript.onPauseGame();
 		}
 	}
 

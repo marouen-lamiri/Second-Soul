@@ -6,21 +6,22 @@ public class FighterNetworkScript : MonoBehaviour {
 
 	PlayerHealthBar playerHealthBar;
 	double healthInPreviousFrame;
-	Fighter fighter;
-
+	Fighter fighterScript;
+	Pausing pausingObject;
 	
 	// Use this for initialization
 	void Start () {
 		//playerHealthBar = (PlayerHealthBar) GameObject.FindObjectOfType (typeof(PlayerHealthBar));
-		fighter = (Fighter)gameObject.GetComponent<Fighter> ();
+		fighterScript = (Fighter)gameObject.GetComponent<Fighter> ();
+		pausingObject = (Pausing) GameObject.FindObjectOfType (typeof(Pausing));
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// Networking: setting up an eventListener for watching changes to player health:
-		if(healthInPreviousFrame != fighter.health) {
-			healthInPreviousFrame = fighter.health;
-			onHealthPointsChanged(fighter.health);
+		if(healthInPreviousFrame != fighterScript.health) {
+			healthInPreviousFrame = fighterScript.health;
+			onHealthPointsChanged(fighterScript.health);
 		}
 
 		
@@ -32,7 +33,18 @@ public class FighterNetworkScript : MonoBehaviour {
 
 	}
 
-
+	// watch pausing game:
+	[RPC]
+	public void onPauseGame() {
+		if(networkView.isMine){
+			networkView.RPC("togglePauseGame", RPCMode.Others);
+		}
+	}
+	
+	[RPC]
+	void togglePauseGame() {
+		pausingObject.Pause ();
+	}
 
 	// watch energy:
 	[RPC]
@@ -44,7 +56,7 @@ public class FighterNetworkScript : MonoBehaviour {
 	
 	[RPC]
 	void setEnergy(string energyValue) {
-		fighter.energy = Convert.ToDouble (energyValue);
+		fighterScript.energy = Convert.ToDouble (energyValue);
 	}
 
 
@@ -89,11 +101,11 @@ public class FighterNetworkScript : MonoBehaviour {
 			//			fighter.activeSkill1.caster.animateAttack();
 			//			fighter.activeSkill1.setCaster(this);
 			//			fighter.activeSkill1.useSkill(target);
-			fighter.animateAttack();
+			fighterScript.animateAttack();
 		} else if (attackName == "activeSkill2") {
 			//			fighter.activeSkill2.setCaster(this);
 			//			fighter.activeSkill2.useSkill(castPosition()); // TODO consider making a helper that calls these two, within Player.cs
-			fighter.animateAttack();
+			fighterScript.animateAttack();
 		}
 	}
 
@@ -107,7 +119,7 @@ public class FighterNetworkScript : MonoBehaviour {
 
 	[RPC]
 	void changeHealthPoints(string healthValue) {
-		fighter.health = Convert.ToDouble(healthValue);
+		fighterScript.health = Convert.ToDouble(healthValue);
 	}
 
 //	// use networkView.isMine 
