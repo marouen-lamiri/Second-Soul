@@ -6,6 +6,8 @@ public class ClickToMove : MonoBehaviour {
 	public Character player;
 	private Vector3 position;
 
+	public static bool busy;
+
 	// Use this for initialization
 	void Start () {
 		position = transform.position;
@@ -13,7 +15,7 @@ public class ClickToMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update (){
-		if(!player.isDead() && player.playerEnabled)
+		if(!player.isDead() && player.playerEnabled && !busy)
 		{
 			if(!player.chasing && !player.actionLocked()){
 				if(Input.GetMouseButton(0))

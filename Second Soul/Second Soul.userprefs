@@ -1,27 +1,25 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FighterNetworkScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Inventory\Inventory.cs">
     <Files>
-      <File FileName="Assets\Scripts\Pausing.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerEnergyBar.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerHealthBar.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Fighter.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DisplayPlayerStats.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Character.cs" Line="1" Column="1" />
-      <File FileName="Assets\ClientNetwork.cs" Line="1" Column="1" />
-      <File FileName="Assets\SorcererNetworkScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\FighterNetworkScript.cs" Line="9" Column="14" />
-      <File FileName="Assets\Scripts\Enemy.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\BasicAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Player.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\FireballSkill.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\ProjectileSkill.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Inventory\Armor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Inventory\Inventory.cs" Line="121" Column="41" />
+      <File FileName="Assets\Scripts\Inventory\ItemList.cs" Line="11" Column="12" />
+      <File FileName="Assets\Scripts\Inventory\Items.cs" Line="13" Column="55" />
+      <File FileName="Assets\Scripts\Inventory\Slots.cs" Line="17" Column="37" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
-            <Node name="FighterNetworkScript.cs" selected="True" />
+            <Node name="Scripts" expanded="True">
+              <Node name="Inventory" expanded="True">
+                <Node name="Inventory.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="UnityTestTools" expanded="True">
+              <Node name="Assertions" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>

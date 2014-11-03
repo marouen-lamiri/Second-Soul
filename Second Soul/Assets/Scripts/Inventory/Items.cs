@@ -10,6 +10,7 @@ public abstract class Items {
 	public int Width;
 	public int Height;
 
+	//Abstract Method, should be overwritten in any inherited class
 	public abstract void performAction ();
 }
 
