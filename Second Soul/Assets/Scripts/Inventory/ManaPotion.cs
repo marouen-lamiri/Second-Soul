@@ -2,9 +2,9 @@
 using System.Collections;
 
 [System.Serializable]
-public class Armor : Item{
+public class ManaPotion : Item {
 
 	public override void performAction(){
-
+		//player.energy += 50;
 	}
 }

@@ -1,27 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Inventory\Inventory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Inventory\HealthPotion.cs">
     <Files>
-      <File FileName="Assets\Scripts\Inventory\Armor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Inventory\Inventory.cs" Line="121" Column="41" />
-      <File FileName="Assets\Scripts\Inventory\ItemList.cs" Line="11" Column="12" />
-      <File FileName="Assets\Scripts\Inventory\Items.cs" Line="13" Column="55" />
-      <File FileName="Assets\Scripts\Inventory\Slots.cs" Line="17" Column="37" />
+      <File FileName="Assets\Scripts\Inventory\Armor.cs" Line="7" Column="21" />
+      <File FileName="Assets\Scripts\Inventory\Items.cs" Line="6" Column="26" />
+      <File FileName="Assets\Scripts\Inventory\HealthPotion.cs" Line="8" Column="5" />
+      <File FileName="Assets\Scripts\Inventory\ManaPotion.cs" Line="8" Column="5" />
+      <File FileName="Assets\Scripts\Inventory\Item.cs" Line="11" Column="2" />
+      <File FileName="Assets\Scripts\Inventory\Inventory.cs" Line="85" Column="192" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Scripts" expanded="True">
-              <Node name="Inventory" expanded="True">
-                <Node name="Inventory.cs" selected="True" />
-              </Node>
-            </Node>
-            <Node name="UnityTestTools" expanded="True">
-              <Node name="Assertions" expanded="True" />
-            </Node>
-          </Node>
-        </State>
+        <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
         <State expanded="True" selected="True" />

@@ -1,178 +1,179 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
-public class Inventory : MonoBehaviour {
-	public Texture2D Image;
-	public Rect Position;
+public class Inventory : MonoBehaviour 
+{
+	public Texture2D image;
+	public Rect position;
 
-	public List<Items> items = new List<Items>();
+	public List<Item> items = new List<Item>();
 	int slotWidthSize = 6;
 	int slotHeightSize = 4;
-	public Slots[,] slots;
-	
+	public Slot[,] slots;
+
 	public int slotX;
 	public int slotY;
-	public int width = 32;
-	public int height = 32;
+	public int width = 40;
+	public int height = 40;
 
-	private Items temp;
-	private bool test;
-	private bool showInventory = false;
+	private Item temp;
 	private Vector2 selected;
-	private Vector2 secondSelect;
+	private Vector2 secondSelected;
+	private bool isInventoryOn = false;
 
+	private bool test;
 	// Use this for initialization
 	void Start () {
 		setSlots ();
 		test = false;
 	}
 
+	void setSlots(){
+		slots = new Slot[slotWidthSize,slotHeightSize];
+		for(int x = 0; x < slotWidthSize ; x++){
+			for(int y = 0; y < slotHeightSize ; y++){
+				slots[x,y] = new Slot(new Rect(slotX + width*x, slotY + height*y, width, height));
+			}
+		}
+	}
+
 	void testMethod(){
-		addItems (0,0,ItemList.getArmor(0));
-		addItems (2,2,ItemList.getArmor(0));
+		addItem(0,0,Items.getArmor(0));
+		addItem(2,0,Items.getHealthPotion(0));
+		addItem(3,0,Items.getManaPotion(0));
 		test = true;
 	}
 
-	//Position slots in the right position
-	void setSlots() {
-		slots = new Slots[6,4];
-		for (int x = 0; x < slotWidthSize; x++) {
-			for (int y = 0; y < slotHeightSize; y++){
-				slots[x,y] = new Slots (new Rect(slotX + width * x, slotY + height * y, width, height));
-//				slotY += 5;
-//				if(slotHeightSize - y == 1)
-//					slotY -= 5 * slotHeightSize;
-			}
-//			slotX += 5;
-//			if(slotWidthSize - x == 1)
-//				slotX -= 5 * slotWidthSize;
+	void shownInventory(){
+		if (isInventoryOn) {
+			isInventoryOn = false;
+		}
+		else {
+			isInventoryOn = true;
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if (!test) {
-			testMethod();
+		if(!test){
+			testMethod ();
+		}
+		if (Input.GetKeyDown ("i")) {
+			shownInventory();
 		}
 	}
 
-	//Determines to display Inventory or not
-//	void changeShowInventory () {
-//		if (showInventory) {
-//			showInventory = false;
-//		}
-//		else {
-//			showInventory = true;
-//		}
-//	}
-
-	//Draw on Screen the inventory
-	void OnGUI() {
-		drawInventory ();
-		drawSlots ();
-		drawItems ();
-		detectGuiAction ();
-		detectMouseAction ();
+	void OnGUI(){
+		if (isInventoryOn) {
+			drawInventory ();
+			drawSlots ();
+			drawItems ();
+			detectGUIAction ();
+		}
 	}
 
-	//Create slots for the inventory
-	void drawSlots () {
-		for (int x = 0; x < slotWidthSize; x++) {
-			for (int y = 0; y < slotHeightSize; y++){
-				slots[x,y].Draw(Position.x, Position.y);
+	void drawSlots(){
+		for(int x = 0; x < slotWidthSize ; x++){
+			for(int y = 0; y < slotHeightSize ; y++){
+				slots[x,y].draw(position.x, position.y);
 			}
 		}
 	}
 
-	//Draw items in slots for inventory
 	void drawItems(){
-		for (int count = 0; count < items.Count; count++) {
-			GUI.DrawTexture(new Rect(2 + slotX + Position.x + items[count].X * width, 2 + slotY + Position.y + items[count].Y * height,items[count].Width * width - 4,
-			                         items[count].Height * height - 4), items[count].Image);
+		for(int count = 0; count < items.Count; count++){
+			GUI.DrawTexture(new Rect(8 + slotX + position.x + items[count].x * width, 8 + slotY + position.y + items[count].y * height,items[count].width * width - 16,items[count].height * height - 16), items[count].image);
 		}
 	}
 
-	//Add item in inventory by checking if not item is present in that location
-	void addItems(int x, int y, Items item){
-
-		for (int counterX = 0; counterX < item.Width; counterX++) {
-			for(int counterY = 0; counterY < item.Height; counterY++){
-				if(slots[x,y].Occupied){
-					//Debug.Log ("Breaks " + x + ", " + y);
+	void addItem(int x, int y, Item item){	
+		for(int sX = 0; sX < item.width ; sX++){
+			for(int sY = 0; sY < item.height ; sY++){
+				if(slots[x,y].occupied){
+					Debug.Log("breaks" + x + " , " + y);
 					return;
 				}
 			}
 		}
-		//Debug.Log ("Comes " + x + ", " + y);
-		if (x + item.Width > slotWidthSize) {
-			//Debug.Log ("Out of X bounds");
-			return;
-		}
-		else if (y + item.Height > slotHeightSize) {
-			//Debug.Log ("Out of Y bounds");
-			return;
-		}
-		item.X = x;
-		item.Y = y;
-		items.Add (item);
 
-		for (int counterX = x; counterX < item.Width + x; counterX++) {
-			for(int counterY = y; counterY < item.Height + y; counterY++){
-				slots[counterX, counterY].Occupied = true;
+		if(x + item.width > slotWidthSize){
+			Debug.Log("Out of X bounds");
+			return;
+		}
+		else if(y + item.height > slotHeightSize){
+			Debug.Log("Out of Y bounds");
+			return;
+		}
+
+		Debug.Log("comes"+ x + " , " + y);
+		item.x = x;
+		item.y = y;
+		items.Add(item);
+
+		for(int sX = x; sX < item.width + x; sX++){
+			for(int sY = y; sY < item.height + y ; sY++){
+				slots[sX,sY].occupied = true;
 			}
 		}
 	}
 
-	//Draw Inventory 
-	void drawInventory(){
-		Position.x = Screen.width - Position.x;
-		Position.y = Screen.height - Position.y - Screen.height * 0.1f;
-		GUI.DrawTexture (Position, Image);
+	void removeItem(Item item){
+		for(int x = item.x; x < item.x + item.width; x++){
+			for(int y = item.y; y < item.y + item.height; y++) {
+				slots[x,y].occupied = false;
+			}
+		}
+		item.performAction ();
+		items.Remove(item);
 	}
-
-	void detectGuiAction(){
-		//Debug.Log (Input.mousePosition.y);
-		if(Input.mousePosition.x > Position.x && Input.mousePosition.x < Position.x + Position.width){
-			if(Screen.height - Input.mousePosition.y > Position.y && Input.mousePosition.y < Position.y + Position.height){
+	void detectGUIAction(){
+		if(Input.mousePosition.x > position.x && Input.mousePosition.x < position.x + position.width){
+			if(Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height){
+				detectMouseAction();
 				ClickToMove.busy = true;
 				return;
 			}
 		}
 		ClickToMove.busy = false;
 	}
-
+	
 	void detectMouseAction(){
-		for (int x = 0; x < slotWidthSize; x++) {
-			for (int y = 0; y < slotHeightSize; y++){
-				Rect slot = new Rect(slots[x,y].Position.x + Position.x, slots[x,y].Position.y + Position.y, width, height);
-				if(slot.Contains(new Vector2 (Input.mousePosition.x, Screen.height - Input.mousePosition.y))){
+		for(int x = 0; x < slotWidthSize ; x++){
+			for(int y = 0; y < slotHeightSize ; y++){
+				Rect slot = new Rect(position.x + slots[x,y].position.x, position.y + slots[x,y].position.y, width, height);
+				if(slot.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y))){
 					if(Event.current.isMouse && Input.GetMouseButtonDown(0)){
 						selected.x = x;
 						selected.y = y;
-						if(slots[x, y].Item != null) {
-							for(int index = 0; index < items.Count; index++){
-								for(int countX = 0; countX < items.Count; countX++){
-									for(int countY = 0; countY < items.Count; countY++){
+						for(int index = 0; index < items.Count; index++){
+							for(int countX = items[index].x; countX < items[index].x + items[index].width; countX++){
+								for(int countY = items[index].y; countY < items[index].y + items[index].height; countY++){
 										if(countX == x && countY == y){
 											temp = items[index];
+											removeItem(temp);
+											return;
 										}
 									}
 								}
 							}
-						}
 					}
 					else if(Event.current.isMouse && Input.GetMouseButtonUp(0)){
-						secondSelect.x = x;
-						secondSelect.y = y;
-						if(secondSelect.x != selected.x || secondSelect.y != selected.y) {
-							addItems ((int)secondSelect.x, (int)secondSelect.y, temp);
+						secondSelected.x = x;
+						secondSelected.y = y;
+						//NEED TO SET TEMP TO NULL
+						if(secondSelected.x != selected.x || secondSelected.y != selected.y){
+							addItem((int)secondSelected.x, (int)secondSelected.y, temp);
 						}
 					}
-					//Debug.Log(selected + "    /   " + secondSelect);
 					return;
 				}
 			}
 		}
+	}
+
+	void drawInventory(){
+		position.x = Screen.width - position.width;
+		position.y = Screen.height - position.height - Screen.height * 0.2f;
+		GUI.DrawTexture(position, image);
 	}
 }

@@ -58,10 +58,12 @@
      <Compile Include="Assets\Scripts\GameOver.cs" />
      <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Inventory\Armor.cs" />
+     <Compile Include="Assets\Scripts\Inventory\HealthPotion.cs" />
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
-     <Compile Include="Assets\Scripts\Inventory\ItemList.cs" />
+     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
      <Compile Include="Assets\Scripts\Inventory\Items.cs" />
-     <Compile Include="Assets\Scripts\Inventory\Slots.cs" />
+     <Compile Include="Assets\Scripts\Inventory\ManaPotion.cs" />
+     <Compile Include="Assets\Scripts\Inventory\Slot.cs" />
      <Compile Include="Assets\Scripts\Pausing.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerEnergyBar.cs" />
