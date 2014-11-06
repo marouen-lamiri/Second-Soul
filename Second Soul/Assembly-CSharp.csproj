@@ -46,17 +46,21 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ClientNetwork.cs" />
-     <Compile Include="Assets\FighterNetworkScript.cs" />
-     <Compile Include="Assets\Scripts\ApplicationQuit.cs" />
-     <Compile Include="Assets\Scripts\Character.cs" />
-     <Compile Include="Assets\Scripts\ClickToMove.cs" />
-     <Compile Include="Assets\Scripts\DisplayPlayerStats.cs" />
-     <Compile Include="Assets\Scripts\Enemy.cs" />
-     <Compile Include="Assets\Scripts\EnemyFactory.cs" />
-     <Compile Include="Assets\Scripts\Fighter.cs" />
-     <Compile Include="Assets\Scripts\GameOver.cs" />
-     <Compile Include="Assets\Scripts\HealthBar.cs" />
+     <Compile Include="Assets\Art\Standard Assets\Scripts\General Scripts\ActivateTrigger.cs" />
+     <Compile Include="Assets\Scripts\Character\Character.cs" />
+     <Compile Include="Assets\Scripts\Character\ClickToMove.cs" />
+     <Compile Include="Assets\Scripts\Character\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Character\EnemyFactory.cs" />
+     <Compile Include="Assets\Scripts\Character\Fighter.cs" />
+     <Compile Include="Assets\Scripts\Character\Player.cs" />
+     <Compile Include="Assets\Scripts\Character\Sorcerer.cs" />
+     <Compile Include="Assets\Scripts\HUD\ApplicationQuit.cs" />
+     <Compile Include="Assets\Scripts\HUD\DisplayPlayerStats.cs" />
+     <Compile Include="Assets\Scripts\HUD\GameOver.cs" />
+     <Compile Include="Assets\Scripts\HUD\HealthBar.cs" />
+     <Compile Include="Assets\Scripts\HUD\Pausing.cs" />
+     <Compile Include="Assets\Scripts\HUD\PlayerEnergyBar.cs" />
+     <Compile Include="Assets\Scripts\HUD\PlayerHealthBar.cs" />
      <Compile Include="Assets\Scripts\Inventory\Armor.cs" />
      <Compile Include="Assets\Scripts\Inventory\HealthPotion.cs" />
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
@@ -64,10 +68,9 @@
      <Compile Include="Assets\Scripts\Inventory\Items.cs" />
      <Compile Include="Assets\Scripts\Inventory\ManaPotion.cs" />
      <Compile Include="Assets\Scripts\Inventory\Slot.cs" />
-     <Compile Include="Assets\Scripts\Pausing.cs" />
-     <Compile Include="Assets\Scripts\Player.cs" />
-     <Compile Include="Assets\Scripts\PlayerEnergyBar.cs" />
-     <Compile Include="Assets\Scripts\PlayerHealthBar.cs" />
+     <Compile Include="Assets\Scripts\Network\ClientNetwork.cs" />
+     <Compile Include="Assets\Scripts\Network\FighterNetworkScript.cs" />
+     <Compile Include="Assets\Scripts\Network\SorcererNetworkScript.cs" />
      <Compile Include="Assets\Scripts\Skill\BasicAttack.cs" />
      <Compile Include="Assets\Scripts\Skill\BasicMelee.cs" />
      <Compile Include="Assets\Scripts\Skill\BasicRanged.cs" />
@@ -78,8 +81,6 @@
      <Compile Include="Assets\Scripts\Skill\ProjectileBehavior.cs" />
      <Compile Include="Assets\Scripts\Skill\ProjectileSkill.cs" />
      <Compile Include="Assets\Scripts\Skill\RangedSkill.cs" />
-     <Compile Include="Assets\Scripts\Sorcerer.cs" />
-     <Compile Include="Assets\SorcererNetworkScript.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
      <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
@@ -125,7 +126,7 @@
      <None Include="Assets\UnityTestTools\LICENSE.txt" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\ParticleAdditiveBlend.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\Additive.shader" />
-     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+     <None Include="Assets\Art\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\Fallback.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\Multiply.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\CharacterSelfIlluminationReflective.shader" />
@@ -135,18 +136,12 @@
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\AngryInclude.cginc" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\ParticleAdditive.shader" />
      <None Include="Assets\UnityTestTools\changelog.txt" />
-     <None Include="Assets\Skeleton Pack\SkeletonData\animations.txt" />
+     <None Include="Assets\Art\Skeleton Pack\SkeletonData\animations.txt" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\LaserScope.shader" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\BackgroundAndCharacters\SuperSimpleSelfIllumination.shader" />
      <None Include="Assets\Editor\Doxygen\Resources\BaseDoxyfile.txt" />
      <None Include="Assets\Editor\Doxygen\ReadMe.txt" />
      <None Include="Assets\UnityTestTools\Examples\IntegrationTestsFrameworkExamples\AngryBotsTests\Shaders\Fx\ParticleBlend.shader" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{45DF45F5-3538-9ABC-22A9-7ACD5E07DDB6}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
-    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
-      <Project>{8400A744-01AC-F2D2-7625-0B1C46E856DF}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
