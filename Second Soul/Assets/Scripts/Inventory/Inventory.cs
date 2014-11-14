@@ -69,6 +69,7 @@ public class Inventory : MonoBehaviour
 			drawSlots ();
 			drawItems ();
 			detectGUIAction ();
+			drawTempItem();
 		}
 	}
 
@@ -86,26 +87,32 @@ public class Inventory : MonoBehaviour
 		}
 	}
 
-	void addItem(int x, int y, Item item){	
+	void drawTempItem(){
+		if (temp != null) {
+			GUI.DrawTexture (new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, temp.width*width, temp.height*height), temp.image);
+		}
+	}
+
+	bool addItem(int x, int y, Item item){	
 		for(int sX = 0; sX < item.width ; sX++){
 			for(int sY = 0; sY < item.height ; sY++){
 				if(slots[x,y].occupied){
-					Debug.Log("breaks" + x + " , " + y);
-					return;
+					//Debug.Log("breaks" + x + " , " + y);
+					return false;
 				}
 			}
 		}
 
 		if(x + item.width > slotWidthSize){
-			Debug.Log("Out of X bounds");
-			return;
+			//Debug.Log("Out of X bounds");
+			return false;
 		}
 		else if(y + item.height > slotHeightSize){
-			Debug.Log("Out of Y bounds");
-			return;
+			//Debug.Log("Out of Y bounds");
+			return false;
 		}
 
-		Debug.Log("comes"+ x + " , " + y);
+		//Debug.Log("comes"+ x + " , " + y);
 		item.x = x;
 		item.y = y;
 		items.Add(item);
@@ -115,6 +122,7 @@ public class Inventory : MonoBehaviour
 				slots[sX,sY].occupied = true;
 			}
 		}
+		return true;
 	}
 
 	void removeItem(Item item){
@@ -123,9 +131,9 @@ public class Inventory : MonoBehaviour
 				slots[x,y].occupied = false;
 			}
 		}
-		item.performAction ();
 		items.Remove(item);
 	}
+
 	void detectGUIAction(){
 		if(Input.mousePosition.x > position.x && Input.mousePosition.x < position.x + position.width){
 			if(Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height){
@@ -160,15 +168,36 @@ public class Inventory : MonoBehaviour
 					else if(Event.current.isMouse && Input.GetMouseButtonUp(0)){
 						secondSelected.x = x;
 						secondSelected.y = y;
-						//NEED TO SET TEMP TO NULL
 						if(secondSelected.x != selected.x || secondSelected.y != selected.y){
-							addItem((int)secondSelected.x, (int)secondSelected.y, temp);
+							if(temp != null) {
+								if(addItem((int)secondSelected.x, (int)secondSelected.y, temp)){
+
+								}
+								else{
+									addItem(temp.x, temp.y, temp);
+								}
+								temp = null;
+							}
 						}
+						else {
+							addItem(temp.x, temp.y, temp);
+							temp = null;
+						}
+					}
+					else if(Event.current.isMouse && Input.GetKeyDown(KeyCode.Space)){
+						Debug.Log ("Hello");
+						temp.performAction();
+						removeItem(temp);
+						deleteItem ();
 					}
 					return;
 				}
 			}
 		}
+	}
+
+	void deleteItem(){
+		temp = null;
 	}
 
 	void drawInventory(){
