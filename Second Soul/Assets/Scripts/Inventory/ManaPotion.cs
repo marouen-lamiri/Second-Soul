@@ -5,6 +5,9 @@ using System.Collections;
 public class ManaPotion : Item {
 
 	public override void performAction(){
-		//player.energy += 50;
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		if (player != null) {
+			player.SendMessage("rechargeCharacter", 100);
+		}
 	}
 }

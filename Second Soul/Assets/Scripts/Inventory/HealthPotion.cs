@@ -5,6 +5,10 @@ using System.Collections;
 public class HealthPotion : Item {
 
 	public override void performAction(){
-		//player.health += 50;
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		if (player != null) {
+			player.SendMessage("healCharacter", 100);
+			Debug.Log ("Heal");
+		}
 	}
 }

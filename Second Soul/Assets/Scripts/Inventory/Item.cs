@@ -8,7 +8,6 @@ public abstract class Item{
 	public int y;
 	public int width;
 	public int height;
-	public Character player;
 
 	public abstract void performAction();
 

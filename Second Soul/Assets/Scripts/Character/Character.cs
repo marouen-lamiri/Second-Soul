@@ -57,6 +57,22 @@ public abstract class Character : MonoBehaviour {
 		}
 	}
 
+	public void healCharacter (double heal){
+		health += heal;
+
+		if (health >= maxHealth) {
+			health = maxHealth;
+		}
+	}
+
+	public void rechargeCharacter (double recharge){
+		energy += recharge;
+		
+		if (energy >= maxEnergy) {
+			energy = maxEnergy;
+		}
+	}
+
 	public virtual void loseEnergy(float energy){
 
 	}
