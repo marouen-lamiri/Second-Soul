@@ -1,50 +1,50 @@
 fileFormatVersion: 2
 guid: 1da85f72a7a82bc4eabdbd8f0683bde2
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: minebot_main
-    100004: minebot_head
-    100006: minebot_back_lowerleg
-    100008: minebot_front_upperleg 1
-    100010: minebot_left_lowerleg
-    100012: minebot_front_upperleg
-    100014: minebot_right_lowerleg
-    100016: minebot_front_lowerleg
+    100000: minebot_front_upperleg 1
+    100002: minebot_front_lowerleg
+    100004: minebot_back_lowerleg
+    100006: minebot_left_lowerleg
+    100008: minebot_left_upperleg
+    100010: minebot_right_lowerleg
+    100012: minebot_head
+    100014: minebot_front_upperleg
+    100016: //RootNode
     100018: minebot_right_upperleg
-    100020: minebot_left_upperleg
-    400000: //RootNode
-    400002: minebot_main
-    400004: minebot_head
-    400006: minebot_back_lowerleg
-    400008: minebot_front_upperleg 1
-    400010: minebot_left_lowerleg
-    400012: minebot_front_upperleg
-    400014: minebot_right_lowerleg
-    400016: minebot_front_lowerleg
+    100020: minebot_main
+    400000: minebot_front_upperleg 1
+    400002: minebot_front_lowerleg
+    400004: minebot_back_lowerleg
+    400006: minebot_left_lowerleg
+    400008: minebot_left_upperleg
+    400010: minebot_right_lowerleg
+    400012: minebot_head
+    400014: minebot_front_upperleg
+    400016: //RootNode
     400018: minebot_right_upperleg
-    400020: minebot_left_upperleg
-    2300000: minebot_main
-    2300002: minebot_head
+    400020: minebot_main
+    2300000: minebot_front_upperleg 1
+    2300002: minebot_front_lowerleg
     2300004: minebot_back_lowerleg
-    2300006: minebot_front_upperleg 1
-    2300008: minebot_left_lowerleg
-    2300010: minebot_front_upperleg
-    2300012: minebot_right_lowerleg
-    2300014: minebot_front_lowerleg
+    2300006: minebot_left_lowerleg
+    2300008: minebot_left_upperleg
+    2300010: minebot_right_lowerleg
+    2300012: minebot_head
+    2300014: minebot_front_upperleg
     2300016: minebot_right_upperleg
-    2300018: minebot_left_upperleg
-    3300000: minebot_main
-    3300002: minebot_head
+    2300018: minebot_main
+    3300000: minebot_front_upperleg 1
+    3300002: minebot_front_lowerleg
     3300004: minebot_back_lowerleg
-    3300006: minebot_front_upperleg 1
-    3300008: minebot_left_lowerleg
-    3300010: minebot_front_upperleg
-    3300012: minebot_right_lowerleg
-    3300014: minebot_front_lowerleg
+    3300006: minebot_left_lowerleg
+    3300008: minebot_left_upperleg
+    3300010: minebot_right_lowerleg
+    3300012: minebot_head
+    3300014: minebot_front_upperleg
     3300016: minebot_right_upperleg
-    3300018: minebot_left_upperleg
+    3300018: minebot_main
     4300000: minebot_main
     4300002: minebot_right_upperleg
     4300004: minebot_right_lowerleg
@@ -55,8 +55,7 @@ ModelImporter:
     4300014: minebot_left_lowerleg
     4300016: minebot_front_upperleg
     4300018: minebot_front_lowerleg
-    7400002: Take 001
-    7400004: __preview__Take 001
+    7400000: Take 001
     11100000: //RootNode
   materials:
     importMaterials: 1
@@ -66,6 +65,7 @@ ModelImporter:
     legacyGenerateAnimations: 3
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -76,11 +76,11 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .0130000003
+    globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
-    swapUVChannels: 0
+    swapUVChannels: 1
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
@@ -109,4 +109,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 1
+  additionalBone: 0
   userData: 

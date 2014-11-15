@@ -49,6 +49,7 @@ public class Enemy : Character {
 			}
 		} 
 		else if(inAttackRange () && !attackLocked()){
+			meshAgent.Stop(true);
 			activeSkill1.setCaster(this);
 			activeSkill1.useSkill(target);
 		}	
@@ -88,6 +89,7 @@ public class Enemy : Character {
 	}
 
 	public void loseAggro(){
+			meshAgent.Stop(true);
 			hasAggro = false;
 			animateIdle();
 	}

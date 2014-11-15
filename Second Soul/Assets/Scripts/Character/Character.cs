@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
 public abstract class Character : MonoBehaviour {
 	public CharacterController controller;
+	
+	public NavMeshAgent meshAgent;
+	public Seeker seeker;
+	private Path path;
+	private int currentWaypoint;
 	
 	public bool playerEnabled;
 	
@@ -64,9 +70,25 @@ public abstract class Character : MonoBehaviour {
 	
 	public void chaseTarget(){
 		chasing = true;
-		transform.LookAt (target.transform.position);
-		controller.SimpleMove (transform.forward * speed);
 		animateRun();
+		//findPath();
+		
+		/*if(currentWaypoint >= path.vectorPath.Count){
+			return;
+		}*/
+		
+		//Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
+		//dir.y = 0;
+		//Debug.Log (dir);
+		//Debug.Log (currentWaypoint);
+		//transform.LookAt (target.transform.position);
+		meshAgent.SetDestination(target.transform.position);
+		//controller.SimpleMove (transform.forward * speed);
+		//controller.SimpleMove (dir * speed);
+		
+		/*if(Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]) < 2f){
+			currentWaypoint++;
+		}*/
 	}
 	
 	public void attack(){
@@ -101,6 +123,20 @@ public abstract class Character : MonoBehaviour {
 		yield return new WaitForSeconds(skillLength * impactTime);
 		if (delayedTarget != null){
 			delayedTarget.takeDamage(damage);
+		}
+	}
+	
+	void findPath(){
+		seeker.StartPath( transform.position, target.transform.position, onPathComplete);
+	}
+	
+	void onPathComplete(Path p){
+		if(!p.error){
+			path = p;
+			currentWaypoint = 1;
+		}
+		else{
+			Debug.Log(p.error);
 		}
 	}
 	
