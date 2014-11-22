@@ -15,10 +15,10 @@ public class NavClickToMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update (){
-		if(!player.isDead() && player.playerEnabled && !busy)
+		if(!player.isDead() && player.playerEnabled)
 		{
 			if(!player.chasing && !player.actionLocked()){
-				if(Input.GetMouseButton(0))
+				if(Input.GetMouseButton(0) && !busy)
 				{
 					//Locate where the player clicked on the terrain
 					locatePosition();
@@ -40,7 +40,7 @@ public class NavClickToMove : MonoBehaviour {
 		
 		if(hits != null){
 			RaycastHit hit = hits[0];
-			if(hit.collider.tag != "Player" && hit.collider.tag != "Enemy"){
+			if(hit.collider.tag != "Player" && hit.collider.tag != "Enemy" && hit.collider.tag != "GUI"){
 				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 			}
 			//Debug.Log(position);

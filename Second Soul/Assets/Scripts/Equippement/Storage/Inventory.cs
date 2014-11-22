@@ -28,6 +28,27 @@ public class Inventory : MonoBehaviour
 		test = false;
 	}
 
+	// Update is called once per frame
+	void Update () {
+		if(!test){
+			testMethod ();
+		}
+		if (Input.GetKeyDown ("i")) {
+			shownInventory();
+		}
+	}
+	
+	void OnGUI(){
+		if (isInventoryOn) {
+			drawInventory ();
+			drawSlots ();
+			drawItems ();
+			detectGUIAction ();
+			drawTempItem();
+			//Debug.Log("id: " + GUIUtility.hotControl);
+		}
+	}
+
 	void setSlots(){
 		slots = new Slot[slotWidthSize,slotHeightSize];
 		for(int x = 0; x < slotWidthSize ; x++){
@@ -50,26 +71,6 @@ public class Inventory : MonoBehaviour
 		}
 		else {
 			isInventoryOn = true;
-		}
-	}
-
-	// Update is called once per frame
-	void Update () {
-		if(!test){
-			testMethod ();
-		}
-		if (Input.GetKeyDown ("i")) {
-			shownInventory();
-		}
-	}
-
-	void OnGUI(){
-		if (isInventoryOn) {
-			drawInventory ();
-			drawSlots ();
-			drawItems ();
-			detectGUIAction ();
-			drawTempItem();
 		}
 	}
 
@@ -138,11 +139,13 @@ public class Inventory : MonoBehaviour
 		if(Input.mousePosition.x > position.x && Input.mousePosition.x < position.x + position.width){
 			if(Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height){
 				detectMouseAction();
-				ClickToMove.busy = true;
+				NavClickToMove.busy = true;
 				return;
 			}
 		}
-		ClickToMove.busy = false;
+		else{
+			NavClickToMove.busy = false;
+		}
 	}
 	
 	void detectMouseAction(){

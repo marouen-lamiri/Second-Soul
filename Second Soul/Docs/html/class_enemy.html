@@ -120,6 +120,10 @@ Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_methods_class_character"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_character')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_character.html">Character</a></td></tr>
 <tr class="memitem:aad538f8d2549afff6927c77b3badb1e8 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aad538f8d2549afff6927c77b3badb1e8">takeDamage</a> (double <a class="el" href="class_character.html#ae66b8e62817e2090f57634ca4b0cfd3f">damage</a>)</td></tr>
 <tr class="separator:aad538f8d2549afff6927c77b3badb1e8 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92f7c7e38bb9061117e0b71a47a4f0ce inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a92f7c7e38bb9061117e0b71a47a4f0ce">healCharacter</a> (double heal)</td></tr>
+<tr class="separator:a92f7c7e38bb9061117e0b71a47a4f0ce inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88f8e5d764c86ac4c16a3548d6d005b2 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a88f8e5d764c86ac4c16a3548d6d005b2">rechargeCharacter</a> (double recharge)</td></tr>
+<tr class="separator:a88f8e5d764c86ac4c16a3548d6d005b2 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93dd89b3867927ddb3261266ce5fdc37 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a93dd89b3867927ddb3261266ce5fdc37">loseEnergy</a> (float <a class="el" href="class_character.html#ad2d08f1243cb40a809f68ebae8336b62">energy</a>)</td></tr>
 <tr class="separator:a93dd89b3867927ddb3261266ce5fdc37 inherit pub_methods_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a081ba7d0e287ae6a00a628ef37f44523 inherit pub_methods_class_character"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a081ba7d0e287ae6a00a628ef37f44523">isDead</a> ()</td></tr>
@@ -162,6 +166,10 @@ Public Attributes</h2></td></tr>
 <tr class="inherit_header pub_attribs_class_character"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_character')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_character.html">Character</a></td></tr>
 <tr class="memitem:a5be34f952665451bcd50ed057d1b07ea inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">CharacterController&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a5be34f952665451bcd50ed057d1b07ea">controller</a></td></tr>
 <tr class="separator:a5be34f952665451bcd50ed057d1b07ea inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f04558bf5e8dc34ab1cf5a93e741c40 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">NavMeshAgent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a1f04558bf5e8dc34ab1cf5a93e741c40">meshAgent</a></td></tr>
+<tr class="separator:a1f04558bf5e8dc34ab1cf5a93e741c40 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a944077a260a38e80eb5dc2288f31fcf7 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">Seeker&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a944077a260a38e80eb5dc2288f31fcf7">seeker</a></td></tr>
+<tr class="separator:a944077a260a38e80eb5dc2288f31fcf7 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af14576e42d1dfa4e67487e810d77e608 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#af14576e42d1dfa4e67487e810d77e608">playerEnabled</a></td></tr>
 <tr class="separator:af14576e42d1dfa4e67487e810d77e608 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a408273dba5567b7387407e6648248607 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_character.html">Character</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a408273dba5567b7387407e6648248607">target</a></td></tr>
@@ -345,12 +353,12 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>D:/Documents/Guillaume/Unity Projects/Second-Soul/Second Soul/Assets/Scripts/<a class="el" href="_enemy_8cs.html">Enemy.cs</a></li>
+<li>D:/Documents/Guillaume/Unity Projects/Second-Soul/Second Soul/Assets/Scripts/Character/<a class="el" href="_enemy_8cs.html">Enemy.cs</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 1 2014 15:55:08 for Second Soul by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 20 2014 16:37:04 for Second Soul by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

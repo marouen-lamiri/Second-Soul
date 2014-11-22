@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['fighter',['fighter',['../class_sorcerer.html#a2fd865e91099728a5523907ab545fe8b',1,'Sorcerer']]],
-  ['fireballprefab',['fireballPrefab',['../class_fireball_skill.html#a20e1d8e8a54042a8893e3bb761a1f4a3',1,'FireballSkill']]],
-  ['fireballskill',['fireballSkill',['../class_fireball_behavior.html#ade4d18bbb152a232e27feef689a166b1',1,'FireballBehavior']]]
+  ['enemy',['enemy',['../class_health_bar.html#a378e645c5dc18ffb12e084322ce0a529',1,'HealthBar']]],
+  ['enemyprefab',['enemyPrefab',['../class_enemy_factory.html#a78fa53142f9b2c98bc0550b77bb7e5d8',1,'EnemyFactory']]],
+  ['energy',['energy',['../class_character.html#ad2d08f1243cb40a809f68ebae8336b62',1,'Character']]],
+  ['energycost',['energyCost',['../class_ranged_skill.html#ac11f1690de224cb8775999b37bb300c7',1,'RangedSkill']]]
 ];

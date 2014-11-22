@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['damage',['damage',['../class_character.html#ae66b8e62817e2090f57634ca4b0cfd3f',1,'Character.damage()'],['../class_basic_attack.html#a1714318839bd1c506b54bf89060200e1',1,'BasicAttack.damage()'],['../class_fireball_skill.html#a4b7073bb6da12958542f129bd8a71886',1,'FireballSkill.damage()'],['../class_ranged_skill.html#ab3d0823dcd712e0e53a1c7c537cd23a2',1,'RangedSkill.damage()']]],
-  ['dieclip',['dieClip',['../class_character.html#abeff1b5530b0a4762f3efa2fb838bc38',1,'Character']]]
+  ['caster',['caster',['../class_basic_attack.html#ad6c5331381f278b73b9fc424024932de',1,'BasicAttack.caster()'],['../class_ranged_skill.html#af3daa5c70f12bd28718a05de2ea56fff',1,'RangedSkill.caster()']]],
+  ['casttime',['castTime',['../class_ranged_skill.html#ad3abfb9e2265d09384c84551c94932a1',1,'RangedSkill']]],
+  ['chasing',['chasing',['../class_character.html#a912f4689de5acb36d97aa78ee45463c2',1,'Character']]],
+  ['controller',['controller',['../class_character.html#a5be34f952665451bcd50ed057d1b07ea',1,'Character']]]
 ];

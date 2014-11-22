@@ -11,10 +11,14 @@ var searchData=
   ['aoedamage',['AOEDamage',['../class_fireball_skill.html#a1c64f9a9a21ce83578e61ddf20d78f08',1,'FireballSkill']]],
   ['applicationquit',['ApplicationQuit',['../class_application_quit.html',1,'']]],
   ['applicationquit_2ecs',['ApplicationQuit.cs',['../_application_quit_8cs.html',1,'']]],
+  ['armor',['Armor',['../class_armor.html',1,'']]],
+  ['armor_2ecs',['Armor.cs',['../_armor_8cs.html',1,'']]],
+  ['armorinspector',['armorInspector',['../class_items.html#a5b51c16e4e69b137ff78a081552cbd4b',1,'Items']]],
   ['attack',['attack',['../class_character.html#aa9ac03892548ae2f879d2af58f225114',1,'Character']]],
   ['attackclip',['attackClip',['../class_character.html#a1d8ccad5a059dc364fc0ea0b5aad2efe',1,'Character']]],
   ['attacking',['attacking',['../class_player.html#aabdd0b89c7b6682a72362492e7b5a6eb',1,'Player']]],
   ['attacklocked',['attackLocked',['../class_character.html#a9cd60100303e8034eb8f80682ad912a8',1,'Character']]],
   ['attacklogic',['attackLogic',['../class_player.html#a5a10c89dde4c737e6c02af022224aba2',1,'Player']]],
-  ['attackrange',['attackRange',['../class_character.html#ac97af5d3bc566393b6afdb80fc30071b',1,'Character']]]
+  ['attackrange',['attackRange',['../class_character.html#ac97af5d3bc566393b6afdb80fc30071b',1,'Character']]],
+  ['awake',['Awake',['../class_client_network.html#a6b89ff0736bded1a5cddb5b960d7af1a',1,'ClientNetwork']]]
 ];

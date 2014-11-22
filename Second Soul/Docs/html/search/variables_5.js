@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['globeheight',['globeHeight',['../class_player_energy_bar.html#a324027ed051febcca40247d098fa2a18',1,'PlayerEnergyBar.globeHeight()'],['../class_player_health_bar.html#ae9b094d72c42c586e147c9b9984a5f55',1,'PlayerHealthBar.globeHeight()']]],
-  ['globepic',['globePic',['../class_player_energy_bar.html#ac0528f4153047dd191dc2957ddc91048',1,'PlayerEnergyBar.globePic()'],['../class_player_health_bar.html#ad6f4dcc1b11563058e4de371cfde2238',1,'PlayerHealthBar.globePic()']]],
-  ['globesize',['globeSize',['../class_player_energy_bar.html#a39e349fd6101eba04f668e5019f54437',1,'PlayerEnergyBar.globeSize()'],['../class_player_health_bar.html#ac1854d375b27f0fbe53cfbc60d5c17d2',1,'PlayerHealthBar.globeSize()']]]
+  ['fighter',['fighter',['../class_sorcerer.html#a2fd865e91099728a5523907ab545fe8b',1,'Sorcerer']]],
+  ['fighternetworkscript',['fighterNetworkScript',['../class_player.html#a75462493faefbaf4a6cb61f2114db50f',1,'Player']]],
+  ['fireballprefab',['fireballPrefab',['../class_fireball_skill.html#a20e1d8e8a54042a8893e3bb761a1f4a3',1,'FireballSkill']]],
+  ['fireballskill',['fireballSkill',['../class_fireball_behavior.html#ade4d18bbb152a232e27feef689a166b1',1,'FireballBehavior']]]
 ];

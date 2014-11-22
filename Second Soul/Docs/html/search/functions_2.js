@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['destroyself',['destroySelf',['../class_enemy.html#a4c7586dfa1c80d7ae4ed746cc0c48113',1,'Enemy']]],
-  ['diemethod',['dieMethod',['../class_character.html#a7cfc361f6bcf1b2efee50c4fd30f619e',1,'Character']]]
+  ['castposition',['castPosition',['../class_player.html#a6b18665df88d371b448b20ffcd7112b2',1,'Player']]],
+  ['chasetarget',['chaseTarget',['../class_character.html#aa17c09da6656f5b0a561042524250b95',1,'Character']]]
 ];

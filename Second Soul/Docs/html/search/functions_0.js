@@ -7,5 +7,6 @@ var searchData=
   ['animaterun',['animateRun',['../class_character.html#ab82b2837bc6330b919984f6384621aa4',1,'Character']]],
   ['attack',['attack',['../class_character.html#aa9ac03892548ae2f879d2af58f225114',1,'Character']]],
   ['attacklocked',['attackLocked',['../class_character.html#a9cd60100303e8034eb8f80682ad912a8',1,'Character']]],
-  ['attacklogic',['attackLogic',['../class_player.html#a5a10c89dde4c737e6c02af022224aba2',1,'Player']]]
+  ['attacklogic',['attackLogic',['../class_player.html#a5a10c89dde4c737e6c02af022224aba2',1,'Player']]],
+  ['awake',['Awake',['../class_client_network.html#a6b89ff0736bded1a5cddb5b960d7af1a',1,'ClientNetwork']]]
 ];

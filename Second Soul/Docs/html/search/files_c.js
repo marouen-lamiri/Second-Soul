@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sorcerer_2ecs',['Sorcerer.cs',['../_sorcerer_8cs.html',1,'']]]
+  ['rangedskill_2ecs',['RangedSkill.cs',['../_ranged_skill_8cs.html',1,'']]]
 ];
