@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Pathfinding;
 
 public abstract class Character : MonoBehaviour {
 	public CharacterController controller;
 	
 	public NavMeshAgent meshAgent;
-	public Seeker seeker;
-	private Path path;
 	private int currentWaypoint;
 	
 	public bool playerEnabled;
@@ -139,20 +136,6 @@ public abstract class Character : MonoBehaviour {
 		yield return new WaitForSeconds(skillLength * impactTime);
 		if (delayedTarget != null){
 			delayedTarget.takeDamage(damage);
-		}
-	}
-	
-	void findPath(){
-		seeker.StartPath( transform.position, target.transform.position, onPathComplete);
-	}
-	
-	void onPathComplete(Path p){
-		if(!p.error){
-			path = p;
-			currentWaypoint = 1;
-		}
-		else{
-			Debug.Log(p.error);
 		}
 	}
 	
