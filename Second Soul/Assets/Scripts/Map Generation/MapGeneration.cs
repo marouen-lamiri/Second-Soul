@@ -7,7 +7,7 @@ public class MapGeneration : MonoBehaviour{
 	// Use this for initialization
 	List<int> listOfWalls;
 	int[,] mapArray;
-	int numberRooms = 5;
+	int numberRooms = 10;
 	int mapSizeX = 100;
 	int mapSizeZ = 100;
 
@@ -35,22 +35,97 @@ public class MapGeneration : MonoBehaviour{
 				}
 			}while(!goodPosition); 
 			goodPosition=false;
-			//////Maybe next section should go here
 			do{
 				int x = Random.Range (0,mapSizeX-1);
 				int z = Random.Range (0,mapSizeZ-1);//mapsize is a 2D array, so y is representing our z axis since in 3D y is up
-				if(map[x,z]!=0 &&map[x,z]!=i+1){
+				if(map[x,z]!=0 && map[x,z]!=i+1){
 					goodPosition=true;
 					corridorEnds[i]= new Vector2(x,z);
 					map[x,z]=(i+1)*-1;
 				}
 			}while(!goodPosition);
+
+			//This segment randomizes the sizes of the squares that make up the corridors
+			int hallSizeX = Random.Range (2,5);//used to randomize width of Z-direction hall
+			int hallSizeZ = Random.Range (2,5);//used to randomize width of X-direction hall
+
+			/*int  random= Random.Range(0,1);
+			bool startXAxis;
+			if(random<0.5f){
+				startXAxis=true;
+			}
+			else{
+				startXAxis=false;
+			}
+			if(startXAxis){*/
+				int xAdjusted;
+				int zAdjusted;
+				for(int x=0; x<Mathf.Abs(corridorEnds[i].x-corridorStarts[i].x); ++x){
+
+					for(int z=0; z<hallSizeZ; ++z){
+						if((corridorEnds[i].x-corridorStarts[i].x)<0){
+							xAdjusted=x*-1;
+						}
+						else{
+							xAdjusted=x;
+						}
+						if((corridorEnds[i].y-corridorStarts[i].y)<0){
+							zAdjusted=z*-1;
+						}
+						else{
+							zAdjusted=z;
+						}
+						if(map[(int)corridorStarts[i].x+xAdjusted,(int)corridorStarts[i].y+ zAdjusted]==0){
+							map[(int)corridorStarts[i].x+xAdjusted,(int)corridorStarts[i].y+ zAdjusted]=-1;
+						}
+					}
+				}
+				for(int z=0; z<Mathf.Abs(corridorEnds[i].y-corridorStarts[i].y); ++z){
+
+					for(int x=0; x<hallSizeX; ++x){
+
+						if((corridorEnds[i].x-corridorStarts[i].x)<0){
+							xAdjusted=x*-1;
+						}
+						else{
+							xAdjusted=x;
+						}
+						if((corridorEnds[i].y-corridorStarts[i].y)<0){
+							zAdjusted=z*-1;
+						}
+						else{
+							zAdjusted=z;
+						}
+						if(map[(int)corridorEnds[i].x-xAdjusted,(int)corridorEnds[i].y-zAdjusted]==0){
+							map[(int)corridorEnds[i].x-xAdjusted,(int)corridorEnds[i].y-zAdjusted]=-1;
+						}
+					}
+				}
+
+			/*}
+			else{
+
+			}*/
+			//This segment draws the corridors as '-1' on the map
 		}
-		//This segment randomizes the sizes of the squares that make up the corridors
-		int hallSizeX = Random.Range (2,5);
-		int hallSizeZ = Random.Range (2,5);
-		//This segment draws the corridors as '-1' on the map
+		string[] text = new string[sizeX];
+
+		for(int i=0;i<sizeX;++i){
+			string line="";
+			for(int j=0; j<sizeZ; ++j){
+				if(map[i,j]>=0){
+					line +=".";
+				}
+				line +=map[i,j];
+				line += " ";
+			}
+			text[i]=line;
+
+		}
+		System.IO.File.WriteAllLines("yourtextfile.txt", text);
+		//Debug.Log(line);
 		return map;
+
 	}
 
 	int[,] generateMap(int sizeX, int sizeZ, int squaresToGenerate){
@@ -60,14 +135,7 @@ public class MapGeneration : MonoBehaviour{
 		numberRooms = FindRooms (genMap, sizeX, sizeZ);
 		if (numberRooms >= 1) {
 			genMap = createDungeonHalls(genMap, sizeX,sizeZ,numberRooms);
-			for(int i=0;i<sizeX;++i){
-				string line="";
-				for(int j=0; j<sizeZ; ++j){
-					line +=genMap[i,j];
-					line += " ";
-				}
-				Debug.Log(line);
-			}
+
 		}
 
 		//SpawnEnvironment(genMap, sizeX, sizeZ, numberRooms); // Create environment(Spider eggs for now)
