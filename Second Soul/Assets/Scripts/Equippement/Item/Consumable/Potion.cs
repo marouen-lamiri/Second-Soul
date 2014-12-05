@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Potion : MonoBehaviour {
+public class Potion {//: Item, IConsumable {
 
-	// Use this for initialization
-	void Start () {
-	
+	/*public override void useItem(){
+		consume ();
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	public void consume(){
 	
-	}
+	}*/
 }

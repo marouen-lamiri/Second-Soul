@@ -1,15 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IEquipable : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+public interface IEquipable {
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	void equip();
 }

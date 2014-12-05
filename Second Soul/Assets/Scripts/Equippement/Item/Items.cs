@@ -10,6 +10,8 @@ public class Items : MonoBehaviour {
 	private static List<HealthPotion> healthPotionList;
 	public List<ManaPotion> manaPotionListInspector;
 	private static List<ManaPotion> manaPotionList;
+	public List<Item> itemsInspector;
+	private static List<Item> items;
 
 	void Start(){
 		armor = armorInspector;
@@ -18,26 +20,14 @@ public class Items : MonoBehaviour {
 	}
 
 	public static Armor getArmor(int id){
-		Armor armor = new Armor();
-		armor.image = Items.armor[id].image;
-		armor.width = Items.armor[id].width;
-		armor.height = Items.armor[id].height;
-		return armor;
+		return armor[id];
 	}
 
 	public static HealthPotion getHealthPotion(int id){
-		HealthPotion potion = new HealthPotion();
-		potion.image = Items.healthPotionList[id].image;
-		potion.width = Items.healthPotionList[id].width;
-		potion.height = Items.healthPotionList[id].height;
-		return potion;
+		return healthPotionList[id];
 	}
 
 	public static ManaPotion getManaPotion(int id){
-		ManaPotion mana = new ManaPotion();
-		mana.image = Items.manaPotionList[id].image;
-		mana.width = Items.manaPotionList[id].width;
-		mana.height = Items.manaPotionList[id].height;
-		return mana;
+		return manaPotionList[id];
 	}
 }

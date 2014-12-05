@@ -63,6 +63,7 @@ public class NavClickToMove : MonoBehaviour {
 		}
 		//Player not moving
 		else {
+			position = transform.position;
 			player.animateIdle();
 		}
 	}
