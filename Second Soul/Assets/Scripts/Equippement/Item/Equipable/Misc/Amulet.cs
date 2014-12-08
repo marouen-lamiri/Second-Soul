@@ -1,15 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Amulet : MonoBehaviour {
+[System.Serializable]
+public class Amulet : Misc {
 
-	// Use this for initialization
-	void Start () {
-	
+	public Amulet(){
+		
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	public override void useItem(){
+		equip ();
+	}
 	
+	public override void equip(){
+		
+	}
+	
+	public override Texture2D getImage(){
+		return AmuletModel.getImage();
+	}
+	
+	public override int getWidth(){
+		return AmuletModel.getWidth();
+	}
+	
+	public override int getHeight(){
+		return AmuletModel.getHeight();
 	}
 }

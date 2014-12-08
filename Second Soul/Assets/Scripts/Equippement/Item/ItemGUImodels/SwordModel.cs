@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ManaPotionModel : MonoBehaviour {
+public class SwordModel : MonoBehaviour {
 
 	private static Texture2D image;
 	private static int width;

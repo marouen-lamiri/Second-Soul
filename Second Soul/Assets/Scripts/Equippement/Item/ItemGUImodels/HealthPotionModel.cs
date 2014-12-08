@@ -7,7 +7,7 @@ public class HealthPotionModel : MonoBehaviour {
 	private static int width;
 	private static int height;
 	
-	
+	//used to put ressources directly from inspector rather than ressources
 	public Texture2D imageInspector;
 	public int widthInspector;
 	public int heightInspector;

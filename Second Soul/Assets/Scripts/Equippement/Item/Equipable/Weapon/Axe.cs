@@ -1,15 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Axe : MonoBehaviour {
+[System.Serializable]
+public class Axe : Weapon {
 
-	// Use this for initialization
-	void Start () {
-	
+	public Axe(){
+		
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	public override void useItem(){
+		equip ();
+	}
 	
+	public override void equip(){
+		
+	}
+	
+	public override Texture2D getImage(){
+		return AxeModel.getImage();
+	}
+	
+	public override int getWidth(){
+		return AxeModel.getWidth();
+	}
+	
+	public override int getHeight(){
+		return AxeModel.getHeight();
 	}
 }

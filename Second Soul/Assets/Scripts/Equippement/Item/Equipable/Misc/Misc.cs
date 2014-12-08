@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Misc : MonoBehaviour {
+public abstract class Misc : Item, IEquipable {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public override abstract void useItem();
+	public override abstract Texture2D getImage();
+	public override abstract int getWidth();
+	public override abstract int getHeight();
+	public abstract void equip();
+
 }

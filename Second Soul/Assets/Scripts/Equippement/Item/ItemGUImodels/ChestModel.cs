@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ArmorModel : MonoBehaviour {
-	
+public class ChestModel : MonoBehaviour {
+
 	private static Texture2D image;
 	private static int width;
 	private static int height;
 	
-	
+	//used to put ressources directly from inspector rather than ressources
 	public Texture2D imageInspector;
 	public int widthInspector;
 	public int heightInspector;
@@ -30,5 +30,4 @@ public class ArmorModel : MonoBehaviour {
 	public static int getHeight(){
 		return height;
 	}
-	
 }

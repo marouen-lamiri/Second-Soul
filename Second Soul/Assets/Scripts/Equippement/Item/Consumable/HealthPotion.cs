@@ -2,9 +2,17 @@
 using System.Collections;
 
 [System.Serializable]
-public class HealthPotion : Item {
+public class HealthPotion : Potion {
+
+	public HealthPotion(){
+	
+	}
 
 	public override void useItem(){
+		consume ();
+	}
+	
+	public override void consume(){
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		if (player != null) {
 			player.SendMessage("healCharacter", 100);

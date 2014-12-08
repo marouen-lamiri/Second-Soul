@@ -1,15 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Sword : MonoBehaviour {
+[System.Serializable]
+public class Sword : Weapon {
 
-	// Use this for initialization
-	void Start () {
-	
+	public Sword(){
+		
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	public override void useItem(){
+		equip ();
+	}
 	
+	public override void equip(){
+		
+	}
+	
+	public override Texture2D getImage(){
+		return SwordModel.getImage();
+	}
+	
+	public override int getWidth(){
+		return SwordModel.getWidth();
+	}
+	
+	public override int getHeight(){
+		return SwordModel.getHeight();
 	}
 }

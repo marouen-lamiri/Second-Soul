@@ -1,15 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Chest : MonoBehaviour {
+[System.Serializable]
+public class Chest : Armor {
 
-	// Use this for initialization
-	void Start () {
-	
+	public Chest(){
+		
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	public override void useItem(){
+		equip ();
+	}
 	
+	public override void equip(){
+		EquippedItems.items.Add(this);
+		FighterItems.chest = this;	
+	}
+	
+	public override Texture2D getImage(){
+		return ChestModel.getImage();
+	}
+	
+	public override int getWidth(){
+		return ChestModel.getWidth();
+	}
+	
+	public override int getHeight(){
+		return ChestModel.getHeight();
 	}
 }

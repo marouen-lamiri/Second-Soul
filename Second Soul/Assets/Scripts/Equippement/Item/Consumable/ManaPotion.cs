@@ -2,9 +2,17 @@
 using System.Collections;
 
 [System.Serializable]
-public class ManaPotion : Item {
+public class ManaPotion : Potion {
+
+	public ManaPotion(){
+		
+	}
 
 	public override void useItem(){
+		consume ();
+	}
+	
+	public override void consume(){
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		if (player != null) {
 			player.SendMessage("rechargeCharacter", 100);

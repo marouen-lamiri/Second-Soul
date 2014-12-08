@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+public abstract class Weapon : Item, IEquipable {
 	
-	}
+	public override abstract void useItem();
+	public override abstract Texture2D getImage();
+	public override abstract int getWidth();
+	public override abstract int getHeight();
+	public abstract void equip();
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

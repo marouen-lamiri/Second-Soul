@@ -1,15 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Ring : MonoBehaviour {
+[System.Serializable]
+public class Ring : Misc {
 
-	// Use this for initialization
-	void Start () {
+	public Ring(){
+		
+	}
+
+	public override void useItem(){
+		equip ();
+	}
+	
+	public override void equip(){
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	public override Texture2D getImage(){
+		return RingModel.getImage();
+	}
 	
+	public override int getWidth(){
+		return RingModel.getWidth();
+	}
+	
+	public override int getHeight(){
+		return RingModel.getHeight();
 	}
 }

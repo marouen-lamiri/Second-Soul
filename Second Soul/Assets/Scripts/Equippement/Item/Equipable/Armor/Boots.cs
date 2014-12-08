@@ -1,15 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Boots : MonoBehaviour {
+[System.Serializable]
+public class Boots : Armor {
 
-	// Use this for initialization
-	void Start () {
-	
+	public Boots(){
+		
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	public override void useItem(){
+		equip ();
+	}
 	
+	public override void equip(){
+		
+	}
+	
+	public override Texture2D getImage(){
+		return BootsModel.getImage();
+	}
+	
+	public override int getWidth(){
+		return BootsModel.getWidth();
+	}
+	
+	public override int getHeight(){
+		return BootsModel.getWidth();
 	}
 }

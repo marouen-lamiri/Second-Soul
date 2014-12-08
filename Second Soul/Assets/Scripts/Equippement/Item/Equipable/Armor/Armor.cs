@@ -1,22 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[System.Serializable]
-public class Armor : Item{
-
-	public override void useItem(){
-
-	}
-	
-	public override Texture2D getImage(){
-		return ArmorModel.getImage();
-	}
-	
-	public override int getWidth(){
-		return ArmorModel.getWidth();
-	}
-	
-	public override int getHeight(){
-		return ArmorModel.getHeight();
-	}
+public abstract class Armor : Item, IEquipable {
+		
+		public override abstract void useItem();
+		public override abstract Texture2D getImage();
+		public override abstract int getWidth();
+		public override abstract int getHeight();
+		public abstract void equip();
 }
