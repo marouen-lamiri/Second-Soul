@@ -16,6 +16,10 @@ public class Axe : Weapon {
 		
 	}
 	
+	public override void unequip(){
+		
+	}
+	
 	public override Texture2D getImage(){
 		return AxeModel.getImage();
 	}

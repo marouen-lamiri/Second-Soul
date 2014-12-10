@@ -2,7 +2,11 @@
 using System.Collections;
 
 public abstract class Potion : Item, IConsumable {
-	
+
+	public Potion() : base(){
+		
+	}
+			
 	public override abstract void useItem();
 	public override abstract Texture2D getImage();
 	public override abstract int getWidth();

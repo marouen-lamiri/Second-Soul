@@ -16,6 +16,10 @@ public class Amulet : Misc {
 		
 	}
 	
+	public override void unequip(){
+		
+	}
+	
 	public override Texture2D getImage(){
 		return AmuletModel.getImage();
 	}

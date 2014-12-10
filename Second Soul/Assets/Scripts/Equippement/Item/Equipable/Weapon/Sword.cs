@@ -16,6 +16,10 @@ public class Sword : Weapon {
 		
 	}
 	
+	public override void unequip(){
+		
+	}
+	
 	public override Texture2D getImage(){
 		return SwordModel.getImage();
 	}

@@ -4,8 +4,8 @@ using System.Collections;
 [System.Serializable]
 public class Chest : Armor {
 
-	public Chest(){
-		
+	public Chest() : base(){
+
 	}
 	
 	public override void useItem(){
@@ -13,8 +13,17 @@ public class Chest : Armor {
 	}
 	
 	public override void equip(){
-		EquippedItems.items.Add(this);
-		FighterItems.chest = this;	
+		Debug.Log(FighterItems.chestSlot.position);
+		this.position = FighterItems.chestSlot.position;	
+		EquippedItems.equipItems.Add(this);
+		
+		FighterItems.equipSlots.Remove(FighterItems.chestSlot);
+		FighterItems.chestSlot.item = this;
+		FighterItems.equipSlots.Add(FighterItems.chestSlot);
+	}
+	
+	public override void unequip(){
+	
 	}
 	
 	public override Texture2D getImage(){

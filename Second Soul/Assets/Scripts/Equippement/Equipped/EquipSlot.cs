@@ -8,6 +8,11 @@ public class EquipSlot {
 	public bool occupied;
 	public Rect position;
 	
+	public EquipSlot(Rect position)
+	{
+		this.position = position;
+	}
+	
 	public EquipSlot(Rect position, Item item )
 	{
 		this.position = position;

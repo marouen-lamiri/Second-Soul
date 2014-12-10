@@ -10,10 +10,15 @@ public abstract class Item{
 	public int width;
 	public int height;
 
+	public Item(){
+		this.image = getImage();
+		this.width = getWidth();
+		this.height = getHeight();
+	}
+
 	public abstract void useItem();
 	public abstract Texture2D getImage();
 	public abstract int getWidth();
 	public abstract int getHeight();
 	
-
 }

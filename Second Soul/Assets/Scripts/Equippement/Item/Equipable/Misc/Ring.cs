@@ -16,6 +16,10 @@ public class Ring : Misc {
 	
 	}
 	
+	public override void unequip(){
+		
+	}
+	
 	public override Texture2D getImage(){
 		return RingModel.getImage();
 	}

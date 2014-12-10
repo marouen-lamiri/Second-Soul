@@ -1,44 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Inventory : MonoBehaviour 
+public class Inventory : Storage 
 {
 	public Texture2D image;
 	public Rect position;
 
-	public List<Item> items = new List<Item>();
-	
 	// in number of slots
 	int storageWidth = 6;
 	int storageHeight = 4;
-	
-	public Slot[,] slots;
 
 	public int slotsOffsetX;
 	public int slotsOffsetY;
-	
-	//slot pixel dimensions
-	public int slotWidth = 40;
-	public int slotHeight = 40;
-	
-	private int hoverOffset = 10;
 
 	/*private Item temp;
 	private Vector2 selected;
 	private Vector2 secondSelected;*/ //out dated vars
-	
-	public static bool isInventoryOn = false;
-	
-	//new development variables
-	private Item targetItem;
-	private bool itemPickedUp;
 
 	// Use this for initialization
 	void Start () {
+		initializeVariables(); // in parent Storage class
 		setSlots ();
-		testMethod ();
-		targetItem = null;
-		itemPickedUp = false;
+		addSampleItems ();
 	}
 
 	// Update is called once per frame
@@ -50,18 +33,18 @@ public class Inventory : MonoBehaviour
 	}
 	
 	void setSlots(){
-		slots = new Slot[storageWidth,storageHeight];
+		inventorySlots = new Slot[storageWidth,storageHeight];
 		for(int x = 0; x < storageWidth ; x++){
 			for(int y = 0; y < storageHeight ; y++){
-				slots[x,y] = new Slot(new Rect(slotsOffsetX + slotWidth*x, slotsOffsetY + slotHeight*y, slotWidth, slotHeight));
+				inventorySlots[x,y] = new Slot(new Rect(slotsOffsetX + slotWidth*x, slotsOffsetY + slotHeight*y, slotWidth, slotHeight));
 			}
 		}
 	}
 	
-	void testMethod(){
-		addItem(0,0,Items.getChest(0));
-		addItem(2,0,Items.getHealthPotion(0));
-		addItem(3,0,Items.getManaPotion(0));
+	void addSampleItems(){
+		addInventoryItem(0,0,new Chest());
+		addInventoryItem(2,0,new HealthPotion());
+		addInventoryItem(3,0,new ManaPotion());
 	}
 	
 	void shownInventory(){
@@ -94,34 +77,20 @@ public class Inventory : MonoBehaviour
 	void drawSlots(){
 		for(int x = 0; x < storageWidth ; x++){
 			for(int y = 0; y < storageHeight ; y++){
-				slots[x,y].draw(position.x, position.y);
+				inventorySlots[x,y].draw(position.x, position.y);
 			}
 		}
 	}
 
 	void drawItems(){
-		for(int i = 0; i < items.Count; i++){
-			items[i].position = new Rect(8 + slotsOffsetX + position.x + items[i].x * slotWidth, 8 + slotsOffsetY + position.y + items[i].y * slotHeight,items[i].width * slotWidth - 16,items[i].height * slotHeight - 16);
-			GUI.DrawTexture(items[i].position, items[i].image);
+		for(int i = 0; i < inventoryItems.Count; i++){
+			inventoryItems[i].position = new Rect(8 + slotsOffsetX + position.x + inventoryItems[i].x * slotWidth, 8 + slotsOffsetY + position.y + inventoryItems[i].y * slotHeight,inventoryItems[i].width * slotWidth - 16,inventoryItems[i].height * slotHeight - 16);
+			GUI.DrawTexture(inventoryItems[i].position, inventoryItems[i].getImage());
 		}
 	}
 
-	void drawHoverItem(){
-		if (itemPickedUp) {
-			GUI.DrawTexture (new Rect(Input.mousePosition.x - hoverOffset, Screen.height - Input.mousePosition.y - hoverOffset, targetItem.width * slotWidth, targetItem.height * slotHeight), targetItem.image);
-		}
-	}
 	
 	bool availableSlots(int x, int y, Item item){
-		for(int sX = x; sX < item.width + x; sX++){
-			for(int sY = y; sY < item.height + y ; sY++){
-				if(slots[sX,sY].occupied){
-					//Debug.Log("breaks" + x + " , " + y);
-					return false;
-				}
-			}
-		}
-		
 		if(x + item.width > storageWidth){
 			//Debug.Log("Out of X bounds");
 			return false;
@@ -130,20 +99,17 @@ public class Inventory : MonoBehaviour
 			//Debug.Log("Out of Y bounds");
 			return false;
 		}
-		return true;
-	}
-
-	void addItem(int x, int y, Item item){
-		//Debug.Log("comes"+ x + " , " + y);
-		item.x = x;
-		item.y = y;
-		items.Add(item);
-
+		
 		for(int sX = x; sX < item.width + x; sX++){
 			for(int sY = y; sY < item.height + y ; sY++){
-				slots[sX,sY].occupied = true;
+				if(inventorySlots[sX,sY].occupied){
+					//Debug.Log("breaks" + x + " , " + y);
+					return false;
+				}
 			}
 		}
+		
+		return true;
 	}
 
 	void detectGUIAction(){
@@ -162,9 +128,9 @@ public class Inventory : MonoBehaviour
 	}
 	
 	void onItemHover(){
-		for(int i = 0; i < items.Count; i++){
-			if(!itemPickedUp && items[i].position.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y))){
-				targetItem = items[i];
+		for(int i = 0; i < inventoryItems.Count; i++){
+			if(!itemPickedUp && inventoryItems[i].position.Contains(mousePositionInInventory())){
+				targetItem = inventoryItems[i];
 				Debug.Log("on item hover " + targetItem);
 				Debug.Log(targetItem.GetType());
 				return;
@@ -198,23 +164,18 @@ public class Inventory : MonoBehaviour
 	void dropItem(){
 		for(int x = 0; x < storageWidth ; x++){
 			for(int y = 0; y < storageHeight ; y++){
-				Rect slot = new Rect(position.x + slots[x,y].position.x, position.y + slots[x,y].position.y, slotWidth, slotHeight);
-				if(slot.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y))){
+				Rect slot = new Rect(position.x + inventorySlots[x,y].position.x, position.y + inventorySlots[x,y].position.y, slotWidth, slotHeight);
+				if(slot.Contains(mousePositionInInventory())){
 					if(availableSlots(x, y, targetItem)){
-						addItem(x, y, targetItem);
+						addInventoryItem(x, y, targetItem);
 						resetTargetItem();
 						return;
 					}
 				}
 			}
 		}
-		addItem(targetItem.x, targetItem.y, targetItem);
+		addInventoryItem(targetItem.x, targetItem.y, targetItem);
 		resetTargetItem();
-	}
-	
-	void resetTargetItem(){
-		itemPickedUp = false;
-		targetItem = null;
 	}
 	
 	void useItem(){
@@ -226,17 +187,18 @@ public class Inventory : MonoBehaviour
 	void removeItem(Item item){
 		for(int x = item.x; x < item.x + item.width; x++){
 			for(int y = item.y; y < item.y + item.height; y++) {
-				slots[x,y].occupied = false;
+				inventorySlots[x,y].occupied = false;
 			}
 		}
-		items.Remove(item);
+		inventoryItems.Remove(item);
 	}
-
-	private bool inWidthBoundaries(){
+	
+	protected bool inWidthBoundaries(){
 		return (Input.mousePosition.x > position.x && Input.mousePosition.x < position.x + position.width);
 	}
 	
-	private bool inHeightBoundaries(){
+	protected bool inHeightBoundaries(){
 		return (Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height);
 	}
+	
 }

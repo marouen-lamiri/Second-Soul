@@ -16,6 +16,10 @@ public class Boots : Armor {
 		
 	}
 	
+	public override void unequip(){
+		
+	}
+	
 	public override Texture2D getImage(){
 		return BootsModel.getImage();
 	}

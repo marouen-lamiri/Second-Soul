@@ -4,8 +4,8 @@ using System.Collections;
 [System.Serializable]
 public class ManaPotion : Potion {
 
-	public ManaPotion(){
-		
+	public ManaPotion() : base(){
+	
 	}
 
 	public override void useItem(){

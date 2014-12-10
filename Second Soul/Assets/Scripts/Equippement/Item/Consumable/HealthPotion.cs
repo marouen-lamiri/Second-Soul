@@ -4,7 +4,7 @@ using System.Collections;
 [System.Serializable]
 public class HealthPotion : Potion {
 
-	public HealthPotion(){
+	public HealthPotion() : base(){
 	
 	}
 
