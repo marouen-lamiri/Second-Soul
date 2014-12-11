@@ -14,10 +14,10 @@ public class Slot
 		this.position = position;
 	}
 	
-	public void draw(float frameX, float frameY)
+	/*public void draw(float frameX, float frameY)
 	{
 		if(item!=null){
 			GUI.DrawTexture(new Rect(frameX + position.x, frameY + position.y, position.width, position.height), item.getImage());
 		}
-	}
+	}*/
 }

@@ -13,13 +13,18 @@ public class Chest : Armor {
 	}
 	
 	public override void equip(){
-		Debug.Log(FighterItems.chestSlot.position);
-		this.position = FighterItems.chestSlot.position;	
-		EquippedItems.equipItems.Add(this);
-		
-		FighterItems.equipSlots.Remove(FighterItems.chestSlot);
-		FighterItems.chestSlot.item = this;
-		FighterItems.equipSlots.Add(FighterItems.chestSlot);
+		//Debug.Log(FighterItems.chestSlot.position);
+		foreach(EquipSlot slot in Storage.equipSlots){
+			if(slot.type == this.GetType().ToString()){
+				this.position = slot.position;	
+				Storage.equipItems.Add(this);
+				slot.item = this;
+				/*Storage.equipSlots.Remove(slot);
+				FighterItems.chestSlot.item = this;
+				Storage.equipSlots.Add(FighterItems.chestSlot);*/
+				return;
+			}
+		}
 	}
 	
 	public override void unequip(){

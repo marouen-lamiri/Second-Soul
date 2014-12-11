@@ -7,6 +7,7 @@ public class EquipSlot {
 	public Item item;
 	public bool occupied;
 	public Rect position;
+	public string type; //type of item it accepts
 	
 	public EquipSlot(Rect position)
 	{
@@ -19,11 +20,17 @@ public class EquipSlot {
 		this.item = item;
 	}
 	
+	public EquipSlot(Rect position, string type )
+	{
+		this.position = position;
+		this.type = type;
+	}
+	
 	//not currently used
-	public void draw(float frameX, float frameY)
+	/*public void draw(float frameX, float frameY)
 	{
 		if(item!=null){
 			GUI.DrawTexture(new Rect(frameX + position.x, frameY + position.y, position.width, position.height), item.image);
 		}
-	}
+	}*/
 }

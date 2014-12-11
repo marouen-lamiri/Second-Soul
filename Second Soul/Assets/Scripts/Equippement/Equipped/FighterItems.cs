@@ -2,20 +2,11 @@
 using System.Collections.Generic;
 
 public class FighterItems : EquippedItems {
-
-	public static Chest chest;
-	public static Boots boots;
-	public static Weapon weapon;
-	
-	public static List<EquipSlot> equipSlots = new List<EquipSlot>();
 	
 	public static EquipSlot chestSlot;
 	public static EquipSlot bootsSlot;
 	public static EquipSlot weaponSlot;
-	
-	//FIXME: Static Offset for inventory position (should be like Inventory where new GUI is relative to first)
-	public int inventoryOffsetX = 867;
-	public int inventoryOffsetY = 18;
+
 	
 	
 	//Offset and size of chest rect slot
@@ -24,6 +15,13 @@ public class FighterItems : EquippedItems {
 	
 	public int chestPixelHeight;
 	public int chestPixelWidth;
+	
+	//Offset and size of chest rect slot
+	public int weaponOffsetX;
+	public int weaponOffsetY;
+	
+	public int weaponPixelHeight;
+	public int weaponPixelWidth;
 	
 	// Use this for initialization
 	void Start () {
@@ -36,9 +34,9 @@ public class FighterItems : EquippedItems {
 	}
 	
 	void setSlots(){
-		chestSlot = new EquipSlot(new Rect(chestOffsetX + inventoryOffsetX, chestOffsetY + inventoryOffsetY, chestPixelHeight, chestPixelWidth), new Chest());
-		bootsSlot = new EquipSlot(new Rect(), new Boots());
-		weaponSlot = new EquipSlot(new Rect(), new Axe());
+		chestSlot = new EquipSlot(new Rect(chestOffsetX + inventoryOffsetX, chestOffsetY + inventoryOffsetY, chestPixelHeight, chestPixelWidth), "Chest");
+		bootsSlot = new EquipSlot(new Rect(), "Boots");
+		weaponSlot = new EquipSlot(new Rect(weaponOffsetX + inventoryOffsetX, weaponOffsetY + inventoryOffsetY, weaponPixelHeight, weaponPixelWidth), "Weapon");
 		equipSlots.Add(chestSlot);
 		equipSlots.Add(bootsSlot);
 		equipSlots.Add(weaponSlot); // set to dynamic weapon then have weapon check parent to make sure its a weapon
@@ -47,7 +45,7 @@ public class FighterItems : EquippedItems {
 	void OnGUI(){
 		if (isInventoryOn) {
 			drawEquippedItems();
-			detectGUIAction();
+			//detectGUIAction();
 			//Debug.Log(chestSlot.position);
 		}
 	}
@@ -59,21 +57,9 @@ public class FighterItems : EquippedItems {
 		}
 	}
 	
-	void onItemHover(){
-		foreach(Item item in equipItems){
-			if(!itemPickedUp && item.position.Contains(mousePositionInInventory())){
-				targetItem = item;
-				Debug.Log("on item hover " + targetItem);
-				Debug.Log(targetItem.GetType());
-				return;
-			}
-			else if(!itemPickedUp){
-				targetItem = null;
-			}
-		}
-	}
 	
-	void detectGUIAction(){
+	
+	/*void detectGUIAction(){
 		if(true){//inWidthBoundaries() && inHeightBoundaries()){ // similar to code from inventory add equipped boundaries, ideally make boundary from storage level then check deeper for specific actions
 			onItemHover();
 			if(targetItem != null){
@@ -122,5 +108,5 @@ public class FighterItems : EquippedItems {
 	
 	void removeItem(Item targetItem){
 	
-	}
+	}*/
 }

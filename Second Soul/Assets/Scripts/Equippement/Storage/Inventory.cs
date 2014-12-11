@@ -4,12 +4,15 @@ using System.Collections.Generic;
 public class Inventory : Storage 
 {
 	public Texture2D image;
-	public Rect position;
+	//public Rect position;
+	public Texture2D white;
+	public Texture2D red;
+	public Texture2D blue;
 
 	// in number of slots
-	int storageWidth = 6;
+	/*int storageWidth = 6;
 	int storageHeight = 4;
-
+	*/
 	public int slotsOffsetX;
 	public int slotsOffsetY;
 
@@ -33,18 +36,20 @@ public class Inventory : Storage
 	}
 	
 	void setSlots(){
-		inventorySlots = new Slot[storageWidth,storageHeight];
-		for(int x = 0; x < storageWidth ; x++){
-			for(int y = 0; y < storageHeight ; y++){
+		inventorySlots = new Slot[inventoryStorageWidth,inventoryStorageHeight];
+		for(int x = 0; x < inventoryStorageWidth ; x++){
+			for(int y = 0; y < inventoryStorageHeight ; y++){
 				inventorySlots[x,y] = new Slot(new Rect(slotsOffsetX + slotWidth*x, slotsOffsetY + slotHeight*y, slotWidth, slotHeight));
 			}
 		}
 	}
 	
 	void addSampleItems(){
-		addInventoryItem(0,0,new Chest());
-		addInventoryItem(2,0,new HealthPotion());
-		addInventoryItem(3,0,new ManaPotion());
+		addInventoryItem(0, 0, new Chest());
+		addInventoryItem(2, 0, new HealthPotion());
+		addInventoryItem(3, 0, new ManaPotion());
+		addInventoryItem(2, 1, new Ring());
+		addInventoryItem(4, 0, new Axe());
 	}
 	
 	void shownInventory(){
@@ -59,7 +64,7 @@ public class Inventory : Storage
 	void OnGUI(){
 		if (isInventoryOn) {
 			drawInventory ();
-			drawSlots ();
+			//drawSlots ();
 			drawItems ();
 			detectGUIAction ();
 			drawHoverItem();
@@ -68,29 +73,30 @@ public class Inventory : Storage
 		}
 	}
 
+
 	void drawInventory(){
 		position.x = Screen.width - position.width;
 		position.y = Screen.height - position.height - Screen.height * 0.2f;
 		GUI.DrawTexture(position, image);
 	}
 
-	void drawSlots(){
+	/*void drawSlots(){
 		for(int x = 0; x < storageWidth ; x++){
 			for(int y = 0; y < storageHeight ; y++){
 				inventorySlots[x,y].draw(position.x, position.y);
 			}
 		}
-	}
+	}*/
 
 	void drawItems(){
 		for(int i = 0; i < inventoryItems.Count; i++){
-			inventoryItems[i].position = new Rect(8 + slotsOffsetX + position.x + inventoryItems[i].x * slotWidth, 8 + slotsOffsetY + position.y + inventoryItems[i].y * slotHeight,inventoryItems[i].width * slotWidth - 16,inventoryItems[i].height * slotHeight - 16);
+			inventoryItems[i].position = new Rect(6 + slotsOffsetX + position.x + inventoryItems[i].x * slotWidth, 6 + slotsOffsetY + position.y + inventoryItems[i].y * slotHeight,inventoryItems[i].width * slotWidth - 12,inventoryItems[i].height * slotHeight - 12);
 			GUI.DrawTexture(inventoryItems[i].position, inventoryItems[i].getImage());
 		}
 	}
 
 	
-	bool availableSlots(int x, int y, Item item){
+	/*bool availableSlots(int x, int y, Item item){
 		if(x + item.width > storageWidth){
 			//Debug.Log("Out of X bounds");
 			return false;
@@ -199,6 +205,6 @@ public class Inventory : Storage
 	
 	protected bool inHeightBoundaries(){
 		return (Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height);
-	}
+	}*/
 	
 }
