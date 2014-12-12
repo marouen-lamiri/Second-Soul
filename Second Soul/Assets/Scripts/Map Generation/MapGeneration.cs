@@ -5,20 +5,55 @@ using System.Collections.Generic;
 public class MapGeneration : MonoBehaviour{
 
 	// Use this for initialization
+	public GameObject wallPrefab;
 	List<int> listOfWalls;
 	int[,] mapArray;
 	int numberRooms = 10;
-	int mapSizeX = 100;
-	int mapSizeZ = 100;
+	int mapSizeX = 50;
+	int mapSizeZ = 50;
 
 	void Start () {
-		generateMap (mapSizeX, mapSizeZ, numberRooms);
+		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms);
+		buildMap (map);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+	void buildMap(int[,] map){
+		for (int i=0; i<mapSizeX; i++) {
+			for(int j=0;j<mapSizeZ;j++){
+				if (map [i,j] != 0){
+					buildWalls(map,i,j);
+				}
+			}
+		}
+	}
+
+	//Checks all 4 directions
+	void buildWalls (int [,] map,int i,int j){
+		Vector3 position = new Vector3 (i*10,0,j*10);
+
+		//Instantiate(wallPrefab, new Vector3(position.x,0,position.z), Quaternion.Euler (0,90,0));
+		//Instantiate(wallPrefab, new Vector3(position.x,0,position.z), Quaternion.Euler (0,-90,0));
+	//	Instantiate(wallPrefab, new Vector3(position.x,0,position.z), Quaternion.Euler (0,180,0));
+		//Instantiate(wallPrefab, new Vector3(position.x,0,position.z), Quaternion.Euler (0,0,0));
+		if (map [i - 1, j] == 0) {
+			Instantiate(wallPrefab, new Vector3(position.x,0,position.z), new Quaternion());
+		}
+		if (map [i + 1, j] == 0) {
+			Instantiate(wallPrefab, new Vector3(position.x+10,0,position.z), new Quaternion());
+		}
+		if (map [i, j - 1] == 0) {
+			Instantiate(wallPrefab, new Vector3(position.x,0,position.z), Quaternion.Euler (0,90,0));
+		}
+		if (map [i, j + 1] == 0) {
+			Instantiate(wallPrefab, new Vector3(position.x,0,position.z+10), Quaternion.Euler (0,90,0));
+		}
+
+	}
+
 	int[,] createDungeonHalls(int[,] map, int sizeX, int sizeZ, int numberRooms){
 		Vector2[] corridorStarts = new Vector2[numberRooms];
 		Vector2[] corridorEnds = new Vector2[numberRooms];
@@ -49,64 +84,49 @@ public class MapGeneration : MonoBehaviour{
 			int hallSizeX = Random.Range (2,5);//used to randomize width of Z-direction hall
 			int hallSizeZ = Random.Range (2,5);//used to randomize width of X-direction hall
 
-			/*int  random= Random.Range(0,1);
-			bool startXAxis;
-			if(random<0.5f){
-				startXAxis=true;
-			}
-			else{
-				startXAxis=false;
-			}
-			if(startXAxis){*/
-				int xAdjusted;
-				int zAdjusted;
-				for(int x=0; x<Mathf.Abs(corridorEnds[i].x-corridorStarts[i].x); ++x){
+			int xAdjusted;
+			int zAdjusted;
+			for(int x=0; x<Mathf.Abs(corridorEnds[i].x-corridorStarts[i].x); ++x){
 
-					for(int z=0; z<hallSizeZ; ++z){
-						if((corridorEnds[i].x-corridorStarts[i].x)<0){
-							xAdjusted=x*-1;
-						}
-						else{
-							xAdjusted=x;
-						}
-						if((corridorEnds[i].y-corridorStarts[i].y)<0){
-							zAdjusted=z*-1;
-						}
-						else{
-							zAdjusted=z;
-						}
-						if(map[(int)corridorStarts[i].x+xAdjusted,(int)corridorStarts[i].y+ zAdjusted]==0){
-							map[(int)corridorStarts[i].x+xAdjusted,(int)corridorStarts[i].y+ zAdjusted]=-1;
-						}
+				for(int z=0; z<hallSizeZ; ++z){
+					if((corridorEnds[i].x-corridorStarts[i].x)<0){
+						xAdjusted=x*-1;
+					}
+					else{
+						xAdjusted=x;
+					}
+					if((corridorEnds[i].y-corridorStarts[i].y)<0){
+						zAdjusted=z*-1;
+					}
+					else{
+						zAdjusted=z;
+					}
+					if(map[(int)corridorStarts[i].x+xAdjusted,(int)corridorStarts[i].y+ zAdjusted]==0){
+						map[(int)corridorStarts[i].x+xAdjusted,(int)corridorStarts[i].y+ zAdjusted]=-1;
 					}
 				}
-				for(int z=0; z<Mathf.Abs(corridorEnds[i].y-corridorStarts[i].y); ++z){
+			}
+			for(int z=0; z<Mathf.Abs(corridorEnds[i].y-corridorStarts[i].y); ++z){
 
-					for(int x=0; x<hallSizeX; ++x){
+				for(int x=0; x<hallSizeX; ++x){
 
-						if((corridorEnds[i].x-corridorStarts[i].x)<0){
-							xAdjusted=x*-1;
-						}
-						else{
-							xAdjusted=x;
-						}
-						if((corridorEnds[i].y-corridorStarts[i].y)<0){
-							zAdjusted=z*-1;
-						}
-						else{
-							zAdjusted=z;
-						}
-						if(map[(int)corridorEnds[i].x-xAdjusted,(int)corridorEnds[i].y-zAdjusted]==0){
-							map[(int)corridorEnds[i].x-xAdjusted,(int)corridorEnds[i].y-zAdjusted]=-1;
-						}
+					if((corridorEnds[i].x-corridorStarts[i].x)<0){
+						xAdjusted=x*-1;
+					}
+					else{
+						xAdjusted=x;
+					}
+					if((corridorEnds[i].y-corridorStarts[i].y)<0){
+						zAdjusted=z*-1;
+					}
+					else{
+						zAdjusted=z;
+					}
+					if(map[(int)corridorEnds[i].x-xAdjusted,(int)corridorEnds[i].y-zAdjusted]==0){
+						map[(int)corridorEnds[i].x-xAdjusted,(int)corridorEnds[i].y-zAdjusted]=-1;
 					}
 				}
-
-			/*}
-			else{
-
-			}*/
-			//This segment draws the corridors as '-1' on the map
+			}
 		}
 		string[] text = new string[sizeX];
 
@@ -135,14 +155,7 @@ public class MapGeneration : MonoBehaviour{
 		numberRooms = FindRooms (genMap, sizeX, sizeZ);
 		if (numberRooms >= 1) {
 			genMap = createDungeonHalls(genMap, sizeX,sizeZ,numberRooms);
-
-		}
-
-		//SpawnEnvironment(genMap, sizeX, sizeZ, numberRooms); // Create environment(Spider eggs for now)
-		
-		//listOfWalls = EvaluateWallToBuild(genMap, sizeX, sizeZ);
-		//InstantiateMapWalls(_ListOfWalls);
-		
+		}		
 		return genMap;
 	}
 
@@ -151,8 +164,8 @@ public class MapGeneration : MonoBehaviour{
 		
 		for(int i = 0; i < squaresToGenerate; i++){
 			// Calculate random room size and position. Make sure the room is inside the map.
-			int roomSizeX = Random.Range (10,sizeX/5);
-			int roomSizeZ = Random.Range (10,sizeZ/5);
+			int roomSizeX = Random.Range (3,sizeX/8);
+			int roomSizeZ = Random.Range (3,sizeZ/8);
 			int roomPosX  = Random.Range (1,sizeX-roomSizeX);
 			int roomPosZ  = Random.Range (1,sizeZ-roomSizeZ);
 			
