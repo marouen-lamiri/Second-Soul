@@ -3,11 +3,26 @@ using System.Collections;
 
 public class MiniMap : MonoBehaviour {
 
-	public Transform Fighter; // The Fighter from the scene.
+	public Fighter fighter;   // The Fighter from the scene.
+	public Sorcerer sorcerer; // The Sorcerer from the scene.
 
 	void Update()
 	{
-		// Adjusting the position of the MiniMap to the Fighter's one.
-		this.transform.position = new Vector3 (Fighter.position.x, transform.position.y, Fighter.position.z);
+		if (fighter.playerEnabled)
+		{
+			// Adjusting the MiniMap camera to the Fighter position.
+			this.moveMiniMapCamera(fighter.transform.position);
+		}
+		else if (sorcerer.playerEnabled)
+		{
+			// Adjusting the MiniMap camera to the Sorcerer position.
+			this.moveMiniMapCamera(sorcerer.transform.position);
+		}
+	}
+
+	// Move the MiniMap's camera to the entered position.
+	void moveMiniMapCamera(Vector3 position)
+	{
+		this.transform.position = new Vector3 (position.x, transform.position.y, position.z);
 	}
 }
