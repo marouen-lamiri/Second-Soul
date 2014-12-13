@@ -6,14 +6,18 @@ public class MapGeneration : MonoBehaviour{
 
 	// Use this for initialization
 	public GameObject wallPrefab;
+	public GameObject enemy;
 	List<int> listOfWalls;
 	int[,] mapArray;
 	int numberRooms = 10;
-	int mapSizeX = 50;
-	int mapSizeZ = 50;
+	int mapSizeX = 25;
+	int mapSizeZ = 25;
 
 	void Start () {
 		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms);
+		GameObject player = GameObject.Find("Fighter");
+		playerStartPosition(map, player);
+		enemySpawnLocation (map, enemy);
 		buildMap (map);
 	}
 	
@@ -21,6 +25,40 @@ public class MapGeneration : MonoBehaviour{
 	void Update () {
 		
 	}
+
+	void playerStartPosition(int [,] map, GameObject player){
+		for (int i=0; i<mapSizeX; i++) {
+			for(int j=0;j<mapSizeZ;j++){
+				if (map [i,j] != 0 && map [i-1,j] != 0 && map [i,j-1] != 0 && map [i-2,j] != 0 && map [i,j-2] != 0){
+					player.transform.position = new Vector3(i*10,0,j*10);
+					i = mapSizeX;
+					j = mapSizeZ;
+				}
+			}
+		}
+	}
+
+	void enemySpawnLocation(int [,] map, GameObject enemy){
+		int nbrEnemies = Random.Range (10,15);
+		int nbrEnemiesByRoom = Random.Range (1,4);
+		int previousRoomNumber = 0;
+		for (int i=0; i<mapSizeX; i++) {
+			for(int j=0;j<mapSizeZ;j++){
+				if (map [i,j] != 0 && map [i-1,j] != 0 && map [i,j-1] != 0 && nbrEnemies != 0 && nbrEnemiesByRoom != 0
+				    && previousRoomNumber != map [i,j]){
+					Instantiate (enemy,new Vector3(i*10,0,j*10), new Quaternion());
+					nbrEnemies--;
+					nbrEnemiesByRoom--;
+					if(nbrEnemiesByRoom <= 0){
+						previousRoomNumber = map[i,j];
+						Debug.Log ("previousRoomNumber: "+ previousRoomNumber);
+						nbrEnemiesByRoom = Random.Range (1,4);
+					}
+				}
+			}
+		}
+	}
+	
 	void buildMap(int[,] map){
 		for (int i=0; i<mapSizeX; i++) {
 			for(int j=0;j<mapSizeZ;j++){

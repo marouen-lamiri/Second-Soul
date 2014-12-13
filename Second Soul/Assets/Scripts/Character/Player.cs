@@ -9,6 +9,7 @@ public abstract class Player : Character {
 	
 	public ISkill activeSkill1; // protected
 	public  ISkill activeSkill2; // protected
+	public Vector3 position;
 
 	// networking:
 	protected FighterNetworkScript fighterNetworkScript;
@@ -80,7 +81,5 @@ public abstract class Player : Character {
 
 		Physics.Raycast(ray, out hit, 1000);
 		return new Vector3(hit.point.x, hit.point.y, hit.point.z);
-		
-		
 	}	
 }
