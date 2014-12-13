@@ -6,7 +6,10 @@ public class MapGeneration : MonoBehaviour{
 	
 	// Use this for initialization
 	public GameObject wallPrefab;
-	public GameObject enemy;
+	public Enemy enemyPrefab;
+	public Fighter fighter;
+	public Sorcerer sorcerer;
+	private EnemyFactory factory;
 	List<int> listOfWalls;
 	int[,] mapArray;
 	int numberRooms = 10;
@@ -14,12 +17,13 @@ public class MapGeneration : MonoBehaviour{
 	int mapSizeZ = 25;
 	
 	void Start () {
+		factory = new EnemyFactory(enemyPrefab, fighter, sorcerer);
 		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms);
 		GameObject player = GameObject.Find("Fighter");
 		GameObject player2 = GameObject.Find("Sorcerer");
 		playerStartPosition(map, player);
 		playerStartPosition(map, player2);
-		enemySpawnLocation (map, enemy);
+		enemySpawnLocation (map);
 		buildMap (map);
 	}
 	
@@ -42,7 +46,7 @@ public class MapGeneration : MonoBehaviour{
 		}
 	}
 	
-	void enemySpawnLocation(int [,] map, GameObject enemy){
+	void enemySpawnLocation(int [,] map){
 		int nbrEnemies = Random.Range (25,35);
 		int nbrEnemiesByRoom = Random.Range (1,4);
 		int previousRoomNumber = 0;
@@ -53,7 +57,8 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i-2,j] != 98 && map [i,j-2] != 98 && map [i+1,j] != 98 && map [i+2,j] != 98 && map [i,j-1] != 98 && map [i,j-2] != 98
 				    && map [i-1,j-1] != 98 && map [i+1,j+1] != 98){
 					map [i,j] = 98;
-					Instantiate (enemy,new Vector3(i*10,0,j*10), new Quaternion());
+					Vector3 spawnLocation = new Vector3(i*10,0,j*10);
+					factory.spawn(spawnLocation);
 					nbrEnemies--;
 					nbrEnemiesByRoom--;
 					if(nbrEnemiesByRoom == 0){
@@ -80,16 +85,20 @@ public class MapGeneration : MonoBehaviour{
 		Vector3 position = new Vector3 (i*10,0,j*10);
 
 		if (map [i - 1, j] == 0) {
-			Instantiate(wallPrefab, new Vector3(position.x,0,position.z), new Quaternion());
+			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x-5,0,position.z), new Quaternion())as GameObject;
+			wall.transform.parent = GameObject.Find("Walls").transform;
 		}
 		if (map [i + 1, j] == 0) {
-			Instantiate(wallPrefab, new Vector3(position.x+10,0,position.z), new Quaternion());
+			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z), new Quaternion())as GameObject;
+			wall.transform.parent = GameObject.Find("Walls").transform;
 		}
 		if (map [i, j - 1] == 0) {
-			Instantiate(wallPrefab, new Vector3(position.x,0,position.z), Quaternion.Euler (0,90,0));
+			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x,0,position.z-5), Quaternion.Euler (0,90,0))as GameObject;
+			wall.transform.parent = GameObject.Find("Walls").transform;
 		}
 		if (map [i, j + 1] == 0) {
-			Instantiate(wallPrefab, new Vector3(position.x,0,position.z+10), Quaternion.Euler (0,90,0));
+			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,90,0))as GameObject;
+			wall.transform.parent = GameObject.Find("Walls").transform;
 		}
 		
 	}
