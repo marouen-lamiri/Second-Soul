@@ -3,17 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MapGeneration : MonoBehaviour{
-
+	
 	// Use this for initialization
 	public GameObject wallPrefab;
+	public GameObject enemy;
 	List<int> listOfWalls;
 	int[,] mapArray;
 	int numberRooms = 10;
-	int mapSizeX = 50;
-	int mapSizeZ = 50;
-
+	int mapSizeX = 25;
+	int mapSizeZ = 25;
+	
 	void Start () {
 		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms);
+		GameObject player = GameObject.Find("Fighter");
+		GameObject player2 = GameObject.Find("Sorcerer");
+		playerStartPosition(map, player);
+		playerStartPosition(map, player2);
+		enemySpawnLocation (map, enemy);
 		buildMap (map);
 	}
 	
@@ -21,6 +27,44 @@ public class MapGeneration : MonoBehaviour{
 	void Update () {
 		
 	}
+	
+	
+	void playerStartPosition(int [,] map, GameObject player){
+		for (int i=0; i<mapSizeX; i++) {
+			for(int j=0;j<mapSizeZ;j++){
+				if (map [i,j] != 0 && map [i-1,j] != 0 && map [i,j-1] != 0 && map [i-2,j] != 0 && map [i,j-2] != 0 && map [i,j] != 99){
+					map [i,j] = 99;
+					player.transform.position = new Vector3(i*10,0,j*10);
+					i = mapSizeX;
+					j = mapSizeZ;
+				}
+			}
+		}
+	}
+	
+	void enemySpawnLocation(int [,] map, GameObject enemy){
+		int nbrEnemies = Random.Range (25,35);
+		int nbrEnemiesByRoom = Random.Range (1,4);
+		int previousRoomNumber = 0;
+		for (int i=0; i<mapSizeX; i++) {
+			for(int j=0;j<mapSizeZ;j++){
+				if (map [i, j] != 0 && map [i - 1, j] != 0 && map [i, j - 1] != 0 && nbrEnemies != 0 && nbrEnemiesByRoom != 0
+				    && previousRoomNumber != map [i, j] && map [i, j] != 99 && map [i,j] != 98 && map [i-1,j] != 98 && map [i,j-1] != 98 
+				    && map [i-2,j] != 98 && map [i,j-2] != 98 && map [i+1,j] != 98 && map [i+2,j] != 98 && map [i,j-1] != 98 && map [i,j-2] != 98
+				    && map [i-1,j-1] != 98 && map [i+1,j+1] != 98){
+					map [i,j] = 98;
+					Instantiate (enemy,new Vector3(i*10,0,j*10), new Quaternion());
+					nbrEnemies--;
+					nbrEnemiesByRoom--;
+					if(nbrEnemiesByRoom == 0){
+						previousRoomNumber = map[i,j];
+						nbrEnemiesByRoom = Random.Range (1,4);
+					}
+				}
+			}
+		}
+	}
+	
 	void buildMap(int[,] map){
 		for (int i=0; i<mapSizeX; i++) {
 			for(int j=0;j<mapSizeZ;j++){
@@ -30,15 +74,11 @@ public class MapGeneration : MonoBehaviour{
 			}
 		}
 	}
-
+	
 	//Checks all 4 directions
 	void buildWalls (int [,] map,int i,int j){
 		Vector3 position = new Vector3 (i*10,0,j*10);
 
-		//Instantiate(wallPrefab, new Vector3(position.x,0,position.z), Quaternion.Euler (0,90,0));
-		//Instantiate(wallPrefab, new Vector3(position.x,0,position.z), Quaternion.Euler (0,-90,0));
-	//	Instantiate(wallPrefab, new Vector3(position.x,0,position.z), Quaternion.Euler (0,180,0));
-		//Instantiate(wallPrefab, new Vector3(position.x,0,position.z), Quaternion.Euler (0,0,0));
 		if (map [i - 1, j] == 0) {
 			Instantiate(wallPrefab, new Vector3(position.x,0,position.z), new Quaternion());
 		}
@@ -51,9 +91,9 @@ public class MapGeneration : MonoBehaviour{
 		if (map [i, j + 1] == 0) {
 			Instantiate(wallPrefab, new Vector3(position.x,0,position.z+10), Quaternion.Euler (0,90,0));
 		}
-
+		
 	}
-
+	
 	int[,] createDungeonHalls(int[,] map, int sizeX, int sizeZ, int numberRooms){
 		Vector2[] corridorStarts = new Vector2[numberRooms];
 		Vector2[] corridorEnds = new Vector2[numberRooms];
@@ -79,15 +119,15 @@ public class MapGeneration : MonoBehaviour{
 					map[x,z]=(i+1)*-1;
 				}
 			}while(!goodPosition);
-
+			
 			//This segment randomizes the sizes of the squares that make up the corridors
 			int hallSizeX = Random.Range (2,5);//used to randomize width of Z-direction hall
 			int hallSizeZ = Random.Range (2,5);//used to randomize width of X-direction hall
-
+			
 			int xAdjusted;
 			int zAdjusted;
 			for(int x=0; x<Mathf.Abs(corridorEnds[i].x-corridorStarts[i].x); ++x){
-
+				
 				for(int z=0; z<hallSizeZ; ++z){
 					if((corridorEnds[i].x-corridorStarts[i].x)<0){
 						xAdjusted=x*-1;
@@ -107,9 +147,9 @@ public class MapGeneration : MonoBehaviour{
 				}
 			}
 			for(int z=0; z<Mathf.Abs(corridorEnds[i].y-corridorStarts[i].y); ++z){
-
+				
 				for(int x=0; x<hallSizeX; ++x){
-
+					
 					if((corridorEnds[i].x-corridorStarts[i].x)<0){
 						xAdjusted=x*-1;
 					}
@@ -129,7 +169,7 @@ public class MapGeneration : MonoBehaviour{
 			}
 		}
 		string[] text = new string[sizeX];
-
+		
 		for(int i=0;i<sizeX;++i){
 			string line="";
 			for(int j=0; j<sizeZ; ++j){
@@ -140,17 +180,17 @@ public class MapGeneration : MonoBehaviour{
 				line += " ";
 			}
 			text[i]=line;
-
+			
 		}
 		System.IO.File.WriteAllLines("yourtextfile.txt", text);
 		//Debug.Log(line);
 		return map;
-
+		
 	}
-
+	
 	int[,] generateMap(int sizeX, int sizeZ, int squaresToGenerate){
 		int [,] genMap;
-
+		
 		genMap = createSquares(sizeX, sizeZ, squaresToGenerate);
 		numberRooms = FindRooms (genMap, sizeX, sizeZ);
 		if (numberRooms >= 1) {
@@ -158,7 +198,7 @@ public class MapGeneration : MonoBehaviour{
 		}		
 		return genMap;
 	}
-
+	
 	static int[,] createSquares(int sizeX, int sizeZ, int squaresToGenerate){
 		int[,] newMap = new int[sizeX,sizeZ]; // Create empty map with imputted dimensions
 		
@@ -178,7 +218,7 @@ public class MapGeneration : MonoBehaviour{
 		}
 		return newMap;
 	}
-
+	
 	// Loop through the dungeon map and find rooms created by touching squares
 	static int FindRooms(int[,] genMap, int sizeX, int sizeZ){
 		
@@ -219,3 +259,4 @@ public class MapGeneration : MonoBehaviour{
 		return nbrRoomFound;
 	}
 }
+
