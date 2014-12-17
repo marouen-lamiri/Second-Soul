@@ -7,6 +7,10 @@ public class MapGeneration : MonoBehaviour{
 	// Use this for initialization
 	public GameObject wallPrefab;
 	public GameObject obstaclePrefab;
+	public GameObject torchPrefab;
+	public GameObject crystalPrefab;
+	public GameObject plantPrefab;
+	public GameObject statuePrefab;
 	public Enemy enemyPrefab;
 	public Fighter fighter;
 	public Sorcerer sorcerer;
@@ -19,12 +23,9 @@ public class MapGeneration : MonoBehaviour{
 	
 	void Start () {
 		factory = new EnemyFactory(enemyPrefab, fighter, sorcerer);
-		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms);
 		GameObject player = GameObject.Find("Fighter");
 		GameObject player2 = GameObject.Find("Sorcerer");
-		playerStartPosition(map, player);
-		playerStartPosition(map, player2);
-		enemySpawnLocation (map);
+		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, player, player2);
 		buildMap (map);
 	}
 	
@@ -86,7 +87,7 @@ public class MapGeneration : MonoBehaviour{
 		Vector3 position = new Vector3 (i*10,0,j*10);
 
 		if (map [i - 1, j] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x-5,0,position.z), new Quaternion())as GameObject;
+			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x-5,0,position.z), Quaternion.Euler (0,180,0))as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 		}
 		if (map [i + 1, j] == 0) {
@@ -98,7 +99,7 @@ public class MapGeneration : MonoBehaviour{
 			wall.transform.parent = GameObject.Find("Walls").transform;
 		}
 		if (map [i, j + 1] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,90,0))as GameObject;
+			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,-90,0))as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 		}
 		
@@ -198,30 +199,43 @@ public class MapGeneration : MonoBehaviour{
 		
 	}
 	
-	int[,] generateMap(int sizeX, int sizeZ, int squaresToGenerate){
+	int[,] generateMap(int sizeX, int sizeZ, int squaresToGenerate, GameObject player, GameObject player2){
 		int [,] genMap;
 		
 		genMap = createSquares(sizeX, sizeZ, squaresToGenerate);
 		numberRooms = FindRooms (genMap, sizeX, sizeZ);
 		if (numberRooms >= 1) {
 			genMap = createDungeonHalls(genMap, sizeX,sizeZ,numberRooms);
-			generateObstacles (genMap, obstaclePrefab);
+			genMap = generateObstacles (genMap, torchPrefab, false);
+			genMap = generateObstacles (genMap, crystalPrefab, false);
+			genMap = generateObstacles (genMap, plantPrefab, false);
+			genMap = generateObstacles (genMap, obstaclePrefab, true);
+			genMap = generateObstacles (genMap, statuePrefab, false);
+			playerStartPosition(genMap, player);
+			playerStartPosition(genMap, player2);
+			enemySpawnLocation (genMap);
 		}		
 		return genMap;
 	}
 
-	void generateObstacles (int [,] map, GameObject obstacle){
-		int nbrObstacles = Random.Range (15,25);
-		int nbrObstaclesByRoom = Random.Range (4,8);
+	int[,] generateObstacles (int [,] map, GameObject obstacle, bool type){
+		int nbrObstacles = Random.Range (10,20);
+		int nbrObstaclesByRoom = Random.Range (4,12);
 		int previousRoomNumber = 0;
-		for (int i = 0; i < mapSizeX; i = Random.Range(i,i+5)) {
-			for (int j = 0; j < mapSizeX; j = Random.Range(j,j+7)) {
-				if (map [i, j] != 0 && map [i - 1, j] != 0 && map [i, j - 1] != 0 && map [i - 1, j - 1] != 0 && map [i + 1, j + 1] != 0  && nbrObstacles != 0 
+		for (int i = 0; i < mapSizeX; i = Random.Range(i,i+3)) {
+			for (int j = 0; j < mapSizeX; j = Random.Range(j,j+3)) {
+				if (map [i,j] != 0 && map [i-1, j] != 0 && map [i,j-1] != 0 && map [i-1,j-1] != 0 && map [i+1,j+1] != 0  && nbrObstacles != 0 
+				    && map [i-1, j+1] != 0 && map [i+1,j-1] != 0 && map [i-2,j+1] != 0 && map [i+2,j-1] != 0
 				    && nbrObstaclesByRoom != 0 && previousRoomNumber != map [i, j] && map [i, j] != 99 && map [i,j] != 98 && map [i-1,j] != 98 
-				    && map [i,j-1] != 98 && map [i-2,j] != 98 && map [i,j-2] != 98 && map [i+1,j] != 98 && map [i+2,j] != 98 && map [i,j-1] != 98 
-				    && map [i,j-2] != 98 && map [i-1,j-1] != 98 && map [i+1,j+1] != 98) {
+				    && map [i,j-1] != 98 && map [i+1,j] != 98 && map [i,j-1] != 98 
+				    && map [i-1,j-1] != 98 && map [i+1,j+1] != 98 && map[i,j] != 90) {
 					map[i,j] = 90;
-					Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), new Quaternion());
+					if(type){
+						Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), new Quaternion());
+					}
+					else {
+						Instantiate (obstacle, new Vector3(i*10, 0, j*10), new Quaternion());
+					}
 					nbrObstacles--;
 					nbrObstaclesByRoom--;
 					if(nbrObstaclesByRoom <= 0){
@@ -232,6 +246,7 @@ public class MapGeneration : MonoBehaviour{
 				}
 			}
 		}
+		return map;
 	}
 	
 	static int[,] createSquares(int sizeX, int sizeZ, int squaresToGenerate){
