@@ -95,7 +95,7 @@ public abstract class Character : MonoBehaviour {
 		//Debug.Log (dir);
 		//Debug.Log (currentWaypoint);
 		//transform.LookAt (target.transform.position);
-		meshAgent.SetDestination(target.transform.position);
+		//meshAgent.SetDestination(target.transform.position);
 		//controller.SimpleMove (transform.forward * speed);
 		//controller.SimpleMove (dir * speed);
 		

@@ -89,7 +89,7 @@ public class Enemy : Character {
 	}
 
 	public void loseAggro(){
-			meshAgent.Stop(true);
+			//meshAgent.Stop(true);
 			hasAggro = false;
 			animateIdle();
 	}

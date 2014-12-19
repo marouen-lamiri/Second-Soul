@@ -5,6 +5,7 @@ public class ClickToMove : MonoBehaviour {
 
 	public Character player;
 	private Vector3 position;
+	private Vector3 nextPosition; // used for pathfinding
 
 	public static bool busy;
 
@@ -47,7 +48,7 @@ public class ClickToMove : MonoBehaviour {
 			if(hit.collider.tag != "Player" && hit.collider.tag != "Enemy"){
 				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 			}
-			//Debug.Log(position);
+			setNextPosition(position);
 		}
 	}
 
@@ -69,4 +70,15 @@ public class ClickToMove : MonoBehaviour {
 			player.animateIdle();
 		}
 	}
+
+	void setNextPosition(Vector3 position){
+		nextPosition = position;
+		Debug.Log (nextPosition);
+	}
+
+	public Vector3 returnPosition(){
+		return nextPosition;
+	}
+
+
 }

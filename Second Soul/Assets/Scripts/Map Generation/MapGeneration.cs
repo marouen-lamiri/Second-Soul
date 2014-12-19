@@ -9,7 +9,6 @@ public class MapGeneration : MonoBehaviour{
 	public GameObject obstaclePrefab;
 	public GameObject torchPrefab;
 	public GameObject crystalPrefab;
-	public GameObject plantPrefab;
 	public GameObject statuePrefab;
 	public Enemy enemyPrefab;
 	public Fighter fighter;
@@ -208,7 +207,6 @@ public class MapGeneration : MonoBehaviour{
 			genMap = createDungeonHalls(genMap, sizeX,sizeZ,numberRooms);
 			genMap = generateObstacles (genMap, torchPrefab, false);
 			genMap = generateObstacles (genMap, crystalPrefab, false);
-			genMap = generateObstacles (genMap, plantPrefab, false);
 			genMap = generateObstacles (genMap, obstaclePrefab, true);
 			genMap = generateObstacles (genMap, statuePrefab, false);
 			playerStartPosition(genMap, player);
