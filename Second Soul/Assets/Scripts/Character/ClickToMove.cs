@@ -5,7 +5,6 @@ public class ClickToMove : MonoBehaviour {
 
 	public Character player;
 	private Vector3 position;
-	private Vector3 nextPosition; // used for pathfinding
 
 	public static bool busy;
 
@@ -32,7 +31,7 @@ public class ClickToMove : MonoBehaviour {
 		{
 		}
 	}
-	
+
 	public void move () {
 		//Locate player click position
 		locatePosition ();
@@ -48,7 +47,13 @@ public class ClickToMove : MonoBehaviour {
 			if(hit.collider.tag != "Player" && hit.collider.tag != "Enemy"){
 				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 			}
-			setNextPosition(position);
+			checkTrajectory(hit, position);
+		}
+	}
+
+	public void checkTrajectory(RaycastHit hit, Vector3 position){
+		if (hit.collider.tag == "Obstacle") {
+			findClosest(position);
 		}
 	}
 
@@ -71,14 +76,31 @@ public class ClickToMove : MonoBehaviour {
 		}
 	}
 
-	void setNextPosition(Vector3 position){
-		nextPosition = position;
-		Debug.Log (nextPosition);
+	GameObject findClosest(Vector3 nextPosition){
+		GameObject[] Nodes;
+		Nodes = GameObject.FindGameObjectsWithTag("Node"); // an array of every node in the game
+		GameObject player = GameObject.Find("Fighter");
+		GameObject closest = GameObject.Find("Node");
+		float distance = Mathf.Infinity;
+		Vector3 position = player.transform.position;
+		foreach (GameObject Node in Nodes) {
+			Vector3 diff = Node.transform.position - position;
+			float curDistance = diff.sqrMagnitude;
+			if(curDistance - distance < 2 || distance - curDistance < 2){
+				if (curDistance < distance) {
+					closest = Node;
+					distance = curDistance;
+				}
+			}
+		}
+		Vector3 diff2 = nextPosition - position;
+		float curDistance2 = diff2.sqrMagnitude;
+		if(curDistance2 - distance < 2 || distance - curDistance2 < 2){
+			if (curDistance2 < distance) {
+				closest = null;
+				distance = curDistance2;
+			}
+		}
+		return closest;
 	}
-
-	public Vector3 returnPosition(){
-		return nextPosition;
-	}
-
-
 }
