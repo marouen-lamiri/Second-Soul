@@ -43,7 +43,7 @@ public abstract class Player : Character {
 			if(target != null){
 				if ((Input.GetButtonDown ("activeSkill1") || Input.GetButton ("activeSkill1")) && activeSkill1 != null){
 					if (inAttackRange()){
-						meshAgent.Stop(true);
+						//meshAgent.Stop(true);
 						//attack ();
 						activeSkill1.setCaster(this);
 						activeSkill1.useSkill(target);

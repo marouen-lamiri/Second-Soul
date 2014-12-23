@@ -4,7 +4,7 @@ using System.Collections;
 public abstract class Character : MonoBehaviour {
 	public CharacterController controller;
 	
-	public NavMeshAgent meshAgent;
+	//public NavMeshAgent meshAgent;
 	private int currentWaypoint;
 	
 	public bool playerEnabled;

@@ -50,7 +50,7 @@ public class NavClickToMove : MonoBehaviour {
 	void moveToPosition(){
 		//Player moving
 		if (Vector3.Distance (transform.position, position) > 1) {
-			player.meshAgent.SetDestination(position);
+			//player.meshAgent.SetDestination(position);
 			/*Quaternion newRotation = Quaternion.LookRotation (position - transform.position);
 			
 			newRotation.x = 0;
