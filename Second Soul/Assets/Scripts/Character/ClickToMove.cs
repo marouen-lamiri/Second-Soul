@@ -6,12 +6,15 @@ public class ClickToMove : MonoBehaviour {
 
 	public Character player;
 	private Vector3 position;
-	private Vector3 midPosition;
+	private Vector3 nextPosition;
 	private float timer = 0f; //checks if the player input has been put very recently
-	GameObject[] path = new GameObject[20];
-	Node node;
+	PathFinidng pathing;
 
 	public static bool busy;
+
+	void awake(){
+		pathing = GetComponent<PathFinidng>();
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -57,18 +60,16 @@ public class ClickToMove : MonoBehaviour {
 			Debug.DrawLine(transform.position, position, Color.red, 50f);
 //			Debug.Log ("Initial Position: "+ transform.position);
 //			Debug.Log ("Ending Position: "+ position);
-			checkTrajectory(ray, hit, position);
+			setCheckTrajectory(position);
 		}
 	}
 
-	public void checkTrajectory(Ray ray, RaycastHit hit, Vector3 position){
-		if(Physics.Raycast(ray, out hit, 1000)){
-			if (hit.collider.tag == "Obstacle") {
-				//position = findClosest(position).transform.position;
-				//findPath(transform.position, position, hit, ray);
-				Debug.Log("Came here!");
-			}
-		}
+	void setCheckTrajectory(Vector3 position){
+		nextPosition = position;
+	}
+
+	public Vector3 CheckTrajectory(){
+		return nextPosition;
 	}
 
 	void moveToPosition(){
