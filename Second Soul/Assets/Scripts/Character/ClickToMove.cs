@@ -8,12 +8,11 @@ public class ClickToMove : MonoBehaviour {
 	private Vector3 position;
 	private Vector3 nextPosition;
 	private float timer = 0f; //checks if the player input has been put very recently
-	PathFinidng pathing;
 
 	public static bool busy;
 
 	void awake(){
-		pathing = GetComponent<PathFinidng>();
+
 	}
 
 	// Use this for initialization
@@ -58,8 +57,6 @@ public class ClickToMove : MonoBehaviour {
 				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 			}
 			Debug.DrawLine(transform.position, position, Color.red, 50f);
-//			Debug.Log ("Initial Position: "+ transform.position);
-//			Debug.Log ("Ending Position: "+ position);
 			setCheckTrajectory(position);
 		}
 	}
@@ -90,55 +87,4 @@ public class ClickToMove : MonoBehaviour {
 			player.animateIdle();
 		}
 	}
-
-//	GameObject findClosest(Vector3 nextPosition, int iteration, RaycastHit hit, Ray ray){
-//		GameObject[] Nodes;
-//		Nodes = GameObject.FindGameObjectsWithTag("Node"); // an array of every node in the game
-//		GameObject player = GameObject.Find("Fighter");
-//		GameObject closest = GameObject.Find("Node");
-//		float distance = Mathf.Infinity;
-//		Vector3 position = player.transform.position;
-//		foreach (GameObject Node in Nodes) {
-//			Vector3 diff = Node.transform.position - position;
-//			float curDistance = diff.sqrMagnitude;
-//			if((curDistance - distance < 5 || distance - curDistance < 5) && arrayChecker (path, Node)){
-//				if (curDistance < distance) {
-//					closest = Node;
-//					path[iteration]= Node;
-//					distance = curDistance;
-//					//Debug.Log ("Current distance between node and position is: " + curDistance);
-//				}
-//			}
-//			Vector3 diff2 = nextPosition - position;
-//			float curDistance2 = diff2.sqrMagnitude;
-//			if (curDistance2 < curDistance) {
-//				path[iteration]= null;
-//				closest = null;
-//				distance = curDistance2;
-//			}
-//		}
-//		return closest;
-//	}
-//
-//	bool arrayChecker (GameObject[] array, GameObject node){
-//		for (int i = 0; i<20; i++) {
-//			if(array[i] == node){
-//				return false;
-//			}
-//		}
-//		return true;
-//	}
-//
-//	void findPath(Vector3 sPosition, Vector3 ePosition, RaycastHit hit,Ray ray){
-//		Vector3[] listOfPosition = new Vector3[11];
-//		int i = 0;
-//		GameObject previous = null;
-//		while(i<10 && findClosest (ePosition, i, hit, ray) != null ){
-//			previous =  findClosest (ePosition, i, hit, ray);
-//			midPosition = previous.transform.position;
-//			listOfPosition[i] = midPosition;
-//			Debug.Log ("midpoint Position: "+ listOfPosition[i]);
-//			i++;
-//		}
-//	}
 }

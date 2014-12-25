@@ -84,8 +84,7 @@ public abstract class Character : MonoBehaviour {
 	public void chaseTarget(){
 		chasing = true;
 		animateRun();
-		//findPath();
-		
+
 		/*if(currentWaypoint >= path.vectorPath.Count){
 			return;
 		}*/
@@ -102,6 +101,8 @@ public abstract class Character : MonoBehaviour {
 		/*if(Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]) < 2f){
 			currentWaypoint++;
 		}*/
+
+
 	}
 	
 	public void attack(){

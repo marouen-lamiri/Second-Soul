@@ -4,7 +4,7 @@ using System.Collections;
 public class Fighter : Player {
 	//Variable declaration	
 	//FighterNetworkScript fighterNetworkScript; // is "already serialized" in parent class Player.cs.
-	
+
 	// Use this for initialization
 	void Start () {
 		initializePlayer();

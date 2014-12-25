@@ -10,7 +10,6 @@ public class Grid : MonoBehaviour {
 	public float nodeRadius;
 	public GameObject player;
 	Node[,] grid;
-	public List<Node> path;
 
 	float nodeDiameter;
 	int gridSizeX, gridSizeY;
@@ -22,33 +21,32 @@ public class Grid : MonoBehaviour {
 		createGrid();
 	}
 
-	//Retrieve a list of Nodes neighbouring nodes
-	public List<Node> getNeighbours(Node node){
+	public List<Node> getNeighbours(Node node) {
 		List<Node> neighbours = new List<Node>();
-
-		for(int x = -1; x <=1; x++){
-			for(int y = -1; y <= 1; y++){
-				if(x == 0 && y ==0){
-					continue; // skip this iteration
-				}
-				int checkX = node.gridX+x;
-				int checkY = node.gridY+y;
-
-				//Check if its in the grid world
-				if(checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY){
-					neighbours.Add (grid[checkX,checkY]);
+		
+		for (int x = -1; x <= 1; x++) {
+			for (int y = -1; y <= 1; y++) {
+				if (x == 0 && y == 0)
+					continue;
+				
+				int checkX = node.gridX + x;
+				int checkY = node.gridY + y;
+				
+				if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY) {
+					neighbours.Add(grid[checkX,checkY]);
 				}
 			}
 		}
+		
 		return neighbours;
 	}
 
 	public Node nodeFromWorld(Vector3 worldPosition){
-		float percentX = (worldPosition.x * gridWorldSize.x/2)/ gridWorldSize.x;
-		float percentY = (worldPosition.z * gridWorldSize.y/2)/ gridWorldSize.y;
+		float percentX = (worldPosition.x + gridWorldSize.x/2) / gridWorldSize.x;
+		float percentY = (worldPosition.z + gridWorldSize.y/2) / gridWorldSize.y;
 		percentX = Mathf.Clamp01(percentX);
 		percentY = Mathf.Clamp01(percentY);
-
+		
 		int x = Mathf.RoundToInt((gridSizeX-1) * percentX);
 		int y = Mathf.RoundToInt((gridSizeY-1) * percentY);
 		return grid[x,y];
@@ -69,27 +67,16 @@ public class Grid : MonoBehaviour {
 		}
 	}
 
-	void OnDrawGizmos(){
-		Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x,0, gridWorldSize.y));
+	public List<Node> path;
+	void OnDrawGizmos() {
+		Gizmos.DrawWireCube(transform.position,new Vector3(gridWorldSize.x,1,gridWorldSize.y));
 		
-		if(grid != null){
-			Node playerNode = nodeFromWorld(player.transform.position);
-			foreach(Node n in grid){
-				if(n.walkable) 
-				{
-					Gizmos.color = Color.white;
-				}
-				else{
-					Gizmos.color = Color.red;
-				}
-				if(playerNode == n){
-					Gizmos.color = Color.cyan;
-				}
-				if(path != null){
-					if(path.Contains(n)){
+		if (grid != null) {
+			foreach (Node n in grid) {
+				Gizmos.color = (n.walkable)?Color.white:Color.red;
+				if (path != null)
+					if (path.Contains(n))
 						Gizmos.color = Color.black;
-					}
-				}
 				Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter-.1f));
 			}
 		}

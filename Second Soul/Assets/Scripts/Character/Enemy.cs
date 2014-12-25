@@ -16,9 +16,7 @@ public class Enemy : Character {
 		//health = 100;
 		health = maxHealth;
 		energy = maxEnergy;
-		
 		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
-		
 	}
 
 	// Update is called once per frame
@@ -89,9 +87,9 @@ public class Enemy : Character {
 	}
 
 	public void loseAggro(){
-			//meshAgent.Stop(true);
-			hasAggro = false;
-			animateIdle();
+		//meshAgent.Stop(true);
+		hasAggro = false;
+		animateIdle();
 	}
 	
 	/*private void attack(){
