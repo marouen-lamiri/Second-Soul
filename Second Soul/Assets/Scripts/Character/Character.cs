@@ -4,6 +4,49 @@ using System.Collections;
 public abstract class Character : MonoBehaviour {
 	public CharacterController controller;
 	
+	public int level; // only public for now to see level in inspector
+	
+	int armor;
+	int fireResistance;
+	int coldResistance;
+	int lightningtResistance;
+	
+	float accuracy;
+	float attackSpeed;
+	
+	float castSpeed;
+	float cdr; // cooldown reduction
+	
+	float criticalChance;
+	float criticalDamage;
+	
+	float spellCriticalChance;
+	float spellCriticalDamage;
+	
+	float spellPower;
+	
+	float healthRegen;
+	float energyRegen;
+	
+	/*
+	fighter:
+	- berserker
+	- knight
+	- monk
+	
+	sorcerer:
+	- mage
+	- priest
+	- druid
+	
+	enemy:
+	- golem
+	- imp
+	
+	
+	*/
+	
+	
 	//public NavMeshAgent meshAgent;
 	private int currentWaypoint;
 	
@@ -71,6 +114,10 @@ public abstract class Character : MonoBehaviour {
 	}
 
 	public virtual void loseEnergy(float energy){
+
+	}
+	
+	public virtual void gainExperience(int experience){
 
 	}
 

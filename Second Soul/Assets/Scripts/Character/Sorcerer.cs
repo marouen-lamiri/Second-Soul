@@ -4,6 +4,10 @@ using System.Collections;
 public class Sorcerer : Player {
 
 	//Variable declaration
+	int intelligence; // spell power, spell crit damage
+	int wisdom; // cast speed/cooldown, spell crit chance
+	int spirit; // total energy/regen
+	
 	public Fighter fighter;
 	
 	// Use this for initialization

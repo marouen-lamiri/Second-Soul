@@ -97,10 +97,14 @@ public class Storage : MonoBehaviour {
 				detectItemActions();
 			}
 			//detectMouseAction();
+			//remove appropriate when navigaiton finalized
 			NavClickToMove.busy = true;
+			ClickToMove.busy = true;
 		}
 		else if(!itemPickedUp){
+			//remove appropriate when navigaiton finalized
 			NavClickToMove.busy = false;
+			ClickToMove.busy = false;
 		}
 		
 	}
@@ -233,7 +237,9 @@ public class Storage : MonoBehaviour {
 	protected void resetTargetItem(){
 		itemPickedUp = false;
 		targetItem = null;
+		//remove appropriate when navigaiton finalized
 		NavClickToMove.busy = false;
+		ClickToMove.busy = false;
 	}
 	
 	protected bool firstAvailableInventorySlots( out int startX, out int startY, Item item ){

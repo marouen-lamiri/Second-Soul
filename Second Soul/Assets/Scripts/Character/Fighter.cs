@@ -2,12 +2,19 @@
 using System.Collections;
 
 public class Fighter : Player {
-	//Variable declaration	
+	//Variable declaration
+	
+	int strenght; // base damage, armor, critt damage
+	int dexterity; // attack speed, crit chance, accuracy
+	int endurance; // health, resistances, health regen
+	
+	
 	//FighterNetworkScript fighterNetworkScript; // is "already serialized" in parent class Player.cs.
 
 	// Use this for initialization
 	void Start () {
 		initializePlayer();
+		initializeLevel();
 		playerEnabled=true;
 		health = maxHealth;
 		energy = maxEnergy;
