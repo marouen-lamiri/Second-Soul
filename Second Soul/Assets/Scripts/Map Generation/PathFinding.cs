@@ -13,10 +13,10 @@ public class PathFinding : MonoBehaviour {
 	}
 	
 	void LateUpdate() {
-		FindPath(seeker.transform.position,target.transform.position);
+		//findPath(seeker.transform.position,target.transform.position);
 	}
 	
-	void FindPath(Vector3 startPos, Vector3 targetPos) {
+	public void findPath(Vector3 startPos, Vector3 targetPos) {
 		Node startNode = grid.nodeFromWorld(startPos);
 		Node targetNode = grid.nodeFromWorld(targetPos);
 		
@@ -37,6 +37,7 @@ public class PathFinding : MonoBehaviour {
 			
 			if (currentNode == targetNode) {
 				RetracePath(startNode,targetNode);
+				grid.worldFromNode(grid.path);
 				return;
 			}
 

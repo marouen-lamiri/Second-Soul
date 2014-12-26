@@ -8,11 +8,14 @@ public class ClickToMove : MonoBehaviour {
 	private Vector3 position;
 	private Vector3 nextPosition;
 	private float timer = 0f; //checks if the player input has been put very recently
+	public Grid grid;
+	public PathFinding pathing;
 
 	public static bool busy;
 
 	void awake(){
-
+		grid = GetComponent<Grid>();
+		pathing = GetComponent<PathFinding>();
 	}
 
 	// Use this for initialization
@@ -57,12 +60,8 @@ public class ClickToMove : MonoBehaviour {
 				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 			}
 			Debug.DrawLine(transform.position, position, Color.red, 50f);
-			setCheckTrajectory(position);
+			pathing.findPath(transform.position, position);
 		}
-	}
-
-	void setCheckTrajectory(Vector3 position){
-		nextPosition = position;
 	}
 
 	public Vector3 CheckTrajectory(){

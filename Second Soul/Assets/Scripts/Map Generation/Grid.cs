@@ -50,8 +50,19 @@ public class Grid : MonoBehaviour {
 		int x = Mathf.RoundToInt((gridSizeX-1) * percentX);
 		int y = Mathf.RoundToInt((gridSizeY-1) * percentY);
 		return grid[x,y];
+	}
 
-
+	//Creates a list of all the position in a path using node path
+	public Vector3[] worldFromNode(List<Node> node){
+		Vector3[] path = new Vector3[100];
+		int x, y;
+		for(int i = 0; i < node.Count; i++){
+			x = node[i].gridX;
+			y = node[i].gridY;
+			path[i] = new Vector3(x/nodeDiameter + nodeDiameter, 0, y/nodeDiameter + nodeDiameter);
+			Debug.Log("The next position is: " + path[i]);
+		}
+		return path;
 	}
 
 	void createGrid(){
