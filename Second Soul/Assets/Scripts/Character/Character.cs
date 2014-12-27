@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public abstract class Character : MonoBehaviour {
 	public CharacterController controller;
+	public Grid grid;
+	public PathFinding pathing;
+	private List<Vector3> path;
 	
 	public int level; // only public for now to see level in inspector
 	
@@ -237,7 +241,7 @@ public abstract class Character : MonoBehaviour {
 		//Debug.Log (currentWaypoint);
 		//transform.LookAt (target.transform.position);
 		//meshAgent.SetDestination(target.transform.position);
-		//controller.SimpleMove (transform.forward * speed);
+		controller.SimpleMove (transform.forward * speed);
 		//controller.SimpleMove (dir * speed);
 		
 		/*if(Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]) < 2f){

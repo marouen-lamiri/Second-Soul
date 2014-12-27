@@ -6,7 +6,7 @@ public class ClickToMove : MonoBehaviour {
 
 	public Character player;
 	private Vector3 position;
-	private Vector3 nextPosition;
+	private List<Vector3> nextPositions;
 	private float timer = 0f; //checks if the player input has been put very recently
 	public Grid grid;
 	public PathFinding pathing;
@@ -31,7 +31,7 @@ public class ClickToMove : MonoBehaviour {
 			if(!player.chasing && !player.actionLocked()){
 				if(Input.GetMouseButton(0)&& timer <= 0)
 				{
-					timer = 0.5f;
+					timer = 1f;
 					//Locate where the player clicked on the terrain
 					locatePosition();
 				}
@@ -57,15 +57,21 @@ public class ClickToMove : MonoBehaviour {
 
 		if(Physics.Raycast(ray, out hit, 1000)){
 			if(hit.collider.tag != "Player" && hit.collider.tag != "Enemy"){
-				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+					position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 			}
 			Debug.DrawLine(transform.position, position, Color.red, 50f);
 			pathing.findPath(transform.position, position);
+			setTrajectory(grid.worldFromNode(grid.path));
 		}
 	}
 
-	public Vector3 CheckTrajectory(){
-		return nextPosition;
+	public List<Vector3> CheckTrajectory(){
+		return nextPositions;
+	}
+
+	public void setTrajectory(List<Vector3> path){
+		nextPositions = path;
+		Debug.Log (nextPositions.Count);
 	}
 
 	void moveToPosition(){

@@ -53,13 +53,12 @@ public class Grid : MonoBehaviour {
 	}
 
 	//Creates a list of all the position in a path using node path
-	public Vector3[] worldFromNode(List<Node> node){
-		Vector3[] path = new Vector3[100];
+	public List<Vector3> worldFromNode(List<Node> node){
+		List<Vector3> path = new List<Vector3>();
 		int x, y;
+		float percentX, percentY;
 		for(int i = 0; i < node.Count; i++){
-			x = node[i].gridX;
-			y = node[i].gridY;
-			path[i] = new Vector3(x/nodeDiameter + nodeDiameter, 0, y/nodeDiameter + nodeDiameter);
+			path.Add(new Vector3(node[i].worldPosition.x , 0, node[i].worldPosition.z));
 			Debug.Log("The next position is: " + path[i]);
 		}
 		return path;
