@@ -26,6 +26,10 @@ public class Sorcerer : Player {
 		playerLogic ();
 	}
 
+	public override void levelUp(){
+		Debug.Log("test");
+	}
+	
 	public override bool isDead(){
 		return fighter.isDead ();
 	}

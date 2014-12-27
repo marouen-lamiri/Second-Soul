@@ -3,29 +3,6 @@ using System.Collections;
 
 public abstract class Player : Character {
 
-	/*
-	*exponential function
-	1-2: 2000
-	2-3: 4000
-	
-	
-	1-2
-	totalExp: 1500
-	totalExperienceToNextLevel: 2000
-	
-	2-3
-	totalExp: 3000
-	totalExperienceToNextLevel: 6000
-	
-	
-	
-	currentLevel: 2
-	currentExp: 1000
-	expToNextLvl: 4000
-	
-	
-	*/
-
 	//variable declaration
 	float baseFactorXP = 1.5f;
 	public int totalXP; // total experience --remove public
@@ -50,6 +27,8 @@ public abstract class Player : Character {
 	
 	}
 	
+	public abstract void levelUp();
+	
 	protected void initializePlayer () {
 		target = null;
 		startPosition = transform.position;
@@ -73,6 +52,7 @@ public abstract class Player : Character {
 	public override void gainExperience(int experience){
 		totalXP += experience;
 		if(hasLeveled()){
+			levelUp();
 			calculateLevel();
 			calculateNextLevelXP();
 		}
@@ -83,10 +63,11 @@ public abstract class Player : Character {
 	}
 	
 	void calculateNextLevelXP(){
-		nextLevelXP = (int)(Mathf.Pow(baseFactorXP,(level+1)))*100;
+		nextLevelXP = (int)((Mathf.Pow(baseFactorXP,(level+1)))*100);
 	}
 	
 	bool hasLeveled(){
+		Debug.Log(totalXP >= nextLevelXP);
 		return totalXP >= nextLevelXP;
 	}
 	
