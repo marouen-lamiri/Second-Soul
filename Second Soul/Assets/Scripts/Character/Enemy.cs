@@ -4,16 +4,24 @@ using System.Collections;
 public class Enemy : Character {
 	
 	//Variable declaration
+	public int experienceWorth;
+	public int experienceBase;
+	
 	public Sorcerer sorcerer;
 	public float aggroRange;
 	public bool hasAggro;
+	
+	public bool xpGiven;
 	
 	ISkill activeSkill1;
 	
 	
 	// Use this for initialization
 	void Start (){
+		experienceBase = 25;
+		xpGiven = false;
 		//health = 100;
+		level = target.level;
 		health = maxHealth;
 		energy = maxEnergy;
 		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
@@ -28,8 +36,14 @@ public class Enemy : Character {
 		} 
 		else {
 			dieMethod();
+			giveXP();
 			destroySelf();
 		}
+	}
+	
+	void LateUpdate() {
+		level = target.level;
+		calculateXPWorth();
 	}
 
 	public void enemyAI(){
@@ -90,6 +104,19 @@ public class Enemy : Character {
 		//meshAgent.Stop(true);
 		hasAggro = false;
 		animateIdle();
+	}
+	
+	void calculateXPWorth(){
+		experienceWorth = level * experienceBase;
+	}
+	
+	void giveXP(){
+		if(!xpGiven){
+			Debug.Log (experienceWorth);
+			target.gainExperience(experienceWorth);
+			//sorcerer.gainExperience(experienceWorth);
+		}
+		xpGiven = true;
 	}
 	
 	/*private void attack(){

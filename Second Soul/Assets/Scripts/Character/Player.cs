@@ -3,12 +3,16 @@ using System.Collections;
 
 public abstract class Player : Character {
 
-	//variable declaration	
+	//variable declaration
+	float baseFactorXP = 1.5f;
+	public int totalXP; // total experience --remove public
+	public int nextLevelXP; // xp need for next level --remove public
+	
 	public bool attacking;
 	//private Vector3 castPosition;
 	
 	public ISkill activeSkill1; // protected
-	public  ISkill activeSkill2; // protected
+	public ISkill activeSkill2; // protected
 
 	// networking:
 	protected FighterNetworkScript fighterNetworkScript;
@@ -23,9 +27,17 @@ public abstract class Player : Character {
 	
 	}
 	
+	public abstract void levelUp();
+	
 	protected void initializePlayer () {
 		target = null;
 		startPosition = transform.position;
+	}
+	
+	protected void initializeLevel(){
+		totalXP = 200;
+		calculateLevel();
+		calculateNextLevelXP();
 	}
 	
 	protected void playerLogic () {
@@ -35,6 +47,28 @@ public abstract class Player : Character {
 		else{
 			dieMethod();
 		}
+	}
+	
+	public override void gainExperience(int experience){
+		totalXP += experience;
+		if(hasLeveled()){
+			levelUp();
+			calculateLevel();
+			calculateNextLevelXP();
+		}
+	}
+	
+	void calculateLevel(){
+		level = (int)(Mathf.Log ((float)totalXP/100f)/Mathf.Log(baseFactorXP));
+	}
+	
+	void calculateNextLevelXP(){
+		nextLevelXP = (int)((Mathf.Pow(baseFactorXP,(level+1)))*100);
+	}
+	
+	bool hasLeveled(){
+		Debug.Log(totalXP >= nextLevelXP);
+		return totalXP >= nextLevelXP;
 	}
 	
 	protected void attackLogic(){

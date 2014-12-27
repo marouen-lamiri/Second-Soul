@@ -4,6 +4,10 @@ using System.Collections;
 public class Sorcerer : Player {
 
 	//Variable declaration
+	int intelligence; // spell power, spell crit damage
+	int wisdom; // cast speed/cooldown, spell crit chance
+	int spirit; // total energy/regen
+	
 	public Fighter fighter;
 	
 	// Use this for initialization
@@ -22,6 +26,10 @@ public class Sorcerer : Player {
 		playerLogic ();
 	}
 
+	public override void levelUp(){
+		Debug.Log("test");
+	}
+	
 	public override bool isDead(){
 		return fighter.isDead ();
 	}
