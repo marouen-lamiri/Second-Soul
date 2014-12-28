@@ -71,18 +71,18 @@ public abstract class Character : MonoBehaviour {
 	
 	/*
 	fighter:
-	- berserker
-	- knight
-	- monk
+	- berserker // primary: strength; secondary: dexterity
+	- knight // primary: endurance; secondary: strength
+	- monk // primary: dexterity; secondary: endurance
 	
 	sorcerer:
-	- mage
-	- priest
-	- druid
+	- mage // primary: intelligence; secondary: wisdom
+	- priest // primary: spirit; secondary: intelligence
+	- druid // primary: wisdom; secondary: spirit
 	
 	enemy:
-	- golem
-	- imp
+	- golem // strong, tanky, melee
+	- imp // weak & numerous, squishy, ranged
 	
 	
 	*/

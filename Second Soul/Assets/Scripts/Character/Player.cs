@@ -16,10 +16,12 @@ public abstract class Player : Character {
 
 	// networking:
 	protected FighterNetworkScript fighterNetworkScript;
+	protected SorcererNetworkScript sorcererNetworkScript;
 	
 	// Use this for initialization
 	void Start () {
 		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
+		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
 	}
 	
 	// Update is called once per frame
@@ -35,7 +37,7 @@ public abstract class Player : Character {
 	}
 	
 	protected void initializeLevel(){
-		totalXP = 200;
+		totalXP = 200;//current calculation of level will use this number to calculate that our level is 1 
 		calculateLevel();
 		calculateNextLevelXP();
 	}

@@ -113,8 +113,8 @@ public class Enemy : Character {
 	void giveXP(){
 		if(!xpGiven){
 			Debug.Log (experienceWorth);
-			target.gainExperience(experienceWorth);
-			//sorcerer.gainExperience(experienceWorth);
+			target.gainExperience(experienceWorth/2);//divided by 2 because of xp split. we can always adjust the experienceWorth if necessary
+			sorcerer.gainExperience(experienceWorth/2);
 		}
 		xpGiven = true;
 	}

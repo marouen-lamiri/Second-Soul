@@ -4,32 +4,86 @@ using System.Collections;
 public class Sorcerer : Player {
 
 	//Variable declaration
-	int intelligence; // spell power, spell crit damage
-	int wisdom; // cast speed/cooldown, spell crit chance
-	int spirit; // total energy/regen
-	
+	protected int intelligence; // spell power, spell crit damage
+	protected int wisdom; // cast speed/cooldown, spell crit chance
+	protected int spirit; // total energy/regen
+
+	protected int intelligencePerLvl;
+	protected int wisdomPerLvl;
+	protected int spiritPerLvl;
+
 	public Fighter fighter;
 	
 	// Use this for initialization
 	void Start () {
+		sorcererStart ();
+	}
+
+	protected void sorcererStart(){
 		initializePlayer();
+		initializeLevel();
+		initializePrimaryStats();
+		initializeSecondaryStatsBase();
+		initializeSecondaryStats();
+		calculateSecondaryStats();
+		playerEnabled=true;
+		health = maxHealth;
+		energy = maxEnergy;
+		
+		target = null;
+		startPosition = transform.position;
 		activeSkill1 = (BasicRanged)controller.GetComponent<BasicRanged>();
 		activeSkill2 = (FireballSkill)controller.GetComponent<FireballSkill>();
 		activeSkill2.setCaster (this);
-		target = null;
 		startPosition = transform.position;
+		//networking:
+		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
 	}
-	
 	// Update is called once per frame
 	void Update () {
 		playerEnabled = !fighter.playerEnabled;
 		playerLogic ();
 	}
 
+	protected virtual void initializePrimaryStats(){
+		intelligencePerLvl = 1;
+		wisdomPerLvl = 1;
+		spiritPerLvl = 1;
+		
+		intelligence = 10;
+		wisdom = 10;
+		spirit = 10;
+	}
+
 	public override void levelUp(){
-		Debug.Log("test");
+		Debug.Log("leveled up");
+		
+		calculateNewPrimaryStats();
+		
+		initializeSecondaryStats(); // reset base so that new and old primary stat don't combine
+		calculateSecondaryStats();
+	}
+
+	public void calculateNewPrimaryStats(){
+		intelligence += intelligencePerLvl;
+		wisdom += wisdomPerLvl;
+		spirit += spiritPerLvl;
 	}
 	
+	public void calculateSecondaryStats(){
+		castSpeed += wisdom * castSpeedBase;
+		cdr += wisdom * cdrBase;
+		spellCriticalChance += wisdom * spCritChanBase;;
+		spellCriticalDamage += intelligence * spCritDmgBase;
+		
+		spellPower += intelligence * spPowerBase;
+
+		fighter.maxEnergy += spirit * enBase;//not sure of this. we may ned to adjust who holds energy because fighter holds it atm
+		energyRegen += spirit * enRegBase;
+		
+		fighter.energy = maxEnergy;
+	}
+
 	public override bool isDead(){
 		return fighter.isDead ();
 	}
