@@ -205,8 +205,15 @@ public abstract class Character : MonoBehaviour {
 			return false;
 		}
 	}
-	public virtual bool criticalHitCheck ();
-	public virtual int getDamage ();
+	//to be overriden
+	public virtual bool criticalHitCheck (){
+		return false;
+	}
+	//to be overriden
+	public virtual int getDamage (){
+		return -1;
+	}
+
 	//we ned to tweak the values here
 	public void takeDamage(double damage, DamageType type){
 		if (type == DamageType.Physical) {

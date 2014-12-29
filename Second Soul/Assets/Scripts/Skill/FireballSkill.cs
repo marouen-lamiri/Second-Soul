@@ -15,8 +15,8 @@ public class FireballSkill : ProjectileSkill {
 		damageModifier = 2f;
 		AOEDamageModifier = 0.5f;
 		speed = 10f;
-		damage = caster.damage * damageModifier;
-		AOEDamage = damage * AOEDamageModifier;
+		damage = caster.getDamage() * damageModifier;
+		AOEDamage = (float)damage * AOEDamageModifier;
 		damageType = DamageType.Fire;
 
 		energyCost = 20;
@@ -33,7 +33,7 @@ public class FireballSkill : ProjectileSkill {
 		
 		castTime = 0.35f;
 		skillLength = animation[caster.attackClip.name].length;
-		damage = caster.damage * damageModifier;
+		damage = caster.getDamage() * damageModifier;
 		
 		transform.LookAt (target);
 		caster.animateAttack();

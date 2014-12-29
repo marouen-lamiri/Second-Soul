@@ -37,7 +37,6 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 		transform.LookAt (target.transform.position);
 		caster.animateAttack();
 		caster.skillDurationLeft = skillLength;
-		if(caster
 		StartCoroutine(applyAttackDamage(target, DamageType.Physical));
 	}
 	
@@ -60,7 +59,7 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	IEnumerator applyAttackDamage(Character delayedTarget, DamageType type){
 		yield return new WaitForSeconds(skillLength * impactTime);
 		if (delayedTarget != null){
-			delayedTarget.takeDamage(damage);
+			delayedTarget.takeDamage(damage,type);
 		}
 	}
 	
