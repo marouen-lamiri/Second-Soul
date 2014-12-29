@@ -271,7 +271,7 @@ public abstract class Character : MonoBehaviour {
 		List<Vector3> path = grid.worldFromNode(grid.path);
 		followPath (path);
 		Vector3 destination;
-		if (Vector3.Distance (transform.position, target.transform.position) > 2) {
+		if (Vector3.Distance (transform.position, target.transform.position) > 4) {
 			destination = path[1];
 		} 
 		else {
@@ -282,7 +282,7 @@ public abstract class Character : MonoBehaviour {
 		newRotation.z = 0;
 		
 		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 7);
-		controller.SimpleMove (transform.forward * speed);
+		controller.SimpleMove (transform.forward * speed *4);
 	}
 	//trying to comment this out
 //	public void attack(){

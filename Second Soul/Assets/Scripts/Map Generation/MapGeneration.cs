@@ -228,12 +228,26 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i,j-1] != 98 && map [i+1,j] != 98 && map [i,j-1] != 98 
 				    && map [i-1,j-1] != 98 && map [i+1,j+1] != 98 && map[i,j] != 90) {
 					map[i,j] = 90;
+					GameObject mapObject;
 					if(type){
-						Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), new Quaternion());
+						mapObject = Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), Quaternion.Euler (0,0,0))as GameObject;
 					}
 					else {
-						Instantiate (obstacle, new Vector3(i*10, 0, j*10), new Quaternion());
+						mapObject = Instantiate (obstacle, new Vector3(i*10, 0, j*10), Quaternion.Euler (0,0,0)) as GameObject;
 					}
+					if(mapObject.tag == "Crystals"){
+						mapObject.transform.parent = GameObject.Find(mapObject.tag).transform;
+					}
+					else if(mapObject.tag == "Rock"){
+						mapObject.transform.parent = GameObject.Find(mapObject.tag).transform;
+					}
+					else if(mapObject.tag == "Statue"){
+						mapObject.transform.parent = GameObject.Find(mapObject.tag).transform;
+					}
+					else if(mapObject.tag == "TorchObstacles"){
+						mapObject.transform.parent = GameObject.Find(mapObject.tag).transform;
+					}
+
 					nbrObstacles--;
 					nbrObstaclesByRoom--;
 					if(nbrObstaclesByRoom <= 0){
