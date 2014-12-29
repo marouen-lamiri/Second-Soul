@@ -64,7 +64,15 @@ public class Sorcerer : Player {
 			return false;
 		}
 	}
-
+	public virtual double getDamage(){
+		if(!hitCheck()){
+			return 0;
+		}
+		if (criticalHitCheck ()) {
+			return damage*attackPower*spellCriticalDamage;
+		}
+		return damage * spellPower;
+	}
 	public override void levelUp(){
 		Debug.Log("leveled up");
 		

@@ -99,7 +99,15 @@ public class Fighter : Player {
 			return false;
 		}
 	}
-
+	public virtual double getDamage(){
+		if(!hitCheck()){
+			return 0;
+		}
+		if (criticalHitCheck ()) {
+			return damage*attackPower*criticalDamage;
+		}
+		return damage * attackPower;
+	}
 	public override void loseEnergy(float energy){
 		this.energy -= energy;
 		if (energy < 0) {

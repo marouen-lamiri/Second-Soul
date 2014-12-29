@@ -5,10 +5,8 @@ public class FireballSkill : ProjectileSkill {
 
 	public FireballBehavior fireballPrefab;
 
-	new public float damage;
 	public float AOEDamage;
 	float AOEDamageModifier;
-	float damageModifier;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +17,7 @@ public class FireballSkill : ProjectileSkill {
 		speed = 10f;
 		damage = caster.damage * damageModifier;
 		AOEDamage = damage * AOEDamageModifier;
+		damageType = DamageType.Fire;
 
 		energyCost = 20;
 	}

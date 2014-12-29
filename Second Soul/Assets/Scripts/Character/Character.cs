@@ -103,8 +103,9 @@ public abstract class Character : MonoBehaviour {
 	
 	
 	public float attackRange;
-	public float damage;
-	
+	//we need to discuss how damage works
+	protected float damage;
+
 	public float skillLength;
 	public float skillDurationLeft;
 	
@@ -204,10 +205,25 @@ public abstract class Character : MonoBehaviour {
 			return false;
 		}
 	}
-	public virtual bool criticalHitCheck(){
-		return false;
-	}
-	public void takeDamage(double damage){
+	public virtual bool criticalHitCheck ();
+	public virtual int getDamage ();
+	//we ned to tweak the values here
+	public void takeDamage(double damage, DamageType type){
+		if (type == DamageType.Physical) {
+			damage -= armor;
+		}
+		else if (type == DamageType.Fire) {
+			damage -= fireResistance;
+		}
+		else if (type == DamageType.Ice) {
+			damage -= fireResistance;
+		}
+		else if (type == DamageType.Lightning){
+			damage -= lightningtResistance;
+		}
+		if (damage < 0) {
+			damage = 0;
+		}
 		health -= damage;
 		
 		if (health <= 0) {
@@ -268,15 +284,15 @@ public abstract class Character : MonoBehaviour {
 		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 7);
 		controller.SimpleMove (transform.forward * speed);
 	}
-	
-	public void attack(){
-		transform.LookAt (target.transform.position);
-		animateAttack();
-		
-		skillDurationLeft = skillLength;
-		//Debug.Log (++attackcount);
-		StartCoroutine(applyAttackDamage(target));
-	}
+	//trying to comment this out
+//	public void attack(){
+//		transform.LookAt (target.transform.position);
+//		animateAttack();
+//		
+//		skillDurationLeft = skillLength;
+//		//Debug.Log (++attackcount);
+//		StartCoroutine(applyAttackDamage(target));
+//	}
 	
 	
 	public bool attackLocked(){
@@ -296,13 +312,15 @@ public abstract class Character : MonoBehaviour {
 	public bool inAttackRange(){
 		return Vector3.Distance(target.transform.position, transform.position) <= attackRange;
 	}
-	
-	IEnumerator applyAttackDamage(Character delayedTarget){
-		yield return new WaitForSeconds(skillLength * impactTime);
-		if (delayedTarget != null){
-			delayedTarget.takeDamage(damage);
-		}
-	}
+	//this (below)exists in Character
+	//is this duplicate necessary?
+	//trying to comment it out
+//	IEnumerator applyAttackDamage(Character delayedTarget){
+//		yield return new WaitForSeconds(skillLength * impactTime);
+//		if (delayedTarget != null){
+//			delayedTarget.takeDamage(damage);
+//		}
+//	}
 	
 	public void dieMethod(){
 		//CancelInvoke("applyAttackDamage");
@@ -315,10 +333,6 @@ public abstract class Character : MonoBehaviour {
 		
 		//RESPAWN/ETC...?
 	}
-	
-	//public void applyAttackDamage(){
-		//target.takeDamage(damage);
-	//}
 	
 	public float getInitialPositionX(){
 		return startPosition.x;
