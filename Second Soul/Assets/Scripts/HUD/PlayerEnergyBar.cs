@@ -13,22 +13,36 @@ public class PlayerEnergyBar : MonoBehaviour {
 	float ratioWidth;
 	float ratioHeight;
 	private Fighter player;
+	private bool isStillADummyFighter;
 
 	//Initialization of variables
 	void Start (){
-		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		energyPercent = 1;
-		energy = player.energy;
-		maxEnergy = player.maxEnergy;
-		ratioWidth = Screen.width / 800;  
-		ratioHeight = Screen.height/ 600;
-		globeHeight = (float)(globeHeight + (Screen.height * ratioHeight * 0.03));
-		globeSize = (int)(globeSize + (Screen.width * ratioWidth * 0.03));
+		player = new Fighter ();
+		player.health = 3.0;
+		isStillADummyFighter = true;
 	}
 	
 	// Update is called once per frame
 	void Update (){
-		energy = player.energy;
+
+		if(isStillADummyFighter) {
+			Fighter playerTemp = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+			if(player != null) {
+				player = playerTemp;
+				isStillADummyFighter = false;
+
+				energyPercent = 1;
+				energy = player.energy;
+				maxEnergy = player.maxEnergy;
+				ratioWidth = Screen.width / 800;  
+				ratioHeight = Screen.height/ 600;
+				globeHeight = (float)(globeHeight + (Screen.height * ratioHeight * 0.03));
+				globeSize = (int)(globeSize + (Screen.width * ratioWidth * 0.03));
+			}
+		} else {
+			energy = player.energy;
+		}
+
 	}
 
 	//Draw Energy Bar

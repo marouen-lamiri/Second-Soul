@@ -31,8 +31,13 @@ var heightDamping = 2.0;
 function Update(){
 
 //this, i would like in a "Start", but that doesn't seem to work
-	fighter = GameObject.Find("Fighter").transform;
-	sorcerer = GameObject.Find("Sorcerer").transform;
+	try {            
+		fighter = GameObject.Find("Fighter").transform;
+		sorcerer = GameObject.Find("Sorcerer").transform;
+	}
+	catch (e) {
+		// do nothing, fighter and / or sorcerer are null.
+	}
 //
 	if(enabledFighter){
 		target = fighter;

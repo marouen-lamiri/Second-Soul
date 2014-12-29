@@ -8,10 +8,15 @@ public class GameOver : MonoBehaviour {
 	int scaleTime;
 	private Fighter player;
 	public Font myFont;
+	private bool isStillADummyFighter;
 
 	//Sets default value of variables
 	void Start () {
-		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+//		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		player = new Fighter ();
+		player.health = 3.0;
+		isStillADummyFighter = true;
+
 		isRespawned = false;
 		Time.timeScale = 1;
 		scaleTime = 1;
@@ -19,8 +24,16 @@ public class GameOver : MonoBehaviour {
 
 	// Update is called once per frame, checks if the player is dead
 	void FixedUpdate () {
-		if(player.isDead () && isRespawned == false){
-			Death();
+		if (isStillADummyFighter) {
+			Fighter playerTemp = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+			if(playerTemp != null) {
+				player = playerTemp;
+				isStillADummyFighter = false;
+			}
+		} else {
+			if(player.isDead () && isRespawned == false){
+				Death();
+			}
 		}
 	}
 

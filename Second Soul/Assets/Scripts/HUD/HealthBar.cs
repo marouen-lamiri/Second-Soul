@@ -24,9 +24,15 @@ public class HealthBar : MonoBehaviour {
 	float healthFillWidthFix = 0.375f;
 	float healthFillHeightFix=0.0293f;
 
+	private bool isStillADummyFighter;
+	
 	// Use this for initialization
 	void Start () {
-		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		//player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		player = new Fighter ();
+		player.health = 3.0;
+		isStillADummyFighter = true;
+
 		healthFrameWidth = (float)Screen.width*healthFrameWidthFix;
 		healthFrameHeight = (float)Screen.height*healthFrameHeightFix;
 		healthFillWidth = (float)Screen.width*healthFillWidthFix;
@@ -36,14 +42,22 @@ public class HealthBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-		if(player.target!=null){
+		if (isStillADummyFighter) {
+			Fighter playerTemp = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+			if(playerTemp != null) {
+				player = playerTemp;
+				isStillADummyFighter = false;
+			}
+		} else {
+
+			if(player.target!=null){
 			enemy = player.target.GetComponent<Enemy> ();
 			healthPercent =((float)enemy.health / (float)enemy.maxHealth);
 		}
 		else{
 			enemy = null;
 			healthPercent = 0;
+			}
 		}
 	}
 	void OnGUI(){

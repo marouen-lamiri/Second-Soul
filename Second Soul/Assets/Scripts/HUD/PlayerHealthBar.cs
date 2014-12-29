@@ -13,23 +13,36 @@ public class PlayerHealthBar : MonoBehaviour {
 	float ratioWidth;
 	float ratioHeight;
 	private Fighter player;
-
+	private bool isStillADummyFighter;
 
 	//Initialization of variables
 	void Start () {
-		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		hp = player.health;
-		maxhp = player.maxHealth;
-		healthPercent = 1;
-		ratioWidth = Screen.width / 800;  
-		ratioHeight = Screen.height/ 600;
-		globeHeight = (float)(globeHeight + (Screen.height * ratioHeight * 0.03));
-		globeSize = (int)(globeSize + (Screen.width * ratioWidth * 0.03));
+		player = new Fighter ();
+		player.health = 3.0;
+		isStillADummyFighter = true;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		hp = player.health;
+
+		if(isStillADummyFighter) {
+			Fighter playerTemp = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+			if(playerTemp != null) {
+				player = playerTemp;
+
+				hp = player.health;
+				maxhp = player.maxHealth;
+				healthPercent = 1;
+				ratioWidth = Screen.width / 800;  
+				ratioHeight = Screen.height/ 600;
+				globeHeight = (float)(globeHeight + (Screen.height * ratioHeight * 0.03));
+				globeSize = (int)(globeSize + (Screen.width * ratioWidth * 0.03));
+			}
+		} else {
+			hp = player.health;
+		}
+
+
 
 	}
 
