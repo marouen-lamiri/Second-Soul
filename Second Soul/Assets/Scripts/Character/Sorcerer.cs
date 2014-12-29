@@ -12,7 +12,7 @@ public class Sorcerer : Player {
 	protected int wisdomPerLvl;
 	protected int spiritPerLvl;
 
-	public Fighter fighter;
+	private Fighter fighter;
 	
 	// Use this for initialization
 	void Start () {
@@ -20,6 +20,7 @@ public class Sorcerer : Player {
 	}
 
 	protected void sorcererStart(){
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		initializePlayer();
 		initializeLevel();
 		initializePrimaryStats();

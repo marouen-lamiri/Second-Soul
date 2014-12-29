@@ -3,8 +3,13 @@ using System.Collections;
 
 public class MiniMap : MonoBehaviour {
 
-	public Fighter fighter;   // The Fighter from the scene.
-	public Sorcerer sorcerer; // The Sorcerer from the scene.
+	private Fighter fighter;   // The Fighter from the scene.
+	private Sorcerer sorcerer; // The Sorcerer from the scene.
+
+	void Start(){
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+	}
 
 	void Update()
 	{

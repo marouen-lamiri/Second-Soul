@@ -12,10 +12,11 @@ public class PlayerEnergyBar : MonoBehaviour {
 	double energyPercent;
 	float ratioWidth;
 	float ratioHeight;
-	public Fighter player;
+	private Fighter player;
 
 	//Initialization of variables
 	void Start (){
+		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		energyPercent = 1;
 		energy = player.energy;
 		maxEnergy = player.maxEnergy;

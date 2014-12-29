@@ -35,5 +35,6 @@ public class EnemyFactory : MonoBehaviour {
 		enemy.transform.parent = GameObject.Find("Enemies").transform;
 		enemy.setGrid (grid);
 		enemy.setPathing (pathing);
+		DontDestroyOnLoad(enemy.transform.gameObject); // this is for the Network Menu scene
 	}
 }

@@ -6,11 +6,12 @@ public class GameOver : MonoBehaviour {
 	//Variable declaration
 	public bool isRespawned;
 	int scaleTime;
-	public Fighter player;
+	private Fighter player;
 	public Font myFont;
 
 	//Sets default value of variables
 	void Start () {
+		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		isRespawned = false;
 		Time.timeScale = 1;
 		scaleTime = 1;
