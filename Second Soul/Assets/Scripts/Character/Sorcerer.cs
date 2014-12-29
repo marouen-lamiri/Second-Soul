@@ -55,6 +55,16 @@ public class Sorcerer : Player {
 		spirit = 10;
 	}
 
+	public virtual bool criticalHitCheck(){
+		int randomRoll = Random.Range (1, 100);
+		if (randomRoll <= spellCriticalChance * 100) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public override void levelUp(){
 		Debug.Log("leveled up");
 		

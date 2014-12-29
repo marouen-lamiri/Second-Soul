@@ -60,8 +60,8 @@ public class ClickToMove : MonoBehaviour {
 					position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 			}
 			Debug.DrawLine(transform.position, position, Color.red, 50f);
-			pathing.findPath(transform.position, position);
-			setTrajectory(grid.worldFromNode(grid.path));
+			//pathing.findPath(transform.position, position);
+			//setTrajectory(grid.worldFromNode(grid.path));
 		}
 	}
 

@@ -13,7 +13,7 @@ public class MapGeneration : MonoBehaviour{
 	public Enemy enemyPrefab;
 	public Fighter fighter;
 	public Sorcerer sorcerer;
-	private EnemyFactory factory;
+	public EnemyFactory factory;
 	List<int> listOfWalls;
 	int[,] mapArray;
 	int numberRooms = 10;
@@ -21,7 +21,7 @@ public class MapGeneration : MonoBehaviour{
 	int mapSizeZ = 25;
 	
 	void Start () {
-		factory = new EnemyFactory(enemyPrefab, fighter, sorcerer);
+		factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
 		GameObject player = GameObject.Find("Fighter");
 		GameObject player2 = GameObject.Find("Sorcerer");
 		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, player, player2);

@@ -90,6 +90,16 @@ public class Fighter : Player {
 		health = maxHealth;
 	}
 
+	public virtual bool criticalHitCheck(){
+		int randomRoll = Random.Range (1, 100);
+		if (randomRoll <= criticalChance * 100) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public override void loseEnergy(float energy){
 		this.energy -= energy;
 		if (energy < 0) {

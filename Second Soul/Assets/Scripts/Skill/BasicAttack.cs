@@ -29,7 +29,8 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	}
 	
 	public void useSkill(Character target){
-		impactTime = 0.35f;
+		//impactTime = 0.35f;//use attackspeed
+		impactTime = caster.attackSpeed;
 		skillLength = animation[caster.attackClip.name].length;
 		damage = caster.damage;
 

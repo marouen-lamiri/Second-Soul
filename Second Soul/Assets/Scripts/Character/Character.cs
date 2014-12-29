@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 public abstract class Character : MonoBehaviour {
 	public CharacterController controller;
-	public Grid grid;
-	public PathFinding pathing;
+//	public Grid grid;
+//	public PathFinding pathing;
+	private Grid grid;
+	private PathFinding pathing;
 	private List<Vector3> path;
 	
 	public int level; // only public for now to see level in inspector
@@ -17,7 +19,7 @@ public abstract class Character : MonoBehaviour {
 	protected int lightningtResistance;
 	
 	protected float accuracy;
-	protected float attackSpeed;
+	public float attackSpeed;
 	
 	protected float castSpeed;
 	protected float cdr; // cooldown reduction
@@ -117,6 +119,8 @@ public abstract class Character : MonoBehaviour {
 	public AnimationClip dieClip;
 
 	// Use this for initialization
+
+
 	void Start () {
 		//skillLength = animation[attackClip.name].length; // nothing happens in a parent start
 	}
@@ -125,8 +129,14 @@ public abstract class Character : MonoBehaviour {
 	void Update () {
 	
 	}
-	
-	//public abstract void levelUp();
+
+	public void setPathing(PathFinding path){
+		this.pathing = path;
+	}
+
+	public void setGrid(Grid grid){
+		this.grid = grid;
+	}
 	
 	public virtual void initializeSecondaryStats(){
 		armor = 50;
@@ -174,8 +184,6 @@ public abstract class Character : MonoBehaviour {
 		critChanBase = 0.005f;
 		critDmgBase = 0.01f;
 		
-		attPowerBase = 0.01f;
-		
 		spCritChanBase = 0.005f;
 		spCritDmgBase = 0.01f;
 		
@@ -187,7 +195,18 @@ public abstract class Character : MonoBehaviour {
 		hpRegBase = 0.01f;
 		enRegBase = 0.01f;
 	}
-	
+	public bool hitCheck(){
+		int randomRoll = Random.Range (1, 100);
+		if (randomRoll <= accuracy * 100) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public virtual bool criticalHitCheck(){
+		return false;
+	}
 	public void takeDamage(double damage){
 		health -= damage;
 		
@@ -226,29 +245,28 @@ public abstract class Character : MonoBehaviour {
 		}
 		return false;
 	}
-	
+	public void followPath(List<Vector3> path){
+
+	}
 	public void chaseTarget(){
 		chasing = true;
 		animateRun();
-
-		/*if(currentWaypoint >= path.vectorPath.Count){
-			return;
-		}*/
+		pathing.findPath(transform.position, target.transform.position);
+		List<Vector3> path = grid.worldFromNode(grid.path);
+		followPath (path);
+		Vector3 destination;
+		if (Vector3.Distance (transform.position, target.transform.position) > 2) {
+			destination = path[1];
+		} 
+		else {
+			destination = target.transform.position;
+		}
+		Quaternion newRotation = Quaternion.LookRotation (destination - transform.position);
+		newRotation.x = 0;
+		newRotation.z = 0;
 		
-		//Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
-		//dir.y = 0;
-		//Debug.Log (dir);
-		//Debug.Log (currentWaypoint);
-		//transform.LookAt (target.transform.position);
-		//meshAgent.SetDestination(target.transform.position);
+		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 7);
 		controller.SimpleMove (transform.forward * speed);
-		//controller.SimpleMove (dir * speed);
-		
-		/*if(Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]) < 2f){
-			currentWaypoint++;
-		}*/
-
-
 	}
 	
 	public void attack(){
