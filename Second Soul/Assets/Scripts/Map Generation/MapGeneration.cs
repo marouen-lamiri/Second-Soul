@@ -21,15 +21,25 @@ public class MapGeneration : MonoBehaviour{
 	int mapSizeZ = 25;
 	
 	void Start () {
-		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
-		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter, sorcerer);
-		buildMap (map);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		// generate the map only after the players have been created (becasue they are needed for some reason for the map generation code:
+		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
+		if(serverAndClientAreBothConnected && Network.isServer) {
+			fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+			sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+			factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
+			int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter, sorcerer);
+			buildMap (map);
+
+			// immediately after creating the map, load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
+			print ("BEFORE");
+			NetworkLevelLoader.Instance.LoadLevel("NetworkingCollaboration",1); 
+			print ("AFTER");
+		}
 		
 	}
 	
@@ -80,28 +90,28 @@ public class MapGeneration : MonoBehaviour{
 			}
 		}
 	}
-	
+
 	//Checks all 4 directions
 	void buildWalls (int [,] map,int i,int j){
 		Vector3 position = new Vector3 (i*10,0,j*10);
 
 		if (map [i - 1, j] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x-5,0,position.z), Quaternion.Euler (0,180,0))as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x-5,0,position.z), Quaternion.Euler (0,180,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i + 1, j] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z), new Quaternion())as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z), new Quaternion(), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i, j - 1] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x,0,position.z-5), Quaternion.Euler (0,90,0))as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x,0,position.z-5), Quaternion.Euler (0,90,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i, j + 1] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,-90,0))as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,-90,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
@@ -233,11 +243,11 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i-1,j-1] != 98 && map [i+1,j+1] != 98 && map[i,j] != 90) {
 					map[i,j] = 90;
 					if(type){
-						GameObject obst = Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), new Quaternion());
+						GameObject obst = (GameObject) Network.Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), new Quaternion(), 2);
 						DontDestroyOnLoad(obst.transform.gameObject);
 					}
 					else {
-						GameObject obst = Instantiate (obstacle, new Vector3(i*10, 0, j*10), new Quaternion());
+						GameObject obst = (GameObject) Network.Instantiate (obstacle, new Vector3(i*10, 0, j*10), new Quaternion(), 2);
 						DontDestroyOnLoad(obst.transform.gameObject);
 					}
 					nbrObstacles--;

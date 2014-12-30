@@ -52,7 +52,8 @@ public class ClientNetwork : MonoBehaviour {
 				
 				// connect:
 				Network.InitializeServer (10, port, false);
-				
+				Fighter fighter = Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+
 				// disable second soul:
 				
 			}
@@ -90,7 +91,7 @@ public class ClientNetwork : MonoBehaviour {
 				//            if (Network.peerType == NetworkPeerType.Disconnected) {
 				//                if (GUI.Button(new Rect(100, 100, 150, 25), "Connect")) {
 				ConnectToServer ();
-				//Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0); // N.B. place the network game object exactly where you want to spawn players.
+
 				
 				//                }
 				//            }
@@ -186,7 +187,7 @@ public class ClientNetwork : MonoBehaviour {
 	void OnConnectedToServer() {
 		_messageLog += "Connected to server" + "\n";
 		// added:
-		Fighter fighterrrr = Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+		Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
 		isConnectedToServer = true;
 	}
 	void OnDisconnectedToServer() {
