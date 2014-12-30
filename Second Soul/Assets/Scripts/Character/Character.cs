@@ -11,28 +11,29 @@ public abstract class Character : MonoBehaviour {
 	private List<Vector3> path;
 	
 	public int level; // only public for now to see level in inspector
-	
+
+	//want to be protected - putting to public to check in inspector
 	// Secondary stats... calculated from primary stats
-	protected int armor;
-	protected int fireResistance;
-	protected int coldResistance;
-	protected int lightningtResistance;
+	public int armor;
+	public int fireResistance;
+	public int coldResistance;
+	public int lightningtResistance;
 	
-	protected float accuracy;
+	public float accuracy;
 	public float attackSpeed;
 	
-	protected float castSpeed;
-	protected float cdr; // cooldown reduction
+	public float castSpeed;
+	public float cdr; // cooldown reduction
 	
-	protected float criticalChance;
-	protected float criticalDamage;
+	public float criticalChance;
+	public float criticalDamage;
 	
-	protected float attackPower;
+	public float attackPower;
 	
-	protected float spellCriticalChance;
-	protected float spellCriticalDamage;
+	public float spellCriticalChance;
+	public float spellCriticalDamage;
 	
-	protected float spellPower;
+	public float spellPower;
 	
 	public double health;
 	public double maxHealth;
@@ -40,37 +41,37 @@ public abstract class Character : MonoBehaviour {
 	public double energy;
 	public double maxEnergy;
 	
-	protected float healthRegen;
-	protected float energyRegen;
+	public float healthRegen;
+	public float energyRegen;
 	
 	// base are the static amount per primary stat to the secondary stat
-	protected int armorBase;
-	protected int fireResBase;
-	protected int coldResBase;
-	protected int lightResBase;
+	public int armorBase;
+	public int fireResBase;
+	public int coldResBase;
+	public int lightResBase;
 	
-	protected float accurBase;
-	protected float attSpeedBase;
+	public float accurBase;
+	public float attSpeedBase;
 	
-	protected float castSpeedBase;
-	protected float cdrBase;
+	public float castSpeedBase;
+	public float cdrBase;
 	
-	protected float critChanBase;
-	protected float critDmgBase;
+	public float critChanBase;
+	public float critDmgBase;
 	
-	protected float attPowerBase;
+	public float attPowerBase;
 	
-	protected float spCritChanBase;
-	protected float spCritDmgBase;
+	public float spCritChanBase;
+	public float spCritDmgBase;
 	
-	protected float spPowerBase;
+	public float spPowerBase;
 	
-	protected int hpBase;
-	protected int enBase;
+	public int hpBase;
+	public int enBase;
 	
-	protected float hpRegBase;
-	protected float enRegBase;
-	
+	public float hpRegBase;
+	public float enRegBase;
+	//end of section that should be protected
 	/*
 	fighter:
 	- berserker // primary: strength; secondary: dexterity
@@ -104,7 +105,7 @@ public abstract class Character : MonoBehaviour {
 	
 	public float attackRange;
 	//we need to discuss how damage works
-	protected float damage;
+	public float damage;
 
 	public float skillLength;
 	public float skillDurationLeft;
@@ -138,7 +139,7 @@ public abstract class Character : MonoBehaviour {
 	public void setGrid(Grid grid){
 		this.grid = grid;
 	}
-	
+
 	public virtual void initializeSecondaryStats(){
 		armor = 50;
 		fireResistance = 10;
@@ -154,12 +155,12 @@ public abstract class Character : MonoBehaviour {
 		criticalChance = 0.1f;
 		criticalDamage = 1.5f;
 		
-		attackPower = 1f;
+		attackPower = 10f;
 		
 		spellCriticalChance = 0.1f;
 		spellCriticalDamage = 1.5f;
 		
-		spellPower = 1f;
+		spellPower = 10f;
 		
 		maxHealth = 200;
 		maxEnergy = 100;
@@ -196,6 +197,7 @@ public abstract class Character : MonoBehaviour {
 		hpRegBase = 0.01f;
 		enRegBase = 0.01f;
 	}
+	
 	public bool hitCheck(){
 		int randomRoll = Random.Range (1, 100);
 		if (randomRoll <= accuracy * 100) {
@@ -217,16 +219,16 @@ public abstract class Character : MonoBehaviour {
 	//we ned to tweak the values here
 	public void takeDamage(double damage, DamageType type){
 		if (type == DamageType.Physical) {
-			damage -= armor;
+			damage -= armor/200;
 		}
 		else if (type == DamageType.Fire) {
-			damage -= fireResistance;
+			damage -= fireResistance/200;
 		}
 		else if (type == DamageType.Ice) {
-			damage -= fireResistance;
+			damage -= fireResistance/200;
 		}
 		else if (type == DamageType.Lightning){
-			damage -= lightningtResistance;
+			damage -= lightningtResistance/200;
 		}
 		if (damage < 0) {
 			damage = 0;

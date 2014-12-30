@@ -14,8 +14,8 @@ public class FireballSkill : ProjectileSkill {
 		travelDistance = 10f;
 		damageModifier = 2f;
 		AOEDamageModifier = 0.5f;
-		speed = 10f;
-		damage = caster.getDamage() * damageModifier;
+		speed = 15f;
+		damage = caster.spellPower * damageModifier;
 		AOEDamage = (float)damage * AOEDamageModifier;
 		damageType = DamageType.Fire;
 
@@ -31,19 +31,19 @@ public class FireballSkill : ProjectileSkill {
 	{
 		base.useSkill (target);
 		
-		castTime = 0.35f;
-		skillLength = animation[caster.attackClip.name].length;
-		damage = caster.getDamage() * damageModifier;
+		castTime = caster.castSpeed;
+		skillLength = 1/castTime;
+		damage = caster.spellPower * damageModifier;
 		
 		transform.LookAt (target);
 		caster.animateAttack();
 		caster.skillDurationLeft = skillLength;
-		
+		animation [caster.attackClip.name].normalizedSpeed = castTime;
 		StartCoroutine(shootFireball(target));
 	}
 	
 	IEnumerator shootFireball(Vector3 target){
-		yield return new WaitForSeconds(skillLength * castTime);
+		yield return new WaitForSeconds(skillLength);
 		caster.loseEnergy (energyCost);
 		FireballBehavior fireball = Instantiate(fireballPrefab, caster.transform.position + spawnDistance * caster.transform.forward, caster.transform.rotation)as FireballBehavior;
 		fireball.fireballSkill = this;

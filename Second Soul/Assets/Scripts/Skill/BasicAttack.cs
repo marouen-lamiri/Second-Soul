@@ -30,13 +30,16 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	
 	public void useSkill(Character target){
 		//impactTime = 0.35f;//use attackspeed
-		impactTime = caster.attackSpeed;
+		impactTime = 1/caster.attackSpeed;
 		skillLength = animation[caster.attackClip.name].length;
-		damage = caster.getDamage ();
+		damage = caster.attackPower;
 
 		transform.LookAt (target.transform.position);
 		caster.animateAttack();
-		caster.skillDurationLeft = skillLength;
+		//it'll look wrong because of the animation time, but I want to make attack speed will work. I'm still trying to make it look better
+		//caster.skillDurationLeft = skillLength;
+		caster.skillDurationLeft = impactTime;
+		animation [caster.attackClip.name].normalizedSpeed = 1/impactTime;
 		StartCoroutine(applyAttackDamage(target, DamageType.Physical));
 	}
 	
