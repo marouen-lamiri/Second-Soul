@@ -4,6 +4,14 @@ using System.Collections;
 public class Enemy : Character {
 	
 	//Variable declaration
+	protected int strength; // base damage, armor, critt damage
+	protected int dexterity; // attack speed, crit chance, accuracy
+	protected int endurance; // health, resistances, health regen
+	
+	protected int strengthPerLvl;
+	protected int dexterityPerLvl;
+	protected int endurancePerLvl;
+
 	public int experienceWorth;
 	public int experienceBase;
 	
@@ -20,11 +28,46 @@ public class Enemy : Character {
 	void Start (){
 		experienceBase = 25;
 		xpGiven = false;
-		//health = 100;
+
+		initializePrimaryStats();
+		initializeSecondaryStatsBase();
+		initializeSecondaryStats();
+		calculateSecondaryStats();
+
 		level = target.level;
 		health = maxHealth;
 		energy = maxEnergy;
 		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
+	}
+
+	protected virtual void initializePrimaryStats(){
+		strengthPerLvl = 1;
+		dexterityPerLvl = 1;
+		endurancePerLvl = 1;
+		
+		strength = 10;
+		dexterity = 10;
+		endurance = 10;
+	}
+
+	public void calculateSecondaryStats(){
+		armor += strength * armorBase;
+		fireResistance += endurance * fireResBase;
+		coldResistance += endurance * coldResBase;
+		lightningtResistance += endurance * lightResBase;
+		
+		accuracy += dexterity * accurBase;
+		attackSpeed += dexterity * attSpeedBase;
+		
+		criticalChance += dexterity * critChanBase;
+		criticalDamage += strength * critDmgBase;
+		
+		attackPower += strength * attPowerBase;
+		
+		maxHealth += endurance * hpBase;
+		healthRegen += endurance * hpRegBase;
+		
+		health = maxHealth;
 	}
 
 	// Update is called once per frame

@@ -31,7 +31,7 @@ public class Mage : Sorcerer {
 		spellCriticalChance = 0.2f;
 		spellCriticalDamage = 2.0f;
 		
-		spellPower = 2f;
+		spellPower = 20f;
 
 		maxEnergy = 100;
 

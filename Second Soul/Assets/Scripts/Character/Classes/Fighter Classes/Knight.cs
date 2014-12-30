@@ -35,7 +35,7 @@ public class Knight : Fighter {
 		criticalChance = 0.1f;
 		criticalDamage = 2.0f;
 		
-		attackPower = 1.5f;
+		attackPower = 15.0f;
 		
 		maxHealth = 300;
 		

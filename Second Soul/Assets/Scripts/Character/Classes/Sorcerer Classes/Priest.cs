@@ -31,7 +31,7 @@ public class Priest : Sorcerer {
 		spellCriticalChance = 0.1f;
 		spellCriticalDamage = 1.5f;
 		
-		spellPower = 1.5f;
+		spellPower = 15.0f;
 		
 		maxEnergy = 300;
 		

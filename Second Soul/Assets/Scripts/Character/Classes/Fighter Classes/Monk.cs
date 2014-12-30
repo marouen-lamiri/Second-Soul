@@ -35,7 +35,7 @@ public class Monk : Fighter {
 		criticalChance = 0.6f;
 		criticalDamage = 1.5f;
 		
-		attackPower = 1f;
+		attackPower = 10f;
 		
 		maxHealth = 250;
 		

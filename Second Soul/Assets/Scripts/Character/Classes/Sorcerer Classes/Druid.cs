@@ -31,7 +31,7 @@ public class Druid : Sorcerer {
 		spellCriticalChance = 0.3f;
 		spellCriticalDamage = 1.5f;
 		
-		spellPower = 1f;
+		spellPower = 10f;
 		
 		maxEnergy = 200;
 		
