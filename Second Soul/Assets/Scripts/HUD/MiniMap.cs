@@ -7,27 +7,21 @@ public class MiniMap : MonoBehaviour {
 	private Sorcerer sorcerer; // The Sorcerer from the scene.
 
 	void Start(){
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 	}
 
 	void Update()
 	{
-		if(fighter == null) {
-			fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		if (fighter.playerEnabled)
+		{
+			// Adjusting the MiniMap camera to the Fighter position.
+			this.moveMiniMapCamera(fighter.transform.position);
 		}
-		if(sorcerer == null) {
-			sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		}
-		if(fighter != null && sorcerer != null) {
-			if (fighter.playerEnabled)
-			{
-				// Adjusting the MiniMap camera to the Fighter position.
-				this.moveMiniMapCamera(fighter.transform.position);
-			}
-			else if (sorcerer.playerEnabled)
-			{
-				// Adjusting the MiniMap camera to the Sorcerer position.
-				this.moveMiniMapCamera(sorcerer.transform.position);
-			}
+		else if (sorcerer.playerEnabled)
+		{
+			// Adjusting the MiniMap camera to the Sorcerer position.
+			this.moveMiniMapCamera(sorcerer.transform.position);
 		}
 	}
 

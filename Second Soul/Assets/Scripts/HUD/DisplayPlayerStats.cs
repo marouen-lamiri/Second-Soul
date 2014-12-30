@@ -7,32 +7,20 @@ public class DisplayPlayerStats : MonoBehaviour {
 	private Fighter player;
 	public bool isStatsDisplayed = false;
 	public Font myFont;
-	private bool isStillADummyFighter;
 
 	void Start(){
-		player = new Fighter ();
-		player.health = 3.0;
-		isStillADummyFighter = true;
-
+		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 	}
 	//Checks if the s button was pressed
 	void Update()
 	{
-		if(isStillADummyFighter) {
-			Fighter playerTemp = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-			if(playerTemp != null) {
-				player = playerTemp;
-				isStillADummyFighter = false;
-			}
-		} else {
-			if (Input.GetKeyDown ("s")) 
-			{
-				boolChange ();
+		if (Input.GetKeyDown ("s")) 
+		{
+			boolChange ();
 
-				//networking event listener:
-				FighterNetworkScript fighterNetworkScript = (FighterNetworkScript) GameObject.FindObjectOfType(typeof(FighterNetworkScript));
-				fighterNetworkScript.onStatsDisplayed();
-			}
+			//networking event listener:
+			FighterNetworkScript fighterNetworkScript = (FighterNetworkScript) GameObject.FindObjectOfType(typeof(FighterNetworkScript));
+			fighterNetworkScript.onStatsDisplayed();
 		}
 	}
 

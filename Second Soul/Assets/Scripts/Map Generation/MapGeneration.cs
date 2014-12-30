@@ -19,49 +19,18 @@ public class MapGeneration : MonoBehaviour{
 	int numberRooms = 10;
 	int mapSizeX = 25;
 	int mapSizeZ = 25;
-	private bool isStillADummyFighter;
-	private bool isStillADummySorcerer;
-
-
+	
 	void Start () {
-		fighter = new Fighter ();
-		fighter.health = 3.0;
-		isStillADummyFighter = true;
-
-		sorcerer = new Sorcerer ();
-		//Sorcerer.health = 3.0;
-		isStillADummySorcerer = true;
-
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
+		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter, sorcerer);
+		buildMap (map);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(isStillADummyFighter) {
-			Fighter playerTemp = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-			if(playerTemp != null) {
-				fighter = playerTemp;
-				isStillADummyFighter = false;
-			}
-		} else {
-
-		}
-
-		if(isStillADummySorcerer) {
-			Sorcerer sorcererTemp = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-			if(sorcererTemp != null) {
-				sorcerer = sorcererTemp;
-				isStillADummySorcerer = false;
-			}
-		} else {
-
-		}
-
-		if(!isStillADummyFighter && !isStillADummySorcerer) {
-			factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
-			int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter, sorcerer);
-			buildMap (map);
-		}
-
+		
 	}
 	
 	
@@ -70,9 +39,7 @@ public class MapGeneration : MonoBehaviour{
 			for(int j=0;j<mapSizeZ;j++){
 				if (map [i,j] != 0 && map [i-1,j] != 0 && map [i,j-1] != 0 && map [i-2,j] != 0 && map [i,j-2] != 0 && map [i,j] != 99){
 					map [i,j] = 99;
-					if(player != null) {
-						player.transform.position = new Vector3(i*10,0,j*10);
-					}
+					player.transform.position = new Vector3(i*10,0,j*10);
 					i = mapSizeX;
 					j = mapSizeZ;
 				}
@@ -266,11 +233,11 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i-1,j-1] != 98 && map [i+1,j+1] != 98 && map[i,j] != 90) {
 					map[i,j] = 90;
 					if(type){
-						GameObject obst = (GameObject) Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), new Quaternion());
+						GameObject obst = Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), new Quaternion());
 						DontDestroyOnLoad(obst.transform.gameObject);
 					}
 					else {
-						GameObject obst = (GameObject) Instantiate (obstacle, new Vector3(i*10, 0, j*10), new Quaternion());
+						GameObject obst = Instantiate (obstacle, new Vector3(i*10, 0, j*10), new Quaternion());
 						DontDestroyOnLoad(obst.transform.gameObject);
 					}
 					nbrObstacles--;
