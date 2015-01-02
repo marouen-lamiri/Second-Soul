@@ -12,12 +12,15 @@ public class Fighter : Player {
 	protected int strengthPerLvl;
 	protected int dexterityPerLvl;
 	protected int endurancePerLvl;
+
+	public Database database;
 	
 	//FighterNetworkScript fighterNetworkScript; // is "already serialized" in parent class Player.cs.
 
 	// Use this for initialization
 	void Start () {
 		fighterStart ();
+		database.readPrimaryStats();
 	}
 	protected void fighterStart(){
 		initializePlayer();
