@@ -15,17 +15,17 @@ public class MapGeneration : MonoBehaviour{
 	public Sorcerer sorcerer;
 	public EnemyFactory factory;
 	List<int> listOfWalls;
-	int[,] mapArray;
+	public static int[,] mapArray;
 	int numberRooms = 10;
-	int mapSizeX = 25;
-	int mapSizeZ = 25;
+	public static int mapSizeX = 25;
+	public static int mapSizeZ = 25;
 	
-	void Start () {
+	void Awake () {
 		factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
 		GameObject player = GameObject.Find("Fighter");
 		GameObject player2 = GameObject.Find("Sorcerer");
-		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, player, player2);
-		buildMap (map);
+		mapArray = generateMap (mapSizeX, mapSizeZ, numberRooms, player, player2);
+		buildMap (mapArray);
 	}
 	
 	// Update is called once per frame
@@ -86,19 +86,19 @@ public class MapGeneration : MonoBehaviour{
 		Vector3 position = new Vector3 (i*10,0,j*10);
 
 		if (map [i - 1, j] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x-5,0,position.z), Quaternion.Euler (0,180,0))as GameObject;
+			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,180,0))as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 		}
 		if (map [i + 1, j] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z), new Quaternion())as GameObject;
+			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x+10,0,position.z+5), new Quaternion())as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 		}
 		if (map [i, j - 1] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x,0,position.z-5), Quaternion.Euler (0,90,0))as GameObject;
+			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z), Quaternion.Euler (0,90,0))as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 		}
 		if (map [i, j + 1] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,-90,0))as GameObject;
+			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z+10), Quaternion.Euler (0,-90,0))as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 		}
 		
