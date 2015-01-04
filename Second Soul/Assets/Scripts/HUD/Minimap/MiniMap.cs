@@ -48,16 +48,16 @@ public class MiniMap : MonoBehaviour {
 				if (map [i,j] != 0){
 
 					if (map [i - 1, j] == 0) {
-						buildLine(new Vector3(i, 0, j)*10.0f,new Vector3(i,0, j+1)*10.0f);
+						buildLine(new Vector3(i, -1, j)*10.0f,new Vector3(i,-1, j+1)*10.0f);
 					}
 					if (map [i + 1, j] == 0) {
-						buildLine(new Vector3(i+1, 0, j)*10.0f,new Vector3(i+1,0, j+1)*10.0f);
+						buildLine(new Vector3(i+1, -1, j)*10.0f,new Vector3(i+1,-1, j+1)*10.0f);
 					}
 					if (map [i, j - 1] == 0) {
-						buildLine(new Vector3(i, 0, j)*10.0f,new Vector3(i+1,0, j)*10.0f);
+						buildLine(new Vector3(i, -1, j)*10.0f,new Vector3(i+1,-1, j)*10.0f);
 					}
 					if (map [i, j + 1] == 0) {
-						buildLine(new Vector3(i, 0, j+1)*10.0f,new Vector3(i+1,0, j+1)*10.0f);
+						buildLine(new Vector3(i, -1, j+1)*10.0f,new Vector3(i+1,-1, j+1)*10.0f);
 					}
 				}
 			}

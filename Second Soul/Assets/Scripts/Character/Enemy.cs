@@ -81,6 +81,7 @@ public class Enemy : Character {
 			dieMethod();
 			giveXP();
 			destroySelf();
+			Destroy(transform.FindChild("Sphere").gameObject);
 		}
 	}
 	
