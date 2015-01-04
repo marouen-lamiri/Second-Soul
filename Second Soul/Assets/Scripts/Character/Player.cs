@@ -85,7 +85,13 @@ public abstract class Player : Character {
 						activeSkill1.useSkill(target);
 
 						// networking event listener:
-						fighterNetworkScript.onAttackTriggered("activeSkill1");
+						if(fighterNetworkScript != null) {
+							fighterNetworkScript.onAttackTriggered("activeSkill1");
+						} else if (sorcererNetworkScript != null) {
+							//sorcererNetworkScript.onAttackTriggered("activeSkill1");
+						} else {
+							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+						}
 					}
 					else{
 						chaseTarget();
@@ -100,7 +106,14 @@ public abstract class Player : Character {
 						activeSkill2.useSkill(castPosition());
 
 						// networking event listener:
-						fighterNetworkScript.onAttackTriggered("activeSkill2");
+						// networking event listener:
+						if(fighterNetworkScript != null) {
+							fighterNetworkScript.onAttackTriggered("activeSkill2");
+						} else if (sorcererNetworkScript != null) {
+							//sorcererNetworkScript.onAttackTriggered("activeSkill2");
+						} else {
+							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+						}		
 					}
 					else{
 						chaseTarget();
