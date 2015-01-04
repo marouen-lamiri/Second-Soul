@@ -2,18 +2,22 @@
 using System.Collections;
 
 public class ChooseClass : MonoBehaviour {
-	// Positioning
+	// Positioning.
 	public int windowX;
 	public int windowY;
 	public int windowButtonWidth;
 	public int windowButtonHeight;
 
-	// Represents the Sub-Classes for both Main-Classes
+	// Represents the Sub-Classes for both Main-Classes.
 	public int fighterSelection = 0;
 	public string[] fighterSelectionStrings = {"Berserker", "Knight", "Monk"};
 	public int sorcererSelection = 0;
 	public string[] sorcererSelectionStrings = {"Mage", "Priest", "Druid"};
 
+	// Scene to load when pressing the Start-button.
+	public string sceneName;
+	
+	// Positioning initialization.
 	public void Awake() {
 		windowX = 10;
 		windowY = 10;
@@ -48,7 +52,10 @@ public class ChooseClass : MonoBehaviour {
 		/*group-2*/sorcererSelection = GUI.SelectionGrid (new Rect (screenWidth75 - labelWidth50, windowY + windowButtonHeight * 5, windowButtonWidth, windowButtonHeight*3), sorcererSelection, sorcererSelectionStrings, 1);
 
 		// Start-Button.
-		GUI.Button(new Rect(screenWidth50 - labelWidth50, windowY + windowButtonHeight * 10, windowButtonWidth, windowButtonHeight), "Start");
-
+		if (GUI.Button (new Rect (screenWidth50 - labelWidth50, windowY + windowButtonHeight * 10, windowButtonWidth, windowButtonHeight), "Start"))
+		{
+			// TODO: Once we decide which scene to load, we need to build the current (ChooseClass-scene) together with the sceneName scene.
+//			Application.LoadLevel (sceneName);
+		}
 	}
 }
