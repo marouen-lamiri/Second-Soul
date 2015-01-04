@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Mage : Sorcerer {
 
+	void Awake (){
+		base.Awake ();
+	}
 	// Use this for initialization
 	void Start () {
 	

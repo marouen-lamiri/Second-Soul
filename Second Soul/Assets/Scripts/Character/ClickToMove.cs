@@ -8,14 +8,14 @@ public class ClickToMove : MonoBehaviour {
 	private Vector3 position;
 	private List<Vector3> nextPositions;
 	private float timer = 0f; //checks if the player input has been put very recently
-	public Grid grid;
-	public PathFinding pathing;
+	private Grid grid;
+	private PathFinding pathing;
 
 	public static bool busy;
 
 	void awake(){
-		grid = GetComponent<Grid>();
-		pathing = GetComponent<PathFinding>();
+		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
+		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 	}
 
 	// Use this for initialization

@@ -4,10 +4,13 @@ using System.Collections;
 public class DisplayPlayerStats : MonoBehaviour {
 
 	//Variables
-	public Fighter player;
+	private Fighter player;
 	public bool isStatsDisplayed = false;
 	public Font myFont;
-	
+
+	void Start(){
+		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+	}
 	//Checks if the s button was pressed
 	void Update()
 	{

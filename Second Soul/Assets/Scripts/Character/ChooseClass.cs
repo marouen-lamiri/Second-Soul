@@ -2,6 +2,14 @@
 using System.Collections;
 
 public class ChooseClass : MonoBehaviour {
+	//Prefabs
+	public Berserker berserker;
+	public Knight knight;
+	public Monk monk;
+	public Mage mage;
+	public Druid druid;
+	public Priest priest;
+
 	// Positioning.
 	public int windowX;
 	public int windowY;
@@ -54,8 +62,33 @@ public class ChooseClass : MonoBehaviour {
 		// Start-Button.
 		if (GUI.Button (new Rect (screenWidth50 - labelWidth50, windowY + windowButtonHeight * 10, windowButtonWidth, windowButtonHeight), "Start"))
 		{
-			// TODO: Once we decide which scene to load, we need to build the current (ChooseClass-scene) together with the sceneName scene.
-//			Application.LoadLevel (sceneName);
+			Fighter fighter;
+			Sorcerer sorcerer;
+			if(fighterSelectionStrings[fighterSelection]=="Berserker"){
+				fighter = (Berserker) Instantiate(berserker,Vector3.zero,Quaternion.identity);
+			}
+			else if(fighterSelectionStrings[fighterSelection]=="Knight"){
+				fighter = (Knight) Instantiate(knight,Vector3.zero,Quaternion.identity);
+			}
+			else/*(fighterSelectionStrings[fighterSelection]=="Monk")*/{
+				fighter = (Monk) Instantiate(monk,Vector3.zero,Quaternion.identity);
+			}
+
+			if(sorcererSelectionStrings[sorcererSelection]=="Mage"){
+				sorcerer = (Mage) Instantiate(mage,Vector3.zero,Quaternion.identity);
+			}
+			else if(sorcererSelectionStrings[sorcererSelection]=="Druid"){
+				sorcerer = (Druid) Instantiate(druid,Vector3.zero,Quaternion.identity);
+			}
+			else/*(sorcererSelectionStrings[sorcererSelection]=="Priest")*/{
+				sorcerer = (Priest) Instantiate(priest,Vector3.zero,Quaternion.identity);
+			}
+			fighter.gameObject.name = "Fighter";
+			sorcerer.gameObject.name = "Sorcerer";
+			DontDestroyOnLoad(fighter);
+			DontDestroyOnLoad(sorcerer);
+
+			Application.LoadLevel (sceneName);
 		}
 	}
 }

@@ -12,11 +12,12 @@ public class PlayerHealthBar : MonoBehaviour {
 	double healthPercent;
 	float ratioWidth;
 	float ratioHeight;
-	public Fighter player;
+	private Fighter player;
 
 
 	//Initialization of variables
 	void Start () {
+		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		hp = player.health;
 		maxhp = player.maxHealth;
 		healthPercent = 1;

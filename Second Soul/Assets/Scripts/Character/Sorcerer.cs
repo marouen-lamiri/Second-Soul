@@ -12,14 +12,18 @@ public class Sorcerer : Player {
 	protected int wisdomPerLvl;
 	protected int spiritPerLvl;
 
-	public Fighter fighter;
+	private Fighter fighter;
 	
 	// Use this for initialization
+	protected void Awake (){
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+	}
 	void Start () {
 		sorcererStart ();
 	}
 
 	protected void sorcererStart(){
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		initializePlayer();
 		initializeLevel();
 		initializePrimaryStats();

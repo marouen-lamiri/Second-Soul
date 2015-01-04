@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Items : MonoBehaviour {
 
-	public Character player;
+	private Character player;
 	public List<Chest> chestInspector;
 	private static List<Chest> chest;
 	public List<HealthPotion> healthPotionListInspector;
@@ -12,6 +12,7 @@ public class Items : MonoBehaviour {
 	private static List<ManaPotion> manaPotionList;
 
 	void Start(){
+		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		healthPotionList = healthPotionListInspector;
 		manaPotionList = manaPotionListInspector;
 		chest = chestInspector;

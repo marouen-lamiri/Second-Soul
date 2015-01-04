@@ -4,11 +4,13 @@ using System.Collections.Generic;
 
 public class PathFinding : MonoBehaviour {
 	
-	public GameObject seeker, target;
+	private GameObject seeker, target;
 	
 	Grid grid;
 	
 	void Awake() {
+		seeker = GameObject.Find("Fighter");
+		target = GameObject.Find("Sorcerer");
 		grid = GetComponent<Grid>();
 	}
 	

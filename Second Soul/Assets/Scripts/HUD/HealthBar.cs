@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HealthBar : MonoBehaviour {
 
-	public Fighter player;
+	private Fighter player;
 	public Enemy enemy;
 	
 	public Texture2D healthFrame;
@@ -26,6 +26,7 @@ public class HealthBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		healthFrameWidth = (float)Screen.width*healthFrameWidthFix;
 		healthFrameHeight = (float)Screen.height*healthFrameHeightFix;
 		healthFillWidth = (float)Screen.width*healthFillWidthFix;

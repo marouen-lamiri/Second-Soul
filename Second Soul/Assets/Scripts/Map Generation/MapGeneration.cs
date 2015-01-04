@@ -11,9 +11,9 @@ public class MapGeneration : MonoBehaviour{
 	public GameObject crystalPrefab;
 	public GameObject statuePrefab;
 	public Enemy enemyPrefab;
-	public Fighter fighter;
-	public Sorcerer sorcerer;
 	public EnemyFactory factory;
+	private Fighter fighter;
+	private Sorcerer sorcerer;
 	List<int> listOfWalls;
 	public static int[,] mapArray;
 	int numberRooms = 10;
@@ -21,10 +21,10 @@ public class MapGeneration : MonoBehaviour{
 	public static int mapSizeZ = 25;
 	
 	void Awake () {
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
-		GameObject player = GameObject.Find("Fighter");
-		GameObject player2 = GameObject.Find("Sorcerer");
-		mapArray = generateMap (mapSizeX, mapSizeZ, numberRooms, player, player2);
+		mapArray = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter.gameObject, sorcerer.gameObject);
 		buildMap (mapArray);
 	}
 	
