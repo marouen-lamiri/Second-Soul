@@ -20,7 +20,10 @@ public class Enemy : Character {
 	public bool hasAggro;
 	
 	public bool xpGiven;
-	
+
+	public int assigner;
+	int id;
+
 	ISkill activeSkill1;
 	
 	
@@ -89,7 +92,7 @@ public class Enemy : Character {
 		level = target.level;
 		calculateXPWorth();
 	}
-
+	
 	public void enemyAI(){
 		if(!hasAggro){
 			if(inAwareRadius()){
