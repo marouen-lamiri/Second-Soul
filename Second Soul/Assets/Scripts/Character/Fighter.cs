@@ -42,10 +42,14 @@ public class Fighter : Player {
 	}
 	// Update is called once per frame
 	void Update () {
-		playerLogic();
-		if(Input.GetKeyDown(KeyCode.E)){
+		fighterUpdate ();
+	}
+
+	protected void fighterUpdate(){
+		if(Input.GetKeyDown ("e")){
 			playerEnabled = !playerEnabled;
 		}
+		playerLogic();
 	}
 	
 	protected virtual void initializePrimaryStats(){

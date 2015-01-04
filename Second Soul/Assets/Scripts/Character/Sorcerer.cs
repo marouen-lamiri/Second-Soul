@@ -45,8 +45,12 @@ public class Sorcerer : Player {
 	}
 	// Update is called once per frame
 	void Update () {
+		sorcererUpdate ();
+	}
+
+	protected void sorcererUpdate(){
 		playerEnabled = !fighter.playerEnabled;
-		playerLogic ();
+		playerLogic();
 	}
 
 	protected virtual void initializePrimaryStats(){

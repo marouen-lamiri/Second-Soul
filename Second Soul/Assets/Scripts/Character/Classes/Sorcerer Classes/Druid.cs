@@ -8,12 +8,12 @@ public class Druid : Sorcerer {
 	}
 	// Use this for initialization
 	void Start () {
-	
+		sorcererStart ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		sorcererUpdate ();
 	}
 
 	protected override void initializePrimaryStats(){
