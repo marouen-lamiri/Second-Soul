@@ -111,13 +111,15 @@ public class Fighter : Player {
 		}
 		return damage * attackPower;
 	}
-	public override void loseEnergy(float energy){
-		this.energy -= energy;
-		if (energy < 0) {
-			energy = 0;
+	public override bool loseEnergy(float energy){
+		if (energy > this.energy) {
+			return false;
 		}
+		this.energy -= energy;
 
 		// networking event listener:
 		fighterNetworkScript.onEnergyLost (this.energy);
+
+		return true;
 	}
 }

@@ -4,14 +4,17 @@ using System.Collections.Generic;
 
 public class MiniMap : MonoBehaviour {
 
-	public Fighter fighter;   // The Fighter from the scene.
-	public Sorcerer sorcerer; // The Sorcerer from the scene.
+	private Fighter fighter;   // The Fighter from the scene.
+	private Sorcerer sorcerer; // The Sorcerer from the scene.
 	public Material material;
 	List<GameObject> spheres = new List<GameObject>();
 	List<GameObject> playerSpheres = new List<GameObject>();
 	List<GameObject> enemySpheres = new List<GameObject>();
 
 	void Start(){
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+
 		GameObject fighterSphere = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 		fighterSphere.transform.parent = fighter.transform;
 		playerSpheres.Add (fighterSphere);

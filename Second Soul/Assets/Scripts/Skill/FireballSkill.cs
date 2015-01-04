@@ -44,8 +44,9 @@ public class FireballSkill : ProjectileSkill {
 	
 	IEnumerator shootFireball(Vector3 target){
 		yield return new WaitForSeconds(skillLength);
-		caster.loseEnergy (energyCost);
-		FireballBehavior fireball = Instantiate(fireballPrefab, caster.transform.position + spawnDistance * caster.transform.forward, caster.transform.rotation)as FireballBehavior;
-		fireball.fireballSkill = this;
+		if(caster.loseEnergy (energyCost)){
+			FireballBehavior fireball = Instantiate(fireballPrefab, caster.transform.position + spawnDistance * caster.transform.forward, caster.transform.rotation)as FireballBehavior;
+			fireball.fireballSkill = this;
+		}
 	}
 }

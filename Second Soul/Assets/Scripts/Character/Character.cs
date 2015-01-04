@@ -256,8 +256,8 @@ public abstract class Character : MonoBehaviour {
 		}
 	}
 
-	public virtual void loseEnergy(float energy){
-
+	public virtual bool loseEnergy(float energy){
+		return false;
 	}
 	
 	public virtual void gainExperience(int experience){

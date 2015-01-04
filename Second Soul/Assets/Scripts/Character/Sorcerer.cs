@@ -106,7 +106,7 @@ public class Sorcerer : Player {
 		return fighter.isDead ();
 	}
 
-	public override void loseEnergy(float energy){
-		fighter.loseEnergy (energy);
+	public override bool loseEnergy(float energy){
+		return fighter.loseEnergy (energy);
 	}
 }
