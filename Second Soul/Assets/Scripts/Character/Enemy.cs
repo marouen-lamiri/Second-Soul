@@ -84,7 +84,6 @@ public class Enemy : Character {
 			dieMethod();
 			giveXP();
 			destroySelf();
-			Destroy(transform.FindChild("Sphere").gameObject);
 		}
 	}
 	
@@ -184,6 +183,7 @@ public class Enemy : Character {
 	public void destroySelf(){
 		Destroy(controller);
 		Destroy (this.GetComponent<CapsuleCollider>());
+		Destroy(transform.FindChild("Sphere").gameObject);
 		target.target = null;
 		sorcerer.target = null;
 	}

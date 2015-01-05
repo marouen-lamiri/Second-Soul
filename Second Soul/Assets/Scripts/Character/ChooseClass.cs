@@ -6,7 +6,7 @@ public class ChooseClass : MonoBehaviour {
 	public Berserker berserker;
 	public Knight knight;
 	public Monk monk;
-	public Mage mage;
+	public Sorcerer mage;
 	public Druid druid;
 	public Priest priest;
 
@@ -75,7 +75,7 @@ public class ChooseClass : MonoBehaviour {
 			}
 
 			if(sorcererSelectionStrings[sorcererSelection]=="Mage"){
-				sorcerer = (Mage) Instantiate(mage,Vector3.zero,Quaternion.identity);
+				sorcerer = (Sorcerer) Instantiate(mage,Vector3.zero,Quaternion.identity);
 			}
 			else if(sorcererSelectionStrings[sorcererSelection]=="Druid"){
 				sorcerer = (Druid) Instantiate(druid,Vector3.zero,Quaternion.identity);
