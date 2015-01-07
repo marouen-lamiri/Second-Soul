@@ -242,7 +242,7 @@ public class Storage : MonoBehaviour {
 		ClickToMove.busy = false;
 	}
 	
-	protected bool firstAvailableInventorySlots( out int startX, out int startY, Item item ){
+ 	bool firstAvailableInventorySlots( out int startX, out int startY, Item item ){
 		bool validPostion;
 		for(int x = 0; x < inventoryStorageWidth ; x++){
 			startX = x;
