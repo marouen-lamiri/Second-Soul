@@ -72,7 +72,7 @@ public class Storage : MonoBehaviour {
 		return true;
 	}
 
-	public static void addInventoryItem(int x, int y, Item item){
+	public void addInventoryItem(int x, int y, Item item){
 		//Debug.Log("comes"+ x + " , " + y);
 		item.x = x;
 		item.y = y;
@@ -242,7 +242,7 @@ public class Storage : MonoBehaviour {
 		ClickToMove.busy = false;
 	}
 	
- 	bool firstAvailableInventorySlots( out int startX, out int startY, Item item ){
+ 	public bool firstAvailableInventorySlots( out int startX, out int startY, Item item ){
 		bool validPostion;
 		for(int x = 0; x < inventoryStorageWidth ; x++){
 			startX = x;

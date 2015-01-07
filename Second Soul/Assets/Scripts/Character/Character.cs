@@ -212,7 +212,7 @@ public abstract class Character : MonoBehaviour {
 		return false;
 	}
 	//to be overriden
-	public virtual int getDamage (){
+	public virtual double getDamage (){
 		return -1;
 	}
 
@@ -273,9 +273,12 @@ public abstract class Character : MonoBehaviour {
 	public void followPath(List<Vector3> path){
 
 	}
+
+	// when possible transform this to take (Vector3 pos, Vector3 targetPos) so this can be extensible to chasing another point like an item
 	public void chaseTarget(){
 		chasing = true;
 		animateRun();
+		Debug.Log (pathing);
 		pathing.findPath(transform.position, target.transform.position);
 		List<Vector3> path = grid.worldFromNode(grid.path);
 		followPath (path);

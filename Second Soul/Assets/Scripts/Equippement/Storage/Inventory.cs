@@ -22,6 +22,10 @@ public class Inventory : Storage
 			shownInventory();
 		}
 	}
+
+	public void sayhi(){
+		Debug.Log ("works");
+	}
 	
 	void setSlots(){
 		inventorySlots = new Slot[inventoryStorageWidth,inventoryStorageHeight];

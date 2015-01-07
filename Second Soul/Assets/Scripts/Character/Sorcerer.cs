@@ -15,11 +15,13 @@ public class Sorcerer : Player {
 	private Fighter fighter;
 	
 	// Use this for initialization
-	protected void Awake (){
-		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-	}
+
 	void Start () {
-		sorcererStart ();
+		sorcererStart (); //initialized in base classes now why still needed?
+	}
+	// is this needed since called in sorcereStart??
+	protected void initFighter(){
+		//fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 	}
 
 	protected void sorcererStart(){
@@ -63,7 +65,7 @@ public class Sorcerer : Player {
 		spirit = 10;
 	}
 
-	public virtual bool criticalHitCheck(){
+	public override bool criticalHitCheck(){
 		int randomRoll = Random.Range (1, 100);
 		if (randomRoll <= spellCriticalChance * 100) {
 			return true;
@@ -72,7 +74,7 @@ public class Sorcerer : Player {
 			return false;
 		}
 	}
-	public virtual double getDamage(){
+	public override double getDamage(){
 		if(!hitCheck()){
 			return 0;
 		}

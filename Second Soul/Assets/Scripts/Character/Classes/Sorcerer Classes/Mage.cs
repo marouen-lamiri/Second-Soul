@@ -4,7 +4,7 @@ using System.Collections;
 public class Mage : Sorcerer {
 
 	void Awake (){
-		base.Awake ();
+		initFighter ();
 	}
 	// Use this for initialization
 	void Start () {

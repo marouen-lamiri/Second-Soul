@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ItemHolder : MonoBehaviour {
 
-	Item item;
+	public Item item;
 	// Use this for initialization
 	void Start () {
 	

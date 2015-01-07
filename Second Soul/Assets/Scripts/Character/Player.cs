@@ -9,6 +9,8 @@ public abstract class Player : Character {
 	public int nextLevelXP; // xp need for next level --remove public
 	
 	public bool attacking;
+
+	public Inventory inventory;
 	//private Vector3 castPosition;
 	
 	public ISkill activeSkill1; // protected
@@ -34,6 +36,9 @@ public abstract class Player : Character {
 	protected void initializePlayer () {
 		target = null;
 		startPosition = transform.position;
+		Debug.Log (GameObject.Find ("HUD/Equipment/Inventory"));
+		//inventory = GameObject.FindGameObjectWithTag ("Inventory").GetComponent("Inventory") as Inventory;
+		//inventory.sayhi ();
 	}
 	
 	protected void initializeLevel(){
@@ -121,6 +126,16 @@ public abstract class Player : Character {
 				}
 			}
 		}
+	}
+
+	public bool takeItem(Item item){
+		int newX;
+		int newY;
+		if (!inventory.firstAvailableInventorySlots (out newX, out newY, item)) {
+			return false;
+		}
+		inventory.addInventoryItem(newX, newY, item);
+		return true;
 	}
 	
 	public Vector3 castPosition(){ // private
