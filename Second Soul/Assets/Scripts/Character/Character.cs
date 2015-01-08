@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 public abstract class Character : MonoBehaviour {
 	public CharacterController controller;
-//	public Grid grid;
-//	public PathFinding pathing;
-	private Grid grid;
-	private PathFinding pathing;
+	protected Grid grid;
+	protected PathFinding pathing;
 	private List<Vector3> path;
 	
 	public int level; // only public for now to see level in inspector

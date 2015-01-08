@@ -12,8 +12,7 @@ public class EnemyFactory : MonoBehaviour {
 
 	private Fighter target;
 	private Sorcerer sorcerer;
-	public PathFinding pathing;
-	public Grid grid;
+
 	// Use this for initialization
 	public void setFactoryVariables(Enemy enemyPrefab, Fighter target, Sorcerer sorcerer){
 		this.enemyPrefab=enemyPrefab;
@@ -21,7 +20,6 @@ public class EnemyFactory : MonoBehaviour {
 		this.sorcerer=sorcerer;
 	}
 	void Start () {
-
 	}
 	
 	// Update is called once per frame
@@ -33,7 +31,5 @@ public class EnemyFactory : MonoBehaviour {
 		enemy.target = target;
 		enemy.sorcerer = sorcerer;
 		enemy.transform.parent = GameObject.Find("Enemies").transform;
-		enemy.setGrid (grid);
-		enemy.setPathing (pathing);
 	}
 }

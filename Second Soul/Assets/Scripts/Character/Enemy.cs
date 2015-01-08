@@ -29,6 +29,8 @@ public class Enemy : Character {
 	
 	// Use this for initialization
 	void Start (){
+		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
+		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 		experienceBase = 25;
 		xpGiven = false;
 
