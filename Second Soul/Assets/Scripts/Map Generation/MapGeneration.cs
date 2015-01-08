@@ -34,10 +34,13 @@ public class MapGeneration : MonoBehaviour{
 	}
 	
 	
-	void playerStartPosition(int [,] map, GameObject player){
+	int[,] playerStartPosition(int [,] map, GameObject player){
 		for (int i=0; i<mapSizeX; i++) {
 			for(int j=0;j<mapSizeZ;j++){
-				if (map [i,j] != 0 && map [i-1,j] != 0 && map [i,j-1] != 0 && map [i-2,j] != 0 && map [i,j-2] != 0 && map [i,j] != 99){
+				if (map [i,j] != 0 && map [i-1,j] != 0 && map [i,j-1] != 0 && map [i-2,j] != 0 && map [i,j-2] != 0 && map [i,j] != 99
+				    && map [i+1,j] != 0 && map [i,j+1] != 0 && map [i+2,j] != 0 && map [i,j+2] != 0
+				    && map [i+1,j+1] != 0 && map [i-1,j-1] != 0 && map [i+2,j+2] != 0 && map [i-2,j-2] != 0
+				    && map [i,j] != 98 && map [i,j] != 90){
 					map [i,j] = 99;
 					player.transform.position = new Vector3(i*10,0,j*10);
 					i = mapSizeX;
@@ -45,9 +48,10 @@ public class MapGeneration : MonoBehaviour{
 				}
 			}
 		}
+		return map;
 	}
 	
-	void enemySpawnLocation(int [,] map){
+	int[,] enemySpawnLocation(int [,] map){
 		int nbrEnemies = Random.Range (25,35);
 		int nbrEnemiesByRoom = Random.Range (1,4);
 		int previousRoomNumber = 0;
@@ -69,6 +73,7 @@ public class MapGeneration : MonoBehaviour{
 				}
 			}
 		}
+		return map;
 	}
 	
 	void buildMap(int[,] map){
@@ -209,9 +214,9 @@ public class MapGeneration : MonoBehaviour{
 			genMap = generateObstacles (genMap, crystalPrefab, false);
 			genMap = generateObstacles (genMap, obstaclePrefab, true);
 			genMap = generateObstacles (genMap, statuePrefab, false);
-			playerStartPosition(genMap, player);
-			playerStartPosition(genMap, player2);
-			enemySpawnLocation (genMap);
+			genMap = playerStartPosition(genMap, player);
+			genMap = playerStartPosition(genMap, player2);
+			genMap = enemySpawnLocation (genMap);
 		}		
 		return genMap;
 	}

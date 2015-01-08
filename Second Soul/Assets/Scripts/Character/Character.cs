@@ -97,6 +97,7 @@ public abstract class Character : MonoBehaviour {
 	public bool playerEnabled;
 	
 	public Character target;
+	public Vector3 nextPosition;
 
 	public float speed;
 	public bool chasing;
@@ -270,18 +271,20 @@ public abstract class Character : MonoBehaviour {
 		}
 		return false;
 	}
-	public void followPath(List<Vector3> path){
 
-	}
 
 	// when possible transform this to take (Vector3 pos, Vector3 targetPos) so this can be extensible to chasing another point like an item
 	public void chaseTarget(){
 		chasing = true;
 		animateRun();
 		Debug.Log (pathing);
-		pathing.findPath(transform.position, target.transform.position);
+		if(gameObject.tag == "Enemy"){
+			pathing.findPath(transform.position, target.transform.position);
+		}
+		else{
+			pathing.findPath(transform.position, nextPosition);
+		}
 		List<Vector3> path = grid.worldFromNode(grid.path);
-		followPath (path);
 		Vector3 destination;
 		if (Vector3.Distance (transform.position, target.transform.position) > 4) {
 			destination = path[1];
@@ -305,6 +308,10 @@ public abstract class Character : MonoBehaviour {
 //		//Debug.Log (++attackcount);
 //		StartCoroutine(applyAttackDamage(target));
 //	}
+
+	public void clickPosition(Vector3 position){
+		nextPosition = position;
+	}
 	
 	
 	public bool attackLocked(){
