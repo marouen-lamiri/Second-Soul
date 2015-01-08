@@ -51,6 +51,7 @@ public class Sorcerer : Player {
 	}
 
 	protected void sorcererUpdate(){
+		playerUpdate ();
 		playerEnabled = !fighter.playerEnabled;
 		playerLogic();
 	}
