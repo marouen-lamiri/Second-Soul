@@ -128,9 +128,13 @@ public abstract class Character : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		characterUpdate ();
 	}
-
+	protected void characterUpdate(){
+		if (transform.FindChild ("Sphere") != null) {
+			transform.FindChild ("Sphere").transform.position = new Vector3 (transform.position.x, 10.0f, transform.position.z);
+		}
+	}
 	public void setPathing(PathFinding path){
 		this.pathing = path;
 	}

@@ -95,10 +95,10 @@ public class MiniMap : MonoBehaviour {
 			// Adjusting the MiniMap camera to the Sorcerer position.
 			this.moveMiniMapCamera(sorcerer.transform.position);
 		}
-		fighter.transform.FindChild("Sphere").transform.position=new Vector3(fighter.transform.position.x, 10.0f, fighter.transform.position.z);
-		sorcerer.transform.FindChild("Sphere").transform.position=new Vector3(sorcerer.transform.position.x, 10.0f, sorcerer.transform.position.z);
+		//fighter.transform.FindChild("Sphere").transform.position=new Vector3(fighter.transform.position.x, 10.0f, fighter.transform.position.z);
+		//sorcerer.transform.FindChild("Sphere").transform.position=new Vector3(sorcerer.transform.position.x, 10.0f, sorcerer.transform.position.z);
 		for (int i=0; i<enemySpheres.Count; ++i) {
-			enemySpheres[i].transform.position = new Vector3 (enemySpheres[i].transform.parent.transform.position.x, 10.0f, enemySpheres[i].transform.parent.transform.position.z);
+			//enemySpheres[i].transform.position = new Vector3 (enemySpheres[i].transform.parent.transform.position.x, 10.0f, enemySpheres[i].transform.parent.transform.position.z);
 		}
 
 	}

@@ -77,8 +77,10 @@ public class Enemy : Character {
 
 	// Update is called once per frame
 	void Update (){
-		//Debug.Log (inRange());
-		//Debug.Log (health);
+		enemyUpdate ();
+	}
+	protected void enemyUpdate(){
+		characterUpdate ();
 		if (!isDead ()) {
 			enemyAI ();
 		} 
@@ -185,7 +187,9 @@ public class Enemy : Character {
 	public void destroySelf(){
 		Destroy(controller);
 		Destroy (this.GetComponent<CapsuleCollider>());
-		Destroy(transform.FindChild("Sphere").gameObject);
+		if (transform.FindChild ("Sphere") != null) {
+			Destroy (transform.FindChild ("Sphere").gameObject);
+		}
 		target.target = null;
 		sorcerer.target = null;
 	}

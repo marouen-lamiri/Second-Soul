@@ -28,9 +28,11 @@ public abstract class Player : Character {
 	
 	// Update is called once per frame
 	void Update(){
-	
+		playerUpdate ();
 	}
-	
+	protected void playerUpdate(){
+		characterUpdate ();
+	}
 	public abstract void levelUp();
 	
 	protected void initializePlayer () {

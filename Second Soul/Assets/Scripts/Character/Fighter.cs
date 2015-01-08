@@ -46,6 +46,7 @@ public class Fighter : Player {
 	}
 
 	protected void fighterUpdate(){
+		playerUpdate ();
 		if(Input.GetKeyDown ("e")){
 			playerEnabled = !playerEnabled;
 		}
