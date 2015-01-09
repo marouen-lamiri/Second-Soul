@@ -22,11 +22,19 @@ public class ClientNetwork : MonoBehaviour {
 	int framesToWait;
 
 	public void Start() {
-		//debug
-		Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-		Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
-		sorcerer.name = "Sorcerer";
-		fighter.name = "Fighter";
+//		//debug
+//		if(Application.loadedLevelName == "NetworkStartMenu") {
+//			print ("we're in the if for is NetworkStartMenu");
+//			Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+//			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+//			sorcerer.name = "Sorcerer";
+//			fighter.name = "Fighter";
+//			//		DontDestroyOnLoad (sorcerer.gameObject);
+//			//		DontDestroyOnLoad (fighter.gameObject);
+//			DontDestroyOnLoad (sorcerer);
+//			DontDestroyOnLoad (fighter);
+//
+//		}
 	}
 	
 	public void Awake() {
@@ -43,8 +51,8 @@ public class ClientNetwork : MonoBehaviour {
 
 		// generate the map only after the players have been created (becasue they are needed for some reason for the map generation code:
 		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
-		print ("BEFORE 1: "+Network.connections.Length);
-		if(serverAndClientAreBothConnected) {	// && Network.isServer
+		//print ("BEFORE 1: "+Network.connections.Length);
+		if(serverAndClientAreBothConnected && Application.loadedLevelName == "NetworkStartMenu") {	// && Network.isServer
 			framesToWait++;
 			if(framesToWait > 700) {
 				// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
@@ -79,8 +87,17 @@ public class ClientNetwork : MonoBehaviour {
 				
 				// connect:
 				Network.InitializeServer (10, port, false);
-				Fighter fighter = Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
-				//DontDestroyOnLoad(fighter.gameObject);
+//				Fighter fighter = Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+//				DontDestroyOnLoad(fighter.gameObject);
+
+//				//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+//				Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+//				//sorcerer.name = "Sorcerer";
+//				fighter.name = "Fighter_FIGHTER";
+//				//DontDestroyOnLoad (sorcerer.gameObject);
+//				DontDestroyOnLoad (fighter.gameObject);
+
+
 				// disable second soul:
 				
 			}
@@ -214,8 +231,17 @@ public class ClientNetwork : MonoBehaviour {
 	void OnConnectedToServer() {
 		_messageLog += "Connected to server" + "\n";
 		// added:
-		Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+		//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
 		//DontDestroyOnLoad(sorcerer.gameObject);
+
+//		Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+//		//Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+//		sorcerer.name = "Sorcerer_SORCERER";
+//		//fighter.name = "Fighter";
+//		DontDestroyOnLoad (sorcerer.gameObject);
+//		//DontDestroyOnLoad (fighter.gameObject);
+
+
 		isConnectedToServer = true;
 	}
 	void OnDisconnectedToServer() {
@@ -254,14 +280,28 @@ public class ClientNetwork : MonoBehaviour {
 	//    }
 
 	void OnLevelWasLoaded(int level) {
+
 //		if(Network.isClient) {
 //			Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-//		} else if (Network.isServer) {
-//			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+//			sorcerer.name = "Sorcerer";
+//		} 
+//		else if (Network.isServer) {
+//			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.		fighter.name = "Fighter";
+//			fighter.name = "Fighter";
 //		}
+		if (Network.isClient) {
+			Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+			sorcerer.name = "Sorcerer";
+			fighter.name = "Fighter";
 
-//		Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-//		Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+		} 
+		if(Network.isServer) {
+			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectsOfType(typeof(Sorcerer));
+			Fighter fighter = (Fighter)GameObject.FindObjectsOfType(typeof(Fighter));
+			sorcerer.name = "Sorcerer";
+			fighter.name = "Fighter"; // not working, they are still named Fighter(clone) on the server.
+		}
 
 
 		

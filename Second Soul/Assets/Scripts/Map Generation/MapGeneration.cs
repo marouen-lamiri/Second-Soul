@@ -21,11 +21,13 @@ public class MapGeneration : MonoBehaviour{
 	int mapSizeZ = 25;
 	
 	void Start () {
-		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
-		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter, sorcerer);
-		buildMap (map);
+		if (Network.isServer) {
+			fighter = (Fighter)GameObject.FindObjectOfType (typeof(Fighter));
+			sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof(Sorcerer));
+			factory.setFactoryVariables (enemyPrefab, fighter, sorcerer);
+			int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter, sorcerer);
+			buildMap (map);
+		}
 	}
 	
 	// Update is called once per frame
