@@ -11,7 +11,9 @@ public class MapGeneration : MonoBehaviour{
 	public GameObject crystalPrefab;
 	public GameObject statuePrefab;
 	public Enemy enemyPrefab;
-	public EnemyFactory factory;
+	public EnemyFactory enemyfactory;
+	public ItemHolder itemHolderPrefab;
+	public LootFactory lootFactory;
 	private Fighter fighter;
 	private Sorcerer sorcerer;
 	List<int> listOfWalls;
@@ -23,7 +25,8 @@ public class MapGeneration : MonoBehaviour{
 	void Awake () {
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
+		enemyfactory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
+		lootFactory.setFactoryVariables(itemHolderPrefab, fighter);
 		mapArray = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter.gameObject, sorcerer.gameObject);
 		buildMap (mapArray);
 	}
@@ -63,7 +66,7 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i-1,j-1] != 98 && map [i+1,j+1] != 98){
 					map [i,j] = 98;
 					Vector3 spawnLocation = new Vector3(i*10,0,j*10);
-					factory.spawn(spawnLocation);
+					enemyfactory.spawn(spawnLocation);
 					nbrEnemies--;
 					nbrEnemiesByRoom--;
 					if(nbrEnemiesByRoom == 0){

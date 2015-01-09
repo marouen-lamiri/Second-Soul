@@ -20,11 +20,14 @@ public class Enemy : Character {
 	public bool hasAggro;
 	
 	public bool xpGiven;
+	public bool lootGiven;
 
 	public int assigner;
 	int id;
 
 	ISkill activeSkill1;
+	
+	public float dropRate;
 	
 	
 	// Use this for initialization
@@ -33,6 +36,7 @@ public class Enemy : Character {
 		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 		experienceBase = 25;
 		xpGiven = false;
+		lootGiven = false;
 
 		initializePrimaryStats();
 		initializeSecondaryStatsBase();
@@ -86,6 +90,7 @@ public class Enemy : Character {
 		} 
 		else {
 			dieMethod();
+			giveLoot(dropRate, transform.position);
 			giveXP();
 			destroySelf();
 		}
@@ -167,6 +172,13 @@ public class Enemy : Character {
 			sorcerer.gainExperience(experienceWorth/2);
 		}
 		xpGiven = true;
+	}
+	
+	void giveLoot(float dropRate, Vector3 position){
+		if(!lootGiven){
+			LootFactory.determineDrop(dropRate, position);
+		}
+		lootGiven = true;
 	}
 	
 	/*private void attack(){

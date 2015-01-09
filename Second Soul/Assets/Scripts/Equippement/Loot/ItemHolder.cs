@@ -9,7 +9,7 @@ public class ItemHolder : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		item = (Item) System.Activator.CreateInstance(System.Type.GetType("Chest"));
+		//item = (Item) System.Activator.CreateInstance(System.Type.GetType("Chest"));
 		//item = itemRand();
 	}
 	
