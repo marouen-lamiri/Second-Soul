@@ -13,11 +13,13 @@ public class Sorcerer : Player {
 	protected int spiritPerLvl;
 
 	private Fighter fighter;
-	
-	// Use this for initialization
 
+	public DatabaseSorcerer database;
+
+	// Use this for initialization
 	void Start () {
 		sorcererStart (); //initialized in base classes now why still needed?
+		database.readPrimaryStats();
 	}
 	// is this needed since called in sorcereStart??
 	protected void initFighter(){
@@ -119,5 +121,30 @@ public class Sorcerer : Player {
 
 	public override bool loseEnergy(float energy){
 		return fighter.loseEnergy (energy);
+	}
+
+	// Getters and Setters for Primary Stats
+	public int getIntelligence () {
+		return intelligence;
+	}
+	
+	public void setIntelligence (int iIntelligence) {
+		this.intelligence = iIntelligence;
+	}
+	
+	public int getWisdom () {
+		return wisdom;
+	}
+	
+	public void setWisdom (int iWisdom) {
+		this.wisdom = iWisdom;
+	}
+	
+	public int getSpirit () {
+		return spirit;
+	}
+	
+	public void setSpirit (int iSpirit) {
+		this.spirit = iSpirit;
 	}
 }

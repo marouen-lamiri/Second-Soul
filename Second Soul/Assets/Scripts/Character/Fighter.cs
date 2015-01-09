@@ -13,7 +13,7 @@ public class Fighter : Player {
 	protected int dexterityPerLvl;
 	protected int endurancePerLvl;
 
-	public Database database;
+	public DatabaseFighter database;
 	
 	//FighterNetworkScript fighterNetworkScript; // is "already serialized" in parent class Player.cs.
 
@@ -127,4 +127,30 @@ public class Fighter : Player {
 
 		return true;
 	}
+
+	// Getters and Setters for Primary Stats
+	public int getStrength () {
+		return strength;
+	}
+	
+	public void setStrength (int iStrength) {
+		this.strength = iStrength;
+	}
+
+	public int getDexterity () {
+		return dexterity;
+	}
+	
+	public void setDexterity (int iDexterity) {
+		this.dexterity = iDexterity;
+	}
+	
+	public int getEndurance () {
+		return endurance;
+	}
+	
+	public void setEndurance (int iEndurance) {
+		this.endurance = iEndurance;
+	}
+
 }
