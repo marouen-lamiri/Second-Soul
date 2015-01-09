@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public abstract class Misc : Item, IEquipable {
 
 	public Misc() : base(){

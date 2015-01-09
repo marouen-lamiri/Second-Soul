@@ -9,12 +9,16 @@ public abstract class Player : Character {
 	public int nextLevelXP; // xp need for next level --remove public
 	
 	public bool attacking;
+	
+	public int pickUpRange;
 
 	public Inventory inventory;
 	//private Vector3 castPosition;
 	
 	public ISkill activeSkill1; // protected
 	public ISkill activeSkill2; // protected
+	
+	public ItemHolder lootItem;
 
 	// networking:
 	protected FighterNetworkScript fighterNetworkScript;
@@ -32,13 +36,16 @@ public abstract class Player : Character {
 	}
 	protected void playerUpdate(){
 		characterUpdate ();
+		Debug.Log (inventory);
 	}
 	public abstract void levelUp();
 	
 	protected void initializePlayer () {
 		target = null;
+		lootItem = null;
 		startPosition = transform.position;
-		Debug.Log (GameObject.Find ("HUD/Equipment/Inventory"));
+		//Debug.Log (inventory);
+		//Debug.Log (GameObject.Find ("HUD/Equipment/Inventory"));
 		//inventory = GameObject.FindGameObjectWithTag ("Inventory").GetComponent("Inventory") as Inventory;
 		//inventory.sayhi ();
 	}
@@ -52,6 +59,7 @@ public abstract class Player : Character {
 	protected void playerLogic () {
 		if (!isDead()){
 			attackLogic ();
+			lootLogic();
 		}
 		else{
 			dieMethod();
@@ -80,6 +88,15 @@ public abstract class Player : Character {
 		return totalXP >= nextLevelXP;
 	}
 	
+	protected void lootLogic(){
+		Debug.Log(lootItem);
+		if(lootItem != null){
+			if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))){
+				pickUpItem();
+			}
+		}		
+	}
+	
 	protected void attackLogic(){
 		if(!attackLocked() && playerEnabled){
 			chasing = false;
@@ -101,7 +118,7 @@ public abstract class Player : Character {
 						}
 					}
 					else{
-						chaseTarget();
+						chaseTarget(target.transform.position);
 					}
 				}
 				if ((Input.GetButtonDown ("activeSkill2") || Input.GetButton ("activeSkill2")) && activeSkill2 != null){
@@ -123,21 +140,26 @@ public abstract class Player : Character {
 						}		
 					}
 					else{
-						chaseTarget();
+						chaseTarget(target.transform.position);
 					}
 				}
 			}
 		}
 	}
 
-	public bool takeItem(Item item){
-		int newX;
-		int newY;
-		if (!inventory.firstAvailableInventorySlots (out newX, out newY, item)) {
-			return false;
+	public void pickUpItem(){
+		if(inPickupRange()){
+			if(inventory.takeItem(lootItem.item)){
+			lootItem.getPickedUp();
+			}
 		}
-		inventory.addInventoryItem(newX, newY, item);
-		return true;
+		else{
+			chaseTarget(lootItem.transform.position);
+		}
+	}
+	
+	public bool inPickupRange(){
+		return Vector3.Distance(lootItem.transform.position, transform.position) <= pickUpRange;
 	}
 	
 	public Vector3 castPosition(){ // private

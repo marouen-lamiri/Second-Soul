@@ -15,9 +15,9 @@ public class EnemyFactory : MonoBehaviour {
 
 	// Use this for initialization
 	public void setFactoryVariables(Enemy enemyPrefab, Fighter target, Sorcerer sorcerer){
-		this.enemyPrefab=enemyPrefab;
-		this.target=target;
-		this.sorcerer=sorcerer;
+		this.enemyPrefab = enemyPrefab;
+		this.target = target;
+		this.sorcerer = sorcerer;
 	}
 	void Start () {
 	}

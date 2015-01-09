@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public abstract class Weapon : Item, IEquipable {
 	
 	public Weapon() : base(){

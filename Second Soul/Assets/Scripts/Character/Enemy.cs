@@ -105,7 +105,7 @@ public class Enemy : Character {
 			}
 		}
 		else if(!inAttackRange () && hasAggro){
-			chaseTarget();
+			chaseTarget(target.transform.position);
 			if(outAggroRange()){
 				loseAggro();
 			}

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public abstract class Potion : Item, IConsumable {
 
 	public Potion() : base(){

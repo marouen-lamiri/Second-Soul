@@ -34,9 +34,11 @@ public class FighterItems : EquippedItems {
 	}
 	
 	void setSlots(){
-		chestSlot = new EquipSlot(new Rect(chestOffsetX + inventoryOffsetX, chestOffsetY + inventoryOffsetY, chestPixelHeight, chestPixelWidth), "Chest");
+		position.x = Screen.width - position.width;
+		position.y = Screen.height - position.height - Screen.height * 0.2f;
+		chestSlot = new EquipSlot(new Rect(chestOffsetX + position.x, chestOffsetY + position.y, chestPixelHeight, chestPixelWidth), "Chest");
 		bootsSlot = new EquipSlot(new Rect(), "Boots");
-		weaponSlot = new EquipSlot(new Rect(weaponOffsetX + inventoryOffsetX, weaponOffsetY + inventoryOffsetY, weaponPixelHeight, weaponPixelWidth), "Weapon");
+		weaponSlot = new EquipSlot(new Rect(weaponOffsetX + position.x, weaponOffsetY + position.y, weaponPixelHeight, weaponPixelWidth), "Weapon");
 		equipSlots.Add(chestSlot);
 		equipSlots.Add(bootsSlot);
 		equipSlots.Add(weaponSlot); // set to dynamic weapon then have weapon check parent to make sure its a weapon

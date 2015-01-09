@@ -276,19 +276,19 @@ public abstract class Character : MonoBehaviour {
 
 
 	// when possible transform this to take (Vector3 pos, Vector3 targetPos) so this can be extensible to chasing another point like an item
-	public void chaseTarget(){
+	public void chaseTarget(Vector3 targetPosition){
 		chasing = true;
 		animateRun();
 		Debug.Log (pathing);
 		if(gameObject.tag == "Enemy"){
-			pathing.findPath(transform.position, target.transform.position);
+			pathing.findPath(transform.position, targetPosition);
 		}
 		else{
 			pathing.findPath(transform.position, nextPosition);
 		}
 		List<Vector3> path = grid.worldFromNode(grid.path);
 		Vector3 destination;
-		if (Vector3.Distance (transform.position, target.transform.position) > 4) {
+		if (Vector3.Distance (transform.position, targetPosition) > 4) {
 			destination = path[1];
 		} 
 		else {

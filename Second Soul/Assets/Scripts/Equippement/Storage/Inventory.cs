@@ -4,11 +4,19 @@ using System.Collections.Generic;
 public class Inventory : Storage 
 {
 	public Texture2D image;
+	private Player player;
 
 	public int slotsOffsetX;
 	public int slotsOffsetY;
 
 	// Use this for initialization
+	void Awake(){
+		//position.x = Screen.width - position.width;
+		//position.y = Screen.height - position.height - Screen.height * 0.2f;
+		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		player.inventory = this;
+	}
+	
 	void Start () {
 		initializeVariables(); // in parent Storage class
 		setSlots ();
@@ -63,6 +71,16 @@ public class Inventory : Storage
 			//Debug.Log("id: " + GUIUtility.hotControl);
 			//Debug.Log (itemPickedUp);
 		}
+	}
+	
+	public bool takeItem(Item item){
+		int newX;
+		int newY;
+		if (!firstAvailableInventorySlots (out newX, out newY, item)) {
+			return false;
+		}
+		addInventoryItem(newX, newY, item);
+		return true;
 	}
 
 
