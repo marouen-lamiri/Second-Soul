@@ -18,6 +18,16 @@ public class ClientNetwork : MonoBehaviour {
 	
 	public Fighter playerPrefab;
 	public Sorcerer sorcererPrefab;
+
+	int framesToWait;
+
+	public void Start() {
+		//debug
+		Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+		Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+		sorcerer.name = "Sorcerer";
+		fighter.name = "Fighter";
+	}
 	
 	public void Awake() {
 		
@@ -26,7 +36,24 @@ public class ClientNetwork : MonoBehaviour {
 		networkWindowButtonWidth = 150;
 		networkWindowButtonHeight = 25;
 		//AddNetworkView();
+		framesToWait = 0;
 	} 
+
+	public void Update() {
+
+		// generate the map only after the players have been created (becasue they are needed for some reason for the map generation code:
+		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
+		print ("BEFORE 1: "+Network.connections.Length);
+		if(serverAndClientAreBothConnected) {	// && Network.isServer
+			framesToWait++;
+			if(framesToWait > 700) {
+				// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
+				print ("BEFORE 3");
+				NetworkLevelLoader.Instance.LoadLevel("NetworkingCollaboration",1); 
+				print ("AFTER");
+			}
+		}
+	}
 	
 	[RPC]
 	private void AddNetworkView() {
@@ -53,7 +80,7 @@ public class ClientNetwork : MonoBehaviour {
 				// connect:
 				Network.InitializeServer (10, port, false);
 				Fighter fighter = Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
-
+				//DontDestroyOnLoad(fighter.gameObject);
 				// disable second soul:
 				
 			}
@@ -188,6 +215,7 @@ public class ClientNetwork : MonoBehaviour {
 		_messageLog += "Connected to server" + "\n";
 		// added:
 		Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+		//DontDestroyOnLoad(sorcerer.gameObject);
 		isConnectedToServer = true;
 	}
 	void OnDisconnectedToServer() {
@@ -224,5 +252,21 @@ public class ClientNetwork : MonoBehaviour {
 	//            transform.position = receivedPosition;
 	//        }
 	//    }
+
+	void OnLevelWasLoaded(int level) {
+//		if(Network.isClient) {
+//			Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+//		} else if (Network.isServer) {
+//			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+//		}
+
+//		Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+//		Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+
+
+		
+	}
+
+
 }
 

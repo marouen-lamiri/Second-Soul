@@ -21,25 +21,39 @@ public class MapGeneration : MonoBehaviour{
 	int mapSizeZ = 25;
 	
 	void Start () {
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
+		int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter, sorcerer);
+		buildMap (map);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		// generate the map only after the players have been created (becasue they are needed for some reason for the map generation code:
-		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
-		if(serverAndClientAreBothConnected && Network.isServer) {
-			fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-			sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-			factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
-			int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter, sorcerer);
-			buildMap (map);
-
-			// immediately after creating the map, load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
-			print ("BEFORE");
-			NetworkLevelLoader.Instance.LoadLevel("NetworkingCollaboration",1); 
-			print ("AFTER");
-		}
+//		// generate the map only after the players have been created (becasue they are needed for some reason for the map generation code:
+//		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
+//		print ("BEFORE 1");
+//		if(serverAndClientAreBothConnected && Network.isServer) {
+//			print ("BEFORE 2.0");
+//			fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+//			sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+//			if(fighter != null) {
+//				print ("BEFORE 2.1");
+//				if(sorcerer != null) {
+//					print ("BEFORE 2.2");
+//					factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
+//					int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter, sorcerer);
+//					buildMap (map);
+//					
+//					// immediately after creating the map, load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
+//					print ("BEFORE 3");
+//					NetworkLevelLoader.Instance.LoadLevel("NetworkingCollaboration",1); 
+//					print ("AFTER");
+//
+//				}
+//			}
+//		}
 		
 	}
 	
