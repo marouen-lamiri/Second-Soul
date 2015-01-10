@@ -33,6 +33,7 @@ public class DatabaseSorcerer : MonoBehaviour {
 	
 	public void readPrimaryStats(){
 //		Debug.Log ("Read the stats of the " + player.name);
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		sorcerer.setIntelligence((int) PlayerPrefs.GetInt("Intelligence"));
 		sorcerer.setWisdom((int) PlayerPrefs.GetInt("Wisdom"));
 		sorcerer.setSpirit((int) PlayerPrefs.GetInt("Spirit"));

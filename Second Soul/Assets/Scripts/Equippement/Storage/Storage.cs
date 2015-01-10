@@ -298,5 +298,22 @@ public class Storage : MonoBehaviour {
 		}
 		return (slot.type == targetItem.GetType().ToString());
 	}
-	
+
+	public int getStorageSizeWidth(){
+		return inventoryStorageWidth;
+	}
+
+	public int getStorageSizeHeight(){
+		return inventoryStorageHeight;
+	}
+
+	public Slot[,] getInventorySlots(){
+		Slot[,] copy = inventorySlots;
+		return copy;
+	}
+
+	public List<Item> getInventoryItems(){
+		List<Item> copy = inventoryItems;
+		return copy;
+	}
 }

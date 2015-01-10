@@ -8,6 +8,7 @@ public class Inventory : Storage
 
 	public int slotsOffsetX;
 	public int slotsOffsetY;
+	DatabaseInventory database;
 
 	// Use this for initialization
 	void Awake(){
@@ -20,7 +21,9 @@ public class Inventory : Storage
 	void Start () {
 		initializeVariables(); // in parent Storage class
 		setSlots ();
-		addSampleItems ();
+		//addSampleItems ();
+		database = (DatabaseInventory)Inventory.FindObjectOfType(typeof(DatabaseInventory));
+		database.readItems();
 	}
 
 	// Update is called once per frame
@@ -96,6 +99,4 @@ public class Inventory : Storage
 			GUI.DrawTexture(inventoryItems[i].position, inventoryItems[i].getImage());
 		}
 	}
-
-	
 }

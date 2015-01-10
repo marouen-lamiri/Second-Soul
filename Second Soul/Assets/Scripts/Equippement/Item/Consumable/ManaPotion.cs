@@ -30,4 +30,16 @@ public class ManaPotion : Potion {
 	public override int getHeight(){
 		return ManaPotionModel.getHeight();
 	}
+
+	public override int getX(){
+		return x;
+	}
+	
+	public override int getY(){
+		return y;
+	}
+
+	public override string getTypeAsString(){
+		return "ManaPotion";
+	}
 }

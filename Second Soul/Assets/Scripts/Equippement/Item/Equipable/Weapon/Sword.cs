@@ -31,4 +31,16 @@ public class Sword : Weapon {
 	public override int getHeight(){
 		return SwordModel.getHeight();
 	}
+
+	public override int getX(){
+		return x;
+	}
+	
+	public override int getY(){
+		return y;
+	}
+	
+	public override string getTypeAsString(){
+		return "Sword";
+	}
 }

@@ -81,7 +81,7 @@ public class ClickToMove : MonoBehaviour {
 			pathing.findPath(transform.position, position);
 			List<Vector3> path = grid.worldFromNode(grid.path);
 			Vector3 destination;
-			if (Vector3.Distance (transform.position, position) > 2) {
+			if (Vector3.Distance (transform.position, position) > 1) {
 				destination = path[1];
 			} 
 			else {

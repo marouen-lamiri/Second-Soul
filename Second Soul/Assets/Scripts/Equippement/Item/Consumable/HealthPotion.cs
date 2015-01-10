@@ -31,4 +31,16 @@ public class HealthPotion : Potion {
 	public override int getHeight(){
 		return HealthPotionModel.getHeight();
 	}
+
+	public override int getX(){
+		return x;
+	}
+
+	public override int getY(){
+		return y;
+	}
+
+	public override string getTypeAsString(){
+		return "HealthPotion";
+	}
 }

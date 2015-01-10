@@ -36,7 +36,7 @@ public abstract class Player : Character {
 	}
 	protected void playerUpdate(){
 		characterUpdate ();
-		Debug.Log (inventory);
+		//Debug.Log (inventory);
 	}
 	public abstract void levelUp();
 	
@@ -89,7 +89,7 @@ public abstract class Player : Character {
 	}
 	
 	protected void lootLogic(){
-		Debug.Log(lootItem);
+		//Debug.Log(lootItem);
 		if(lootItem != null){
 			if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))){
 				pickUpItem();

@@ -2,7 +2,6 @@
 using System.Collections;
 
 [System.Serializable]
-
 public class Slot 
 {
 	public bool occupied;

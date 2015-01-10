@@ -42,4 +42,16 @@ public class Ring : Misc {
 	public override int getHeight(){
 		return RingModel.getHeight();
 	}
+
+	public override int getX(){
+		return x;
+	}
+	
+	public override int getY(){
+		return y;
+	}
+	
+	public override string getTypeAsString(){
+		return "Ring";
+	}
 }
