@@ -21,9 +21,9 @@ public class Inventory : Storage
 	void Start () {
 		initializeVariables(); // in parent Storage class
 		setSlots ();
-		addSampleItems ();
+		//addSampleItems ();
 		database = (DatabaseInventory)Inventory.FindObjectOfType(typeof(DatabaseInventory));
-		//database.readItems();
+		database.readItems();
 	}
 
 	// Update is called once per frame
@@ -49,10 +49,10 @@ public class Inventory : Storage
 	
 	void addSampleItems(){
 		addInventoryItem(0, 0, new Chest());
-		addInventoryItem(0, 0, new HealthPotion());
-		addInventoryItem(0, 0, new ManaPotion());
-		addInventoryItem(0, 0, new Ring());
-		addInventoryItem(0, 0, new Axe());
+		addInventoryItem(2, 2, new HealthPotion());
+		addInventoryItem(2, 3, new ManaPotion());
+		addInventoryItem(3, 3, new Ring());
+		addInventoryItem(4, 2, new Axe());
 	}
 	
 	void shownInventory(){
