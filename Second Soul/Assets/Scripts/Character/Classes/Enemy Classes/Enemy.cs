@@ -4,6 +4,14 @@ using System.Collections;
 public class Enemy : Character {
 	
 	//Variable declaration
+	protected int strength; // base damage, armor, critt damage
+	protected int dexterity; // attack speed, crit chance, accuracy
+	protected int endurance; // health, resistances, health regen
+	
+	protected int strengthPerLvl;
+	protected int dexterityPerLvl;
+	protected int endurancePerLvl;
+
 	public int experienceWorth;
 	public int experienceBase;
 	
@@ -12,30 +20,77 @@ public class Enemy : Character {
 	public bool hasAggro;
 	
 	public bool xpGiven;
-	
+	public bool lootGiven;
+
+	public int assigner;
+	int id;
+
 	ISkill activeSkill1;
+	
+	public float dropRate;
 	
 	
 	// Use this for initialization
 	void Start (){
+		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
+		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 		experienceBase = 25;
 		xpGiven = false;
-		//health = 100;
+		lootGiven = false;
+
+		initializePrimaryStats();
+		initializeSecondaryStatsBase();
+		initializeSecondaryStats();
+		calculateSecondaryStats();
+
 		level = target.level;
 		health = maxHealth;
 		energy = maxEnergy;
 		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
 	}
 
+	protected virtual void initializePrimaryStats(){
+		strengthPerLvl = 1;
+		dexterityPerLvl = 1;
+		endurancePerLvl = 1;
+		
+		strength = 10;
+		dexterity = 10;
+		endurance = 10;
+	}
+
+	public void calculateSecondaryStats(){
+		armor += strength * armorBase;
+		fireResistance += endurance * fireResBase;
+		coldResistance += endurance * coldResBase;
+		lightningtResistance += endurance * lightResBase;
+		
+		accuracy += dexterity * accurBase;
+		attackSpeed += dexterity * attSpeedBase;
+		
+		criticalChance += dexterity * critChanBase;
+		criticalDamage += strength * critDmgBase;
+		
+		attackPower += strength * attPowerBase;
+		
+		maxHealth += endurance * hpBase;
+		healthRegen += endurance * hpRegBase;
+		
+		health = maxHealth;
+	}
+
 	// Update is called once per frame
 	void Update (){
-		//Debug.Log (inRange());
-		//Debug.Log (health);
+		enemyUpdate ();
+	}
+	protected void enemyUpdate(){
+		characterUpdate ();
 		if (!isDead ()) {
 			enemyAI ();
 		} 
 		else {
 			dieMethod();
+			giveLoot(dropRate, transform.position);
 			giveXP();
 			destroySelf();
 		}
@@ -45,7 +100,7 @@ public class Enemy : Character {
 		level = target.level;
 		calculateXPWorth();
 	}
-
+	
 	public void enemyAI(){
 		if(!hasAggro){
 			if(inAwareRadius()){
@@ -55,7 +110,7 @@ public class Enemy : Character {
 			}
 		}
 		else if(!inAttackRange () && hasAggro){
-			chaseTarget();
+			chaseTarget(target.transform.position);
 			if(outAggroRange()){
 				loseAggro();
 			}
@@ -119,6 +174,13 @@ public class Enemy : Character {
 		xpGiven = true;
 	}
 	
+	void giveLoot(float dropRate, Vector3 position){
+		if(!lootGiven){
+			LootFactory.determineDrop(dropRate, position);
+		}
+		lootGiven = true;
+	}
+	
 	/*private void attack(){
 		if (!target.isDead ()){
 			animateAttack();
@@ -137,6 +199,9 @@ public class Enemy : Character {
 	public void destroySelf(){
 		Destroy(controller);
 		Destroy (this.GetComponent<CapsuleCollider>());
+		if (transform.FindChild ("Sphere") != null) {
+			Destroy (transform.FindChild ("Sphere").gameObject);
+		}
 		target.target = null;
 		sorcerer.target = null;
 	}

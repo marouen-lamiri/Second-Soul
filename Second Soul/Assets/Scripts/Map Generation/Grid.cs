@@ -58,7 +58,7 @@ public class Grid : MonoBehaviour {
 		int x, y;
 		float percentX, percentY;
 		for(int i = 0; i < node.Count; i++){
-			path.Add(new Vector3(node[i].worldPosition.x , 0, node[i].worldPosition.z));
+			path.Add(new Vector3(node[i].worldPosition.x + nodeDiameter , 0, node[i].worldPosition.z + nodeDiameter));
 			Debug.Log("The next position is: " + path[i]);
 		}
 		return path;

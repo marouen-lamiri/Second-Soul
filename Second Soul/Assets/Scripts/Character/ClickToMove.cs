@@ -8,23 +8,28 @@ public class ClickToMove : MonoBehaviour {
 	private Vector3 position;
 	private List<Vector3> nextPositions;
 	private float timer = 0f; //checks if the player input has been put very recently
-	public Grid grid;
-	public PathFinding pathing;
+	private Grid grid;
+	private PathFinding pathing;
+	bool initial = false;
 
 	public static bool busy;
 
 	void awake(){
-		grid = GetComponent<Grid>();
-		pathing = GetComponent<PathFinding>();
+		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
+		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 	}
 
 	// Use this for initialization
 	void Start () {
 		position = transform.position;
+		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
+		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 	}
 	
 	// Update is called once per frame
 	void Update (){
+		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
+		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 		timer -= Time.deltaTime;
 		if(!player.isDead() && player.playerEnabled && !busy)
 		{
@@ -35,8 +40,10 @@ public class ClickToMove : MonoBehaviour {
 					//Locate where the player clicked on the terrain
 					locatePosition();
 				}
-			 	//Move the player to the position
-				moveToPosition();
+				if(initial){
+			 		//Move the player to the position
+					moveToPosition();
+				}
 			}
 		}
 		else
@@ -52,36 +59,38 @@ public class ClickToMove : MonoBehaviour {
 	}
 
 	void locatePosition(){
-		RaycastHit hit;
+		RaycastHit[] hits;
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-
-		if(Physics.Raycast(ray, out hit, 1000)){
-			if(hit.collider.tag != "Player" && hit.collider.tag != "Enemy"){
-					position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+		initial = true;
+		hits = Physics.RaycastAll(ray.origin,ray.direction, 1000);
+		
+		if(hits != null){
+			RaycastHit hit = hits[0];
+			if(hit.collider.tag != "Player" && hit.collider.tag != "Enemy" && hit.collider.tag != "GUI"){
+				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 			}
-			Debug.DrawLine(transform.position, position, Color.red, 50f);
-			//pathing.findPath(transform.position, position);
-			//setTrajectory(grid.worldFromNode(grid.path));
+			//Debug.Log(position);
 		}
-	}
 
-	public List<Vector3> CheckTrajectory(){
-		return nextPositions;
-	}
-
-	public void setTrajectory(List<Vector3> path){
-		nextPositions = path;
-		Debug.Log (nextPositions.Count);
 	}
 
 	void moveToPosition(){
 		//Player moving
 		if (Vector3.Distance (transform.position, position) > 1) {
-			Quaternion newRotation = Quaternion.LookRotation (position - transform.position);
-
+			Debug.Log (pathing);
+			pathing.findPath(transform.position, position);
+			List<Vector3> path = grid.worldFromNode(grid.path);
+			Vector3 destination;
+			if (Vector3.Distance (transform.position, position) > 1) {
+				destination = path[1];
+			} 
+			else {
+				destination = position;
+			}
+			Quaternion newRotation = Quaternion.LookRotation (destination - transform.position);
 			newRotation.x = 0;
 			newRotation.z = 0;
-
+			
 			transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 7);
 			player.controller.SimpleMove (transform.forward * player.speed);
 

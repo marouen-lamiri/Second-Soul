@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,22 +11,25 @@ public class MapGeneration : MonoBehaviour{
 	public GameObject crystalPrefab;
 	public GameObject statuePrefab;
 	public Enemy enemyPrefab;
+	public EnemyFactory enemyfactory;
+	public ItemHolder itemHolderPrefab;
+	public LootFactory lootFactory;
 	private Fighter fighter;
 	private Sorcerer sorcerer;
-	public EnemyFactory factory;
 	List<int> listOfWalls;
-	int[,] mapArray;
+	public static int[,] mapArray;
 	int numberRooms = 10;
-	int mapSizeX = 25;
-	int mapSizeZ = 25;
+	public static int mapSizeX = 25;
+	public static int mapSizeZ = 25;
 	
-	void Start () {
+	void Awake () {
 		if (Network.isServer) {
-			fighter = (Fighter)GameObject.FindObjectOfType (typeof(Fighter));
-			sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof(Sorcerer));
-			factory.setFactoryVariables (enemyPrefab, fighter, sorcerer);
-			int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter, sorcerer);
-			buildMap (map);
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		enemyfactory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
+		lootFactory.setFactoryVariables(itemHolderPrefab, fighter);
+		mapArray = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter.gameObject, sorcerer.gameObject);
+		buildMap (mapArray);
 		}
 	}
 	
@@ -60,10 +63,13 @@ public class MapGeneration : MonoBehaviour{
 	}
 	
 	
-	void playerStartPosition(int [,] map, Player player){
+	int[,] playerStartPosition(int [,] map, GameObject player){
 		for (int i=0; i<mapSizeX; i++) {
 			for(int j=0;j<mapSizeZ;j++){
-				if (map [i,j] != 0 && map [i-1,j] != 0 && map [i,j-1] != 0 && map [i-2,j] != 0 && map [i,j-2] != 0 && map [i,j] != 99){
+				if (map [i,j] != 0 && map [i-1,j] != 0 && map [i,j-1] != 0 && map [i-2,j] != 0 && map [i,j-2] != 0 && map [i,j] != 99
+				    && map [i+1,j] != 0 && map [i,j+1] != 0 && map [i+2,j] != 0 && map [i,j+2] != 0
+				    && map [i+1,j+1] != 0 && map [i-1,j-1] != 0 && map [i+2,j+2] != 0 && map [i-2,j-2] != 0
+				    && map [i,j] != 98 && map [i,j] != 90){
 					map [i,j] = 99;
 					player.transform.position = new Vector3(i*10,0,j*10);
 					i = mapSizeX;
@@ -71,9 +77,10 @@ public class MapGeneration : MonoBehaviour{
 				}
 			}
 		}
+		return map;
 	}
 	
-	void enemySpawnLocation(int [,] map){
+	int[,] enemySpawnLocation(int [,] map){
 		int nbrEnemies = Random.Range (25,35);
 		int nbrEnemiesByRoom = Random.Range (1,4);
 		int previousRoomNumber = 0;
@@ -85,7 +92,7 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i-1,j-1] != 98 && map [i+1,j+1] != 98){
 					map [i,j] = 98;
 					Vector3 spawnLocation = new Vector3(i*10,0,j*10);
-					factory.spawn(spawnLocation);
+					enemyfactory.spawn(spawnLocation);
 					nbrEnemies--;
 					nbrEnemiesByRoom--;
 					if(nbrEnemiesByRoom == 0){
@@ -95,6 +102,7 @@ public class MapGeneration : MonoBehaviour{
 				}
 			}
 		}
+		return map;
 	}
 	
 	void buildMap(int[,] map){
@@ -239,9 +247,9 @@ public class MapGeneration : MonoBehaviour{
 			genMap = generateObstacles (genMap, crystalPrefab, false);
 			genMap = generateObstacles (genMap, obstaclePrefab, true);
 			genMap = generateObstacles (genMap, statuePrefab, false);
-			playerStartPosition(genMap, player);
-			playerStartPosition(genMap, player2);
-			enemySpawnLocation (genMap);
+			genMap = playerStartPosition(genMap, player);
+			genMap = playerStartPosition(genMap, player2);
+			genMap = enemySpawnLocation (genMap);
 		}		
 		return genMap;
 	}
@@ -258,14 +266,28 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i,j-1] != 98 && map [i+1,j] != 98 && map [i,j-1] != 98 
 				    && map [i-1,j-1] != 98 && map [i+1,j+1] != 98 && map[i,j] != 90) {
 					map[i,j] = 90;
+					GameObject mapObject;
 					if(type){
-						GameObject obst = (GameObject) Network.Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), new Quaternion(), 2);
-						DontDestroyOnLoad(obst.transform.gameObject);
+						mapObject = (GameObject) Network.Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), Quaternion.Euler (0,0,0), 2)as GameObject;
+						DontDestroyOnLoad(mapObject);
 					}
 					else {
-						GameObject obst = (GameObject) Network.Instantiate (obstacle, new Vector3(i*10, 0, j*10), new Quaternion(), 2);
-						DontDestroyOnLoad(obst.transform.gameObject);
+						mapObject = (GameObject) Network.Instantiate (obstacle, new Vector3(i*10, 0, j*10), Quaternion.Euler (0,0,0), 2) as GameObject;
+						DontDestroyOnLoad(mapObject.transform.gameObject);
 					}
+					if(mapObject.tag == "Crystals"){
+						mapObject.transform.parent = GameObject.Find(mapObject.tag).transform;
+					}
+					else if(mapObject.tag == "Rock"){
+						mapObject.transform.parent = GameObject.Find(mapObject.tag).transform;
+					}
+					else if(mapObject.tag == "Statue"){
+						mapObject.transform.parent = GameObject.Find(mapObject.tag).transform;
+					}
+					else if(mapObject.tag == "TorchObstacles"){
+						mapObject.transform.parent = GameObject.Find(mapObject.tag).transform;
+					}
+
 					nbrObstacles--;
 					nbrObstaclesByRoom--;
 					if(nbrObstaclesByRoom <= 0){

@@ -42,4 +42,16 @@ public class Chest : Armor {
 	public override int getHeight(){
 		return ChestModel.getHeight();
 	}
+
+	public override string getTypeAsString(){
+		return "Chest";
+	}
+
+	public override int getX(){
+		return x;
+	}
+	
+	public override int getY(){
+		return y;
+	}
 }

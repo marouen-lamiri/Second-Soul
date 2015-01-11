@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public abstract class Potion : Item, IConsumable {
 
 	public Potion() : base(){
@@ -12,4 +13,5 @@ public abstract class Potion : Item, IConsumable {
 	public override abstract int getWidth();
 	public override abstract int getHeight();
 	public abstract void consume();
+	public override abstract string getTypeAsString();
 }

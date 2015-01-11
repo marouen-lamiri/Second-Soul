@@ -9,10 +9,16 @@ public abstract class Player : Character {
 	public int nextLevelXP; // xp need for next level --remove public
 	
 	public bool attacking;
+	
+	public int pickUpRange;
+
+	public Inventory inventory;
 	//private Vector3 castPosition;
 	
 	public ISkill activeSkill1; // protected
 	public ISkill activeSkill2; // protected
+	
+	public ItemHolder lootItem;
 
 	// networking:
 	protected FighterNetworkScript fighterNetworkScript;
@@ -26,14 +32,22 @@ public abstract class Player : Character {
 	
 	// Update is called once per frame
 	void Update(){
-	
+		playerUpdate ();
 	}
-	
+	protected void playerUpdate(){
+		characterUpdate ();
+		//Debug.Log (inventory);
+	}
 	public abstract void levelUp();
 	
 	protected void initializePlayer () {
 		target = null;
+		lootItem = null;
 		startPosition = transform.position;
+		//Debug.Log (inventory);
+		//Debug.Log (GameObject.Find ("HUD/Equipment/Inventory"));
+		//inventory = GameObject.FindGameObjectWithTag ("Inventory").GetComponent("Inventory") as Inventory;
+		//inventory.sayhi ();
 	}
 	
 	protected void initializeLevel(){
@@ -45,6 +59,7 @@ public abstract class Player : Character {
 	protected void playerLogic () {
 		if (!isDead()){
 			attackLogic ();
+			lootLogic();
 		}
 		else{
 			dieMethod();
@@ -73,6 +88,15 @@ public abstract class Player : Character {
 		return totalXP >= nextLevelXP;
 	}
 	
+	protected void lootLogic(){
+		//Debug.Log(lootItem);
+		if(lootItem != null){
+			if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))){
+				pickUpItem();
+			}
+		}		
+	}
+	
 	protected void attackLogic(){
 		if(!attackLocked() && playerEnabled){
 			chasing = false;
@@ -85,10 +109,16 @@ public abstract class Player : Character {
 						activeSkill1.useSkill(target);
 
 						// networking event listener:
-						fighterNetworkScript.onAttackTriggered("activeSkill1");
+						if(fighterNetworkScript != null) {
+							fighterNetworkScript.onAttackTriggered("activeSkill1");
+						} else if (sorcererNetworkScript != null) {
+							//sorcererNetworkScript.onAttackTriggered("activeSkill1");
+						} else {
+							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+						}
 					}
 					else{
-						chaseTarget();
+						chaseTarget(target.transform.position);
 					}
 				}
 				if ((Input.GetButtonDown ("activeSkill2") || Input.GetButton ("activeSkill2")) && activeSkill2 != null){
@@ -100,14 +130,36 @@ public abstract class Player : Character {
 						activeSkill2.useSkill(castPosition());
 
 						// networking event listener:
-						fighterNetworkScript.onAttackTriggered("activeSkill2");
+						// networking event listener:
+						if(fighterNetworkScript != null) {
+							fighterNetworkScript.onAttackTriggered("activeSkill2");
+						} else if (sorcererNetworkScript != null) {
+							//sorcererNetworkScript.onAttackTriggered("activeSkill2");
+						} else {
+							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+						}		
 					}
 					else{
-						chaseTarget();
+						chaseTarget(target.transform.position);
 					}
 				}
 			}
 		}
+	}
+
+	public void pickUpItem(){
+		if(inPickupRange()){
+			if(inventory.takeItem(lootItem.item)){
+			lootItem.getPickedUp();
+			}
+		}
+		else{
+			chaseTarget(lootItem.transform.position);
+		}
+	}
+	
+	public bool inPickupRange(){
+		return Vector3.Distance(lootItem.transform.position, transform.position) <= pickUpRange;
 	}
 	
 	public Vector3 castPosition(){ // private

@@ -13,10 +13,17 @@ public class Sorcerer : Player {
 	protected int spiritPerLvl;
 
 	private Fighter fighter;
-	
+
+	public DatabaseSorcerer database;
+
 	// Use this for initialization
 	void Start () {
-		sorcererStart ();
+		sorcererStart (); //initialized in base classes now why still needed?
+		database.readPrimaryStats();
+	}
+	// is this needed since called in sorcereStart??
+	protected void initFighter(){
+		//fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 	}
 
 	protected void sorcererStart(){
@@ -42,8 +49,13 @@ public class Sorcerer : Player {
 	}
 	// Update is called once per frame
 	void Update () {
+		sorcererUpdate ();
+	}
+
+	protected void sorcererUpdate(){
+		playerUpdate ();
 		playerEnabled = !fighter.playerEnabled;
-		playerLogic ();
+		playerLogic();
 	}
 
 	protected virtual void initializePrimaryStats(){
@@ -56,7 +68,7 @@ public class Sorcerer : Player {
 		spirit = 10;
 	}
 
-	public virtual bool criticalHitCheck(){
+	public override bool criticalHitCheck(){
 		int randomRoll = Random.Range (1, 100);
 		if (randomRoll <= spellCriticalChance * 100) {
 			return true;
@@ -65,7 +77,15 @@ public class Sorcerer : Player {
 			return false;
 		}
 	}
-
+	public override double getDamage(){
+		if(!hitCheck()){
+			return 0;
+		}
+		if (criticalHitCheck ()) {
+			return damage*attackPower*spellCriticalDamage;
+		}
+		return damage * spellPower;
+	}
 	public override void levelUp(){
 		Debug.Log("leveled up");
 		
@@ -99,7 +119,32 @@ public class Sorcerer : Player {
 		return fighter.isDead ();
 	}
 
-	public override void loseEnergy(float energy){
-		fighter.loseEnergy (energy);
+	public override bool loseEnergy(float energy){
+		return fighter.loseEnergy (energy);
+	}
+
+	// Getters and Setters for Primary Stats
+	public int getIntelligence () {
+		return intelligence;
+	}
+	
+	public void setIntelligence (int iIntelligence) {
+		this.intelligence = iIntelligence;
+	}
+	
+	public int getWisdom () {
+		return wisdom;
+	}
+	
+	public void setWisdom (int iWisdom) {
+		this.wisdom = iWisdom;
+	}
+	
+	public int getSpirit () {
+		return spirit;
+	}
+	
+	public void setSpirit (int iSpirit) {
+		this.spirit = iSpirit;
 	}
 }

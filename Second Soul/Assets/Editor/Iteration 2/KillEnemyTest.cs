@@ -14,11 +14,11 @@ public class KillEnemyTest {
 		enemy.health = initHealth;
 		
 		// 2. Player
-		player.damage = damageValue;
+		//player.damage = damageValue;
 
 		// Act
 		while (enemy.health > 0)
-			enemy.takeDamage(player.damage);
+			enemy.takeDamage(damageValue,DamageType.Physical);
 
 		// Assert
 		Assert.IsTrue (enemy.isDead());

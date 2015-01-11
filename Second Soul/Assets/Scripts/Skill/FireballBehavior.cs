@@ -36,11 +36,11 @@ public class FireballBehavior : ProjectileBehavior {
 
 	void OnTriggerEnter(Collider obj){
 		if (!explode) {
-			obj.GetComponent<Enemy> ().health -= fireballSkill.damage;
+			obj.GetComponent<Enemy> ().takeDamage(fireballSkill.damage,fireballSkill.damageType);
 			explode = true;
 		}
 		else {
-			obj.GetComponent<Enemy> ().health -= fireballSkill.AOEDamage;
+			obj.GetComponent<Enemy> ().takeDamage(fireballSkill.AOEDamage,fireballSkill.damageType);
 		}
 	}
 

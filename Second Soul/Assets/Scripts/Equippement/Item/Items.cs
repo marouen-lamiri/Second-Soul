@@ -12,7 +12,7 @@ public class Items : MonoBehaviour {
 	private static List<ManaPotion> manaPotionList;
 
 	void Start(){
-		player = (Character)GameObject.FindObjectOfType (typeof(Character));
+		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		healthPotionList = healthPotionListInspector;
 		manaPotionList = manaPotionListInspector;
 		chest = chestInspector;

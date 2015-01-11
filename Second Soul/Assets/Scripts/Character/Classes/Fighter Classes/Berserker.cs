@@ -10,7 +10,7 @@ public class Berserker : Fighter {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		fighterUpdate ();
 	}
 
 	protected override void initializePrimaryStats(){
@@ -35,7 +35,7 @@ public class Berserker : Fighter {
 		criticalChance = 0.3f;
 		criticalDamage = 2.5f;
 		
-		attackPower = 2f;
+		attackPower = 20f;
 
 		maxHealth = 200;
 		

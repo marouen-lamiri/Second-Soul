@@ -10,7 +10,7 @@ public class Monk : Fighter {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		fighterUpdate ();
 	}
 
 	protected override void initializePrimaryStats(){
@@ -35,7 +35,7 @@ public class Monk : Fighter {
 		criticalChance = 0.6f;
 		criticalDamage = 1.5f;
 		
-		attackPower = 1f;
+		attackPower = 10f;
 		
 		maxHealth = 250;
 		

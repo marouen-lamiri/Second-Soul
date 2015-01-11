@@ -4,35 +4,34 @@ using System.Collections.Generic;
 
 public abstract class Character : MonoBehaviour {
 	public CharacterController controller;
-//	public Grid grid;
-//	public PathFinding pathing;
-	private Grid grid;
-	private PathFinding pathing;
+	protected Grid grid;
+	protected PathFinding pathing;
 	private List<Vector3> path;
 	
 	public int level; // only public for now to see level in inspector
-	
+
+	//want to be protected - putting to public to check in inspector
 	// Secondary stats... calculated from primary stats
-	protected int armor;
-	protected int fireResistance;
-	protected int coldResistance;
-	protected int lightningtResistance;
+	public int armor;
+	public int fireResistance;
+	public int coldResistance;
+	public int lightningtResistance;
 	
-	protected float accuracy;
+	public float accuracy;
 	public float attackSpeed;
 	
-	protected float castSpeed;
-	protected float cdr; // cooldown reduction
+	public float castSpeed;
+	public float cdr; // cooldown reduction
 	
-	protected float criticalChance;
-	protected float criticalDamage;
+	public float criticalChance;
+	public float criticalDamage;
 	
-	protected float attackPower;
+	public float attackPower;
 	
-	protected float spellCriticalChance;
-	protected float spellCriticalDamage;
+	public float spellCriticalChance;
+	public float spellCriticalDamage;
 	
-	protected float spellPower;
+	public float spellPower;
 	
 	public double health;
 	public double maxHealth;
@@ -40,37 +39,37 @@ public abstract class Character : MonoBehaviour {
 	public double energy;
 	public double maxEnergy;
 	
-	protected float healthRegen;
-	protected float energyRegen;
+	public float healthRegen;
+	public float energyRegen;
 	
 	// base are the static amount per primary stat to the secondary stat
-	protected int armorBase;
-	protected int fireResBase;
-	protected int coldResBase;
-	protected int lightResBase;
+	public int armorBase;
+	public int fireResBase;
+	public int coldResBase;
+	public int lightResBase;
 	
-	protected float accurBase;
-	protected float attSpeedBase;
+	public float accurBase;
+	public float attSpeedBase;
 	
-	protected float castSpeedBase;
-	protected float cdrBase;
+	public float castSpeedBase;
+	public float cdrBase;
 	
-	protected float critChanBase;
-	protected float critDmgBase;
+	public float critChanBase;
+	public float critDmgBase;
 	
-	protected float attPowerBase;
+	public float attPowerBase;
 	
-	protected float spCritChanBase;
-	protected float spCritDmgBase;
+	public float spCritChanBase;
+	public float spCritDmgBase;
 	
-	protected float spPowerBase;
+	public float spPowerBase;
 	
-	protected int hpBase;
-	protected int enBase;
+	public int hpBase;
+	public int enBase;
 	
-	protected float hpRegBase;
-	protected float enRegBase;
-	
+	public float hpRegBase;
+	public float enRegBase;
+	//end of section that should be protected
 	/*
 	fighter:
 	- berserker // primary: strength; secondary: dexterity
@@ -96,6 +95,7 @@ public abstract class Character : MonoBehaviour {
 	public bool playerEnabled;
 	
 	public Character target;
+	public Vector3 nextPosition;
 
 	public float speed;
 	public bool chasing;
@@ -103,8 +103,9 @@ public abstract class Character : MonoBehaviour {
 	
 	
 	public float attackRange;
+	//we need to discuss how damage works
 	public float damage;
-	
+
 	public float skillLength;
 	public float skillDurationLeft;
 	
@@ -127,9 +128,13 @@ public abstract class Character : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		characterUpdate ();
 	}
-
+	protected void characterUpdate(){
+		if (transform.FindChild ("Sphere") != null) {
+			transform.FindChild ("Sphere").transform.position = new Vector3 (transform.position.x, 10.0f, transform.position.z);
+		}
+	}
 	public void setPathing(PathFinding path){
 		this.pathing = path;
 	}
@@ -137,7 +142,7 @@ public abstract class Character : MonoBehaviour {
 	public void setGrid(Grid grid){
 		this.grid = grid;
 	}
-	
+
 	public virtual void initializeSecondaryStats(){
 		armor = 50;
 		fireResistance = 10;
@@ -153,12 +158,12 @@ public abstract class Character : MonoBehaviour {
 		criticalChance = 0.1f;
 		criticalDamage = 1.5f;
 		
-		attackPower = 1f;
+		attackPower = 10f;
 		
 		spellCriticalChance = 0.1f;
 		spellCriticalDamage = 1.5f;
 		
-		spellPower = 1f;
+		spellPower = 10f;
 		
 		maxHealth = 200;
 		maxEnergy = 100;
@@ -195,6 +200,7 @@ public abstract class Character : MonoBehaviour {
 		hpRegBase = 0.01f;
 		enRegBase = 0.01f;
 	}
+	
 	public bool hitCheck(){
 		int randomRoll = Random.Range (1, 100);
 		if (randomRoll <= accuracy * 100) {
@@ -204,10 +210,32 @@ public abstract class Character : MonoBehaviour {
 			return false;
 		}
 	}
-	public virtual bool criticalHitCheck(){
+	//to be overriden
+	public virtual bool criticalHitCheck (){
 		return false;
 	}
-	public void takeDamage(double damage){
+	//to be overriden
+	public virtual double getDamage (){
+		return -1;
+	}
+
+	//we ned to tweak the values here
+	public void takeDamage(double damage, DamageType type){
+		if (type == DamageType.Physical) {
+			damage -= armor/200;
+		}
+		else if (type == DamageType.Fire) {
+			damage -= fireResistance/200;
+		}
+		else if (type == DamageType.Ice) {
+			damage -= fireResistance/200;
+		}
+		else if (type == DamageType.Lightning){
+			damage -= lightningtResistance/200;
+		}
+		if (damage < 0) {
+			damage = 0;
+		}
 		health -= damage;
 		
 		if (health <= 0) {
@@ -231,8 +259,8 @@ public abstract class Character : MonoBehaviour {
 		}
 	}
 
-	public virtual void loseEnergy(float energy){
-
+	public virtual bool loseEnergy(float energy){
+		return false;
 	}
 	
 	public virtual void gainExperience(int experience){
@@ -245,17 +273,22 @@ public abstract class Character : MonoBehaviour {
 		}
 		return false;
 	}
-	public void followPath(List<Vector3> path){
 
-	}
-	public void chaseTarget(){
+
+	// when possible transform this to take (Vector3 pos, Vector3 targetPos) so this can be extensible to chasing another point like an item
+	public void chaseTarget(Vector3 targetPosition){
 		chasing = true;
 		animateRun();
-		pathing.findPath(transform.position, target.transform.position);
+		Debug.Log (pathing);
+		if(gameObject.tag == "Enemy"){
+			pathing.findPath(transform.position, targetPosition);
+		}
+		else{
+			pathing.findPath(transform.position, nextPosition);
+		}
 		List<Vector3> path = grid.worldFromNode(grid.path);
-		followPath (path);
 		Vector3 destination;
-		if (Vector3.Distance (transform.position, target.transform.position) > 2) {
+		if (Vector3.Distance (transform.position, targetPosition) > 4) {
 			destination = path[1];
 		} 
 		else {
@@ -266,16 +299,20 @@ public abstract class Character : MonoBehaviour {
 		newRotation.z = 0;
 		
 		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 7);
-		controller.SimpleMove (transform.forward * speed);
+		controller.SimpleMove (transform.forward * speed *4);
 	}
-	
-	public void attack(){
-		transform.LookAt (target.transform.position);
-		animateAttack();
-		
-		skillDurationLeft = skillLength;
-		//Debug.Log (++attackcount);
-		StartCoroutine(applyAttackDamage(target));
+	//trying to comment this out
+//	public void attack(){
+//		transform.LookAt (target.transform.position);
+//		animateAttack();
+//		
+//		skillDurationLeft = skillLength;
+//		//Debug.Log (++attackcount);
+//		StartCoroutine(applyAttackDamage(target));
+//	}
+
+	public void clickPosition(Vector3 position){
+		nextPosition = position;
 	}
 	
 	
@@ -296,13 +333,15 @@ public abstract class Character : MonoBehaviour {
 	public bool inAttackRange(){
 		return Vector3.Distance(target.transform.position, transform.position) <= attackRange;
 	}
-	
-	IEnumerator applyAttackDamage(Character delayedTarget){
-		yield return new WaitForSeconds(skillLength * impactTime);
-		if (delayedTarget != null){
-			delayedTarget.takeDamage(damage);
-		}
-	}
+	//this (below)exists in Character
+	//is this duplicate necessary?
+	//trying to comment it out
+//	IEnumerator applyAttackDamage(Character delayedTarget){
+//		yield return new WaitForSeconds(skillLength * impactTime);
+//		if (delayedTarget != null){
+//			delayedTarget.takeDamage(damage);
+//		}
+//	}
 	
 	public void dieMethod(){
 		//CancelInvoke("applyAttackDamage");
@@ -315,10 +354,6 @@ public abstract class Character : MonoBehaviour {
 		
 		//RESPAWN/ETC...?
 	}
-	
-	//public void applyAttackDamage(){
-		//target.takeDamage(damage);
-	//}
 	
 	public float getInitialPositionX(){
 		return startPosition.x;

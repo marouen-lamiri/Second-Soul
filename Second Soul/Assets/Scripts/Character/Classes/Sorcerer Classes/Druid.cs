@@ -3,14 +3,17 @@ using System.Collections;
 
 public class Druid : Sorcerer {
 
+	void Awake (){
+		initFighter ();
+	}
 	// Use this for initialization
 	void Start () {
-	
+		sorcererStart ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		sorcererUpdate ();
 	}
 
 	protected override void initializePrimaryStats(){
@@ -31,7 +34,7 @@ public class Druid : Sorcerer {
 		spellCriticalChance = 0.3f;
 		spellCriticalDamage = 1.5f;
 		
-		spellPower = 1f;
+		spellPower = 10f;
 		
 		maxEnergy = 200;
 		

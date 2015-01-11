@@ -3,14 +3,17 @@ using System.Collections;
 
 public class Priest : Sorcerer {
 
+	void Awake (){
+		initFighter ();
+	}
 	// Use this for initialization
 	void Start () {
-	
+		sorcererStart ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		sorcererUpdate ();
 	}
 
 	protected override void initializePrimaryStats(){
@@ -31,7 +34,7 @@ public class Priest : Sorcerer {
 		spellCriticalChance = 0.1f;
 		spellCriticalDamage = 1.5f;
 		
-		spellPower = 1.5f;
+		spellPower = 15.0f;
 		
 		maxEnergy = 300;
 		

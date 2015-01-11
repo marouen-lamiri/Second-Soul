@@ -20,5 +20,7 @@ public abstract class Item{
 	public abstract Texture2D getImage();
 	public abstract int getWidth();
 	public abstract int getHeight();
-	
+	public abstract int getX();
+	public abstract int getY();
+	public abstract string getTypeAsString();
 }

@@ -13,11 +13,11 @@ public class PlayerCombatTest {
 		enemy.health = initHealth;
 
 		// 2. Player
-		player.damage = damageValue;
+		//player.getDamage() = damageValue;
 
 		// Act
-		enemy.takeDamage(player.damage);
-
+		//enemy.takeDamage(player.getDamage(),DamageType.Physical);
+		enemy.takeDamage(damageValue,DamageType.Physical);
 		// Assert
 		Assert.That (enemy.health < initHealth);
 	}

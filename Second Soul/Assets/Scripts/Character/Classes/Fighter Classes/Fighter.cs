@@ -12,12 +12,15 @@ public class Fighter : Player {
 	protected int strengthPerLvl;
 	protected int dexterityPerLvl;
 	protected int endurancePerLvl;
+
+	public DatabaseFighter database;
 	
 	//FighterNetworkScript fighterNetworkScript; // is "already serialized" in parent class Player.cs.
 
 	// Use this for initialization
 	void Start () {
 		fighterStart ();
+		database.readPrimaryStats();
 	}
 	protected void fighterStart(){
 		initializePlayer();
@@ -39,10 +42,15 @@ public class Fighter : Player {
 	}
 	// Update is called once per frame
 	void Update () {
-		playerLogic();
-		if(Input.GetKeyDown(KeyCode.E)){
+		fighterUpdate ();
+	}
+
+	protected void fighterUpdate(){
+		playerUpdate ();
+		if(Input.GetKeyDown ("e")){
 			playerEnabled = !playerEnabled;
 		}
+		playerLogic();
 	}
 	
 	protected virtual void initializePrimaryStats(){
@@ -90,7 +98,7 @@ public class Fighter : Player {
 		health = maxHealth;
 	}
 
-	public virtual bool criticalHitCheck(){
+	public override bool criticalHitCheck(){
 		int randomRoll = Random.Range (1, 100);
 		if (randomRoll <= criticalChance * 100) {
 			return true;
@@ -99,14 +107,50 @@ public class Fighter : Player {
 			return false;
 		}
 	}
-
-	public override void loseEnergy(float energy){
-		this.energy -= energy;
-		if (energy < 0) {
-			energy = 0;
+	public override double getDamage(){
+		if(!hitCheck()){
+			return 0;
 		}
+		if (criticalHitCheck ()) {
+			return damage*attackPower*criticalDamage;
+		}
+		return damage * attackPower;
+	}
+	public override bool loseEnergy(float energy){
+		if (energy > this.energy) {
+			return false;
+		}
+		this.energy -= energy;
 
 		// networking event listener:
 		fighterNetworkScript.onEnergyLost (this.energy);
+
+		return true;
 	}
+
+	// Getters and Setters for Primary Stats
+	public int getStrength () {
+		return strength;
+	}
+	
+	public void setStrength (int iStrength) {
+		this.strength = iStrength;
+	}
+
+	public int getDexterity () {
+		return dexterity;
+	}
+	
+	public void setDexterity (int iDexterity) {
+		this.dexterity = iDexterity;
+	}
+	
+	public int getEndurance () {
+		return endurance;
+	}
+	
+	public void setEndurance (int iEndurance) {
+		this.endurance = iEndurance;
+	}
+
 }
