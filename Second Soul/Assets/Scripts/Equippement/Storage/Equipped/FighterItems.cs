@@ -51,6 +51,10 @@ public class FighterItems : EquippedItems {
 			//Debug.Log(chestSlot.position);
 		}
 	}
+
+	public void setChestSlot(Item item){
+
+	}
 	
 	void drawEquippedItems(){
 		//Debug.Log("I happen");

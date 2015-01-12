@@ -316,4 +316,9 @@ public class Storage : MonoBehaviour {
 		List<Item> copy = inventoryItems;
 		return copy;
 	}
+
+	public List<Item> getEquipItems(){
+		List<Item> copy = equipItems;
+		return copy;
+	}
 }
