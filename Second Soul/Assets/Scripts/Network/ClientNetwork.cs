@@ -21,22 +21,17 @@ public class ClientNetwork : MonoBehaviour {
 
 	int framesToWait;
 
-	public void Start() {
-//		//debug
-//		if(Application.loadedLevelName == "NetworkStartMenu") {
-//			print ("we're in the if for is NetworkStartMenu");
-//			Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-//			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
-//			sorcerer.name = "Sorcerer";
-//			fighter.name = "Fighter";
-//			//		DontDestroyOnLoad (sorcerer.gameObject);
-//			//		DontDestroyOnLoad (fighter.gameObject);
-//			DontDestroyOnLoad (sorcerer);
-//			DontDestroyOnLoad (fighter);
-//
-//		}
-	}
-	
+	public string gameSceneToLoad;
+//	public Sorcerer sorcerer;
+//	public Fighter fighter;
+	private bool playerWasCreated;
+	private bool sorcererWasCreated;
+	private bool bothPlayerAndSorcererWereFound;
+
+	private static Vector3 sorcererPositionAfterMapCreation;
+	private bool sorcererPositionWasUpdated; // ... AfterMapGeneration;
+	private bool sorcererPositionWasSent; // after map generation, but used before sending it.
+
 	public void Awake() {
 		
 		networkWindowX = Screen.width - 500;
@@ -45,22 +40,111 @@ public class ClientNetwork : MonoBehaviour {
 		networkWindowButtonHeight = 25;
 		//AddNetworkView();
 		framesToWait = 0;
+		playerWasCreated = false;
+		sorcererWasCreated = false;
+		bothPlayerAndSorcererWereFound = false;
+
+		sorcererPositionAfterMapCreation = Vector3.zero;
+		sorcererPositionWasSent = false;
 	} 
+
+	public void Start() {
+	}
 
 	public void Update() {
 
 		// generate the map only after the players have been created (becasue they are needed for some reason for the map generation code:
 		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
 		//print ("BEFORE 1: "+Network.connections.Length);
-		if(serverAndClientAreBothConnected && Application.loadedLevelName == "NetworkStartMenu") {	// && Network.isServer
-			framesToWait++;
-			if(framesToWait > 700) {
-				// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
+		if(serverAndClientAreBothConnected && Application.loadedLevelName == "NetworkStartMenu" && bothPlayerAndSorcererWereFound) {	// && Network.isServer
+
+			if(Network.isServer) {
+				framesToWait++;
+				if(framesToWait > 700) {
+					// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
+					print ("BEFORE 3");
+					NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
+					print ("AFTER");
+				}
+
+			} else {
 				print ("BEFORE 3");
-				NetworkLevelLoader.Instance.LoadLevel("NetworkingCollaboration",1); 
+				NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
 				print ("AFTER");
+
 			}
 		}
+
+
+		//===================
+		if (Network.isClient && Application.loadedLevelName == "NetworkStartMenu" && !sorcererWasCreated) {
+			Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0); //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+			//sorcerer.name = "Sorcerer";
+			//fighter.name = "Fighter";
+			//						DontDestroyOnLoad (sorcerer);
+			//						DontDestroyOnLoad (fighter);
+			sorcererWasCreated = true;
+		} 
+		if(Network.isServer && Application.loadedLevelName == "NetworkStartMenu" && !playerWasCreated) {
+			Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0); //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+			playerWasCreated = true;
+		}
+
+		if(Application.loadedLevelName == "NetworkStartMenu") { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
+			//			print ("we're in the if for is NetworkStartMenu");
+			//			Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+			//			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+			//			sorcerer.name = "Sorcerer";
+			//			fighter.name = "Fighter";
+			//			//		DontDestroyOnLoad (sorcerer.gameObject);
+			//			//		DontDestroyOnLoad (fighter.gameObject);
+
+			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+			Fighter fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));			
+
+			if(sorcerer != null && fighter != null) {
+				DontDestroyOnLoad (sorcerer);
+				DontDestroyOnLoad (fighter);
+				sorcerer.name = "Sorcerer";
+				fighter.name = "Fighter";
+				bothPlayerAndSorcererWereFound = true;
+			}
+			
+			//
+
+		}
+
+		//=========================
+		// updating the sorcerer position after the map was 
+		if(sorcererPositionAfterMapCreation != Vector3.zero && !sorcererPositionWasUpdated) {
+//			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+//			sorcerer.transform.position = sorcererPositionAfterMapCreation;
+//			sorcererPositionWasUpdated = true;
+		}
+
+		if(Network.isClient) {
+			//networkView.RPC ("SetSorcererPositionAfterMapCreation", RPCMode.Others, "hello sent from client");
+
+		} else if (Network.isServer && MapGeneration.mapGenerationCompleted && !sorcererPositionWasSent) { // 
+			//networkView.RPC ("SetSorcererPositionAfterMapCreation", RPCMode.Others, "hello sent from server");
+			//networkView.RPC ("onStatsDisplayed", RPCMode.Others);
+
+			//onStatsDisplayed();
+			//ClientNetwork clientNetwork = (ClientNetwork)GameObject.FindObjectOfType(typeof(ClientNetwork));
+
+			OnSorcererPositionDeterminedAfterMapCreation(MapGeneration.playerStartPositionVector3);
+			//clientNetwork.onStatsDisplayed();
+//			sorcererPositionWasSent = true;
+
+			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+			//if(sorcerer.transform.position != Vector3.zero) {
+			if(sorcerer.transform.position.x > 1.0f || sorcerer.transform.position.x  < -1.0f){
+				sorcererPositionWasSent = true;
+				print ("sorcererPositionWasSent = true");
+			}
+			
+		}
+
 	}
 	
 	[RPC]
@@ -289,24 +373,69 @@ public class ClientNetwork : MonoBehaviour {
 //			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.		fighter.name = "Fighter";
 //			fighter.name = "Fighter";
 //		}
-		if (Network.isClient) {
-			Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
-			sorcerer.name = "Sorcerer";
-			fighter.name = "Fighter";
+//		if (Network.isServer) {
+//			sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+//			fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+//			//sorcerer.name = "Sorcerer";
+//			//fighter.name = "Fighter";
+////						DontDestroyOnLoad (sorcerer);
+////						DontDestroyOnLoad (fighter);
+//		} 
 
-		} 
-		if(Network.isServer) {
-			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectsOfType(typeof(Sorcerer));
-			Fighter fighter = (Fighter)GameObject.FindObjectsOfType(typeof(Fighter));
-			sorcerer.name = "Sorcerer";
-			fighter.name = "Fighter"; // not working, they are still named Fighter(clone) on the server.
-		}
+//		if(Network.isClient) {
+//			sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+//			fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));
+////			sorcerer.name = "Sorcerer";
+////			fighter.name = "Fighter"; // not working, they are still named Fighter(clone) on the server.
+////						DontDestroyOnLoad (sorcerer);
+////						DontDestroyOnLoad (fighter);
+//
+//		}
 
 
 		
 	}
 
+	//============= RPC functions called from elsewhere in the code. ====================
+	[RPC]
+	public void OnSorcererPositionDeterminedAfterMapCreation(Vector3 position) {
+		//if (networkView.isMine) {
+		networkView.RPC ("SetSorcererPositionAfterMapCreation", RPCMode.Others, position.x.ToString()+","+position.y.ToString()+","+position.z.ToString());
+		//}
+		print (position);
 
+	}
+	[RPC]
+	void SetSorcererPositionAfterMapCreation(string position) {
+		//sorcererPositionAfterMapCreation = position;
+		print (position);
+		string[] positions = position.Split (',');
+		Vector3 positionVector3 = Vector3.zero;
+		positionVector3.x = float.Parse(positions[0]);
+		positionVector3.y = float.Parse(positions[1]);
+		positionVector3.z = float.Parse(positions[2]);
+		
+		Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+		sorcerer.transform.position = positionVector3;
+		sorcererPositionWasUpdated = true;
+	}
+	
+	
+	// debug:
+	// watch onStatsDisplayed:
+	[RPC]
+	public void onStatsDisplayed() {
+		//if(networkView.isMine){
+		networkView.RPC("toggleStatsDisplayed", RPCMode.All);//RPCMode.Others);
+		//print ("hello");
+		//}
+	}
+	[RPC]
+	void toggleStatsDisplayed() {
+		//DisplayPlayerStats statsDisplayScript = (DisplayPlayerStats) GameObject.FindObjectOfType(typeof(DisplayPlayerStats));
+		//statsDisplayScript.boolChange ();
+		print ("toggle stats displayed WORKED");
+	}
+	
 }
 

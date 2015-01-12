@@ -21,16 +21,22 @@ public class MapGeneration : MonoBehaviour{
 	int numberRooms = 10;
 	public static int mapSizeX = 25;
 	public static int mapSizeZ = 25;
+
+	// network:
+	public static Vector3 playerStartPositionVector3;
+	public static bool mapGenerationCompleted;
 	
 	void Awake () {
+		mapGenerationCompleted = false;
 		if (Network.isServer) {
-		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		enemyfactory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
-		lootFactory.setFactoryVariables(itemHolderPrefab, fighter);
-		mapArray = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter.gameObject, sorcerer.gameObject);
-		buildMap (mapArray);
-		}
+			fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+			sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+			enemyfactory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
+			lootFactory.setFactoryVariables(itemHolderPrefab, fighter);
+			mapArray = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter.gameObject, sorcerer.gameObject);
+			buildMap (mapArray);
+			mapGenerationCompleted = true; // signal for client network to set the sorcerer's position with rpc call
+		} 
 	}
 	
 	// Update is called once per frame
@@ -71,7 +77,8 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i+1,j+1] != 0 && map [i-1,j-1] != 0 && map [i+2,j+2] != 0 && map [i-2,j-2] != 0
 				    && map [i,j] != 98 && map [i,j] != 90){
 					map [i,j] = 99;
-					player.transform.position = new Vector3(i*10,0,j*10);
+					playerStartPositionVector3 = new Vector3(i*10,0,j*10);
+					player.transform.position = playerStartPositionVector3;
 					i = mapSizeX;
 					j = mapSizeZ;
 				}
@@ -79,6 +86,7 @@ public class MapGeneration : MonoBehaviour{
 		}
 		return map;
 	}
+
 	
 	int[,] enemySpawnLocation(int [,] map){
 		int nbrEnemies = Random.Range (25,35);
@@ -236,7 +244,7 @@ public class MapGeneration : MonoBehaviour{
 		
 	}
 	
-	int[,] generateMap(int sizeX, int sizeZ, int squaresToGenerate, Fighter player, Sorcerer player2){
+	int[,] generateMap(int sizeX, int sizeZ, int squaresToGenerate, GameObject player, GameObject player2){
 		int [,] genMap;
 		
 		genMap = createSquares(sizeX, sizeZ, squaresToGenerate);
@@ -248,7 +256,13 @@ public class MapGeneration : MonoBehaviour{
 			genMap = generateObstacles (genMap, obstaclePrefab, true);
 			genMap = generateObstacles (genMap, statuePrefab, false);
 			genMap = playerStartPosition(genMap, player);
-			genMap = playerStartPosition(genMap, player2);
+
+			genMap = playerStartPosition(genMap, player2); // now setting a private var for the player2 position, because we need to send it over the network so the right instance sets its position.
+			ClientNetwork clientNetwork = (ClientNetwork)GameObject.FindObjectOfType(typeof(ClientNetwork));
+			//clientNetwork.OnSorcererPositionDeterminedAfterMapCreation(playerStartPositionVector3);
+			clientNetwork.onStatsDisplayed();
+
+
 			genMap = enemySpawnLocation (genMap);
 		}		
 		return genMap;
