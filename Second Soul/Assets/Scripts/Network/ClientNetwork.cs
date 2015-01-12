@@ -138,10 +138,7 @@ public class ClientNetwork : MonoBehaviour {
 
 			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
 			//if(sorcerer.transform.position != Vector3.zero) {
-			if(sorcerer.transform.position.x > 1.0f || sorcerer.transform.position.x  < -1.0f){
-				sorcererPositionWasSent = true;
-				print ("sorcererPositionWasSent = true");
-			}
+
 			
 		}
 
@@ -400,13 +397,13 @@ public class ClientNetwork : MonoBehaviour {
 	[RPC]
 	public void OnSorcererPositionDeterminedAfterMapCreation(Vector3 position) {
 		//if (networkView.isMine) {
-		networkView.RPC ("SetSorcererPositionAfterMapCreation", RPCMode.Others, position.x.ToString()+","+position.y.ToString()+","+position.z.ToString());
+		networkView.RPC ("SetSorcererPositionAfterMapCreation", RPCMode.All, position.x.ToString()+","+position.y.ToString()+","+position.z.ToString());
 		//}
 		print (position);
 
 	}
 	[RPC]
-	void SetSorcererPositionAfterMapCreation(string position) {
+	public void SetSorcererPositionAfterMapCreation(string position) {
 		//sorcererPositionAfterMapCreation = position;
 		print (position);
 		string[] positions = position.Split (',');
@@ -418,8 +415,15 @@ public class ClientNetwork : MonoBehaviour {
 		Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
 		sorcerer.transform.position = positionVector3;
 		sorcererPositionWasUpdated = true;
+		if(sorcerer.transform.position.x > 1.0f || sorcerer.transform.position.x  < -1.0f){
+			//sorcererPositionWasSent = true;
+			networkView.RPC ("setServerBoolean",RPCMode.Server);
+		}
 	}
-	
+	[RPC]
+	public void setServerBoolean(){
+		sorcererPositionWasSent = !sorcererPositionWasSent;
+	}
 	
 	// debug:
 	// watch onStatsDisplayed:

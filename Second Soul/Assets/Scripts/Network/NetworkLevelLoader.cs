@@ -24,7 +24,7 @@ public class NetworkLevelLoader : MonoBehaviour
 	}
 	private static NetworkLevelLoader instance;
 	
-	public void LoadLevel( string levelName, int prefix = 0 )
+	public void LoadLevel( string levelName, int prefix )
 	{
 		StopAllCoroutines();
 		StartCoroutine( doLoadLevel( levelName, prefix ) );
