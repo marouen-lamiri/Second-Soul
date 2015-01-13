@@ -32,6 +32,7 @@ public class DatabaseFighter : MonoBehaviour {
 	}
 	
 	public void readPrimaryStats(){
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 //		Debug.Log ("Read the stats of the " + player.name);
 		fighter.setStrength((int) PlayerPrefs.GetInt("Strength"));
 		fighter.setDexterity((int) PlayerPrefs.GetInt("Dexterity"));

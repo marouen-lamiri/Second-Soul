@@ -289,15 +289,9 @@ public abstract class Character : MonoBehaviour {
 		chasing = true;
 		animateRun();
 		Debug.Log (pathing);
-		if(gameObject.tag == "Enemy"){
-			pathing.findPath(transform.position, targetPosition);
-		}
-		else{
-			pathing.findPath(transform.position, nextPosition);
-		}
-		List<Vector3> path = grid.worldFromNode(grid.path);
 		Vector3 destination;
-		if (Vector3.Distance (transform.position, targetPosition) > 4) {
+		List<Vector3> path = grid.worldFromNode(grid.path);
+		if (Vector3.Distance (transform.position, targetPosition) > 2) {
 			destination = path[1];
 		} 
 		else {

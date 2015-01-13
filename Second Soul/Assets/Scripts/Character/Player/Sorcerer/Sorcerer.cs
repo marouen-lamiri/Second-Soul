@@ -19,6 +19,8 @@ public class Sorcerer : Player {
 	// Use this for initialization
 	void Start () {
 		sorcererStart (); //initialized in base classes now why still needed?
+		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
+		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 	}
 	// is this needed since called in sorcereStart??
 	protected void initFighter(){

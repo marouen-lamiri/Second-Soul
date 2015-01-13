@@ -20,6 +20,8 @@ public class Fighter : Player {
 	// Use this for initialization
 	void Start () {
 		fighterStart ();
+		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
+		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 
 	}
 	protected void fighterStart(){
