@@ -120,7 +120,13 @@ public class Sorcerer : Player {
 	}
 
 	public override bool loseEnergy(float energy){
-		return fighter.loseEnergy (energy);
+
+		var newEnergyValue = fighter.loseEnergy (energy);
+
+		// networking event listener:
+		sorcererNetworkScript.onEnergyLost (newEnergyValue);// (this.energy);
+
+		return newEnergyValue;
 	}
 
 	// Getters and Setters for Primary Stats
