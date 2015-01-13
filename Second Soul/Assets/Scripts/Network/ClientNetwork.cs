@@ -31,6 +31,9 @@ public class ClientNetwork : MonoBehaviour {
 	private static Vector3 sorcererPositionAfterMapCreation;
 	private bool sorcererPositionWasUpdated; // ... AfterMapGeneration;
 	private bool sorcererPositionWasSent; // after map generation, but used before sending it.
+	private bool focusCorrectPlayerWasDone;
+
+	private int framesToWaitForFocusCorrectCharacter;
 
 	public void Awake() {
 		
@@ -46,6 +49,10 @@ public class ClientNetwork : MonoBehaviour {
 
 		sorcererPositionAfterMapCreation = Vector3.zero;
 		sorcererPositionWasSent = false;
+		focusCorrectPlayerWasDone = false;
+
+		this.gameSceneToLoad = "SaveNetwork";
+		framesToWaitForFocusCorrectCharacter = 0;
 	} 
 
 	public void Start() {
@@ -78,16 +85,19 @@ public class ClientNetwork : MonoBehaviour {
 
 		//===================
 		if (Network.isClient && Application.loadedLevelName == "NetworkStartMenu" && !sorcererWasCreated) {
-			Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0); //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+			Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
 			//sorcerer.name = "Sorcerer";
 			//fighter.name = "Fighter";
 			//						DontDestroyOnLoad (sorcerer);
 			//						DontDestroyOnLoad (fighter);
 			sorcererWasCreated = true;
+
+
 		} 
 		if(Network.isServer && Application.loadedLevelName == "NetworkStartMenu" && !playerWasCreated) {
-			Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0); //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
 			playerWasCreated = true;
+
 		}
 
 		if(Application.loadedLevelName == "NetworkStartMenu") { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
@@ -110,9 +120,38 @@ public class ClientNetwork : MonoBehaviour {
 				bothPlayerAndSorcererWereFound = true;
 			}
 			
-			//
 
 		}
+
+//		// focus correct player:
+//		if (Application.loadedLevelName == this.gameSceneToLoad && !focusCorrectPlayerWasDone) {
+//
+//			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+//			Fighter fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));			
+//
+//			if(sorcerer != null && fighter != null) {
+//
+//				framesToWaitForFocusCorrectCharacter++;
+//				if(framesToWaitForFocusCorrectCharacter > 900) {
+//					if(Network.isServer) {
+//						//focus sorcerer:
+//						fighter.playerEnabled = true;
+//						//sorcerer.playerEnabled = false; // sorcerer is always the reverse of the fighter, see Sorcerer.cs:57
+//						
+//					}
+//					else if (Network.isClient) {
+//						//focus sorcerer:
+//						//sorcerer.playerEnabled = true;
+//						fighter.playerEnabled = false;
+//						
+//					}
+//					focusCorrectPlayerWasDone = true;
+//				}
+//
+//
+//
+//			}
+//		}
 
 		//=========================
 		// updating the sorcerer position after the map was 
@@ -180,6 +219,7 @@ public class ClientNetwork : MonoBehaviour {
 
 
 				// disable second soul:
+
 				
 			}
 		}
