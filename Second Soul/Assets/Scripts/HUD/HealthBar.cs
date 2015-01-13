@@ -38,7 +38,7 @@ public class HealthBar : MonoBehaviour {
 	void Update () {
 		
 		if(player.target!=null){
-			enemy = player.target.GetComponent<Enemy> ();
+			enemy = (Enemy)player.target;
 			healthPercent =((float)enemy.health / (float)enemy.maxHealth);
 		}
 		else{
