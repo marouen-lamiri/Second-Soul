@@ -32,23 +32,27 @@ public class Enemy : Character {
 	
 	// Use this for initialization
 	void Start (){
+		enemyStart ();
+	}
+	protected void enemyStart(){
+		characterStart ();
+		sphere.renderer.material.color = Color.red;
 		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 		experienceBase = 25;
 		xpGiven = false;
 		lootGiven = false;
-
+		
 		initializePrimaryStats();
 		initializeSecondaryStatsBase();
 		initializeSecondaryStats();
 		calculateSecondaryStats();
-
+		
 		level = target.level;
 		health = maxHealth;
 		energy = maxEnergy;
 		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
 	}
-
 	protected virtual void initializePrimaryStats(){
 		strengthPerLvl = 1;
 		dexterityPerLvl = 1;

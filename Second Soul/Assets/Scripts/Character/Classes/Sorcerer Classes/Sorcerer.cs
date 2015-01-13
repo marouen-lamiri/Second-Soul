@@ -19,7 +19,6 @@ public class Sorcerer : Player {
 	// Use this for initialization
 	void Start () {
 		sorcererStart (); //initialized in base classes now why still needed?
-		database.readPrimaryStats();
 	}
 	// is this needed since called in sorcereStart??
 	protected void initFighter(){
@@ -27,6 +26,7 @@ public class Sorcerer : Player {
 	}
 
 	protected void sorcererStart(){
+		playerStart ();
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		initializePlayer();
 		initializeLevel();
@@ -46,6 +46,7 @@ public class Sorcerer : Player {
 		startPosition = transform.position;
 		//networking:
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
+		database.readPrimaryStats();
 	}
 	// Update is called once per frame
 	void Update () {

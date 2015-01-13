@@ -14,33 +14,6 @@ public class MiniMap : MonoBehaviour {
 	void Start(){
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-
-		GameObject fighterSphere = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-		fighterSphere.transform.parent = fighter.transform;
-		playerSpheres.Add (fighterSphere);
-		GameObject sorcererSphere = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-		sorcererSphere.transform.parent = sorcerer.transform;
-		playerSpheres.Add (sorcererSphere);
-		spheres.AddRange (playerSpheres);
-
-		GameObject [] enemies = GameObject.FindGameObjectsWithTag ("Enemy");
-		for (int i=0; i<enemies.GetLength(0); ++i) {
-			GameObject enemySphere = GameObject.CreatePrimitive (PrimitiveType.Sphere); 
-			enemySphere.transform.parent=enemies[i].transform;
-			enemySpheres.Add (enemySphere);
-		}
-		spheres.AddRange (enemySpheres);
-		for (int i=0; i<spheres.Count; ++i) {
-			spheres[i].renderer.material.color = Color.red;
-			spheres[i].renderer.castShadows = false;
-			spheres[i].renderer.receiveShadows = false;
-			//was going to scale to 0.1f, but scaling the map down didn't seem to work
-			spheres[i].transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
-			spheres[i].gameObject.layer = LayerMask.NameToLayer ("Minimap");
-		}
-		for (int i=0; i<playerSpheres.Count; ++i) {
-			playerSpheres[i].renderer.material.color = Color.blue;
-		}
 		buildMinimap ();
 	}
 
@@ -95,12 +68,6 @@ public class MiniMap : MonoBehaviour {
 			// Adjusting the MiniMap camera to the Sorcerer position.
 			this.moveMiniMapCamera(sorcerer.transform.position);
 		}
-		//fighter.transform.FindChild("Sphere").transform.position=new Vector3(fighter.transform.position.x, 10.0f, fighter.transform.position.z);
-		//sorcerer.transform.FindChild("Sphere").transform.position=new Vector3(sorcerer.transform.position.x, 10.0f, sorcerer.transform.position.z);
-		for (int i=0; i<enemySpheres.Count; ++i) {
-			//enemySpheres[i].transform.position = new Vector3 (enemySpheres[i].transform.parent.transform.position.x, 10.0f, enemySpheres[i].transform.parent.transform.position.z);
-		}
-
 	}
 
 	// Move the MiniMap's camera to the entered position.

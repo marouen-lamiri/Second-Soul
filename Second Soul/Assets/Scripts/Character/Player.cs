@@ -26,10 +26,14 @@ public abstract class Player : Character {
 	
 	// Use this for initialization
 	void Start () {
+		playerStart ();
+	}
+	protected void playerStart(){
+		characterStart ();
+		sphere.renderer.material.color = Color.blue;
 		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
 	}
-	
 	// Update is called once per frame
 	void Update(){
 		playerUpdate ();

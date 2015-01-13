@@ -7,7 +7,7 @@ public abstract class Character : MonoBehaviour {
 	protected Grid grid;
 	protected PathFinding pathing;
 	private List<Vector3> path;
-	
+	protected GameObject sphere;
 	public int level; // only public for now to see level in inspector
 
 	//want to be protected - putting to public to check in inspector
@@ -123,7 +123,16 @@ public abstract class Character : MonoBehaviour {
 
 
 	void Start () {
-		//skillLength = animation[attackClip.name].length; // nothing happens in a parent start
+		characterStart ();
+	}
+	protected void characterStart(){
+		sphere = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+		sphere.renderer.castShadows = false;
+		sphere.renderer.receiveShadows = false;
+		sphere.transform.parent = transform;
+		//was going to scale to 0.1f, but scaling the map down didn't seem to work
+		sphere.transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
+		sphere.gameObject.layer = LayerMask.NameToLayer ("Minimap");
 	}
 	
 	// Update is called once per frame

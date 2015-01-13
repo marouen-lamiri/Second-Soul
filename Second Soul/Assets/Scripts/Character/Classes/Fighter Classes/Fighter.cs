@@ -20,9 +20,10 @@ public class Fighter : Player {
 	// Use this for initialization
 	void Start () {
 		fighterStart ();
-		database.readPrimaryStats();
+
 	}
 	protected void fighterStart(){
+		playerStart ();
 		initializePlayer();
 		initializeLevel();
 		initializePrimaryStats();
@@ -39,6 +40,7 @@ public class Fighter : Player {
 		
 		//networking:
 		fighterNetworkScript = (FighterNetworkScript)GameObject.FindObjectOfType (typeof(FighterNetworkScript));
+		database.readPrimaryStats();
 	}
 	// Update is called once per frame
 	void Update () {
