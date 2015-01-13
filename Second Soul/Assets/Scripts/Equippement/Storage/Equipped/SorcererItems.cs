@@ -24,14 +24,6 @@ public class SorcererItems : EquippedItems {
 		equipSlots.Add(ringSlot);
 	}
 
-	public void setAmuletSlot(Item item){
-		amuletSlot  = new EquipSlot (amuletSlot.position, item);
-	}
-	
-	public void setRingSlot(Item item){
-		ringSlot  = new EquipSlot (ringSlot.position, item);
-	}
-	
 	// Update is called once per frame
 	void Update () {
 	

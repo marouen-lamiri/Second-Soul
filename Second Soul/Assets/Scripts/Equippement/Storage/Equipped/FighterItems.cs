@@ -50,18 +50,6 @@ public class FighterItems : EquippedItems {
 		}
 	}
 
-	public void setChestSlot(Item item){
-		chestSlot = new EquipSlot (chestSlot.position, item);
-	}
-
-	public void setBootSlot(Item item){
-		bootsSlot = new EquipSlot (bootsSlot.position, item);
-	}
-
-	public void setWeaponSlot(Item item){
-		weaponSlot = new EquipSlot (weaponSlot.position, item);
-	}
-
 	void drawEquippedItems(){
 		//Debug.Log("I happen");
 		foreach(Item item in equipItems){

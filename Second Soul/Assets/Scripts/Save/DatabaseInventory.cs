@@ -11,8 +11,7 @@ public class DatabaseInventory : MonoBehaviour {
 	private List<Item> inventoryItems;
 	private List<Item> equipItems;
 	private Inventory inventory;
-	private SorcererItems sorcererItems;
-	private FighterItems fighterItems;
+	private EquipSlot slots; 
 	
 	void Start () {
 		inventory = (Inventory) GameObject.FindObjectOfType (typeof (Inventory));
@@ -98,32 +97,32 @@ public class DatabaseInventory : MonoBehaviour {
 		Item item;
 		if(PlayerPrefs.GetString("Equiped Item type" + i) == "Axe"){
 			item = new Axe();
-			fighterItems.setWeaponSlot(item);
+			item.useItem();
 			//add item to axe slot
 		}
 		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Ring"){
 			item = new Ring();
-			sorcererItems.setRingSlot(item);
+			item.useItem();
 			//add item to ring slot);
 		}
 		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Chest"){
 			item = new Chest();
-			fighterItems.setChestSlot(item);
+			item.useItem();
 			//add item to chest slot
 		}
 		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Boots"){
 			item = new Boots();
-			fighterItems.setBootSlot(item);
+			item.useItem();
 			//add item to boots slot
 		}
 		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Amulet"){
 			item = new Amulet();
-			sorcererItems.setAmuletSlot(item);
+			item.useItem();
 			//add item to amulet slot
 		}
 		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Sword"){
 			item = new Sword();
-			fighterItems.setWeaponSlot(item);
+			item.useItem();
 			//add item to sword slot
 		}
 	}
@@ -136,11 +135,11 @@ public class DatabaseInventory : MonoBehaviour {
 			int y = PlayerPrefs.GetInt("Item position y" + i);
 			recreateItem(x, y, i);
 		}
-//		for(int i = 0; i < PlayerPrefs.GetInt ("Equiped Item Total"); i++){ 
-//			Debug.Log ("hello2");
-//			int x = PlayerPrefs.GetInt("Equiped Item position x" + i);
-//			int y = PlayerPrefs.GetInt("Equiped Item position y" + i);
-//			recreateEquipItem(x, y, i);
-//		}
+		for(int i = 0; i < PlayerPrefs.GetInt ("Equiped Item Total"); i++){ 
+			Debug.Log ("hello2");
+			int x = PlayerPrefs.GetInt("Equiped Item position x" + i);
+			int y = PlayerPrefs.GetInt("Equiped Item position y" + i);
+			recreateEquipItem(x, y, i);
+		}
 	}
 }
