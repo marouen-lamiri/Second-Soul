@@ -7,8 +7,6 @@ public class FighterItems : EquippedItems {
 	public static EquipSlot bootsSlot;
 	public static EquipSlot weaponSlot;
 
-	
-	
 	//Offset and size of chest rect slot
 	public int chestOffsetX;
 	public int chestOffsetY;
@@ -24,7 +22,7 @@ public class FighterItems : EquippedItems {
 	public int weaponPixelWidth;
 	
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 		setSlots();
 	}
 	
@@ -53,9 +51,17 @@ public class FighterItems : EquippedItems {
 	}
 
 	public void setChestSlot(Item item){
-
+		chestSlot = new EquipSlot (chestSlot.position, item);
 	}
-	
+
+	public void setBootSlot(Item item){
+		bootsSlot = new EquipSlot (bootsSlot.position, item);
+	}
+
+	public void setWeaponSlot(Item item){
+		weaponSlot = new EquipSlot (weaponSlot.position, item);
+	}
+
 	void drawEquippedItems(){
 		//Debug.Log("I happen");
 		foreach(Item item in equipItems){

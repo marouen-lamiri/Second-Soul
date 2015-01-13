@@ -15,13 +15,21 @@ public class SorcererItems : EquippedItems {
 	public int ringPixelWidth;
 	
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 		position.x = Screen.width - position.width;
 		position.y = Screen.height - position.height - Screen.height * 0.2f;
 		amuletSlot = new EquipSlot(new Rect(), "Amulet");
 		ringSlot = new EquipSlot(new Rect(ringOffsetX + position.x, ringOffsetY + position.y, ringPixelHeight, ringPixelWidth), "Ring");
 		equipSlots.Add(amuletSlot);
 		equipSlots.Add(ringSlot);
+	}
+
+	public void setAmuletSlot(Item item){
+		amuletSlot  = new EquipSlot (amuletSlot.position, item);
+	}
+	
+	public void setRingSlot(Item item){
+		ringSlot  = new EquipSlot (ringSlot.position, item);
 	}
 	
 	// Update is called once per frame
