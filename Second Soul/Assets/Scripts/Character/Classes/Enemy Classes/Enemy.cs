@@ -52,6 +52,8 @@ public class Enemy : Character {
 		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
 
 		// networking: makes sure each enemy is properly instantiated even on another game instance that didn't run the EnemyFactory code.
+		target = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		this.target = target;
 		this.sorcerer = sorcerer;
 		this.transform.parent = GameObject.Find("Enemies").transform;
