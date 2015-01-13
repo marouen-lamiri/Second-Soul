@@ -35,6 +35,9 @@ public class Sorcerer : Player {
 		initializeSecondaryStats();
 		calculateSecondaryStats();
 		playerEnabled=true;
+		if (Network.isClient) {
+			fighter.playerEnabled=false;
+		}
 		health = maxHealth;
 		energy = maxEnergy;
 		
