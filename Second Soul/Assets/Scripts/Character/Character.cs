@@ -375,6 +375,10 @@ public abstract class Character : MonoBehaviour {
 	public float getInitialPositionZ(){
 		return startPosition.z;
 	}
+
+	public void setInitialPosition(Vector3 initPos){
+		startPosition = initPos;
+	}
 	
 	public void animateIdle(){
 		animation.CrossFade(idleClip.name);

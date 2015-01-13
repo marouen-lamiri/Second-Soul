@@ -18,7 +18,7 @@ public class MapGeneration : MonoBehaviour{
 	private Sorcerer sorcerer;
 	List<int> listOfWalls;
 	public static int[,] mapArray;
-	int numberRooms = 10;
+	int numberRooms = 5;
 	public static int mapSizeX = 25;
 	public static int mapSizeZ = 25;
 	
@@ -45,7 +45,9 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i+1,j+1] != 0 && map [i-1,j-1] != 0 && map [i+2,j+2] != 0 && map [i-2,j-2] != 0
 				    && map [i,j] != 98 && map [i,j] != 90){
 					map [i,j] = 99;
-					player.transform.position = new Vector3(i*10,0,j*10);
+					Vector3 position = new Vector3(i*10,0,j*10);
+					player.transform.position = position;
+					fighter.setInitialPosition(position);
 					i = mapSizeX;
 					j = mapSizeZ;
 				}
