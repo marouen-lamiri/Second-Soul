@@ -5,9 +5,13 @@ using System.Collections.Generic;
 public class DatabaseInventory : MonoBehaviour {
 
 	// Use this for initialization
-	int interval = 300;
-	int count;
+	private int interval = 300;
+	private int count;
+	private Slot [,] inventorySlots;
+	private List<Item> inventoryItems;
+	private List<Item> equipItems;
 	private Inventory inventory;
+	private EquipSlot slots; 
 	
 	void Start () {
 		inventory = (Inventory) GameObject.FindObjectOfType (typeof (Inventory));
@@ -17,85 +21,125 @@ public class DatabaseInventory : MonoBehaviour {
 	void Update () {
 		if(count == interval){
 			//save
-			Debug.Log ("Save Fighter's Primary Stats!");
+			Debug.Log ("Save Inventory!");
 			saveItems();
+			saveEquipItems();
+			PlayerPrefs.Save();
 			count = 0;
 		}
 		count++;
 	}
 
-	void compareSlotPosToItemPos(){
-
+	void saveItems(){
+		Debug.Log ("Step 1");
+		inventoryItems = inventory.getInventoryItems();
+		int counter = 0;
+		for (int i = 0; i < inventoryItems.Count; i++){
+			PlayerPrefs.SetInt ("Item position x" + i, inventoryItems[i].getX());
+			PlayerPrefs.SetInt ("Item position y" + i, inventoryItems[i].getY());
+			PlayerPrefs.SetString("Item type" + i, inventoryItems[i].getTypeAsString());
+			Debug.Log (inventoryItems[i].getTypeAsString());
+			counter++;
+		}
+		PlayerPrefs.SetInt ("Item Total", counter);
 	}
 
-	void saveItems(){
-		Slot [,] inventorySlots = inventory.getInventorySlots();
-		List<Item> inventoryItems = inventory.getInventoryItems();
-		for (int i = 0; i < inventory.getStorageSizeWidth(); i++){
-			for(int j = 0; j < inventory.getStorageSizeHeight(); j++){
-				Debug.Log (inventorySlots);
-				if(inventorySlots[i,j].occupied){
-					PlayerPrefs.SetString("Inventory Slot at" + i + "/" + j+ " status", "true" );
-					PlayerPrefs.SetInt ("Item position x", inventoryItems[i].getX());
-					PlayerPrefs.SetInt ("Item position y", inventoryItems[i].getY());
-					PlayerPrefs.SetString("Item type", inventoryItems[i].getTypeAsString());
-				}
-				else{
-					PlayerPrefs.SetString("Inventory Slot at" + i + "/" + j+ " status", "false" );
-				}
-			}
+	void saveEquipItems(){
+		equipItems = inventory.getEquipItems();
+		int counter = 0;
+		for (int i = 0; i < equipItems.Count; i++){
+			PlayerPrefs.SetInt ("Equiped Item position x" + i, equipItems[i].getX());
+			PlayerPrefs.SetInt ("Equiped Item position y" + i, equipItems[i].getY());
+			PlayerPrefs.SetString("Equiped Item type" + i, equipItems[i].getTypeAsString());
+			Debug.Log (equipItems[i].getTypeAsString());
+			counter++;
+		}
+		PlayerPrefs.SetInt ("Equiped Item Total", counter);
+	}
+
+	public void recreateItem(int x, int y, int i){
+		Item item;
+		if(PlayerPrefs.GetString("Item type" + i) == "ManaPotion"){
+			item = new ManaPotion();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "HealthPotion"){
+			item = new HealthPotion();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Axe"){
+			item = new Axe();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Ring"){
+			item = new Ring();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Chest"){
+			item = new Chest();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Boots"){
+			item = new Boots();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Amulet"){
+			item = new Amulet();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Sword"){
+			item = new Sword();
+			inventory.addInventoryItem(x,y,item);
+		}
+	}
+
+	public void recreateEquipItem(int x, int y, int i){
+		Item item;
+		if(PlayerPrefs.GetString("Equiped Item type" + i) == "Axe"){
+			item = new Axe();
+			item.useItem();
+			//add item to axe slot
+		}
+		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Ring"){
+			item = new Ring();
+			item.useItem();
+			//add item to ring slot);
+		}
+		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Chest"){
+			item = new Chest();
+			item.useItem();
+			//add item to chest slot
+		}
+		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Boots"){
+			item = new Boots();
+			item.useItem();
+			//add item to boots slot
+		}
+		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Amulet"){
+			item = new Amulet();
+			item.useItem();
+			//add item to amulet slot
+		}
+		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Sword"){
+			item = new Sword();
+			item.useItem();
+			//add item to sword slot
 		}
 	}
 	
 	public void readItems(){
-		Slot [,] inventorySlots = inventory.getInventorySlots();
-		List<Item> inventoryItems = inventory.getInventoryItems();
-		for(int i = 0; i < inventory.getStorageSizeWidth(); i++){
-			for(int j = 0; j < inventory.getStorageSizeHeight(); j++){
-				if(PlayerPrefs.GetString("Inventory Slot at" + i + "/" + j+ " status") == "true"){
-					Debug.Log ("Load");
-					string itemType = (string)PlayerPrefs.GetString("Item type");
-					int x = (int)PlayerPrefs.GetInt("Item position x");
-					int y = (int)PlayerPrefs.GetInt("Item position y");
-					if(itemType == "ManaPotion"){
-						inventory.addInventoryItem(x,y,new ManaPotion());
-						inventorySlots[i,j].occupied = true;
-					}
-					else if(itemType == "HealthPotion"){
-						inventory.addInventoryItem(x,y,new HealthPotion());
-						inventorySlots[i,j].occupied = true;
-					}
-					else if(itemType == "Axe"){
-						inventory.addInventoryItem(x,y,new Axe());
-						inventorySlots[i,j].occupied = true;
-					}
-					else if(itemType == "Ring"){
-						inventory.addInventoryItem(x,y,new Ring());
-						inventorySlots[i,j].occupied = true;
-					}
-					else if(itemType == "Chest"){
-						inventory.addInventoryItem(x,y,new Chest());
-						inventorySlots[i,j].occupied = true;
-					}
-					else if(itemType == "Boots"){
-						inventory.addInventoryItem(x,y,new Boots());
-						inventorySlots[i,j].occupied = true;
-					}
-					else if(itemType == "Amulet"){
-						inventory.addInventoryItem(x,y,new Amulet());
-						inventorySlots[i,j].occupied = true;
-					}
-					else if(itemType == "Sword"){
-						inventory.addInventoryItem(x,y,new Sword());
-						inventorySlots[i,j].occupied = true;
-					}
-					else{
-						continue;
-					}
-
-				}
-			}
+		inventorySlots = inventory.getInventorySlots();
+		inventoryItems = inventory.getInventoryItems();
+		for(int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++){
+			int x = PlayerPrefs.GetInt("Item position x" + i);
+			int y = PlayerPrefs.GetInt("Item position y" + i);
+			recreateItem(x, y, i);
 		}
-
+		for(int i = 0; i < PlayerPrefs.GetInt ("Equiped Item Total"); i++){ 
+			Debug.Log ("hello2");
+			int x = PlayerPrefs.GetInt("Equiped Item position x" + i);
+			int y = PlayerPrefs.GetInt("Equiped Item position y" + i);
+			recreateEquipItem(x, y, i);
+		}
 	}
 }

@@ -49,10 +49,10 @@ public class Inventory : Storage
 	
 	void addSampleItems(){
 		addInventoryItem(0, 0, new Chest());
-		addInventoryItem(2, 0, new HealthPotion());
-		addInventoryItem(3, 0, new ManaPotion());
-		addInventoryItem(2, 1, new Ring());
-		addInventoryItem(4, 0, new Axe());
+		addInventoryItem(2, 2, new HealthPotion());
+		addInventoryItem(2, 3, new ManaPotion());
+		addInventoryItem(3, 3, new Ring());
+		addInventoryItem(4, 2, new Axe());
 	}
 	
 	void shownInventory(){

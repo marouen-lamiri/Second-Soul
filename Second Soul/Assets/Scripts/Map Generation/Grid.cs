@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour {
 	public float nodeRadius;
 	public GameObject player;
 	Node[,] grid;
+	public List<Node> path;
 
 	float nodeDiameter;
 	int gridSizeX, gridSizeY;
@@ -19,6 +20,10 @@ public class Grid : MonoBehaviour {
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x/nodeDiameter); 
 		gridSizeY = Mathf.RoundToInt(gridWorldSize.y/nodeDiameter); 
 		createGrid();
+		Fighter fighter = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
+		Sorcerer sorcerer = GameObject.FindObjectOfType(typeof(Sorcerer))as Sorcerer;
+		fighter.setGrid (this);
+		sorcerer.setGrid (this);
 	}
 
 	public List<Node> getNeighbours(Node node) {
@@ -42,8 +47,8 @@ public class Grid : MonoBehaviour {
 	}
 
 	public Node nodeFromWorld(Vector3 worldPosition){
-		float percentX = (worldPosition.x + gridWorldSize.x/2) / gridWorldSize.x;
-		float percentY = (worldPosition.z + gridWorldSize.y/2) / gridWorldSize.y;
+		float percentX = (worldPosition.x) / gridWorldSize.x;
+		float percentY = (worldPosition.z) / gridWorldSize.y;
 		percentX = Mathf.Clamp01(percentX);
 		percentY = Mathf.Clamp01(percentY);
 		
@@ -55,18 +60,16 @@ public class Grid : MonoBehaviour {
 	//Creates a list of all the position in a path using node path
 	public List<Vector3> worldFromNode(List<Node> node){
 		List<Vector3> path = new List<Vector3>();
-		int x, y;
-		float percentX, percentY;
 		for(int i = 0; i < node.Count; i++){
-			path.Add(new Vector3(node[i].worldPosition.x + nodeDiameter , 0, node[i].worldPosition.z + nodeDiameter));
-			Debug.Log("The next position is: " + path[i]);
+			path.Add(new Vector3(node[i].worldPosition.x, 0, node[i].worldPosition.z));
+			//Debug.Log("The next position is: " + path[i]);
 		}
 		return path;
 	}
 
 	void createGrid(){
 		grid = new Node[gridSizeX, gridSizeY];
-		Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x/2 - Vector3.forward * gridWorldSize.y/2;
+		Vector3 worldBottomLeft = transform.position;
 
 		for(int x = 0; x < gridSizeX; x++){
 			for(int y = 0; y < gridSizeY; y++){
@@ -76,8 +79,7 @@ public class Grid : MonoBehaviour {
 			}
 		}
 	}
-
-	public List<Node> path;
+	
 	void OnDrawGizmos() {
 		Gizmos.DrawWireCube(transform.position,new Vector3(gridWorldSize.x,1,gridWorldSize.y));
 		

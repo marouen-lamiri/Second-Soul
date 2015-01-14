@@ -31,8 +31,7 @@ public class ClickToMove : MonoBehaviour {
 		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 		timer -= Time.deltaTime;
-		if(!player.isDead() && player.playerEnabled && !busy)
-		{
+		if(!player.isDead() && player.playerEnabled && !busy){
 			if(!player.chasing && !player.actionLocked()){
 				if(Input.GetMouseButton(0)&& timer <= 0)
 				{
@@ -66,7 +65,7 @@ public class ClickToMove : MonoBehaviour {
 		
 		if(hits != null){
 			RaycastHit hit = hits[0];
-			if(hit.collider.tag != "Player" && hit.collider.tag != "Enemy" && hit.collider.tag != "GUI"){
+			if(hit.collider.tag != "Player" /*&& hit.collider.tag != "Enemy"*/ && hit.collider.tag != "GUI"){
 				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 			}
 			//Debug.Log(position);
@@ -77,7 +76,6 @@ public class ClickToMove : MonoBehaviour {
 	void moveToPosition(){
 		//Player moving
 		if (Vector3.Distance (transform.position, position) > 1) {
-			Debug.Log (pathing);
 			pathing.findPath(transform.position, position);
 			List<Vector3> path = grid.worldFromNode(grid.path);
 			Vector3 destination;

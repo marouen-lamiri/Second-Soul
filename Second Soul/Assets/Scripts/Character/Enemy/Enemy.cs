@@ -35,17 +35,22 @@ public class Enemy : Character {
 	
 	// Use this for initialization
 	void Start (){
+		enemyStart ();
+	}
+	protected void enemyStart(){
+		characterStart ();
+		sphere.renderer.material.color = Color.red;
 		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 		experienceBase = 25;
 		xpGiven = false;
 		lootGiven = false;
-
+		
 		initializePrimaryStats();
 		initializeSecondaryStatsBase();
 		initializeSecondaryStats();
 		calculateSecondaryStats();
-
+		
 		level = target.level;
 		health = maxHealth;
 		energy = maxEnergy;
@@ -63,7 +68,6 @@ public class Enemy : Character {
 
 
 	}
-
 	protected virtual void initializePrimaryStats(){
 		strengthPerLvl = 1;
 		dexterityPerLvl = 1;
@@ -225,8 +229,9 @@ public class Enemy : Character {
 		if (transform.FindChild ("Sphere") != null) {
 			Destroy (transform.FindChild ("Sphere").gameObject);
 		}
-		target.target = null;
-		sorcerer.target = null;
+		//this used to be necessary, but now it causes errors and its need doesn't exist anymore. I'm keeping this here incase I'm wrong
+//		target.target = null;
+//		sorcerer.target = null;
 	}
 	
 	void OnMouseDrag(){

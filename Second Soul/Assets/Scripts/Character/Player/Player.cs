@@ -26,10 +26,14 @@ public abstract class Player : Character {
 	
 	// Use this for initialization
 	void Start () {
+		playerStart ();
+	}
+	protected void playerStart(){
+		characterStart ();
+		sphere.renderer.material.color = Color.blue;
 		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
 	}
-	
 	// Update is called once per frame
 	void Update(){
 		playerUpdate ();
@@ -109,13 +113,13 @@ public abstract class Player : Character {
 						activeSkill1.useSkill(target);
 
 						// networking event listener:
-						if(fighterNetworkScript != null) {
-							fighterNetworkScript.onAttackTriggered("activeSkill1");
-						} else if (sorcererNetworkScript != null) {
-							//sorcererNetworkScript.onAttackTriggered("activeSkill1");
-						} else {
-							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
-						}
+//						if(fighterNetworkScript != null) {
+//							fighterNetworkScript.onAttackTriggered("activeSkill1");
+//						} else if (sorcererNetworkScript != null) {
+//							//sorcererNetworkScript.onAttackTriggered("activeSkill1");
+//						} else {
+//							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+//						}
 					}
 					else{
 						chaseTarget(target.transform.position);
@@ -131,13 +135,13 @@ public abstract class Player : Character {
 
 						// networking event listener:
 						// networking event listener:
-						if(fighterNetworkScript != null) {
-							fighterNetworkScript.onAttackTriggered("activeSkill2");
-						} else if (sorcererNetworkScript != null) {
-							//sorcererNetworkScript.onAttackTriggered("activeSkill2");
-						} else {
-							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
-						}		
+//						if(fighterNetworkScript != null) {
+//							fighterNetworkScript.onAttackTriggered("activeSkill2");
+//						} else if (sorcererNetworkScript != null) {
+//							//sorcererNetworkScript.onAttackTriggered("activeSkill2");
+//						} else {
+//							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+//						}		
 					}
 					else{
 						chaseTarget(target.transform.position);

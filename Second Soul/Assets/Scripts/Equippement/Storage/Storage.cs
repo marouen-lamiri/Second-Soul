@@ -80,7 +80,7 @@ public class Storage : MonoBehaviour {
 		
 		for(int sX = x; sX < item.width + x; sX++){
 			for(int sY = y; sY < item.height + y ; sY++){
-				inventorySlots[sX,sY].occupied = true;
+					inventorySlots[sX,sY].occupied = true;
 			}
 		}
 	}
@@ -314,6 +314,11 @@ public class Storage : MonoBehaviour {
 
 	public List<Item> getInventoryItems(){
 		List<Item> copy = inventoryItems;
+		return copy;
+	}
+
+	public List<Item> getEquipItems(){
+		List<Item> copy = equipItems;
 		return copy;
 	}
 }
