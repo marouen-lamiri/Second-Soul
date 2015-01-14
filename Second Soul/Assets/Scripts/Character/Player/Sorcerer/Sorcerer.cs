@@ -22,10 +22,6 @@ public class Sorcerer : Player {
 		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 	}
-	// is this needed since called in sorcereStart??
-	protected void initFighter(){
-		//fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-	}
 
 	protected void sorcererStart(){
 		playerStart ();

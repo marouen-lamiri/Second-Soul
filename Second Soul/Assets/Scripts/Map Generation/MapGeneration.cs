@@ -77,7 +77,7 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i+1,j+1] != 0 && map [i-1,j-1] != 0 && map [i+2,j+2] != 0 && map [i-2,j-2] != 0
 				    && map [i,j] != 98 && map [i,j] != 90){
 					map [i,j] = 99;
-					playerStartPositionVector3 = new Vector3(i*10,0,j*10);
+					playerStartPositionVector3 = new Vector3(i*10,0.08f,j*10);
 					player.transform.position = playerStartPositionVector3;
 					fighter.setInitialPosition(playerStartPositionVector3);
 					i = mapSizeX;
