@@ -14,7 +14,8 @@ public class SorcererNetworkScript : MonoBehaviour {
 	void Start () {
 		//playerHealthBar = (PlayerHealthBar) GameObject.FindObjectOfType (typeof(PlayerHealthBar));
 		sorcererScript = (Sorcerer)gameObject.GetComponent<Sorcerer> ();
-		fighterScript = (Fighter)gameObject.GetComponent<Fighter> ();
+		Fighter fighter = (Fighter)GameObject.FindObjectOfType (typeof(Fighter))as Fighter;
+		fighterScript = fighter.GetComponent<Fighter> ();
 		//pausingObject = (Pausing) GameObject.FindObjectOfType (typeof(Pausing));
 	}
 	
@@ -51,9 +52,7 @@ public class SorcererNetworkScript : MonoBehaviour {
 	// watch energy:
 	[RPC]
 	public void onEnergyLost(double energyValue) {
-		if(networkView.isMine){
-			networkView.RPC("setEnergy", RPCMode.Others, energyValue+"");
-		}
+		networkView.RPC("setEnergy", RPCMode.Others, energyValue+"");
 	}
 	
 	[RPC]
@@ -93,9 +92,7 @@ public class SorcererNetworkScript : MonoBehaviour {
 	// watch enemiy's attack movement:
 	[RPC]
 	public void onAttackTriggered(string attackName) {
-		if (networkView.isMine) {
-			networkView.RPC ("attackWithActiveSkill", RPCMode.Others, attackName + "");
-		}
+		networkView.RPC ("attackWithActiveSkill", RPCMode.Others, attackName + "");
 	}
 	[RPC]
 	void attackWithActiveSkill(string attackName) {
@@ -116,9 +113,7 @@ public class SorcererNetworkScript : MonoBehaviour {
 	// watch player health:
 	[RPC]
 	private void onHealthPointsChanged(double healthValue) {
-		if (networkView.isMine) {
-			networkView.RPC ("changeHealthPoints", RPCMode.Others, healthValue + "");
-		}
+		networkView.RPC ("changeHealthPoints", RPCMode.Others, healthValue + "");
 	}
 	
 	[RPC]

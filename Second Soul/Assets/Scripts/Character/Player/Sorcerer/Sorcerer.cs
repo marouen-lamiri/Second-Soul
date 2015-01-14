@@ -114,7 +114,7 @@ public class Sorcerer : Player {
 		fighter.maxEnergy += spirit * enBase;//not sure of this. we may ned to adjust who holds energy because fighter holds it atm
 		energyRegen += spirit * enRegBase;
 		
-		fighter.energy = maxEnergy;
+		fighter.energy = fighter.maxEnergy;
 	}
 
 	public override bool isDead(){

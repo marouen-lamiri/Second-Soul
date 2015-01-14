@@ -114,9 +114,7 @@ public class EnemyNetworkScript : MonoBehaviour {
 	// watch player health:
 	[RPC]
 	private void onHealthPointsChanged(double healthValue) {
-		if (networkView.isMine) {
-			networkView.RPC ("changeHealthPoints", RPCMode.Others, healthValue + "");
-		}
+		networkView.RPC ("changeHealthPoints", RPCMode.Others, healthValue + "");
 	}
 	
 	[RPC]

@@ -19,7 +19,8 @@ public class ClientNetwork : MonoBehaviour {
 	
 	public Fighter playerPrefab;
 	public Sorcerer sorcererPrefab;
-
+	public GameObject linesPrefab;
+	public GameObject lines;
 	int framesToWait;
 
 	public string gameSceneToLoad;
@@ -98,7 +99,7 @@ public class ClientNetwork : MonoBehaviour {
 			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
 			playerWasCreated = true;
 
-
+			lines = Network.Instantiate (linesPrefab,transform.position,transform.rotation,7)as GameObject;
 		}
 
 		if(Application.loadedLevelName == "NetworkStartMenu") { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
@@ -113,10 +114,20 @@ public class ClientNetwork : MonoBehaviour {
 			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
 			Fighter fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));	
 
-			GameObject lines = GameObject.Find ("lines");
-			DontDestroyOnLoad(lines);
-			lines.gameObject.layer = LayerMask.NameToLayer ("Minimap");
+			//GameObject lines = GameObject.Find ("lines");
+			if(lines != null){
+				DontDestroyOnLoad(lines);
+				lines.gameObject.layer = LayerMask.NameToLayer ("Minimap");
+				lines.name = "lines";
+			}
+			GameObject lines2 = GameObject.Find ("lines(Clone)");
+			if(Network.isClient && lines2 != null){
 
+				DontDestroyOnLoad(lines2);
+				lines2.gameObject.layer = LayerMask.NameToLayer ("Minimap");
+				lines2.name = "lines";
+			}
+			
 			if(sorcerer != null && fighter != null) {
 				DontDestroyOnLoad (sorcerer);
 				DontDestroyOnLoad (fighter);
@@ -468,10 +479,9 @@ public class ClientNetwork : MonoBehaviour {
 		print (position);
 
 	}
+
 	[RPC]
 	public void SetSorcererPositionAfterMapCreation(string position) {
-		//sorcererPositionAfterMapCreation = position;
-		print (position);
 		string[] positions = position.Split (',');
 		Vector3 positionVector3 = Vector3.zero;
 		positionVector3.x = float.Parse(positions[0]);
@@ -486,6 +496,17 @@ public class ClientNetwork : MonoBehaviour {
 			networkView.RPC ("setServerBoolean",RPCMode.Server);
 		}
 	}
+
+	[RPC]
+	public void startClientLines(string s){
+		networkView.RPC ("setClientLines", RPCMode.All, s);
+	}
+
+	[RPC]
+	public void setClientLines(string s){
+		MiniMap.setLine (s);
+	}
+
 	[RPC]
 	public void setServerBoolean(){
 		sorcererPositionWasSent = !sorcererPositionWasSent;
@@ -500,6 +521,7 @@ public class ClientNetwork : MonoBehaviour {
 		//print ("hello");
 		//}
 	}
+
 	[RPC]
 	void toggleStatsDisplayed() {
 		//DisplayPlayerStats statsDisplayScript = (DisplayPlayerStats) GameObject.FindObjectOfType(typeof(DisplayPlayerStats));
