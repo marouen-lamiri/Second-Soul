@@ -235,6 +235,24 @@ public class ClientNetwork : MonoBehaviour {
 			}
 			if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 3, networkWindowButtonWidth, networkWindowButtonHeight), "Send hi to client"))
 				SendInfoToClient("Hello client!");
+
+			if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 4, networkWindowButtonWidth, networkWindowButtonHeight), "Remove Client")) {
+				//find the sorcerer:
+				Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;
+				//1-create the sorcerer copy --> Instantiate(...) 
+				//Instantiate (sorcerer);
+				//2-Network.Destroy the other one
+				// Network.Destroy(GetComponent<NetworkView>().viewID);
+				//Destroy(sorcerer.gameObject);
+				//3- remove the client from the network -- disconnect it.
+				if (Network.connections.Length == 1) {
+					Debug.Log("Disconnecting: " + Network.connections[0].ipAddress + ":" + Network.connections[0].port);
+					Network.CloseConnection(Network.connections[0], true);
+				} else {
+					print ("Error on disconnecting client: More than one client is connected -- this is not allowed.");
+				}
+				//Instantiate (sorcerer);
+			}
 			
 			
 			GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, 300, 100), _messageLog);

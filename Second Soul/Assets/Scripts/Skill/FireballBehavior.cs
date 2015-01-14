@@ -18,6 +18,10 @@ public class FireballBehavior : ProjectileBehavior {
 		//fireballComponents [1].GetComponent<ParticleRenderer> ().enabled = false; 
 
 		timeToDestroy = 0.5f;
+
+		//fix:
+		Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;
+		this.fireballSkill = sorcerer.GetComponent<FireballSkill>();
 	}
 	
 	// Update is called once per frame

@@ -46,7 +46,7 @@ public class FireballSkill : ProjectileSkill {
 		yield return new WaitForSeconds(skillLength);
 		if(caster.loseEnergy (energyCost)){
 			FireballBehavior fireball = Network.Instantiate(fireballPrefab, caster.transform.position + spawnDistance * caster.transform.forward, caster.transform.rotation, 4)as FireballBehavior;
-			fireball.fireballSkill = this;
+			//fireball.fireballSkill = this; // now done directly in fireballBehavior
 		}
 	}
 }
