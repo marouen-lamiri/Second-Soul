@@ -231,7 +231,7 @@ public class MapGeneration : MonoBehaviour{
 		int nbrObstaclesByRoom = Random.Range (4,12);
 		int previousRoomNumber = 0;
 		for (int i = 0; i < mapSizeX; i = Random.Range(i,i+3)) {
-			for (int j = 0; j < mapSizeX; j = Random.Range(j,j+3)) {
+			for (int j = 0; j < mapSizeZ; j = Random.Range(j,j+3)) {
 				if (map [i,j] != 0 && map [i-1, j] != 0 && map [i,j-1] != 0 && map [i-1,j-1] != 0 && map [i+1,j+1] != 0  && nbrObstacles != 0 
 				    && map [i-1, j+1] != 0 && map [i+1,j-1] != 0 && map [i-2,j+1] != 0 && map [i+2,j-1] != 0
 				    && nbrObstaclesByRoom != 0 && previousRoomNumber != map [i, j] && map [i, j] != 99 && map [i,j] != 98 && map [i-1,j] != 98 

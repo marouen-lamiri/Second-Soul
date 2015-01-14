@@ -288,14 +288,14 @@ public abstract class Character : MonoBehaviour {
 	public void chaseTarget(Vector3 targetPosition){
 		chasing = true;
 		animateRun();
-		Debug.Log (pathing);
+//		Debug.Log (pathing);
 		Vector3 destination;
 		List<Vector3> path = grid.worldFromNode(grid.path);
 		if (Vector3.Distance (transform.position, targetPosition) > 2) {
 			destination = path[1];
 		} 
 		else {
-			destination = target.transform.position;
+			destination = targetPosition;
 		}
 		Quaternion newRotation = Quaternion.LookRotation (destination - transform.position);
 		newRotation.x = 0;

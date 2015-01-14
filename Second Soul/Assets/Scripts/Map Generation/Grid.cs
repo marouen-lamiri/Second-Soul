@@ -58,7 +58,7 @@ public class Grid : MonoBehaviour {
 		List<Vector3> path = new List<Vector3>();
 		for(int i = 0; i < node.Count; i++){
 			path.Add(new Vector3(node[i].worldPosition.x, 0, node[i].worldPosition.z));
-			Debug.Log("The next position is: " + path[i]);
+			//Debug.Log("The next position is: " + path[i]);
 		}
 		return path;
 	}
