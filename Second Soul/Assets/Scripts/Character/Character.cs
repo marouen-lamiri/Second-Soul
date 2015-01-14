@@ -290,6 +290,7 @@ public abstract class Character : MonoBehaviour {
 		animateRun();
 //		Debug.Log (pathing);
 		Vector3 destination;
+		pathing.findPath(transform.position, targetPosition);
 		List<Vector3> path = grid.worldFromNode(grid.path);
 		if (Vector3.Distance (transform.position, targetPosition) > 2) {
 			destination = path[1];
@@ -301,8 +302,8 @@ public abstract class Character : MonoBehaviour {
 		newRotation.x = 0;
 		newRotation.z = 0;
 		
-		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 7);
-		controller.SimpleMove (transform.forward * speed *4);
+		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime*25);
+		controller.SimpleMove (transform.forward * speed);
 	}
 	//trying to comment this out
 //	public void attack(){

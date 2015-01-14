@@ -20,6 +20,10 @@ public class Grid : MonoBehaviour {
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x/nodeDiameter); 
 		gridSizeY = Mathf.RoundToInt(gridWorldSize.y/nodeDiameter); 
 		createGrid();
+		Fighter fighter = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
+		Sorcerer sorcerer = GameObject.FindObjectOfType(typeof(Sorcerer))as Sorcerer;
+		fighter.setGrid (this);
+		sorcerer.setGrid (this);
 	}
 
 	public List<Node> getNeighbours(Node node) {
