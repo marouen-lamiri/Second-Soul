@@ -46,6 +46,6 @@ public class FireballBehavior : ProjectileBehavior {
 
 	IEnumerator selfDestruct(){
 		yield return new WaitForSeconds (timeToDestroy);
-		Destroy (this.gameObject);
+		Network.Destroy (this.gameObject);
 	}
 }
