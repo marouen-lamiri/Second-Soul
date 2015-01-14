@@ -4,6 +4,7 @@ using System.Collections;
 public class ClientNetwork : MonoBehaviour {
 	
 	public string serverIP = "127.0.0.1";
+	public string serverLocalIP;
 	public int port = 25000;
 	private string _messageLog = "";
 	string someInfo = "";
@@ -316,6 +317,9 @@ public class ClientNetwork : MonoBehaviour {
 	// for client:
 	private void ConnectToServer() {
 		Network.Connect(serverIP, port);
+		if (!Network.isClient) {
+			Network.Connect(serverLocalIP,port);
+		}
 	}
 	
 	// for server:
