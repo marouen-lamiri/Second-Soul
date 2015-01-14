@@ -15,7 +15,7 @@ public class FireballBehavior : ProjectileBehavior {
 		originalSpawn = transform.position;
 		explode = false;
 		fireballComponents = this.GetComponentsInChildren<ParticleRenderer>();
-		fireballComponents [1].GetComponent<ParticleRenderer> ().enabled = false;
+		//fireballComponents [1].GetComponent<ParticleRenderer> ().enabled = false; 
 
 		timeToDestroy = 0.5f;
 	}
@@ -28,8 +28,8 @@ public class FireballBehavior : ProjectileBehavior {
 			transform.position = new Vector3(transform.position.x, oldY, transform.position.z);
 		}
 		else{
-			fireballComponents [1].GetComponent<ParticleRenderer> ().enabled = true;
-			this.GetComponent<CharacterController>().radius=7;
+			//fireballComponents [1].GetComponent<ParticleRenderer> ().enabled = true; // maybe network error
+			//this.GetComponent<CharacterController>().radius=7; // maybe network error
 			StartCoroutine(selfDestruct());
 		}
 	}
