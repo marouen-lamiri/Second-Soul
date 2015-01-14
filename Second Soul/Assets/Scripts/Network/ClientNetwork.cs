@@ -4,6 +4,7 @@ using System.Collections;
 public class ClientNetwork : MonoBehaviour {
 	
 	public string serverIP = "127.0.0.1";
+	public string serverLocalIP;
 	public int port = 25000;
 	private string _messageLog = "";
 	string someInfo = "";
@@ -51,7 +52,6 @@ public class ClientNetwork : MonoBehaviour {
 		sorcererPositionWasSent = false;
 		focusCorrectPlayerWasDone = false;
 
-		this.gameSceneToLoad = "SaveNetwork";
 		framesToWaitForFocusCorrectCharacter = 0;
 	} 
 
@@ -98,10 +98,6 @@ public class ClientNetwork : MonoBehaviour {
 			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
 			playerWasCreated = true;
 
-			// debugging lines not showing up on the minimap
-			GameObject lines = Network.Instantiate(new GameObject(), transform.position, transform.rotation, 7) as GameObject;
-			lines.name = "lines";
-			DontDestroyOnLoad(lines);
 
 		}
 
@@ -117,9 +113,10 @@ public class ClientNetwork : MonoBehaviour {
 			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
 			Fighter fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));	
 
-			GameObject lines = GameObject.Find("lines");
+			GameObject lines = GameObject.Find ("lines");
 			DontDestroyOnLoad(lines);
-			
+			lines.gameObject.layer = LayerMask.NameToLayer ("Minimap");
+
 			if(sorcerer != null && fighter != null) {
 				DontDestroyOnLoad (sorcerer);
 				DontDestroyOnLoad (fighter);
@@ -324,6 +321,9 @@ public class ClientNetwork : MonoBehaviour {
 	// for client:
 	private void ConnectToServer() {
 		Network.Connect(serverIP, port);
+		if (!Network.isClient) {
+			Network.Connect(serverLocalIP,port);
+		}
 	}
 	
 	// for server:
