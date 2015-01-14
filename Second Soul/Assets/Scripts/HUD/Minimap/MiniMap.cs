@@ -14,7 +14,10 @@ public class MiniMap : MonoBehaviour {
 	void Start(){
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		buildMinimap ();
+		if(Network.isServer) {
+			buildMinimap ();
+		}
+
 	}
 
 	void buildMinimap(){

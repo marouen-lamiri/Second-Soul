@@ -79,7 +79,7 @@ public class MapGeneration : MonoBehaviour{
 					map [i,j] = 99;
 					playerStartPositionVector3 = new Vector3(i*10,0,j*10);
 					player.transform.position = playerStartPositionVector3;
-					fighter.setInitialPosition(position);
+					fighter.setInitialPosition(playerStartPositionVector3);
 					i = mapSizeX;
 					j = mapSizeZ;
 				}

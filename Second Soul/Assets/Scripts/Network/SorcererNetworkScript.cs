@@ -58,7 +58,7 @@ public class SorcererNetworkScript : MonoBehaviour {
 	
 	[RPC]
 	void setEnergy(string energyValue) {
-		//fighterScript.energy = Convert.ToDouble (energyValue); // yes, fighter --> because the sorcerer doesn't have any energy, it's all held by the fighter.
+		fighterScript.energy = Convert.ToDouble (energyValue); // yes, fighter --> because the sorcerer doesn't have any energy, it's all held by the fighter.
 	}
 	
 	

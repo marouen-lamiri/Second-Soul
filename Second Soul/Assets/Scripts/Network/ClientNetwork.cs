@@ -98,6 +98,11 @@ public class ClientNetwork : MonoBehaviour {
 			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
 			playerWasCreated = true;
 
+			// debugging lines not showing up on the minimap
+			GameObject lines = Network.Instantiate(new GameObject(), transform.position, transform.rotation, 7) as GameObject;
+			lines.name = "lines";
+			DontDestroyOnLoad(lines);
+
 		}
 
 		if(Application.loadedLevelName == "NetworkStartMenu") { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
@@ -110,8 +115,11 @@ public class ClientNetwork : MonoBehaviour {
 			//			//		DontDestroyOnLoad (fighter.gameObject);
 
 			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
-			Fighter fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));			
+			Fighter fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));	
 
+			GameObject lines = GameObject.Find("lines");
+			DontDestroyOnLoad(lines);
+			
 			if(sorcerer != null && fighter != null) {
 				DontDestroyOnLoad (sorcerer);
 				DontDestroyOnLoad (fighter);
