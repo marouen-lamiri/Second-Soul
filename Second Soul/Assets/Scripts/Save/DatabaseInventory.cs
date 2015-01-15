@@ -12,11 +12,11 @@ public class DatabaseInventory : MonoBehaviour {
 	private List<Item> equipItems;
 	private Inventory inventory;
 	private EquipSlot slots; 
-	private GameObject player;
+	private Player player;
 	
 	void Start () {
 		inventory = (Inventory) GameObject.FindObjectOfType (typeof (Inventory));
-		player = (GameObject) GameObject.FindObjectOfType (typeof(Player));
+		player = (Player) GameObject.FindObjectOfType (typeof(Player));
 	}
 	
 	// Update is called once per frame

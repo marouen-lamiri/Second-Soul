@@ -27,8 +27,10 @@ public class ChooseClass : MonoBehaviour {
 	
 	// Positioning initialization.
 	public void Awake() {
+//		windowX = 10;
+//		windowY = 10;
 		windowX = 10;
-		windowY = 10;
+		windowY = 40; // to put it below chat window
 		windowButtonWidth = 100;
 		windowButtonHeight = 25;
 	}
@@ -48,12 +50,14 @@ public class ChooseClass : MonoBehaviour {
 		var labelWidth50 = windowButtonWidth / 2;
 
 		// Header.
-		GUI.Label(new Rect(screenWidth50 - labelWidth50, windowY + windowButtonHeight * 1, windowButtonWidth, windowButtonHeight), "Second Soul", centeredStyle);
-		GUI.Label(new Rect(screenWidth50 - labelWidth50, windowY + windowButtonHeight * 2, windowButtonWidth, windowButtonHeight), "Class Selection", centeredStyle);
+//		GUI.Label(new Rect(screenWidth50 - labelWidth50, windowY + windowButtonHeight * 1, windowButtonWidth, windowButtonHeight), "Second Soul", centeredStyle);
+//		GUI.Label(new Rect(screenWidth50 - labelWidth50, windowY + windowButtonHeight * 2, windowButtonWidth, windowButtonHeight), "Class Selection", centeredStyle);
+		GUI.Label(new Rect(screenWidth50 - labelWidth50, windowY +150+ windowButtonHeight * 1, windowButtonWidth, windowButtonHeight), "Second Soul", centeredStyle);
+		GUI.Label(new Rect(screenWidth50 - labelWidth50, windowY +150+ windowButtonHeight * 2, windowButtonWidth, windowButtonHeight), "Class Selection", centeredStyle);
 
 		// Main-Classes.
 		/*group-1*/GUI.Label(new Rect(screenWidth25 - labelWidth50, windowY + windowButtonHeight * 4, windowButtonWidth, windowButtonHeight), "Fighter:", centeredStyle);
-		/*group-2*/GUI.Label(new Rect(screenWidth75 - labelWidth50, windowY + windowButtonHeight * 4, windowButtonWidth, windowButtonHeight), "Sourcerer:", centeredStyle);
+		/*group-2*/GUI.Label(new Rect(screenWidth75 - labelWidth50, windowY + windowButtonHeight * 4, windowButtonWidth, windowButtonHeight), "Sorcerer:", centeredStyle);
 
 		// Sub-Classes.
 		/*group-1*/fighterSelection = GUI.SelectionGrid (new Rect (screenWidth25 - labelWidth50, windowY + windowButtonHeight * 5, windowButtonWidth, windowButtonHeight*3), fighterSelection, fighterSelectionStrings, 1);

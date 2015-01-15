@@ -93,10 +93,30 @@ public class ClickToMove : MonoBehaviour {
 			player.controller.SimpleMove (transform.forward * player.speed);
 
 			player.animateRun();
+
+			// networking: event listener to RPC the attack anim
+//			Fighter fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+			CharacterNetworkScript playerNetworkScript = player.GetComponent<CharacterNetworkScript>();
+			if(playerNetworkScript != null) {
+				playerNetworkScript.onRunTriggered();
+			} else {
+				print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+			}
+
 		}
 		//Player not moving
 		else {
 			player.animateIdle();
+
+			// networking: event listener to RPC the attack anim
+//			Fighter fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+			CharacterNetworkScript playerNetworkScript = player.GetComponent<CharacterNetworkScript>();
+			if(playerNetworkScript != null) {
+				playerNetworkScript.onIdleTriggered();
+			} else {
+				print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+			}
+
 		}
 	}
 }
