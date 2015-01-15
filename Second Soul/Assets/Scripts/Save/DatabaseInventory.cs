@@ -12,9 +12,11 @@ public class DatabaseInventory : MonoBehaviour {
 	private List<Item> equipItems;
 	private Inventory inventory;
 	private EquipSlot slots; 
+	private GameObject player;
 	
 	void Start () {
 		inventory = (Inventory) GameObject.FindObjectOfType (typeof (Inventory));
+		player = (GameObject) GameObject.FindObjectOfType (typeof(Player));
 	}
 	
 	// Update is called once per frame
@@ -32,16 +34,30 @@ public class DatabaseInventory : MonoBehaviour {
 
 	void saveItems(){
 		Debug.Log ("Step 1");
-		inventoryItems = inventory.getInventoryItems();
-		int counter = 0;
-		for (int i = 0; i < inventoryItems.Count; i++){
-			PlayerPrefs.SetInt ("Item position x" + i, inventoryItems[i].getX());
-			PlayerPrefs.SetInt ("Item position y" + i, inventoryItems[i].getY());
-			PlayerPrefs.SetString("Item type" + i, inventoryItems[i].getTypeAsString());
-			Debug.Log (inventoryItems[i].getTypeAsString());
-			counter++;
+		if(Network.isServer){//if (player.GetType () != typeof (Sorcerer)) {
+			inventoryItems = inventory.getInventoryItems ();
+			int counter = 0;
+			for (int i = 0; i < inventoryItems.Count; i++) {
+				PlayerPrefs.SetInt ("Fighter Item position x" + i, inventoryItems [i].getX ());
+				PlayerPrefs.SetInt ("Fighter Item position y" + i, inventoryItems [i].getY ());
+				PlayerPrefs.SetString ("Fighter Item type" + i, inventoryItems [i].getTypeAsString ());
+				Debug.Log (inventoryItems [i].getTypeAsString ());
+				counter++;
+			}
+			PlayerPrefs.SetInt ("Fighter Item Total", counter);
 		}
-		PlayerPrefs.SetInt ("Item Total", counter);
+//		else{
+//			inventoryItems = inventory.getInventoryItems ();
+//			int counter = 0;
+//			for (int i = 0; i < inventoryItems.Count; i++) {
+//				PlayerPrefs.SetInt ("Sorcerer Item position x" + i, inventoryItems [i].getX ());
+//				PlayerPrefs.SetInt ("Sorcerer Item position y" + i, inventoryItems [i].getY ());
+//				PlayerPrefs.SetString ("Sorcerer Item type" + i, inventoryItems [i].getTypeAsString ());
+//				Debug.Log (inventoryItems [i].getTypeAsString ());
+//				counter++;
+//			}
+//			PlayerPrefs.SetInt ("Sorcerer Item Total", counter);
+//		}
 	}
 
 	void saveEquipItems(){
@@ -57,41 +73,78 @@ public class DatabaseInventory : MonoBehaviour {
 		PlayerPrefs.SetInt ("Equiped Item Total", counter);
 	}
 
-	public void recreateItem(int x, int y, int i){
+	public void recreateFighterItem(int x, int y, int i){
 		Item item;
-		if(PlayerPrefs.GetString("Item type" + i) == "ManaPotion"){
+		if(PlayerPrefs.GetString("Fighter Item type" + i) == "ManaPotion"){
 			item = new ManaPotion();
 			inventory.addInventoryItem(x,y,item);
 		}
-		else if(PlayerPrefs.GetString("Item type" + i) == "HealthPotion"){
+		else if(PlayerPrefs.GetString("Fighter Item type"  + i) == "HealthPotion"){
 			item = new HealthPotion();
 			inventory.addInventoryItem(x,y,item);
 		}
-		else if(PlayerPrefs.GetString("Item type" + i) == "Axe"){
+		else if(PlayerPrefs.GetString("Fighter Item type"  + i) == "Axe"){
 			item = new Axe();
 			inventory.addInventoryItem(x,y,item);
 		}
-		else if(PlayerPrefs.GetString("Item type" + i) == "Ring"){
+		else if(PlayerPrefs.GetString( "Fighter Item type" + i) == "Ring"){
 			item = new Ring();
 			inventory.addInventoryItem(x,y,item);
 		}
-		else if(PlayerPrefs.GetString("Item type" + i) == "Chest"){
+		else if(PlayerPrefs.GetString("Fighter Item type" + i) == "Chest"){
 			item = new Chest();
 			inventory.addInventoryItem(x,y,item);
 		}
-		else if(PlayerPrefs.GetString("Item type" + i) == "Boots"){
+		else if(PlayerPrefs.GetString("Fighter Item type" + i) == "Boots"){
 			item = new Boots();
 			inventory.addInventoryItem(x,y,item);
 		}
-		else if(PlayerPrefs.GetString("Item type" + i) == "Amulet"){
+		else if(PlayerPrefs.GetString("Fighter Item type"  + i) == "Amulet"){
 			item = new Amulet();
 			inventory.addInventoryItem(x,y,item);
 		}
-		else if(PlayerPrefs.GetString("Item type" + i) == "Sword"){
+		else if(PlayerPrefs.GetString( "Fighter Item type" + i) == "Sword"){
 			item = new Sword();
 			inventory.addInventoryItem(x,y,item);
 		}
 	}
+
+	public void recreateSorcererItem(int x, int y, int i){
+		Item item;
+		if(PlayerPrefs.GetString("Sorcerer Item type" + i) == "ManaPotion"){
+			item = new ManaPotion();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Sorcerer Item type"  + i) == "HealthPotion"){
+			item = new HealthPotion();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Sorcerer Item type"  + i) == "Axe"){
+			item = new Axe();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Sorcerer Item type" + i) == "Ring"){
+			item = new Ring();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Sorcerer Item type" + i) == "Chest"){
+			item = new Chest();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Sorcerer Item type" + i) == "Boots"){
+			item = new Boots();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Sorcerer Item type"  + i) == "Amulet"){
+			item = new Amulet();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString( "Sorcerer Item type" + i) == "Sword"){
+			item = new Sword();
+			inventory.addInventoryItem(x,y,item);
+		}
+	}
+
 
 	public void recreateEquipItem(int x, int y, int i){
 		Item item;
@@ -130,10 +183,19 @@ public class DatabaseInventory : MonoBehaviour {
 	public void readItems(){
 		inventorySlots = inventory.getInventorySlots();
 		inventoryItems = inventory.getInventoryItems();
-		for(int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++){
-			int x = PlayerPrefs.GetInt("Item position x" + i);
-			int y = PlayerPrefs.GetInt("Item position y" + i);
-			recreateItem(x, y, i);
+		if(Network.isServer){//if(player.GetType() != typeof (Sorcerer)){
+			for(int i = 0; i < PlayerPrefs.GetInt("Fighter Item Total"); i++){
+				int x = PlayerPrefs.GetInt("Fighter Item position x" + i);
+				int y = PlayerPrefs.GetInt("FIghter Item position y" + i);
+				recreateFighterItem(x,y,i);
+			}
+		}
+		else{
+			for(int i = 0; i < PlayerPrefs.GetInt("Sorcerer Item Total"); i++){
+				int x = PlayerPrefs.GetInt("Sorcerer Item position x" + i);
+				int y = PlayerPrefs.GetInt("Sorcerer Item position y" + i);
+				recreateSorcererItem(x,y,i);
+			}
 		}
 		for(int i = 0; i < PlayerPrefs.GetInt ("Equiped Item Total"); i++){ 
 			Debug.Log ("hello2");
