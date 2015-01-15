@@ -13,7 +13,7 @@ public class FighterNetworkScript : CharacterNetworkScript {
 	// Update is called once per frame
 	void Update () {
 		watchCharacterHealth ();
-
+		watchCharacterEnergy ();
 	}
 
 	protected override void setCharacterScript() {

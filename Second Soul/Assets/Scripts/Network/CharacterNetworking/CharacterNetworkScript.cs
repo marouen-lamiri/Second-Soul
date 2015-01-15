@@ -6,6 +6,7 @@ public abstract class CharacterNetworkScript : MonoBehaviour {
 
 	protected Character characterScript;
 	protected double healthInPreviousFrame;
+	protected double energyInPreviousFrame;
 
 
 	// Use this for initialization
@@ -24,6 +25,14 @@ public abstract class CharacterNetworkScript : MonoBehaviour {
 		if(healthInPreviousFrame != characterScript.health) {
 			healthInPreviousFrame = characterScript.health;
 			onHealthPointsChanged(characterScript.health);
+		}
+	}
+	
+	protected void watchCharacterEnergy(){
+		// Networking: setting up an eventListener for watching changes to player health:
+		if(energyInPreviousFrame != characterScript.energy) {
+			energyInPreviousFrame = characterScript.energy;
+			onEnergyPointsChanged(characterScript.energy);
 		}
 	}
 
@@ -55,7 +64,7 @@ public abstract class CharacterNetworkScript : MonoBehaviour {
 			characterScript.animateAttack();
 		}
 	}
-	
+		
 	// watch player health:
 	[RPC]
 	protected void onHealthPointsChanged(double healthValue) {
@@ -67,6 +76,16 @@ public abstract class CharacterNetworkScript : MonoBehaviour {
 		characterScript.health = Convert.ToDouble(healthValue);
 	}
 
+	// watch player energy:
+	[RPC]
+	protected void onEnergyPointsChanged(double energyValue) {
+		networkView.RPC ("changeEnergyPoints", RPCMode.Others, energyValue + "");
+	}
+	
+	[RPC]
+	void changeEnergyPoints(string energyValue) {
+		characterScript.energy = Convert.ToDouble(energyValue);
+	}
 
 	// watch player's idle anim:
 	[RPC]
