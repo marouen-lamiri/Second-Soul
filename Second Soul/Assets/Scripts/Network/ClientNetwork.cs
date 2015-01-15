@@ -281,7 +281,7 @@ public class ClientNetwork : MonoBehaviour {
 	private void ConnectToServer() {
 		Network.Connect(serverIP, port);
 		if (!Network.isClient) {
-			//Network.Connect(serverLocalIP,port);
+			Network.Connect(serverLocalIP,port);
 		}
 	}
 	
