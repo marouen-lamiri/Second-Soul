@@ -13,7 +13,7 @@ public class FighterNetworkScript : MonoBehaviour {
 	void Start () {
 		//playerHealthBar = (PlayerHealthBar) GameObject.FindObjectOfType (typeof(PlayerHealthBar));
 		fighterScript = (Fighter)gameObject.GetComponent<Fighter> ();
-		pausingObject = (Pausing) GameObject.FindObjectOfType (typeof(Pausing));
+		pausingObject = (Pausing) GameObject.FindObjectOfType (typeof(Pausing))as Pausing;
 	}
 	
 	// Update is called once per frame
@@ -41,6 +41,7 @@ public class FighterNetworkScript : MonoBehaviour {
 	
 	[RPC]
 	void togglePauseGame() {
+		Pausing pausingObject = (Pausing) GameObject.FindObjectOfType (typeof(Pausing))as Pausing;
 		pausingObject.Pause ();
 	}
 

@@ -33,7 +33,7 @@ public class Mage : Sorcerer {
 		
 		spellPower = 20f;
 
-		maxEnergy = 100;
+		fighter.maxEnergy = 100;
 
 		energyRegen = 0.5f;
 	}

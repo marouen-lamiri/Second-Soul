@@ -8,7 +8,7 @@ public class SorcererNetworkScript : MonoBehaviour {
 	double healthInPreviousFrame;
 	Sorcerer sorcererScript;
 	Fighter fighterScript;
-	//Pausing pausingObject;
+	Pausing pausingObject;
 	
 	// Use this for initialization
 	void Start () {
@@ -16,7 +16,7 @@ public class SorcererNetworkScript : MonoBehaviour {
 		sorcererScript = (Sorcerer)gameObject.GetComponent<Sorcerer> ();
 		Fighter fighter = (Fighter)GameObject.FindObjectOfType (typeof(Fighter))as Fighter;
 		fighterScript = fighter.GetComponent<Fighter> ();
-		//pausingObject = (Pausing) GameObject.FindObjectOfType (typeof(Pausing));
+
 	}
 	
 	// Update is called once per frame
@@ -36,18 +36,17 @@ public class SorcererNetworkScript : MonoBehaviour {
 		
 	}
 	
-	// watch pausing game:
-	//	[RPC]
-	//	public void onPauseGame() {
-	//		if(networkView.isMine){
-	//			networkView.RPC("togglePauseGame", RPCMode.Others);
-	//		}
-	//	}
-	//	
-	//	[RPC]
-	//	void togglePauseGame() {
-	//		//pausingObject.Pause ();
-	//	}
+//	 watch pausing game:
+	[RPC]
+	public void onPauseGame() {
+		networkView.RPC("togglePauseGame", RPCMode.Others);
+	}
+	
+	[RPC]
+	void togglePauseGame() {
+		Pausing pausingObject = (Pausing) GameObject.FindObjectOfType (typeof(Pausing))as Pausing;
+		pausingObject.Pause ();
+	}
 	
 	// watch energy:
 	[RPC]

@@ -74,6 +74,7 @@ public class LootFactory : MonoBehaviour {
 					break;
 				}
 			}
+			//ItemHolder itemHolder = Network.Instantiate(itemHolderPrefab, dropPosition, Quaternion.identity,8)as ItemHolder;
 			ItemHolder itemHolder = Instantiate(itemHolderPrefab, dropPosition, Quaternion.identity)as ItemHolder;
 			itemHolder.item = (Item) System.Activator.CreateInstance(System.Type.GetType(itemType));
 		}

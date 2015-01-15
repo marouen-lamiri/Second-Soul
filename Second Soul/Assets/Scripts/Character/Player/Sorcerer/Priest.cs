@@ -33,7 +33,7 @@ public class Priest : Sorcerer {
 		
 		spellPower = 15.0f;
 		
-		maxEnergy = 300;
+		fighter.maxEnergy = 300;
 		
 		energyRegen = 1.0f;
 	}

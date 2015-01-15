@@ -17,8 +17,8 @@ public class ClientNetwork : MonoBehaviour {
 	public int networkWindowButtonWidth;
 	public int networkWindowButtonHeight;
 	
-	public Fighter playerPrefab;
-	public Sorcerer sorcererPrefab;
+	private Fighter playerPrefab;
+	private Sorcerer sorcererPrefab;
 	public GameObject linesPrefab;
 	public GameObject lines;
 	int framesToWait;
@@ -34,7 +34,7 @@ public class ClientNetwork : MonoBehaviour {
 	private bool sorcererPositionWasUpdated; // ... AfterMapGeneration;
 	private bool sorcererPositionWasSent; // after map generation, but used before sending it.
 	private bool focusCorrectPlayerWasDone;
-
+	public ChooseClass classChooser;
 	private int framesToWaitForFocusCorrectCharacter;
 
 	public void Awake() {
@@ -86,6 +86,19 @@ public class ClientNetwork : MonoBehaviour {
 
 		//===================
 		if (Network.isClient && Application.loadedLevelName == "NetworkStartMenu" && !sorcererWasCreated) {
+
+			if(classChooser.sorcererSelectionStrings[classChooser.sorcererSelection]=="Mage"){
+				//				sorcerer = (Sorcerer) Instantiate(classChooser.mage,Vector3.zero,Quaternion.identity);
+				sorcererPrefab = classChooser.mage;
+			}
+			else if(classChooser.sorcererSelectionStrings[classChooser.sorcererSelection]=="Druid"){
+				//				sorcerer = (Druid) Instantiate(classChooser.druid,Vector3.zero,Quaternion.identity);
+				sorcererPrefab = classChooser.mage;
+			}
+			else/*(sorcererSelectionStrings[sorcererSelection]=="Priest")*/{
+				//				sorcerer = (Priest) Instantiate(classChooser.priest,Vector3.zero,Quaternion.identity);
+				sorcererPrefab = classChooser.mage;
+			}
 			Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
 			//sorcerer.name = "Sorcerer";
 			//fighter.name = "Fighter";
@@ -96,6 +109,20 @@ public class ClientNetwork : MonoBehaviour {
 
 		} 
 		if(Network.isServer && Application.loadedLevelName == "NetworkStartMenu" && !playerWasCreated) {
+
+			if(classChooser.fighterSelectionStrings[classChooser.fighterSelection]=="Berserker"){
+				//				fighter = (Berserker) Instantiate(classChooser.berserker,Vector3.zero,Quaternion.identity);
+				playerPrefab = classChooser.berserker;
+			}
+			else if(classChooser.fighterSelectionStrings[classChooser.fighterSelection]=="Knight"){
+				//				fighter = (Knight) Instantiate(classChooser.knight,Vector3.zero,Quaternion.identity);
+				playerPrefab = classChooser.knight;
+			}
+			else/*(fighterSelectionStrings[fighterSelection]=="Monk")*/{
+				//				fighter = (Monk) Instantiate(classChooser.monk,Vector3.zero,Quaternion.identity);
+				playerPrefab = classChooser.monk;
+			}
+
 			Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
 			playerWasCreated = true;
 

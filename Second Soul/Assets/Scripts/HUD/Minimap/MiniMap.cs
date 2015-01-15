@@ -82,12 +82,12 @@ public class MiniMap : MonoBehaviour {
 
 	void Update()
 	{
-		if (fighter.playerEnabled)
+		if (Network.isServer)
 		{
 			// Adjusting the MiniMap camera to the Fighter position.
 			this.moveMiniMapCamera(fighter.transform.position);
 		}
-		else if (sorcerer.playerEnabled)
+		else 
 		{
 			// Adjusting the MiniMap camera to the Sorcerer position.
 			this.moveMiniMapCamera(sorcerer.transform.position);

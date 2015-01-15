@@ -12,7 +12,7 @@ public class Sorcerer : Player {
 	protected int wisdomPerLvl;
 	protected int spiritPerLvl;
 
-	private Fighter fighter;
+	protected Fighter fighter;
 
 	public DatabaseSorcerer database;
 
@@ -37,7 +37,7 @@ public class Sorcerer : Player {
 			fighter.playerEnabled=false;
 		}
 		health = maxHealth;
-		energy = maxEnergy;
+		fighter.energy = fighter.maxEnergy;
 		
 		target = null;
 		startPosition = transform.position;
@@ -123,8 +123,10 @@ public class Sorcerer : Player {
 
 	public override bool loseEnergy(float energy){
 
+		if (energy > fighter.energy) {
+			return false;
+		}
 		fighter.loseEnergy (energy);
-
 		// networking event listener:
 		sorcererNetworkScript.onEnergyLost (fighter.energy);// (this.energy);
 
