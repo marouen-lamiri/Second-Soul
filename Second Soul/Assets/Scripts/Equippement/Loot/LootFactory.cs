@@ -43,6 +43,8 @@ public class LootFactory : MonoBehaviour {
 		addItemToDict("Chest", 3);
 		addItemToDict("Axe", 3);
 		addItemToDict("Ring", 3);
+		addItemToDict("HealthPotion", 3);
+		addItemToDict("ManaPotion", 3);
 	}
 	
 	void addItemToDict(string type, int weight){
