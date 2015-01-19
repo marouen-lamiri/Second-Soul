@@ -43,6 +43,8 @@ public class LootFactory : MonoBehaviour {
 		addItemToDict("Chest", 3);
 		addItemToDict("Axe", 3);
 		addItemToDict("Ring", 3);
+		addItemToDict("HealthPotion", 3);
+		addItemToDict("ManaPotion", 3);
 	}
 	
 	void addItemToDict(string type, int weight){
@@ -74,6 +76,7 @@ public class LootFactory : MonoBehaviour {
 					break;
 				}
 			}
+			//ItemHolder itemHolder = Network.Instantiate(itemHolderPrefab, dropPosition, Quaternion.identity,8)as ItemHolder;
 			ItemHolder itemHolder = Instantiate(itemHolderPrefab, dropPosition, Quaternion.identity)as ItemHolder;
 			itemHolder.item = (Item) System.Activator.CreateInstance(System.Type.GetType(itemType));
 		}

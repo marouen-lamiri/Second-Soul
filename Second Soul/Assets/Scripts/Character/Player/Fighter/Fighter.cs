@@ -33,6 +33,9 @@ public class Fighter : Player {
 		initializeSecondaryStats();
 		calculateSecondaryStats();
 		playerEnabled=true;
+		if (Network.isClient) {
+			playerEnabled = false;
+		}
 		health = maxHealth;
 		energy = maxEnergy;
 		

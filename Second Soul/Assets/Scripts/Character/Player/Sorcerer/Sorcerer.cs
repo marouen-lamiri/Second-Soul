@@ -12,7 +12,7 @@ public class Sorcerer : Player {
 	protected int wisdomPerLvl;
 	protected int spiritPerLvl;
 
-	private Fighter fighter;
+	protected Fighter fighter;
 
 	public DatabaseSorcerer database;
 
@@ -21,10 +21,13 @@ public class Sorcerer : Player {
 		sorcererStart (); //initialized in base classes now why still needed?
 		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
+<<<<<<< HEAD:Second Soul/Assets/Scripts/Character/Player/Sorcerer/Sorcerer.cs
 	}
 	// is this needed since called in sorcereStart??
 	protected void initFighter(){
 		//fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+=======
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9:Second Soul/Assets/Scripts/Character/Player/Sorcerer/Sorcerer.cs
 	}
 
 	protected void sorcererStart(){
@@ -37,8 +40,11 @@ public class Sorcerer : Player {
 		initializeSecondaryStats();
 		calculateSecondaryStats();
 		playerEnabled=true;
+		if (Network.isClient) {
+			fighter.playerEnabled=false;
+		}
 		health = maxHealth;
-		energy = maxEnergy;
+		fighter.energy = fighter.maxEnergy;
 		
 		target = null;
 		startPosition = transform.position;
@@ -115,7 +121,7 @@ public class Sorcerer : Player {
 		fighter.maxEnergy += spirit * enBase;//not sure of this. we may ned to adjust who holds energy because fighter holds it atm
 		energyRegen += spirit * enRegBase;
 		
-		fighter.energy = maxEnergy;
+		fighter.energy = fighter.maxEnergy;
 	}
 
 	public override bool isDead(){
@@ -123,7 +129,15 @@ public class Sorcerer : Player {
 	}
 
 	public override bool loseEnergy(float energy){
-		return fighter.loseEnergy (energy);
+
+		if (energy > fighter.energy) {
+			return false;
+		}
+		fighter.loseEnergy (energy);
+		// networking event listener:
+		sorcererNetworkScript.onEnergyLost (fighter.energy);// (this.energy);
+
+		return true;
 	}
 
 	// Getters and Setters for Primary Stats

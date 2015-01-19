@@ -28,7 +28,10 @@ public class Enemy : Character {
 	ISkill activeSkill1;
 	
 	public float dropRate;
-	
+
+	// networking:
+	protected EnemyNetworkScript enemyNetworkScript;
+
 	
 	// Use this for initialization
 	void Start (){
@@ -52,6 +55,21 @@ public class Enemy : Character {
 		health = maxHealth;
 		energy = maxEnergy;
 		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
+<<<<<<< HEAD:Second Soul/Assets/Scripts/Character/Enemy/Enemy.cs
+=======
+
+		// networking: makes sure each enemy is properly instantiated even on another game instance that didn't run the EnemyFactory code.
+		target = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		this.target = target;
+		this.sorcerer = sorcerer;
+		this.transform.parent = GameObject.Find("Enemies").transform;
+
+		// networking:
+		enemyNetworkScript = (EnemyNetworkScript)gameObject.GetComponent<EnemyNetworkScript> ();
+
+
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9:Second Soul/Assets/Scripts/Character/Enemy/Enemy.cs
 	}
 	protected virtual void initializePrimaryStats(){
 		strengthPerLvl = 1;
@@ -123,6 +141,14 @@ public class Enemy : Character {
 			//meshAgent.Stop(true);
 			activeSkill1.setCaster(this);
 			activeSkill1.useSkill(target);
+
+			// networking: event listener to RPC the attack anim
+			if(enemyNetworkScript != null) {
+				enemyNetworkScript.onAttackTriggered("activeSkill2");
+			} else {
+				print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+			}		
+
 		}	
 	}
 	public bool hasDirectView(){

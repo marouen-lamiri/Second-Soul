@@ -113,6 +113,7 @@ public abstract class Player : Character {
 						activeSkill1.useSkill(target);
 
 						// networking event listener:
+<<<<<<< HEAD:Second Soul/Assets/Scripts/Character/Player/Player.cs
 //						if(fighterNetworkScript != null) {
 //							fighterNetworkScript.onAttackTriggered("activeSkill1");
 //						} else if (sorcererNetworkScript != null) {
@@ -120,6 +121,15 @@ public abstract class Player : Character {
 //						} else {
 //							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
 //						}
+=======
+						if(fighterNetworkScript != null) {
+							fighterNetworkScript.onAttackTriggered("activeSkill1");
+						} else if (sorcererNetworkScript != null) {
+							sorcererNetworkScript.onAttackTriggered("activeSkill1");
+						} else {
+							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+						}
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9:Second Soul/Assets/Scripts/Character/Player/Player.cs
 					}
 					else{
 						chaseTarget(target.transform.position);
@@ -135,6 +145,7 @@ public abstract class Player : Character {
 
 						// networking event listener:
 						// networking event listener:
+<<<<<<< HEAD:Second Soul/Assets/Scripts/Character/Player/Player.cs
 //						if(fighterNetworkScript != null) {
 //							fighterNetworkScript.onAttackTriggered("activeSkill2");
 //						} else if (sorcererNetworkScript != null) {
@@ -142,6 +153,15 @@ public abstract class Player : Character {
 //						} else {
 //							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
 //						}		
+=======
+						if(fighterNetworkScript != null) {
+							fighterNetworkScript.onAttackTriggered("activeSkill2");
+						} else if (sorcererNetworkScript != null) {
+							sorcererNetworkScript.onAttackTriggered("activeSkill2");
+						} else {
+							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+						}		
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9:Second Soul/Assets/Scripts/Character/Player/Player.cs
 					}
 					else{
 						chaseTarget(target.transform.position);

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -21,18 +21,50 @@ public class MapGeneration : MonoBehaviour{
 	int numberRooms = 5;
 	public static int mapSizeX = 25;
 	public static int mapSizeZ = 25;
+
+	// network:
+	public static Vector3 playerStartPositionVector3;
+	public static bool mapGenerationCompleted;
 	
 	void Awake () {
-		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		enemyfactory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
-		lootFactory.setFactoryVariables(itemHolderPrefab, fighter);
-		mapArray = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter.gameObject, sorcerer.gameObject);
-		buildMap (mapArray);
+		mapGenerationCompleted = false;
+		if (Network.isServer) {
+			fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+			sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+			enemyfactory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
+			lootFactory.setFactoryVariables(itemHolderPrefab, fighter);
+			mapArray = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter.gameObject, sorcerer.gameObject);
+			buildMap (mapArray);
+			mapGenerationCompleted = true; // signal for client network to set the sorcerer's position with rpc call
+		} 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+//		// generate the map only after the players have been created (becasue they are needed for some reason for the map generation code:
+//		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
+//		print ("BEFORE 1");
+//		if(serverAndClientAreBothConnected && Network.isServer) {
+//			print ("BEFORE 2.0");
+//			fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+//			sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+//			if(fighter != null) {
+//				print ("BEFORE 2.1");
+//				if(sorcerer != null) {
+//					print ("BEFORE 2.2");
+//					factory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
+//					int[,] map = generateMap (mapSizeX, mapSizeZ, numberRooms, fighter, sorcerer);
+//					buildMap (map);
+//					
+//					// immediately after creating the map, load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
+//					print ("BEFORE 3");
+//					NetworkLevelLoader.Instance.LoadLevel("NetworkingCollaboration",1); 
+//					print ("AFTER");
+//
+//				}
+//			}
+//		}
 		
 	}
 	
@@ -45,9 +77,15 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i+1,j+1] != 0 && map [i-1,j-1] != 0 && map [i+2,j+2] != 0 && map [i-2,j-2] != 0
 				    && map [i,j] != 98 && map [i,j] != 90){
 					map [i,j] = 99;
+<<<<<<< HEAD
 					Vector3 position = new Vector3(i*10,0,j*10);
 					player.transform.position = position;
 					fighter.setInitialPosition(position);
+=======
+					playerStartPositionVector3 = new Vector3(i*10,0.08f,j*10);
+					player.transform.position = playerStartPositionVector3;
+					fighter.setInitialPosition(playerStartPositionVector3);
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9
 					i = mapSizeX;
 					j = mapSizeZ;
 				}
@@ -55,6 +93,7 @@ public class MapGeneration : MonoBehaviour{
 		}
 		return map;
 	}
+
 	
 	int[,] enemySpawnLocation(int [,] map){
 		int nbrEnemies = Random.Range (25,35);
@@ -90,26 +129,30 @@ public class MapGeneration : MonoBehaviour{
 			}
 		}
 	}
-	
+
 	//Checks all 4 directions
 	void buildWalls (int [,] map,int i,int j){
 		Vector3 position = new Vector3 (i*10,0,j*10);
 
 		if (map [i - 1, j] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,180,0))as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x-5,0,position.z), Quaternion.Euler (0,180,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
+			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i + 1, j] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x+10,0,position.z+5), new Quaternion())as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z), new Quaternion(), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
+			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i, j - 1] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z), Quaternion.Euler (0,90,0))as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x,0,position.z-5), Quaternion.Euler (0,90,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
+			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i, j + 1] == 0) {
-			GameObject wall = Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z+10), Quaternion.Euler (0,-90,0))as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,-90,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
+			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		
 	}
@@ -220,7 +263,13 @@ public class MapGeneration : MonoBehaviour{
 			genMap = generateObstacles (genMap, obstaclePrefab, true);
 			genMap = generateObstacles (genMap, statuePrefab, false);
 			genMap = playerStartPosition(genMap, player);
-			genMap = playerStartPosition(genMap, player2);
+
+			genMap = playerStartPosition(genMap, player2); // now setting a private var for the player2 position, because we need to send it over the network so the right instance sets its position.
+			ClientNetwork clientNetwork = (ClientNetwork)GameObject.FindObjectOfType(typeof(ClientNetwork));
+			//clientNetwork.OnSorcererPositionDeterminedAfterMapCreation(playerStartPositionVector3);
+			clientNetwork.onStatsDisplayed();
+
+
 			genMap = enemySpawnLocation (genMap);
 		}		
 		return genMap;
@@ -240,10 +289,12 @@ public class MapGeneration : MonoBehaviour{
 					map[i,j] = 90;
 					GameObject mapObject;
 					if(type){
-						mapObject = Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), Quaternion.Euler (0,0,0))as GameObject;
+						mapObject = (GameObject) Network.Instantiate (obstacle, new Vector3(i*10, -5.4f, j*10), Quaternion.Euler (0,0,0), 2)as GameObject;
+						DontDestroyOnLoad(mapObject);
 					}
 					else {
-						mapObject = Instantiate (obstacle, new Vector3(i*10, 0, j*10), Quaternion.Euler (0,0,0)) as GameObject;
+						mapObject = (GameObject) Network.Instantiate (obstacle, new Vector3(i*10, 0, j*10), Quaternion.Euler (0,0,0), 2) as GameObject;
+						DontDestroyOnLoad(mapObject.transform.gameObject);
 					}
 					if(mapObject.tag == "Crystals"){
 						mapObject.transform.parent = GameObject.Find(mapObject.tag).transform;

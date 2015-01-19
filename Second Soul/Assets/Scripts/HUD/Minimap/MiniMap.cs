@@ -6,15 +6,22 @@ public class MiniMap : MonoBehaviour {
 
 	private Fighter fighter;   // The Fighter from the scene.
 	private Sorcerer sorcerer; // The Sorcerer from the scene.
-	public Material material;
+	public static Material material;
 	List<GameObject> spheres = new List<GameObject>();
 	List<GameObject> playerSpheres = new List<GameObject>();
 	List<GameObject> enemySpheres = new List<GameObject>();
-
 	void Start(){
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+<<<<<<< HEAD
 		buildMinimap ();
+=======
+
+		if(Network.isServer) {
+			buildMinimap ();
+		}
+
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9
 	}
 
 	void buildMinimap(){
@@ -40,7 +47,7 @@ public class MiniMap : MonoBehaviour {
 		}
 	}
 
-	void buildLine(Vector3 start, Vector3 end){
+	public static void buildLine(Vector3 start, Vector3 end){
 		LineRenderer line = new GameObject ("Line").AddComponent<LineRenderer> ();
 		//apparently I should use this as a default material, but it didn't work so I used some arbitrary material
 		//line.material = new Material(Shader.Find("Particles/Additive"));
@@ -54,16 +61,37 @@ public class MiniMap : MonoBehaviour {
 		line.SetVertexCount(2);
 		line.SetPosition(0, start);
 		line.SetPosition (1, end);
+		string positions = start.x.ToString () + "," + start.y.ToString () + "," + start.z.ToString () + "," + end.x.ToString () + "," + end.y.ToString () + "," + end.z.ToString ();
+		if (Network.isServer) {
+			ClientNetwork client = (ClientNetwork) GameObject.FindObjectOfType(typeof(ClientNetwork));
+			client.startClientLines (positions);
+		}
 	}
-	
+
+	public static void setLine(string positions) {
+		string[] posStrings = positions.Split (',');
+
+		Vector3 startVector3 = Vector3.zero;
+		startVector3.x = float.Parse(posStrings[0]);
+		startVector3.y = float.Parse(posStrings[1]);
+		startVector3.z = float.Parse(posStrings[2]);
+
+		Vector3 endVector3 = Vector3.zero;
+		endVector3.x = float.Parse(posStrings[3]);
+		endVector3.y = float.Parse(posStrings[4]);
+		endVector3.z = float.Parse(posStrings[5]);
+
+		buildLine (startVector3, endVector3);
+	}
+
 	void Update()
 	{
-		if (fighter.playerEnabled)
+		if (Network.isServer)
 		{
 			// Adjusting the MiniMap camera to the Fighter position.
 			this.moveMiniMapCamera(fighter.transform.position);
 		}
-		else if (sorcerer.playerEnabled)
+		else 
 		{
 			// Adjusting the MiniMap camera to the Sorcerer position.
 			this.moveMiniMapCamera(sorcerer.transform.position);
