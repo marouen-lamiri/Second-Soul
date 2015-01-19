@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Mage : Sorcerer {
 
+	void Awake (){
+		initFighter ();
+	}
 	// Use this for initialization
 	void Start () {
 		sorcererStart ();
@@ -33,7 +36,7 @@ public class Mage : Sorcerer {
 		
 		spellPower = 20f;
 
-		fighter.maxEnergy = 100;
+		maxEnergy = 100;
 
 		energyRegen = 0.5f;
 	}

@@ -113,6 +113,7 @@ public abstract class Player : Character {
 						activeSkill1.useSkill(target);
 
 						// networking event listener:
+<<<<<<< HEAD
 						if(fighterNetworkScript != null) {
 							fighterNetworkScript.onAttackTriggered("activeSkill1");
 						} else if (sorcererNetworkScript != null) {
@@ -120,6 +121,15 @@ public abstract class Player : Character {
 						} else {
 							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
 						}
+=======
+//						if(fighterNetworkScript != null) {
+//							fighterNetworkScript.onAttackTriggered("activeSkill1");
+//						} else if (sorcererNetworkScript != null) {
+//							//sorcererNetworkScript.onAttackTriggered("activeSkill1");
+//						} else {
+//							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+//						}
+>>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
 					}
 					else{
 						chaseTarget(target.transform.position);
@@ -135,6 +145,7 @@ public abstract class Player : Character {
 
 						// networking event listener:
 						// networking event listener:
+<<<<<<< HEAD
 						if(fighterNetworkScript != null) {
 							fighterNetworkScript.onAttackTriggered("activeSkill2");
 						} else if (sorcererNetworkScript != null) {
@@ -142,6 +153,15 @@ public abstract class Player : Character {
 						} else {
 							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
 						}		
+=======
+//						if(fighterNetworkScript != null) {
+//							fighterNetworkScript.onAttackTriggered("activeSkill2");
+//						} else if (sorcererNetworkScript != null) {
+//							//sorcererNetworkScript.onAttackTriggered("activeSkill2");
+//						} else {
+//							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+//						}		
+>>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
 					}
 					else{
 						chaseTarget(target.transform.position);
