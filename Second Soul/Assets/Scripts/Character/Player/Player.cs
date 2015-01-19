@@ -113,6 +113,19 @@ public abstract class Player : Character {
 						activeSkill1.useSkill(target);
 
 						// networking event listener:
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:Second Soul/Assets/Scripts/Character/Player/Player.cs
+//						if(fighterNetworkScript != null) {
+//							fighterNetworkScript.onAttackTriggered("activeSkill1");
+//						} else if (sorcererNetworkScript != null) {
+//							//sorcererNetworkScript.onAttackTriggered("activeSkill1");
+//						} else {
+//							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+//						}
+=======
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 						if(fighterNetworkScript != null) {
 							fighterNetworkScript.onAttackTriggered("activeSkill1");
 						} else if (sorcererNetworkScript != null) {
@@ -120,6 +133,19 @@ public abstract class Player : Character {
 						} else {
 							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
 						}
+<<<<<<< HEAD
+=======
+//						if(fighterNetworkScript != null) {
+//							fighterNetworkScript.onAttackTriggered("activeSkill1");
+//						} else if (sorcererNetworkScript != null) {
+//							//sorcererNetworkScript.onAttackTriggered("activeSkill1");
+//						} else {
+//							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+//						}
+>>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
+=======
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9:Second Soul/Assets/Scripts/Character/Player/Player.cs
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 					}
 					else{
 						chaseTarget(target.transform.position);
@@ -135,6 +161,19 @@ public abstract class Player : Character {
 
 						// networking event listener:
 						// networking event listener:
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:Second Soul/Assets/Scripts/Character/Player/Player.cs
+//						if(fighterNetworkScript != null) {
+//							fighterNetworkScript.onAttackTriggered("activeSkill2");
+//						} else if (sorcererNetworkScript != null) {
+//							//sorcererNetworkScript.onAttackTriggered("activeSkill2");
+//						} else {
+//							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+//						}		
+=======
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 						if(fighterNetworkScript != null) {
 							fighterNetworkScript.onAttackTriggered("activeSkill2");
 						} else if (sorcererNetworkScript != null) {
@@ -142,6 +181,19 @@ public abstract class Player : Character {
 						} else {
 							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
 						}		
+<<<<<<< HEAD
+=======
+//						if(fighterNetworkScript != null) {
+//							fighterNetworkScript.onAttackTriggered("activeSkill2");
+//						} else if (sorcererNetworkScript != null) {
+//							//sorcererNetworkScript.onAttackTriggered("activeSkill2");
+//						} else {
+//							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+//						}		
+>>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
+=======
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9:Second Soul/Assets/Scripts/Character/Player/Player.cs
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 					}
 					else{
 						chaseTarget(target.transform.position);

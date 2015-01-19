@@ -30,17 +30,10 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	
 	public void useSkill(Character target){
 		//impactTime = 0.35f;//use attackspeed
-
-		System.Type type = caster.GetType ();
-		if (caster.GetType().IsSubclassOf(typeof(Fighter))) {
-			damage = caster.attackPower;
-			impactTime = 1/caster.attackSpeed;
-		}
-		else {
-			damage = caster.spellPower;
-			impactTime = 1/caster.castSpeed;
-		}
+		impactTime = 1/caster.attackSpeed;
 		skillLength = animation[caster.attackClip.name].length;
+		damage = caster.attackPower;
+
 		transform.LookAt (target.transform.position);
 		caster.animateAttack();
 		//it'll look wrong because of the animation time, but I want to make attack speed will work. I'm still trying to make it look better

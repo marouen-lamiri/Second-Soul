@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Druid : Sorcerer {
 
+	void Awake (){
+		initFighter ();
+	}
 	// Use this for initialization
 	void Start () {
 		sorcererStart ();
@@ -27,13 +30,13 @@ public class Druid : Sorcerer {
 		
 		castSpeed = 3f;
 		cdr = 0.3f;
-
+		
 		spellCriticalChance = 0.3f;
 		spellCriticalDamage = 1.5f;
 		
 		spellPower = 10f;
 		
-		fighter.maxEnergy = 200;
+		maxEnergy = 200;
 		
 		energyRegen = 0.75f;
 	}

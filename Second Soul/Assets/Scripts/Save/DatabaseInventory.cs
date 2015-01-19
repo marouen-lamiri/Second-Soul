@@ -12,11 +12,19 @@ public class DatabaseInventory : MonoBehaviour {
 	private List<Item> equipItems;
 	private Inventory inventory;
 	private EquipSlot slots; 
+<<<<<<< HEAD
+<<<<<<< HEAD
 	private Player player;
+=======
+>>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
+=======
+=======
+	private Player player;
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 	
 	void Start () {
 		inventory = (Inventory) GameObject.FindObjectOfType (typeof (Inventory));
-		player = (Player) GameObject.FindObjectOfType (typeof(Player));
 	}
 	
 	// Update is called once per frame
@@ -34,6 +42,21 @@ public class DatabaseInventory : MonoBehaviour {
 
 	void saveItems(){
 		Debug.Log ("Step 1");
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		inventoryItems = inventory.getInventoryItems();
+		int counter = 0;
+		for (int i = 0; i < inventoryItems.Count; i++){
+			PlayerPrefs.SetInt ("Item position x" + i, inventoryItems[i].getX());
+			PlayerPrefs.SetInt ("Item position y" + i, inventoryItems[i].getY());
+			PlayerPrefs.SetString("Item type" + i, inventoryItems[i].getTypeAsString());
+			Debug.Log (inventoryItems[i].getTypeAsString());
+			counter++;
+		}
+		PlayerPrefs.SetInt ("Item Total", counter);
+=======
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 		if(Network.isServer){//if (player.GetType () != typeof (Sorcerer)) {
 			inventoryItems = inventory.getInventoryItems ();
 			int counter = 0;
@@ -58,6 +81,22 @@ public class DatabaseInventory : MonoBehaviour {
 //			}
 //			PlayerPrefs.SetInt ("Sorcerer Item Total", counter);
 //		}
+<<<<<<< HEAD
+=======
+		inventoryItems = inventory.getInventoryItems();
+		int counter = 0;
+		for (int i = 0; i < inventoryItems.Count; i++){
+			PlayerPrefs.SetInt ("Item position x" + i, inventoryItems[i].getX());
+			PlayerPrefs.SetInt ("Item position y" + i, inventoryItems[i].getY());
+			PlayerPrefs.SetString("Item type" + i, inventoryItems[i].getTypeAsString());
+			Debug.Log (inventoryItems[i].getTypeAsString());
+			counter++;
+		}
+		PlayerPrefs.SetInt ("Item Total", counter);
+>>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
+=======
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 	}
 
 	void saveEquipItems(){
@@ -73,6 +112,42 @@ public class DatabaseInventory : MonoBehaviour {
 		PlayerPrefs.SetInt ("Equiped Item Total", counter);
 	}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	public void recreateItem(int x, int y, int i){
+		Item item;
+		if(PlayerPrefs.GetString("Item type" + i) == "ManaPotion"){
+			item = new ManaPotion();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "HealthPotion"){
+			item = new HealthPotion();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Axe"){
+			item = new Axe();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Ring"){
+			item = new Ring();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Chest"){
+			item = new Chest();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Boots"){
+			item = new Boots();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Amulet"){
+			item = new Amulet();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Sword"){
+=======
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 	public void recreateFighterItem(int x, int y, int i){
 		Item item;
 		if(PlayerPrefs.GetString("Fighter Item type" + i) == "ManaPotion"){
@@ -104,11 +179,53 @@ public class DatabaseInventory : MonoBehaviour {
 			inventory.addInventoryItem(x,y,item);
 		}
 		else if(PlayerPrefs.GetString( "Fighter Item type" + i) == "Sword"){
+<<<<<<< HEAD
+=======
+	public void recreateItem(int x, int y, int i){
+		Item item;
+		if(PlayerPrefs.GetString("Item type" + i) == "ManaPotion"){
+			item = new ManaPotion();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "HealthPotion"){
+			item = new HealthPotion();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Axe"){
+			item = new Axe();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Ring"){
+			item = new Ring();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Chest"){
+			item = new Chest();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Boots"){
+			item = new Boots();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Amulet"){
+			item = new Amulet();
+			inventory.addInventoryItem(x,y,item);
+		}
+		else if(PlayerPrefs.GetString("Item type" + i) == "Sword"){
+>>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
+=======
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 			item = new Sword();
 			inventory.addInventoryItem(x,y,item);
 		}
 	}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 	public void recreateSorcererItem(int x, int y, int i){
 		Item item;
 		if(PlayerPrefs.GetString("Sorcerer Item type" + i) == "ManaPotion"){
@@ -146,6 +263,12 @@ public class DatabaseInventory : MonoBehaviour {
 	}
 
 
+<<<<<<< HEAD
+=======
+>>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
+=======
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 	public void recreateEquipItem(int x, int y, int i){
 		Item item;
 		if(PlayerPrefs.GetString("Equiped Item type" + i) == "Axe"){
@@ -183,6 +306,22 @@ public class DatabaseInventory : MonoBehaviour {
 	public void readItems(){
 		inventorySlots = inventory.getInventorySlots();
 		inventoryItems = inventory.getInventoryItems();
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		for(int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++){
+			int x = PlayerPrefs.GetInt("Item position x" + i);
+			int y = PlayerPrefs.GetInt("Item position y" + i);
+			recreateItem(x, y, i);
+		}
+		for(int i = 0; i < PlayerPrefs.GetInt ("Equiped Item Total"); i++){ 
+			Debug.Log ("hello2");
+			int x = PlayerPrefs.GetInt("Equiped Item position x" + i);
+			int y = PlayerPrefs.GetInt("Equiped Item position y" + i);
+			recreateEquipItem(x, y, i);
+		}
+=======
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 		if(Network.isServer){//if(player.GetType() != typeof (Sorcerer)){
 			for(int i = 0; i < PlayerPrefs.GetInt("Fighter Item Total"); i++){
 				int x = PlayerPrefs.GetInt("Fighter Item position x" + i);
@@ -196,6 +335,12 @@ public class DatabaseInventory : MonoBehaviour {
 				int y = PlayerPrefs.GetInt("Sorcerer Item position y" + i);
 				recreateSorcererItem(x,y,i);
 			}
+=======
+		for(int i = 0; i < PlayerPrefs.GetInt("Item Total"); i++){
+			int x = PlayerPrefs.GetInt("Item position x" + i);
+			int y = PlayerPrefs.GetInt("Item position y" + i);
+			recreateItem(x, y, i);
+>>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
 		}
 		for(int i = 0; i < PlayerPrefs.GetInt ("Equiped Item Total"); i++){ 
 			Debug.Log ("hello2");
@@ -203,5 +348,6 @@ public class DatabaseInventory : MonoBehaviour {
 			int y = PlayerPrefs.GetInt("Equiped Item position y" + i);
 			recreateEquipItem(x, y, i);
 		}
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9
 	}
 }

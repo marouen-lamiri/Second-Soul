@@ -27,7 +27,7 @@ public class EnemyFactory : MonoBehaviour {
 	
 	}
 	public void spawn(Vector3 spawnPosition){
-		Enemy enemy = Network.Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, 3)as Enemy;
+		Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity)as Enemy;
 		enemy.target = target;
 		enemy.sorcerer = sorcerer;
 		enemy.transform.parent = GameObject.Find("Enemies").transform;

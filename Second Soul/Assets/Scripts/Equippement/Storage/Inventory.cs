@@ -5,7 +5,6 @@ public class Inventory : Storage
 {
 	public Texture2D image;
 	private Player player;
-	private Player player2;
 
 	public int slotsOffsetX;
 	public int slotsOffsetY;
@@ -16,7 +15,6 @@ public class Inventory : Storage
 		//position.x = Screen.width - position.width;
 		//position.y = Screen.height - position.height - Screen.height * 0.2f;
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		player2 = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		player.inventory = this;
 	}
 	

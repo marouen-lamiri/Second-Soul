@@ -25,18 +25,11 @@ var heightDamping = 2.0;
 
 // Place the script in the Camera-Control group in the component menu
 @script AddComponentMenu("Camera-Control/Smooth Follow")
-function Start(){
-	fighter = GameObject.Find("Fighter").transform;
-	sorcerer = GameObject.Find("Sorcerer").transform;
-	if(Network.isClient){
-		enabledFighter = false;
-	}
-}
 function Update(){
 
 //this, i would like in a "Start", but that doesn't seem to work
-//	fighter = GameObject.Find("Fighter").transform;
-//	sorcerer = GameObject.Find("Sorcerer").transform;
+	fighter = GameObject.Find("Fighter").transform;
+	sorcerer = GameObject.Find("Sorcerer").transform;
 	
 	if(enabledFighter){
 		target = fighter;
