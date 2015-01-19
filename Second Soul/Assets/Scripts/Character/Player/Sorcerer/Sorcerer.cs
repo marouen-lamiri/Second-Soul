@@ -22,12 +22,21 @@ public class Sorcerer : Player {
 		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+<<<<<<< HEAD:Second Soul/Assets/Scripts/Character/Player/Sorcerer/Sorcerer.cs
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 	}
 	// is this needed since called in sorcereStart??
 	protected void initFighter(){
 		//fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+<<<<<<< HEAD
 >>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
+=======
+=======
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9:Second Soul/Assets/Scripts/Character/Player/Sorcerer/Sorcerer.cs
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 	}
 
 	protected void sorcererStart(){

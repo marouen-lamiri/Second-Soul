@@ -53,6 +53,11 @@ public class Enemy : Character {
 		energy = maxEnergy;
 		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:Second Soul/Assets/Scripts/Character/Enemy/Enemy.cs
+=======
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 
 		// networking: makes sure each enemy is properly instantiated even on another game instance that didn't run the EnemyFactory code.
 		target = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
@@ -65,8 +70,12 @@ public class Enemy : Character {
 		enemyNetworkScript = (EnemyNetworkScript)gameObject.GetComponent<EnemyNetworkScript> ();
 
 
+<<<<<<< HEAD
 =======
 >>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
+=======
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9:Second Soul/Assets/Scripts/Character/Enemy/Enemy.cs
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 	}
 	protected virtual void initializePrimaryStats(){
 		strengthPerLvl = 1;

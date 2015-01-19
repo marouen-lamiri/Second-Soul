@@ -46,6 +46,7 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i,j] != 98 && map [i,j] != 90){
 					map [i,j] = 99;
 <<<<<<< HEAD
+<<<<<<< HEAD
 					playerStartPositionVector3 = new Vector3(i*10,0.08f,j*10);
 					player.transform.position = playerStartPositionVector3;
 					fighter.setInitialPosition(playerStartPositionVector3);
@@ -54,6 +55,16 @@ public class MapGeneration : MonoBehaviour{
 					player.transform.position = position;
 					fighter.setInitialPosition(position);
 >>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
+=======
+					Vector3 position = new Vector3(i*10,0,j*10);
+					player.transform.position = position;
+					fighter.setInitialPosition(position);
+=======
+					playerStartPositionVector3 = new Vector3(i*10,0.08f,j*10);
+					player.transform.position = playerStartPositionVector3;
+					fighter.setInitialPosition(playerStartPositionVector3);
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 					i = mapSizeX;
 					j = mapSizeZ;
 				}

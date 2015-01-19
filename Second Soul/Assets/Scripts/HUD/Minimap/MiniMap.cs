@@ -15,14 +15,23 @@ public class MiniMap : MonoBehaviour {
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		buildMinimap ();
+=======
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 
 		if(Network.isServer) {
 			buildMinimap ();
 		}
 
+<<<<<<< HEAD
 =======
 		buildMinimap ();
 >>>>>>> parent of d799c52... Merge branch 'master' of https://github.com/marouen-lamiri/Second-Soul into Development
+=======
+>>>>>>> a832b619c6f4144446dd81950edcb02bed4bdde9
+>>>>>>> d799c5283c276d296eba35446a42e6aa02c0b52c
 	}
 
 	void buildMinimap(){
