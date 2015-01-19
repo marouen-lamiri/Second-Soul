@@ -19,9 +19,8 @@ public class ItemHolder : MonoBehaviour {
 	}
 	
 	public void getPickedUp(){
-		//Destroy(this);
-		//Destroy (this.gameObject);
 		Destroy (gameObject);
+		//Network.Destroy(gameObject);
 	}
 	
 	void OnMouseDrag(){
