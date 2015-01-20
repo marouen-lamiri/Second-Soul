@@ -28,36 +28,36 @@ public class ClickToMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update (){
-		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
-		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
-		timer -= Time.deltaTime;
-		if(!player.isDead() && player.playerEnabled && !busy){
-			if(!player.chasing && !player.actionLocked()){
-				if(Input.GetMouseButton(0)&& timer <= 0)
-				{
-					timer = 1f;
-					//Locate where the player clicked on the terrain
-					locatePosition();
-				}
-				if(initial){
-			 		//Move the player to the position
-					moveToPosition();
-				}
-			}
-		}
-		else
-		{
-		}
+//		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
+//		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
+//		timer -= Time.deltaTime;
+//		if(!player.isDead() && player.playerEnabled && !busy){
+//			if(!player.chasing && !player.actionLocked()){
+//				if(Input.GetMouseButton(0)&& timer <= 0)
+//				{
+//					timer = 1f;
+//					//Locate where the player clicked on the terrain
+//					locatePosition();
+//				}
+//				if(initial){
+//			 		//Move the player to the position
+//					moveToPosition();
+//				}
+//			}
+//		}
+//		else
+//		{
+//		}
 	}
 
 	public void move () {
-		//Locate player click position
-		locatePosition ();
-		//move player to position
-		moveToPosition ();
+//		//Locate player click position
+//		locatePosition ();
+//		//move player to position
+//		moveToPosition ();
 	}
 
-	void locatePosition(){
+	public void locatePosition(){
 		RaycastHit[] hits;
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		initial = true;
@@ -66,6 +66,7 @@ public class ClickToMove : MonoBehaviour {
 		if(hits != null){
 			RaycastHit hit = hits[0];
 			if(hit.collider.tag != "Player" /*&& hit.collider.tag != "Enemy"*/ && hit.collider.tag != "GUI"){
+				//position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 			}
 			//Debug.Log(position);

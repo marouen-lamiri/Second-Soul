@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public abstract class Player : Character {
 
@@ -9,7 +10,9 @@ public abstract class Player : Character {
 	public int nextLevelXP; // xp need for next level --remove public
 	
 	public bool attacking;
-	
+	private bool moving;
+	private Vector3 goalPosition;
+
 	public int pickUpRange;
 
 	public Inventory inventory;
@@ -40,6 +43,9 @@ public abstract class Player : Character {
 	}
 	protected void playerUpdate(){
 		characterUpdate ();
+		if (moving) {
+			moveToPosition();
+		}
 		//Debug.Log (inventory);
 	}
 	public abstract void levelUp();
@@ -48,10 +54,6 @@ public abstract class Player : Character {
 		target = null;
 		lootItem = null;
 		startPosition = transform.position;
-		//Debug.Log (inventory);
-		//Debug.Log (GameObject.Find ("HUD/Equipment/Inventory"));
-		//inventory = GameObject.FindGameObjectWithTag ("Inventory").GetComponent("Inventory") as Inventory;
-		//inventory.sayhi ();
 	}
 	
 	protected void initializeLevel(){
@@ -103,50 +105,52 @@ public abstract class Player : Character {
 	
 	protected void attackLogic(){
 		if(!attackLocked() && playerEnabled){
-			chasing = false;
-			if(target != null){
-				if ((Input.GetButtonDown ("activeSkill1") || Input.GetButton ("activeSkill1")) && activeSkill1 != null){
-					if (inAttackRange()){
-						//meshAgent.Stop(true);
-						//attack ();
-						activeSkill1.setCaster(this);
-						activeSkill1.useSkill(target);
-
-						// networking event listener:
-						if(fighterNetworkScript != null) {
-							fighterNetworkScript.onAttackTriggered("activeSkill1");
-						} else if (sorcererNetworkScript != null) {
-							sorcererNetworkScript.onAttackTriggered("activeSkill1");
-						} else {
-							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
-						}
-					}
-					else{
-						chaseTarget(target.transform.position);
-					}
+			RaycastHit[] hits;
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			hits = Physics.RaycastAll(ray.origin,ray.direction, 1000);
+			Character targetCharacter;
+			Vector3 targetPosition;
+			if (hits.Length>1 && hits [1].GetType ().IsSubclassOf (typeof(Enemy))) {
+				targetPosition = hits [1].transform.position;
+				targetCharacter = target;//the player's target, which in this case is an enemy
+			}
+			else {
+				targetPosition = new Vector3(hits[0].point.x, hits[0].point.y, hits[0].point.z);
+				targetCharacter = target;//the player's target, which in this case is null
+				if(chasing == true){
+					targetPosition=target.transform.position;
 				}
-				if ((Input.GetButtonDown ("activeSkill2") || Input.GetButton ("activeSkill2")) && activeSkill2 != null){
-					if (inAttackRange()){
-						//attack ();
-						//Debug.Log (activeSkill2.GetType());
-						//locatePosition();
-						activeSkill2.setCaster(this);
-						activeSkill2.useSkill(castPosition());
+			}
+			if(targetCharacter==this){
+				targetCharacter=null;
+				//return;
+			}
+			if ((Input.GetButtonDown ("activeSkill1") || Input.GetButton ("activeSkill1")) && activeSkill1 != null){
 
-						// networking event listener:
-						// networking event listener:
-						if(fighterNetworkScript != null) {
-							fighterNetworkScript.onAttackTriggered("activeSkill2");
-						} else if (sorcererNetworkScript != null) {
-							sorcererNetworkScript.onAttackTriggered("activeSkill2");
-						} else {
-							print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
-						}		
-					}
-					else{
-						chaseTarget(target.transform.position);
-					}
+				activeSkill1.setCaster(this);
+				activeSkill1.useSkill(targetPosition, targetCharacter);
+
+				// networking event listener:
+				if(fighterNetworkScript != null) {
+					fighterNetworkScript.onAttackTriggered("activeSkill1");
+				} else if (sorcererNetworkScript != null) {
+					sorcererNetworkScript.onAttackTriggered("activeSkill1");
+				} else {
+					print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
 				}
+			}
+			else if ((Input.GetButtonDown ("activeSkill2") || Input.GetButton ("activeSkill2")) && activeSkill2 != null){
+				activeSkill2.setCaster(this);
+				activeSkill2.useSkill(targetPosition,targetCharacter);
+
+				// networking event listener:
+				if(fighterNetworkScript != null) {
+					fighterNetworkScript.onAttackTriggered("activeSkill2");
+				} else if (sorcererNetworkScript != null) {
+					sorcererNetworkScript.onAttackTriggered("activeSkill2");
+				} else {
+					print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+				}		
 			}
 		}
 	}
@@ -158,7 +162,7 @@ public abstract class Player : Character {
 			}
 		}
 		else{
-			chaseTarget(lootItem.transform.position);
+			startMoving(lootItem.transform.position);
 		}
 	}
 	
@@ -172,7 +176,61 @@ public abstract class Player : Character {
 
 		Physics.Raycast(ray, out hit, 1000);
 		return new Vector3(hit.point.x, hit.point.y, hit.point.z);
-		
-		
 	}	
+
+	private void moveToPosition(){
+		//Player moving
+		pathing.findPath(transform.position, goalPosition);
+		List<Vector3> path = grid.worldFromNode(grid.path);
+		Vector3 destination;
+		Quaternion newRotation;
+		if (path.Count > 1) {
+			destination = path [1];
+			newRotation = Quaternion.LookRotation (destination - transform.position);
+		}
+		else {
+			destination = goalPosition;
+			newRotation = Quaternion.LookRotation (goalPosition - transform.position);
+		}
+
+		newRotation.x = 0;
+		newRotation.z = 0;
+		
+		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 7);
+		controller.SimpleMove (transform.forward * speed);
+		
+		animateRun();
+		
+		// networking: event listener to RPC the attack anim
+		//			Fighter fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		CharacterNetworkScript playerNetworkScript = GetComponent<CharacterNetworkScript>();
+		if(playerNetworkScript != null) {
+			playerNetworkScript.onRunTriggered();
+		} 
+		else {
+			print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+		}
+		//Player not moving
+		if(destination == goalPosition) {
+			moving = false;
+			animateIdle();
+
+			if(playerNetworkScript != null) {
+				playerNetworkScript.onIdleTriggered();
+			} else {
+				print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+			}
+			
+		}
+	}
+	public void startMoving(Vector3 position){
+		moving = true;
+		goalPosition = position;
+	}
+
+	public void stopMoving(){
+		moving = false;
+		chasing = false;
+		goalPosition = transform.position;
+	}
 }

@@ -128,22 +128,22 @@ public class Enemy : Character {
 				}
 			}
 		}
-		else if(!inAttackRange () && hasAggro){
+		else if(!inAttackRange (target.transform.position) && hasAggro){
 			chaseTarget(target.transform.position);
 			if(outAggroRange()){
 				loseAggro();
 			}
 		} 
-		else if(inAttackRange () && !attackLocked()){
+		else if(inAttackRange (target.transform.position) && !attackLocked()){
 			//meshAgent.Stop(true);
 			activeSkill1.setCaster(this);
-			activeSkill1.useSkill(target);
+			activeSkill1.useSkill(target.transform.position,target);
 
 			// networking: event listener to RPC the attack anim
 			if(enemyNetworkScript != null) {
 				enemyNetworkScript.onAttackTriggered("activeSkill2");
 			} else {
-				print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+				print("No enemyNetworkScript attached to enemy.");
 			}		
 
 		}	
@@ -202,7 +202,7 @@ public class Enemy : Character {
 	}
 	
 	void giveLoot(float dropRate, Vector3 position){
-		if(!lootGiven){
+		if(!lootGiven && networkView.isMine){
 			LootFactory.determineDrop(dropRate, position);
 		}
 		lootGiven = true;
@@ -229,9 +229,6 @@ public class Enemy : Character {
 		if (transform.FindChild ("Sphere") != null) {
 			Destroy (transform.FindChild ("Sphere").gameObject);
 		}
-		//this used to be necessary, but now it causes errors and its need doesn't exist anymore. I'm keeping this here incase I'm wrong
-//		target.target = null;
-//		sorcerer.target = null;
 	}
 	
 	void OnMouseDrag(){
@@ -256,7 +253,11 @@ public class Enemy : Character {
 	}
 
 	void OnMouseExit(){
-		target.target = null;
-		sorcerer.target = null;
+		if (!target.chasing) {
+			target.target = null;
+		}
+		if (!sorcerer.chasing) {
+			sorcerer.target = null;
+		}
 	}	
 }

@@ -27,26 +27,27 @@ public class FireballSkill : ProjectileSkill {
 	
 	}
 	
-	public override void useSkill (Vector3 target)
-	{
-		base.useSkill (target);
-		
+	public override void useSkill (Vector3 targetPosition, Character targetCharacter)
+	{	
+		if(caster.GetType().IsSubclassOf(typeof(Player))){
+			Player player = (Player)caster;
+			player.stopMoving ();
+		}
 		castTime = caster.castSpeed;
 		skillLength = 1/castTime;
 		damage = caster.spellPower * damageModifier;
 		
-		transform.LookAt (target);
+		transform.LookAt (targetPosition);
 		caster.animateAttack();
 		caster.skillDurationLeft = skillLength;
 		animation [caster.attackClip.name].normalizedSpeed = castTime;
-		StartCoroutine(shootFireball(target));
+		StartCoroutine(shootFireball());
 	}
 	
-	IEnumerator shootFireball(Vector3 target){
+	IEnumerator shootFireball(){
 		yield return new WaitForSeconds(skillLength);
 		if(caster.loseEnergy (energyCost)){
 			FireballBehavior fireball = Network.Instantiate(fireballPrefab, caster.transform.position + spawnDistance * caster.transform.forward, caster.transform.rotation, 4)as FireballBehavior;
-			//fireball.fireballSkill = this; // now done directly in fireballBehavior
 		}
 	}
 }

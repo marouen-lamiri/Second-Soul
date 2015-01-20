@@ -22,17 +22,23 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	void Update () {
 	
 	}
-	
-	//FIXME: cheat for avoiding generics
-	public void useSkill(Vector3 target){
-		Debug.Log ("wrong type passing: use skill");
-	}
-	
-	public void useSkill(Character target){
-		//impactTime = 0.35f;//use attackspeed
 
-		System.Type type = caster.GetType ();
-		if (caster.GetType().IsSubclassOf(typeof(Fighter))) {
+	public void useSkill(Vector3 target, Character targetCharacter){
+		//impactTime = 0.35f;//use attackspeed]
+		if ((caster.target == null && caster.GetType().IsSubclassOf(typeof(Player))) || !caster.inAttackRange (target)) {
+			Player player = (Player) caster;
+			player.startMoving(target);
+			if(caster.target!=null){
+				player.chasing=true;
+			}
+			return;
+		}
+		if(caster.GetType().IsSubclassOf(typeof(Player))){
+			Player player = (Player)caster;
+			player.stopMoving ();
+		}
+
+		if (caster.GetType().IsSubclassOf(typeof(Fighter))|| caster.GetType().IsSubclassOf(typeof(Enemy))) {
 			damage = caster.attackPower;
 			impactTime = 1/caster.attackSpeed;
 		}
@@ -41,13 +47,13 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 			impactTime = 1/caster.castSpeed;
 		}
 		skillLength = animation[caster.attackClip.name].length;
-		transform.LookAt (target.transform.position);
+		transform.LookAt (target);
 		caster.animateAttack();
 		//it'll look wrong because of the animation time, but I want to make attack speed will work. I'm still trying to make it look better
 		//caster.skillDurationLeft = skillLength;
 		caster.skillDurationLeft = impactTime;
 		animation [caster.attackClip.name].normalizedSpeed = 1/impactTime;
-		StartCoroutine(applyAttackDamage(target, DamageType.Physical));
+		StartCoroutine(applyAttackDamage(targetCharacter, DamageType.Physical));
 	}
 	
 	/*

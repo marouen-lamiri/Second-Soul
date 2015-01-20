@@ -10,7 +10,10 @@ public class SorcererNetworkScript : CharacterNetworkScript {
 	void Start () {
 		//playerHealthBar = (PlayerHealthBar) GameObject.FindObjectOfType (typeof(PlayerHealthBar));
 		setCharacterScript ();
-
+		
+		characterScript = (Sorcerer)gameObject.GetComponent<Sorcerer> ();
+		Fighter fighter = (Fighter)GameObject.FindObjectOfType (typeof(Fighter))as Fighter;
+		fighterScript = fighter.GetComponent<Fighter> ();	
 	}
 	
 	// Update is called once per frame

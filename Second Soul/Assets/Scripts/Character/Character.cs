@@ -282,21 +282,19 @@ public abstract class Character : MonoBehaviour {
 		}
 		return false;
 	}
-
-
-	// when possible transform this to take (Vector3 pos, Vector3 targetPos) so this can be extensible to chasing another point like an item
+	
 	public void chaseTarget(Vector3 targetPosition){
 		chasing = true;
 		animateRun();
-//		Debug.Log (pathing);
 		Vector3 destination;
 		pathing.findPath(transform.position, targetPosition);
 		List<Vector3> path = grid.worldFromNode(grid.path);
-		if (Vector3.Distance (transform.position, targetPosition) > 2) {
+		if (path.Count>1) {
 			destination = path[1];
 		} 
 		else {
 			destination = targetPosition;
+			chasing = false;
 		}
 		Quaternion newRotation = Quaternion.LookRotation (destination - transform.position);
 		newRotation.x = 0;
@@ -334,18 +332,9 @@ public abstract class Character : MonoBehaviour {
 		}
 	}
 	
-	public bool inAttackRange(){
-		return Vector3.Distance(target.transform.position, transform.position) <= attackRange;
+	public bool inAttackRange(Vector3 targetPosition){
+		return Vector3.Distance(targetPosition, transform.position) <= attackRange;
 	}
-	//this (below)exists in Character
-	//is this duplicate necessary?
-	//trying to comment it out
-//	IEnumerator applyAttackDamage(Character delayedTarget){
-//		yield return new WaitForSeconds(skillLength * impactTime);
-//		if (delayedTarget != null){
-//			delayedTarget.takeDamage(damage);
-//		}
-//	}
 	
 	public void dieMethod(){
 		//CancelInvoke("applyAttackDamage");
@@ -355,8 +344,6 @@ public abstract class Character : MonoBehaviour {
 		if (animation[dieClip.name].time > animation[dieClip.name].length * 0.80) {
 			animation[dieClip.name].speed = 0;
 		}
-		
-		//RESPAWN/ETC...?
 	}
 	
 	public float getInitialPositionX(){

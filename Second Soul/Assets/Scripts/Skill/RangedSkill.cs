@@ -21,12 +21,8 @@ public abstract class RangedSkill : MonoBehaviour, ISkill {
 	void Update () {
 	
 	}
-	//FIXME: cheat for avoiding generics
-	public void useSkill(Character target){
-		Debug.Log ("wrong type passing: use skill");
-	}
-	
-	public virtual void useSkill(Vector3 target){
+
+	public virtual void useSkill(Vector3 target, Character character){
 		
 	}
 	

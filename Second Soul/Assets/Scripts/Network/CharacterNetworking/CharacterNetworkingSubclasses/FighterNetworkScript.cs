@@ -8,6 +8,7 @@ public class FighterNetworkScript : CharacterNetworkScript {
 	// Use this for initialization
 	void Start () {
 		setCharacterScript ();
+		characterScript = (Fighter)gameObject.GetComponent<Fighter> ();
 	}
 	
 	// Update is called once per frame
