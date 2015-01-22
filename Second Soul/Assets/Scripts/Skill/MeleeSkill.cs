@@ -13,7 +13,8 @@ public abstract class MeleeSkill : MonoBehaviour, ISkill {
 	void Update () {
 	
 	}
-	
+	public abstract void skillStart ();
+
 	public void useSkill(Vector3 targetPosition, Character targetCharacter){
 	
 	}
@@ -21,4 +22,6 @@ public abstract class MeleeSkill : MonoBehaviour, ISkill {
 	public void setCaster(Character caster){
 		this.caster = caster;
 	}
+	
+	public abstract void animateAttack();
 }

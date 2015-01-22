@@ -12,15 +12,23 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	
 	protected float skillLength;
 	//public float skillDurationLeft;
-	
+
+	// networking:
+	protected FighterNetworkScript fighterNetworkScript;
+	protected SorcererNetworkScript sorcererNetworkScript;
 	// Use this for initialization
 	void Start () {
-	
+		skillStart ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void skillStart(){
+		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
+		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
 	}
 
 	public void useSkill(Vector3 target, Character targetCharacter){
@@ -49,6 +57,7 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 		skillLength = animation[caster.attackClip.name].length;
 		transform.LookAt (target);
 		caster.animateAttack();
+		animateAttack ();
 		//it'll look wrong because of the animation time, but I want to make attack speed will work. I'm still trying to make it look better
 		//caster.skillDurationLeft = skillLength;
 		caster.skillDurationLeft = impactTime;
@@ -56,21 +65,16 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 		StartCoroutine(applyAttackDamage(targetCharacter, DamageType.Physical));
 	}
 	
-	/*
-	public bool attackLocked(){
-		skillDurationLeft -= Time.deltaTime;
-		return actionLocked ();
+
+	public void animateAttack(){
+		if(fighterNetworkScript != null) {
+			fighterNetworkScript.onAttackTriggered("activeSkill1");
+		} 
+		else if (sorcererNetworkScript != null) {
+			sorcererNetworkScript.onAttackTriggered("activeSkill1");
+		}		
 	}
-	
-	public bool actionLocked(){
-		if (skillDurationLeft > 0){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	*/
+
 	
 	IEnumerator applyAttackDamage(Character delayedTarget, DamageType type){
 		yield return new WaitForSeconds(skillLength * impactTime);

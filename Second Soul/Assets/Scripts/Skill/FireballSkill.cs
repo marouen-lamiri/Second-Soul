@@ -10,6 +10,7 @@ public class FireballSkill : ProjectileSkill {
 
 	// Use this for initialization
 	void Start () {
+		skillStart ();
 		spawnDistance = 2f;
 		travelDistance = 10f;
 		damageModifier = 2f;
@@ -49,5 +50,10 @@ public class FireballSkill : ProjectileSkill {
 		if(caster.loseEnergy (energyCost)){
 			FireballBehavior fireball = Network.Instantiate(fireballPrefab, caster.transform.position + spawnDistance * caster.transform.forward, caster.transform.rotation, 4)as FireballBehavior;
 		}
+	}
+	public override void animateAttack(){
+		if (sorcererNetworkScript != null) {
+			sorcererNetworkScript.onAttackTriggered("activeSkill1");
+		}	
 	}
 }

@@ -118,7 +118,12 @@ public abstract class Player : Character {
 				targetPosition = new Vector3(hits[0].point.x, hits[0].point.y, hits[0].point.z);
 				targetCharacter = target;//the player's target, which in this case is null
 				if(chasing == true){
-					targetPosition=target.transform.position;
+					if(target != null){//if you have a target
+						targetPosition=target.transform.position;
+					}
+					else{//if you don't have a target, then chasing is on when it should be off
+						chasing = false;
+					}
 				}
 			}
 			if(targetCharacter==this){
@@ -129,28 +134,10 @@ public abstract class Player : Character {
 
 				activeSkill1.setCaster(this);
 				activeSkill1.useSkill(targetPosition, targetCharacter);
-
-				// networking event listener:
-				if(fighterNetworkScript != null) {
-					fighterNetworkScript.onAttackTriggered("activeSkill1");
-				} else if (sorcererNetworkScript != null) {
-					sorcererNetworkScript.onAttackTriggered("activeSkill1");
-				} else {
-					print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
-				}
 			}
 			else if ((Input.GetButtonDown ("activeSkill2") || Input.GetButton ("activeSkill2")) && activeSkill2 != null){
 				activeSkill2.setCaster(this);
 				activeSkill2.useSkill(targetPosition,targetCharacter);
-
-				// networking event listener:
-				if(fighterNetworkScript != null) {
-					fighterNetworkScript.onAttackTriggered("activeSkill2");
-				} else if (sorcererNetworkScript != null) {
-					sorcererNetworkScript.onAttackTriggered("activeSkill2");
-				} else {
-					print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
-				}		
 			}
 		}
 	}
