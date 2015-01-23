@@ -10,24 +10,27 @@ public abstract class RangedSkill : MonoBehaviour, ISkill {
 	protected float castTime;
 	
 	protected float skillLength;
+	
+	protected SorcererNetworkScript sorcererNetworkScript;
 
 	public DamageType damageType;
 	// Use this for initialization
 	void Start () {
 	
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	
 	}
-
-	public virtual void useSkill(Vector3 target, Character character){
-		
+	public void skillStart(){
+		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
 	}
+	public abstract void useSkill (Vector3 target, Character character);
 	
 	public void setCaster(Character caster){
 		this.caster = caster;
 	}
 
+	public abstract void animateAttack();
 }

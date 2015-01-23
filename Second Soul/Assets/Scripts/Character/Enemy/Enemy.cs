@@ -253,11 +253,12 @@ public class Enemy : Character {
 	}
 
 	void OnMouseExit(){
-		if (!target.chasing) {
+		//gonna try to comment out these conditionals because they may be redundant and causing errors
+		//if (!target.chasing) {
 			target.target = null;
-		}
-		if (!sorcerer.chasing) {
+	//	}
+		//if (!sorcerer.chasing) {
 			sorcerer.target = null;
-		}
+		//}
 	}	
 }
