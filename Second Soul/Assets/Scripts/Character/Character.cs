@@ -95,10 +95,11 @@ public abstract class Character : MonoBehaviour {
 	public bool playerEnabled;
 	
 	public Character target;
-	public Vector3 nextPosition;
+	public Vector3 goalPosition;
 
 	public float speed;
 	public bool chasing;
+	public bool moving;
 
 	
 	
@@ -142,6 +143,9 @@ public abstract class Character : MonoBehaviour {
 	protected void characterUpdate(){
 		if (transform.FindChild ("Sphere") != null) {
 			transform.FindChild ("Sphere").transform.position = new Vector3 (transform.position.x, 10.0f, transform.position.z);
+		}
+		if (moving) {
+			moveToPosition();
 		}
 	}
 	public void setPathing(PathFinding path){
@@ -285,38 +289,8 @@ public abstract class Character : MonoBehaviour {
 	
 	public void chaseTarget(Vector3 targetPosition){
 		chasing = true;
-		animateRun();
-		Vector3 destination;
-		pathing.findPath(transform.position, targetPosition);
-		List<Vector3> path = grid.worldFromNode(grid.path);
-		if (path.Count>1) {
-			destination = path[1];
-		} 
-		else {
-			destination = targetPosition;
-			chasing = false;
-		}
-		Quaternion newRotation = Quaternion.LookRotation (destination - transform.position);
-		newRotation.x = 0;
-		newRotation.z = 0;
-		
-		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime*25);
-		controller.SimpleMove (transform.forward * speed);
+		startMoving (targetPosition);
 	}
-	//trying to comment this out
-//	public void attack(){
-//		transform.LookAt (target.transform.position);
-//		animateAttack();
-//		
-//		skillDurationLeft = skillLength;
-//		//Debug.Log (++attackcount);
-//		StartCoroutine(applyAttackDamage(target));
-//	}
-
-	public void clickPosition(Vector3 position){
-		nextPosition = position;
-	}
-	
 	
 	public bool attackLocked(){
 		skillDurationLeft -= Time.deltaTime;
@@ -335,7 +309,64 @@ public abstract class Character : MonoBehaviour {
 	public bool inAttackRange(Vector3 targetPosition){
 		return Vector3.Distance(targetPosition, transform.position) <= attackRange;
 	}
+
+	private void moveToPosition(){
+		//Player moving
+		pathing.findPath(transform.position, goalPosition);
+		List<Vector3> path = grid.worldFromNode(grid.path);
+		Vector3 destination;
+		Quaternion newRotation;
+		if (path.Count > 1) {
+			destination = path [1];
+			newRotation = Quaternion.LookRotation (destination - transform.position);
+		}
+		else {
+			destination = goalPosition;
+			newRotation = Quaternion.LookRotation (goalPosition - transform.position);
+		}
+		
+		newRotation.x = 0;
+		newRotation.z = 0;
+		
+		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime *25 );
+		//transform.rotation = newRotation;
+		controller.SimpleMove (transform.forward * speed);
+		
+		animateRun();
+		
+		// networking: event listener to RPC the run anim
+		//			Fighter fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		CharacterNetworkScript playerNetworkScript = GetComponent<CharacterNetworkScript>();
+		if(playerNetworkScript != null) {
+			playerNetworkScript.onRunTriggered();
+		} 
+		else {
+			print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+		}
+		//Player not moving
+		if(destination == goalPosition) {
+			moving = false;
+			animateIdle();
+			
+			if(playerNetworkScript != null) {
+				playerNetworkScript.onIdleTriggered();
+			} else {
+				print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
+			}
+			
+		}
+	}
+	public void startMoving(Vector3 position){
+		moving = true;
+		goalPosition = position;
+	}
 	
+	public void stopMoving(){
+		moving = false;
+		chasing = false;
+		goalPosition = transform.position;
+	}
+
 	public void dieMethod(){
 		//CancelInvoke("applyAttackDamage");
 		//StopCoroutine(applyAttackDamage(target));

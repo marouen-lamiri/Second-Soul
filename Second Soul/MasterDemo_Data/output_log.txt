@@ -14,7 +14,25 @@ Platform assembly: E:\Documents\GitSourceTree\Second Soul\Second Soul\MasterDemo
 Loading E:\Documents\GitSourceTree\Second Soul\Second Soul\MasterDemo_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
 Platform assembly: E:\Documents\GitSourceTree\Second Soul\Second Soul\MasterDemo_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading E:\Documents\GitSourceTree\Second Soul\Second Soul\MasterDemo_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.169 seconds
+- Completed reload, in  0.075 seconds
 desktop: 2560x1440 59Hz; virtual: 3840x1440 at -1280,0
 <RI> Initializing input.
 <RI> Input initialized.
+Platform assembly: E:\Documents\GitSourceTree\Second Soul\Second Soul\MasterDemo_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: E:\Documents\GitSourceTree\Second Soul\Second Soul\MasterDemo_Data\Managed\System.dll (this message is harmless)
+Failed Network.Instantiate because we are not connected.
+ 
+(Filename:  Line: 2463)
+
+Failed Network.Instantiate because we are not connected.
+ 
+(Filename:  Line: 2463)
+
+Failed Network.Instantiate because we are not connected.
+ 
+(Filename:  Line: 2463)
+
+SERVER: Received Info from Client
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+

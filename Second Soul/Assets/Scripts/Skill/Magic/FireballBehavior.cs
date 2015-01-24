@@ -18,7 +18,7 @@ public class FireballBehavior : ProjectileBehavior {
 //		fireballComponents = this.GetComponentsInChildren<ParticleRenderer>();
 //		fireballComponents [1].GetComponent<ParticleRenderer> ().enabled = false; 
 
-//		timeToDestroy = 0.5f;
+		timeToDestroy = 10f;
 
 		//fix:
 		Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;

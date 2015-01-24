@@ -28,7 +28,7 @@ public class FireballSkill : ProjectileSkill {
 	
 	}
 	
-	public override void useSkill (Vector3 targetPosition, Character targetCharacter)
+	public override void useSkill ()
 	{	
 		if(caster.GetType().IsSubclassOf(typeof(Player))){
 			Player player = (Player)caster;
@@ -44,13 +44,14 @@ public class FireballSkill : ProjectileSkill {
 		animation [caster.attackClip.name].normalizedSpeed = castTime;
 		StartCoroutine(shootFireball());
 	}
-	
+
 	IEnumerator shootFireball(){
 		yield return new WaitForSeconds(skillLength);
 		if(caster.loseEnergy (energyCost)){
 			FireballBehavior fireball = Network.Instantiate(fireballPrefab, caster.transform.position + spawnDistance * caster.transform.forward, caster.transform.rotation, 4)as FireballBehavior;
 		}
 	}
+
 	public override void animateAttack(){
 		if (sorcererNetworkScript != null) {
 			sorcererNetworkScript.onAttackTriggered("activeSkill1");

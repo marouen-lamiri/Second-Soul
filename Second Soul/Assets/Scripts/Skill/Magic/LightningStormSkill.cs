@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LightningStormSkill : MonoBehaviour {
+public class LightningStormSkill : AreaRangedSkill {
 
 	// Use this for initialization
 	void Start () {
@@ -11,5 +11,15 @@ public class LightningStormSkill : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public override void useSkill(){
+		
+	}
+
+	public override void animateAttack(){
+		if (sorcererNetworkScript != null) {
+			sorcererNetworkScript.onAttackTriggered("activeSkill1");
+		}	
 	}
 }
