@@ -12,10 +12,8 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	
 	protected float skillLength;
 	//public float skillDurationLeft;
+	protected Vector3 targetPosition;
 
-	// networking:
-	protected FighterNetworkScript fighterNetworkScript;
-	protected SorcererNetworkScript sorcererNetworkScript;
 	// Use this for initialization
 	void Start () {
 		skillStart ();
@@ -26,16 +24,14 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	
 	}
 
-	public void skillStart(){
-		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
-		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
-	}
+	public abstract void skillStart ();
 
-	public void useSkill(Vector3 target, Character targetCharacter){
-		//impactTime = 0.35f;//use attackspeed]
-		if ((caster.target == null && caster.GetType().IsSubclassOf(typeof(Player))) || !caster.inAttackRange (target)) {
+	public void useSkill(){
+		skillStart ();
+		rayCast ();
+		if ((caster.target == null && caster.GetType().IsSubclassOf(typeof(Player)) && !caster.attackLocked()) || !caster.inAttackRange (caster.target.transform.position)) {
 			Player player = (Player) caster;
-			player.startMoving(target);
+			player.startMoving(targetPosition);
 			if(caster.target!=null){
 				player.chasing=true;
 			}
@@ -46,34 +42,39 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 			player.stopMoving ();
 		}
 
-		if (caster.GetType().IsSubclassOf(typeof(Fighter))|| caster.GetType().IsSubclassOf(typeof(Enemy))) {
-			damage = caster.attackPower;
-			impactTime = 1/caster.attackSpeed;
-		}
-		else {
-			damage = caster.spellPower;
-			impactTime = 1/caster.castSpeed;
-		}
 		skillLength = animation[caster.attackClip.name].length;
-		transform.LookAt (target);
+		transform.LookAt (caster.target.transform.position);
 		caster.animateAttack();
 		animateAttack ();
 		//it'll look wrong because of the animation time, but I want to make attack speed will work. I'm still trying to make it look better
 		//caster.skillDurationLeft = skillLength;
 		caster.skillDurationLeft = impactTime;
 		animation [caster.attackClip.name].normalizedSpeed = 1/impactTime;
-		StartCoroutine(applyAttackDamage(targetCharacter, DamageType.Physical));
+		StartCoroutine(applyAttackDamage(caster.target, DamageType.Physical));
 	}
 	
-
-	public void animateAttack(){
-		if(fighterNetworkScript != null) {
-			fighterNetworkScript.onAttackTriggered("activeSkill1");
-		} 
-		else if (sorcererNetworkScript != null) {
-			sorcererNetworkScript.onAttackTriggered("activeSkill1");
-		}		
+	public void rayCast(){
+		RaycastHit[] hits;
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		hits = Physics.RaycastAll(ray.origin,ray.direction, 1000);
+		for (int i = 0; i < hits.Length; ++i) {
+			if(hits[i].collider.GetType().IsSubclassOf(typeof(Enemy)) || hits[i].collider.GetType() == typeof(Enemy)){
+				targetPosition = hits [1].point;
+				return;
+			}
+		}
+		//this only happens if the for loop above fails to find an Enemy
+		targetPosition = hits[0].point;
+		if(caster.chasing == true){
+			if(caster.target != null){//if you have a target
+				targetPosition=caster.target.transform.position;
+			}
+			else{//if you don't have a target, then chasing is on when it should be off
+				caster.chasing = false;
+			}
+		}
 	}
+	public abstract void animateAttack ();
 
 	
 	IEnumerator applyAttackDamage(Character delayedTarget, DamageType type){

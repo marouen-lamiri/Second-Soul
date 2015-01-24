@@ -23,6 +23,7 @@ public class PathFinding : MonoBehaviour {
 	public void findPath(Vector3 startPos, Vector3 targetPos) {
 		Node startNode = grid.nodeFromWorld(startPos);
 		Node targetNode = grid.nodeFromWorld(targetPos);
+		int limitedTrial = 2000;
 		
 		List<Node> openSet = new List<Node>();
 		HashSet<Node> closedSet = new HashSet<Node>();
@@ -56,8 +57,14 @@ public class PathFinding : MonoBehaviour {
 					neighbour.hCost = GetDistance(neighbour, targetNode);
 					neighbour.parent = currentNode;
 					
-					if (!openSet.Contains(neighbour))
+					if (!openSet.Contains(neighbour)){
 						openSet.Add(neighbour);
+					}
+
+					if(limitedTrial <= 0){
+						return;
+					}
+					limitedTrial--;
 				}
 			}
 		}

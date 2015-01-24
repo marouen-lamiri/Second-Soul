@@ -16,9 +16,9 @@ private var fighter : Transform;
 var enabledFighter = true;
 
 // The distance in the x-z plane to the target
-var distance = 10.0;
+public var distance = 10.0;
 // the height we want the camera to be above the target
-var height = 5.0;
+public var height = 15.0;
 // How much we 
 var heightDamping = 2.0;
 //var rotationDamping = 3.0;
@@ -34,10 +34,6 @@ function Start(){
 }
 function Update(){
 
-//this, i would like in a "Start", but that doesn't seem to work
-//	fighter = GameObject.Find("Fighter").transform;
-//	sorcerer = GameObject.Find("Sorcerer").transform;
-	
 	if(enabledFighter){
 		target = fighter;
 	}

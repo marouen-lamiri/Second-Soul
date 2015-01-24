@@ -137,7 +137,7 @@ public class Enemy : Character {
 		else if(inAttackRange (target.transform.position) && !attackLocked()){
 			//meshAgent.Stop(true);
 			activeSkill1.setCaster(this);
-			activeSkill1.useSkill(target.transform.position,target);
+			activeSkill1.useSkill();
 
 			// networking: event listener to RPC the attack anim
 			if(enemyNetworkScript != null) {

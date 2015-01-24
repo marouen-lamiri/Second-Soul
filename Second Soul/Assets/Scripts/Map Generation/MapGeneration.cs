@@ -129,22 +129,22 @@ public class MapGeneration : MonoBehaviour{
 		Vector3 position = new Vector3 (i*10,0,j*10);
 
 		if (map [i - 1, j] == 0) {
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x-5,0,position.z), Quaternion.Euler (0,180,0), 2)as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,180,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i + 1, j] == 0) {
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z), new Quaternion(), 2)as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x+10,0,position.z+5), new Quaternion(), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i, j - 1] == 0) {
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x,0,position.z-5), Quaternion.Euler (0,90,0), 2)as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z), Quaternion.Euler (0,90,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i, j + 1] == 0) {
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,-90,0), 2)as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z+10), Quaternion.Euler (0,-90,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}

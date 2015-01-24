@@ -42,6 +42,7 @@ public class Fighter : Player {
 		target = null;
 		startPosition = transform.position;
 		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
+		activeSkill2 = (Charge)controller.GetComponent<Charge>();
 		
 		//networking:
 		fighterNetworkScript = (FighterNetworkScript)GameObject.FindObjectOfType (typeof(FighterNetworkScript));
