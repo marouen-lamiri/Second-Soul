@@ -115,15 +115,20 @@ public abstract class Player : Character {
 				targetCharacter = target;//the player's target, which in this case is an enemy
 			}
 			else {
-				targetPosition = new Vector3(hits[0].point.x, hits[0].point.y, hits[0].point.z);
 				targetCharacter = target;//the player's target, which in this case is null
-				if(chasing == true){
-					if(target != null){//if you have a target
-						targetPosition=target.transform.position;
+				targetPosition = new Vector3(0,0,0);
+				try {
+					targetPosition = new Vector3(hits[0].point.x, hits[0].point.y, hits[0].point.z);
+					if(chasing == true){
+						if(target != null){//if you have a target
+							targetPosition=target.transform.position;
+						}
+						else{//if you don't have a target, then chasing is on when it should be off
+							chasing = false;
+						}
 					}
-					else{//if you don't have a target, then chasing is on when it should be off
-						chasing = false;
-					}
+				} catch (System.Exception ex) {
+					
 				}
 			}
 			if(targetCharacter==this){
