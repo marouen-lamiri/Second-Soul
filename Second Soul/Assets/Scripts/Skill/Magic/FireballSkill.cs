@@ -48,7 +48,7 @@ public class FireballSkill : ProjectileSkill {
 	IEnumerator shootFireball(){
 		yield return new WaitForSeconds(skillLength);
 		if(caster.loseEnergy (energyCost)){
-			FireballBehavior fireball = Network.Instantiate(fireballPrefab, caster.transform.position + spawnDistance * caster.transform.forward, caster.transform.rotation, 4)as FireballBehavior;
+			FireballBehavior fireball = Network.Instantiate(fireballPrefab, caster.transform.position + new Vector3(0,1,0) + (spawnDistance * caster.transform.forward), caster.transform.rotation, 4)as FireballBehavior;
 		}
 	}
 
