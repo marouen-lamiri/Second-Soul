@@ -37,7 +37,12 @@ public class FighterNetworkScript : CharacterNetworkScript {
 	// watch onStatsDisplayed:
 	[RPC]
 	public void onStatsDisplayed() {
-		networkView.RPC("toggleStatsDisplayed", RPCMode.Others);
+		try {
+			networkView.RPC ("toggleStatsDisplayed", RPCMode.Others);
+		} catch (Exception ex) {
+			//print (ex);
+			print ("... error is normal if in one player mode.");
+		}
 	}
 	
 	[RPC]
