@@ -23,7 +23,7 @@ public class BasicMelee : BasicAttack {
 	
 	public override void animateAttack(){
 		if (fighterNetworkScript != null) {
-			fighterNetworkScript.onAttackTriggered("activeSkill3");
+			fighterNetworkScript.onAttackTriggered("activeSkill1");
 		}	
 	}
 }

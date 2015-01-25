@@ -24,24 +24,24 @@ public class CycloneBehavior : ProjectileBehavior {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Vector3.Distance(originalSpawn, transform.position) < cycloneSkill.travelDistance && !explode){
-			float oldY = transform.position.y;
-			transform.position += Time.deltaTime * cycloneSkill.speed * transform.forward;
-			transform.position = new Vector3(transform.position.x, oldY, transform.position.z);
+//		if(Vector3.Distance(originalSpawn, transform.position) < cycloneSkill.travelDistance && !explode){
+//			float oldY = transform.position.y;
+//			transform.position += Time.deltaTime * cycloneSkill.speed * transform.forward;
+//			transform.position = new Vector3(transform.position.x, oldY, transform.position.z);
+		if(timeToDestroy>0){
+			timeToDestroy-=Time.deltaTime;
 		}
 		else{
 			StartCoroutine(selfDestruct());
 		}
 	}
 	
-	void OnTriggerEnter(Collider obj){
-		if (!explode) {
-			obj.GetComponent<Enemy> ().takeDamage(cycloneSkill.damage,cycloneSkill.damageType);
-			explode = true;
-		}
-		else {
-			obj.GetComponent<Enemy> ().takeDamage(cycloneSkill.AOEDamage,cycloneSkill.damageType);
-		}
+	void OnParticleCollision(GameObject obj){
+		Debug.Log ("hadouken!");
+	}
+	
+	void OnParticleCollision(Character obj){
+		Debug.Log ("hadouken!222222");
 	}
 	
 	IEnumerator selfDestruct(){

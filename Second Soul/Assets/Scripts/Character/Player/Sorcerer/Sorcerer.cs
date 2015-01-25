@@ -42,7 +42,9 @@ public class Sorcerer : Player {
 		target = null;
 		startPosition = transform.position;
 		activeSkill1 = (BasicRanged)controller.GetComponent<BasicRanged>();
-		activeSkill2 = (IceShardSkill)controller.GetComponent<IceShardSkill>();
+		activeSkill2 = (FireballSkill)controller.GetComponent<FireballSkill>();
+		activeSkill3 = (IceShardSkill)controller.GetComponent<IceShardSkill>();
+		activeSkill4 = (CycloneSkill)controller.GetComponent<CycloneSkill>();
 		Debug.Log ("sorcerer type is: " + this.GetType());
 		activeSkill2.setCaster (this);
 		startPosition = transform.position;

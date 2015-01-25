@@ -98,9 +98,8 @@ public abstract class Character : MonoBehaviour {
 	public Vector3 goalPosition;
 
 	public float speed;
-	public bool chasing;
 	public bool moving;
-
+	public GameObject chasingTarget;
 	
 	
 	public float attackRange;
@@ -119,7 +118,7 @@ public abstract class Character : MonoBehaviour {
 	public AnimationClip runClip;
 	public AnimationClip attackClip;
 	public AnimationClip dieClip;
-
+	private CharacterNetworkScript playerNetworkScript;
 	// Use this for initialization
 
 
@@ -134,6 +133,8 @@ public abstract class Character : MonoBehaviour {
 		//was going to scale to 0.1f, but scaling the map down didn't seem to work
 		sphere.transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
 		sphere.gameObject.layer = LayerMask.NameToLayer ("Minimap");
+
+		playerNetworkScript = GetComponent<CharacterNetworkScript>();
 	}
 	
 	// Update is called once per frame
@@ -286,11 +287,7 @@ public abstract class Character : MonoBehaviour {
 		}
 		return false;
 	}
-	
-	public void chaseTarget(Vector3 targetPosition){
-		chasing = true;
-		startMoving (targetPosition);
-	}
+
 	
 	public bool attackLocked(){
 		skillDurationLeft -= Time.deltaTime;
@@ -335,8 +332,6 @@ public abstract class Character : MonoBehaviour {
 		animateRun();
 		
 		// networking: event listener to RPC the run anim
-		//			Fighter fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		CharacterNetworkScript playerNetworkScript = GetComponent<CharacterNetworkScript>();
 		if(playerNetworkScript != null) {
 			playerNetworkScript.onRunTriggered();
 		} 
@@ -363,7 +358,6 @@ public abstract class Character : MonoBehaviour {
 	
 	public void stopMoving(){
 		moving = false;
-		chasing = false;
 		goalPosition = transform.position;
 	}
 

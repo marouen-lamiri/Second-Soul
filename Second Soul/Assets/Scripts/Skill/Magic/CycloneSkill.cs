@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CycloneSkill : ProjectileSkill {
+public class CycloneSkill : AreaRangedSkill {
 
 	public CycloneBehavior cyclonePrefab;
 
@@ -11,11 +11,11 @@ public class CycloneSkill : ProjectileSkill {
 	// Use this for initialization
 	void Start () {
 		skillStart ();
-		spawnDistance = 2f;
-		travelDistance = 10f;
+		//spawnDistance = 2f;
+		//travelDistance = 10f;
 		damageModifier = 2f;
 		AOEDamageModifier = 0.5f;
-		speed = 15f;
+	//	speed = 15f;
 		damage = caster.spellPower * damageModifier;
 		AOEDamage = (float)damage * AOEDamageModifier;
 		damageType = DamageType.Physical;
@@ -29,6 +29,7 @@ public class CycloneSkill : ProjectileSkill {
 	}
 	
 	public override void useSkill(){
+		rayCast ();
 		if(caster.GetType().IsSubclassOf(typeof(Player))){
 			Player player = (Player)caster;
 			player.stopMoving ();
@@ -47,7 +48,7 @@ public class CycloneSkill : ProjectileSkill {
 	IEnumerator shootCyclone(){
 		yield return new WaitForSeconds(skillLength);
 		if(caster.loseEnergy (energyCost)){
-			CycloneBehavior Cyclone = Network.Instantiate(cyclonePrefab, caster.transform.position + new Vector3(0,1,0) + (spawnDistance * caster.transform.forward), caster.transform.rotation, 4)as CycloneBehavior;
+			CycloneBehavior Cyclone = Network.Instantiate(cyclonePrefab, targetPosition, caster.transform.rotation, 4)as CycloneBehavior;
 		}
 	}
 

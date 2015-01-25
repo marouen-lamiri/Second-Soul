@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IceShardBehaviors : ProjectileBehavior {
+public class IceShardBehavior : ProjectileBehavior {
 
 	bool explode;
 	float timeToDestroy;

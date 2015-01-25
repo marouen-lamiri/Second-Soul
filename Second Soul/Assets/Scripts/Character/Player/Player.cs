@@ -20,6 +20,9 @@ public abstract class Player : Character {
 	
 	public ISkill activeSkill1; // protected
 	public ISkill activeSkill2; // protected
+	public ISkill activeSkill3; // protected
+	public ISkill activeSkill4; // protected
+	public ISkill activeSkill5; // protected
 	
 	public ItemHolder lootItem;
 
@@ -109,6 +112,14 @@ public abstract class Player : Character {
 			else if ((Input.GetButtonDown ("activeSkill2") || Input.GetButton ("activeSkill2")) && activeSkill2 != null){
 				activeSkill2.setCaster(this);
 				activeSkill2.useSkill();
+			}
+			else if ((Input.GetButtonDown ("activeSkill3") || Input.GetButton ("activeSkill3")) && activeSkill3 != null){
+				activeSkill3.setCaster(this);
+				activeSkill3.useSkill();
+			}
+			else if ((Input.GetButtonDown ("activeSkill4") || Input.GetButton ("activeSkill4")) && activeSkill4 != null){
+				activeSkill4.setCaster(this);
+				activeSkill4.useSkill();
 			}
 		}
 	}

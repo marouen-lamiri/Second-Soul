@@ -3,7 +3,7 @@ using System.Collections;
 
 public class IceShardSkill : ProjectileSkill {
 
-	public IceShardBehaviors icePrefab;
+	public IceShardBehavior icePrefab;
 	
 	public float AOEDamage;
 	float AOEDamageModifier;
@@ -18,7 +18,7 @@ public class IceShardSkill : ProjectileSkill {
 		speed = 15f;
 		damage = caster.spellPower * damageModifier;
 		AOEDamage = (float)damage * AOEDamageModifier;
-		damageType = DamageType.Fire;
+		damageType = DamageType.Ice;
 		
 		energyCost = 20;
 	}
@@ -30,6 +30,7 @@ public class IceShardSkill : ProjectileSkill {
 	
 	public override void useSkill ()
 	{	
+		rayCast ();
 		if(caster.GetType().IsSubclassOf(typeof(Player))){
 			Player player = (Player)caster;
 			player.stopMoving ();
@@ -48,7 +49,7 @@ public class IceShardSkill : ProjectileSkill {
 	IEnumerator shootFireball(){
 		yield return new WaitForSeconds(skillLength);
 		if(caster.loseEnergy (energyCost)){
-			FireballBehavior fireball = Network.Instantiate(icePrefab, caster.transform.position + new Vector3(0,1,0) + (spawnDistance * caster.transform.forward), caster.transform.rotation, 4)as FireballBehavior;
+			IceShardBehavior iceShard = Network.Instantiate(icePrefab, caster.transform.position + new Vector3(0,1,0) + (spawnDistance * caster.transform.forward), caster.transform.rotation, 4)as IceShardBehavior;
 		}
 	}
 	

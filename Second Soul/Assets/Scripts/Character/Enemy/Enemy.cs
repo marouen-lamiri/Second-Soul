@@ -129,13 +129,15 @@ public class Enemy : Character {
 			}
 		}
 		else if(!inAttackRange (target.transform.position) && hasAggro){
-			chaseTarget(target.transform.position);
+			chasingTarget = target.gameObject;
+			startMoving(target.transform.position);
 			if(outAggroRange()){
 				loseAggro();
 			}
 		} 
 		else if(inAttackRange (target.transform.position) && !attackLocked()){
 			//meshAgent.Stop(true);
+			stopMoving ();
 			activeSkill1.setCaster(this);
 			activeSkill1.useSkill();
 
