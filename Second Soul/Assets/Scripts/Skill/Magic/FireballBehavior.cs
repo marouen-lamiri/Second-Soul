@@ -12,7 +12,7 @@ public class FireballBehavior : ProjectileBehavior {
 
 	// Use this for initialization
 	void Start () {
-		transform.position = new Vector3 (transform.position.x, 0.5f, transform.position.z);
+		//transform.position = new Vector3 (transform.position.x, 0.5f, transform.position.z);
 		originalSpawn = transform.position;
 		explode = false;
 //		fireballComponents = this.GetComponentsInChildren<ParticleRenderer>();
@@ -39,14 +39,12 @@ public class FireballBehavior : ProjectileBehavior {
 		}
 	}
 
-	void OnTriggerEnter(Collider obj){
-		if (!explode) {
-			obj.GetComponent<Enemy> ().takeDamage(fireballSkill.damage,fireballSkill.damageType);
-			explode = true;
-		}
-		else {
-			obj.GetComponent<Enemy> ().takeDamage(fireballSkill.AOEDamage,fireballSkill.damageType);
-		}
+	void OnParticleCollision(GameObject obj){
+		Debug.Log ("hadouken!");
+	}
+
+	void OnParticleCollision(Character obj){
+		Debug.Log ("hadouken!222222");
 	}
 
 	IEnumerator selfDestruct(){

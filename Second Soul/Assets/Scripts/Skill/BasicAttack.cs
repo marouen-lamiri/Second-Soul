@@ -32,9 +32,6 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 		if ((caster.target == null && caster.GetType().IsSubclassOf(typeof(Player)) && !caster.attackLocked()) || !caster.inAttackRange (caster.target.transform.position)) {
 			Player player = (Player) caster;
 			player.startMoving(targetPosition);
-			if(caster.target!=null){
-				player.chasing=true;
-			}
 			return;
 		}
 		if(caster.GetType().IsSubclassOf(typeof(Player))){
@@ -58,19 +55,20 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		hits = Physics.RaycastAll(ray.origin,ray.direction, 1000);
 		for (int i = 0; i < hits.Length; ++i) {
-			if(hits[i].collider.GetType().IsSubclassOf(typeof(Enemy)) || hits[i].collider.GetType() == typeof(Enemy)){
-				targetPosition = hits [1].point;
+			GameObject hit = hits[i].collider.gameObject;
+			if(hit.GetComponent<Character>()!=null && (hit.GetComponent<Character>().GetType().IsSubclassOf(typeof(Enemy)) || hit.GetComponent<Character>().GetType() == typeof(Enemy))){
+				targetPosition = hit.transform.position;
 				return;
 			}
 		}
 		//this only happens if the for loop above fails to find an Enemy
 		targetPosition = hits[0].point;
-		if(caster.chasing == true){
+		if(caster.moving == true){
 			if(caster.target != null){//if you have a target
 				targetPosition=caster.target.transform.position;
 			}
 			else{//if you don't have a target, then chasing is on when it should be off
-				caster.chasing = false;
+				caster.moving = false;
 			}
 		}
 	}

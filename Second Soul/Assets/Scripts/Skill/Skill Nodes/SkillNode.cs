@@ -4,10 +4,10 @@ using System.Collections;
 [System.Serializable]
 public class SkillNode {
 
-	ISkill skill;
+	public ISkill skill;
 	
-	string skillName;
-	string skillDesc;
+	public string skillName;
+	public string skillDesc;
 	
 	public Rect position;
 	public Texture2D icon;

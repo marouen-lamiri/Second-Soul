@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class TargetedMeleeSkill : MeleeSkill {
 
-	Vector3 targetPosition;
+	protected Character targetCharacter;
 	// Use this for initialization
 	void Start () {
 		skillStart ();
@@ -20,8 +20,9 @@ public abstract class TargetedMeleeSkill : MeleeSkill {
 		hits = Physics.RaycastAll(ray.origin,ray.direction, 1000);
 
 		for (int i = 0; i < hits.Length; ++i) {
-			if(hits[i].collider.GetType().IsSubclassOf(typeof(Enemy)) || hits[i].collider.GetType() == typeof(Enemy)){
-				targetPosition = hits[i].point;
+			GameObject hit = hits[i].collider.gameObject;
+			if(hit.GetComponent<Character>()!=null && (hit.GetComponent<Character>().GetType().IsSubclassOf(typeof(Enemy)) || hit.GetComponent<Character>().GetType() == typeof(Enemy))){
+				targetCharacter = hit.GetComponent<Character>();
 				return;
 			}
 		}

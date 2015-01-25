@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class AreaRangedSkill : RangedSkill {
 
-	Vector3 targetPosition;
+	protected Vector3 targetPosition;
 	// Use this for initialization
 	void Start () {
 		skillStart ();

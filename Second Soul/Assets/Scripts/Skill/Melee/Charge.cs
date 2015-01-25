@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Charge : TargetedMeleeSkill {
 
-	private Character targetCharacter;
 	private float range;
 	private float originalSpeed;
 	private float chargeSpeed;
@@ -31,11 +30,14 @@ public class Charge : TargetedMeleeSkill {
 	// Update is called once per frame
 	void Update () {
 		//I do not believe this to be perfect. The only alternative I can think of is a complete rework of the stats system.
-		if (charging && !caster.moving) {
+		if (charging && caster.inAttackRange(targetCharacter.transform.position)) {
+			caster.stopMoving();
 			caster.speed = originalSpeed;
 			charging=false;
 			targetCharacter.takeDamage(damage,DamageType.Physical);
+			caster.chasingTarget = null;
 			caster.skillDurationLeft=0;
+			animateAttack();
 		}
 	}
 
@@ -44,13 +46,17 @@ public class Charge : TargetedMeleeSkill {
 			skillStart ();
 			caster.skillDurationLeft = 5;
 			caster.speed = chargeSpeed;
-			caster.chaseTarget (caster.target.transform.position);
+			caster.chasingTarget = caster.target.gameObject;
+			caster.goalPosition = targetCharacter.transform.position;
+			caster.startMoving(caster.goalPosition);
 		}	
 	}
 
 	public override void animateAttack(){
 		if (fighterNetworkScript != null) {
-			fighterNetworkScript.onAttackTriggered("activeSkill3");
+//			this would be skill3 but we have a limited set of animations available atm
+			//fighterNetworkScript.onAttackTriggered("activeSkill3");
+			fighterNetworkScript.onAttackTriggered("activeSkill1");
 		}	
 	}
 }

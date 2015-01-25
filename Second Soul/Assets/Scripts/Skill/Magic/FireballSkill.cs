@@ -30,6 +30,7 @@ public class FireballSkill : ProjectileSkill {
 	
 	public override void useSkill ()
 	{	
+		rayCast ();
 		if(caster.GetType().IsSubclassOf(typeof(Player))){
 			Player player = (Player)caster;
 			player.stopMoving ();
@@ -38,7 +39,7 @@ public class FireballSkill : ProjectileSkill {
 		skillLength = 1/castTime;
 		damage = caster.spellPower * damageModifier;
 		
-		transform.LookAt (targetPosition);
+		caster.transform.LookAt (targetPosition);
 		caster.animateAttack();
 		caster.skillDurationLeft = skillLength;
 		animation [caster.attackClip.name].normalizedSpeed = castTime;
