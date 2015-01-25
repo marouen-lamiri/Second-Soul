@@ -42,7 +42,8 @@ public class Sorcerer : Player {
 		target = null;
 		startPosition = transform.position;
 		activeSkill1 = (BasicRanged)controller.GetComponent<BasicRanged>();
-		activeSkill2 = (FireballSkill)controller.GetComponent<FireballSkill>();
+		activeSkill2 = (IceShardSkill)controller.GetComponent<IceShardSkill>();
+		Debug.Log ("sorcerer type is: " + this.GetType());
 		activeSkill2.setCaster (this);
 		startPosition = transform.position;
 		//networking:
