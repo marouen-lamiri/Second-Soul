@@ -39,7 +39,12 @@ public abstract class CharacterNetworkScript : MonoBehaviour {
 	// watch pausing game:
 	[RPC]
 	public void onPauseGame() {
-		networkView.RPC("togglePauseGame", RPCMode.Others);
+		try {
+			networkView.RPC ("togglePauseGame", RPCMode.Others);
+		} catch (Exception ex) {
+			//print (ex);
+			print ("... error is normal if in one player mode.");
+		}
 	}
 	
 	[RPC]
@@ -52,7 +57,12 @@ public abstract class CharacterNetworkScript : MonoBehaviour {
 	// watch attack movement:
 	[RPC]
 	public void onAttackTriggered(string attackName) {
-		networkView.RPC ("attackWithActiveSkill", RPCMode.Others, attackName + "");
+		try {
+			networkView.RPC ("attackWithActiveSkill", RPCMode.Others, attackName + "");
+		} catch (Exception ex) {
+			//print (ex);
+			print ("... error is normal if in one player mode.");
+		}
 	}
 	[RPC]
 	void attackWithActiveSkill(string attackName) {
@@ -68,7 +78,12 @@ public abstract class CharacterNetworkScript : MonoBehaviour {
 	// watch player health:
 	[RPC]
 	protected void onHealthPointsChanged(double healthValue) {
-		networkView.RPC ("changeHealthPoints", RPCMode.Others, healthValue + "");
+		try {
+			networkView.RPC ("changeHealthPoints", RPCMode.Others, healthValue + "");
+		} catch (Exception ex) {
+			//print (ex);
+			print ("... error is normal if in one player mode.");
+		}
 	}
 	
 	[RPC]
@@ -79,7 +94,12 @@ public abstract class CharacterNetworkScript : MonoBehaviour {
 	// watch player energy:
 	[RPC]
 	protected void onEnergyPointsChanged(double energyValue) {
-		networkView.RPC ("changeEnergyPoints", RPCMode.Others, energyValue + "");
+		try {
+			networkView.RPC ("changeEnergyPoints", RPCMode.Others, energyValue + "");
+		} catch (Exception ex) {
+			//print (ex);
+			print ("... error is normal if in one player mode.");
+		}
 	}
 	
 	[RPC]
@@ -90,7 +110,12 @@ public abstract class CharacterNetworkScript : MonoBehaviour {
 	// watch player's idle anim:
 	[RPC]
 	public void onIdleTriggered() {
-		networkView.RPC ("triggerIdleAnim", RPCMode.Others);
+		try {
+			networkView.RPC ("triggerIdleAnim", RPCMode.Others);
+		} catch (Exception ex) {
+			//print (ex);
+			print ("... error is normal if in one player mode.");
+		}
 	}
 	[RPC]
 	void triggerIdleAnim() {
@@ -100,7 +125,12 @@ public abstract class CharacterNetworkScript : MonoBehaviour {
 	// watch player's run anim:
 	[RPC]
 	public void onRunTriggered() {
-		networkView.RPC ("triggerRunAnim", RPCMode.Others);
+		try {
+			networkView.RPC ("triggerRunAnim", RPCMode.Others);
+		} catch (Exception ex) {
+			//print (ex);
+			print ("... error is normal if in one player mode.");
+		}
 	}
 	[RPC]
 	void triggerRunAnim() {
