@@ -14,6 +14,9 @@ public abstract class Player : Character {
 	public int pickUpRange;
 
 	public Inventory inventory;
+	public SkillTree skillTree;
+	
+	public List<ISkill> unlockedSkills;
 	
 	public ISkill activeSkill1; // protected
 	public ISkill activeSkill2; // protected

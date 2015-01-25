@@ -71,7 +71,7 @@ public class ClientNetwork : MonoBehaviour {
 
 		// generate the map only after the players have been created (because they are needed for some reason for the map generation code:
 		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
-		if(serverAndClientAreBothConnected && Application.loadedLevelName == "NetworkStartMenu" && bothPlayerAndSorcererWereFound) {	// && Network.isServer
+		if(serverAndClientAreBothConnected && Application.loadedLevelName == "StartScreen" && bothPlayerAndSorcererWereFound) {	// && Network.isServer
 
 			if(Network.isServer) {
 				framesToWait++;
@@ -88,7 +88,7 @@ public class ClientNetwork : MonoBehaviour {
 
 
 		//===================
-		if (Application.loadedLevelName == "NetworkStartMenu" && !sorcererWasCreated) { //Network.isClient && 
+		if (Application.loadedLevelName == "StartScreen" && !sorcererWasCreated) { //Network.isClient && 
 
 			//  --> moved out of if, because we still want the server to be able to determine the sorcerer's type for 1 player mode.
 			if(classChooser.sorcererSelectionStrings[classChooser.sorcererSelection]=="Mage"){
@@ -115,7 +115,7 @@ public class ClientNetwork : MonoBehaviour {
 
 		// ------------------
 
-		if(Application.loadedLevelName == "NetworkStartMenu" && !playerWasCreated) { //Network.isServer && 
+		if(Application.loadedLevelName == "StartScreen" && !playerWasCreated) { //Network.isServer && 
 
 			// --> moved out of if, we want the server to be able to set the type of fighter even before connecting as a server.
 			if(classChooser.fighterSelectionStrings[classChooser.fighterSelection]=="Berserker"){
@@ -142,7 +142,7 @@ public class ClientNetwork : MonoBehaviour {
 		}
 
 		// =======================
-		if(Application.loadedLevelName == "NetworkStartMenu") { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
+		if(Application.loadedLevelName == "StartScreen") { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
 
 			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
 			Fighter fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));	

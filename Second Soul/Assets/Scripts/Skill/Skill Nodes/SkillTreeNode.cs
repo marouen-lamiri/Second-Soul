@@ -15,6 +15,8 @@ public class SkillTreeNode : SkillNode {
 	: base(s, name, desc, pos, icon){
 		this.unlocked = false;
 		this.available = false;
+		this.parents = new List<SkillTreeNode>();
+		this.children = new List<SkillTreeNode>();
 	}
 	
 	public void makeChildrenAvailable(){	
@@ -29,6 +31,18 @@ public class SkillTreeNode : SkillNode {
 				child.available = true;
 			}
 		}
+	}
+	
+	public void addParent(SkillTreeNode s){
+		parents.Add(s);
+	}
+	
+	public void addChild(SkillTreeNode s){
+		children.Add(s);
+	}
+	
+	public ISkill getSkill(){
+		return skill;
 	}
 
 }
