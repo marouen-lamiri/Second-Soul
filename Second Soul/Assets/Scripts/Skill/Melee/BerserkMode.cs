@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Focus : MeleeSkill {
+public class BerserkMode : TargetedMeleeSkill {
 
 	bool duration = false;
 	bool casting = true;
-	int addSpeed;
-	public GameObject spdBuffPrefab;
-	GameObject spdBuff;
+	int addAtt;
+	public GameObject attBuffPrefab;
+	GameObject attBuff;
 	
 	// Use this for initialization
 	void Start () {
@@ -18,11 +18,11 @@ public class Focus : MeleeSkill {
 	// Update is called once per frame
 	void Update () {
 		checkTimeSpent();
-		if(spdBuff != null){
-			spdBuff.transform.position = caster.transform.position + new Vector3 (0,5,0);
+		if(attBuff != null){
+			attBuff.transform.position = caster.transform.position + new Vector3 (0,5,0);
 		}
-		else if(spdBuff == null && duration == false){
-			caster.speed = caster.speed - addSpeed;
+		else if(attBuff == null && duration == false){
+			caster.attackPower = caster.attackPower - addAtt;
 			duration = true;
 		}
 	}
@@ -30,23 +30,23 @@ public class Focus : MeleeSkill {
 	public override void useSkill(){
 		if (casting == true && caster.loseEnergy(energyCost)) {
 			skillStart ();
-			spdBuff = Network.Instantiate (spdBuffPrefab, caster.transform.position + new Vector3 (0,5,0), new Quaternion(), 4) as GameObject;
-			addSpeed = (int) (0.15 * caster.speed) +1;
-			//Debug.Log ("Speed increased by: " + addSpeed);
-			caster.speed = addSpeed + caster.speed;
-			//Debug.Log ("Speed is: " + caster.attackPower);
+			attBuff = Network.Instantiate (attBuffPrefab, caster.transform.position + new Vector3 (0,5,0), new Quaternion(), 4) as GameObject;
+			addAtt = (int) (0.15 * caster.attackPower) +1;
+			Debug.Log ("Armor increased by: " + addAtt);
+			caster.attackPower = addAtt + caster.attackPower;
+			Debug.Log ("Armor is: " + caster.attackPower);
 			duration = false;
 			casting = false;
 		}
 	}
 	
 	void checkTimeSpent(){
-		if(spdBuff != null){
-			if(spdBuff.activeInHierarchy == true){
+		if(attBuff != null){
+			if(attBuff.activeInHierarchy == true){
 				duration = false;
 			}
 			else{
-				spdBuff = null;
+				attBuff = null;
 				duration = true;
 				casting = true;
 			}
