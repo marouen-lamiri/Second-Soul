@@ -45,8 +45,14 @@ public class Sorcerer : Player {
 		activeSkill2 = (FireballSkill)controller.GetComponent<FireballSkill>();
 		activeSkill3 = (IceShardSkill)controller.GetComponent<IceShardSkill>();
 		activeSkill4 = (CycloneSkill)controller.GetComponent<CycloneSkill>();
-		Debug.Log ("sorcerer type is: " + this.GetType());
+		activeSkill5 = (LightningStrike)controller.GetComponent<LightningStrike>();
+		activeSkill6 = (Heal)controller.GetComponent<Heal>();
+		activeSkill1.setCaster (this);
 		activeSkill2.setCaster (this);
+		activeSkill3.setCaster (this);
+		activeSkill4.setCaster (this);
+		activeSkill5.setCaster (this);
+		activeSkill6.setCaster (this);
 		startPosition = transform.position;
 		//networking:
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
@@ -82,15 +88,28 @@ public class Sorcerer : Player {
 			return false;
 		}
 	}
+
 	public override double getDamage(){
+		if (criticalHitCheck ()) {
+			return spellPower*spellCriticalDamage;
+		}
+		return spellPower;
+	}
+
+	public override double getDamageCanMiss(){
 		if(!hitCheck()){
 			return 0;
 		}
 		if (criticalHitCheck ()) {
-			return damage*attackPower*spellCriticalDamage;
+			return spellPower*spellCriticalDamage;
 		}
-		return damage * spellPower;
+		return spellPower;
 	}
+
+	public Fighter getFighter(){
+		return fighter;
+	}
+
 	public override void levelUp(){
 		Debug.Log("leveled up");
 		

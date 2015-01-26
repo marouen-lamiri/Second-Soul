@@ -68,6 +68,24 @@ public class Enemy : Character {
 
 
 	}
+
+	public override double getDamage(){
+		if (criticalHitCheck ()) {
+			return attackPower*criticalDamage;
+		}
+		return attackPower;
+	}
+
+	public override double getDamageCanMiss(){
+		if(!hitCheck()){
+			return 0;
+		}
+		if (criticalHitCheck ()) {
+			return attackPower*criticalDamage;
+		}
+		return attackPower;
+	}
+
 	protected virtual void initializePrimaryStats(){
 		strengthPerLvl = 1;
 		dexterityPerLvl = 1;

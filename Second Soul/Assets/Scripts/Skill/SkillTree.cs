@@ -67,7 +67,7 @@ public class SkillTree : MonoBehaviour {
 		                                    nodePositions[0], FireballModel.getImage());
 		SkillTreeNode ls = addSkillTreeNode(new LightningStormSkill(), "Lighting Storm", "...", 
 		                                    nodePositions[1], LightingModel.getImage());
-		SkillTreeNode he = addSkillTreeNode(new HealSkill(), "Heal", "...", 
+		SkillTreeNode he = addSkillTreeNode(new Heal(), "Heal", "...", 
 		                                    nodePositions[2], HealModel.getImage());
 		// order: (parent, child)
 		setSkillTreeNodeLinks(fb, ls);

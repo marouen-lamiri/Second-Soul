@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class RangedSkill : MonoBehaviour, ISkill {
 
-	protected Character caster;
+	public Character caster;
 	public double damage;
 	public float damageModifier;
 	protected float energyCost;

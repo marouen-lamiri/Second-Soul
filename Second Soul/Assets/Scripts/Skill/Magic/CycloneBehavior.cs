@@ -1,20 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CycloneBehavior : ProjectileBehavior {
+public class CycloneBehavior : ParticleBehavior {
 
-	bool explode;
 	float timeToDestroy;
 	
 	public CycloneSkill cycloneSkill;
 	public Vector3 originalSpawn;
-	Component[] cycloneComponents;
 	
 	// Use this for initialization
 	void Start () {
 		transform.position = new Vector3 (transform.position.x, 0.5f, transform.position.z);
 		originalSpawn = transform.position;
-		explode = false; 
 		
 		timeToDestroy = 10f;
 
@@ -24,24 +21,30 @@ public class CycloneBehavior : ProjectileBehavior {
 	
 	// Update is called once per frame
 	void Update () {
-//		if(Vector3.Distance(originalSpawn, transform.position) < cycloneSkill.travelDistance && !explode){
-//			float oldY = transform.position.y;
-//			transform.position += Time.deltaTime * cycloneSkill.speed * transform.forward;
-//			transform.position = new Vector3(transform.position.x, oldY, transform.position.z);
 		if(timeToDestroy>0){
 			timeToDestroy-=Time.deltaTime;
 		}
 		else{
-			StartCoroutine(selfDestruct());
+			//StartCoroutine(selfDestruct());
 		}
 	}
 	
 	void OnParticleCollision(GameObject obj){
-		Debug.Log ("hadouken!");
-	}
-	
-	void OnParticleCollision(Character obj){
-		Debug.Log ("hadouken!222222");
+		Character character = obj.GetComponent<Character> ();
+		if (character == null) {
+			return;
+		}
+		//		this means that if the caster is a player, and the skill hit an enemy
+		if (caster.gameObject.GetComponent<Character> ().GetType ().IsSubclassOf (typeof(Player))){
+			if( !character.GetType ().IsSubclassOf (typeof(Player))){
+				character.takeDamage (skill.damage, skill.damageType);
+			}
+		} 
+		else {
+			if( character.GetType ().IsSubclassOf (typeof(Player))){
+				character.takeDamage (skill.damage, skill.damageType);
+			}
+		}
 	}
 	
 	IEnumerator selfDestruct(){

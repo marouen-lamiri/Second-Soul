@@ -12,7 +12,6 @@ public class BasicMelee : BasicAttack {
 	
 	public override void skillStart(){
 		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
-		damage = caster.attackPower;
 		impactTime = 1/caster.attackSpeed;
 	}
 	

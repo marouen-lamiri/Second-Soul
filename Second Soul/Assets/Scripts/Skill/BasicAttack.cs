@@ -4,8 +4,6 @@ using System.Collections;
 public abstract class BasicAttack : MonoBehaviour, ISkill {
 
 	protected Character caster; // protected
-	//public Character target;
-	protected float damage;
 	
 	protected float impactTime;
 	//public bool impacted;
@@ -60,9 +58,12 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 				targetPosition = hit.transform.position;
 				return;
 			}
+			else if(hit.CompareTag("Floor")){
+				targetPosition = hits[i].point;
+			}
 		}
 		//this only happens if the for loop above fails to find an Enemy
-		targetPosition = hits[0].point;
+
 		if(caster.moving == true){
 			if(caster.target != null){//if you have a target
 				targetPosition=caster.target.transform.position;
@@ -78,7 +79,7 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	IEnumerator applyAttackDamage(Character delayedTarget, DamageType type){
 		yield return new WaitForSeconds(skillLength * impactTime);
 		if (delayedTarget != null){
-			delayedTarget.takeDamage(damage,type);
+			delayedTarget.takeDamage(caster.getDamageCanMiss(),type);
 		}
 	}
 	

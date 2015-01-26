@@ -4,20 +4,17 @@ using System.Collections;
 public class IceShardSkill : ProjectileSkill {
 
 	public IceShardBehavior icePrefab;
-	
-	public float AOEDamage;
-	float AOEDamageModifier;
+
 	
 	// Use this for initialization
 	void Start () {
 		skillStart ();
+		//I do this because caster is not being set for some reason
+		caster = gameObject.GetComponent<Character> ();
 		spawnDistance = 2f;
 		travelDistance = 10f;
-		damageModifier = 2f;
-		AOEDamageModifier = 0.5f;
-		speed = 15f;
-		damage = caster.spellPower * damageModifier;
-		AOEDamage = (float)damage * AOEDamageModifier;
+		damageModifier = 4f;
+		speed = 20f;
 		damageType = DamageType.Ice;
 		
 		energyCost = 20;
@@ -37,19 +34,20 @@ public class IceShardSkill : ProjectileSkill {
 		}
 		castTime = caster.castSpeed;
 		skillLength = 1/castTime;
-		damage = caster.spellPower * damageModifier;
+		damage = caster.getDamage() * damageModifier;
 		
 		transform.LookAt (targetPosition);
 		caster.animateAttack();
 		caster.skillDurationLeft = skillLength;
 		animation [caster.attackClip.name].normalizedSpeed = castTime;
-		StartCoroutine(shootFireball());
+		StartCoroutine(shootIceShard());
 	}
 	
-	IEnumerator shootFireball(){
+	IEnumerator shootIceShard(){
 		yield return new WaitForSeconds(skillLength);
 		if(caster.loseEnergy (energyCost)){
 			IceShardBehavior iceShard = Network.Instantiate(icePrefab, caster.transform.position + new Vector3(0,1,0) + (spawnDistance * caster.transform.forward), caster.transform.rotation, 4)as IceShardBehavior;
+			iceShard.startBehaviour (caster, this);
 		}
 	}
 	

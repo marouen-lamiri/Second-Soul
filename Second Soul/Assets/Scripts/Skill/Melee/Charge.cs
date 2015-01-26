@@ -7,6 +7,7 @@ public class Charge : TargetedMeleeSkill {
 	private float originalSpeed;
 	private float chargeSpeed;
 	private bool charging;
+	private float damageModifier;
 
 	// Use this for initialization
 	void Start () {
@@ -21,15 +22,16 @@ public class Charge : TargetedMeleeSkill {
 	public override void skillStart(){
 		base.skillStart ();
 		targetCharacter = caster.target;
-		damage = caster.attackPower * 1.5;
-		range = caster.attackRange * 15;
+		damageModifier = 2f;
+		range = caster.attackRange * 5;
 		originalSpeed = caster.speed;
 		chargeSpeed = originalSpeed * 5;
+		energyCost = 10;
 		charging = true;
 	}
 	// Update is called once per frame
 	void Update () {
-		//I do not believe this to be perfect. The only alternative I can think of is a complete rework of the stats system.
+		damage = caster.getDamage() * damageModifier;
 		if (charging && caster.inAttackRange(targetCharacter.transform.position)) {
 			caster.stopMoving();
 			caster.speed = originalSpeed;
@@ -42,7 +44,7 @@ public class Charge : TargetedMeleeSkill {
 	}
 
 	public override void useSkill(){
-		if (caster.target != null) {
+		if (caster.target != null && caster.loseEnergy(energyCost)) {
 			skillStart ();
 			caster.skillDurationLeft = 5;
 			caster.speed = chargeSpeed;

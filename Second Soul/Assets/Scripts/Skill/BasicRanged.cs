@@ -12,7 +12,6 @@ public class BasicRanged : BasicAttack {
 	
 	public override void skillStart(){
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
-		damage = caster.spellPower;
 		impactTime = 1/caster.castSpeed;
 	}
 	

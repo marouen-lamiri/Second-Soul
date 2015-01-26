@@ -135,6 +135,8 @@ public abstract class Character : MonoBehaviour {
 		sphere.gameObject.layer = LayerMask.NameToLayer ("Minimap");
 
 		playerNetworkScript = GetComponent<CharacterNetworkScript>();
+
+		accuracy = 0.8f;
 	}
 	
 	// Update is called once per frame
@@ -230,6 +232,10 @@ public abstract class Character : MonoBehaviour {
 	}
 	//to be overriden
 	public virtual double getDamage (){
+		return -1;
+	}
+
+	public virtual double getDamageCanMiss (){
 		return -1;
 	}
 

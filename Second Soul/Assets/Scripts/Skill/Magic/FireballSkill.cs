@@ -37,7 +37,7 @@ public class FireballSkill : ProjectileSkill {
 		}
 		castTime = caster.castSpeed;
 		skillLength = 1/castTime;
-		damage = caster.spellPower * damageModifier;
+		damage = caster.getDamage() * damageModifier;
 		
 		caster.transform.LookAt (targetPosition);
 		caster.animateAttack();
@@ -50,6 +50,7 @@ public class FireballSkill : ProjectileSkill {
 		yield return new WaitForSeconds(skillLength);
 		if(caster.loseEnergy (energyCost)){
 			FireballBehavior fireball = Network.Instantiate(fireballPrefab, caster.transform.position + new Vector3(0,1,0) + (spawnDistance * caster.transform.forward), caster.transform.rotation, 4)as FireballBehavior;
+			fireball.startBehaviour (caster, this);
 		}
 	}
 

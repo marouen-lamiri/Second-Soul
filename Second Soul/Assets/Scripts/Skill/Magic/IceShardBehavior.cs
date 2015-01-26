@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IceShardBehavior : ProjectileBehavior {
+public class IceShardBehavior : ParticleBehavior {
 
 	bool explode;
 	float timeToDestroy;
@@ -15,8 +15,6 @@ public class IceShardBehavior : ProjectileBehavior {
 		transform.position = new Vector3 (transform.position.x, 0.5f, transform.position.z);
 		originalSpawn = transform.position;
 		explode = false;
-		//		fireballComponents = this.GetComponentsInChildren<ParticleRenderer>();
-		//		fireballComponents [1].GetComponent<ParticleRenderer> ().enabled = false; 
 		
 		timeToDestroy = 10f;
 		
@@ -27,6 +25,9 @@ public class IceShardBehavior : ProjectileBehavior {
 	
 	// Update is called once per frame
 	void Update () {
+		if (caster == null) {
+			return;
+		}
 		if(Vector3.Distance(originalSpawn, transform.position) < iceSkill.travelDistance && !explode){
 			float oldY = transform.position.y;
 			transform.position += Time.deltaTime * iceSkill.speed * transform.forward;
@@ -39,13 +40,21 @@ public class IceShardBehavior : ProjectileBehavior {
 		}
 	}
 	
-	void OnTriggerEnter(Collider obj){
-		if (!explode) {
-			obj.GetComponent<Enemy> ().takeDamage(iceSkill.damage,iceSkill.damageType);
-			explode = true;
+	void OnParticleCollision(GameObject obj){
+		Character character = obj.GetComponent<Character> ();
+		if (character == null) {
+			return;
 		}
+		//		this means that if the caster is a player, and the skill hit an enemy
+		if (caster.gameObject.GetComponent<Character> ().GetType ().IsSubclassOf (typeof(Player))){
+			if( !character.GetType ().IsSubclassOf (typeof(Player))){
+				character.takeDamage (skill.damage, skill.damageType);
+			}
+		} 
 		else {
-			obj.GetComponent<Enemy> ().takeDamage(iceSkill.AOEDamage,iceSkill.damageType);
+			if( character.GetType ().IsSubclassOf (typeof(Player))){
+				character.takeDamage (skill.damage, skill.damageType);
+			}
 		}
 	}
 	

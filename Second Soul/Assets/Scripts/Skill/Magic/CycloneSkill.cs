@@ -5,21 +5,12 @@ public class CycloneSkill : AreaRangedSkill {
 
 	public CycloneBehavior cyclonePrefab;
 
-	public float AOEDamage;
-	float AOEDamageModifier;
 
 	// Use this for initialization
 	void Start () {
 		skillStart ();
-		//spawnDistance = 2f;
-		//travelDistance = 10f;
 		damageModifier = 2f;
-		AOEDamageModifier = 0.5f;
-	//	speed = 15f;
-		damage = caster.spellPower * damageModifier;
-		AOEDamage = (float)damage * AOEDamageModifier;
 		damageType = DamageType.Physical;
-		
 		energyCost = 20;
 	}
 	
@@ -36,7 +27,7 @@ public class CycloneSkill : AreaRangedSkill {
 		}
 		castTime = caster.castSpeed;
 		skillLength = 1/castTime;
-		damage = caster.spellPower * damageModifier;
+		damage = caster.getDamage() * damageModifier;
 		
 		transform.LookAt (targetPosition);
 		caster.animateAttack();
@@ -48,7 +39,8 @@ public class CycloneSkill : AreaRangedSkill {
 	IEnumerator shootCyclone(){
 		yield return new WaitForSeconds(skillLength);
 		if(caster.loseEnergy (energyCost)){
-			CycloneBehavior Cyclone = Network.Instantiate(cyclonePrefab, targetPosition, caster.transform.rotation, 4)as CycloneBehavior;
+			CycloneBehavior cyclone = Network.Instantiate(cyclonePrefab, targetPosition, caster.transform.rotation, 4)as CycloneBehavior;
+			cyclone.startBehaviour(caster,this);
 		}
 	}
 
