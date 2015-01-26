@@ -97,11 +97,11 @@ public class ClientNetwork : MonoBehaviour {
 			}
 			else if(classChooser.sorcererSelectionStrings[classChooser.sorcererSelection]=="Druid"){
 				//				sorcerer = (Druid) Instantiate(classChooser.druid,Vector3.zero,Quaternion.identity);
-				sorcererPrefab = classChooser.mage;
+				sorcererPrefab = classChooser.druid;
 			}
 			else/*(sorcererSelectionStrings[sorcererSelection]=="Priest")*/{
 				//				sorcerer = (Priest) Instantiate(classChooser.priest,Vector3.zero,Quaternion.identity);
-				sorcererPrefab = classChooser.mage;
+				sorcererPrefab = classChooser.priest;
 			}
 
 			if(Network.isClient){
@@ -199,33 +199,7 @@ public class ClientNetwork : MonoBehaviour {
 	void OnGUI() {
 		
 		
-		// button to play one player mode:
-		if (Network.peerType == NetworkPeerType.Disconnected) {
-			if (GUI.Button (new Rect (Screen.width / 2 - 200, Screen.height / 2 + 50, 150, 50), "1 Player Mode")) {
 
-				// connect only the server, no client:
-				Network.InitializeServer (10, port, false);
-				displayChat = true;
-
-				//network instantiate both the fighter and sorcerer:
-				transform.position = new Vector3(-2,0,0); // put the fighter to the left under the fighter buttons
-				Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
-				playerWasCreated = true;
-
-				// always create the sorcerer before the fighter.
-				transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
-				Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-				sorcererWasCreated = true;
-
-				lines = Network.Instantiate (linesPrefab,transform.position,transform.rotation,7)as GameObject;
-
-
-				// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
-				NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
-
-
-			}
-		}
 
 		// button to connect as server:
 		if (Network.peerType == NetworkPeerType.Disconnected) {
@@ -312,6 +286,34 @@ public class ClientNetwork : MonoBehaviour {
 				
 			}
 
+		}
+
+		// button to play one player mode:
+		if (Network.peerType == NetworkPeerType.Disconnected) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 200, Screen.height / 2 + 50, 150, 50), "1 Player Mode")) {
+				
+				// connect only the server, no client:
+				Network.InitializeServer (10, port, false);
+				displayChat = true;
+				
+				//network instantiate both the fighter and sorcerer:
+				transform.position = new Vector3(-2,0,0); // put the fighter to the left under the fighter buttons
+				Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+				playerWasCreated = true;
+				
+				// always create the sorcerer before the fighter.
+				transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
+				Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+				sorcererWasCreated = true;
+				
+				lines = Network.Instantiate (linesPrefab,transform.position,transform.rotation,7)as GameObject;
+				
+				
+				// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
+				NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
+				
+				
+			}
 		}
 
 		
