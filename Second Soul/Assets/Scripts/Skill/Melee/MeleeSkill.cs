@@ -9,7 +9,9 @@ public abstract class MeleeSkill : MonoBehaviour, ISkill {
 	public float damageModifier;
 	protected float energyCost;	
 	protected float skillLength;
+	protected float castTime;
 	protected FighterNetworkScript fighterNetworkScript;
+	protected DamageType damageType;
 	// Use this for initialization
 	void Start () {
 		skillStart ();

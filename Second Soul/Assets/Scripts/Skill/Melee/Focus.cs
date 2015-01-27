@@ -5,7 +5,7 @@ public class Focus : MeleeSkill {
 
 	bool duration = false;
 	bool casting = true;
-	int addSpeed;
+	float addSpeed;
 	public GameObject spdBuffPrefab;
 	GameObject spdBuff;
 	
@@ -22,7 +22,7 @@ public class Focus : MeleeSkill {
 			spdBuff.transform.position = caster.transform.position + new Vector3 (0,5,0);
 		}
 		else if(spdBuff == null && duration == false){
-			caster.speed = caster.speed - addSpeed;
+			caster.attackSpeed = caster.attackSpeed - addSpeed;
 			duration = true;
 		}
 	}
@@ -31,9 +31,9 @@ public class Focus : MeleeSkill {
 		if (casting == true && caster.loseEnergy(energyCost)) {
 			skillStart ();
 			spdBuff = Network.Instantiate (spdBuffPrefab, caster.transform.position + new Vector3 (0,5,0), new Quaternion(), 4) as GameObject;
-			addSpeed = (int) (0.15 * caster.speed) +1;
+			addSpeed = (0.15f * caster.attackSpeed);
 			//Debug.Log ("Speed increased by: " + addSpeed);
-			caster.speed = addSpeed + caster.speed;
+			caster.attackSpeed = addSpeed + caster.attackSpeed;
 			//Debug.Log ("Speed is: " + caster.attackPower);
 			duration = false;
 			casting = false;

@@ -17,7 +17,6 @@ public class SubParticleCollisionDetection : MonoBehaviour {
 	}
 
 	void OnParticleCollision(GameObject obj){
-		Debug.Log ("HASDAWFDAWDFSFKJAASODFNJASOCASJCAOCVASCAKLEN");
 		Character character = obj.GetComponent<Character> ();
 		if (character == null) {
 			return;

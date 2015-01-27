@@ -46,11 +46,13 @@ public class Fighter : Player {
 		activeSkill3 = (KnightsHonour)controller.GetComponent<KnightsHonour>();
 		activeSkill4 = (BerserkMode)controller.GetComponent<BerserkMode>();
 		activeSkill5 = (Focus)controller.GetComponent<Focus>();
+		activeSkill6 = (SpinAttack)controller.GetComponent<SpinAttack>();
 		activeSkill1.setCaster (this);
 		activeSkill2.setCaster (this);
 		activeSkill3.setCaster (this);
 		activeSkill4.setCaster (this);
 		activeSkill5.setCaster (this);
+		activeSkill6.setCaster (this);
 		//networking:
 		fighterNetworkScript = (FighterNetworkScript)GameObject.FindObjectOfType (typeof(FighterNetworkScript));
 		database.readPrimaryStats();
