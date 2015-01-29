@@ -73,8 +73,7 @@ public class MapGeneration : MonoBehaviour{
 		for (int i=0; i<mapSizeX; i++) {
 			for(int j=0;j<mapSizeZ;j++){
 				if (map [i,j] != 0 && map [i-1,j] != 0 && map [i,j-1] != 0 && map [i-2,j] != 0 && map [i,j-2] != 0 && map [i,j] != 99
-				    && map [i+1,j] != 0 && map [i,j+1] != 0 && map [i+2,j] != 0 && map [i,j+2] != 0
-				    && map [i+1,j+1] != 0 && map [i-1,j-1] != 0 && map [i+2,j+2] != 0 && map [i-2,j-2] != 0
+				    && map [i-1,j-1] != 0 && map [i-2,j-2] != 0
 				    && map [i,j] != 98 && map [i,j] != 90){
 					map [i,j] = 99;
 					playerStartPositionVector3 = new Vector3(i*10,0.08f,j*10);
@@ -97,8 +96,8 @@ public class MapGeneration : MonoBehaviour{
 			for(int j=0;j<mapSizeZ;j++){
 				if (map [i, j] != 0 && map [i - 1, j] != 0 && map [i, j - 1] != 0 && nbrEnemies != 0 && nbrEnemiesByRoom != 0
 				    && previousRoomNumber != map [i, j] && map [i, j] != 99 && map [i,j] != 98 && map [i-1,j] != 98 && map [i,j-1] != 98 
-				    && map [i-2,j] != 98 && map [i,j-2] != 98 && map [i+1,j] != 98 && map [i+2,j] != 98 && map [i,j-1] != 98 && map [i,j-2] != 98
-				    && map [i-1,j-1] != 98 && map [i+1,j+1] != 98){
+				    && map [i-2,j] != 98 && map [i,j-2] != 98  && map [i,j-1] != 98 && map [i,j-2] != 98
+				    && map [i-1,j-1] != 98){
 					map [i,j] = 98;
 					Vector3 spawnLocation = new Vector3(i*10,0,j*10);
 					enemyfactory.spawn(spawnLocation);
@@ -129,22 +128,22 @@ public class MapGeneration : MonoBehaviour{
 		Vector3 position = new Vector3 (i*10,0,j*10);
 
 		if (map [i - 1, j] == 0) {
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x-5,0,position.z), Quaternion.Euler (0,180,0), 2)as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,180,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i + 1, j] == 0) {
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z), new Quaternion(), 2)as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x+10,0,position.z+5), new Quaternion(), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i, j - 1] == 0) {
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x,0,position.z-5), Quaternion.Euler (0,90,0), 2)as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z), Quaternion.Euler (0,90,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map [i, j + 1] == 0) {
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x,0,position.z+5), Quaternion.Euler (0,-90,0), 2)as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x+5,0,position.z+10), Quaternion.Euler (0,-90,0), 2)as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}

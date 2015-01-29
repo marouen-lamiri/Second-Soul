@@ -68,6 +68,24 @@ public class Enemy : Character {
 
 
 	}
+
+	public override double getDamage(){
+		if (criticalHitCheck ()) {
+			return attackPower*criticalDamage;
+		}
+		return attackPower;
+	}
+
+	public override double getDamageCanMiss(){
+		if(!hitCheck()){
+			return 0;
+		}
+		if (criticalHitCheck ()) {
+			return attackPower*criticalDamage;
+		}
+		return attackPower;
+	}
+
 	protected virtual void initializePrimaryStats(){
 		strengthPerLvl = 1;
 		dexterityPerLvl = 1;
@@ -129,15 +147,17 @@ public class Enemy : Character {
 			}
 		}
 		else if(!inAttackRange (target.transform.position) && hasAggro){
-			chaseTarget(target.transform.position);
+			chasingTarget = target.gameObject;
+			startMoving(target.transform.position);
 			if(outAggroRange()){
 				loseAggro();
 			}
 		} 
 		else if(inAttackRange (target.transform.position) && !attackLocked()){
 			//meshAgent.Stop(true);
+			stopMoving ();
 			activeSkill1.setCaster(this);
-			activeSkill1.useSkill(target.transform.position,target);
+			activeSkill1.useSkill();
 
 			// networking: event listener to RPC the attack anim
 			if(enemyNetworkScript != null) {

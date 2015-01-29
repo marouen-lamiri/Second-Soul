@@ -42,7 +42,17 @@ public class Fighter : Player {
 		target = null;
 		startPosition = transform.position;
 		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
-		
+		activeSkill2 = (Charge)controller.GetComponent<Charge>();
+		activeSkill3 = (KnightsHonour)controller.GetComponent<KnightsHonour>();
+		activeSkill4 = (BerserkMode)controller.GetComponent<BerserkMode>();
+		activeSkill5 = (Focus)controller.GetComponent<Focus>();
+		activeSkill6 = (SpinAttack)controller.GetComponent<SpinAttack>();
+		activeSkill1.setCaster (this);
+		activeSkill2.setCaster (this);
+		activeSkill3.setCaster (this);
+		activeSkill4.setCaster (this);
+		activeSkill5.setCaster (this);
+		activeSkill6.setCaster (this);
 		//networking:
 		fighterNetworkScript = (FighterNetworkScript)GameObject.FindObjectOfType (typeof(FighterNetworkScript));
 		database.readPrimaryStats();
@@ -114,15 +124,24 @@ public class Fighter : Player {
 			return false;
 		}
 	}
+
 	public override double getDamage(){
+		if (criticalHitCheck ()) {
+			return attackPower*criticalDamage;
+		}
+		return attackPower;
+	}
+
+	public override double getDamageCanMiss(){
 		if(!hitCheck()){
 			return 0;
 		}
 		if (criticalHitCheck ()) {
-			return damage*attackPower*criticalDamage;
+			return attackPower*criticalDamage;
 		}
-		return damage * attackPower;
+		return attackPower;
 	}
+
 	public override bool loseEnergy(float energy){
 		if (energy > this.energy) {
 			return false;

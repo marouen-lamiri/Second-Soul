@@ -29,9 +29,10 @@ public class DisplayPlayerStats : MonoBehaviour {
 		GUI.skin.font = myFont;
 		if (isStatsDisplayed) {
 			GUI.Box (new Rect (Screen.width * 0.005f, Screen.height * 0.01f, Screen.width * 0.2f, Screen.height * 0.2f), "-Character Stats-");
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.05f, Screen.width * 0.2f, Screen.height * 0.2f), "Health: " + player.health + " /" + player.maxHealth);
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.08f, Screen.width * 0.2f, Screen.height * 0.2f), "Energy: " + player.energy  + " /" + player.maxEnergy); 
+			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.05f, Screen.width * 0.2f, Screen.height * 0.2f), "Health: " + (int)player.health + " /" + (int)player.maxHealth);
+			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.08f, Screen.width * 0.2f, Screen.height * 0.2f), "Energy: " + (int)player.energy  + " /" + (int)player.maxEnergy); 
 			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.11f, Screen.width * 0.2f, Screen.height * 0.2f), "Speed: " + player.speed);
+			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.14f, Screen.width * 0.2f, Screen.height * 0.2f), "Defense: " + player.armor);
 		}
 	}
 

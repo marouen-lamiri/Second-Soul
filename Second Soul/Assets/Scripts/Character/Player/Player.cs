@@ -10,16 +10,20 @@ public abstract class Player : Character {
 	public int nextLevelXP; // xp need for next level --remove public
 	
 	public bool attacking;
-	private bool moving;
-	private Vector3 goalPosition;
 
 	public int pickUpRange;
 
 	public Inventory inventory;
-	//private Vector3 castPosition;
+	public SkillTree skillTree;
+	
+	public List<ISkill> unlockedSkills;
 	
 	public ISkill activeSkill1; // protected
 	public ISkill activeSkill2; // protected
+	public ISkill activeSkill3; // protected
+	public ISkill activeSkill4; // protected
+	public ISkill activeSkill5; // protected
+	public ISkill activeSkill6; // protected
 	
 	public ItemHolder lootItem;
 
@@ -43,9 +47,6 @@ public abstract class Player : Character {
 	}
 	protected void playerUpdate(){
 		characterUpdate ();
-		if (moving) {
-			moveToPosition();
-		}
 		//Debug.Log (inventory);
 	}
 	public abstract void levelUp();
@@ -95,7 +96,6 @@ public abstract class Player : Character {
 	}
 	
 	protected void lootLogic(){
-		//Debug.Log(lootItem);
 		if(lootItem != null){
 			if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))){
 				pickUpItem();
@@ -105,39 +105,23 @@ public abstract class Player : Character {
 	
 	protected void attackLogic(){
 		if(!attackLocked() && playerEnabled){
-			RaycastHit[] hits;
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			hits = Physics.RaycastAll(ray.origin,ray.direction, 1000);
-			Character targetCharacter;
-			Vector3 targetPosition;
-			if (hits.Length>1 && hits [1].GetType ().IsSubclassOf (typeof(Enemy))) {
-				targetPosition = hits [1].transform.position;
-				targetCharacter = target;//the player's target, which in this case is an enemy
-			}
-			else {
-				targetPosition = new Vector3(hits[0].point.x, hits[0].point.y, hits[0].point.z);
-				targetCharacter = target;//the player's target, which in this case is null
-				if(chasing == true){
-					if(target != null){//if you have a target
-						targetPosition=target.transform.position;
-					}
-					else{//if you don't have a target, then chasing is on when it should be off
-						chasing = false;
-					}
-				}
-			}
-			if(targetCharacter==this){
-				targetCharacter=null;
-				//return;
-			}
 			if ((Input.GetButtonDown ("activeSkill1") || Input.GetButton ("activeSkill1")) && activeSkill1 != null){
-
-				activeSkill1.setCaster(this);
-				activeSkill1.useSkill(targetPosition, targetCharacter);
+				activeSkill1.useSkill();
 			}
 			else if ((Input.GetButtonDown ("activeSkill2") || Input.GetButton ("activeSkill2")) && activeSkill2 != null){
-				activeSkill2.setCaster(this);
-				activeSkill2.useSkill(targetPosition,targetCharacter);
+				activeSkill2.useSkill();
+			}
+			else if ((Input.GetButtonDown ("activeSkill3") || Input.GetButton ("activeSkill3")) && activeSkill3 != null){
+				activeSkill3.useSkill();
+			}
+			else if ((Input.GetButtonDown ("activeSkill4") || Input.GetButton ("activeSkill4")) && activeSkill4 != null){
+				activeSkill4.useSkill();
+			}
+			else if ((Input.GetButtonDown ("activeSkill5") || Input.GetButton ("activeSkill5")) && activeSkill5 != null){
+				activeSkill5.useSkill();
+			}
+			else if ((Input.GetButtonDown ("activeSkill6") || Input.GetButton ("activeSkill6")) && activeSkill6 != null){
+				activeSkill6.useSkill();
 			}
 		}
 	}
@@ -155,69 +139,5 @@ public abstract class Player : Character {
 	
 	public bool inPickupRange(){
 		return Vector3.Distance(lootItem.transform.position, transform.position) <= pickUpRange;
-	}
-	
-	public Vector3 castPosition(){ // private
-		RaycastHit hit;
-		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-
-		Physics.Raycast(ray, out hit, 1000);
-		return new Vector3(hit.point.x, hit.point.y, hit.point.z);
-	}	
-
-	private void moveToPosition(){
-		//Player moving
-		pathing.findPath(transform.position, goalPosition);
-		List<Vector3> path = grid.worldFromNode(grid.path);
-		Vector3 destination;
-		Quaternion newRotation;
-		if (path.Count > 1) {
-			destination = path [1];
-			newRotation = Quaternion.LookRotation (destination - transform.position);
-		}
-		else {
-			destination = goalPosition;
-			newRotation = Quaternion.LookRotation (goalPosition - transform.position);
-		}
-
-		newRotation.x = 0;
-		newRotation.z = 0;
-		
-		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 7);
-		controller.SimpleMove (transform.forward * speed);
-		
-		animateRun();
-		
-		// networking: event listener to RPC the attack anim
-		//			Fighter fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		CharacterNetworkScript playerNetworkScript = GetComponent<CharacterNetworkScript>();
-		if(playerNetworkScript != null) {
-			playerNetworkScript.onRunTriggered();
-		} 
-		else {
-			print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
-		}
-		//Player not moving
-		if(destination == goalPosition) {
-			moving = false;
-			animateIdle();
-
-			if(playerNetworkScript != null) {
-				playerNetworkScript.onIdleTriggered();
-			} else {
-				print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
-			}
-			
-		}
-	}
-	public void startMoving(Vector3 position){
-		moving = true;
-		goalPosition = position;
-	}
-
-	public void stopMoving(){
-		moving = false;
-		chasing = false;
-		goalPosition = transform.position;
 	}
 }

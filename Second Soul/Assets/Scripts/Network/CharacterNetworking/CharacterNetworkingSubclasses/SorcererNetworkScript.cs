@@ -32,7 +32,12 @@ public class SorcererNetworkScript : CharacterNetworkScript {
 	// watch energy:
 	[RPC]
 	public void onEnergyLost(double energyValue) {
-		networkView.RPC("setEnergy", RPCMode.Others, energyValue+"");
+		try {
+			networkView.RPC ("setEnergy", RPCMode.Others, energyValue + "");
+		} catch (Exception ex) {
+			//print (ex);
+			print ("... error is normal if in one player mode.");
+		}
 	}
 	
 	[RPC]

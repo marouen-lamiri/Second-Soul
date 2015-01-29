@@ -59,14 +59,14 @@ public class ClickToMove : MonoBehaviour {
 
 	public void locatePosition(){
 		RaycastHit[] hits;
+		int [,] map = MapGeneration.mapArray;
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		initial = true;
 		hits = Physics.RaycastAll(ray.origin,ray.direction, 1000);
 		
 		if(hits != null){
 			RaycastHit hit = hits[0];
-			if(hit.collider.tag != "Player" /*&& hit.collider.tag != "Enemy"*/ && hit.collider.tag != "GUI"){
-				//position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+			if(hit.collider.tag != "Player" && hit.collider.tag != "GUI"){
 				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
 			}
 			//Debug.Log(position);
