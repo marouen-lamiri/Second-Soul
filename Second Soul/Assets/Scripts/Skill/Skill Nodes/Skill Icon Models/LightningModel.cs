@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LightingModel : MonoBehaviour {
+public class LightningModel : MonoBehaviour {
 	
 	private static Texture2D image;
 	

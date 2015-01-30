@@ -112,7 +112,7 @@ public class Sorcerer : Player {
 
 	public override void levelUp(){
 		Debug.Log("leveled up");
-		
+		usableSkillPoints++;
 		calculateNewPrimaryStats();
 		
 		initializeSecondaryStats(); // reset base so that new and old primary stat don't combine

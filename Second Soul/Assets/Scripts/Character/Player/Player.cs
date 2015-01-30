@@ -16,7 +16,8 @@ public abstract class Player : Character {
 	public Inventory inventory;
 	public SkillTree skillTree;
 	
-	public List<ISkill> unlockedSkills;
+	public int usableSkillPoints;
+	public List<SkillNode> unlockedSkills;
 	
 	public ISkill activeSkill1; // protected
 	public ISkill activeSkill2; // protected
@@ -37,6 +38,7 @@ public abstract class Player : Character {
 	}
 	protected void playerStart(){
 		characterStart ();
+		usableSkillPoints = 3;
 		sphere.renderer.material.color = Color.blue;
 		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();

@@ -11,7 +11,7 @@ public class SkillTreeNode : SkillNode {
 	List<SkillTreeNode> parents;
 	List<SkillTreeNode> children;
 	
-	public SkillTreeNode(ISkill s, string name, string desc, Rect pos, Texture2D icon) 
+	public SkillTreeNode(System.Type s, string name, string desc, Rect pos, Texture2D icon) 
 	: base(s, name, desc, pos, icon){
 		this.unlocked = false;
 		this.available = false;
@@ -28,7 +28,7 @@ public class SkillTreeNode : SkillNode {
 				}
 			}
 			if(allParentsUnlocked){
-				child.available = true;
+				child.makeAvailable();
 			}
 		}
 	}
@@ -40,9 +40,21 @@ public class SkillTreeNode : SkillNode {
 	public void addChild(SkillTreeNode s){
 		children.Add(s);
 	}
-	
-	public ISkill getSkill(){
-		return skill;
-	}
 
+	public bool isUnlocked(){
+		return unlocked;
+	}
+	
+	public bool isAvailable(){
+		return available;
+	}
+	
+	public void makeUnlocked(){
+		unlocked = true;
+		makeChildrenAvailable();
+	}
+	
+	public void makeAvailable(){
+		available = true;
+	}
 }
