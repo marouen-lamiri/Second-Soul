@@ -5,6 +5,9 @@ using System.Collections;
 public class SkillNode {
 
 	public ISkill skill;
+	public string skillClassName;
+	
+	public System.Type type;
 	
 	public string skillName;
 	public string skillDesc;

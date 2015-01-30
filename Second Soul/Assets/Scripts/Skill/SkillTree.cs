@@ -63,7 +63,7 @@ public class SkillTree : MonoBehaviour {
 	}
 	
 	public void createSkillTree(){
-		SkillTreeNode fb = addSkillTreeNode(new FireballSkill(), "Fireball", "Throw a fireball", 
+		SkillTreeNode fb = addSkillTreeNode(null, "Fireball", "Throw a fireball", 
 		                                    nodePositions[0], FireballModel.getImage());
 		SkillTreeNode ls = addSkillTreeNode(new LightningStormSkill(), "Lighting Storm", "...", 
 		                                    nodePositions[1], LightingModel.getImage());
