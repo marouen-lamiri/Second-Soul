@@ -119,6 +119,9 @@ public abstract class Character : MonoBehaviour {
 	public AnimationClip attackClip;
 	public AnimationClip dieClip;
 	private CharacterNetworkScript playerNetworkScript;
+	public GameObject clickAnimation;
+	GameObject clickedPosition;
+	Vector3 previousGoal;
 	// Use this for initialization
 
 
@@ -151,6 +154,7 @@ public abstract class Character : MonoBehaviour {
 			moveToPosition();
 		}
 	}
+
 	public void setPathing(PathFinding path){
 		this.pathing = path;
 	}
@@ -316,6 +320,14 @@ public abstract class Character : MonoBehaviour {
 	private void moveToPosition(){
 		//Player moving
 		pathing.findPath(transform.position, goalPosition);
+		if(previousGoal == null){
+			previousGoal = goalPosition;
+		}
+		if(transform.tag != "Enemy" && Vector3.Distance(previousGoal, goalPosition) > 2){
+			previousGoal = goalPosition;
+			clickedPosition = Network.Instantiate (clickAnimation, goalPosition, Quaternion.Euler(180,0,0), 4) as GameObject;
+
+		}
 		List<Vector3> path = grid.worldFromNode(grid.path);
 		Vector3 destination;
 		Quaternion newRotation;
@@ -333,7 +345,12 @@ public abstract class Character : MonoBehaviour {
 		
 		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime *25 );
 		//transform.rotation = newRotation;
-		controller.SimpleMove (transform.forward * speed);
+		if( Vector3.Distance(goalPosition, transform.position) < 5 ){
+			controller.SimpleMove (transform.forward * (speed-2));
+		}
+		else{
+			controller.SimpleMove (transform.forward * speed);
+		}
 		
 		animateRun();
 		

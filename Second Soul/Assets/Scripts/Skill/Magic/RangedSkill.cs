@@ -37,4 +37,8 @@ public abstract class RangedSkill : MonoBehaviour, ISkill {
 	}
 
 	public abstract void animateAttack();
+
+	public float getEnergyCost(){
+		return energyCost;
+	}
 }

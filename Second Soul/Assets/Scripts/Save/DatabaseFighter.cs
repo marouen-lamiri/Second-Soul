@@ -17,7 +17,7 @@ public class DatabaseFighter : MonoBehaviour {
 	void Update () {
 		if(count == interval){
 			//save
-			Debug.Log ("Save Fighter's Primary Stats!");
+			//Debug.Log ("Save Fighter's Primary Stats!");
 			savePrimaryStats();
 			count = 0;
 		}

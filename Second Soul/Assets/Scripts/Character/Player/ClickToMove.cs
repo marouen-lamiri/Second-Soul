@@ -10,6 +10,7 @@ public class ClickToMove : MonoBehaviour {
 	private float timer = 0f; //checks if the player input has been put very recently
 	private Grid grid;
 	private PathFinding pathing;
+	public GameObject clickAnimation;
 	bool initial = false;
 
 	public static bool busy;
@@ -68,8 +69,10 @@ public class ClickToMove : MonoBehaviour {
 			RaycastHit hit = hits[0];
 			if(hit.collider.tag != "Player" && hit.collider.tag != "GUI"){
 				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+				Network.Instantiate (clickAnimation, position, transform.rotation, 4);
+				//Network.Instantiate (clickAnimation, position, transform.rotation);
 			}
-			//Debug.Log(position);
+			Debug.Log("Did it come here?");
 		}
 
 	}

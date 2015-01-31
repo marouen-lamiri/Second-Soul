@@ -8,7 +8,8 @@ public class AutoDestructParticleSystem : MonoBehaviour {
 	// of a particle effect. It will destroy the gameobject and its children.
 	void LateUpdate () 
 	{
-		if (!particleSystem.IsAlive())
+		if (!particleSystem.IsAlive()){
 			Object.Destroy (this.gameObject);	
+		}
 	}
 }

@@ -23,7 +23,7 @@ public class DatabaseInventory : MonoBehaviour {
 	void Update () {
 		if(count == interval){
 			//save
-			Debug.Log ("Save Inventory!");
+			//Debug.Log ("Save Inventory!");
 			saveItems();
 			saveEquipItems();
 			PlayerPrefs.Save();
@@ -33,7 +33,7 @@ public class DatabaseInventory : MonoBehaviour {
 	}
 
 	void saveItems(){
-		Debug.Log ("Step 1");
+		//Debug.Log ("Step 1");
 		if(Network.isServer){//if (player.GetType () != typeof (Sorcerer)) {
 			inventoryItems = inventory.getInventoryItems ();
 			int counter = 0;
@@ -41,7 +41,7 @@ public class DatabaseInventory : MonoBehaviour {
 				PlayerPrefs.SetInt ("Fighter Item position x" + i, inventoryItems [i].getX ());
 				PlayerPrefs.SetInt ("Fighter Item position y" + i, inventoryItems [i].getY ());
 				PlayerPrefs.SetString ("Fighter Item type" + i, inventoryItems [i].getTypeAsString ());
-				Debug.Log (inventoryItems [i].getTypeAsString ());
+				//Debug.Log (inventoryItems [i].getTypeAsString ());
 				counter++;
 			}
 			PlayerPrefs.SetInt ("Fighter Item Total", counter);
@@ -67,7 +67,7 @@ public class DatabaseInventory : MonoBehaviour {
 			PlayerPrefs.SetInt ("Equiped Item position x" + i, equipItems[i].getX());
 			PlayerPrefs.SetInt ("Equiped Item position y" + i, equipItems[i].getY());
 			PlayerPrefs.SetString("Equiped Item type" + i, equipItems[i].getTypeAsString());
-			Debug.Log (equipItems[i].getTypeAsString());
+			//Debug.Log (equipItems[i].getTypeAsString());
 			counter++;
 		}
 		PlayerPrefs.SetInt ("Equiped Item Total", counter);
@@ -198,7 +198,7 @@ public class DatabaseInventory : MonoBehaviour {
 			}
 		}
 		for(int i = 0; i < PlayerPrefs.GetInt ("Equiped Item Total"); i++){ 
-			Debug.Log ("hello2");
+			//Debug.Log ("hello2");
 			int x = PlayerPrefs.GetInt("Equiped Item position x" + i);
 			int y = PlayerPrefs.GetInt("Equiped Item position y" + i);
 			recreateEquipItem(x, y, i);

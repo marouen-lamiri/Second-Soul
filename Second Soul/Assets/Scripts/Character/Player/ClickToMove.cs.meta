@@ -2,7 +2,9 @@ fileFormatVersion: 2
 guid: dc84d119626ac2d40ba89e0cab5b9584
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - clickAnimation: {fileID: 154386, guid: f4370e344bedf904d83fa678c065f4fc, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

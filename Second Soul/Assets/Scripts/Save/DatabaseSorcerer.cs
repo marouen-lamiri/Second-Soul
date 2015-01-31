@@ -17,7 +17,7 @@ public class DatabaseSorcerer : MonoBehaviour {
 	void Update () {
 		if(count == interval){
 			//save
-			Debug.Log ("Save Sorcerer's Primary Stats!");
+			//Debug.Log ("Save Sorcerer's Primary Stats!");
 			savePrimaryStats();
 			count = 0;
 		}
