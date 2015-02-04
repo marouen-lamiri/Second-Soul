@@ -9,6 +9,7 @@ public class KnightsHonour : MeleeSkill {
 	public GameObject defenseBuffPrefab;
 	GameObject defenseBuff;
 
+
 	// Use this for initialization
 	void Start () {
 		skillStart ();
