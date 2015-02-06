@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class MageSkillTree : SkillTree {
+[System.Serializable]
+public class MageSkillTree : SorcererSkillTree {
+	
+	protected SkillTreeNode iceShard;
 	
 	void Awake(){
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
@@ -11,6 +15,8 @@ public class MageSkillTree : SkillTree {
 	// Use this for initialization
 	void Start () {
 		isSkillOpen = false;
+		skillTree = new List<SkillTreeNode>();
+		setNodePositionOffsets();
 		createSkillTree();
 	}
 	
@@ -25,6 +31,16 @@ public class MageSkillTree : SkillTree {
 		if(isSkillOpen){
 			drawSkillTree();
 			drawSkillTreeNodes();
+			onSkillNodeHover();
+			checkTargetAction();
 		}
+	}
+	
+	public override void createSkillTree(){
+		base.createSkillTree();
+		iceShard = addSkillTreeNode(typeof(IceShardSkill), "Ice Shard", "...", 
+		                               nodePositions[3], IceShardModel.getImage());
+		// order: (parent, child)
+		setSkillTreeNodeLinks(lightStorm, iceShard);
 	}
 }

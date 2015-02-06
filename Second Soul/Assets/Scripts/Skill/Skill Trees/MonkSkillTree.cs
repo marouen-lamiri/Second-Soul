@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class MonkSkillTree : SkillTree {
+[System.Serializable]
+public class MonkSkillTree : FighterSkillTree {
+	
+	protected SkillTreeNode monkSpirit;
 	
 	void Awake(){
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
@@ -11,6 +15,8 @@ public class MonkSkillTree : SkillTree {
 	// Use this for initialization
 	void Start () {
 		isSkillOpen = false;
+		skillTree = new List<SkillTreeNode>();
+		setNodePositionOffsets();
 		createSkillTree();
 	}
 	
@@ -25,6 +31,16 @@ public class MonkSkillTree : SkillTree {
 		if(isSkillOpen){
 			drawSkillTree();
 			drawSkillTreeNodes();
+			onSkillNodeHover();
+			checkTargetAction();
 		}
+	}
+	
+	public override void createSkillTree(){
+		base.createSkillTree();
+		monkSpirit = addSkillTreeNode(typeof(Focus), "Monk Spirit", "...", 
+		                               nodePositions[3], MonkSpiritModel.getImage());
+		// order: (parent, child)
+		setSkillTreeNodeLinks(cleave, monkSpirit);
 	}
 }

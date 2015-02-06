@@ -29,8 +29,9 @@ public class SkillTree : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		skillTree = new List<SkillTreeNode>();
 		isSkillOpen = false;
+		skillTree = new List<SkillTreeNode>();
+		setNodePositionOffsets();
 		createSkillTree();
 	}
 	
@@ -70,9 +71,17 @@ public class SkillTree : MonoBehaviour {
 		}
 	}
 	
+	protected void setNodePositionOffsets(){
+		nodePositions = new List<Rect>();
+		nodePositions.Add(new Rect(79, 18, 43, 48));
+		nodePositions.Add(new Rect(19, 106, 43, 48));
+		nodePositions.Add(new Rect(138, 107, 43, 48));
+		nodePositions.Add(new Rect(19, 194, 43, 48));
+	}
+	
 	//public abstract void createSkillTree();
 	
-	public void createSkillTree(){
+	public virtual void createSkillTree(){
 		SkillTreeNode fb = addSkillTreeNode(typeof(FireballSkill), "Fireball", "Throw a fireball", 
 		                                    nodePositions[0], FireballModel.getImage());
 		SkillTreeNode ls = addSkillTreeNode(typeof(LightningStormSkill), "Lightning Storm", "...", 
