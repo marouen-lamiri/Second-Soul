@@ -404,7 +404,7 @@ public class ClientNetwork : MonoBehaviour {
 		//if (networkView.isMine) {
 		networkView.RPC ("SetSorcererPositionAfterMapCreation", RPCMode.All, position.x.ToString()+","+position.y.ToString()+","+position.z.ToString());
 		//}
-		print (position);
+		//print (position);
 
 	}
 
