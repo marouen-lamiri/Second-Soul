@@ -15,6 +15,7 @@ public abstract class Player : Character {
 
 	public Inventory inventory;
 	public SkillTree skillTree;
+	public ActionBar actionBar;
 	
 	public int usableSkillPoints;
 	public List<SkillNode> unlockedSkills;
@@ -38,7 +39,9 @@ public abstract class Player : Character {
 	}
 	protected void playerStart(){
 		characterStart ();
+		unlockedSkills = new List<SkillNode>();
 		usableSkillPoints = 3;
+		temporarySkills();
 		sphere.renderer.material.color = Color.blue;
 		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
@@ -63,6 +66,13 @@ public abstract class Player : Character {
 		totalXP = 200;//current calculation of level will use this number to calculate that our level is 1 
 		calculateLevel();
 		calculateNextLevelXP();
+	}
+	
+	//REMOVE THIS ONCE ACTION BAR SKILL PLACING IS DYNAMIC
+	private void temporarySkills(){
+		unlockedSkills.Add(new SkillNode(typeof(BasicMelee), "Basic Melee", "...", new Rect(0,0,0,0), FireballModel.getImage()));
+		unlockedSkills.Add(new SkillNode(typeof(BasicRanged), "Basic Range", "...", new Rect(0,0,0,0), FireballModel.getImage()));
+		unlockedSkills.Add(new SkillNode(typeof(FireballSkill), "Fireball", "...", new Rect(0,0,0,0), FireballModel.getImage()));
 	}
 	
 	protected void playerLogic () {
