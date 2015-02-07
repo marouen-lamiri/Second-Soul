@@ -65,11 +65,12 @@ public class ClientNetwork : MonoBehaviour {
 
 	public void Update() {
 
+		// toggle display chat window:
 		if(Input.GetKeyDown ("n")){
 			displayChat = !displayChat;
 		}
 
-		// generate the map only after the players have been created (because they are needed for some reason for the map generation code:
+		// generate the map only after the players have been created (because they are needed for some reason in the map generation code:
 		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
 		if(serverAndClientAreBothConnected && Application.loadedLevelName == "StartScreen" && bothPlayerAndSorcererWereFound) {	// && Network.isServer
 
@@ -88,9 +89,10 @@ public class ClientNetwork : MonoBehaviour {
 
 
 		//===================
+		// client --> logic for creating (different types of) sorcerer:
 		if (Application.loadedLevelName == "StartScreen" && !sorcererWasCreated) { //Network.isClient && 
 
-			//  --> moved out of if, because we still want the server to be able to determine the sorcerer's type for 1 player mode.
+			//  --> moved out of if(isClient), because we still want the server to be able to determine the sorcerer's type for 1 player mode.
 			if(classChooser.sorcererSelectionStrings[classChooser.sorcererSelection]=="Mage"){
 				//				sorcerer = (Sorcerer) Instantiate(classChooser.mage,Vector3.zero,Quaternion.identity);
 				sorcererPrefab = classChooser.mage;
@@ -104,6 +106,7 @@ public class ClientNetwork : MonoBehaviour {
 				sorcererPrefab = classChooser.priest;
 			}
 
+			// if player choose to play as Client, instantiate sorcerer:
 			if(Network.isClient){
 				transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
 				Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
@@ -114,10 +117,10 @@ public class ClientNetwork : MonoBehaviour {
 		} 
 
 		// ------------------
-
+		// server --> logic for creating (different types of) fighter:
 		if(Application.loadedLevelName == "StartScreen" && !playerWasCreated) { //Network.isServer && 
 
-			// --> moved out of if, we want the server to be able to set the type of fighter even before connecting as a server.
+			// --> moved out of if(isServer), since we want the server to be able to set the type of fighter even before connecting as a server.
 			if(classChooser.fighterSelectionStrings[classChooser.fighterSelection]=="Berserker"){
 				//				fighter = (Berserker) Instantiate(classChooser.berserker,Vector3.zero,Quaternion.identity);
 				playerPrefab = classChooser.berserker;
@@ -131,7 +134,7 @@ public class ClientNetwork : MonoBehaviour {
 				playerPrefab = classChooser.monk;
 			}
 
-
+			// if player choose to play as Server, instantiate fighter:
 			if(Network.isServer) {
 				transform.position = new Vector3(-2,0,0); // put the fighter to the left under the fighter buttons
 				Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
@@ -141,7 +144,8 @@ public class ClientNetwork : MonoBehaviour {
 			}
 		}
 
-		// =======================
+		// =======================\
+		// client and server --> logic for keeping fighter and sorcerer across scenes (dontdestroyonload):
 		if(Application.loadedLevelName == "StartScreen") { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
 
 			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
@@ -173,13 +177,10 @@ public class ClientNetwork : MonoBehaviour {
 		}
 
 		//=========================
-		if(Network.isClient) {
-			//networkView.RPC ("SetSorcererPositionAfterMapCreation", RPCMode.Others, "hello sent from client");
-
-		} else if (Network.isServer && MapGeneration.mapGenerationCompleted && !sorcererPositionWasSent) { // 
+		// server --> send 
+		if (Network.isServer && MapGeneration.mapGenerationCompleted && !sorcererPositionWasSent) { // 
 			OnSorcererPositionDeterminedAfterMapCreation(MapGeneration.playerStartPositionVector3);
 			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
-
 			//sorcererPositionWasSent = true;
 		}
 
@@ -197,9 +198,6 @@ public class ClientNetwork : MonoBehaviour {
 	
 
 	void OnGUI() {
-		
-		
-
 
 		// button to connect as server:
 		if (Network.peerType == NetworkPeerType.Disconnected) {
@@ -240,7 +238,6 @@ public class ClientNetwork : MonoBehaviour {
 					}
 					//Instantiate (sorcerer);
 				}
-				
 				
 				GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, 300, 125), _messageLog);
 				
@@ -439,9 +436,7 @@ public class ClientNetwork : MonoBehaviour {
 	public void setServerBoolean(){
 		sorcererPositionWasSent = true;//!sorcererPositionWasSent;
 	}
-	
-	// debug:
-	// watch onStatsDisplayed:
+
 	[RPC]
 	public void onStatsDisplayed() {
 		//if(networkView.isMine){
@@ -454,7 +449,7 @@ public class ClientNetwork : MonoBehaviour {
 	void toggleStatsDisplayed() {
 		//DisplayPlayerStats statsDisplayScript = (DisplayPlayerStats) GameObject.FindObjectOfType(typeof(DisplayPlayerStats));
 		//statsDisplayScript.boolChange ();
-		print ("toggle stats displayed WORKED");
+		//print ("toggle stats displayed WORKED");
 	}
 	
 }
