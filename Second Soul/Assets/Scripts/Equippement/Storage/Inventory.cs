@@ -4,8 +4,6 @@ using System.Collections.Generic;
 public class Inventory : Storage 
 {
 	public Texture2D image;
-	private Player player;
-	private Player player2;
 
 	public int slotsOffsetX;
 	public int slotsOffsetY;

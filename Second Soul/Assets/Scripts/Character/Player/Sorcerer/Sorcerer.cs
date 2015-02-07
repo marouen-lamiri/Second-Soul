@@ -41,18 +41,25 @@ public class Sorcerer : Player {
 		
 		target = null;
 		startPosition = transform.position;
-		activeSkill1 = (BasicRanged)controller.GetComponent<BasicRanged>();
-		activeSkill2 = (FireballSkill)controller.GetComponent<FireballSkill>();
+		activeSkill1 = null;
+		activeSkill2 = null;
+		activeSkill3 = null;
+		activeSkill4 = null;
+		activeSkill5 = null;
+		activeSkill6 = null;
+		//remove this soon (except maybe basic ranged)
+		//activeSkill1 = (BasicRanged)controller.GetComponent<BasicRanged>();
+		/*activeSkill2 = (FireballSkill)controller.GetComponent<FireballSkill>();
 		activeSkill3 = (IceShardSkill)controller.GetComponent<IceShardSkill>();
 		activeSkill4 = (CycloneSkill)controller.GetComponent<CycloneSkill>();
 		activeSkill5 = (LightningStrike)controller.GetComponent<LightningStrike>();
-		activeSkill6 = (Heal)controller.GetComponent<Heal>();
-		activeSkill1.setCaster (this);
-		activeSkill2.setCaster (this);
+		activeSkill6 = (Heal)controller.GetComponent<Heal>();*/
+		//activeSkill1.setCaster (this);
+		/*activeSkill2.setCaster (this);
 		activeSkill3.setCaster (this);
 		activeSkill4.setCaster (this);
 		activeSkill5.setCaster (this);
-		activeSkill6.setCaster (this);
+		activeSkill6.setCaster (this);*/
 		startPosition = transform.position;
 		//networking:
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();

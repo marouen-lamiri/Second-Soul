@@ -16,7 +16,7 @@ public class FireballSkill : ProjectileSkill {
 		damageModifier = 2f;
 		AOEDamageModifier = 0.5f;
 		speed = 15f;
-		damage = caster.spellPower * damageModifier;
+		
 		AOEDamage = (float)damage * AOEDamageModifier;
 		damageType = DamageType.Fire;
 
@@ -35,6 +35,7 @@ public class FireballSkill : ProjectileSkill {
 			Player player = (Player)caster;
 			player.stopMoving ();
 		}
+		damage = caster.spellPower * damageModifier;
 		castTime = caster.castSpeed;
 		skillLength = 1/castTime;
 		damage = caster.getDamage() * damageModifier;

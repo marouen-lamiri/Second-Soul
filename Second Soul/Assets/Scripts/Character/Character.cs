@@ -300,7 +300,9 @@ public abstract class Character : MonoBehaviour {
 
 	
 	public bool attackLocked(){
-		skillDurationLeft -= Time.deltaTime;
+		if(skillDurationLeft > 0){
+			skillDurationLeft -= Time.deltaTime;
+		}
 		return actionLocked ();
 	}
 	
