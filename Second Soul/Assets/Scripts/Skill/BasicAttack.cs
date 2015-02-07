@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class BasicAttack : MonoBehaviour, ISkill {
 
-	protected Character caster; // protected
+	public Character caster; // protected
 	
 	protected float impactTime;
 	//public bool impacted;

@@ -41,18 +41,25 @@ public class Fighter : Player {
 		
 		target = null;
 		startPosition = transform.position;
-		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
-		activeSkill2 = (Charge)controller.GetComponent<Charge>();
+		activeSkill1 = null;
+		activeSkill2 = null;
+		activeSkill3 = null;
+		activeSkill4 = null;
+		activeSkill5 = null;
+		activeSkill6 = null;
+		//remove this soon (except maybe basic melee)
+		//activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
+		/*activeSkill2 = (Charge)controller.GetComponent<Charge>();
 		activeSkill3 = (KnightsHonour)controller.GetComponent<KnightsHonour>();
 		activeSkill4 = (BerserkMode)controller.GetComponent<BerserkMode>();
 		activeSkill5 = (Focus)controller.GetComponent<Focus>();
-		activeSkill6 = (SpinAttack)controller.GetComponent<SpinAttack>();
-		activeSkill1.setCaster (this);
-		activeSkill2.setCaster (this);
+		activeSkill6 = (SpinAttack)controller.GetComponent<SpinAttack>();*/
+		//activeSkill1.setCaster (this);
+		/*activeSkill2.setCaster (this);
 		activeSkill3.setCaster (this);
 		activeSkill4.setCaster (this);
 		activeSkill5.setCaster (this);
-		activeSkill6.setCaster (this);
+		activeSkill6.setCaster (this);*/
 		//networking:
 		fighterNetworkScript = (FighterNetworkScript)GameObject.FindObjectOfType (typeof(FighterNetworkScript));
 		database.readPrimaryStats();

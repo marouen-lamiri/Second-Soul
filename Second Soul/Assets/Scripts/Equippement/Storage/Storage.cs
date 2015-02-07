@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 
 public class Storage : MonoBehaviour {
+	protected Player player;
+	protected Player player2;
+
 	public Rect position;
 
 	//different item collections
@@ -97,10 +100,10 @@ public class Storage : MonoBehaviour {
 				detectItemActions();
 			}
 			//detectMouseAction();
-			ClickToMove.busy = true;
+			player.busyHUD = true;
 		}
 		else if(!itemPickedUp){
-			ClickToMove.busy = false;
+			player.busyHUD = false;
 		}
 		
 	}
@@ -233,7 +236,7 @@ public class Storage : MonoBehaviour {
 	protected void resetTargetItem(){
 		itemPickedUp = false;
 		targetItem = null;
-		ClickToMove.busy = false;
+		player.busyHUD = false;
 	}
 	
  	public bool firstAvailableInventorySlots( out int startX, out int startY, Item item ){

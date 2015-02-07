@@ -9,6 +9,8 @@ public abstract class Player : Character {
 	public int totalXP; // total experience --remove public
 	public int nextLevelXP; // xp need for next level --remove public
 	
+	public bool busyHUD; // global state variable to disable movements if HUD elements are open
+	
 	public bool attacking;
 
 	public int pickUpRange;
@@ -38,10 +40,13 @@ public abstract class Player : Character {
 		playerStart ();
 	}
 	protected void playerStart(){
+		busyHUD = false;
 		characterStart ();
+		//maybe useless remove if it is
 		unlockedSkills = new List<SkillNode>();
-		usableSkillPoints = 3;
-		temporarySkills();
+		// FIXME: THIS NEEDS TO BE ZERO AFTER TESTING, SKILL POINTS COME FROM LEVELING
+		usableSkillPoints = 4;
+		//temporarySkills();
 		sphere.renderer.material.color = Color.blue;
 		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
@@ -69,16 +74,20 @@ public abstract class Player : Character {
 	}
 	
 	//REMOVE THIS ONCE ACTION BAR SKILL PLACING IS DYNAMIC
-	private void temporarySkills(){
+	/*private void temporarySkills(){
 		unlockedSkills.Add(new SkillNode(typeof(BasicMelee), "Basic Melee", "...", new Rect(0,0,0,0), FireballModel.getImage()));
 		unlockedSkills.Add(new SkillNode(typeof(BasicRanged), "Basic Range", "...", new Rect(0,0,0,0), FireballModel.getImage()));
 		unlockedSkills.Add(new SkillNode(typeof(FireballSkill), "Fireball", "...", new Rect(0,0,0,0), FireballModel.getImage()));
-	}
+	}*/
 	
 	protected void playerLogic () {
 		if (!isDead()){
-			attackLogic ();
-			lootLogic();
+			Debug.Log("am i busy: " + busyHUD);
+			// bool doesnt work...
+			if(!busyHUD){
+				attackLogic ();
+				lootLogic();
+			}
 		}
 		else{
 			dieMethod();
@@ -116,7 +125,7 @@ public abstract class Player : Character {
 	}
 	
 	protected void attackLogic(){
-		if(!attackLocked() && playerEnabled){
+		if(!attackLocked() && playerEnabled && !busyHUD && !skillTree.isSkillOpen){
 			if ((Input.GetButtonDown ("activeSkill1") || Input.GetButton ("activeSkill1")) && activeSkill1 != null){
 				activeSkill1.useSkill();
 			}

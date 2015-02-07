@@ -17,6 +17,8 @@ public class ActionBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		position.x = Screen.width * 0.5f - position.width * 0.5f;
+		position.y = Screen.height - position.height;
 		activeSkill1 = null;
 		activeSkill2 = null;
 		activeSkill3 = null;
@@ -25,8 +27,9 @@ public class ActionBar : MonoBehaviour {
 		activeSkill6 = null;
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		player.actionBar = this;
+		initializeBasicAttack();
 		//for testing only
-		initFakeSkills();
+		//initFakeSkills();
 	}
 	
 	// Update is called once per frame
@@ -37,10 +40,11 @@ public class ActionBar : MonoBehaviour {
 	void OnGUI(){
 		drawActionBar();
 		drawSkillNodes();
+		detectPlayerActionBlocked();
 	}
 	
 	//for testing only
-	private void initFakeSkills(){
+	/*private void initFakeSkills(){
 		setActiveSkill1(player.unlockedSkills[0]);
 		setActiveSkill2(player.unlockedSkills[1]);
 		setActiveSkill3(player.unlockedSkills[2]);
@@ -53,6 +57,25 @@ public class ActionBar : MonoBehaviour {
 		activeSkill3.icon = FireballModel.getImage();
 		activeSkill3.position.x = Screen.width * 0.5f - position.width * 0.5f + 148;
 		activeSkill3.position.y = Screen.height - 53;
+	}*/
+	
+	private void initializeBasicAttack(){
+		SkillNode basicAttack;
+		// this doesn't work, find way to type check parent or children...
+		if(player.GetType() == typeof(Sorcerer)){
+			basicAttack = new SkillNode(typeof(BasicRanged), "Basic Ranged", "...",
+													new Rect(0,0,0,0), BasicRangeModel.getImage());	
+		}
+		else{
+			basicAttack = new SkillNode(typeof(BasicMelee), "Basic Melee", "...",
+			                                      new Rect(0,0,0,0), BasicMeleeModel.getImage());
+		}
+		addSkillComponent(basicAttack.skillType);
+		setActiveSkill5(basicAttack);
+	}
+	
+	private void addSkillComponent(System.Type skillType){
+		player.gameObject.AddComponent(skillType);
 	}
 	
 	private void drawActionBar(){
@@ -82,34 +105,67 @@ public class ActionBar : MonoBehaviour {
 		}
 	}
 	
+	private void detectPlayerActionBlocked(){
+		//lock player movement within HUD bounds
+		if(inWidthBoundaries() && inHeightBoundaries()){
+			player.busyHUD = true;
+		}
+		else{
+			player.busyHUD = false;
+		}
+	}
+	
 	public void setActiveSkill1(SkillNode skillNode){
 		activeSkill1 = skillNode;
-		activeSkill1.position = new Rect(position.x + 20,position.y + 3,38,38);
+		activeSkill1.position = new Rect(position.x + 60, position.y + 12, 38, 38);
+		player.activeSkill1 = player.gameObject.GetComponent(skillNode.skillType) as ISkill;
+		Debug.Log(player.activeSkill1 + " : " + skillNode.skillType);
+		player.activeSkill1.setCaster(player);
 	}
 	
 	public void setActiveSkill2(SkillNode skillNode){
 		activeSkill2 = skillNode;
-		activeSkill2.position = new Rect(position.x + 62,position.y + 3,38,38);
+		activeSkill2.position = new Rect(position.x + 104, position.y + 12, 38, 38);
+		player.activeSkill2 = player.gameObject.GetComponent(skillNode.skillType) as ISkill;
+		player.activeSkill2.setCaster(player);
 	}
 	
 	public void setActiveSkill3(SkillNode skillNode){
 		activeSkill3 = skillNode;
-		activeSkill3.position = new Rect(position.x + 104,position.y + 3,38,38);
+		activeSkill3.position = new Rect(position.x + 148, position.y + 12, 38, 38);
+		player.activeSkill3 = player.gameObject.GetComponent(skillNode.skillType) as ISkill;
+		player.activeSkill3.setCaster(player);
 	}
 	
 	public void setActiveSkill4(SkillNode skillNode){
 		activeSkill4 = skillNode;
-		activeSkill4.position = new Rect(position.x + 146,position.y + 3,38,38);
+		activeSkill4.position = new Rect(position.x + 192, position.y + 12, 38, 38);
+		player.activeSkill4 = player.gameObject.GetComponent(skillNode.skillType) as ISkill;
+		player.activeSkill4.setCaster(player);
 	}
 	
 	public void setActiveSkill5(SkillNode skillNode){
+		// decide if skill 5 (left mouse click) is always basic attack
 		activeSkill5 = skillNode;
-		activeSkill5.position = new Rect(position.x + 188,position.y + 3,38,38);
+		activeSkill5.position = new Rect(position.x + 236, position.y + 12, 38, 38);
+		player.activeSkill5 = player.gameObject.GetComponent(skillNode.skillType) as ISkill;
+		player.activeSkill5.setCaster(player);
 	}
 	
 	public void setActiveSkill6(SkillNode skillNode){
 		activeSkill6 = skillNode;
-		activeSkill6.position = new Rect(position.x + 230,position.y + 3,38,38);
+		activeSkill6.position = new Rect(position.x + 278, position.y + 12, 38, 38);
+		player.activeSkill6 = player.gameObject.GetComponent(skillNode.skillType) as ISkill;
+		player.activeSkill6.setCaster(player);
+	}
+	
+	
+	protected bool inWidthBoundaries(){
+		return (Input.mousePosition.x > position.x && Input.mousePosition.x < position.x + position.width);
+	}
+	
+	protected bool inHeightBoundaries(){
+		return (Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height);
 	}
 
 }

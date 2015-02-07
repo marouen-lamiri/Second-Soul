@@ -6,8 +6,9 @@ using System.Collections.Generic;
 public class SkillTree : MonoBehaviour {
 
 	protected Player player;
+	protected ActionBar actionBar;
 
-	protected bool isSkillOpen;
+	public bool isSkillOpen;
 	
 	public Rect position;
 	public Texture2D image;
@@ -23,6 +24,7 @@ public class SkillTree : MonoBehaviour {
 	
 	
 	void Awake(){
+		actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		player.skillTree = this;
 	}
@@ -48,6 +50,7 @@ public class SkillTree : MonoBehaviour {
 			drawSkillTreeNodes();
 			onSkillNodeHover();
 			checkTargetAction();
+			equipSkill();
 		}
 	}
 	
@@ -115,13 +118,20 @@ public class SkillTree : MonoBehaviour {
 	}
 	
 	protected void checkTargetAction(){
+		//lock player movement within HUD bounds
+		if(inWidthBoundaries() && inHeightBoundaries()){
+			player.busyHUD = true;
+		}
+		else{
+			player.busyHUD = false;
+		}
 		//make sure target is set, and mouse is still in target position (since target doesn't go back null)
 		if(target != null && target.position.Contains(mousePositionInSkillTree())){
 			//on mouse click, if target skill is avalable BUT not unlocked
 			if(Input.GetMouseButtonDown(0) && target.isAvailable() && !target.isUnlocked()){
 				//if player has usable skill points
 				if(player.usableSkillPoints > 0){
-					target.makeUnlocked();
+					target.makeUnlocked(); // may be useless remove if so
 					unlockSkill(target);
 				}
 			}
@@ -129,11 +139,53 @@ public class SkillTree : MonoBehaviour {
 	}
 	
 	protected void unlockSkill(SkillTreeNode s){
+		addSkillComponent(s.skillType);
+		// probably not important, remove if not used (both lines)
 		SkillNode newSkill = new SkillNode(s.GetType(), s.skillName, s.skillDesc, s.position, s.icon);
 		player.unlockedSkills.Add(newSkill);
 	}
 	
+	protected void equipSkill(){
+		//make sure target is set, and mouse is still in target position (since target doesn't go back null)
+		if(target != null && target.position.Contains(mousePositionInSkillTree())){
+			//on mouse click, if target skill is avalable and unlocked
+			if(Input.GetMouseButton(1) && target.isAvailable() && target.isUnlocked()){
+				SkillNode newSkill = new SkillNode(target.skillType, target.skillName, target.skillDesc, target.position, target.icon);
+				if(Input.GetKeyDown(KeyCode.Alpha1)){
+					actionBar.setActiveSkill1(newSkill);
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha2)){
+					actionBar.setActiveSkill2(newSkill);
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha3)){
+					actionBar.setActiveSkill3(newSkill);
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha4)){
+					actionBar.setActiveSkill4(newSkill);
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha5)){
+					actionBar.setActiveSkill5(newSkill);
+				}
+				if(Input.GetKeyDown(KeyCode.Alpha6)){
+					actionBar.setActiveSkill6(newSkill);
+				}
+			}
+		}
+	}
+	
+	private void addSkillComponent(System.Type skillType){
+		player.gameObject.AddComponent(skillType);
+	}
+	
 	protected Vector2 mousePositionInSkillTree(){
 		return new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+	}
+	
+	protected bool inWidthBoundaries(){
+		return (Input.mousePosition.x > position.x && Input.mousePosition.x < position.x + position.width);
+	}
+	
+	protected bool inHeightBoundaries(){
+		return (Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height);
 	}
 }
