@@ -1,34 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 public class PlayerEnergyBar : MonoBehaviour {
-
 	//Variable
-	float globeHeight = 64;
+	float globeHeight = 128f;
 	public Texture globePic;
-	int globeSize = 64;
+	float globeSize = 128f;
 	double energy;
 	double maxEnergy;
 	double energyPercent;
 	float ratioWidth;
 	float ratioHeight;
 	private Fighter player;
-
 	//Initialization of variables
 	void Start (){
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		energyPercent = 1;
 		energy = player.energy;
 		maxEnergy = player.maxEnergy;
-		ratioWidth = Screen.width / 800;  
-		ratioHeight = Screen.height/ 600;
-		globeHeight = (float)(globeHeight + (Screen.height * ratioHeight * 0.03));
-		globeSize = (int)(globeSize + (Screen.width * ratioWidth * 0.03));
 	}
-	
 	// Update is called once per frame
 	void Update (){
 		energy = player.energy;
+		ratioWidth = (Screen.width/1366f);
+		if(ratioWidth < 0.5f ){
+			ratioWidth = 0.5f;
+		}
 	}
 
 	//Draw Energy Bar
@@ -43,14 +39,12 @@ public class PlayerEnergyBar : MonoBehaviour {
 		{
 			energyPercent = 1;
 		}
-
 		//Draw the appropriate amount of health bar
 		globeHeight = (float) energyPercent*globeSize;
-		
 		//Drawing Energy Bar
-		GUI.BeginGroup(new Rect(Screen.width * 0.9f , (Screen.height-(globeHeight+20)), globeSize, globeSize));
-		GUI.DrawTexture(new Rect(0, -globeSize+globeHeight, globeSize, globeSize),globePic);
+		GUI.BeginGroup(new Rect(Screen.width * (0.6435f), (Screen.height-(globeHeight+2f)), globeSize, globeSize));
+		GUI.DrawTexture(new Rect(0, (-globeSize+globeHeight), globeSize, globeSize),globePic);
 		GUI.EndGroup();
-	}
 
+	}
 }

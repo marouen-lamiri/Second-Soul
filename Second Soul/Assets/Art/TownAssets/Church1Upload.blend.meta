@@ -1,0 +1,133 @@
+fileFormatVersion: 2
+guid: aeafe08429f924c4e8c9f8a409ddf83b
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Bell
+    100002: //RootNode
+    100004: Clapper
+    100006: ClockHolder
+    100008: CopperRoof
+    100010: FrontDoor
+    100012: Innansorra
+    100014: SideDoor
+    100016: SideStairs
+    100018: StoneBeams
+    100020: StoneBrickWalls
+    100022: StoneRoof
+    100024: SunSymbol
+    100026: WindowBars
+    100028: Windows
+    400000: Bell
+    400002: //RootNode
+    400004: Clapper
+    400006: ClockHolder
+    400008: CopperRoof
+    400010: FrontDoor
+    400012: Innansorra
+    400014: SideDoor
+    400016: SideStairs
+    400018: StoneBeams
+    400020: StoneBrickWalls
+    400022: StoneRoof
+    400024: SunSymbol
+    400026: WindowBars
+    400028: Windows
+    2300000: Bell
+    2300002: Clapper
+    2300004: ClockHolder
+    2300006: CopperRoof
+    2300008: FrontDoor
+    2300010: Innansorra
+    2300012: SideDoor
+    2300014: SideStairs
+    2300016: StoneBeams
+    2300018: StoneBrickWalls
+    2300020: StoneRoof
+    2300022: SunSymbol
+    2300024: WindowBars
+    2300026: Windows
+    3300000: Bell
+    3300002: Clapper
+    3300004: ClockHolder
+    3300006: CopperRoof
+    3300008: FrontDoor
+    3300010: Innansorra
+    3300012: SideDoor
+    3300014: SideStairs
+    3300016: StoneBeams
+    3300018: StoneBrickWalls
+    3300020: StoneRoof
+    3300022: SunSymbol
+    3300024: WindowBars
+    3300026: Windows
+    4300000: Windows
+    4300002: CopperRoof
+    4300004: StoneBrickWalls
+    4300006: SideStairs
+    4300008: WindowBars
+    4300010: ClockHolder
+    4300012: Bell
+    4300014: Clapper
+    4300016: SunSymbol
+    4300018: FrontDoor
+    4300020: StoneRoof
+    4300022: StoneBeams
+    4300024: Innansorra
+    4300026: SideDoor
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
