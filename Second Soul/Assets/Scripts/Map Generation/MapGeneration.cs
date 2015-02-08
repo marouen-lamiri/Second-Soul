@@ -258,9 +258,9 @@ public class MapGeneration : MonoBehaviour{
 			genMap = playerStartPosition(genMap, player);
 
 			genMap = playerStartPosition(genMap, player2); // now setting a private var for the player2 position, because we need to send it over the network so the right instance sets its position.
-			ClientNetwork clientNetwork = (ClientNetwork)GameObject.FindObjectOfType(typeof(ClientNetwork));
+			ParentNetwork serverNetwork = (ParentNetwork)GameObject.FindObjectOfType(typeof(ParentNetwork));
 			//clientNetwork.OnSorcererPositionDeterminedAfterMapCreation(playerStartPositionVector3);
-			clientNetwork.onStatsDisplayed();
+			serverNetwork.onStatsDisplayed();
 
 
 			genMap = enemySpawnLocation (genMap);

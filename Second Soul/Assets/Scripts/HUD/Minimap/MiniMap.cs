@@ -59,8 +59,8 @@ public class MiniMap : MonoBehaviour {
 		line.SetPosition (1, end);
 		string positions = start.x.ToString () + "," + start.y.ToString () + "," + start.z.ToString () + "," + end.x.ToString () + "," + end.y.ToString () + "," + end.z.ToString ();
 		if (Network.isServer) {
-			ClientNetwork client = (ClientNetwork) GameObject.FindObjectOfType(typeof(ClientNetwork));
-			client.startClientLines (positions);
+			ServerNetwork server = (ServerNetwork) GameObject.FindObjectOfType(typeof(ServerNetwork));
+			server.startClientLines (positions);
 		}
 	}
 

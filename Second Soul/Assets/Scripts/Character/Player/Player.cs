@@ -50,6 +50,7 @@ public abstract class Player : Character {
 		sphere.renderer.material.color = Color.blue;
 		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
+		//skillTree = (SkillTree)GameObject.FindObjectOfType (typeof(SkillTree)); // ADD Nicolas 2015-02-08 trying to fix null error, skillTree is null
 	}
 	// Update is called once per frame
 	void Update(){

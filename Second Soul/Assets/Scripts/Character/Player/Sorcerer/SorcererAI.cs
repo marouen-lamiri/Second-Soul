@@ -27,7 +27,8 @@ public class SorcererAI : MonoBehaviour {
 	}
 
 	void movingAI(){
-		if(Network.isClient != true){
+		// if in one player mode, i.e. no client is connected, server playing alone, run the sorcerer AI code:
+		if(Network.connections.Length == 0){ //if(Network.isClient != true){
 			int randomTech = Random.Range(0,200);
 			nearestEnemy = checkNearestEnemy();
 			if(Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < 5 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < 10 ){
