@@ -33,7 +33,7 @@ public abstract class RangedSkill : MonoBehaviour, ISkill {
 
 	public abstract void rayCast ();
 
-	protected abstract Vector3 AIRayCast (Vector3 targetPosition){
+	protected virtual Vector3 AIRayCast (Vector3 targetPosition){
 		SorcererAI ai = gameObject.GetComponent<SorcererAI> ();
 		if (ai != null && ai.enabled == true) {
 			return ai.checkNearestEnemy().transform.position;

@@ -30,7 +30,7 @@ public abstract class TargetedRangedSkill : RangedSkill {
 
 	}
 
-	protected override Vector3 AIRayCast (Character targetCharacter){
+	protected Character AIRayCast (Character targetCharacter){
 		SorcererAI ai = gameObject.GetComponent<SorcererAI> ();
 		if (ai != null && ai.enabled == true) {
 			return ai.checkNearestEnemy();
