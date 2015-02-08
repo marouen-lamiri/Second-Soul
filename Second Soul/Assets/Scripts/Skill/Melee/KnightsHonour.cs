@@ -15,7 +15,7 @@ public class KnightsHonour : MeleeSkill {
 		skillStart ();
 		energyCost = 10;
 
-		defenseBuffPrefab = (GameObject)Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Light/Defense buff");
+		defenseBuffPrefab = (GameObject)Resources.Load ("Prefabs/skills/Light/Defense buff", typeof(GameObject));
 	}
 	
 	// Update is called once per frame

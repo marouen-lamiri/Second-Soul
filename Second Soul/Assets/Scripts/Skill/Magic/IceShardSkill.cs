@@ -19,7 +19,7 @@ public class IceShardSkill : ProjectileSkill {
 		
 		energyCost = 20;
 
-		icePrefab = (IceShardBehavior) Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Ice/IceShard");
+		icePrefab = (IceShardBehavior) Resources.Load ("Prefabs/skills/Ice/IceShard", typeof(IceShardBehavior));
 	}
 	
 	// Update is called once per frame

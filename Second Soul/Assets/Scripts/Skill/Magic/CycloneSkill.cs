@@ -13,7 +13,7 @@ public class CycloneSkill : AreaRangedSkill {
 		damageType = DamageType.Physical;
 		energyCost = 20;
 
-		cyclonePrefab = (CycloneBehavior) Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Wind/Cyclone");
+		cyclonePrefab = (CycloneBehavior) Resources.Load ("Prefabs/skills/Wind/Cyclone", typeof(CycloneBehavior));
 	}
 	
 	// Update is called once per frame

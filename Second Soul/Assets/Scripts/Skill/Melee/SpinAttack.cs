@@ -13,7 +13,7 @@ public class SpinAttack : AreaMeleeSkill {
 		energyCost = 20;
 		range = caster.attackRange * 3;
 
-		spinAttackPrefab = (GameObject)Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Wind/SpinAttack");
+		spinAttackPrefab = (GameObject)Resources.Load ("Prefabs/skills/Wind/SpinAttack", typeof(GameObject));
 	}
 
 	// Update is called once per frame

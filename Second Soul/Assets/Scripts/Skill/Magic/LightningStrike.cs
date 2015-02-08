@@ -11,7 +11,7 @@ public class LightningStrike : TargetedRangedSkill {
 		damageType = DamageType.Lightning;
 		energyCost = 20;
 
-		lightningStrikePrefab = (GameObject) Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Thunder/Thunder");
+		lightningStrikePrefab = (GameObject) Resources.Load ("Prefabs/skills/Thunder/Thunder", typeof(GameObject));
 	}
 	
 	// Update is called once per frame

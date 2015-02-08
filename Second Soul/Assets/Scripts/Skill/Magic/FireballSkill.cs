@@ -22,7 +22,7 @@ public class FireballSkill : ProjectileSkill {
 
 		energyCost = 20;
 
-		fireballPrefab = (FireballBehavior)Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Fire/Fireball");
+		fireballPrefab = (FireballBehavior)Resources.Load ("Prefabs/skills/Fire/Fireball",typeof(FireballBehavior));
 	}
 	
 	// Update is called once per frame

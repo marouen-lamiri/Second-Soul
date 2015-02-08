@@ -14,7 +14,8 @@ public class Focus : MeleeSkill {
 		skillStart ();
 		energyCost = 10;
 
-		spdBuffPrefab = (GameObject)Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Light/Speed buff");
+		spdBuffPrefab = (GameObject)Resources.Load ("Prefabs/skills/Light/Speed buff", typeof(GameObject));
+
 	}
 	
 	// Update is called once per frame

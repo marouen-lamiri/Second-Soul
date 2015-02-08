@@ -14,7 +14,7 @@ public class BerserkMode : TargetedMeleeSkill {
 		skillStart ();
 		energyCost = 10;
 
-		attBuffPrefab = (GameObject)Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Light/Attack buff");
+		attBuffPrefab = (GameObject)Resources.Load ("Prefabs/skills/Light/Attack buff", typeof(GameObject));
 	}
 	
 	// Update is called once per frame

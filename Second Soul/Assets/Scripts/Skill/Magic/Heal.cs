@@ -10,7 +10,8 @@ public class Heal : TargetedRangedSkill {
 		damageType = DamageType.Physical;
 		energyCost = 20;
 
-		healPrefab = (GameObject)Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Light/Healing");
+		healPrefab = (GameObject)Resources.Load ("Prefabs/skills/Light/Healing", typeof(GameObject));
+
 	}
 	
 	// Update is called once per frame
