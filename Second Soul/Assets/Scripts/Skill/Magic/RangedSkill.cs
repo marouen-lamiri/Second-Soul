@@ -26,12 +26,20 @@ public abstract class RangedSkill : MonoBehaviour, ISkill {
 
 	public void skillStart(){
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
+		setCaster (gameObject.GetComponent<Character> ());
 	}
 
 	public abstract void useSkill ();
 
 	public abstract void rayCast ();
-	
+
+	protected abstract Vector3 AIRayCast (Vector3 targetPosition){
+		SorcererAI ai = gameObject.GetComponent<SorcererAI> ();
+		if (ai != null && ai.enabled == true) {
+			return ai.checkNearestEnemy().transform.position;
+		}
+		return targetPosition;
+	}
 	public void setCaster(Character caster){
 		this.caster = caster;
 	}

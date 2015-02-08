@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpinAttack : AreaMeleeSkill {
 
-	public GameObject spinAttackPrefab;
+	GameObject spinAttackPrefab;
 	private float range;
 	// Use this for initialization
 	void Start () {
@@ -12,6 +12,8 @@ public class SpinAttack : AreaMeleeSkill {
 		damageType = DamageType.Physical;
 		energyCost = 20;
 		range = caster.attackRange * 3;
+
+		spinAttackPrefab = (GameObject)Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Wind/SpinAttack");
 	}
 
 	// Update is called once per frame

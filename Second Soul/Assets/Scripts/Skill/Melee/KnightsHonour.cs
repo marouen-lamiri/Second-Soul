@@ -6,7 +6,7 @@ public class KnightsHonour : MeleeSkill {
 	bool duration = false;
 	bool casting = true;
 	int additionalArmor;
-	public GameObject defenseBuffPrefab;
+	GameObject defenseBuffPrefab;
 	GameObject defenseBuff;
 
 
@@ -14,6 +14,8 @@ public class KnightsHonour : MeleeSkill {
 	void Start () {
 		skillStart ();
 		energyCost = 10;
+
+		defenseBuffPrefab = (GameObject)Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Light/Defense buff");
 	}
 	
 	// Update is called once per frame

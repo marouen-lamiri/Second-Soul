@@ -3,7 +3,7 @@ using System.Collections;
 
 public class IceShardSkill : ProjectileSkill {
 
-	public IceShardBehavior icePrefab;
+	IceShardBehavior icePrefab;
 
 	
 	// Use this for initialization
@@ -18,6 +18,8 @@ public class IceShardSkill : ProjectileSkill {
 		damageType = DamageType.Ice;
 		
 		energyCost = 20;
+
+		icePrefab = (IceShardBehavior) Resources.Load ("Assets/Prefabs/skills/Elementals/Prefabs/Ice/IceShard");
 	}
 	
 	// Update is called once per frame

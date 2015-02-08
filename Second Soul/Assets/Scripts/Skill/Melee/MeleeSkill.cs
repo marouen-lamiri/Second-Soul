@@ -19,6 +19,7 @@ public abstract class MeleeSkill : MonoBehaviour, ISkill {
 
 	public virtual void skillStart(){
 		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
+		setCaster (gameObject.GetComponent<Character> ());
 	}
 
 	// Update is called once per frame
