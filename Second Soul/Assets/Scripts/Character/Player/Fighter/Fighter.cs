@@ -24,7 +24,7 @@ public class Fighter : Player {
 		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 
 	}
-	protected void fighterStart(){
+	protected void fighterStart(){	
 		playerStart ();
 		initializePlayer();
 		initializeLevel();

@@ -15,7 +15,7 @@ public class Inventory : Storage
 		//position.y = Screen.height - position.height - Screen.height * 0.2f;
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		player2 = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		player.inventory = this;
+		//player.inventory = this;
 	}
 	
 	void Start () {

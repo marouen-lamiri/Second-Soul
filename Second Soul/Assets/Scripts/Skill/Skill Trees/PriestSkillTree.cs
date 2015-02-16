@@ -33,6 +33,7 @@ public class PriestSkillTree : SorcererSkillTree {
 			drawSkillTreeNodes();
 			onSkillNodeHover();
 			checkTargetAction();
+			equipSkill();
 		}
 	}
 	

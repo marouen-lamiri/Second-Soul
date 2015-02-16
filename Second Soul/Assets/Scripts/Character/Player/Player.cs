@@ -14,6 +14,8 @@ public abstract class Player : Character {
 	public bool attacking;
 
 	public int pickUpRange;
+	
+	protected GameObject skillTreeGameObject;
 
 	public Inventory inventory;
 	public SkillTree skillTree;
@@ -22,12 +24,12 @@ public abstract class Player : Character {
 	public int usableSkillPoints;
 	public List<SkillNode> unlockedSkills;
 	
-	public ISkill activeSkill1; // protected
-	public ISkill activeSkill2; // protected
-	public ISkill activeSkill3; // protected
-	public ISkill activeSkill4; // protected
-	public ISkill activeSkill5; // protected
-	public ISkill activeSkill6; // protected
+	public ISkill activeSkill1;
+	public ISkill activeSkill2;
+	public ISkill activeSkill3;
+	public ISkill activeSkill4;
+	public ISkill activeSkill5;
+	public ISkill activeSkill6;
 	
 	public ItemHolder lootItem;
 
@@ -59,6 +61,11 @@ public abstract class Player : Character {
 		characterUpdate ();
 		//Debug.Log (inventory);
 	}
+	
+	protected virtual void initializeSkillTree(){
+		skillTreeGameObject = GameObject.Find("Skill Tree");
+	}
+	
 	public abstract void levelUp();
 	
 	protected void initializePlayer () {
