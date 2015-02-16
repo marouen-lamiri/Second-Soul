@@ -132,7 +132,7 @@ public abstract class Player : Character {
 	}
 	
 	protected void attackLogic(){
-		if(!attackLocked() && playerEnabled && !busyHUD && !skillTree.isSkillOpen){
+		if(!attackLocked() && playerEnabled && !busyHUD){
 			if ((Input.GetButtonDown ("activeSkill1") || Input.GetButton ("activeSkill1")) && activeSkill1 != null){
 				activeSkill1.useSkill();
 			}
