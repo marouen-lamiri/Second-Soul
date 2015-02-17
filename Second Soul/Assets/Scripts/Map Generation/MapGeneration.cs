@@ -100,7 +100,7 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i-1,j-1] != 98){
 					map [i,j] = 98;
 					Vector3 spawnLocation = new Vector3(i*10,0,j*10);
-					enemyfactory.spawn(spawnLocation);
+					enemyfactory.spawnMob(spawnLocation,5);
 					nbrEnemies--;
 					nbrEnemiesByRoom--;
 					if(nbrEnemiesByRoom == 0){

@@ -54,7 +54,7 @@ public class Enemy : Character {
 		level = target.level;
 		health = maxHealth;
 		energy = maxEnergy;
-		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
+		activeSkill1 = (BasicMelee)GetComponent<BasicMelee>();
 
 		// networking: makes sure each enemy is properly instantiated even on another game instance that didn't run the EnemyFactory code.
 		target = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
@@ -64,7 +64,7 @@ public class Enemy : Character {
 		this.transform.parent = GameObject.Find("Enemies").transform;
 
 		// networking:
-		enemyNetworkScript = (EnemyNetworkScript)gameObject.GetComponent<EnemyNetworkScript> ();
+		enemyNetworkScript = (EnemyNetworkScript)GetComponent<EnemyNetworkScript> ();
 
 
 	}
@@ -117,7 +117,7 @@ public class Enemy : Character {
 	}
 
 	// Update is called once per frame
-	void Update (){
+	void FixedUpdate (){
 		enemyUpdate ();
 	}
 	protected void enemyUpdate(){
@@ -139,11 +139,18 @@ public class Enemy : Character {
 	}
 	
 	public void enemyAI(){
+		Wander wanderScript = GetComponent<Wander> ();
+		SteeringAgent steeringScript = GetComponent<SteeringAgent> ();
 		if(!hasAggro){
 			if(inAwareRadius()){
 				if(hasDirectView()){
 					hasAggro = true;
 				}
+			}
+			else{
+				//wander - commented out now because of performance issues
+				//wanderScript.wanderUpdate();
+			//	startMoving(wanderScript.target);
 			}
 		}
 		else if(!inAttackRange (target.transform.position) && hasAggro){
@@ -168,6 +175,7 @@ public class Enemy : Character {
 
 		}	
 	}
+
 	public bool hasDirectView(){
 		Vector3 playerPosition = target.transform.position;
 		Vector3 enemyOrigin = new Vector3 (transform.position.x, transform.position.y + controller.height, transform.position.z);

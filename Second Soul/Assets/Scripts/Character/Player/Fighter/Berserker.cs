@@ -9,7 +9,7 @@ public class Berserker : Fighter {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		fighterUpdate ();
 	}
 

@@ -82,7 +82,7 @@ public abstract class Player : Character {
 	
 	protected void playerLogic () {
 		if (!isDead()){
-			Debug.Log("am i busy: " + busyHUD);
+			//Debug.Log("am i busy: " + busyHUD);
 			// bool doesnt work...
 			if(!busyHUD){
 				attackLogic ();
