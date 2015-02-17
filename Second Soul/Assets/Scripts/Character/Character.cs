@@ -320,7 +320,12 @@ public abstract class Character : MonoBehaviour {
 	}
 
 	private void moveToPosition(){
-		//Player moving
+		//script initiation
+		Seek seekScript = GetComponent<Seek> ();
+		Arrive arriveScript = GetComponent<Arrive> ();
+		SteeringAgent steeringScript = GetComponent<SteeringAgent> ();
+		Align alignScript = GetComponent<Align> ();
+		//getting next position
 		pathing.findPath(transform.position, goalPosition);
 		if(previousGoal == null){
 			previousGoal = goalPosition;
@@ -334,26 +339,29 @@ public abstract class Character : MonoBehaviour {
 		Vector3 destination;
 		Quaternion newRotation;
 		if (path.Count > 1) {
-			destination = path [1];
+			destination = path [1];//because path[0] is where you are now, and path[1] is the immediately next step
 			newRotation = Quaternion.LookRotation (destination - transform.position);
+			arriveScript.enabled = false;
 		}
 		else {
 			destination = goalPosition;
 			newRotation = Quaternion.LookRotation (goalPosition - transform.position);
+			arriveScript.enabled = true;
 		}
 		
 		newRotation.x = 0;
 		newRotation.z = 0;
-		
-		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime *25 );
-		//transform.rotation = newRotation;
-		if( Vector3.Distance(goalPosition, transform.position) < 5 ){
-			controller.SimpleMove (transform.forward * (speed-2));
+
+		alignScript.interpolatedChangeInOrientation (steeringScript.Velocity);
+		bool hit = Physics.Raycast (transform.position, transform.forward, Vector3.Distance (transform.position, goalPosition));
+		if (!hit) {
+			steeringScript.setTarget (goalPosition);
 		}
-		else{
-			controller.SimpleMove (transform.forward * speed);
+		else {
+			steeringScript.setTarget (destination);
 		}
-		
+		steeringScript.steeringUpdate ();
+				
 		animateRun();
 		
 		// networking: event listener to RPC the run anim

@@ -48,12 +48,12 @@ public class Fighter : Player {
 		activeSkill5 = null;
 		activeSkill6 = null;
 		//remove this soon (except maybe basic melee)
-		//activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
-		/*activeSkill2 = (Charge)controller.GetComponent<Charge>();
-		activeSkill3 = (KnightsHonour)controller.GetComponent<KnightsHonour>();
-		activeSkill4 = (BerserkMode)controller.GetComponent<BerserkMode>();
-		activeSkill5 = (Focus)controller.GetComponent<Focus>();
-		activeSkill6 = (SpinAttack)controller.GetComponent<SpinAttack>();*/
+		//activeSkill1 = (BasicMelee)GetComponent<BasicMelee>();
+		/*activeSkill2 = (Charge)GetComponent<Charge>();
+		activeSkill3 = (KnightsHonour)GetComponent<KnightsHonour>();
+		activeSkill4 = (BerserkMode)GetComponent<BerserkMode>();
+		activeSkill5 = (Focus)GetComponent<Focus>();
+		activeSkill6 = (SpinAttack)GetComponent<SpinAttack>();*/
 		//activeSkill1.setCaster (this);
 		/*activeSkill2.setCaster (this);
 		activeSkill3.setCaster (this);

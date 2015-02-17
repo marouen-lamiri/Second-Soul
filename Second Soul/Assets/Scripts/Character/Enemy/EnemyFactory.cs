@@ -19,17 +19,28 @@ public class EnemyFactory : MonoBehaviour {
 		this.target = target;
 		this.sorcerer = sorcerer;
 	}
+
 	void Start () {
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
 	public void spawn(Vector3 spawnPosition){
 		Enemy enemy = Network.Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, 3)as Enemy;
 		enemy.target = target;
 		enemy.sorcerer = sorcerer;
 		enemy.transform.parent = GameObject.Find("Enemies").transform;
+	}
+
+	public void spawnMob(Vector3 mobPosition, int mobSize){
+		for (int i=0; i<mobSize; ++i) {
+			Vector2 offset = Random.insideUnitCircle*3;
+			Vector3 spawnPosition = mobPosition + new Vector3(offset.x, 0, offset.y);
+			spawn (spawnPosition);
+		}
 	}
 }
