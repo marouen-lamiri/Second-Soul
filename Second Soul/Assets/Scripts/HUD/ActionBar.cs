@@ -62,13 +62,13 @@ public class ActionBar : MonoBehaviour {
 	private void initializeBasicAttack(){
 		SkillNode basicAttack;
 		// this doesn't work, find way to type check parent or children...
-		if(player.GetType() == typeof(Sorcerer)){
-			basicAttack = new SkillNode(typeof(BasicRanged), "Basic Ranged", "...",
-													new Rect(0,0,0,0), BasicRangeModel.getImage());	
+		if(player.GetType().IsSubclassOf(typeof(Fighter))){
+			basicAttack = new SkillNode(typeof(BasicMelee), "Basic Melee", "...",
+			                            new Rect(0,0,0,0), BasicMeleeModel.getImage());
 		}
 		else{
-			basicAttack = new SkillNode(typeof(BasicMelee), "Basic Melee", "...",
-			                                      new Rect(0,0,0,0), BasicMeleeModel.getImage());
+			basicAttack = new SkillNode(typeof(BasicRanged), "Basic Ranged", "...",
+			                            new Rect(0,0,0,0), BasicRangeModel.getImage());	
 		}
 		addSkillComponent(basicAttack.skillType);
 		setActiveSkill5(basicAttack);

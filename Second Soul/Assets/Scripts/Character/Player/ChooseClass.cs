@@ -33,6 +33,13 @@ public class ChooseClass : MonoBehaviour {
 		windowY = 40; // to put it below chat window
 		windowButtonWidth = 100;
 		windowButtonHeight = 25;
+		initializeGameTabs();
+		
+	}
+	
+	protected void initializeGameTabs(){
+		GameObject gameTabs = GameObject.Find("Game Tabs");
+		DontDestroyOnLoad(gameTabs);
 	}
 
 	void OnGUI () {

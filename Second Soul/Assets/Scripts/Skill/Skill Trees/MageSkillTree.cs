@@ -33,6 +33,7 @@ public class MageSkillTree : SorcererSkillTree {
 			drawSkillTreeNodes();
 			onSkillNodeHover();
 			checkTargetAction();
+			equipSkill();
 		}
 	}
 	

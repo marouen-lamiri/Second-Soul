@@ -33,6 +33,7 @@ public class KnightSkillTree : FighterSkillTree {
 			drawSkillTreeNodes();
 			onSkillNodeHover();
 			checkTargetAction();
+			equipSkill();
 		}
 	}
 	
