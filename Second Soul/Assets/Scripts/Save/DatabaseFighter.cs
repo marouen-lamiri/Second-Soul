@@ -4,7 +4,7 @@ using System.Collections;
 public class DatabaseFighter : MonoBehaviour {
 	
 	// Use this for initialization
-	int interval = 120;
+	int interval = 300;
 	int count;
 	public Character player;
 	private Fighter fighter;
@@ -16,16 +16,14 @@ public class DatabaseFighter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(count == interval){
-			//save
-			//Debug.Log ("Save Fighter's Primary Stats!");
 			savePrimaryStats();
+			UnityNotificationBar.UNotify("Saved Fighter Stats"); //although this might appear false in Mono-Develop, it actually works as an external asset
 			count = 0;
 		}
 		count++;
 	}
 	
 	void savePrimaryStats(){
-//		Debug.Log ("Save the stats of the " + player.name);
 		PlayerPrefs.SetInt ("Strength", fighter.getStrength ());
 		PlayerPrefs.SetInt ("Dexterity", fighter.getDexterity ());
 		PlayerPrefs.SetInt ("Endurance", fighter.getEndurance ());
@@ -33,9 +31,9 @@ public class DatabaseFighter : MonoBehaviour {
 	
 	public void readPrimaryStats(){
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-//		Debug.Log ("Read the stats of the " + player.name);
 		fighter.setStrength((int) PlayerPrefs.GetInt("Strength"));
 		fighter.setDexterity((int) PlayerPrefs.GetInt("Dexterity"));
 		fighter.setEndurance((int) PlayerPrefs.GetInt("Endurance"));
+		fighter.calculateSecondaryStats();
 	}
 }

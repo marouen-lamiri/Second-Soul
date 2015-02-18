@@ -29,6 +29,7 @@ public class ChooseClass : MonoBehaviour {
 	public void Awake() {
 //		windowX = 10;
 //		windowY = 10;
+		UnityNotificationBar.UNotify("Welcome to the Game!"); //although this might appear false in Mono-Develop, it actually works as an external asset
 		windowX = 10;
 		windowY = 40; // to put it below chat window
 		windowButtonWidth = 100;

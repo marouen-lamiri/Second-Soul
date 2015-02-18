@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Fighter : Player {
+public class Fighter : Player{
 	//Variable declaration
 	
 	// primary stats... these compute secondary stats defined in Character
@@ -22,7 +22,6 @@ public class Fighter : Player {
 		fighterStart ();
 		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
-
 	}
 	protected void fighterStart(){	
 		playerStart ();
@@ -86,9 +85,10 @@ public class Fighter : Player {
 		dexterity = 10;
 		endurance = 10;
 	}
-	
+
 	public override void levelUp(){
 		Debug.Log("leveled up");
+		UnityNotificationBar.UNotify("Level Up to level: " + level); //although this might appear false in Mono-Develop, it actually works as an external asset
 		usableSkillPoints++;
 		calculateNewPrimaryStats();
 		

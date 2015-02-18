@@ -223,6 +223,7 @@ public class Enemy : Character {
 	void giveXP(){
 		if(!xpGiven){
 			Debug.Log (experienceWorth);
+			UnityNotificationBar.UNotify("Gained " + experienceWorth + " Experience"); //although this might appear false in Mono-Develop, it actually works as an external asset
 			target.gainExperience(experienceWorth/2);//divided by 2 because of xp split. we can always adjust the experienceWorth if necessary
 			sorcerer.gainExperience(experienceWorth/2);
 		}
