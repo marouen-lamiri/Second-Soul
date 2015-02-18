@@ -9,7 +9,7 @@ public class Priest : Sorcerer {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		sorcererUpdate ();
 	}
 

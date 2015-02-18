@@ -27,7 +27,7 @@ public class Inventory : Storage
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		if (Input.GetKeyDown ("i")) {
 			shownInventory();

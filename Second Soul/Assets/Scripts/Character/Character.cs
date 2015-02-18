@@ -143,7 +143,7 @@ public abstract class Character : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		characterUpdate ();
 	}
 	protected void characterUpdate(){
@@ -326,40 +326,47 @@ public abstract class Character : MonoBehaviour {
 		SteeringAgent steeringScript = GetComponent<SteeringAgent> ();
 		Align alignScript = GetComponent<Align> ();
 		//getting next position
-		pathing.findPath(transform.position, goalPosition);
-		if(previousGoal == null){
-			previousGoal = goalPosition;
-		}
-		if(transform.tag != "Enemy" && Vector3.Distance(previousGoal, goalPosition) > 2){
-			previousGoal = goalPosition;
-			clickedPosition = Network.Instantiate (clickAnimation, goalPosition, Quaternion.Euler(180,0,0), 4) as GameObject;
-
-		}
-		List<Vector3> path = grid.worldFromNode(grid.path);
 		Vector3 destination;
-		Quaternion newRotation;
-		if (path.Count > 1) {
-			destination = path [1];//because path[0] is where you are now, and path[1] is the immediately next step
-			newRotation = Quaternion.LookRotation (destination - transform.position);
-			arriveScript.enabled = false;
-		}
-		else {
-			destination = goalPosition;
-			newRotation = Quaternion.LookRotation (goalPosition - transform.position);
-			arriveScript.enabled = true;
-		}
-		
-		newRotation.x = 0;
-		newRotation.z = 0;
-
-		alignScript.interpolatedChangeInOrientation (steeringScript.Velocity);
-		bool hit = Physics.Raycast (transform.position, transform.forward, Vector3.Distance (transform.position, goalPosition));
+		//temporary comment
+//		bool hit = Physics.Raycast (transform.position, transform.forward, Vector3.Distance (transform.position, goalPosition));
+		bool hit = false;
 		if (!hit) {
+			destination = goalPosition;
+			arriveScript.enabled = (steeringScript.Velocity.magnitude>=speed/2)?true:false;
 			steeringScript.setTarget (goalPosition);
 		}
 		else {
+
+			pathing.findPath(transform.position, goalPosition);
+			if(previousGoal == null){
+				previousGoal = goalPosition;
+			}
+
+			List<Vector3> path = grid.worldFromNode(grid.path);
+
+			if (path.Count > 1) {
+				destination = path [1];//because path[0] is where you are now, and path[1] is the immediately next step
+				arriveScript.enabled = false;
+			}
+			else {//this should never happen, but its for completion. I could be wrong. but I believe if the avatar is about to approach his final destination, he should have clear sight of it
+				destination = goalPosition;
+				arriveScript.enabled = true;
+			}
+
 			steeringScript.setTarget (destination);
 		}
+		
+		SorcererAI ai = GetComponent<SorcererAI>();
+		if(transform.tag != "Enemy" && (ai == null || !ai.enabled) &&Vector3.Distance(previousGoal, goalPosition) > 2){
+			previousGoal = goalPosition;
+			clickedPosition = Instantiate (clickAnimation, goalPosition, Quaternion.Euler(180,0,0)) as GameObject;
+			
+		}
+
+		if (steeringScript.Velocity.magnitude > 0) {
+			alignScript.interpolatedChangeInOrientation (steeringScript.Velocity);
+		}
+
 		steeringScript.steeringUpdate ();
 				
 		animateRun();
@@ -372,7 +379,8 @@ public abstract class Character : MonoBehaviour {
 			print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
 		}
 		//Player not moving
-		if(destination == goalPosition) {
+		//if(destination == goalPosition) {
+		if(steeringScript.Velocity.magnitude==0) {
 			moving = false;
 			animateIdle();
 			

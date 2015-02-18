@@ -15,15 +15,14 @@ public class Wander : Seek
 		wanderingObject = new GameObject ();
 		wanderingObject.name = "Wandering Object";
 		wanderingObject.transform.parent = GameObject.Find ("Wandering Objects").transform;
-		//wanderingObject.transform.parent = GameObject.Find ("Wandering Objects").transform;
 		target = wanderingObject.transform.position;
     }
 
 	public void wanderUpdate(){
 		target = wanderingObject.transform.position;
 		timetoChange -= Time.fixedDeltaTime;
-		if(timetoChange <=0 ){
-			timetoChange=.50f;
+		if(timetoChange <= 0 ){
+			timetoChange = 0.50f;
 			positionOfCircle = transform.position + transform.forward * distanceOfCircle;
 			float angle = UnityEngine.Random.Range (0, 360);
 			float x = (radiusOfCircle * (float)System.Math.Cos (angle * Mathf.PI / 180f)) + positionOfCircle.x;

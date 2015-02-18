@@ -9,7 +9,7 @@ public class DisplayHelp : MonoBehaviour {
 	public Font myFont;
 	
 	//Checks if the 'h'-button was pressed
-	void Update()
+	void FixedUpdate()
 	{
 		if (Input.GetKeyDown ("h")) 
 		{

@@ -9,7 +9,7 @@ public class Monk : Fighter {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		fighterUpdate ();
 	}
 

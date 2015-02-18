@@ -16,7 +16,8 @@ public class Berserker : Fighter {
 	
 	protected override void initializeSkillTree(){
 		base.initializeSkillTree();
-		skillTreeGameObject.AddComponent(typeof(BerserkerSkillTree));
+		//temporary comment
+		//skillTreeGameObject.AddComponent(typeof(BerserkerSkillTree));
 	}
 
 	protected override void initializePrimaryStats(){

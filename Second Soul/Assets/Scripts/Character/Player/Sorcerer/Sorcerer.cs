@@ -66,7 +66,7 @@ public class Sorcerer : Player {
 		database.readPrimaryStats();
 	}
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		sorcererUpdate ();
 	}
 

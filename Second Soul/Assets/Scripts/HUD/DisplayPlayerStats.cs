@@ -12,7 +12,7 @@ public class DisplayPlayerStats : MonoBehaviour {
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 	}
 	//Checks if the s button was pressed
-	void Update()
+	void FixedUpdate()
 	{
 		if (Input.GetKeyDown ("s")) 
 		{

@@ -54,7 +54,7 @@ public abstract class Player : Character {
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
 	}
 	// Update is called once per frame
-	void Update(){
+	void FixedUpdate(){
 		playerUpdate ();
 	}
 	protected void playerUpdate(){

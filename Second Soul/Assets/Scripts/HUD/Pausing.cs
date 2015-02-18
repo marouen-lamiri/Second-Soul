@@ -13,7 +13,7 @@ public class Pausing : MonoBehaviour {
 	}
 
 	// Update is called once per frame, checks if p is pressed
-	void Update () {
+	void FixedUpdate () {
 		if(Input.GetKeyDown("p"))
 		{
 			Pause();

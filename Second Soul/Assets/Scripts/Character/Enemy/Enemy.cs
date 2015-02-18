@@ -123,6 +123,8 @@ public class Enemy : Character {
 	protected void enemyUpdate(){
 		characterUpdate ();
 		if (!isDead ()) {
+			level = target.level;
+			calculateXPWorth();
 			enemyAI ();
 		} 
 		else {
@@ -133,25 +135,21 @@ public class Enemy : Character {
 		}
 	}
 	
-	void LateUpdate() {
-		level = target.level;
-		calculateXPWorth();
-	}
-	
 	public void enemyAI(){
 		Wander wanderScript = GetComponent<Wander> ();
 		SteeringAgent steeringScript = GetComponent<SteeringAgent> ();
 		if(!hasAggro){
-			if(inAwareRadius()){
-				if(hasDirectView()){
-					hasAggro = true;
-				}
-			}
-			else{
-				//wander - commented out now because of performance issues
-				//wanderScript.wanderUpdate();
-			//	startMoving(wanderScript.target);
-			}
+//			if(inAwareRadius()){
+//				if(hasDirectView()){
+//					hasAggro = true;
+//				}
+//			}
+//			else{
+//				//wander - commented out now because of performance issues
+//				//wanderScript.wanderUpdate();
+//				wanderScript.enabled = false;
+//			//	startMoving(wanderScript.target);
+//			}
 		}
 		else if(!inAttackRange (target.transform.position) && hasAggro){
 			chasingTarget = target.gameObject;
@@ -223,7 +221,7 @@ public class Enemy : Character {
 	void giveXP(){
 		if(!xpGiven){
 			Debug.Log (experienceWorth);
-			UnityNotificationBar.UNotify("Gained " + experienceWorth + " Experience"); //although this might appear false in Mono-Develop, it actually works as an external asset
+			//UnityNotificationBar.UNotify("Gained " + experienceWorth + " Experience"); //although this might appear false in Mono-Develop, it actually works as an external asset
 			target.gainExperience(experienceWorth/2);//divided by 2 because of xp split. we can always adjust the experienceWorth if necessary
 			sorcerer.gainExperience(experienceWorth/2);
 		}

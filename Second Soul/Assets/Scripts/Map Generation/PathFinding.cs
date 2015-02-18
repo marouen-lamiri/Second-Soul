@@ -16,7 +16,7 @@ public class PathFinding : MonoBehaviour {
 		target.setPathing (this);
 	}
 	
-	void LateUpdate() {
+	void FixedUpdate() {
 		//findPath(seeker.transform.position,target.transform.position);
 	}
 	

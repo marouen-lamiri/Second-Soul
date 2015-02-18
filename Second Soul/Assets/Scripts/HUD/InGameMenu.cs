@@ -12,7 +12,7 @@ public class InGameMenu : MonoBehaviour {
 	}
 	
 	// Update is called once per frame, checks if Escape-button is pressed.
-	void Update () {
+	void FixedUpdate () {
 		if(Input.GetKeyDown("escape"))
 		{
 			//Debug.Log("Escape Pressed");
