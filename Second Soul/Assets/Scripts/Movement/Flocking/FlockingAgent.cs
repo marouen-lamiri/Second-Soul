@@ -9,10 +9,12 @@ public class FlockingAgent : MonoBehaviour {
 	
 	public Vector3 Velocity { get; private set; }
 	public float AngularVelocity { get; private set; }
-	
+
+	FlockingBehaviour [] behaviours;
 	void Start()
 	{
-		//throw new NotImplementedException();
+		
+		behaviours = gameObject.GetComponents<FlockingBehaviour> ();
 		ResetVelocities ();
 	}
 	
@@ -33,11 +35,10 @@ public class FlockingAgent : MonoBehaviour {
 	private void UpdateVelocities(float deltaTime)
 	{
 		// throw new NotImplementedException();
-		
-		FlockingBehaviour [] behaviour = gameObject.GetComponents<FlockingBehaviour> ();
-		for (int i=0; i<behaviour.Length; ++i) {
-			Velocity += behaviour[i].Acceleration*Time.fixedDeltaTime;
-			if(behaviour[i].HaltTranslation){
+
+		for (int i=0; i<behaviours.Length; ++i) {
+			Velocity += behaviours[i].Acceleration*Time.fixedDeltaTime;
+			if(behaviours[i].HaltTranslation){
 				Velocity = Vector3.zero;
 				return;
 			}

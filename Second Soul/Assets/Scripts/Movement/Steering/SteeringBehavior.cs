@@ -13,13 +13,6 @@ public abstract class SteeringBehavior : MonoBehaviour
         }
     }
 
-    public virtual float AngularAcceleration {
-        get
-        {
-            return 0f;
-        }
-    }
-
     public virtual bool HaltTranslation {
         get
         {

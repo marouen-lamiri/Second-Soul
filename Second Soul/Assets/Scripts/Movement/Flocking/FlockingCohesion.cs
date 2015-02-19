@@ -19,7 +19,7 @@ public class FlockingCohesion : FlockingBehaviour {
 		{
 			getNeighbours();
 			Vector3 totalVector = new Vector3();
-			foreach(FlockingAgent agent in neighbours){
+			foreach(SteeringAgent agent in neighbours){
 				totalVector+= agent.transform.position-transform.position;
 			}
 			return MaxAcceleration * totalVector.normalized;

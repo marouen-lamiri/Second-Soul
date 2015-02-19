@@ -15,7 +15,8 @@ public class Inventory : Storage
 		//position.y = Screen.height - position.height - Screen.height * 0.2f;
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		player2 = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		//player.inventory = this;
+		//was this next line supposed to be commented out? it was, but it seems essential. Not having it broke loot pickup for me. Was this meant to be initialized elsewhere?
+		player.inventory = this;
 	}
 	
 	void Start () {

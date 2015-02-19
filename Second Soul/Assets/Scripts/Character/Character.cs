@@ -3,10 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 
 public abstract class Character : MonoBehaviour {
+
+	//scripts of the same GameObject
+	Seek seekScript;
+	Arrive arriveScript;
+	SteeringAgent steeringScript;
+	Align alignScript;
+	SorcererAI ai;
 	public CharacterController controller;
+	private CharacterNetworkScript playerNetworkScript;
+
+	//pathfinding related
 	protected Grid grid;
 	protected PathFinding pathing;
 	private List<Vector3> path;
+
 	protected GameObject sphere;
 	public int level; // only public for now to see level in inspector
 
@@ -87,9 +98,7 @@ public abstract class Character : MonoBehaviour {
 	
 	
 	*/
-	
-	
-	//public NavMeshAgent meshAgent;
+
 	private int currentWaypoint;
 	
 	public bool playerEnabled;
@@ -118,7 +127,6 @@ public abstract class Character : MonoBehaviour {
 	public AnimationClip runClip;
 	public AnimationClip attackClip;
 	public AnimationClip dieClip;
-	private CharacterNetworkScript playerNetworkScript;
 	public GameObject clickAnimation;
 	GameObject clickedPosition;
 	Vector3 previousGoal;
@@ -129,15 +137,21 @@ public abstract class Character : MonoBehaviour {
 		characterStart ();
 	}
 	protected void characterStart(){
+		//script of same GameObject initiation
+		seekScript = GetComponent<Seek> ();
+		arriveScript = GetComponent<Arrive> ();
+		steeringScript = GetComponent<SteeringAgent> ();
+		alignScript = GetComponent<Align> ();
+		ai = GetComponent<SorcererAI>();
+		playerNetworkScript = GetComponent<CharacterNetworkScript>();
+
 		sphere = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 		sphere.renderer.castShadows = false;
 		sphere.renderer.receiveShadows = false;
 		sphere.transform.parent = transform;
-		//was going to scale to 0.1f, but scaling the map down didn't seem to work
 		sphere.transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
 		sphere.gameObject.layer = LayerMask.NameToLayer ("Minimap");
 
-		playerNetworkScript = GetComponent<CharacterNetworkScript>();
 
 		accuracy = 0.8f;
 	}
@@ -320,16 +334,11 @@ public abstract class Character : MonoBehaviour {
 	}
 
 	private void moveToPosition(){
-		//script initiation
-		Seek seekScript = GetComponent<Seek> ();
-		Arrive arriveScript = GetComponent<Arrive> ();
-		SteeringAgent steeringScript = GetComponent<SteeringAgent> ();
-		Align alignScript = GetComponent<Align> ();
 		//getting next position
 		Vector3 destination;
 		//temporary comment
-//		bool hit = Physics.Raycast (transform.position, transform.forward, Vector3.Distance (transform.position, goalPosition));
-		bool hit = false;
+		bool hit = Physics.Raycast (transform.position, transform.forward, Vector3.Distance (transform.position, goalPosition));
+//		bool hit = false;
 		if (!hit) {
 			destination = goalPosition;
 			arriveScript.enabled = (steeringScript.Velocity.magnitude>=speed/2)?true:false;
@@ -355,8 +364,7 @@ public abstract class Character : MonoBehaviour {
 
 			steeringScript.setTarget (destination);
 		}
-		
-		SorcererAI ai = GetComponent<SorcererAI>();
+
 		if(transform.tag != "Enemy" && (ai == null || !ai.enabled) &&Vector3.Distance(previousGoal, goalPosition) > 2){
 			previousGoal = goalPosition;
 			clickedPosition = Instantiate (clickAnimation, goalPosition, Quaternion.Euler(180,0,0)) as GameObject;

@@ -4,15 +4,18 @@ using System.Collections;
 public class Pursue : SteeringBehavior {
 
 	Transform target;    
+	Character character;
 	
 	void Start() {
-		target = gameObject.GetComponent<Character> ().target.transform;
+		character = gameObject.GetComponent<Character> ();
+		target = character.target.transform;
 	}
 	
 	
 	public override Vector3 Acceleration {
 		get
 		{
+			target = character.target.transform;
 			Vector3 futureTargetPosition;
 			float distance = Vector3.Distance(target.position,transform.position);
 			float time2Target = distance / gameObject.GetComponent<SteeringAgent>().Velocity.magnitude;

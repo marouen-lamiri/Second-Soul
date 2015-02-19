@@ -10,10 +10,12 @@ public sealed class SteeringAgent : MonoBehaviour
     public Vector3 Velocity { get; private set; }
 	Character character;
 	Align alignScript;
+	SteeringBehavior [] behaviours;
 	public Vector3 targetPosition;
     void Start(){
 		character = GetComponent<Character> ();
 		alignScript = GetComponent<Align> ();
+		behaviours = gameObject.GetComponents<SteeringBehavior> ();
 		ResetVelocities ();
     }
     
@@ -31,17 +33,17 @@ public sealed class SteeringAgent : MonoBehaviour
     private void UpdateVelocities(float deltaTime){		
 	//	if (hault)
 			//return;
-		SteeringBehavior [] behaviour = gameObject.GetComponents<SteeringBehavior> ();
-		for (int i=0; i<behaviour.Length; ++i) {
-			if(behaviour[i].enabled == false)
+
+		for (int i=0; i<behaviours.Length; ++i) {
+			if(behaviours[i].enabled == false)
 				continue;
-			if(behaviour[i].Acceleration == Vector3.zero){
+			if(behaviours[i].Acceleration == Vector3.zero){
 				Velocity += Vector3.zero;
 				continue;
 			}
 			else
-				Velocity += behaviour[i].Acceleration*Time.fixedDeltaTime;
-			if(behaviour[i].HaltTranslation){
+				Velocity += behaviours[i].Acceleration*Time.fixedDeltaTime;
+			if(behaviours[i].HaltTranslation){
 				Velocity = Vector3.zero;
 				return;
 			}

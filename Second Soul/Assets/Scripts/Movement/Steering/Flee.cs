@@ -5,17 +5,18 @@ using System;
 public class Flee : SteeringBehavior
 {
 	Vector3 pursuer;
+	Character character;
 
     void Start()
     {
-		pursuer = gameObject.GetComponent<Character> ().goalPosition;
+		character = gameObject.GetComponent<Character> ();
     }
 
     public override Vector3 Acceleration
     {
 		get
 		{
-			pursuer = gameObject.GetComponent<Character> ().goalPosition;
+			pursuer = character.goalPosition;
 			return MaxAcceleration * (transform.position-pursuer).normalized;
 		}
     }

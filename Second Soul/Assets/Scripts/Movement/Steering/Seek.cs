@@ -5,16 +5,17 @@ using System;
 public class Seek : SteeringBehavior
 {
     public Vector3 target;    
-
+	protected SteeringAgent steeringScript;
     void Start() {
-		target = gameObject.GetComponent<SteeringAgent> ().targetPosition;
+		steeringScript = gameObject.GetComponent<SteeringAgent> ();
+		target = steeringScript.targetPosition;
     }
 
 
     public override Vector3 Acceleration {
         get
         {
-			target = gameObject.GetComponent<SteeringAgent> ().targetPosition;
+			target = steeringScript.targetPosition;
 			return MaxAcceleration * (target-transform.position).normalized;
         }
     }

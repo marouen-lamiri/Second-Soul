@@ -19,7 +19,7 @@ public class FlockingAlignment : FlockingBehaviour {
 		{
 			getNeighbours();
 			Vector3 totalVector = new Vector3();
-			foreach(FlockingAgent agent in neighbours){
+			foreach(SteeringAgent agent in neighbours){
 				totalVector+= agent.Velocity;
 			}
 			totalVector/=neighbours.Count;

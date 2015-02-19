@@ -29,9 +29,10 @@ public class Enemy : Character {
 	
 	public float dropRate;
 
-	// networking:
+	// scripts of same GameObject
 	protected EnemyNetworkScript enemyNetworkScript;
-
+	Wander wanderScript;
+	SteeringAgent steeringScript;
 	
 	// Use this for initialization
 	void Start (){
@@ -65,7 +66,9 @@ public class Enemy : Character {
 
 		// networking:
 		enemyNetworkScript = (EnemyNetworkScript)GetComponent<EnemyNetworkScript> ();
-
+		
+		wanderScript = GetComponent<Wander> ();
+		steeringScript = GetComponent<SteeringAgent> ();
 
 	}
 
@@ -136,20 +139,18 @@ public class Enemy : Character {
 	}
 	
 	public void enemyAI(){
-		Wander wanderScript = GetComponent<Wander> ();
-		SteeringAgent steeringScript = GetComponent<SteeringAgent> ();
 		if(!hasAggro){
-//			if(inAwareRadius()){
-//				if(hasDirectView()){
-//					hasAggro = true;
-//				}
-//			}
-//			else{
-//				//wander - commented out now because of performance issues
-//				//wanderScript.wanderUpdate();
-//				wanderScript.enabled = false;
-//			//	startMoving(wanderScript.target);
-//			}
+			if(inAwareRadius()){
+				if(hasDirectView()){
+					hasAggro = true;
+				}
+			}
+			else{
+				//wander - commented out now because of performance issues
+				//wanderScript.wanderUpdate();
+				wanderScript.enabled = false;
+			//	startMoving(wanderScript.target);
+			}
 		}
 		else if(!inAttackRange (target.transform.position) && hasAggro){
 			chasingTarget = target.gameObject;

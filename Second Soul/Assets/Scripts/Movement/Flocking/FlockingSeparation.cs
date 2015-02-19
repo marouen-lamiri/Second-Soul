@@ -19,7 +19,7 @@ public class FlockingSeparation : FlockingBehaviour {
 		{
 			getNeighbours();
 			Vector3 totalVector = new Vector3();
-			foreach(FlockingAgent agent in neighbours){
+			foreach(SteeringAgent agent in neighbours){
 				totalVector+= transform.position-agent.transform.position;
 			}
 			totalVector*=multiple;
