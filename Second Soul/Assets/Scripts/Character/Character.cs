@@ -337,7 +337,7 @@ public abstract class Character : MonoBehaviour {
 		//getting next position
 		Vector3 destination;
 		//temporary comment
-		bool hit = Physics.Raycast (transform.position, transform.forward, Vector3.Distance (transform.position, goalPosition));
+		bool hit = Physics.Linecast(transform.position, goalPosition);
 //		bool hit = false;
 		if (!hit) {
 			destination = goalPosition;
@@ -345,7 +345,6 @@ public abstract class Character : MonoBehaviour {
 			steeringScript.setTarget (goalPosition);
 		}
 		else {
-
 			pathing.findPath(transform.position, goalPosition);
 			if(previousGoal == null){
 				previousGoal = goalPosition;

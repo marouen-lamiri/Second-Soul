@@ -32,7 +32,6 @@ public class Enemy : Character {
 	// scripts of same GameObject
 	protected EnemyNetworkScript enemyNetworkScript;
 	Wander wanderScript;
-	SteeringAgent steeringScript;
 	
 	// Use this for initialization
 	void Start (){
@@ -68,7 +67,6 @@ public class Enemy : Character {
 		enemyNetworkScript = (EnemyNetworkScript)GetComponent<EnemyNetworkScript> ();
 		
 		wanderScript = GetComponent<Wander> ();
-		steeringScript = GetComponent<SteeringAgent> ();
 
 	}
 
