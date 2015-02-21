@@ -22,6 +22,10 @@ public class ChooseClass : MonoBehaviour {
 	public int sorcererSelection = 0;
 	public string[] sorcererSelectionStrings = {"Mage", "Priest", "Druid"};
 
+	public GUIStyle style;
+	public GUIStyle labelStyle;
+	float ratio;
+
 	// Scene to load when pressing the Start-button.
 	public string sceneName;
 	
@@ -29,7 +33,7 @@ public class ChooseClass : MonoBehaviour {
 	public void Awake() {
 //		windowX = 10;
 //		windowY = 10;
-		//UnityNotificationBar.UNotify("Welcome to the Game!"); //although this might appear false in Mono-Develop, it actually works as an external asset
+		ratio = 1/100;
 		windowX = 10;
 		windowY = 40; // to put it below chat window
 		windowButtonWidth = 100;
@@ -44,10 +48,13 @@ public class ChooseClass : MonoBehaviour {
 	}
 
 	void OnGUI () {
+		GUI.skin.button = style;
+		//background.height = Screen.width * 99 / 100;
+
 		// Editing the style.
-		var centeredStyle = GUI.skin.GetStyle("Label");
-		centeredStyle.alignment = TextAnchor.UpperCenter;
-		centeredStyle.fontSize = 14;
+//		var centeredStyle = GUI.skin.GetStyle("Label");
+//		centeredStyle.alignment = TextAnchor.UpperCenter;
+//		centeredStyle.fontSize = 14;
 
 		// Screen percentage: 25%, 50%, 75% of the screen.
 		var screenWidth25 = Screen.width / 4;
@@ -60,16 +67,16 @@ public class ChooseClass : MonoBehaviour {
 		// Header.
 //		GUI.Label(new Rect(screenWidth50 - labelWidth50, windowY + windowButtonHeight * 1, windowButtonWidth, windowButtonHeight), "Second Soul", centeredStyle);
 //		GUI.Label(new Rect(screenWidth50 - labelWidth50, windowY + windowButtonHeight * 2, windowButtonWidth, windowButtonHeight), "Class Selection", centeredStyle);
-		GUI.Label(new Rect(screenWidth50 - labelWidth50, windowY +150+ windowButtonHeight * 1, windowButtonWidth, windowButtonHeight), "Second Soul", centeredStyle);
-		GUI.Label(new Rect(screenWidth50 - labelWidth50, windowY +150+ windowButtonHeight * 2, windowButtonWidth, windowButtonHeight), "Class Selection", centeredStyle);
+//		GUI.Label(new Rect(screenWidth50 - labelWidth50, windowY +150+ windowButtonHeight * 1, windowButtonWidth + 10f, windowButtonHeight), "Second Soul", style);
+		GUI.Label(new Rect(Screen.width/2 - ((windowButtonWidth + 10f)*3)/2, Screen.height/4 - windowButtonHeight, (windowButtonWidth + 10f) *3, windowButtonHeight * 2), "<Size=30>Class Selection</Size>", style);
 
 		// Main-Classes.
-		/*group-1*/GUI.Label(new Rect(screenWidth25 - labelWidth50, windowY + windowButtonHeight * 4, windowButtonWidth, windowButtonHeight), "Fighter:", centeredStyle);
-		/*group-2*/GUI.Label(new Rect(screenWidth75 - labelWidth50, windowY + windowButtonHeight * 4, windowButtonWidth, windowButtonHeight), "Sorcerer:", centeredStyle);
+		/*group-1*/GUI.Label(new Rect(Screen.width/3 - windowButtonWidth/2, Screen.height/3 , windowButtonWidth, windowButtonHeight), "Fighter:", style);
+		/*group-2*/GUI.Label(new Rect(Screen.width/3 * 2 - windowButtonWidth/2, Screen.height/3 , windowButtonWidth, windowButtonHeight), "Sorcerer:", style);
 
 		// Sub-Classes.
-		/*group-1*/fighterSelection = GUI.SelectionGrid (new Rect (screenWidth25 - labelWidth50, windowY + windowButtonHeight * 5, windowButtonWidth, windowButtonHeight*3), fighterSelection, fighterSelectionStrings, 1);
-		/*group-2*/sorcererSelection = GUI.SelectionGrid (new Rect (screenWidth75 - labelWidth50, windowY + windowButtonHeight * 5, windowButtonWidth, windowButtonHeight*3), sorcererSelection, sorcererSelectionStrings, 1);
+		/*group-1*/fighterSelection = GUI.SelectionGrid (new Rect (Screen.width/3 - windowButtonWidth/2, Screen.height/3 + windowButtonHeight, windowButtonWidth, windowButtonHeight*3), fighterSelection, fighterSelectionStrings, 1, style);
+		/*group-2*/sorcererSelection = GUI.SelectionGrid (new Rect (Screen.width/3 * 2 - windowButtonWidth/2, Screen.height/3 + windowButtonHeight, windowButtonWidth, windowButtonHeight*3), sorcererSelection, sorcererSelectionStrings, 1, style);
 
 		// Start-Button.
 //		if (GUI.Button (new Rect (screenWidth50 - labelWidth50, windowY + windowButtonHeight * 10, windowButtonWidth, windowButtonHeight), "Start"))

@@ -19,8 +19,8 @@ public class MapGeneration : MonoBehaviour{
 	List<int> listOfWalls;
 	public static int[,] mapArray;
 	int numberRooms = 5;
-	public static int mapSizeX = 25;
-	public static int mapSizeZ = 25;
+	public static int mapSizeX = 8;
+	public static int mapSizeZ = 8;
 
 	// network:
 	public static Vector3 playerStartPositionVector3;

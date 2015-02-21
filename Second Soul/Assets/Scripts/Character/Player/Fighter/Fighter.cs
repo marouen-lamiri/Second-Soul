@@ -88,7 +88,7 @@ public class Fighter : Player{
 
 	public override void levelUp(){
 		Debug.Log("leveled up");
-		//UnityNotificationBar.UNotify ("Level Up to level: " + level); //although this might appear false in Mono-Develop, it actually works as an external asset
+		UnityNotificationBar.UNotify ("Level Up to level: " + level); //although this might appear false in Mono-Develop, it actually works as an external asset
 		usableSkillPoints++;
 		calculateNewPrimaryStats();
 		

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SorcererAI : MonoBehaviour {
+public class SorcererAI : Sorcerer {
 
 	public CharacterController controller;
 	public ISkill skillArray;
@@ -22,8 +22,10 @@ public class SorcererAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		movingAI();
-		timeOut -= Time.deltaTime;
+		if(grid != null){
+			movingAI();
+			timeOut -= Time.deltaTime;
+		}
 	}
 
 	void movingAI(){

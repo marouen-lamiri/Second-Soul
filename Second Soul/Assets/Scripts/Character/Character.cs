@@ -339,19 +339,26 @@ public abstract class Character : MonoBehaviour {
 		//temporary comment
 		bool hit = Physics.Raycast (transform.position, transform.forward, Vector3.Distance (transform.position, goalPosition));
 //		bool hit = false;
+
 		if (!hit) {
 			destination = goalPosition;
 			arriveScript.enabled = (steeringScript.Velocity.magnitude>=speed/2)?true:false;
 			steeringScript.setTarget (goalPosition);
 		}
+		else if(grid.nodeFromWorld(goalPosition).walkable != true || Physics.Linecast(transform.position, goalPosition, 1000)){
+			animateIdle();
+			return;
+		}
 		else {
-
 			pathing.findPath(transform.position, goalPosition);
 			if(previousGoal == null){
 				previousGoal = goalPosition;
 			}
 
 			List<Vector3> path = grid.worldFromNode(grid.path);
+			if(path == null){
+				destination = transform.position;
+			}
 
 			if (path.Count > 1) {
 				destination = path [1];//because path[0] is where you are now, and path[1] is the immediately next step

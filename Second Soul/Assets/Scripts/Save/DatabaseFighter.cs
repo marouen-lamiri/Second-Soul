@@ -17,7 +17,7 @@ public class DatabaseFighter : MonoBehaviour {
 	void Update () {
 		if(count == interval){
 			savePrimaryStats();
-			//UnityNotificationBar.UNotify("Saved Fighter Stats"); //although this might appear false in Mono-Develop, it actually works as an external asset
+			UnityNotificationBar.UNotify("Saved Fighter Stats"); //although this might appear false in Mono-Develop, it actually works as an external asset
 			count = 0;
 		}
 		count++;
@@ -35,5 +35,6 @@ public class DatabaseFighter : MonoBehaviour {
 		fighter.setDexterity((int) PlayerPrefs.GetInt("Dexterity"));
 		fighter.setEndurance((int) PlayerPrefs.GetInt("Endurance"));
 		fighter.calculateSecondaryStats();
+		Character character = (Character) fighter;
 	}
 }

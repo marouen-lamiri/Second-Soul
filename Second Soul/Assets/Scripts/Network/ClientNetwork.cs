@@ -37,10 +37,15 @@ public class ClientNetwork : MonoBehaviour {
 	public ChooseClass classChooser;
 	private int framesToWaitForFocusCorrectCharacter;
 
+	public GUIStyle style;
+	public GUIStyle labelStyle;
+	public GUIStyle background;
+	float backgroundBox = 50f;
+
 	bool displayChat;
 
 	public void Awake() {
-		
+
 		networkWindowX = Screen.width - 500;
 		networkWindowY = 10;
 		networkWindowButtonWidth = 150;
@@ -68,6 +73,8 @@ public class ClientNetwork : MonoBehaviour {
 		if(Input.GetKeyDown ("n")){
 			displayChat = !displayChat;
 		}
+
+
 
 		// generate the map only after the players have been created (because they are needed for some reason for the map generation code:
 		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
@@ -197,13 +204,14 @@ public class ClientNetwork : MonoBehaviour {
 	
 
 	void OnGUI() {
-		
-		
 
+		GUI.skin.button = style;
 
 		// button to connect as server:
 		if (Network.peerType == NetworkPeerType.Disconnected) {
-			if (GUI.Button (new Rect (Screen.width / 2 - 200, Screen.height / 2, 150, 50), "Connect as a server")) {
+			GUI.Box(new Rect(backgroundBox, backgroundBox, Screen.width - backgroundBox * 2, Screen.height - backgroundBox * 2),"<Size=38>Second Soul</Size>", background);
+			GUI.Label (new Rect(Screen.width / 2 - 150, Screen.height/2 + 25, 300, 50),"<Size=30>Network Choices</Size>",style);
+			if (GUI.Button (new Rect (Screen.width / 2 - 225, Screen.height/2 + 100, 150, 50), "Connect as a server", style)) {
 				// connect:
 				Network.InitializeServer (10, port, false);
 				displayChat = true;
@@ -213,8 +221,8 @@ public class ClientNetwork : MonoBehaviour {
 		// after connecting: if you're a server:
 		if(displayChat) {
 			if (Network.peerType == NetworkPeerType.Server) {
-				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, networkWindowButtonWidth, networkWindowButtonHeight), "Server");
-				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 1, networkWindowButtonWidth, networkWindowButtonHeight), "Clients attached: " + Network.connections.Length);
+				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, networkWindowButtonWidth, networkWindowButtonHeight), "Server", labelStyle);
+				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 1, networkWindowButtonWidth, networkWindowButtonHeight), "Clients attached: " + Network.connections.Length, labelStyle);
 				
 				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 2, networkWindowButtonWidth, networkWindowButtonHeight), "Quit server")) {
 					Network.Disconnect(); 
@@ -242,7 +250,7 @@ public class ClientNetwork : MonoBehaviour {
 				}
 				
 				
-				GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, 300, 125), _messageLog);
+				GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, 300, 125), _messageLog, style);
 				
 				// that's good for both: 
 				if (Network.peerType == NetworkPeerType.Disconnected)
@@ -259,7 +267,7 @@ public class ClientNetwork : MonoBehaviour {
 		
 		// button to connect as a client:
 		if (Network.peerType == NetworkPeerType.Disconnected) {
-			if (GUI.Button (new Rect (Screen.width / 2 + 50, Screen.height / 2, 150, 50), "Connect as a Client")) {
+			if (GUI.Button (new Rect (Screen.width / 2 + 75, Screen.height / 2 + 100, 150, 50), "Connect as a Client")) {
 				ConnectToServer ();
 				displayChat = true;
 
@@ -269,7 +277,7 @@ public class ClientNetwork : MonoBehaviour {
 		// after connecting if you're a client:
 		if(displayChat) {
 			if (Network.peerType == NetworkPeerType.Client) {
-				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client");
+				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client", labelStyle);
 				
 				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 1, 150, networkWindowButtonHeight), "Logout")) {
 					Network.Disconnect();
@@ -282,7 +290,7 @@ public class ClientNetwork : MonoBehaviour {
 					SendInfoToServer(someInfo);
 				}
 				
-				GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog);
+				GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
 				
 			}
 
@@ -290,7 +298,7 @@ public class ClientNetwork : MonoBehaviour {
 
 		// button to play one player mode:
 		if (Network.peerType == NetworkPeerType.Disconnected) {
-			if (GUI.Button (new Rect (Screen.width / 2 - 200, Screen.height / 2 + 50, 150, 50), "1 Player Mode")) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 75, Screen.height / 2 + 100, 150, 50), "1 Player Mode")) {
 				
 				// connect only the server, no client:
 				Network.InitializeServer (10, port, false);

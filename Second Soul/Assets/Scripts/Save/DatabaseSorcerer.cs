@@ -19,7 +19,7 @@ public class DatabaseSorcerer : MonoBehaviour {
 			//save
 			//Debug.Log ("Save Sorcerer's Primary Stats!");
 			savePrimaryStats();
-			//UnityNotificationBar.UNotify("Saved Sorcerer Stats"); //although this might appear false in Mono-Develop, it actually works as an external asset
+			UnityNotificationBar.UNotify("Saved Sorcerer Stats"); //although this might appear false in Mono-Develop, it actually works as an external asset
 			count = 0;
 		}
 		count++;

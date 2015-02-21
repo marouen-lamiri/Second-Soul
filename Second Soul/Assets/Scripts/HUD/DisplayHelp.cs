@@ -6,11 +6,24 @@ public class DisplayHelp : MonoBehaviour {
 	
 	//Variables
 	public bool isHelpDisplayed = false;
+	public GUIStyle style;
+	public GUIStyle labelStyle;
 	public Font myFont;
+	float height = 25f;
+	float width = 300f;
+	float basicScreenHeight = 320;
+	float basicScreenWidth = 797;
+	float ratioWidth;
+	float ratioHeight;
+	float nbrOfDraws = 5; //value has to be changed depending on the number of labels to be drawn
+	float offset;
 	
 	//Checks if the 'h'-button was pressed
 	void FixedUpdate()
 	{
+		ratioHeight = Screen.height/basicScreenHeight;
+		ratioWidth = Screen.width/basicScreenWidth;
+		offset = ratioWidth * 0.01f;
 		if (Input.GetKeyDown ("h")) 
 		{
 			boolChange ();
@@ -18,15 +31,18 @@ public class DisplayHelp : MonoBehaviour {
 	}
 	
 	//Draw the controls on the screen
-	void OnGUI () {
+	void OnGUI () { 
+		GUI.skin.button = style;
+		GUI.skin.box = style;
 		GUI.skin.font = myFont;
 		if (isHelpDisplayed) {
-			GUI.Box (new Rect (Screen.width * 0.005f, Screen.height * 0.01f, Screen.width * 0.5f, Screen.height * 0.4f), "-Controls-");
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.07f, Screen.width * 0.5f, Screen.height * 0.4f), "LeftClick   - Move to the clicked position and Basic attack." );
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.11f, Screen.width * 0.5f, Screen.height * 0.4f), "RightClick - For secondary ability." );
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.17f, Screen.width * 0.5f, Screen.height * 0.4f), "' e ' - Switch the character (eg. Fighter/Sorcerer)." );
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.21f, Screen.width * 0.5f, Screen.height * 0.4f), "' s ' - Display game's statistics." );
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.25f, Screen.width * 0.5f, Screen.height * 0.4f), "' i '  - Display player's inventory." );
+			GUI.Box (new Rect (Screen.width * 0.005f, Screen.height * 0.01f, width  * ratioWidth, height * nbrOfDraws * ratioHeight),"", style);
+			GUI.TextArea (new Rect (Screen.width * 0.01f, Screen.height * 0.03f, width * ratioWidth - offset, height * ratioHeight), "<Size=20>-Controls-</Size>", labelStyle);
+			GUI.TextArea (new Rect (Screen.width * 0.01f, Screen.height * 0.13f, width , height * ratioHeight), "LeftClick - Move character and attack.", labelStyle);
+			GUI.TextArea (new Rect (Screen.width * 0.01f, Screen.height * 0.18f, width, height * ratioHeight), "RightClick - For secondary ability.", labelStyle);
+			GUI.TextArea (new Rect (Screen.width * 0.01f, Screen.height * 0.23f, width * ratioWidth - offset, height * ratioHeight), "'e' - Switch between characters.", labelStyle);
+			GUI.TextArea (new Rect (Screen.width * 0.01f, Screen.height * 0.08f, width * ratioWidth - offset, height * ratioHeight), "'s' - Display game's statistics.", labelStyle);
+			GUI.TextArea (new Rect (Screen.width * 0.01f, Screen.height * 0.28f, width * ratioWidth - offset, height * ratioHeight), "'i' - Display player's inventory.", labelStyle);
 		}
 	}
 	
