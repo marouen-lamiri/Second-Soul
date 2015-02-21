@@ -32,7 +32,7 @@ public class SorcererAI : Sorcerer {
 		if(Network.isClient != true){
 			int randomTech = Random.Range(0,200);
 			nearestEnemy = checkNearestEnemy();
-			if(Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < 5 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < 10 ){
+			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < 5 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < 10 ){
 				sorcerer.stopMoving();
 				if(randomTech <= 180 && timeOut <= 0){
 //					sorcerer.activeSkill1.useSkill();

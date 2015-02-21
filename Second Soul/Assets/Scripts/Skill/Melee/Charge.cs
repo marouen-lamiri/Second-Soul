@@ -7,7 +7,6 @@ public class Charge : TargetedMeleeSkill {
 	private float originalSpeed;
 	private float chargeSpeed;
 	private bool charging;
-	private float damageModifier;
 
 	// Use this for initialization
 	void Start () {
