@@ -1,7 +1,7 @@
 /*
 found this on:
 http://wiki.unity3d.com/index.php?title=DepthMask
-It helps to make the Minimap circular, noting more
+It helps to make the Minimap circular, nothing more
 */
 Shader "Masked/Mask" {
  

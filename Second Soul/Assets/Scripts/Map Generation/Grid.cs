@@ -80,16 +80,16 @@ public class Grid : MonoBehaviour {
 	}
 	
 	void OnDrawGizmos() {
-//		Gizmos.DrawWireCube(transform.position,new Vector3(gridWorldSize.x,1,gridWorldSize.y));
-//		
-//		if (grid != null) {
-//			foreach (Node n in grid) {
-//				Gizmos.color = (n.walkable)?Color.white:Color.red;
-//				if (path != null)
-//					if (path.Contains(n))
-//						Gizmos.color = Color.black;
-//				Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter-.1f));
-//			}
-//		}
+		Gizmos.DrawWireCube(transform.position,new Vector3(gridWorldSize.x,1,gridWorldSize.y));
+		
+		if (grid != null) {
+			foreach (Node n in grid) {
+				Gizmos.color = (n.walkable)?Color.white:Color.red;
+				if (path != null)
+					if (path.Contains(n))
+						Gizmos.color = Color.black;
+				Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter-.1f));
+			}
+		}
 	}
 }
