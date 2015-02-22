@@ -174,5 +174,9 @@ public class ActionBar : MonoBehaviour {
 	public void setPlayer(Player p){
 		player = p;
 	}
+	
+	public void findPlayer(System.Type playerType){
+		player = (Player) GameObject.FindObjectOfType (playerType);
+	}
 
 }

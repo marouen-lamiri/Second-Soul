@@ -71,7 +71,8 @@ public abstract class Player : Character {
 		if(playerEnabled){
 			Debug.Log("I GET HERE AB");
 			actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
-			actionBar.setPlayer(this);
+			actionBar.findPlayer(this.GetType());
+			//actionBar.setPlayer(this);
 			actionBar.initializeBasicAttack();
 		}
 	}
@@ -161,6 +162,7 @@ public abstract class Player : Character {
 				activeSkill4.useSkill();
 			}
 			else if ((Input.GetButtonDown ("activeSkill5") || Input.GetButton ("activeSkill5")) && activeSkill5 != null){
+				Debug.Log ("LEFT CLICK HAPPENS");
 				activeSkill5.useSkill();
 			}
 			else if ((Input.GetButtonDown ("activeSkill6") || Input.GetButton ("activeSkill6")) && activeSkill6 != null){

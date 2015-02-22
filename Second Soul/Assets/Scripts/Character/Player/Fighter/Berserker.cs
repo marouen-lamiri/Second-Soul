@@ -19,7 +19,8 @@ public class Berserker : Fighter {
 			base.initializeSkillTree();
 			skillTreeGameObject.AddComponent(typeof(BerserkerSkillTree));
 			skillTree = (BerserkerSkillTree) GameObject.FindObjectOfType (typeof (BerserkerSkillTree));
-			skillTree.setPlayer(this);
+			//skillTree.setPlayer(this);
+			skillTree.findPlayer(this.GetType());
 		}
 	}
 
