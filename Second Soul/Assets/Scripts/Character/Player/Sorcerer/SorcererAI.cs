@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SorcererAI : MonoBehaviour {
+public class SorcererAI : Sorcerer {
 
 	public CharacterController controller;
 	public ISkill skillArray;
@@ -22,8 +22,10 @@ public class SorcererAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		movingAI();
-		timeOut -= Time.deltaTime;
+		if(grid != null){
+			movingAI();
+			timeOut -= Time.deltaTime;
+		}
 	}
 
 	void movingAI(){
@@ -31,30 +33,30 @@ public class SorcererAI : MonoBehaviour {
 		if(Network.connections.Length == 0){ //if(Network.isClient != true){
 			int randomTech = Random.Range(0,200);
 			nearestEnemy = checkNearestEnemy();
-			if(Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < 5 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < 10 ){
+			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < 5 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < 10 ){
 				sorcerer.stopMoving();
 				if(randomTech <= 180 && timeOut <= 0){
-					sorcerer.activeSkill1.useSkill();
+//					sorcerer.activeSkill1.useSkill();
 					timeOut = 2f;
 				}
 				if((randomTech == 193 || randomTech == 194) && fighter.energy > 20 && timeOut <= 0){
-					sorcerer.activeSkill2.useSkill();
+//					sorcerer.activeSkill2.useSkill();
 					timeOut = 4f;
 				}
 				if((randomTech == 195 || randomTech == 196) && fighter.energy > 20 && timeOut <= 0){
-					sorcerer.activeSkill3.useSkill();
+//					sorcerer.activeSkill3.useSkill();
 					timeOut = 4f;
 				}
 				if((randomTech == 197 || randomTech == 198) && fighter.energy >= 20 && timeOut <= 0){
-					sorcerer.activeSkill4.useSkill();
+//					sorcerer.activeSkill4.useSkill();
 					timeOut = 4f;
 				}
 				if((randomTech == 199 || randomTech == 200) && fighter.energy >= 20 && timeOut <= 0){
-					sorcerer.activeSkill5.useSkill();
+//					sorcerer.activeSkill5.useSkill();
 					timeOut = 4f;
 				}
 				if(fighter.health < fighter.maxHealth * 0.50 && fighter.energy >= 10 && (randomTech > 180 && randomTech < 192) && timeOut <= 0){
-					sorcerer.activeSkill6.useSkill();
+//					sorcerer.activeSkill6.useSkill();
 					timeOut = 2f;
 				}
 			}
@@ -73,15 +75,11 @@ public class SorcererAI : MonoBehaviour {
 
 	public Enemy checkNearestEnemy(){
 		float nearestDistanceSqr = Mathf.Infinity;
-		GameObject[] allEnemies =  GameObject.FindGameObjectsWithTag("Enemy");
-		Enemy[] taggedEnemy = new Enemy[allEnemies.Length];
+		Enemy[] allEnemies =  GameObject.FindObjectsOfType<Enemy>();
 		Enemy nearestObj = null;
 
-		for (int i = 0;i < allEnemies.Length;i++) {
-			taggedEnemy[i] = allEnemies[i].GetComponent("Enemy") as Enemy;
-		}
 
-		foreach (Enemy enemy in taggedEnemy){
+		foreach (Enemy enemy in allEnemies){
 			
 			Vector3 objectPos = enemy.transform.position;
 			float distanceSqr = (objectPos - transform.position).sqrMagnitude;

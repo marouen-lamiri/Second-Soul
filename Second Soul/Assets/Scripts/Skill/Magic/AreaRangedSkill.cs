@@ -19,5 +19,6 @@ public abstract class AreaRangedSkill : RangedSkill {
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		hits = Physics.RaycastAll(ray.origin,ray.direction, 1000);
 		targetPosition = hits[0].point;
-	}
+		targetPosition = AIRayCast (targetPosition);
+	}	
 }

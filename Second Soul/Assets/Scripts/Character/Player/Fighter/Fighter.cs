@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Fighter : Player {
+public class Fighter : Player{
 	//Variable declaration
 	
 	// primary stats... these compute secondary stats defined in Character
@@ -22,9 +22,8 @@ public class Fighter : Player {
 		fighterStart ();
 		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
-
 	}
-	protected void fighterStart(){
+	protected void fighterStart(){	
 		playerStart ();
 		initializePlayer();
 		initializeLevel();
@@ -48,12 +47,12 @@ public class Fighter : Player {
 		activeSkill5 = null;
 		activeSkill6 = null;
 		//remove this soon (except maybe basic melee)
-		//activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
-		/*activeSkill2 = (Charge)controller.GetComponent<Charge>();
-		activeSkill3 = (KnightsHonour)controller.GetComponent<KnightsHonour>();
-		activeSkill4 = (BerserkMode)controller.GetComponent<BerserkMode>();
-		activeSkill5 = (Focus)controller.GetComponent<Focus>();
-		activeSkill6 = (SpinAttack)controller.GetComponent<SpinAttack>();*/
+		//activeSkill1 = (BasicMelee)GetComponent<BasicMelee>();
+		/*activeSkill2 = (Charge)GetComponent<Charge>();
+		activeSkill3 = (KnightsHonour)GetComponent<KnightsHonour>();
+		activeSkill4 = (BerserkMode)GetComponent<BerserkMode>();
+		activeSkill5 = (Focus)GetComponent<Focus>();
+		activeSkill6 = (SpinAttack)GetComponent<SpinAttack>();*/
 		//activeSkill1.setCaster (this);
 		/*activeSkill2.setCaster (this);
 		activeSkill3.setCaster (this);
@@ -65,7 +64,7 @@ public class Fighter : Player {
 		database.readPrimaryStats();
 	}
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		fighterUpdate ();
 	}
 
@@ -86,9 +85,10 @@ public class Fighter : Player {
 		dexterity = 10;
 		endurance = 10;
 	}
-	
+
 	public override void levelUp(){
 		Debug.Log("leveled up");
+		UnityNotificationBar.UNotify ("Level Up to level: " + level); //although this might appear false in Mono-Develop, it actually works as an external asset
 		usableSkillPoints++;
 		calculateNewPrimaryStats();
 		

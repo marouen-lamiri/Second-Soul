@@ -29,9 +29,9 @@ public class Enemy : Character {
 	
 	public float dropRate;
 
-	// networking:
+	// scripts of same GameObject
 	protected EnemyNetworkScript enemyNetworkScript;
-
+	Wander wanderScript;
 	
 	// Use this for initialization
 	void Start (){
@@ -54,7 +54,7 @@ public class Enemy : Character {
 		level = target.level;
 		health = maxHealth;
 		energy = maxEnergy;
-		activeSkill1 = (BasicMelee)controller.GetComponent<BasicMelee>();
+		activeSkill1 = (BasicMelee)GetComponent<BasicMelee>();
 
 		// networking: makes sure each enemy is properly instantiated even on another game instance that didn't run the EnemyFactory code.
 		target = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
@@ -64,8 +64,9 @@ public class Enemy : Character {
 		this.transform.parent = GameObject.Find("Enemies").transform;
 
 		// networking:
-		enemyNetworkScript = (EnemyNetworkScript)gameObject.GetComponent<EnemyNetworkScript> ();
-
+		enemyNetworkScript = (EnemyNetworkScript)GetComponent<EnemyNetworkScript> ();
+		
+		wanderScript = GetComponent<Wander> ();
 
 	}
 
@@ -117,12 +118,14 @@ public class Enemy : Character {
 	}
 
 	// Update is called once per frame
-	void Update (){
+	void FixedUpdate (){
 		enemyUpdate ();
 	}
 	protected void enemyUpdate(){
 		characterUpdate ();
 		if (!isDead ()) {
+			level = target.level;
+			calculateXPWorth();
 			enemyAI ();
 		} 
 		else {
@@ -133,17 +136,18 @@ public class Enemy : Character {
 		}
 	}
 	
-	void LateUpdate() {
-		level = target.level;
-		calculateXPWorth();
-	}
-	
 	public void enemyAI(){
 		if(!hasAggro){
 			if(inAwareRadius()){
 				if(hasDirectView()){
 					hasAggro = true;
 				}
+			}
+			else{
+				//wander - commented out now because of performance issues
+				//wanderScript.wanderUpdate();
+				wanderScript.enabled = false;
+			//	startMoving(wanderScript.target);
 			}
 		}
 		else if(!inAttackRange (target.transform.position) && hasAggro){
@@ -168,6 +172,7 @@ public class Enemy : Character {
 
 		}	
 	}
+
 	public bool hasDirectView(){
 		Vector3 playerPosition = target.transform.position;
 		Vector3 enemyOrigin = new Vector3 (transform.position.x, transform.position.y + controller.height, transform.position.z);
@@ -215,6 +220,7 @@ public class Enemy : Character {
 	void giveXP(){
 		if(!xpGiven){
 			Debug.Log (experienceWorth);
+			//UnityNotificationBar.UNotify("Gained " + experienceWorth + " Experience"); //although this might appear false in Mono-Develop, it actually works as an external asset
 			target.gainExperience(experienceWorth/2);//divided by 2 because of xp split. we can always adjust the experienceWorth if necessary
 			sorcerer.gainExperience(experienceWorth/2);
 		}

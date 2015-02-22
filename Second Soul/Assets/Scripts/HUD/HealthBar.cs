@@ -31,7 +31,6 @@ public class HealthBar : MonoBehaviour {
 		healthFrameHeight = (float)Screen.height*healthFrameHeightFix;
 		healthFillWidth = (float)Screen.width*healthFillWidthFix;
 		healthFillHeight =(float)Screen.height*healthFillHeightFix;
-		//player = enemy.player.GetComponent<PlayerCombat> ();
 	}
 	
 	// Update is called once per frame

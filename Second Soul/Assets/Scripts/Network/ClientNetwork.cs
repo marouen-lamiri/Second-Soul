@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ClientNetwork : ParentNetwork {
@@ -17,15 +17,29 @@ public class ClientNetwork : ParentNetwork {
 	private bool focusCorrectPlayerWasDone;
 	private int framesToWaitForFocusCorrectCharacter;
 
+
+
 	bool displayChat;
 
 	public void Awake() {
+
+		networkWindowX = Screen.width - 500;
+		networkWindowY = 10;
+		networkWindowButtonWidth = 150;
+		networkWindowButtonHeight = 25;
+		//AddNetworkView();
+
+		sorcererWasCreated = false;
+		bothPlayerAndSorcererWereFound = false;
 
 
 		sorcererPositionAfterMapCreation = Vector3.zero;
 		focusCorrectPlayerWasDone = false;
 
 		framesToWaitForFocusCorrectCharacter = 0;
+
+		//
+		classChooser = (ChooseClass)GameObject.FindObjectOfType(typeof(ChooseClass));
 
 	} 
 
@@ -85,6 +99,8 @@ public class ClientNetwork : ParentNetwork {
 
 	void OnGUI() {
 
+		GUI.skin.button = style;
+
 
 
 
@@ -92,7 +108,7 @@ public class ClientNetwork : ParentNetwork {
 		
 		// button to connect as a client:
 		if (Network.peerType == NetworkPeerType.Disconnected) {
-			if (GUI.Button (new Rect (Screen.width / 2 + 50, Screen.height / 2, 150, 50), "Connect as a Client")) {
+			if (GUI.Button (new Rect (Screen.width / 2 + 75, Screen.height / 2 + 100, 150, 50), "Connect as a Client")) {
 				ConnectToServer ();
 				displayChat = true;
 
@@ -102,7 +118,7 @@ public class ClientNetwork : ParentNetwork {
 		// after connecting if you're a client:
 		if(displayChat) {
 			if (Network.peerType == NetworkPeerType.Client) {
-				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client");
+				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client", labelStyle);
 				
 				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 1, 150, networkWindowButtonHeight), "Logout")) {
 					Network.Disconnect();
@@ -115,11 +131,12 @@ public class ClientNetwork : ParentNetwork {
 					SendInfoToServer(someInfo);
 				}
 				
-				GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog);
+				GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
 				
 			}
 
 		}
+
 
 
 

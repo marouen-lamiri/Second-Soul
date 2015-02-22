@@ -1,0 +1,318 @@
+using UnityEngine;
+using System.Collections;
+
+public class ClientNetwork : ParentNetwork {
+	
+	public bool isConnectedToServer = false;
+	
+
+
+//	public Sorcerer sorcerer;
+//	public Fighter fighter;
+
+
+	
+	private static Vector3 sorcererPositionAfterMapCreation;
+	private bool sorcererPositionWasUpdated; // ... AfterMapGeneration;
+	private bool focusCorrectPlayerWasDone;
+	private int framesToWaitForFocusCorrectCharacter;
+
+	public GUIStyle style;
+	public GUIStyle labelStyle;
+	public GUIStyle background;
+	float backgroundBox = 50f;
+
+	bool displayChat;
+
+	public void Awake() {
+
+<<<<<<< HEAD
+=======
+		networkWindowX = Screen.width - 500;
+		networkWindowY = 10;
+		networkWindowButtonWidth = 150;
+		networkWindowButtonHeight = 25;
+		//AddNetworkView();
+		framesToWait = 0;
+		playerWasCreated = false;
+		sorcererWasCreated = false;
+		bothPlayerAndSorcererWereFound = false;
+>>>>>>> Development
+
+		sorcererPositionAfterMapCreation = Vector3.zero;
+		focusCorrectPlayerWasDone = false;
+
+		framesToWaitForFocusCorrectCharacter = 0;
+
+	} 
+
+	public void Start() {
+	}
+
+	public void Update() {
+
+<<<<<<< HEAD
+=======
+		// toggle display chat window:
+		if(Input.GetKeyDown ("n")){
+			displayChat = !displayChat;
+		}
+
+
+
+		// generate the map only after the players have been created (because they are needed for some reason for the map generation code:
+		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
+		if(serverAndClientAreBothConnected && Application.loadedLevelName == "StartScreen" && bothPlayerAndSorcererWereFound) {	// && Network.isServer
+>>>>>>> Development
+
+
+
+
+		//===================
+		// client --> logic for creating (different types of) sorcerer:
+		if (Application.loadedLevelName == "StartScreen" && !sorcererWasCreated) { //Network.isClient && 
+
+			//  --> moved out of if(isClient), because we still want the server to be able to determine the sorcerer's type for 1 player mode.
+			if(classChooser.sorcererSelectionStrings[classChooser.sorcererSelection]=="Mage"){
+				//				sorcerer = (Sorcerer) Instantiate(classChooser.mage,Vector3.zero,Quaternion.identity);
+				sorcererPrefab = classChooser.mage;
+			}
+			else if(classChooser.sorcererSelectionStrings[classChooser.sorcererSelection]=="Druid"){
+				//				sorcerer = (Druid) Instantiate(classChooser.druid,Vector3.zero,Quaternion.identity);
+				sorcererPrefab = classChooser.druid;
+			}
+			else/*(sorcererSelectionStrings[sorcererSelection]=="Priest")*/{
+				//				sorcerer = (Priest) Instantiate(classChooser.priest,Vector3.zero,Quaternion.identity);
+				sorcererPrefab = classChooser.priest;
+			}
+
+			// if player choose to play as Client, instantiate sorcerer:
+			if(Network.isClient){
+				transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
+				Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+				sorcererWasCreated = true;
+			}
+
+
+		} 
+
+
+
+
+
+	}
+	
+	[RPC]
+	private void AddNetworkView() {
+		// this is to dynamically add a networkview at runtime, can be useful for example if creating players or other game objects at runtime.
+		
+		//        gameObject.AddComponent<NetworkView>();
+		//        gameObject.networkView.observed = this;
+		//        gameObject.networkView.stateSynchronization = NetworkStateSynchronization.ReliableDeltaCompressed;
+		//        gameObject.networkView.viewID = Network.AllocateViewID();
+	}
+	
+
+	void OnGUI() {
+
+<<<<<<< HEAD
+=======
+		GUI.skin.button = style;
+
+		// button to connect as server:
+		if (Network.peerType == NetworkPeerType.Disconnected) {
+			GUI.Box(new Rect(backgroundBox, backgroundBox, Screen.width - backgroundBox * 2, Screen.height - backgroundBox * 2),"<Size=38>Second Soul</Size>", background);
+			GUI.Label (new Rect(Screen.width / 2 - 150, Screen.height/2 + 25, 300, 50),"<Size=30>Network Choices</Size>",style);
+			if (GUI.Button (new Rect (Screen.width / 2 - 225, Screen.height/2 + 100, 150, 50), "Connect as a server", style)) {
+				// connect:
+				Network.InitializeServer (10, port, false);
+				displayChat = true;
+			}
+		}
+		
+		// after connecting: if you're a server:
+		if(displayChat) {
+			if (Network.peerType == NetworkPeerType.Server) {
+				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, networkWindowButtonWidth, networkWindowButtonHeight), "Server", labelStyle);
+				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 1, networkWindowButtonWidth, networkWindowButtonHeight), "Clients attached: " + Network.connections.Length, labelStyle);
+				
+				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 2, networkWindowButtonWidth, networkWindowButtonHeight), "Quit server")) {
+					Network.Disconnect(); 
+					Application.Quit();
+				}
+				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 3, networkWindowButtonWidth, networkWindowButtonHeight), "Send hi to client"))
+					SendInfoToClient("Hello client!");
+				
+				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 4, networkWindowButtonWidth, networkWindowButtonHeight), "Remove Client")) {
+					//find the sorcerer:
+					Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;
+					//1-create the sorcerer copy --> Instantiate(...) 
+					//Instantiate (sorcerer);
+					//2-Network.Destroy the other one
+					// Network.Destroy(GetComponent<NetworkView>().viewID);
+					//Destroy(sorcerer.gameObject);
+					//3- remove the client from the network -- disconnect it.
+					if (Network.connections.Length == 1) {
+						Debug.Log("Disconnecting: " + Network.connections[0].ipAddress + ":" + Network.connections[0].port);
+						Network.CloseConnection(Network.connections[0], true);
+					} else {
+						print ("Error on disconnecting client: More than one client is connected -- this is not allowed.");
+					}
+					//Instantiate (sorcerer);
+				}
+				
+				
+				GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, 300, 125), _messageLog, style);
+				
+				// that's good for both: 
+				if (Network.peerType == NetworkPeerType.Disconnected)
+				{
+					//GUI.Label(new Rect(10, 10, 200, 20), "Status: Disconnected");
+					print ("Status: Disconnected.");
+				}
+				
+			}
+>>>>>>> Development
+
+
+
+		// =========================
+		
+		// button to connect as a client:
+		if (Network.peerType == NetworkPeerType.Disconnected) {
+			if (GUI.Button (new Rect (Screen.width / 2 + 75, Screen.height / 2 + 100, 150, 50), "Connect as a Client")) {
+				ConnectToServer ();
+				displayChat = true;
+
+			}
+		}
+		
+		// after connecting if you're a client:
+		if(displayChat) {
+			if (Network.peerType == NetworkPeerType.Client) {
+				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client", labelStyle);
+				
+				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 1, 150, networkWindowButtonHeight), "Logout")) {
+					Network.Disconnect();
+					// also destroy the player game object here, since OnPlayerDisconnected only works on the server side, which means the player will be destroyed for everyone except the one who created it.
+					
+				}
+				
+				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 2, 150, networkWindowButtonHeight), "SendHello to server")) {
+					someInfo = "hello server!";
+					SendInfoToServer(someInfo);
+				}
+				
+				GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
+				
+			}
+
+		}
+
+<<<<<<< HEAD
+
+=======
+		// button to play one player mode:
+		if (Network.peerType == NetworkPeerType.Disconnected) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 75, Screen.height / 2 + 100, 150, 50), "1 Player Mode")) {
+				
+				// connect only the server, no client:
+				Network.InitializeServer (10, port, false);
+				displayChat = true;
+				
+				//network instantiate both the fighter and sorcerer:
+				transform.position = new Vector3(-2,0,0); // put the fighter to the left under the fighter buttons
+				Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+				playerWasCreated = true;
+				
+				// always create the sorcerer before the fighter.
+				transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
+				Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+				sorcererWasCreated = true;
+				
+				lines = Network.Instantiate (linesPrefab,transform.position,transform.rotation,7)as GameObject;
+				
+				
+				// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
+				NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
+				
+				
+			}
+		}
+>>>>>>> Development
+
+		
+	}
+	
+	// for client:
+	private void ConnectToServer() {
+		Network.Connect(serverIP, port);
+		if (!Network.isClient) {
+			//Network.Connect(serverLocalIP,port);
+		}
+	}
+	
+
+
+	// for client:
+	[RPC]
+	void SendInfoToServer(string msg){
+		msg = "CLIENT " + _myNetworkPlayer.guid + ": " + msg;
+		_messageLog += msg + "\n";
+		//someInfo = "Client " + _myNetworkPlayer.guid + ": hello server";
+		networkView.RPC("ReceiveInfoFromClient", RPCMode.Server, msg);
+	}
+	[RPC]
+	void SetPlayerInfo(NetworkPlayer player) {
+		_myNetworkPlayer = player;
+		someInfo = "Player setted";
+		networkView.RPC("ReceiveInfoFromClient", RPCMode.Server, someInfo);
+	}
+	
+	[RPC]
+	void ReceiveInfoFromServer(string someInfo) {
+		_messageLog += someInfo + "\n";
+		
+	}
+	
+	void OnConnectedToServer() {
+		_messageLog += "Connected to server" + "\n";
+		isConnectedToServer = true;
+	}
+	void OnDisconnectedToServer() {
+		_messageLog += "Disconnected from server" + "\n";
+		Network.Destroy (playerPrefab.gameObject);
+		isConnectedToServer = false;
+	}
+	
+
+
+	void OnLevelWasLoaded(int level) {
+	}
+
+	//============= RPC functions called from elsewhere in the code. ====================
+
+	[RPC]
+	public void SetSorcererPositionAfterMapCreation(string position) {
+		string[] positions = position.Split (',');
+		Vector3 positionVector3 = Vector3.zero;
+		positionVector3.x = float.Parse(positions[0]);
+		positionVector3.y = float.Parse(positions[1]);
+		positionVector3.z = float.Parse(positions[2]);
+		
+		Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+		sorcerer.transform.position = positionVector3;
+		sorcererPositionWasUpdated = true;
+		if(sorcerer.transform.position.x > 1.0f || sorcerer.transform.position.x  < -1.0f){
+			//sorcererPositionWasSent = true;
+			networkView.RPC ("setServerBoolean",RPCMode.All); // RPCMode.Server --> now All so that it works in 1 player mode too: server calling iself to set that boolean.
+		}
+	}
+
+
+
+
+
+	
+}
+

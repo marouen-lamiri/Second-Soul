@@ -3,13 +3,15 @@ using System.Collections;
 
 public class LightningStrike : TargetedRangedSkill {
 	
-	public GameObject lightningStrikePrefab;
+	GameObject lightningStrikePrefab;
 	// Use this for initialization
 	void Start () {
 		skillStart ();
 		damageModifier = 4f;
 		damageType = DamageType.Lightning;
 		energyCost = 20;
+
+		lightningStrikePrefab = (GameObject) Resources.Load ("Prefabs/skills/Thunder/Thunder", typeof(GameObject));
 	}
 	
 	// Update is called once per frame

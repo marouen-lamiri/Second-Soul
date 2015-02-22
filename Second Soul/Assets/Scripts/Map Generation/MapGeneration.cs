@@ -19,8 +19,8 @@ public class MapGeneration : MonoBehaviour{
 	List<int> listOfWalls;
 	public static int[,] mapArray;
 	int numberRooms = 5;
-	public static int mapSizeX = 25;
-	public static int mapSizeZ = 25;
+	public static int mapSizeX = 8;
+	public static int mapSizeZ = 8;
 
 	// network:
 	public static Vector3 playerStartPositionVector3;
@@ -100,7 +100,7 @@ public class MapGeneration : MonoBehaviour{
 				    && map [i-1,j-1] != 98){
 					map [i,j] = 98;
 					Vector3 spawnLocation = new Vector3(i*10,0,j*10);
-					enemyfactory.spawn(spawnLocation);
+					enemyfactory.spawnMob(spawnLocation,5);
 					nbrEnemies--;
 					nbrEnemiesByRoom--;
 					if(nbrEnemiesByRoom == 0){

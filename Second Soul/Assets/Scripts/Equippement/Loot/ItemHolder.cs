@@ -19,6 +19,7 @@ public class ItemHolder : MonoBehaviour {
 	}
 	
 	public void getPickedUp(){
+		UnityNotificationBar.UNotify("Obtained " + item.GetType()); //although this might appear false in Mono-Develop, it actually works as an external asset
 		Destroy (gameObject);
 		//Network.Destroy(gameObject);
 	}
