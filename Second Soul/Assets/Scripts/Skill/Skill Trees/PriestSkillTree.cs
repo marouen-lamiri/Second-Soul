@@ -8,6 +8,7 @@ public class PriestSkillTree : SorcererSkillTree {
 	protected SkillTreeNode holyLight;
 	
 	void Awake(){
+		actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		player.skillTree = this;
 	}

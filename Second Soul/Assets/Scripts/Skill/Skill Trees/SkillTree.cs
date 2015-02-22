@@ -54,6 +54,11 @@ public class SkillTree : MonoBehaviour {
 		}
 	}
 	
+	protected void initializeGUI(){
+		position = SkillTreeModel.getPosition();
+		image = SkillTreeModel.getImage();
+	}
+	
 	protected void toggleTab(){
 		isSkillOpen = !isSkillOpen;
 	}
@@ -120,10 +125,14 @@ public class SkillTree : MonoBehaviour {
 	protected void checkTargetAction(){
 		//lock player movement within HUD bounds
 		if(inWidthBoundaries() && inHeightBoundaries()){
+			Debug.Log ("IM IN BOUNDARIES");
 			player.busyHUD = true;
+			Debug.Log ("PLAYER IS BUDY?? " + player.busyHUD);
 		}
 		else{
+			Debug.Log ("IM NOT IN BOUNDARIES");
 			player.busyHUD = false;
+			Debug.Log ("PLAYER IS BUDY?? " + player.busyHUD);
 		}
 		//make sure target is set, and mouse is still in target position (since target doesn't go back null)
 		if(target != null && target.position.Contains(mousePositionInSkillTree())){
@@ -141,8 +150,8 @@ public class SkillTree : MonoBehaviour {
 	protected void unlockSkill(SkillTreeNode s){
 		addSkillComponent(s.skillType);
 		// probably not important, remove if not used (both lines)
-		SkillNode newSkill = new SkillNode(s.GetType(), s.skillName, s.skillDesc, s.position, s.icon);
-		player.unlockedSkills.Add(newSkill);
+		//SkillNode newSkill = new SkillNode(s.GetType(), s.skillName, s.skillDesc, s.position, s.icon);
+		//player.unlockedSkills.Add(newSkill);
 	}
 	
 	protected void equipSkill(){
@@ -187,5 +196,9 @@ public class SkillTree : MonoBehaviour {
 	
 	protected bool inHeightBoundaries(){
 		return (Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height);
+	}
+	
+	public void setPlayer(Player p){
+		player = p;
 	}
 }

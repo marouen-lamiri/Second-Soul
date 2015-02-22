@@ -23,7 +23,14 @@ public class Fighter : Player{
 		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 		pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 	}
-	protected void fighterStart(){	
+	protected void fighterStart(){
+		//important that this happens first, other initializations depend on it
+		playerEnabled = true;
+		if (Network.isClient) {
+			Debug.Log("I GET HERE F");
+			playerEnabled = false;
+		}	
+		
 		playerStart ();
 		initializePlayer();
 		initializeLevel();
@@ -31,10 +38,7 @@ public class Fighter : Player{
 		initializeSecondaryStatsBase();
 		initializeSecondaryStats();
 		calculateSecondaryStats();
-		playerEnabled=true;
-		if (Network.isClient) {
-			playerEnabled = false;
-		}
+		
 		health = maxHealth;
 		energy = maxEnergy;
 		

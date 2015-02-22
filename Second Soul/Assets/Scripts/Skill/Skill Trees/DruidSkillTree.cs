@@ -8,6 +8,7 @@ public class DruidSkillTree : SorcererSkillTree {
 	protected SkillTreeNode windLance;
 	
 	void Awake(){
+		actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		player.skillTree = this;
 	}

@@ -24,18 +24,22 @@ public class Sorcerer : Player {
 	}
 
 	protected void sorcererStart(){
-		playerStart ();
+		//important that this happens first, other initializations depend on it
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		playerEnabled = false;
+		if (Network.isClient) {
+			Debug.Log("I GET HERE S");
+			playerEnabled = true;
+			fighter.playerEnabled = false;
+		}
+		
+		playerStart ();
 		initializePlayer();
 		initializeLevel();
 		initializePrimaryStats();
 		initializeSecondaryStatsBase();
 		initializeSecondaryStats();
 		calculateSecondaryStats();
-		playerEnabled=true;
-		if (Network.isClient) {
-			fighter.playerEnabled=false;
-		}
 		health = maxHealth;
 		fighter.energy = fighter.maxEnergy;
 		
@@ -139,8 +143,8 @@ public class Sorcerer : Player {
 		spellCriticalDamage += intelligence * spCritDmgBase;
 		
 		spellPower += intelligence * spPowerBase;
-
 		fighter.maxEnergy += spirit * enBase;//not sure of this. we may ned to adjust who holds energy because fighter holds it atm
+		
 		energyRegen += spirit * enRegBase;
 		
 		fighter.energy = fighter.maxEnergy;

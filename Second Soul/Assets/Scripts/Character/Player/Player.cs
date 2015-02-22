@@ -22,6 +22,7 @@ public abstract class Player : Character {
 	public ActionBar actionBar;
 	
 	public int usableSkillPoints;
+	//remove if not used anymore
 	public List<SkillNode> unlockedSkills;
 	
 	public ISkill activeSkill1;
@@ -45,13 +46,13 @@ public abstract class Player : Character {
 		busyHUD = false;
 		characterStart ();
 		//maybe useless remove if it is
-		unlockedSkills = new List<SkillNode>();
+		//unlockedSkills = new List<SkillNode>();
 		// FIXME: THIS NEEDS TO BE ZERO AFTER TESTING, SKILL POINTS COME FROM LEVELING
 		usableSkillPoints = 4;
+		initializeActionBar();
 		//temporarySkills();
 		sphere.renderer.material.color = Color.blue;
-		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
-		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
+		initiazlieNetwork();
 	}
 	// Update is called once per frame
 	void FixedUpdate(){
@@ -64,6 +65,15 @@ public abstract class Player : Character {
 	
 	protected virtual void initializeSkillTree(){
 		skillTreeGameObject = GameObject.Find("Skill Tree");
+	}
+	
+	protected void initializeActionBar(){
+		if(playerEnabled){
+			Debug.Log("I GET HERE AB");
+			actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
+			actionBar.setPlayer(this);
+			actionBar.initializeBasicAttack();
+		}
 	}
 	
 	public abstract void levelUp();
@@ -80,6 +90,11 @@ public abstract class Player : Character {
 		calculateNextLevelXP();
 	}
 	
+	protected void initiazlieNetwork(){
+		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
+		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
+	}
+	
 	//REMOVE THIS ONCE ACTION BAR SKILL PLACING IS DYNAMIC
 	/*private void temporarySkills(){
 		unlockedSkills.Add(new SkillNode(typeof(BasicMelee), "Basic Melee", "...", new Rect(0,0,0,0), FireballModel.getImage()));
@@ -89,7 +104,7 @@ public abstract class Player : Character {
 	
 	protected void playerLogic () {
 		if (!isDead()){
-			//Debug.Log("am i busy: " + busyHUD);
+			Debug.Log( this.GetType() + " am i busy: " + busyHUD);
 			// bool doesnt work...
 			if(!busyHUD){
 				attackLogic ();

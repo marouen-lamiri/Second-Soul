@@ -17,6 +17,7 @@ public class ActionBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		player = null;
 		position.x = Screen.width * 0.5f - position.width * 0.5f;
 		position.y = Screen.height - position.height;
 		activeSkill1 = null;
@@ -25,9 +26,9 @@ public class ActionBar : MonoBehaviour {
 		activeSkill4 = null;
 		activeSkill5 = null;
 		activeSkill6 = null;
-		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		player.actionBar = this;
-		initializeBasicAttack();
+		//player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		//player.actionBar = this;
+		//initializeBasicAttack();
 		//for testing only
 		//initFakeSkills();
 	}
@@ -38,9 +39,11 @@ public class ActionBar : MonoBehaviour {
 	}
 	
 	void OnGUI(){
-		drawActionBar();
-		drawSkillNodes();
-		detectPlayerActionBlocked();
+		if(player != null){
+			drawActionBar();
+			drawSkillNodes();
+			detectPlayerActionBlocked();
+		}
 	}
 	
 	//for testing only
@@ -59,7 +62,7 @@ public class ActionBar : MonoBehaviour {
 		activeSkill3.position.y = Screen.height - 53;
 	}*/
 	
-	private void initializeBasicAttack(){
+	public void initializeBasicAttack(){
 		SkillNode basicAttack;
 		// this doesn't work, find way to type check parent or children...
 		if(player.GetType().IsSubclassOf(typeof(Fighter))){
@@ -68,7 +71,7 @@ public class ActionBar : MonoBehaviour {
 		}
 		else{
 			basicAttack = new SkillNode(typeof(BasicRanged), "Basic Ranged", "...",
-			                            new Rect(0,0,0,0), BasicRangeModel.getImage());	
+			                            new Rect(0,0,0,0), BasicRangeModel.getImage());
 		}
 		addSkillComponent(basicAttack.skillType);
 		setActiveSkill5(basicAttack);
@@ -166,6 +169,10 @@ public class ActionBar : MonoBehaviour {
 	
 	protected bool inHeightBoundaries(){
 		return (Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height);
+	}
+	
+	public void setPlayer(Player p){
+		player = p;
 	}
 
 }

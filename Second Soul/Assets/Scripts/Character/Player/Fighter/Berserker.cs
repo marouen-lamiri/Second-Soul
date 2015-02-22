@@ -6,18 +6,21 @@ public class Berserker : Fighter {
 	// Use this for initialization
 	void Start () {
 		fighterStart ();
+		initializeSkillTree();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		fighterUpdate ();
-		initializeSkillTree();
 	}
 	
 	protected override void initializeSkillTree(){
-		base.initializeSkillTree();
-		//temporary comment
-		//skillTreeGameObject.AddComponent(typeof(BerserkerSkillTree));
+		if(playerEnabled){
+			base.initializeSkillTree();
+			skillTreeGameObject.AddComponent(typeof(BerserkerSkillTree));
+			skillTree = (BerserkerSkillTree) GameObject.FindObjectOfType (typeof (BerserkerSkillTree));
+			skillTree.setPlayer(this);
+		}
 	}
 
 	protected override void initializePrimaryStats(){

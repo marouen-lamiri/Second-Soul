@@ -16,7 +16,7 @@ public class Inventory : Storage
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		player2 = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		//was this next line supposed to be commented out? it was, but it seems essential. Not having it broke loot pickup for me. Was this meant to be initialized elsewhere?
-		player.inventory = this;
+		//player.inventory = this;
 	}
 	
 	void Start () {

@@ -43,8 +43,8 @@ public class ChooseClass : MonoBehaviour {
 	}
 	
 	protected void initializeGameTabs(){
-		GameObject gameTabs = GameObject.Find("Game Tabs");
-		DontDestroyOnLoad(gameTabs);
+		GameObject playerTabs = GameObject.Find("Player Tabs");
+		DontDestroyOnLoad(playerTabs);
 	}
 
 	void OnGUI () {

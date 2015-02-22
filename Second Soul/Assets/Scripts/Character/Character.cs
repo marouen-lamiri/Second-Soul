@@ -101,6 +101,7 @@ public abstract class Character : MonoBehaviour {
 
 	private int currentWaypoint;
 	
+	// Shouldn't this just be in Player?
 	public bool playerEnabled;
 	
 	public Character target;
