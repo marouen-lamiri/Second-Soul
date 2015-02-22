@@ -134,7 +134,7 @@ public class ClientNetwork : MonoBehaviour {
 		}
 
 		// make chat control disappear after a few seconds, but keep the textarea:
-		print ("HAI --> "+GUI.GetNameOfFocusedControl() == "ChatBox");
+		//print ("HAI --> "+GUI.GetNameOfFocusedControl());
 		if(displayChat == true && framesCounterBeforeFadeOutChat < numberOfFramesToWaitBeforeFadingOutChat ) { // GUI.GetNameOfFocusedControl() != "ChatBox" --> not working !
 			framesCounterBeforeFadeOutChat++;
 		}
@@ -331,7 +331,10 @@ public class ClientNetwork : MonoBehaviour {
 				GUI.SetNextControlName("ChatBox");
 				textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style // "box"
 
-				var isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
+				//bool isEnterPressed = (Event.current.Equals (Event.KeyboardEvent("return")));
+				//bool isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
+				bool isEnterPressed = (Event.current.type == EventType.keyUp) && (Event.current.keyCode == KeyCode.Return);
+				//GUI.GetNameOfFocusedControl() == "input" && Event.current.keyCode == KeyCode.Return
 				if (isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box") && textFieldString != "") {
 					//_messageLog += textFieldString + "\n";
 					SendInfoToClient(textFieldString);
@@ -372,7 +375,8 @@ public class ClientNetwork : MonoBehaviour {
 				GUI.SetNextControlName("ChatBox");
 				textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style // "box"
 
-				var isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
+				//var isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
+				bool isEnterPressed = (Event.current.type == EventType.keyUp) && (Event.current.keyCode == KeyCode.Return);
 				if ((isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box")) && textFieldString != "") {
 					//_messageLog += textFieldString + "\n";
 					SendInfoToServer(textFieldString);
