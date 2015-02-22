@@ -48,12 +48,12 @@ public class Sorcerer : Player {
 		activeSkill5 = null;
 		activeSkill6 = null;
 		//remove this soon (except maybe basic ranged)
-		//activeSkill1 = (BasicRanged)controller.GetComponent<BasicRanged>();
-		/*activeSkill2 = (FireballSkill)controller.GetComponent<FireballSkill>();
-		activeSkill3 = (IceShardSkill)controller.GetComponent<IceShardSkill>();
-		activeSkill4 = (CycloneSkill)controller.GetComponent<CycloneSkill>();
-		activeSkill5 = (LightningStrike)controller.GetComponent<LightningStrike>();
-		activeSkill6 = (Heal)controller.GetComponent<Heal>();*/
+		//activeSkill1 = (BasicRanged)GetComponent<BasicRanged>();
+		/*activeSkill2 = (FireballSkill)GetComponent<FireballSkill>();
+		activeSkill3 = (IceShardSkill)GetComponent<IceShardSkill>();
+		activeSkill4 = (CycloneSkill)GetComponent<CycloneSkill>();
+		activeSkill5 = (LightningStrike)GetComponent<LightningStrike>();
+		activeSkill6 = (Heal)GetComponent<Heal>();*/
 		//activeSkill1.setCaster (this);
 		/*activeSkill2.setCaster (this);
 		activeSkill3.setCaster (this);
@@ -66,7 +66,7 @@ public class Sorcerer : Player {
 		database.readPrimaryStats();
 	}
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		sorcererUpdate ();
 	}
 

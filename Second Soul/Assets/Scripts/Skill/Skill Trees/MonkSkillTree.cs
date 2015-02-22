@@ -33,6 +33,7 @@ public class MonkSkillTree : FighterSkillTree {
 			drawSkillTreeNodes();
 			onSkillNodeHover();
 			checkTargetAction();
+			equipSkill();
 		}
 	}
 	

@@ -9,7 +9,7 @@ public class ApplicationQuit : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (Input.GetKeyDown ("escape")) {
 			Application.Quit();
 		}

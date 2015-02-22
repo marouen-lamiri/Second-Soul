@@ -3,10 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 
 public abstract class Character : MonoBehaviour {
+
+	//scripts of the same GameObject
+	Seek seekScript;
+	Arrive arriveScript;
+	SteeringAgent steeringScript;
+	Align alignScript;
+	SorcererAI ai;
 	public CharacterController controller;
+	private CharacterNetworkScript playerNetworkScript;
+
+	//pathfinding related
 	protected Grid grid;
 	protected PathFinding pathing;
 	private List<Vector3> path;
+
 	protected GameObject sphere;
 	public int level; // only public for now to see level in inspector
 
@@ -87,9 +98,7 @@ public abstract class Character : MonoBehaviour {
 	
 	
 	*/
-	
-	
-	//public NavMeshAgent meshAgent;
+
 	private int currentWaypoint;
 	
 	public bool playerEnabled;
@@ -118,7 +127,6 @@ public abstract class Character : MonoBehaviour {
 	public AnimationClip runClip;
 	public AnimationClip attackClip;
 	public AnimationClip dieClip;
-	private CharacterNetworkScript playerNetworkScript;
 	public GameObject clickAnimation;
 	GameObject clickedPosition;
 	Vector3 previousGoal;
@@ -129,21 +137,27 @@ public abstract class Character : MonoBehaviour {
 		characterStart ();
 	}
 	protected void characterStart(){
+		//script of same GameObject initiation
+		seekScript = GetComponent<Seek> ();
+		arriveScript = GetComponent<Arrive> ();
+		steeringScript = GetComponent<SteeringAgent> ();
+		alignScript = GetComponent<Align> ();
+		ai = GetComponent<SorcererAI>();
+		playerNetworkScript = GetComponent<CharacterNetworkScript>();
+
 		sphere = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 		sphere.renderer.castShadows = false;
 		sphere.renderer.receiveShadows = false;
 		sphere.transform.parent = transform;
-		//was going to scale to 0.1f, but scaling the map down didn't seem to work
 		sphere.transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
 		sphere.gameObject.layer = LayerMask.NameToLayer ("Minimap");
 
-		playerNetworkScript = GetComponent<CharacterNetworkScript>();
 
 		accuracy = 0.8f;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		characterUpdate ();
 	}
 	protected void characterUpdate(){
@@ -320,40 +334,56 @@ public abstract class Character : MonoBehaviour {
 	}
 
 	private void moveToPosition(){
-		//Player moving
-		pathing.findPath(transform.position, goalPosition);
-		if(previousGoal == null){
-			previousGoal = goalPosition;
-		}
-		if(transform.tag != "Enemy" && Vector3.Distance(previousGoal, goalPosition) > 2){
-			previousGoal = goalPosition;
-			clickedPosition = Network.Instantiate (clickAnimation, goalPosition, Quaternion.Euler(180,0,0), 4) as GameObject;
-
-		}
-		List<Vector3> path = grid.worldFromNode(grid.path);
+		//getting next position
 		Vector3 destination;
-		Quaternion newRotation;
-		if (path.Count > 1) {
-			destination = path [1];
-			newRotation = Quaternion.LookRotation (destination - transform.position);
+		//temporary comment
+		bool hit = Physics.Linecast(transform.position, goalPosition);
+//		bool hit = false;
+
+		if (!hit) {
+			destination = goalPosition;
+			arriveScript.enabled = (steeringScript.Velocity.magnitude>=speed/2)?true:false;
+			steeringScript.setTarget (goalPosition);
+		}
+		else if(grid.nodeFromWorld(goalPosition).walkable != true || Physics.Linecast(transform.position, goalPosition, 1000)){
+			animateIdle();
+			return;
 		}
 		else {
-			destination = goalPosition;
-			newRotation = Quaternion.LookRotation (goalPosition - transform.position);
+			pathing.findPath(transform.position, goalPosition);
+			if(previousGoal == null){
+				previousGoal = goalPosition;
+			}
+
+			List<Vector3> path = grid.worldFromNode(grid.path);
+			if(path == null){
+				destination = transform.position;
+			}
+
+			if (path.Count > 1) {
+				destination = path [1];//because path[0] is where you are now, and path[1] is the immediately next step
+				arriveScript.enabled = false;
+			}
+			else {//this should never happen, but its for completion. I could be wrong. but I believe if the avatar is about to approach his final destination, he should have clear sight of it
+				destination = goalPosition;
+				arriveScript.enabled = true;
+			}
+
+			steeringScript.setTarget (destination);
 		}
-		
-		newRotation.x = 0;
-		newRotation.z = 0;
-		
-		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime *25 );
-		//transform.rotation = newRotation;
-		if( Vector3.Distance(goalPosition, transform.position) < 5 ){
-			controller.SimpleMove (transform.forward * (speed-2));
+
+		if(transform.tag != "Enemy" && (ai == null || !ai.enabled) &&Vector3.Distance(previousGoal, goalPosition) > 2){
+			previousGoal = goalPosition;
+			clickedPosition = Instantiate (clickAnimation, goalPosition, Quaternion.Euler(180,0,0)) as GameObject;
+			
 		}
-		else{
-			controller.SimpleMove (transform.forward * speed);
+
+		if (steeringScript.Velocity.magnitude > 0) {
+			alignScript.interpolatedChangeInOrientation (steeringScript.Velocity);
 		}
-		
+
+		steeringScript.steeringUpdate ();
+				
 		animateRun();
 		
 		// networking: event listener to RPC the run anim
@@ -364,7 +394,8 @@ public abstract class Character : MonoBehaviour {
 			print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
 		}
 		//Player not moving
-		if(destination == goalPosition) {
+		//if(destination == goalPosition) {
+		if(steeringScript.Velocity.magnitude==0) {
 			moving = false;
 			animateIdle();
 			

@@ -12,7 +12,7 @@ public class PlayerIcon : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (fighter.playerEnabled) {
 			transform.rotation = fighter.transform.rotation;
 		}

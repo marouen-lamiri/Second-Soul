@@ -9,8 +9,15 @@ public class Berserker : Fighter {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		fighterUpdate ();
+		initializeSkillTree();
+	}
+	
+	protected override void initializeSkillTree(){
+		base.initializeSkillTree();
+		//temporary comment
+		//skillTreeGameObject.AddComponent(typeof(BerserkerSkillTree));
 	}
 
 	protected override void initializePrimaryStats(){

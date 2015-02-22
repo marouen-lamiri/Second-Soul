@@ -6,13 +6,15 @@ public class BerserkMode : TargetedMeleeSkill {
 	bool duration = false;
 	bool casting = true;
 	int addAtt;
-	public GameObject attBuffPrefab;
+	GameObject attBuffPrefab;
 	GameObject attBuff;
 	
 	// Use this for initialization
 	void Start () {
 		skillStart ();
 		energyCost = 10;
+
+		attBuffPrefab = (GameObject)Resources.Load ("Prefabs/skills/Light/Attack buff", typeof(GameObject));
 	}
 	
 	// Update is called once per frame

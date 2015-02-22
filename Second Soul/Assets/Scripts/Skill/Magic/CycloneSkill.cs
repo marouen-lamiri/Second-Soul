@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CycloneSkill : AreaRangedSkill {
 
-	public CycloneBehavior cyclonePrefab;
+	CycloneBehavior cyclonePrefab;
 
 
 	// Use this for initialization
@@ -12,6 +12,8 @@ public class CycloneSkill : AreaRangedSkill {
 		damageModifier = 2f;
 		damageType = DamageType.Physical;
 		energyCost = 20;
+
+		cyclonePrefab = (CycloneBehavior) Resources.Load ("Prefabs/skills/Wind/Cyclone", typeof(CycloneBehavior));
 	}
 	
 	// Update is called once per frame

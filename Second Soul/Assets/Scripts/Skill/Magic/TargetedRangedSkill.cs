@@ -26,5 +26,15 @@ public abstract class TargetedRangedSkill : RangedSkill {
 				return;
 			}
 		}
+		targetCharacter = AIRayCast (targetCharacter);
+
+	}
+
+	protected Character AIRayCast (Character targetCharacter){
+		SorcererAI ai = gameObject.GetComponent<SorcererAI> ();
+		if (ai != null && ai.enabled == true) {
+			return ai.checkNearestEnemy();
+		}
+		return targetCharacter;
 	}
 }

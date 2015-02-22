@@ -9,7 +9,7 @@ public class Knight : Fighter {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		fighterUpdate ();
 	}
 

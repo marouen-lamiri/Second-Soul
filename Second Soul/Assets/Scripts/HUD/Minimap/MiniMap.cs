@@ -80,7 +80,7 @@ public class MiniMap : MonoBehaviour {
 		buildLine (startVector3, endVector3);
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (Network.isServer)
 		{

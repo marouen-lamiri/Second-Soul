@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FireballSkill : ProjectileSkill {
 
-	public FireballBehavior fireballPrefab;
+	FireballBehavior fireballPrefab;
 
 	public float AOEDamage;
 	float AOEDamageModifier;
@@ -21,6 +21,8 @@ public class FireballSkill : ProjectileSkill {
 		damageType = DamageType.Fire;
 
 		energyCost = 20;
+
+		fireballPrefab = (FireballBehavior)Resources.Load ("Prefabs/skills/Fire/Fireball",typeof(FireballBehavior));
 	}
 	
 	// Update is called once per frame

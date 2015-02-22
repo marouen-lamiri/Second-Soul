@@ -26,7 +26,7 @@ public class SkillTree : MonoBehaviour {
 	void Awake(){
 		actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
 		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		player.skillTree = this;
+		//player.skillTree = this;
 	}
 	
 	// Use this for initialization

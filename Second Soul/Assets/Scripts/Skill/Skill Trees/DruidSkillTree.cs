@@ -33,6 +33,7 @@ public class DruidSkillTree : SorcererSkillTree {
 			drawSkillTreeNodes();
 			onSkillNodeHover();
 			checkTargetAction();
+			equipSkill();
 		}
 	}
 	

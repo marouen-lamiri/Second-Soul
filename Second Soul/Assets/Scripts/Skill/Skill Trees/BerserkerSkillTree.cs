@@ -8,8 +8,8 @@ public class BerserkerSkillTree : FighterSkillTree {
 	protected SkillTreeNode berserkRage;
 
 	void Awake(){
-		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		player.skillTree = this;
+		//player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		//player.skillTree = this;
 	}
 	
 	// Use this for initialization
@@ -33,6 +33,7 @@ public class BerserkerSkillTree : FighterSkillTree {
 			drawSkillTreeNodes();
 			onSkillNodeHover();
 			checkTargetAction();
+			equipSkill();
 		}
 	}
 	

@@ -3,12 +3,15 @@ using System.Collections;
 
 public class Heal : TargetedRangedSkill {
 
-	public GameObject healPrefab;
+	GameObject healPrefab;
 	// Use this for initialization
 	void Start () {
 		damageModifier = 2.5f;
 		damageType = DamageType.Physical;
 		energyCost = 20;
+
+		healPrefab = (GameObject)Resources.Load ("Prefabs/skills/Light/Healing", typeof(GameObject));
+
 	}
 	
 	// Update is called once per frame

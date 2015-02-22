@@ -32,5 +32,6 @@ public abstract class ProjectileSkill : RangedSkill {
 				break;
 			}
 		}
+		targetPosition = AIRayCast (targetPosition);
 	}
 }

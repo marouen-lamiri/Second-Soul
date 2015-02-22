@@ -14,6 +14,8 @@ public abstract class Player : Character {
 	public bool attacking;
 
 	public int pickUpRange;
+	
+	protected GameObject skillTreeGameObject;
 
 	public Inventory inventory;
 	public SkillTree skillTree;
@@ -22,12 +24,12 @@ public abstract class Player : Character {
 	public int usableSkillPoints;
 	public List<SkillNode> unlockedSkills;
 	
-	public ISkill activeSkill1; // protected
-	public ISkill activeSkill2; // protected
-	public ISkill activeSkill3; // protected
-	public ISkill activeSkill4; // protected
-	public ISkill activeSkill5; // protected
-	public ISkill activeSkill6; // protected
+	public ISkill activeSkill1;
+	public ISkill activeSkill2;
+	public ISkill activeSkill3;
+	public ISkill activeSkill4;
+	public ISkill activeSkill5;
+	public ISkill activeSkill6;
 	
 	public ItemHolder lootItem;
 
@@ -52,13 +54,18 @@ public abstract class Player : Character {
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
 	}
 	// Update is called once per frame
-	void Update(){
+	void FixedUpdate(){
 		playerUpdate ();
 	}
 	protected void playerUpdate(){
 		characterUpdate ();
 		//Debug.Log (inventory);
 	}
+	
+	protected virtual void initializeSkillTree(){
+		skillTreeGameObject = GameObject.Find("Skill Tree");
+	}
+	
 	public abstract void levelUp();
 	
 	protected void initializePlayer () {
@@ -82,7 +89,7 @@ public abstract class Player : Character {
 	
 	protected void playerLogic () {
 		if (!isDead()){
-			Debug.Log("am i busy: " + busyHUD);
+			//Debug.Log("am i busy: " + busyHUD);
 			// bool doesnt work...
 			if(!busyHUD){
 				attackLogic ();
@@ -125,7 +132,7 @@ public abstract class Player : Character {
 	}
 	
 	protected void attackLogic(){
-		if(!attackLocked() && playerEnabled && !busyHUD && !skillTree.isSkillOpen){
+		if(!attackLocked() && playerEnabled && !busyHUD){
 			if ((Input.GetButtonDown ("activeSkill1") || Input.GetButton ("activeSkill1")) && activeSkill1 != null){
 				activeSkill1.useSkill();
 			}
