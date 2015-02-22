@@ -12,10 +12,22 @@ public class ClientNetwork : MonoBehaviour {
 	
 	public bool isConnectedToServer = false;
 	
-	public int networkWindowX;
-	public int networkWindowY;
+	public int networkWindowX; // 
+	public int networkWindowY; // 
 	public int networkWindowButtonWidth;
 	public int networkWindowButtonHeight;
+
+	int chatTextAreaWidth;
+
+	private int chatInputWidth;
+	private int chatInputHeight;
+	private int chatInputOffsetX;
+	private int chatInputOffsetY;
+
+	private int chatSendButtonWidth; 
+	private int chatSendButtonHeight;
+	private int chatSendButtonOffsetX;
+	private int chatSendButtonOffsetY;
 	
 	private Fighter playerPrefab;
 	private Sorcerer sorcererPrefab;
@@ -44,12 +56,29 @@ public class ClientNetwork : MonoBehaviour {
 
 	bool displayChat;
 
+	string textFieldString = "--";
+	bool selectTextField = true;
+	
+
 	public void Awake() {
 
-		networkWindowX = Screen.width - 500;
-		networkWindowY = 10;
+		networkWindowX = 0;//Screen.width - 500;
+		networkWindowY = Screen.height - 150;//10;
 		networkWindowButtonWidth = 150;
 		networkWindowButtonHeight = 25;
+
+		chatTextAreaWidth = 300;
+		
+		chatInputWidth = 250;
+		chatInputHeight = 25;
+		chatInputOffsetX = 180;
+		chatInputOffsetY = 125;
+		
+		chatSendButtonWidth = chatTextAreaWidth - chatInputWidth; 
+		chatSendButtonHeight = chatInputHeight;
+		chatSendButtonOffsetX = networkWindowX + chatInputOffsetX + chatInputWidth - 25;
+		chatSendButtonOffsetY = networkWindowY + chatInputOffsetY + chatInputHeight - 25;
+
 		//AddNetworkView();
 		framesToWait = 0;
 		playerWasCreated = false;
@@ -63,6 +92,10 @@ public class ClientNetwork : MonoBehaviour {
 		framesToWaitForFocusCorrectCharacter = 0;
 
 		displayChat = true;
+
+		Input.eatKeyPressOnTextFieldFocus = true; // to allow detecting enter key when the chat input field is focused.
+
+
 	} 
 
 	public void Start() {
@@ -244,22 +277,31 @@ public class ClientNetwork : MonoBehaviour {
 					if (Network.connections.Length == 1) {
 						Debug.Log("Disconnecting: " + Network.connections[0].ipAddress + ":" + Network.connections[0].port);
 						Network.CloseConnection(Network.connections[0], true);
-					} else {
+					} else if (Network.connections.Length > 1) {
 						print ("Error on disconnecting client: More than one client is connected -- this is not allowed.");
 					}
 					//Instantiate (sorcerer);
 				}
-				
-				
-				GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, 300, 125), _messageLog, style);
-				
+
 				// that's good for both: 
 				if (Network.peerType == NetworkPeerType.Disconnected)
 				{
 					//GUI.Label(new Rect(10, 10, 200, 20), "Status: Disconnected");
 					print ("Status: Disconnected.");
 				}
-				
+
+				// chat text area:
+				GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
+
+				// chat text input:
+				textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style // "box"
+
+				var isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
+				if (isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box") && textFieldString != "") {
+					//_messageLog += textFieldString + "\n";
+					SendInfoToClient(textFieldString);
+					textFieldString = "";
+				}
 			}
 
 		}
@@ -290,8 +332,20 @@ public class ClientNetwork : MonoBehaviour {
 					someInfo = "hello server!";
 					SendInfoToServer(someInfo);
 				}
-				
-				GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
+
+				// chat text area:
+				//GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
+				GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style
+
+				// chat text input:
+				textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style
+
+				var isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
+				if ((isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box")) && textFieldString != "") {
+					//_messageLog += textFieldString + "\n";
+					SendInfoToServer(textFieldString);
+					textFieldString = "";
+				}
 				
 			}
 
