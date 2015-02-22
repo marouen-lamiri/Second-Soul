@@ -1,25 +1,29 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class Wander : Seek
+public class Wander : MonoBehaviour
 {
 	public GameObject wanderingObject;
-
+	
 	private float timetoChange;
 	public float distanceOfCircle;
 	public float radiusOfCircle;
 	public Vector3 positionOfCircle;
+
+	int maxNeighbourRadius;
     void Start() {
-		
 		timetoChange = 0;
 		wanderingObject = new GameObject ();
 		wanderingObject.name = "Wandering Object";
 		wanderingObject.transform.parent = GameObject.Find ("Wandering Objects").transform;
-		target = wanderingObject.transform.position;
+		wanderingObject.transform.position = transform.position;
+
+		maxNeighbourRadius = 5;
     }
 
-	public void wanderUpdate(){
-		target = wanderingObject.transform.position;
+	public void wanderForward(){
+		Vector3 target = Vector3.zero;
 		timetoChange -= Time.fixedDeltaTime;
 		if(timetoChange <= 0 ){
 			timetoChange = 0.50f;
@@ -43,6 +47,42 @@ public class Wander : Seek
 				target = transform.right * distanceOfCircle;
 			}
 			wanderingObject.transform.position = target;
+		}
+	}
+
+	public void wanderInCircle(){
+		timetoChange -= Time.fixedDeltaTime;
+		if (timetoChange <= 0) {
+			timetoChange = Random.Range (2f, 5f);
+			List<SteeringAgent> neighbours = new List<SteeringAgent>();
+
+			Collider[] hits = Physics.OverlapSphere (transform.position, maxNeighbourRadius);
+			foreach (Collider hit in hits) {
+				SteeringAgent agent = hit.gameObject.GetComponent<SteeringAgent>();
+				if(agent!=null){
+					if(agent!=null)
+						neighbours.Add (agent);
+				}
+			}
+			if(neighbours.Count == 0){
+				wanderingObject.transform.position = transform.position;
+				return;
+			}
+			Vector3 totalVector = new Vector3();
+			foreach(SteeringAgent agent in neighbours){
+				totalVector+= agent.transform.position;
+			}
+			totalVector/=neighbours.Count;
+			float maxRadius = 0f;
+			foreach(SteeringAgent agent in neighbours){
+				float radius = Vector3.Distance(totalVector,agent.transform.position);
+				if(Vector3.Distance(totalVector,agent.transform.position)>maxRadius){
+					maxRadius = radius;
+				}
+			}
+			Vector2 offset = Random.insideUnitCircle*maxNeighbourRadius;
+			Vector3 wanderToPosition = totalVector + new Vector3(offset.x, 0, offset.y);
+			wanderingObject.transform.position = wanderToPosition;
 		}
 	}
 

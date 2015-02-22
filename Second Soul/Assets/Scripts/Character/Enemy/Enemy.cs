@@ -32,6 +32,7 @@ public class Enemy : Character {
 	// scripts of same GameObject
 	protected EnemyNetworkScript enemyNetworkScript;
 	Wander wanderScript;
+	Arrive arriveScript;
 	
 	// Use this for initialization
 	void Start (){
@@ -67,7 +68,7 @@ public class Enemy : Character {
 		enemyNetworkScript = (EnemyNetworkScript)GetComponent<EnemyNetworkScript> ();
 		
 		wanderScript = GetComponent<Wander> ();
-
+		arriveScript = GetComponent<Arrive> ();
 	}
 
 	public override double getDamage(){
@@ -138,16 +139,14 @@ public class Enemy : Character {
 	
 	public void enemyAI(){
 		if(!hasAggro){
-			if(inAwareRadius()){
-				if(hasDirectView()){
-					hasAggro = true;
-				}
+			if(inAwareRadius() && hasDirectView()){
+				hasAggro = true;
 			}
 			else{
-				//wander - commented out now because of performance issues
-				//wanderScript.wanderUpdate();
-				wanderScript.enabled = false;
-			//	startMoving(wanderScript.target);
+				wanderScript.wanderInCircle();
+				if(Vector3.Distance(wanderScript.wanderingObject.transform.position, transform.position)>arriveScript.arriveRadius){
+					startMoving(wanderScript.wanderingObject.transform.position);
+				}
 			}
 		}
 		else if(!inAttackRange (target.transform.position) && hasAggro){

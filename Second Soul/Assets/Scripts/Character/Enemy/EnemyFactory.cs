@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyFactory : MonoBehaviour {
 
 	private Enemy enemyPrefab;
-	
+	int mobRadius;
 	/*private Vector3 spawnPosition = new Vector3 (341, 0, 984);
 	private Vector3 spawnPosition2 = new Vector3 (328, 0, 984);
 	private Vector3 spawnPosition3 = new Vector3 (340, 0, 983);
@@ -21,7 +21,7 @@ public class EnemyFactory : MonoBehaviour {
 	}
 
 	void Start () {
-
+		mobRadius = 3;
 	}
 	
 	// Update is called once per frame

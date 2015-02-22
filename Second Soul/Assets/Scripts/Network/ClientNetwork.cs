@@ -64,9 +64,11 @@ public class ClientNetwork : MonoBehaviour {
 	bool displayChat;
 
 	string textFieldString = "--";
+	string textFieldStringInPreviousFrame;
 	bool selectTextField = true;
 
 	private int framesCounterBeforeFadeOutChat = 0;
+	private int numberOfFramesToWaitBeforeFadingOutChat = 800;
 
 	public void Awake() {
 
@@ -112,7 +114,7 @@ public class ClientNetwork : MonoBehaviour {
 		//styleDefaultTextArea = GUI.skin.textArea; 
 
 		framesCounterBeforeFadeOutChat = 0;
-
+		numberOfFramesToWaitBeforeFadingOutChat = 800;
 	} 
 
 	public void Start() {
@@ -121,18 +123,22 @@ public class ClientNetwork : MonoBehaviour {
 	public void Update() {
 
 		// toggle display chat window:
-		if(Input.GetKeyDown ("n")){
+		if(Input.GetKeyDown ("enter") || Input.GetKeyDown ("return")){ //if(Input.GetKeyDown ("n")){
 			displayChat = !displayChat;
 			framesCounterBeforeFadeOutChat = 0;
-			GUI.FocusControl("ChatBox");
+			GUI.FocusControl("ChatBox"); // not always working why?
+		}
+		if(textFieldString != textFieldStringInPreviousFrame) {
+			framesCounterBeforeFadeOutChat = 0;
+			textFieldStringInPreviousFrame = textFieldString;
 		}
 
 		// make chat control disappear after a few seconds, but keep the textarea:
 		print ("HAI --> "+GUI.GetNameOfFocusedControl() == "ChatBox");
-		if(displayChat == true && framesCounterBeforeFadeOutChat < 400 && GUI.GetNameOfFocusedControl() != "ChatBox") {
+		if(displayChat == true && framesCounterBeforeFadeOutChat < numberOfFramesToWaitBeforeFadingOutChat ) { // GUI.GetNameOfFocusedControl() != "ChatBox" --> not working !
 			framesCounterBeforeFadeOutChat++;
 		}
-		else if(displayChat == true && framesCounterBeforeFadeOutChat >= 400 && GUI.GetNameOfFocusedControl() != "ChatBox") {
+		else if(displayChat == true && framesCounterBeforeFadeOutChat >= numberOfFramesToWaitBeforeFadingOutChat) { //GUI.GetNameOfFocusedControl() != "ChatBox" --> working!
 			displayChat = false;
 		}
 
