@@ -14,11 +14,12 @@ public class ClientNetwork : MonoBehaviour {
 	
 	public int networkWindowX; // 
 	public int networkWindowY; // 
-	public int networkWindowButtonWidth;
-	public int networkWindowButtonHeight;
-
-	int chatTextAreaWidth;
-
+	
+	private int chatTextAreaWidth;
+	private int chatTextAreaHeight;
+	private int chatTextAreaOffsetX;
+	private int chatTextAreaOffsetY;
+	
 	private int chatInputWidth;
 	private int chatInputHeight;
 	private int chatInputOffsetX;
@@ -28,6 +29,11 @@ public class ClientNetwork : MonoBehaviour {
 	private int chatSendButtonHeight;
 	private int chatSendButtonOffsetX;
 	private int chatSendButtonOffsetY;
+
+	public int networkWindowButtonWidth;
+	public int networkWindowButtonHeight;
+	private int networkWindowButtonsOffsetX;
+	private int networkWindowButtonsOffsetY;
 	
 	private Fighter playerPrefab;
 	private Sorcerer sorcererPrefab;
@@ -50,6 +56,7 @@ public class ClientNetwork : MonoBehaviour {
 	private int framesToWaitForFocusCorrectCharacter;
 
 	public GUIStyle style;
+	public GUIStyle styleDefaultTextArea;
 	public GUIStyle labelStyle;
 	public GUIStyle background;
 	float backgroundBox = 50f;
@@ -58,26 +65,34 @@ public class ClientNetwork : MonoBehaviour {
 
 	string textFieldString = "--";
 	bool selectTextField = true;
-	
+
+	private int framesCounterBeforeFadeOutChat = 0;
 
 	public void Awake() {
 
 		networkWindowX = 0;//Screen.width - 500;
 		networkWindowY = Screen.height - 150;//10;
-		networkWindowButtonWidth = 150;
-		networkWindowButtonHeight = 25;
 
 		chatTextAreaWidth = 300;
+		chatTextAreaHeight = 125;
+		chatTextAreaOffsetX = networkWindowX;
+		chatTextAreaOffsetY = networkWindowY;
 		
 		chatInputWidth = 250;
 		chatInputHeight = 25;
-		chatInputOffsetX = 180;
-		chatInputOffsetY = 125;
+		chatInputOffsetX = 8;//180;
+		chatInputOffsetY = chatTextAreaHeight;//125;
 		
 		chatSendButtonWidth = chatTextAreaWidth - chatInputWidth; 
 		chatSendButtonHeight = chatInputHeight;
 		chatSendButtonOffsetX = networkWindowX + chatInputOffsetX + chatInputWidth - 25;
 		chatSendButtonOffsetY = networkWindowY + chatInputOffsetY + chatInputHeight - 25;
+
+		networkWindowButtonWidth = 150;
+		networkWindowButtonHeight = 25;
+		networkWindowButtonsOffsetX = chatTextAreaOffsetX + chatTextAreaWidth;
+		networkWindowButtonsOffsetY = chatTextAreaOffsetY;
+
 
 		//AddNetworkView();
 		framesToWait = 0;
@@ -94,7 +109,9 @@ public class ClientNetwork : MonoBehaviour {
 		displayChat = true;
 
 		Input.eatKeyPressOnTextFieldFocus = true; // to allow detecting enter key when the chat input field is focused.
+		//styleDefaultTextArea = GUI.skin.textArea; 
 
+		framesCounterBeforeFadeOutChat = 0;
 
 	} 
 
@@ -106,8 +123,18 @@ public class ClientNetwork : MonoBehaviour {
 		// toggle display chat window:
 		if(Input.GetKeyDown ("n")){
 			displayChat = !displayChat;
+			framesCounterBeforeFadeOutChat = 0;
+			GUI.FocusControl("ChatBox");
 		}
 
+		// make chat control disappear after a few seconds, but keep the textarea:
+		print ("HAI --> "+GUI.GetNameOfFocusedControl() == "ChatBox");
+		if(displayChat == true && framesCounterBeforeFadeOutChat < 400 && GUI.GetNameOfFocusedControl() != "ChatBox") {
+			framesCounterBeforeFadeOutChat++;
+		}
+		else if(displayChat == true && framesCounterBeforeFadeOutChat >= 400 && GUI.GetNameOfFocusedControl() != "ChatBox") {
+			displayChat = false;
+		}
 
 
 		// generate the map only after the players have been created (because they are needed for some reason for the map generation code:
@@ -255,17 +282,17 @@ public class ClientNetwork : MonoBehaviour {
 		// after connecting: if you're a server:
 		if(displayChat) {
 			if (Network.peerType == NetworkPeerType.Server) {
-				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, networkWindowButtonWidth, networkWindowButtonHeight), "Server", labelStyle);
-				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 1, networkWindowButtonWidth, networkWindowButtonHeight), "Clients attached: " + Network.connections.Length, labelStyle);
+				GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 0, networkWindowButtonWidth, networkWindowButtonHeight), "Server", labelStyle);
+				GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 1, networkWindowButtonWidth, networkWindowButtonHeight), "Clients attached: " + Network.connections.Length, labelStyle);
 				
-				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 2, networkWindowButtonWidth, networkWindowButtonHeight), "Quit server")) {
+				if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 2, networkWindowButtonWidth, networkWindowButtonHeight), "Quit server")) {
 					Network.Disconnect(); 
 					Application.Quit();
 				}
-				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 3, networkWindowButtonWidth, networkWindowButtonHeight), "Send hi to client"))
+				if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 3, networkWindowButtonWidth, networkWindowButtonHeight), "Send hi to client"))
 					SendInfoToClient("Hello client!");
 				
-				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 4, networkWindowButtonWidth, networkWindowButtonHeight), "Remove Client")) {
+				if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 4, networkWindowButtonWidth, networkWindowButtonHeight), "Remove Client")) {
 					//find the sorcerer:
 					Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;
 					//1-create the sorcerer copy --> Instantiate(...) 
@@ -291,9 +318,11 @@ public class ClientNetwork : MonoBehaviour {
 				}
 
 				// chat text area:
-				GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
+				//GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
+				//styleDefaultTextArea
 
 				// chat text input:
+				GUI.SetNextControlName("ChatBox");
 				textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style // "box"
 
 				var isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
@@ -320,25 +349,22 @@ public class ClientNetwork : MonoBehaviour {
 		// after connecting if you're a client:
 		if(displayChat) {
 			if (Network.peerType == NetworkPeerType.Client) {
-				GUI.Label(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client", labelStyle);
+				GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client", labelStyle);
 				
-				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 1, 150, networkWindowButtonHeight), "Logout")) {
+				if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 1, 150, networkWindowButtonHeight), "Logout")) {
 					Network.Disconnect();
 					// also destroy the player game object here, since OnPlayerDisconnected only works on the server side, which means the player will be destroyed for everyone except the one who created it.
 					
 				}
 				
-				if (GUI.Button(new Rect(networkWindowX, networkWindowY + networkWindowButtonHeight * 2, 150, networkWindowButtonHeight), "SendHello to server")) {
+				if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 2, 150, networkWindowButtonHeight), "SendHello to server")) {
 					someInfo = "hello server!";
 					SendInfoToServer(someInfo);
 				}
 
-				// chat text area:
-				//GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
-				GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style
-
 				// chat text input:
-				textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style
+				GUI.SetNextControlName("ChatBox");
+				textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style // "box"
 
 				var isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
 				if ((isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box")) && textFieldString != "") {
@@ -350,6 +376,12 @@ public class ClientNetwork : MonoBehaviour {
 			}
 
 		}
+
+		// chat text area:
+		//GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
+		//GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
+		GUI.TextArea(new Rect(chatTextAreaOffsetX, chatTextAreaOffsetY, chatTextAreaWidth, chatTextAreaHeight), _messageLog, style); // style // "box"
+
 
 		// button to play one player mode:
 		if (Network.peerType == NetworkPeerType.Disconnected) {
