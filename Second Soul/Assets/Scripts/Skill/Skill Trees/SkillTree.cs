@@ -127,12 +127,12 @@ public class SkillTree : MonoBehaviour {
 		if(inWidthBoundaries() && inHeightBoundaries()){
 			Debug.Log ("IM IN BOUNDARIES");
 			player.busyHUD = true;
-			Debug.Log ("PLAYER IS BUDY?? " + player.busyHUD);
+			Debug.Log ("PLAYER IS BUSY?? " + player.busyHUD);
 		}
 		else{
 			Debug.Log ("IM NOT IN BOUNDARIES");
 			player.busyHUD = false;
-			Debug.Log ("PLAYER IS BUDY?? " + player.busyHUD);
+			Debug.Log ("PLAYER IS BUSY?? " + player.busyHUD);
 		}
 		//make sure target is set, and mouse is still in target position (since target doesn't go back null)
 		if(target != null && target.position.Contains(mousePositionInSkillTree())){
