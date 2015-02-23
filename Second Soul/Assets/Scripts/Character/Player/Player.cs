@@ -126,11 +126,12 @@ public abstract class Player : Character {
 		}
 	}
 	
-	void calculateLevel(){
+	public void calculateLevel(){
 		level = (int)(Mathf.Log ((float)totalXP/100f)/Mathf.Log(baseFactorXP));
 	}
-	
-	void calculateNextLevelXP(){
+
+    public void calculateNextLevelXP()
+    {
 		nextLevelXP = (int)((Mathf.Pow(baseFactorXP,(level+1)))*100);
 	}
 	
