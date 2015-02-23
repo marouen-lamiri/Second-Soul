@@ -17,9 +17,11 @@ public class InGameMenu : MonoBehaviour {
 	// Buttons
 	enum menuButtons {Resume, Options, Quit};
 
+	// Length of the 'menuButtons'-enum.
 	int enumLength = System.Enum.GetValues (typeof(menuButtons)).Length;
+
+	// An array with the names of 'menuButtons'-enum.
 	string[] names = System.Enum.GetNames(typeof(menuButtons));
-	string op = System.Enum.GetNames(typeof(menuButtons))[1];
 
 	void Start ()
 	{
@@ -28,7 +30,7 @@ public class InGameMenu : MonoBehaviour {
 	// Update is called once per frame, checks if Escape-button is pressed.
 	void Update ()
 	{
-		
+		// Catches the Esc-button press.
 		if(Input.GetKeyDown("escape"))
 		{
 			GameMenu();
@@ -37,6 +39,7 @@ public class InGameMenu : MonoBehaviour {
 	
 	public void GameMenu ()
 	{
+		// Toggling (hiding/unhiding) the menu.
 		if (isMenuPressed == true)
 		{
 			isMenuPressed = false;
@@ -46,7 +49,8 @@ public class InGameMenu : MonoBehaviour {
 			isMenuPressed = true;
 		}
 	}
-	
+
+	// Returning the height of the box that contains the buttons.
 	private int getBoxHeight (int numberButtons)
 	{
 		
@@ -77,10 +81,7 @@ public class InGameMenu : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		
-		// Iterator variable.
-		//int i = 0;
-		
+
 		// Screen percentage: 50% of the screen.
 		int screenWidth50  = Screen.width / 2;
 		int screenHeight50 = Screen.height / 2;
@@ -94,6 +95,7 @@ public class InGameMenu : MonoBehaviour {
 			// Drawing the Box.
 			GUI.Box(new Rect(boxWidthPosition, boxHeightPosition, BOX_WIDTH, getBoxHeight(enumLength)), /*"Main Menu"*/"");
 
+			// Drawing the Buttons.
 			for (int i = 0; i < enumLength; i++)
 			{
 				if (GUI.Button(new Rect (screenWidth50 - BUTTON_WIDTH / 2, boxHeightPosition + (i * BUTTON_HEIGHT) + ((i + 1) * SPACE_BUTTONS), BUTTON_WIDTH, BUTTON_HEIGHT), names[i]))
