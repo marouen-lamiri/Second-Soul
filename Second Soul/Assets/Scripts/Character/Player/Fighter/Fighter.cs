@@ -174,9 +174,40 @@ public class Fighter : Player{
 	public int getEndurance () {
 		return endurance;
 	}
+
+	public int getLevelXP () {
+		return totalXP;
+	}
+
+	public float getLevelBaseXP(){
+		return baseFactorXP;
+	}
+
+	public int getLevel () {
+		return level;
+	}
 	
+	public int getNextLevel(){
+		return nextLevelXP;
+	}
+
 	public void setEndurance (int iEndurance) {
 		this.endurance = iEndurance;
 	}
 
-}
+	public void setLevel (int iLevel) {
+		this.level = iLevel;
+	}
+	
+	public void setNextLevel(int iBaseFactor){
+		this.nextLevelXP = iBaseFactor;
+	}
+
+	public void setLevelXP (int iLevel) {
+		this.totalXP = iLevel;
+	}
+
+	public void setLevelBaseXP(float iBaseFactor){
+		this.baseFactorXP = iBaseFactor;
+	}
+}	

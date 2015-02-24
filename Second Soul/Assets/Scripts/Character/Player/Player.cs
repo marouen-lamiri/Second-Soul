@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public abstract class Player : Character {
 
 	//variable declaration
-	float baseFactorXP = 1.5f;
+	protected float baseFactorXP = 1.5f;
 	public int totalXP; // total experience --remove public
 	public int nextLevelXP; // xp need for next level --remove public
 	
@@ -115,6 +115,7 @@ public abstract class Player : Character {
 	
 	public override void gainExperience(int experience){
 		totalXP += experience;
+		Debug.Log (experience);
 		if(hasLeveled()){
 			levelUp();
 			calculateLevel();

@@ -42,6 +42,7 @@ public class DatabaseSorcerer : MonoBehaviour {
 		sorcerer.setIntelligence((int) PlayerPrefs.GetInt("Intelligence"));
 		sorcerer.setWisdom((int) PlayerPrefs.GetInt("Wisdom"));
 		sorcerer.setSpirit((int) PlayerPrefs.GetInt("Spirit"));
+		sorcerer.calculateNewPrimaryStats();
 		sorcerer.calculateSecondaryStats();
 		sorcerer.calculateLevel();
 		sorcerer.calculateNextLevelXP();
