@@ -16,6 +16,7 @@ public class SorcererAI : Sorcerer {
 	// Use this for initialization
 	void Start () {
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		//Why does the sorcerer need an object about itself?
 		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		timeOut = 2f;
 	}

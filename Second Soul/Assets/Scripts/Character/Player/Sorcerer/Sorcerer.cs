@@ -26,12 +26,20 @@ public class Sorcerer : Player {
 	protected void sorcererStart(){
 		//important that this happens first, other initializations depend on it
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		//logically the sorcerer shouldn't be an enabled player unless it's the client in a game
 		playerEnabled = false;
 		if (Network.isClient) {
-			Debug.Log("I GET HERE S");
 			playerEnabled = true;
 			fighter.playerEnabled = false;
 		}
+		
+		//inititalize skills before Player start
+		activeSkill1 = null;
+		activeSkill2 = null;
+		activeSkill3 = null;
+		activeSkill4 = null;
+		activeSkill5 = null;
+		activeSkill6 = null;
 		
 		playerStart ();
 		initializePlayer();
@@ -45,26 +53,7 @@ public class Sorcerer : Player {
 		
 		target = null;
 		startPosition = transform.position;
-		activeSkill1 = null;
-		activeSkill2 = null;
-		activeSkill3 = null;
-		activeSkill4 = null;
-		activeSkill5 = null;
-		activeSkill6 = null;
-		//remove this soon (except maybe basic ranged)
-		//activeSkill1 = (BasicRanged)GetComponent<BasicRanged>();
-		/*activeSkill2 = (FireballSkill)GetComponent<FireballSkill>();
-		activeSkill3 = (IceShardSkill)GetComponent<IceShardSkill>();
-		activeSkill4 = (CycloneSkill)GetComponent<CycloneSkill>();
-		activeSkill5 = (LightningStrike)GetComponent<LightningStrike>();
-		activeSkill6 = (Heal)GetComponent<Heal>();*/
-		//activeSkill1.setCaster (this);
-		/*activeSkill2.setCaster (this);
-		activeSkill3.setCaster (this);
-		activeSkill4.setCaster (this);
-		activeSkill5.setCaster (this);
-		activeSkill6.setCaster (this);*/
-		startPosition = transform.position;
+	
 		//networking:
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
 		database.readPrimaryStats();

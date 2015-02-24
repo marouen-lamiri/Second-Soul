@@ -26,6 +26,8 @@ public class ActionBar : MonoBehaviour {
 		activeSkill4 = null;
 		activeSkill5 = null;
 		activeSkill6 = null;
+		
+		// legacy code
 		//player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		//player.actionBar = this;
 		//initializeBasicAttack();
@@ -64,7 +66,7 @@ public class ActionBar : MonoBehaviour {
 	
 	public void initializeBasicAttack(){
 		SkillNode basicAttack;
-		// this doesn't work, find way to type check parent or children...
+		
 		if(player.GetType().IsSubclassOf(typeof(Fighter))){
 			basicAttack = new SkillNode(typeof(BasicMelee), "Basic Melee", "...",
 			                            new Rect(0,0,0,0), BasicMeleeModel.getImage());

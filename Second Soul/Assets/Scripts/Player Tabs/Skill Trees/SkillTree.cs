@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class SkillTree : MonoBehaviour {
+public abstract class SkillTree : MonoBehaviour {
 
 	protected Player player;
 	protected ActionBar actionBar;
@@ -24,13 +24,15 @@ public class SkillTree : MonoBehaviour {
 	
 	
 	void Awake(){
-		actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
-		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		//legacy now children handle it
+		//actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
+		//player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		//player.skillTree = this;
 	}
 	
 	// Use this for initialization
 	void Start () {
+		//legacy now children handle it
 		isSkillOpen = false;
 		skillTree = new List<SkillTreeNode>();
 		setNodePositionOffsets();

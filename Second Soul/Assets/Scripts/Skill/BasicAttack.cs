@@ -14,7 +14,7 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 
 	// Use this for initialization
 	void Start () {
-		skillStart ();
+		//skillStart ();
 	}
 
 	// Update is called once per frame

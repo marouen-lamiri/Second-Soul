@@ -22,8 +22,6 @@ public abstract class Player : Character {
 	public ActionBar actionBar;
 	
 	public int usableSkillPoints;
-	//remove if not used anymore
-	public List<SkillNode> unlockedSkills;
 	
 	public ISkill activeSkill1;
 	public ISkill activeSkill2;
@@ -45,8 +43,7 @@ public abstract class Player : Character {
 	protected void playerStart(){
 		busyHUD = false;
 		characterStart ();
-		//maybe useless remove if it is
-		//unlockedSkills = new List<SkillNode>();
+		
 		// FIXME: THIS NEEDS TO BE ZERO AFTER TESTING, SKILL POINTS COME FROM LEVELING
 		usableSkillPoints = 4;
 		initializeActionBar();
@@ -69,10 +66,9 @@ public abstract class Player : Character {
 	
 	protected void initializeActionBar(){
 		if(playerEnabled){
-			Debug.Log("I GET HERE AB");
 			actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
-			actionBar.findPlayer(this.GetType());
-			//actionBar.setPlayer(this);
+			//actionBar.findPlayer(this.GetType());
+			actionBar.setPlayer(this);
 			actionBar.initializeBasicAttack();
 		}
 	}
