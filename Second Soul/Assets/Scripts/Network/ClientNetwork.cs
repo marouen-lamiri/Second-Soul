@@ -59,7 +59,7 @@ public class ClientNetwork : MonoBehaviour {
 	public GUIStyle styleDefaultTextArea;
 	public GUIStyle labelStyle;
 	public GUIStyle background;
-	float backgroundBox = 50f;
+	float backgroundBox = 100f;
 
 	bool displayChat;
 
@@ -278,8 +278,9 @@ public class ClientNetwork : MonoBehaviour {
 
 		if(!Application.isLoadingLevel){
 			// button to connect as server:
+			background.fontSize = 100 * Screen.height/598;
 			if (Network.peerType == NetworkPeerType.Disconnected) {
-				GUI.Box(new Rect(backgroundBox, backgroundBox, Screen.width - backgroundBox * 2, Screen.height - backgroundBox * 2),"<Size=38>Second Soul</Size>", background);
+				GUI.Box(new Rect(0.1f, 0.1f, Screen.width - 0.1f, Screen.height - 0.1f),"Second Soul", background);
 				GUI.Label (new Rect(Screen.width / 2 - 150, Screen.height/2 + 25, 300, 50),"<Size=30>Network Choices</Size>",style);
 				if (GUI.Button (new Rect (Screen.width / 2 - 225, Screen.height/2 + 100, 150, 50), "Connect as a server", style)) {
 					// connect:
@@ -359,7 +360,7 @@ public class ClientNetwork : MonoBehaviour {
 			}
 			
 			// after connecting if you're a client:
-			if(displayChat) {
+			if(displayChat &&  !(Application.loadedLevelName != "StartScreen")) {
 				if (Network.peerType == NetworkPeerType.Client) {
 					GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client", labelStyle);
 					

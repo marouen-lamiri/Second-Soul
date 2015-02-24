@@ -4,8 +4,13 @@ using System.Collections;
 public class Loading: MonoBehaviour
 {
 	public Texture2D texture;
+	public Texture2D fullBar;
+	public Texture2D emptyBar;
 	static Loading instance;
-	bool checkState;
+	static bool checkState;
+	float halfBar = 200;
+	float offset = 90;
+	static float BarFullness;
 
 
 	void Awake(){
@@ -15,7 +20,6 @@ public class Loading: MonoBehaviour
 			return;
 		}
 		instance = this;
-		Debug.Log (animation);
 		gameObject.AddComponent<GUITexture>().enabled = false;
 		guiTexture.texture = texture;
 		transform.position = new Vector3(0.5f, 0.5f, 1f);
@@ -24,17 +28,19 @@ public class Loading: MonoBehaviour
 
 	void Update(){
 		if(!Application.isLoadingLevel){
+			BarFullness = 0;
 			hide();
-			checkState = false;
 		}
 		else{
-			checkState = true;
+			BarFullness = Application.GetStreamProgressForLevel(1);
 		}
 	}
 
 	void OnGUI(){
 		if(checkState){
-
+			GUI.Label (new Rect(Screen.width/2 -25, Screen.height/2 - 25, 50, 50), "Loading: " + Application.GetStreamProgressForLevel(1) * 99 + "%");
+			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar,  Screen.height/2 + 15, BarFullness * (halfBar + halfBar), 10), fullBar);
+			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar - offset/2,  Screen.height/2 + 10 , halfBar + halfBar + offset, 20), emptyBar);
 		}
 	}
 
@@ -43,6 +49,8 @@ public class Loading: MonoBehaviour
 		{
 			return;
 		}
+		BarFullness = Application.GetStreamProgressForLevel(1);
+		checkState = true;
 		instance.guiTexture.enabled = true;
 	}
 
@@ -51,6 +59,8 @@ public class Loading: MonoBehaviour
 		{
 			return;
 		}
+		BarFullness = 0;
+		checkState = false;
 		instance.guiTexture.enabled = false;
 	}
 	static bool InstanceExists(){
