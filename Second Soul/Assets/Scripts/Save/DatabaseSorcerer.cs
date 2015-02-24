@@ -8,9 +8,11 @@ public class DatabaseSorcerer : MonoBehaviour {
 	int count;
 	public Character player;
 	private Sorcerer sorcerer;
+	private Fighter fighter;
 	
 	void Start () {
 		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 	}
 	
 	// Update is called once per frame
@@ -26,18 +28,22 @@ public class DatabaseSorcerer : MonoBehaviour {
 	}
 	
 	void savePrimaryStats(){
-//		Debug.Log ("Save the stats of the " + player.name);
+		//		Debug.Log ("Save the stats of the " + player.name);
 		PlayerPrefs.SetInt ("Intelligence", sorcerer.getIntelligence ());
 		PlayerPrefs.SetInt ("Wisdom", sorcerer.getWisdom ());
 		PlayerPrefs.SetInt ("Spirit", sorcerer.getSpirit ());
 	}
 	
 	public void readPrimaryStats(){
-//		Debug.Log ("Read the stats of the " + player.name);
+		if(fighter == null) {
+			fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		}
 		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		sorcerer.setIntelligence((int) PlayerPrefs.GetInt("Intelligence"));
 		sorcerer.setWisdom((int) PlayerPrefs.GetInt("Wisdom"));
 		sorcerer.setSpirit((int) PlayerPrefs.GetInt("Spirit"));
 		sorcerer.calculateSecondaryStats();
+		sorcerer.calculateLevel();
+		sorcerer.calculateNextLevelXP();
 	}
 }

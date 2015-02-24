@@ -35,6 +35,7 @@ public class DatabaseFighter : MonoBehaviour {
 		fighter.setDexterity((int) PlayerPrefs.GetInt("Dexterity"));
 		fighter.setEndurance((int) PlayerPrefs.GetInt("Endurance"));
 		fighter.calculateSecondaryStats();
-		Character character = (Character) fighter;
+		fighter.calculateLevel();
+		fighter.calculateNextLevelXP();
 	}
 }

@@ -39,7 +39,7 @@ public class ActionBar : MonoBehaviour {
 	}
 	
 	void OnGUI(){
-		if(player != null){
+		if(player != null && !Application.isLoadingLevel){
 			drawActionBar();
 			drawSkillNodes();
 			detectPlayerActionBlocked();

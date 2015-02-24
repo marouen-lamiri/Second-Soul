@@ -59,7 +59,7 @@ public class ClientNetwork : MonoBehaviour {
 	public GUIStyle styleDefaultTextArea;
 	public GUIStyle labelStyle;
 	public GUIStyle background;
-	float backgroundBox = 50f;
+	float backgroundBox = 100f;
 
 	bool displayChat;
 
@@ -150,11 +150,13 @@ public class ClientNetwork : MonoBehaviour {
 			if(Network.isServer) {
 				framesToWait++;
 				if(framesToWait > 700) {
+					Loading.show ();
 					// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
 					NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
 				}
 
 			} else {
+				Loading.show ();
 				NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
 
 			}
@@ -274,153 +276,155 @@ public class ClientNetwork : MonoBehaviour {
 
 		GUI.skin.button = style;
 
-		// button to connect as server:
-		if (Network.peerType == NetworkPeerType.Disconnected) {
-			GUI.Box(new Rect(backgroundBox, backgroundBox, Screen.width - backgroundBox * 2, Screen.height - backgroundBox * 2),"<Size=38>Second Soul</Size>", background);
-			GUI.Label (new Rect(Screen.width / 2 - 150, Screen.height/2 + 25, 300, 50),"<Size=30>Network Choices</Size>",style);
-			if (GUI.Button (new Rect (Screen.width / 2 - 225, Screen.height/2 + 100, 150, 50), "Connect as a server", style)) {
-				// connect:
-				Network.InitializeServer (10, port, false);
-				displayChat = true;
-			}
-		}
-		
-		// after connecting: if you're a server:
-		if(displayChat) {
-			if (Network.peerType == NetworkPeerType.Server) {
-				GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 0, networkWindowButtonWidth, networkWindowButtonHeight), "Server", labelStyle);
-				GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 1, networkWindowButtonWidth, networkWindowButtonHeight), "Clients attached: " + Network.connections.Length, labelStyle);
-				
-				if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 2, networkWindowButtonWidth, networkWindowButtonHeight), "Quit server")) {
-					Network.Disconnect(); 
-					Application.Quit();
+		if(!Application.isLoadingLevel){
+			// button to connect as server:
+			background.fontSize = 100 * Screen.height/598;
+			if (Network.peerType == NetworkPeerType.Disconnected) {
+				GUI.Box(new Rect(0.1f, 0.1f, Screen.width - 0.1f, Screen.height - 0.1f),"Second Soul", background);
+				GUI.Label (new Rect(Screen.width / 2 - 150, Screen.height/2 + 25, 300, 50),"<Size=30>Network Choices</Size>",style);
+				if (GUI.Button (new Rect (Screen.width / 2 - 225, Screen.height/2 + 100, 150, 50), "Connect as a server", style)) {
+					// connect:
+					Network.InitializeServer (10, port, false);
+					displayChat = true;
 				}
-				if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 3, networkWindowButtonWidth, networkWindowButtonHeight), "Send hi to client"))
-					SendInfoToClient("Hello client!");
-				
-				if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 4, networkWindowButtonWidth, networkWindowButtonHeight), "Remove Client")) {
-					//find the sorcerer:
-					Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;
-					//1-create the sorcerer copy --> Instantiate(...) 
-					//Instantiate (sorcerer);
-					//2-Network.Destroy the other one
-					// Network.Destroy(GetComponent<NetworkView>().viewID);
-					//Destroy(sorcerer.gameObject);
-					//3- remove the client from the network -- disconnect it.
-					if (Network.connections.Length == 1) {
-						Debug.Log("Disconnecting: " + Network.connections[0].ipAddress + ":" + Network.connections[0].port);
-						Network.CloseConnection(Network.connections[0], true);
-					} else if (Network.connections.Length > 1) {
-						print ("Error on disconnecting client: More than one client is connected -- this is not allowed.");
+			}
+			
+			// after connecting: if you're a server:
+			if(displayChat) {
+				if (Network.peerType == NetworkPeerType.Server) {
+					GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 0, networkWindowButtonWidth, networkWindowButtonHeight), "Server", labelStyle);
+					GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 1, networkWindowButtonWidth, networkWindowButtonHeight), "Clients attached: " + Network.connections.Length, labelStyle);
+					
+					if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 2, networkWindowButtonWidth, networkWindowButtonHeight), "Quit server")) {
+						Network.Disconnect(); 
+						Application.Quit();
 					}
-					//Instantiate (sorcerer);
+					if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 3, networkWindowButtonWidth, networkWindowButtonHeight), "Send hi to client"))
+						SendInfoToClient("Hello client!");
+					
+					if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 4, networkWindowButtonWidth, networkWindowButtonHeight), "Remove Client")) {
+						//find the sorcerer:
+						Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;
+						//1-create the sorcerer copy --> Instantiate(...) 
+						//Instantiate (sorcerer);
+						//2-Network.Destroy the other one
+						// Network.Destroy(GetComponent<NetworkView>().viewID);
+						//Destroy(sorcerer.gameObject);
+						//3- remove the client from the network -- disconnect it.
+						if (Network.connections.Length == 1) {
+							Debug.Log("Disconnecting: " + Network.connections[0].ipAddress + ":" + Network.connections[0].port);
+							Network.CloseConnection(Network.connections[0], true);
+						} else if (Network.connections.Length > 1) {
+							print ("Error on disconnecting client: More than one client is connected -- this is not allowed.");
+						}
+						//Instantiate (sorcerer);
+					}
+
+					// that's good for both: 
+					if (Network.peerType == NetworkPeerType.Disconnected)
+					{
+						//GUI.Label(new Rect(10, 10, 200, 20), "Status: Disconnected");
+						print ("Status: Disconnected.");
+					}
+
+					// chat text area:
+					//GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
+					//styleDefaultTextArea
+
+					// chat text input:
+					GUI.SetNextControlName("ChatBox");
+					textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style // "box"
+
+					//bool isEnterPressed = (Event.current.Equals (Event.KeyboardEvent("return")));
+					//bool isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
+					bool isEnterPressed = (Event.current.type == EventType.keyUp) && (Event.current.keyCode == KeyCode.Return);
+					//GUI.GetNameOfFocusedControl() == "input" && Event.current.keyCode == KeyCode.Return
+					if (isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box") && textFieldString != "") {
+						//_messageLog += textFieldString + "\n";
+						SendInfoToClient(textFieldString);
+						textFieldString = "";
+					}
 				}
 
-				// that's good for both: 
-				if (Network.peerType == NetworkPeerType.Disconnected)
-				{
-					//GUI.Label(new Rect(10, 10, 200, 20), "Status: Disconnected");
-					print ("Status: Disconnected.");
-				}
-
-				// chat text area:
-				//GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
-				//styleDefaultTextArea
-
-				// chat text input:
-				GUI.SetNextControlName("ChatBox");
-				textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style // "box"
-
-				//bool isEnterPressed = (Event.current.Equals (Event.KeyboardEvent("return")));
-				//bool isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
-				bool isEnterPressed = (Event.current.type == EventType.keyUp) && (Event.current.keyCode == KeyCode.Return);
-				//GUI.GetNameOfFocusedControl() == "input" && Event.current.keyCode == KeyCode.Return
-				if (isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box") && textFieldString != "") {
-					//_messageLog += textFieldString + "\n";
-					SendInfoToClient(textFieldString);
-					textFieldString = "";
-				}
 			}
 
-		}
+			// =========================
+			
+			// button to connect as a client:
+			if (Network.peerType == NetworkPeerType.Disconnected) {
+				if (GUI.Button (new Rect (Screen.width / 2 + 75, Screen.height / 2 + 100, 150, 50), "Connect as a Client")) {
+					ConnectToServer ();
+					displayChat = true;
 
-		// =========================
-		
-		// button to connect as a client:
-		if (Network.peerType == NetworkPeerType.Disconnected) {
-			if (GUI.Button (new Rect (Screen.width / 2 + 75, Screen.height / 2 + 100, 150, 50), "Connect as a Client")) {
-				ConnectToServer ();
-				displayChat = true;
-
+				}
 			}
-		}
-		
-		// after connecting if you're a client:
-		if(displayChat) {
-			if (Network.peerType == NetworkPeerType.Client) {
-				GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client", labelStyle);
-				
-				if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 1, 150, networkWindowButtonHeight), "Logout")) {
-					Network.Disconnect();
-					// also destroy the player game object here, since OnPlayerDisconnected only works on the server side, which means the player will be destroyed for everyone except the one who created it.
+			
+			// after connecting if you're a client:
+			if(displayChat &&  !(Application.loadedLevelName != "StartScreen")) {
+				if (Network.peerType == NetworkPeerType.Client) {
+					GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client", labelStyle);
+					
+					if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 1, 150, networkWindowButtonHeight), "Logout")) {
+						Network.Disconnect();
+						// also destroy the player game object here, since OnPlayerDisconnected only works on the server side, which means the player will be destroyed for everyone except the one who created it.
+						
+					}
+					
+					if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 2, 150, networkWindowButtonHeight), "SendHello to server")) {
+						someInfo = "hello server!";
+						SendInfoToServer(someInfo);
+					}
+
+					// chat text input:
+					GUI.SetNextControlName("ChatBox");
+					textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style // "box"
+
+					//var isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
+					bool isEnterPressed = (Event.current.type == EventType.keyUp) && (Event.current.keyCode == KeyCode.Return);
+					if ((isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box")) && textFieldString != "") {
+						//_messageLog += textFieldString + "\n";
+						SendInfoToServer(textFieldString);
+						textFieldString = "";
+					}
 					
 				}
-				
-				if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 2, 150, networkWindowButtonHeight), "SendHello to server")) {
-					someInfo = "hello server!";
-					SendInfoToServer(someInfo);
-				}
 
-				// chat text input:
-				GUI.SetNextControlName("ChatBox");
-				textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style // "box"
-
-				//var isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
-				bool isEnterPressed = (Event.current.type == EventType.keyUp) && (Event.current.keyCode == KeyCode.Return);
-				if ((isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box")) && textFieldString != "") {
-					//_messageLog += textFieldString + "\n";
-					SendInfoToServer(textFieldString);
-					textFieldString = "";
-				}
-				
 			}
 
-		}
-
-		// chat text area:
-		//GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
-		//GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
-		GUI.TextArea(new Rect(chatTextAreaOffsetX, chatTextAreaOffsetY, chatTextAreaWidth, chatTextAreaHeight), _messageLog, style); // style // "box"
+			// chat text area:
+			//GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
+			//GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
+			GUI.TextArea(new Rect(chatTextAreaOffsetX, chatTextAreaOffsetY, chatTextAreaWidth, chatTextAreaHeight), _messageLog, style); // style // "box"
 
 
-		// button to play one player mode:
-		if (Network.peerType == NetworkPeerType.Disconnected) {
-			if (GUI.Button (new Rect (Screen.width / 2 - 75, Screen.height / 2 + 100, 150, 50), "1 Player Mode")) {
-				
-				// connect only the server, no client:
-				Network.InitializeServer (10, port, false);
-				displayChat = true;
-				
-				//network instantiate both the fighter and sorcerer:
-				transform.position = new Vector3(-2,0,0); // put the fighter to the left under the fighter buttons
-				Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
-				playerWasCreated = true;
-				
-				// always create the sorcerer before the fighter.
-				transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
-				Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-				sorcererWasCreated = true;
-				
-				lines = Network.Instantiate (linesPrefab,transform.position,transform.rotation,7)as GameObject;
-				
-				
-				// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
-				NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
-				
-				
+			// button to play one player mode:
+			if (Network.peerType == NetworkPeerType.Disconnected) {
+				if (GUI.Button (new Rect (Screen.width / 2 - 75, Screen.height / 2 + 100, 150, 50), "1 Player Mode")) {
+					
+					// connect only the server, no client:
+					Network.InitializeServer (10, port, false);
+					displayChat = true;
+					
+					//network instantiate both the fighter and sorcerer:
+					transform.position = new Vector3(-2,0,0); // put the fighter to the left under the fighter buttons
+					Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
+					playerWasCreated = true;
+					
+					// always create the sorcerer before the fighter.
+					transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
+					Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+					sorcererWasCreated = true;
+					
+					lines = Network.Instantiate (linesPrefab,transform.position,transform.rotation,7)as GameObject;
+					
+					Loading.show ();
+					// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
+					NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
+					
+					
+				}
 			}
 		}
-
 		
 	}
 	

@@ -2,83 +2,124 @@
 using System.Collections;
 
 public class InGameMenu : MonoBehaviour {
-
-	//Variables
-	bool isPaused;
-	//FighterNetworkScript fighterNetworkScript;
 	
-	void Start() {
-		//fighterNetworkScript = (FighterNetworkScript)GameObject.FindObjectOfType (typeof(FighterNetworkScript));
+	// Constants
+	public const int BOX_WIDTH         = 200;
+	public const int BUTTON_WIDTH      = 150;
+	public const int BUTTON_HEIGHT     = 50;
+	public const int BUTTON_HEIGHT_MIN = 20;
+	public const int SPACE_BUTTONS     = 20;
+	public const int SPACE_BUTTONS_MIN = 10;
+	
+	// Variable responsible for hiding/unhiding the menu.
+	bool isMenuPressed;
+
+	// Buttons
+	enum menuButtons {Resume, Options, Quit};
+
+	// Length of the 'menuButtons'-enum.
+	int enumLength = System.Enum.GetValues (typeof(menuButtons)).Length;
+
+	// An array with the names of 'menuButtons'-enum.
+	string[] names = System.Enum.GetNames(typeof(menuButtons));
+
+	void Start ()
+	{
 	}
 	
 	// Update is called once per frame, checks if Escape-button is pressed.
-	void FixedUpdate () {
+	void Update ()
+	{
+		// Catches the Esc-button press.
 		if(Input.GetKeyDown("escape"))
 		{
-			//Debug.Log("Escape Pressed");
-
-			Pause();
-
-			// networking event listener:
-			//fighterNetworkScript.onPauseGame();
+			GameMenu();
 		}
 	}
 	
-	public void Pause(){
-		if (isPaused == true)
+	public void GameMenu ()
+	{
+		// Toggling (hiding/unhiding) the menu.
+		if (isMenuPressed == true)
 		{
-			isPaused = false;
+			isMenuPressed = false;
 		}
 		else
 		{
-			isPaused = true;
+			isMenuPressed = true;
 		}
+	}
+
+	// Returning the height of the box that contains the buttons.
+	private int getBoxHeight (int numberButtons)
+	{
+		
+		int preferableBoxHeight = (numberButtons * BUTTON_HEIGHT) + ((numberButtons + 1) * SPACE_BUTTONS);
+
+		/* Will be improved */
+
+//		int minBoxHeight        = (numberButtons * BUTTON_HEIGHT_MIN) + ((numberButtons + 1) * SPACE_BUTTONS_MIN);
+//		int sceenHeight         = Screen.height;
+//		
+//		// If sceen's height is bigger or equal to prefered size - return prefered size.
+//		if (sceenHeight >= preferableBoxHeight)
+//		{
+//			return preferableBoxHeight;
+//		}
+//		// If sceen's height is smaller or equal to min size - return min size.
+//		else if (sceenHeight <= minBoxHeight)
+//		{
+//			return minBoxHeight;
+//		}
+//		// Else, box's height equal to the sceen's height.
+//		else
+//		{
+//			return sceenHeight;
+//		}
+
+		return preferableBoxHeight;
 	}
 	
 	void OnGUI() {
 
-		// Iterator variable.
-		var i = 0;
-
-		// Box and Buttons variables.
-		var boxWidth  = 200;
-		var boxHeight = 300;
-		var buttonWidth  = 150;
-		var buttonHeight = 50;
-		var spaceButtons = 20;
-
 		// Screen percentage: 50% of the screen.
-		var screenWidth50 = Screen.width / 2;
-		var screenHeight50 = Screen.height / 2;
-
+		int screenWidth50  = Screen.width / 2;
+		int screenHeight50 = Screen.height / 2;
+		
 		// Box position.
-		var boxWidthPosition = screenWidth50 - boxWidth / 2;
-		var boxHeightPosition = screenHeight50 - boxHeight / 2;
-
-		if(isPaused)
+		var boxWidthPosition  = screenWidth50 - BOX_WIDTH / 2;
+		var boxHeightPosition = screenHeight50 - getBoxHeight(enumLength) / 2;
+		
+		if(isMenuPressed)
 		{
 			// Drawing the Box.
-			GUI.Box(new Rect(screenWidth50 - boxWidth/2, screenHeight50 - boxHeight/2, boxWidth, boxHeight), "Main Menu");
+			GUI.Box(new Rect(boxWidthPosition, boxHeightPosition, BOX_WIDTH, getBoxHeight(enumLength)), /*"Main Menu"*/"");
 
 			// Drawing the Buttons.
-			if (GUI.Button(new Rect (screenWidth50 - buttonWidth/2, boxHeightPosition + (i++ * buttonHeight) + (i * spaceButtons), buttonWidth, buttonHeight), "Exit Menu"))
+			for (int i = 0; i < enumLength; i++)
 			{
+				if (GUI.Button(new Rect (screenWidth50 - BUTTON_WIDTH / 2, boxHeightPosition + (i * BUTTON_HEIGHT) + ((i + 1) * SPACE_BUTTONS), BUTTON_WIDTH, BUTTON_HEIGHT), names[i]))
+				{
+					/* Need to add an implementation for each (new) button in "menuButtons"-enum. */
 
-			}
+					// Resume
+					if (string.Equals(names[i], System.Enum.GetName(typeof(menuButtons), menuButtons.Resume)))
+					{
+						isMenuPressed = false;
+					}
 
-			if (GUI.Button(new Rect (screenWidth50 - buttonWidth/2, boxHeightPosition + (i++ * buttonHeight) + (i * spaceButtons), buttonWidth, buttonHeight), "Resume"))
-			{
-				
-			}
+					// Options
+					if (string.Equals(names[i], System.Enum.GetName(typeof(menuButtons), menuButtons.Options)))
+					{
+						Debug.Log("Options-button pressed; no implementation yet.");
+					}
 
-			if (GUI.Button(new Rect (screenWidth50 - buttonWidth/2, boxHeightPosition + (i++ * buttonHeight) + (i * spaceButtons), buttonWidth, buttonHeight), "Options"))
-			{
-				
-			}
-
-			if (GUI.Button(new Rect (screenWidth50 - buttonWidth/2, boxHeightPosition + (i++ * buttonHeight) + (i * spaceButtons), buttonWidth, buttonHeight), "Exit"))
-			{
-				Application.Quit();
+					// Quit
+					if (string.Equals(names[i], System.Enum.GetName(typeof(menuButtons), menuButtons.Quit)))
+					{
+						Application.Quit();
+					}
+				}
 			}
 		}
 	}
