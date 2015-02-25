@@ -7,6 +7,9 @@ public class Inventory : Storage
 
 	public int slotsOffsetX;
 	public int slotsOffsetY;
+	
+	public int guiDepth = 1;
+	
 	DatabaseInventory database;
 
 	// Use this for initialization
@@ -22,7 +25,7 @@ public class Inventory : Storage
 	void Start () {
 		initializeVariables(); // in parent Storage class
 		setSlots ();
-		addSampleItems ();
+		//addSampleItems ();
 		database = (DatabaseInventory)Inventory.FindObjectOfType(typeof(DatabaseInventory));
 		database.readItems();
 	}
@@ -56,6 +59,7 @@ public class Inventory : Storage
 	}
 	
 	void OnGUI(){
+		GUI.depth = guiDepth;
 		if (isInventoryOn) {
 			drawInventory ();
 			//drawSlots ();
