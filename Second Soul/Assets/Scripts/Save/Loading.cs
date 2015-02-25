@@ -38,7 +38,7 @@ public class Loading: MonoBehaviour
 
 	void OnGUI(){
 		if(checkState){
-			GUI.Label (new Rect(Screen.width/2 -25, Screen.height/2 - 25, 50, 50), "Loading: " + Application.GetStreamProgressForLevel(1) * 99 + "%");
+			GUI.Label (new Rect(Screen.width/2 -25, Screen.height/2 - 25, 200, 50), "Loading: "+ Application.GetStreamProgressForLevel(1) * 99 + "%");
 			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar,  Screen.height/2 + 15, BarFullness * (halfBar + halfBar), 10), fullBar);
 			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar - offset/2,  Screen.height/2 + 10 , halfBar + halfBar + offset, 20), emptyBar);
 		}

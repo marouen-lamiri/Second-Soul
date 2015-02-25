@@ -15,7 +15,7 @@ public class DisplayPlayerStats : MonoBehaviour {
 	float basicScreenWidth = 797;
 	float ratioWidth;
 	float ratioHeight;
-	float nbrOfDraws = 4; //value has to be changed depending on the number of labels to be drawn
+	float nbrOfDraws = 5; //value has to be changed depending on the number of labels to be drawn
 	float offset;
 
 	void Start(){
@@ -48,6 +48,7 @@ public class DisplayPlayerStats : MonoBehaviour {
 			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.13f, width , height * ratioHeight), "<Color=black>Energy: </Color>" + (int)player.energy  + "/" + (int)player.maxEnergy, labelStyle); 
 			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.18f, width , height * ratioHeight), "<Color=black>Speed: </Color>" + player.speed, labelStyle);
 			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.23f, width , height * ratioHeight), "<Color=black>Defense: </Color>" + player.armor, labelStyle);
+			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.28f, width , height * ratioHeight), "<Color=black>Level: </Color>" + player.level, labelStyle);
 		}
 	}
 
