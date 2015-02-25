@@ -21,6 +21,8 @@ public class FighterItems : EquippedItems {
 	public int weaponPixelHeight;
 	public int weaponPixelWidth;
 	
+	public int guiDepth = 0;
+	
 	// Use this for initialization
 	public void Start () {
 		setSlots();
@@ -44,6 +46,7 @@ public class FighterItems : EquippedItems {
 	}
 
 	void OnGUI(){
+		GUI.depth = guiDepth;
 		if (isInventoryOn) {
 			drawEquippedItems();
 			//detectGUIAction();

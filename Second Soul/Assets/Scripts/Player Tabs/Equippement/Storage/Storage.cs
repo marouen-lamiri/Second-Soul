@@ -107,8 +107,7 @@ public class Storage : MonoBehaviour {
 		for(int i = 0; i < inventoryItems.Count; i++){
 			if(!itemPickedUp && inventoryItems[i].position.Contains(mousePositionInInventory())){
 				targetItem = inventoryItems[i];
-				Debug.Log("on item hover " + targetItem);
-				Debug.Log(targetItem.GetType());
+				Debug.Log("on inventory item hover " + targetItem);
 				return;
 			}
 			else if(!itemPickedUp){
@@ -121,8 +120,7 @@ public class Storage : MonoBehaviour {
 		foreach(Item item in equipItems){
 			if(!itemPickedUp && item.position.Contains(mousePositionInInventory())){
 				targetItem = item;
-				Debug.Log("on item hover " + targetItem);
-				Debug.Log(targetItem.GetType());
+				Debug.Log("on equipped item hover " + targetItem);
 				return;
 			}
 			else if(!itemPickedUp){
