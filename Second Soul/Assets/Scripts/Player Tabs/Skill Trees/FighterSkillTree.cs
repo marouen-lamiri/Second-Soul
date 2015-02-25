@@ -7,7 +7,7 @@ public class FighterSkillTree : SkillTree {
 
 	protected SkillTreeNode cleave;
 	protected SkillTreeNode charge;
-	protected SkillTreeNode cyclone;
+	protected SkillTreeNode sweep;
 
 	// Use this for initialization
 	void Start () {
@@ -24,12 +24,12 @@ public class FighterSkillTree : SkillTree {
 		                                    nodePositions[0], CleaveModel.getImage());
 		charge = addSkillTreeNode(typeof(Charge), "Charge", "...", 
 		                                    nodePositions[1], ChargeModel.getImage());
-		cyclone = addSkillTreeNode(typeof(SpinAttack), "Cyclone", "...", 
+		sweep = addSkillTreeNode(typeof(SpinAttack), "Sweep", "...", 
 		                                    nodePositions[2], HealModel.getImage());
 		                                    
 		cleave.makeAvailable();
 		// order: (parent, child)
 		setSkillTreeNodeLinks(cleave, charge);
-		setSkillTreeNodeLinks(cleave, cyclone);	
+		setSkillTreeNodeLinks(cleave, sweep);	
 	}
 }

@@ -125,17 +125,6 @@ public abstract class SkillTree : MonoBehaviour {
 	}
 	
 	protected void checkTargetAction(){
-		//lock player movement within HUD bounds
-		if(inWidthBoundaries() && inHeightBoundaries()){
-			Debug.Log ("IM IN BOUNDARIES");
-			player.busyHUD = true;
-			Debug.Log ("PLAYER IS BUSY?? " + player.busyHUD);
-		}
-		else{
-			Debug.Log ("IM NOT IN BOUNDARIES");
-			player.busyHUD = false;
-			Debug.Log ("PLAYER IS BUSY?? " + player.busyHUD);
-		}
 		//make sure target is set, and mouse is still in target position (since target doesn't go back null)
 		if(target != null && target.position.Contains(mousePositionInSkillTree())){
 			//on mouse click, if target skill is avalable BUT not unlocked
@@ -190,6 +179,16 @@ public abstract class SkillTree : MonoBehaviour {
 	
 	protected Vector2 mousePositionInSkillTree(){
 		return new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+	}
+	
+	public bool inBoundaries(){
+		//lock player movement within HUD bounds
+		if(inWidthBoundaries() && inHeightBoundaries()){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
 	protected bool inWidthBoundaries(){

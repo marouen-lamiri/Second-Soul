@@ -32,10 +32,6 @@ public class Boots : Armor {
 		return BootsModel.getWidth();
 	}
 
-	public override string getTypeAsString(){
-		return "Boots";
-	}
-
 	public override int getX(){
 		return x;
 	}

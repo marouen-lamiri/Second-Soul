@@ -13,5 +13,6 @@ public abstract class Potion : Item, IConsumable {
 	public override abstract int getWidth();
 	public override abstract int getHeight();
 	public abstract void consume();
-	public override abstract string getTypeAsString();
+	public override abstract int getX();
+	public override abstract int getY();
 }

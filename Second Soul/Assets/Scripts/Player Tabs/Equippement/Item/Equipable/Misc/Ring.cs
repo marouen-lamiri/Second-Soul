@@ -15,7 +15,7 @@ public class Ring : Misc {
 	public override void equip(){
 		//Debug.Log(FighterItems.chestSlot.position);
 		foreach(EquipSlot slot in Storage.equipSlots){
-			if(slot.type == this.GetType().ToString()){
+			if(slot.type == this.GetType()){
 				this.position = slot.position;	
 				Storage.equipItems.Add(this);
 				slot.item = this;
@@ -49,9 +49,5 @@ public class Ring : Misc {
 	
 	public override int getY(){
 		return y;
-	}
-	
-	public override string getTypeAsString(){
-		return "Ring";
 	}
 }

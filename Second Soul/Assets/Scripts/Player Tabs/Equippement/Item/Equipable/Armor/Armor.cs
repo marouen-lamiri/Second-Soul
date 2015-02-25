@@ -14,5 +14,6 @@ public abstract class Armor : Item, IEquipable {
 	public override abstract int getHeight();
 	public abstract void equip();
 	public abstract void unequip();
-	public override abstract string getTypeAsString();
+	public override abstract int getX();
+	public override abstract int getY();
 }

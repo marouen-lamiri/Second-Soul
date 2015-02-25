@@ -40,7 +40,7 @@ public class DatabaseInventory : MonoBehaviour {
 			for (int i = 0; i < inventoryItems.Count; i++) {
 				PlayerPrefs.SetInt ("Fighter Item position x" + i, inventoryItems [i].getX ());
 				PlayerPrefs.SetInt ("Fighter Item position y" + i, inventoryItems [i].getY ());
-				PlayerPrefs.SetString ("Fighter Item type" + i, inventoryItems [i].getTypeAsString ());
+				PlayerPrefs.SetString ("Fighter Item type" + i, inventoryItems [i].GetType().ToString());
 				//Debug.Log (inventoryItems [i].getTypeAsString ());
 				counter++;
 			}
@@ -66,7 +66,7 @@ public class DatabaseInventory : MonoBehaviour {
 		for (int i = 0; i < equipItems.Count; i++){
 			PlayerPrefs.SetInt ("Equiped Item position x" + i, equipItems[i].getX());
 			PlayerPrefs.SetInt ("Equiped Item position y" + i, equipItems[i].getY());
-			PlayerPrefs.SetString("Equiped Item type" + i, equipItems[i].getTypeAsString());
+			PlayerPrefs.SetString("Equiped Item type" + i, equipItems[i].GetType().ToString());
 			//Debug.Log (equipItems[i].getTypeAsString());
 			counter++;
 		}

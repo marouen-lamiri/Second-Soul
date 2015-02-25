@@ -38,8 +38,4 @@ public class ManaPotion : Potion {
 	public override int getY(){
 		return y;
 	}
-
-	public override string getTypeAsString(){
-		return "ManaPotion";
-	}
 }

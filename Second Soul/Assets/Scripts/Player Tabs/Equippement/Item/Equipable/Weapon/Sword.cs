@@ -39,8 +39,4 @@ public class Sword : Weapon {
 	public override int getY(){
 		return y;
 	}
-	
-	public override string getTypeAsString(){
-		return "Sword";
-	}
 }
