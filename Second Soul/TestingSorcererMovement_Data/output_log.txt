@@ -1,0 +1,49 @@
+Initialize engine version: 4.6.1f1 (d1db7a1b5196)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 4000 (ID=0x166)
+    Vendor:   Intel
+    VRAM:     128 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.061 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\System.dll (this message is harmless)
+SERVER: Received Info from Client
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Unity Notification Bar Constructor Initialized..
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Platform assembly: C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\Boo.Lang.dll (this message is harmless)
+WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
+The tree Bush5 must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
+ 
+(Filename:  Line: 80)
+
+The tree RockMesh must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
+ 
+(Filename:  Line: 80)
+
+UnloadTime: 2.085831 ms
+Unloading 7 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 910 unused Assets to reduce memory usage. Loaded Objects now: 13589.
+Total: 4.510689 ms (FindLiveObjects: 1.214198 ms CreateObjectMapping: 0.162789 ms MarkObjects: 1.272590 ms  DeleteObjects: 1.209244 ms)
+
+WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported

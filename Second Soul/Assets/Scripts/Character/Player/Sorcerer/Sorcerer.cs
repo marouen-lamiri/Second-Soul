@@ -126,6 +126,9 @@ public class Sorcerer : Player {
 	}
 	
 	public void calculateSecondaryStats(){
+		if(fighter == null){
+			fighter = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
+		}
 		castSpeed += wisdom * castSpeedBase;
 		cdr += wisdom * cdrBase;
 		spellCriticalChance += wisdom * spCritChanBase;;

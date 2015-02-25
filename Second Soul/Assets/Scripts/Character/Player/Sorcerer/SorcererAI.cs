@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SorcererAI : Sorcerer {
+public class SorcererAI : MonoBehaviour {
 
 	public CharacterController controller;
 	public ISkill skillArray;
 	private Fighter fighter;
 	private Sorcerer sorcerer;
+	private Grid grid;
 	private Vector3 goalPosition;
 	private Enemy nearestEnemy;
 	private float timeOut;
@@ -16,13 +17,15 @@ public class SorcererAI : Sorcerer {
 	// Use this for initialization
 	void Start () {
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		//Why does the sorcerer need an object about itself?
 		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		timeOut = 2f;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		if(grid == null){
+			grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
+		}
 		if(grid != null){
 			movingAI();
 			timeOut -= Time.deltaTime;
@@ -34,6 +37,7 @@ public class SorcererAI : Sorcerer {
 			int randomTech = Random.Range(0,200);
 			nearestEnemy = checkNearestEnemy();
 			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < 5 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < 10 ){
+				Debug.Log ("Why i'm here?");
 				sorcerer.stopMoving();
 				if(randomTech <= 180 && timeOut <= 0){
 //					sorcerer.activeSkill1.useSkill();
@@ -60,14 +64,16 @@ public class SorcererAI : Sorcerer {
 					timeOut = 2f;
 				}
 			}
-			else if(!sorcerer.moving && Vector3.Distance (fighter.transform.position, sorcerer.transform.position)>=10){
-				//Determine the direction in which the sorcerer moves, he has to be close to the fighter
+			else if(Vector3.Distance (fighter.transform.position, sorcerer.transform.position)>=5){
+				Debug.Log ("I'm here Moving");
 				direction = sorcerer.transform.position - fighter.transform.position;
 				direction.Normalize();
+				//Determine the direction in which the sorcerer moves, he has to be close to the fighter
 				goalPosition = direction;
 				sorcerer.startMoving(fighter.transform.position + goalPosition);
 			}
-			else if (Vector3.Distance(sorcerer.transform.position,goalPosition) < 2){
+			else if (Vector3.Distance(sorcerer.transform.position,goalPosition) < 5){
+				Debug.Log ("I'm here not Moving");
 				sorcerer.stopMoving();
 			}
 		}
