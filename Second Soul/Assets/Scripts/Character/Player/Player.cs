@@ -184,9 +184,9 @@ public abstract class Player : Character {
 	
 	//ADD CONDITIONS FOR ANY NEW OBJECTS THAT WOULD MAKE PLAY BUSY
 	protected bool busyHUD(){
-//		if(playerEnabled){
-//			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp());
-//		}
+		if(playerEnabled){
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp());
+		}
 		return false;
 	}
 }
