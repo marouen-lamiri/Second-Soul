@@ -3,8 +3,10 @@ using System.Collections;
 
 public class LinkedSceneForest : MonoBehaviour {
 
-	public Fighter fPosition;
-	public Sorcerer sPosition;
+	Fighter fPosition;
+	Sorcerer sPosition;
+	string playerTag = "Player";
+	string sceneName = "Forest";
 	
 	// Use this for initialization
 	void Start () {
@@ -19,7 +21,9 @@ public class LinkedSceneForest : MonoBehaviour {
 
 	}
 
-	void OnParticleCollision(){
-		NetworkLevelLoader.Instance.LoadLevel("Forest",1);
+	void OnParticleCollision(GameObject col){
+		if(col.gameObject.tag == playerTag){
+			NetworkLevelLoader.Instance.LoadLevel(sceneName,1);
+		}
 	}
 }

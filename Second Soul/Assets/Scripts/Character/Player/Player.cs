@@ -101,7 +101,7 @@ public abstract class Player : Character {
 	
 	protected void playerLogic () {
 		if (!isDead()){
-			Debug.Log( this.GetType() + " am i busy: " + busyHUD());
+			//Debug.Log( this.GetType() + " am i busy: " + busyHUD());
 			// FIXME: other scripts using busyHUD setting it to false right away
 			if(!busyHUD()){
 				attackLogic ();
@@ -115,7 +115,7 @@ public abstract class Player : Character {
 	
 	public override void gainExperience(int experience){
 		totalXP += experience;
-		Debug.Log (experience);
+		//Debug.Log (experience);
 		if(hasLeveled()){
 			levelUp();
 			calculateLevel();

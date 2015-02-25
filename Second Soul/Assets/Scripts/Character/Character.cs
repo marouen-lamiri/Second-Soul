@@ -340,6 +340,9 @@ public abstract class Character : MonoBehaviour {
 		//temporary comment
 		bool hit = Physics.Linecast(transform.position, goalPosition);
 //		bool hit = false;
+		if(grid == null){
+			grid = GetComponent<Grid>();
+		}
 
 		if (!hit) {
 			destination = goalPosition;
