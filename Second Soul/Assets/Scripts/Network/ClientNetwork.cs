@@ -353,6 +353,7 @@ public class ClientNetwork : MonoBehaviour {
 			// button to connect as a client:
 			if (Network.peerType == NetworkPeerType.Disconnected) {
 				if (GUI.Button (new Rect (Screen.width / 2 + 75, Screen.height / 2 + 100, 150, 50), "Connect as a Client")) {
+					Loading.show ();
 					ConnectToServer ();
 					displayChat = true;
 
@@ -400,7 +401,9 @@ public class ClientNetwork : MonoBehaviour {
 			// button to play one player mode:
 			if (Network.peerType == NetworkPeerType.Disconnected) {
 				if (GUI.Button (new Rect (Screen.width / 2 - 75, Screen.height / 2 + 100, 150, 50), "1 Player Mode")) {
-					
+
+					Loading.show ();
+
 					// connect only the server, no client:
 					Network.InitializeServer (10, port, false);
 					displayChat = true;
@@ -416,8 +419,7 @@ public class ClientNetwork : MonoBehaviour {
 					sorcererWasCreated = true;
 					
 					lines = Network.Instantiate (linesPrefab,transform.position,transform.rotation,7)as GameObject;
-					
-					Loading.show ();
+
 					// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
 					NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
 					

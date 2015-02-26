@@ -341,7 +341,6 @@ public abstract class Character : MonoBehaviour {
 		bool hit = Physics.Linecast(transform.position, goalPosition);
 //		bool hit = false;
 
-		Debug.Log ("Am i trying to move?");
 
 		if(grid == null || pathing == null){
 			grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
