@@ -283,7 +283,6 @@ public class ClientNetwork : MonoBehaviour {
 				GUI.Box(new Rect(0.1f, 0.1f, Screen.width - 0.1f, Screen.height - 0.1f),"Second Soul", background);
 				GUI.Label (new Rect(Screen.width / 2 - 150, Screen.height/2 + 25, 300, 50),"<Size=30>Network Choices</Size>",style);
 				if (GUI.Button (new Rect (Screen.width / 2 - 225, Screen.height/2 + 100, 150, 50), "Connect as a server", style)) {
-					// connect:
 					Network.InitializeServer (10, port, false);
 					displayChat = true;
 				}
@@ -333,7 +332,7 @@ public class ClientNetwork : MonoBehaviour {
 
 					// chat text input:
 					GUI.SetNextControlName("ChatBox");
-					textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style // "box"
+					textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString); // style // "box"
 
 					//bool isEnterPressed = (Event.current.Equals (Event.KeyboardEvent("return")));
 					//bool isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
@@ -378,7 +377,7 @@ public class ClientNetwork : MonoBehaviour {
 
 					// chat text input:
 					GUI.SetNextControlName("ChatBox");
-					textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString, style); // style // "box"
+					textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatTextAreaWidth + chatInputOffsetX, chatInputHeight), textFieldString); // style // "box"
 
 					//var isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
 					bool isEnterPressed = (Event.current.type == EventType.keyUp) && (Event.current.keyCode == KeyCode.Return);
@@ -395,7 +394,7 @@ public class ClientNetwork : MonoBehaviour {
 			// chat text area:
 			//GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
 			//GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
-			GUI.TextArea(new Rect(chatTextAreaOffsetX, chatTextAreaOffsetY, chatTextAreaWidth, chatTextAreaHeight), _messageLog, style); // style // "box"
+			GUI.TextArea(new Rect(networkWindowX + chatInputOffsetX, chatTextAreaOffsetY, chatTextAreaWidth, chatTextAreaHeight), _messageLog); // style // "box"
 
 
 			// button to play one player mode:

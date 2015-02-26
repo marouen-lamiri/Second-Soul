@@ -38,7 +38,7 @@ public class DatabaseFighter : MonoBehaviour {
 		fighter.setLevel((int)PlayerPrefs.GetInt("Level"));
 		fighter.calculateNewPrimaryStats();
 		fighter.calculateSecondaryStats();
-		fighter.calculateLevel();
+		//fighter.calculateLevel();
 		fighter.calculateNextLevelXP();
 	}
 }
