@@ -39,8 +39,4 @@ public class HealthPotion : Potion {
 	public override int getY(){
 		return y;
 	}
-
-	public override string getTypeAsString(){
-		return "HealthPotion";
-	}
 }

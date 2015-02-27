@@ -5,11 +5,11 @@ using System.Collections.Generic;
 public abstract class Player : Character {
 
 	//variable declaration
-	float baseFactorXP = 1.5f;
+	protected float baseFactorXP = 1.5f;
 	public int totalXP; // total experience --remove public
 	public int nextLevelXP; // xp need for next level --remove public
 	
-	public bool busyHUD; // global state variable to disable movements if HUD elements are open
+	//public bool busyHUD; // global state variable to disable movements if HUD elements are open
 	
 	public bool attacking;
 
@@ -22,8 +22,6 @@ public abstract class Player : Character {
 	public ActionBar actionBar;
 	
 	public int usableSkillPoints;
-	//remove if not used anymore
-	public List<SkillNode> unlockedSkills;
 	
 	public ISkill activeSkill1;
 	public ISkill activeSkill2;
@@ -43,16 +41,16 @@ public abstract class Player : Character {
 		playerStart ();
 	}
 	protected void playerStart(){
-		busyHUD = false;
-		characterStart ();
-		//maybe useless remove if it is
-		//unlockedSkills = new List<SkillNode>();
+		//busyHUD = false;
 		// FIXME: THIS NEEDS TO BE ZERO AFTER TESTING, SKILL POINTS COME FROM LEVELING
 		usableSkillPoints = 4;
+		characterStart ();
 		initializeActionBar();
-		//temporarySkills();
-		sphere.renderer.material.color = Color.blue;
+		initializeInventory();
 		initiazlieNetwork();
+		// Mini map float ball color
+		sphere.renderer.material.color = Color.blue;
+		//temporarySkills();
 	}
 	// Update is called once per frame
 	void FixedUpdate(){
@@ -69,11 +67,16 @@ public abstract class Player : Character {
 	
 	protected void initializeActionBar(){
 		if(playerEnabled){
-			Debug.Log("I GET HERE AB");
 			actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
-			actionBar.findPlayer(this.GetType());
-			//actionBar.setPlayer(this);
+			actionBar.setPlayer(this);
 			actionBar.initializeBasicAttack();
+		}
+	}
+	
+	protected void initializeInventory(){
+		if(playerEnabled){
+			inventory = (Inventory) GameObject.FindObjectOfType (typeof (Inventory));
+			inventory.setPlayer(this);
 		}
 	}
 	
@@ -96,18 +99,11 @@ public abstract class Player : Character {
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
 	}
 	
-	//REMOVE THIS ONCE ACTION BAR SKILL PLACING IS DYNAMIC
-	/*private void temporarySkills(){
-		unlockedSkills.Add(new SkillNode(typeof(BasicMelee), "Basic Melee", "...", new Rect(0,0,0,0), FireballModel.getImage()));
-		unlockedSkills.Add(new SkillNode(typeof(BasicRanged), "Basic Range", "...", new Rect(0,0,0,0), FireballModel.getImage()));
-		unlockedSkills.Add(new SkillNode(typeof(FireballSkill), "Fireball", "...", new Rect(0,0,0,0), FireballModel.getImage()));
-	}*/
-	
 	protected void playerLogic () {
 		if (!isDead()){
-			Debug.Log( this.GetType() + " am i busy: " + busyHUD);
-			// bool doesnt work...
-			if(!busyHUD){
+			//Debug.Log( this.GetType() + " am i busy: " + busyHUD());
+			// FIXME: other scripts using busyHUD setting it to false right away
+			if(!busyHUD()){
 				attackLogic ();
 				lootLogic();
 			}
@@ -119,6 +115,7 @@ public abstract class Player : Character {
 	
 	public override void gainExperience(int experience){
 		totalXP += experience;
+		//Debug.Log (experience);
 		if(hasLeveled()){
 			levelUp();
 			calculateLevel();
@@ -130,26 +127,17 @@ public abstract class Player : Character {
 		level = (int)(Mathf.Log ((float)totalXP/100f)/Mathf.Log(baseFactorXP));
 	}
 
-    public void calculateNextLevelXP()
-    {
+    public void calculateNextLevelXP(){
 		nextLevelXP = (int)((Mathf.Pow(baseFactorXP,(level+1)))*100);
 	}
 	
-	bool hasLeveled(){
-		Debug.Log(totalXP >= nextLevelXP);
+	protected bool hasLeveled(){
+		Debug.Log("has leveled: " + (totalXP >= nextLevelXP));
 		return totalXP >= nextLevelXP;
 	}
 	
-	protected void lootLogic(){
-		if(lootItem != null){
-			if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))){
-				pickUpItem();
-			}
-		}		
-	}
-	
 	protected void attackLogic(){
-		if(!attackLocked() && playerEnabled && !busyHUD){
+		if(!attackLocked() && playerEnabled && !busyHUD()){
 			if ((Input.GetButtonDown ("activeSkill1") || Input.GetButton ("activeSkill1")) && activeSkill1 != null){
 				activeSkill1.useSkill();
 			}
@@ -163,13 +151,20 @@ public abstract class Player : Character {
 				activeSkill4.useSkill();
 			}
 			else if ((Input.GetButtonDown ("activeSkill5") || Input.GetButton ("activeSkill5")) && activeSkill5 != null){
-				Debug.Log ("LEFT CLICK HAPPENS");
 				activeSkill5.useSkill();
 			}
 			else if ((Input.GetButtonDown ("activeSkill6") || Input.GetButton ("activeSkill6")) && activeSkill6 != null){
 				activeSkill6.useSkill();
 			}
 		}
+	}
+	
+	protected void lootLogic(){
+		if(lootItem != null){
+			if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))){
+				pickUpItem();
+			}
+		}		
 	}
 
 	public void pickUpItem(){
@@ -185,5 +180,13 @@ public abstract class Player : Character {
 	
 	public bool inPickupRange(){
 		return Vector3.Distance(lootItem.transform.position, transform.position) <= pickUpRange;
+	}
+	
+	//ADD CONDITIONS FOR ANY NEW OBJECTS THAT WOULD MAKE PLAY BUSY
+	protected bool busyHUD(){
+		if(playerEnabled){
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp());
+		}
+		return false;
 	}
 }

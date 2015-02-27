@@ -334,23 +334,29 @@ public abstract class Character : MonoBehaviour {
 		return Vector3.Distance(targetPosition, transform.position) <= attackRange;
 	}
 
-	private void moveToPosition(){
+	protected void moveToPosition(){
 		//getting next position
 		Vector3 destination;
 		//temporary comment
 		bool hit = Physics.Linecast(transform.position, goalPosition);
 //		bool hit = false;
 
+
+		if(grid == null || pathing == null){
+			grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
+			pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
+		}
 		if (!hit) {
 			destination = goalPosition;
 			arriveScript.enabled = (steeringScript.Velocity.magnitude>=speed/2)?true:false;
 			steeringScript.setTarget (goalPosition);
 		}
-		else if(grid.nodeFromWorld(goalPosition).walkable != true || Physics.Linecast(transform.position, goalPosition, 1000)){
+		else if(Physics.Linecast(transform.position, goalPosition, 1000)){
 			animateIdle();
 			return;
 		}
 		else {
+
 			pathing.findPath(transform.position, goalPosition);
 			if(previousGoal == null){
 				previousGoal = goalPosition;
@@ -373,7 +379,7 @@ public abstract class Character : MonoBehaviour {
 			steeringScript.setTarget (destination);
 		}
 
-		if(transform.tag != "Enemy" && (ai == null || !ai.enabled) &&Vector3.Distance(previousGoal, goalPosition) > 2){
+		if(transform.tag != "Enemy" && /*(ai == null || !ai.enabled) && */ Vector3.Distance(previousGoal, goalPosition) > 2){
 			previousGoal = goalPosition;
 			clickedPosition = Instantiate (clickAnimation, goalPosition, Quaternion.Euler(180,0,0)) as GameObject;
 			

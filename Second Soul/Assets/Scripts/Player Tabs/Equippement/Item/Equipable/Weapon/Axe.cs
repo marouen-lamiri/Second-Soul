@@ -15,7 +15,7 @@ public class Axe : Weapon {
 	public override void equip(){
 		//Debug.Log(FighterItems.chestSlot.position);
 		foreach(EquipSlot slot in Storage.equipSlots){
-			if(slot.type == this.GetType().BaseType.ToString()){
+			if(slot.type == this.GetType().BaseType){
 				this.position = slot.position;	
 				Storage.equipItems.Add(this);
 				slot.item = this;
@@ -49,9 +49,5 @@ public class Axe : Weapon {
 	
 	public override int getY(){
 		return y;
-	}
-	
-	public override string getTypeAsString(){
-		return "Axe";
 	}
 }

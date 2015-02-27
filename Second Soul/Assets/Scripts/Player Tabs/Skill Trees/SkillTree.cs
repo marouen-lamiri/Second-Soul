@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class SkillTree : MonoBehaviour {
+public abstract class SkillTree : MonoBehaviour {
 
 	protected Player player;
 	protected ActionBar actionBar;
@@ -24,13 +24,15 @@ public class SkillTree : MonoBehaviour {
 	
 	
 	void Awake(){
-		actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
-		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		//legacy now children handle it
+		//actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
+		//player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		//player.skillTree = this;
 	}
 	
 	// Use this for initialization
 	void Start () {
+		//legacy now children handle it
 		isSkillOpen = false;
 		skillTree = new List<SkillTreeNode>();
 		setNodePositionOffsets();
@@ -123,17 +125,6 @@ public class SkillTree : MonoBehaviour {
 	}
 	
 	protected void checkTargetAction(){
-		//lock player movement within HUD bounds
-		if(inWidthBoundaries() && inHeightBoundaries()){
-			Debug.Log ("IM IN BOUNDARIES");
-			player.busyHUD = true;
-			Debug.Log ("PLAYER IS BUSY?? " + player.busyHUD);
-		}
-		else{
-			Debug.Log ("IM NOT IN BOUNDARIES");
-			player.busyHUD = false;
-			Debug.Log ("PLAYER IS BUSY?? " + player.busyHUD);
-		}
 		//make sure target is set, and mouse is still in target position (since target doesn't go back null)
 		if(target != null && target.position.Contains(mousePositionInSkillTree())){
 			//on mouse click, if target skill is avalable BUT not unlocked
@@ -188,6 +179,16 @@ public class SkillTree : MonoBehaviour {
 	
 	protected Vector2 mousePositionInSkillTree(){
 		return new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+	}
+	
+	public bool inBoundaries(){
+		//lock player movement within HUD bounds
+		if(inWidthBoundaries() && inHeightBoundaries()){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
 	protected bool inWidthBoundaries(){

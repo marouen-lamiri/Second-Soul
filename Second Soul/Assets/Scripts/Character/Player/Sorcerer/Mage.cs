@@ -6,11 +6,22 @@ public class Mage : Sorcerer {
 	// Use this for initialization
 	void Start () {
 		sorcererStart ();
+		initializeSkillTree();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		sorcererUpdate ();
+	}
+	
+	protected override void initializeSkillTree(){
+		if(playerEnabled){
+			base.initializeSkillTree();
+			skillTreeGameObject.AddComponent(typeof(MageSkillTree));
+			skillTree = (MageSkillTree) GameObject.FindObjectOfType (typeof (MageSkillTree));
+			skillTree.setPlayer(this);
+			//skillTree.findPlayer(this.GetType());
+		}
 	}
 
 	protected override void initializePrimaryStats(){

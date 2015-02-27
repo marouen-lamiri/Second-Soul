@@ -16,6 +16,5 @@ public abstract class Misc : Item, IEquipable {
 	public abstract void unequip();
 	public override abstract int getX();
 	public override abstract int getY();
-	public override abstract string getTypeAsString();
 
 }

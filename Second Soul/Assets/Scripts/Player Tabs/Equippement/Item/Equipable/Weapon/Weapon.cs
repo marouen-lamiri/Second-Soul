@@ -16,5 +16,4 @@ public abstract class Weapon : Item, IEquipable {
 	public abstract void unequip();
 	public override abstract int getX();
 	public override abstract int getY();
-	public override abstract string getTypeAsString();
 }

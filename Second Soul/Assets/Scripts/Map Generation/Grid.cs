@@ -58,6 +58,7 @@ public class Grid : MonoBehaviour {
 
 	//Creates a list of all the position in a path using node path
 	public List<Vector3> worldFromNode(List<Node> node){
+		if(node == null) { return null;}
 		List<Vector3> path = new List<Vector3>();
 		for(int i = 0; i < node.Count; i++){
 			path.Add(new Vector3(node[i].worldPosition.x, 0, node[i].worldPosition.z));

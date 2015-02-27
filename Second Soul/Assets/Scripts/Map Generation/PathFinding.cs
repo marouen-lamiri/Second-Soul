@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class PathFinding : MonoBehaviour {
 	
 	private Player seeker, target;
-	public LayerMask unwalkableMask; 
 	
 	Grid grid;
 	
@@ -24,7 +23,7 @@ public class PathFinding : MonoBehaviour {
 	public void findPath(Vector3 startPos, Vector3 targetPos) {
 		Node startNode = grid.nodeFromWorld(startPos);
 		Node targetNode = grid.nodeFromWorld(targetPos);
-		int limitedTrial = 1000;
+		int limitedTrial = 2000;
 		
 		List<Node> openSet = new List<Node>();
 		HashSet<Node> closedSet = new HashSet<Node>();
@@ -63,7 +62,7 @@ public class PathFinding : MonoBehaviour {
 					}
 
 					if(limitedTrial <= 0){
-						limitedTrial = 1000;
+						limitedTrial = 2000;
 						return;
 					}
 					limitedTrial--;

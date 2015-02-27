@@ -8,10 +8,13 @@ public class BasicMelee : BasicAttack {
 	// Use this for initialization
 	void Start () {
 		//skillStart ();
+		fighterNetworkScript = null;
 	}
 	
 	public override void skillStart(){
-		fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
+		if(fighterNetworkScript != null){
+			fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
+		}
 		impactTime = 1/caster.attackSpeed;
 	}
 	

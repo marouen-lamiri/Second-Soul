@@ -60,7 +60,7 @@ public class UnityNotificationBar extends MonoBehaviour
 	
 	public static function UNotify(message :String)
 	{
-		Debug.Log("numberOfExistingMessages="+numberOfExistingMessages);
+		//Debug.Log("numberOfExistingMessages="+numberOfExistingMessages);
 		numberOfExistingMessages+=1;
 		numberOfCreatedMessages+=1;
 		//create a new game object under the main Unity Notification Bar object
@@ -75,7 +75,7 @@ public class UnityNotificationBar extends MonoBehaviour
 
 	  	showingNewMessage=true;
 		
-		Debug.Log("numberOfExistingMessages="+numberOfExistingMessages);
+		//Debug.Log("numberOfExistingMessages="+numberOfExistingMessages);
 	}
 	
 	

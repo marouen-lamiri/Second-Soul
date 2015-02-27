@@ -26,6 +26,8 @@ public class ActionBar : MonoBehaviour {
 		activeSkill4 = null;
 		activeSkill5 = null;
 		activeSkill6 = null;
+		
+		// legacy code
 		//player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		//player.actionBar = this;
 		//initializeBasicAttack();
@@ -42,7 +44,7 @@ public class ActionBar : MonoBehaviour {
 		if(player != null && !Application.isLoadingLevel){
 			drawActionBar();
 			drawSkillNodes();
-			detectPlayerActionBlocked();
+			//detectPlayerActionBlocked();
 		}
 	}
 	
@@ -64,7 +66,7 @@ public class ActionBar : MonoBehaviour {
 	
 	public void initializeBasicAttack(){
 		SkillNode basicAttack;
-		// this doesn't work, find way to type check parent or children...
+		
 		if(player.GetType().IsSubclassOf(typeof(Fighter))){
 			basicAttack = new SkillNode(typeof(BasicMelee), "Basic Melee", "...",
 			                            new Rect(0,0,0,0), BasicMeleeModel.getImage());
@@ -105,16 +107,6 @@ public class ActionBar : MonoBehaviour {
 		}
 		if(activeSkill6 != null){
 			GUI.DrawTexture(activeSkill6.position, activeSkill6.icon);
-		}
-	}
-	
-	private void detectPlayerActionBlocked(){
-		//lock player movement within HUD bounds
-		if(inWidthBoundaries() && inHeightBoundaries()){
-			player.busyHUD = true;
-		}
-		else{
-			player.busyHUD = false;
 		}
 	}
 	
@@ -162,6 +154,15 @@ public class ActionBar : MonoBehaviour {
 		player.activeSkill6.setCaster(player);
 	}
 	
+	public bool inBoundaries(){
+		//lock player movement within HUD bounds
+		if(inWidthBoundaries() && inHeightBoundaries()){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	
 	protected bool inWidthBoundaries(){
 		return (Input.mousePosition.x > position.x && Input.mousePosition.x < position.x + position.width);

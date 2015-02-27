@@ -9,10 +9,6 @@ public class SorcererSkillTree : SkillTree {
 	protected SkillTreeNode lightStorm;
 	protected SkillTreeNode cyclone;
 	
-	void Awake(){
-
-	}
-	
 	// Use this for initialization
 	void Start () {
 

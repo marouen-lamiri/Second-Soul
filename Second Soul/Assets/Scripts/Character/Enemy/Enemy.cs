@@ -16,6 +16,7 @@ public class Enemy : Character {
 	public int experienceBase;
 	
 	public Sorcerer sorcerer;
+	
 	public float aggroRange;
 	public bool hasAggro;
 	
@@ -28,6 +29,8 @@ public class Enemy : Character {
 	ISkill activeSkill1;
 	
 	public float dropRate;
+	
+	CapsuleCollider collider;
 
 	// scripts of same GameObject
 	protected EnemyNetworkScript enemyNetworkScript;
@@ -39,6 +42,7 @@ public class Enemy : Character {
 		enemyStart ();
 	}
 	protected void enemyStart(){
+		
 		characterStart ();
 		sphere.renderer.material.color = Color.red;
 		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
@@ -47,26 +51,28 @@ public class Enemy : Character {
 		xpGiven = false;
 		lootGiven = false;
 		
+		// networking: makes sure each enemy is properly instantiated even on another game instance that didn't run the EnemyFactory code.
+		target = (Fighter) GameObject.FindObjectOfType (typeof (Fighter)); // for the enemies perspective target is always fighter
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+
+		
+		level = target.level;
 		initializePrimaryStats();
 		initializeSecondaryStatsBase();
 		initializeSecondaryStats();
 		calculateSecondaryStats();
-		
-		level = target.level;
 		health = maxHealth;
 		energy = maxEnergy;
+		
 		activeSkill1 = (BasicMelee)GetComponent<BasicMelee>();
 
-		// networking: makes sure each enemy is properly instantiated even on another game instance that didn't run the EnemyFactory code.
-		target = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		this.target = target;
-		this.sorcerer = sorcerer;
+		
 		this.transform.parent = GameObject.Find("Enemies").transform;
 
 		// networking:
 		enemyNetworkScript = (EnemyNetworkScript)GetComponent<EnemyNetworkScript> ();
 		
+		collider = GetComponent<CapsuleCollider>();
 		wanderScript = GetComponent<Wander> ();
 		arriveScript = GetComponent<Arrive> ();
 	}
@@ -126,12 +132,12 @@ public class Enemy : Character {
 		characterUpdate ();
 		if (!isDead ()) {
 			level = target.level;
-			calculateXPWorth();
 			enemyAI ();
 		} 
 		else {
 			dieMethod();
 			giveLoot(dropRate, transform.position);
+			calculateXPWorth();
 			giveXP();
 			destroySelf();
 		}
@@ -218,10 +224,14 @@ public class Enemy : Character {
 	
 	void giveXP(){
 		if(!xpGiven){
-			Debug.Log (experienceWorth);
+			Debug.Log ("enemy experience worth: " + experienceWorth);
 			//UnityNotificationBar.UNotify("Gained " + experienceWorth + " Experience"); //although this might appear false in Mono-Develop, it actually works as an external asset
-			target.gainExperience(experienceWorth/2);//divided by 2 because of xp split. we can always adjust the experienceWorth if necessary
-			sorcerer.gainExperience(experienceWorth/2);
+			if(target.playerEnabled){
+				target.gainExperience(experienceWorth);
+			}
+			if(sorcerer.playerEnabled){
+				sorcerer.gainExperience(experienceWorth);
+			}
 		}
 		xpGiven = true;
 	}
@@ -250,10 +260,11 @@ public class Enemy : Character {
 
 	public void destroySelf(){
 		Destroy(controller);
-		Destroy (this.GetComponent<CapsuleCollider>());
+		Destroy (collider);
 		if (transform.FindChild ("Sphere") != null) {
 			Destroy (transform.FindChild ("Sphere").gameObject);
 		}
+		Destroy(this);
 	}
 	
 	void OnMouseDrag(){

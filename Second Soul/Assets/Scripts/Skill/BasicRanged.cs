@@ -8,10 +8,13 @@ public class BasicRanged : BasicAttack {
 	// Use this for initialization
 	void Start () {
 		//skillStart ();
+		sorcererNetworkScript = null;
 	}
 	
 	public override void skillStart(){
-		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
+		if (sorcererNetworkScript != null){
+			sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
+		}
 		impactTime = 1/caster.castSpeed;
 	}
 	

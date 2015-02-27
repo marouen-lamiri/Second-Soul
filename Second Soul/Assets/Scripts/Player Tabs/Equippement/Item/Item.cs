@@ -22,5 +22,4 @@ public abstract class Item{
 	public abstract int getHeight();
 	public abstract int getX();
 	public abstract int getY();
-	public abstract string getTypeAsString();
 }

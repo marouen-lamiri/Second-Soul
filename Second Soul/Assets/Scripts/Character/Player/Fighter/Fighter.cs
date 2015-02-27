@@ -27,9 +27,16 @@ public class Fighter : Player{
 		//important that this happens first, other initializations depend on it
 		playerEnabled = true;
 		if (Network.isClient) {
-			Debug.Log("I GET HERE F");
 			playerEnabled = false;
 		}	
+		
+		//inititalize skills before Player start
+		activeSkill1 = null;
+		activeSkill2 = null;
+		activeSkill3 = null;
+		activeSkill4 = null;
+		activeSkill5 = null;
+		activeSkill6 = null;
 		
 		playerStart ();
 		initializePlayer();
@@ -44,25 +51,7 @@ public class Fighter : Player{
 		
 		target = null;
 		startPosition = transform.position;
-		activeSkill1 = null;
-		activeSkill2 = null;
-		activeSkill3 = null;
-		activeSkill4 = null;
-		activeSkill5 = null;
-		activeSkill6 = null;
-		//remove this soon (except maybe basic melee)
-		//activeSkill1 = (BasicMelee)GetComponent<BasicMelee>();
-		/*activeSkill2 = (Charge)GetComponent<Charge>();
-		activeSkill3 = (KnightsHonour)GetComponent<KnightsHonour>();
-		activeSkill4 = (BerserkMode)GetComponent<BerserkMode>();
-		activeSkill5 = (Focus)GetComponent<Focus>();
-		activeSkill6 = (SpinAttack)GetComponent<SpinAttack>();*/
-		//activeSkill1.setCaster (this);
-		/*activeSkill2.setCaster (this);
-		activeSkill3.setCaster (this);
-		activeSkill4.setCaster (this);
-		activeSkill5.setCaster (this);
-		activeSkill6.setCaster (this);*/
+
 		//networking:
 		fighterNetworkScript = (FighterNetworkScript)GameObject.FindObjectOfType (typeof(FighterNetworkScript));
 		database.readPrimaryStats();
@@ -185,9 +174,40 @@ public class Fighter : Player{
 	public int getEndurance () {
 		return endurance;
 	}
+
+	public int getLevelXP () {
+		return totalXP;
+	}
+
+	public float getLevelBaseXP(){
+		return baseFactorXP;
+	}
+
+	public int getLevel () {
+		return level;
+	}
 	
+	public int getNextLevel(){
+		return nextLevelXP;
+	}
+
 	public void setEndurance (int iEndurance) {
 		this.endurance = iEndurance;
 	}
 
-}
+	public void setLevel (int iLevel) {
+		this.level = iLevel;
+	}
+	
+	public void setNextLevel(int iBaseFactor){
+		this.nextLevelXP = iBaseFactor;
+	}
+
+	public void setLevelXP (int iLevel) {
+		this.totalXP = iLevel;
+	}
+
+	public void setLevelBaseXP(float iBaseFactor){
+		this.baseFactorXP = iBaseFactor;
+	}
+}	

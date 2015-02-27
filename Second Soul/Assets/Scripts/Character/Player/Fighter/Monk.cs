@@ -6,11 +6,22 @@ public class Monk : Fighter {
 	// Use this for initialization
 	void Start () {
 		fighterStart ();
+		initializeSkillTree();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		fighterUpdate ();
+	}
+	
+	protected override void initializeSkillTree(){
+		if(playerEnabled){
+			base.initializeSkillTree();
+			skillTreeGameObject.AddComponent(typeof(MonkSkillTree));
+			skillTree = (MonkSkillTree) GameObject.FindObjectOfType (typeof (MonkSkillTree));
+			skillTree.setPlayer(this);
+			//skillTree.findPlayer(this.GetType());
+		}
 	}
 
 	protected override void initializePrimaryStats(){

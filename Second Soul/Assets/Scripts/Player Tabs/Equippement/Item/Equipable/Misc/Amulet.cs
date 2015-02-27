@@ -39,8 +39,4 @@ public class Amulet : Misc {
 	public override int getY(){
 		return y;
 	}
-	
-	public override string getTypeAsString(){
-		return "Amulet";
-	}
 }

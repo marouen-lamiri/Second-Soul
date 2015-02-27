@@ -89,7 +89,7 @@ public class Storage : MonoBehaviour {
 	}
 	
 	protected void detectGUIAction(){
-		if(inWidthBoundaries() && inHeightBoundaries()){
+		if(inBoundaries()){
 			if(inInventoryBoundaries()){
 				onInventoryItemHover();
 			}
@@ -100,20 +100,14 @@ public class Storage : MonoBehaviour {
 				detectItemActions();
 			}
 			//detectMouseAction();
-			player.busyHUD = true;
 		}
-		else if(!itemPickedUp){
-			player.busyHUD = false;
-		}
-		
 	}
 	
 	void onInventoryItemHover(){
 		for(int i = 0; i < inventoryItems.Count; i++){
 			if(!itemPickedUp && inventoryItems[i].position.Contains(mousePositionInInventory())){
 				targetItem = inventoryItems[i];
-				Debug.Log("on item hover " + targetItem);
-				Debug.Log(targetItem.GetType());
+				Debug.Log("on inventory item hover " + targetItem);
 				return;
 			}
 			else if(!itemPickedUp){
@@ -126,8 +120,7 @@ public class Storage : MonoBehaviour {
 		foreach(Item item in equipItems){
 			if(!itemPickedUp && item.position.Contains(mousePositionInInventory())){
 				targetItem = item;
-				Debug.Log("on item hover " + targetItem);
-				Debug.Log(targetItem.GetType());
+				Debug.Log("on equipped item hover " + targetItem);
 				return;
 			}
 			else if(!itemPickedUp){
@@ -236,7 +229,6 @@ public class Storage : MonoBehaviour {
 	protected void resetTargetItem(){
 		itemPickedUp = false;
 		targetItem = null;
-		player.busyHUD = false;
 	}
 	
  	public bool firstAvailableInventorySlots( out int startX, out int startY, Item item ){
@@ -273,6 +265,20 @@ public class Storage : MonoBehaviour {
 		return new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
 	}
 	
+	public bool isItemPickedUp(){
+		return itemPickedUp;
+	}
+	
+	public bool inBoundaries(){
+		//lock player movement within HUD bounds
+		if(inWidthBoundaries() && inHeightBoundaries()){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
 	protected bool inWidthBoundaries(){
 		return (Input.mousePosition.x > position.x && Input.mousePosition.x < position.x + position.width);
 	}
@@ -289,11 +295,12 @@ public class Storage : MonoBehaviour {
 		return (Screen.height - Input.mousePosition.y > position.y + position.height/1.8f && Screen.height - Input.mousePosition.y < position.y + position.height);
 	}
 	
-	protected bool validEquipSlot(EquipSlot slot, Item item){
-		if(slot.type == "Weapon"){
-			return (slot.type == targetItem.GetType().BaseType.ToString());
+	protected static bool validEquipSlot(EquipSlot slot, Item item){
+		return (item.GetType().IsSubclassOf(slot.type) || item.GetType() == slot.type);
+		/*if(slot.type == typeof(Weapon)){
+			return (slot.type == targetItem.GetType().BaseType);
 		}
-		return (slot.type == targetItem.GetType().ToString());
+		return (slot.type == targetItem.GetType());*/
 	}
 
 	public int getStorageSizeWidth(){
@@ -317,5 +324,9 @@ public class Storage : MonoBehaviour {
 	public List<Item> getEquipItems(){
 		List<Item> copy = equipItems;
 		return copy;
+	}
+	
+	public void setPlayer(Player p){
+		player = p;
 	}
 }

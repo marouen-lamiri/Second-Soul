@@ -2,9 +2,12 @@
 using System.Collections;
 public class PlayerEnergyBar : MonoBehaviour {
 	//Variable
-	float globeHeight = 128f;
+	float globeHeight = 164f;
 	public Texture globePic;
-	float globeSize = 128f;
+	public Texture2D background;
+	float globeSize = 164f;
+	float initialGlobeSize;
+	float initialGlobeHeight;
 	double energy;
 	double maxEnergy;
 	double energyPercent;
@@ -17,6 +20,8 @@ public class PlayerEnergyBar : MonoBehaviour {
 		energyPercent = 1;
 		energy = player.energy;
 		maxEnergy = player.maxEnergy;
+		initialGlobeSize = globeSize;
+		initialGlobeHeight = globeHeight;
 	}
 	// Update is called once per frame
 	void Update (){
@@ -42,7 +47,8 @@ public class PlayerEnergyBar : MonoBehaviour {
 		//Draw the appropriate amount of health bar
 		globeHeight = (float) energyPercent*globeSize;
 		//Drawing Energy Bar
-		GUI.BeginGroup(new Rect(Screen.width * (0.6435f), (Screen.height-(globeHeight+2f)), globeSize, globeSize));
+		//GUI.Box(new Rect(Screen.width * (0.6435f), (Screen.height-(globeHeight+2f)), initialGlobeSize, initialGlobeHeight), background);
+		GUI.BeginGroup(new Rect(Screen.width * (0.636f), (Screen.height-(globeHeight-8f)), globeSize, globeSize));
 		GUI.DrawTexture(new Rect(0, (-globeSize+globeHeight), globeSize, globeSize),globePic);
 		GUI.EndGroup();
 

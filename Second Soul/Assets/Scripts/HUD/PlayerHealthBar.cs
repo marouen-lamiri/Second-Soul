@@ -2,9 +2,12 @@
 using System.Collections;
 public class PlayerHealthBar : MonoBehaviour {
 	//Variables
-	float globeHeight = 128;
+	float globeHeight = 164;
 	public Texture globePic;
-	int globeSize = 128;
+	public Texture2D background;
+	int globeSize = 164;
+	float initialGlobeSize;
+	float initialGlobeHeight;
 	double hp;
 	double maxhp;
 	double healthPercent;
@@ -17,6 +20,8 @@ public class PlayerHealthBar : MonoBehaviour {
 		hp = player.health;
 		maxhp = player.maxHealth;
 		healthPercent = 1;
+		initialGlobeSize = globeSize;
+		initialGlobeHeight = globeHeight;
 	}
 	// Update is called once per frame
 	void Update () {
@@ -41,7 +46,8 @@ public class PlayerHealthBar : MonoBehaviour {
 		//Draw the appropriate amount of health bar
 		globeHeight= (float) healthPercent*globeSize;
 		//Drawing health Bar
-		GUI.BeginGroup(new Rect(Screen.width * 0.26f * ratioWidth, Screen.height-(globeHeight+2f), globeSize, globeSize));
+		//GUI.Box(new Rect(Screen.width * (0.60f), (Screen.height-(globeHeight+2f)), initialGlobeSize, initialGlobeHeight), background);
+		GUI.BeginGroup(new Rect(Screen.width * 0.244f * ratioWidth, Screen.height-(globeHeight-11f), globeSize, globeSize));
 		GUI.DrawTexture(new Rect(0, (-globeSize+globeHeight), globeSize, globeSize),globePic);
 		GUI.EndGroup();
 	}
