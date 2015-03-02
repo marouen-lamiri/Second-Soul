@@ -1,0 +1,1476 @@
+fileFormatVersion: 2
+guid: 67f0d3916863b93408142e94b92f6174
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Circle_001
+    100004: //RootNode
+    100006: root
+    100008: root_001
+    100010: root_001_L
+    100012: root_001_L_001
+    100014: root_001_L_002
+    100016: root_001_L_003
+    100018: root_001_L_004
+    100020: root_001_R
+    100022: root_001_R_001
+    100024: root_001_R_002
+    100026: root_001_R_003
+    100028: root_001_R_004
+    100030: root_002
+    100032: root_002_L
+    100034: root_002_L_001
+    100036: root_002_L_002
+    100038: root_002_L_003
+    100040: root_002_L_004
+    100042: root_002_L_005
+    100044: root_002_L_006
+    100046: root_002_L_007
+    100048: root_002_L_008
+    100050: root_002_L_009
+    100052: root_002_L_010
+    100054: root_002_L_011
+    100056: root_002_L_012
+    100058: root_002_L_013
+    100060: root_002_L_014
+    100062: root_002_R
+    100064: root_002_R_001
+    100066: root_002_R_002
+    100068: root_002_R_003
+    100070: root_002_R_004
+    100072: root_002_R_005
+    100074: root_002_R_006
+    100076: root_002_R_007
+    100078: root_002_R_008
+    100080: root_002_R_009
+    100082: root_002_R_010
+    100084: root_002_R_011
+    100086: root_002_R_012
+    100088: root_002_R_013
+    100090: root_002_R_014
+    100092: root_003
+    100094: root_004
+    100096: root_005
+    100098: root_006
+    100100: root_007
+    100102: root_011
+    400000: Armature
+    400002: Circle_001
+    400004: //RootNode
+    400006: root
+    400008: root_001
+    400010: root_001_L
+    400012: root_001_L_001
+    400014: root_001_L_002
+    400016: root_001_L_003
+    400018: root_001_L_004
+    400020: root_001_R
+    400022: root_001_R_001
+    400024: root_001_R_002
+    400026: root_001_R_003
+    400028: root_001_R_004
+    400030: root_002
+    400032: root_002_L
+    400034: root_002_L_001
+    400036: root_002_L_002
+    400038: root_002_L_003
+    400040: root_002_L_004
+    400042: root_002_L_005
+    400044: root_002_L_006
+    400046: root_002_L_007
+    400048: root_002_L_008
+    400050: root_002_L_009
+    400052: root_002_L_010
+    400054: root_002_L_011
+    400056: root_002_L_012
+    400058: root_002_L_013
+    400060: root_002_L_014
+    400062: root_002_R
+    400064: root_002_R_001
+    400066: root_002_R_002
+    400068: root_002_R_003
+    400070: root_002_R_004
+    400072: root_002_R_005
+    400074: root_002_R_006
+    400076: root_002_R_007
+    400078: root_002_R_008
+    400080: root_002_R_009
+    400082: root_002_R_010
+    400084: root_002_R_011
+    400086: root_002_R_012
+    400088: root_002_R_013
+    400090: root_002_R_014
+    400092: root_003
+    400094: root_004
+    400096: root_005
+    400098: root_006
+    400100: root_007
+    400102: root_011
+    4300000: Circle_001
+    7400000: Default Take
+    7400002: attack
+    7400004: die
+    7400006: hit
+    7400008: idle1
+    7400010: idle2
+    7400012: idleAnim
+    7400014: mightyAttack
+    7400016: spell
+    7400018: walk
+    9500000: //RootNode
+    13700000: Circle_001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: -1
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/root_001
+        weight: 1
+      - path: Armature/root/root_001/root_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002/root_001_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002/root_001_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002/root_002_L_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008/root_002_L_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002/root_002_R_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008/root_002_R_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004/root_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_007
+        weight: 1
+      - path: Circle_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: attack
+      takeName: attack
+      firstFrame: -1
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/root_001
+        weight: 1
+      - path: Armature/root/root_001/root_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002/root_001_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002/root_001_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002/root_002_L_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008/root_002_L_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002/root_002_R_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008/root_002_R_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004/root_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_007
+        weight: 1
+      - path: Circle_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: die
+      takeName: die
+      firstFrame: -1
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/root_001
+        weight: 1
+      - path: Armature/root/root_001/root_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002/root_001_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002/root_001_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002/root_002_L_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008/root_002_L_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002/root_002_R_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008/root_002_R_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004/root_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_007
+        weight: 1
+      - path: Circle_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: hit
+      takeName: hit
+      firstFrame: -1
+      lastFrame: 3
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/root_001
+        weight: 1
+      - path: Armature/root/root_001/root_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002/root_001_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002/root_001_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002/root_002_L_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008/root_002_L_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002/root_002_R_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008/root_002_R_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004/root_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_007
+        weight: 1
+      - path: Circle_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: idle1
+      takeName: idle1
+      firstFrame: -1
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/root_001
+        weight: 1
+      - path: Armature/root/root_001/root_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002/root_001_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002/root_001_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002/root_002_L_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008/root_002_L_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002/root_002_R_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008/root_002_R_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004/root_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_007
+        weight: 1
+      - path: Circle_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: idle2
+      takeName: idle2
+      firstFrame: -1
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/root_001
+        weight: 1
+      - path: Armature/root/root_001/root_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002/root_001_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002/root_001_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002/root_002_L_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008/root_002_L_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002/root_002_R_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008/root_002_R_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004/root_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_007
+        weight: 1
+      - path: Circle_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: idleAnim
+      takeName: idleAnim
+      firstFrame: -1
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/root_001
+        weight: 1
+      - path: Armature/root/root_001/root_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002/root_001_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002/root_001_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002/root_002_L_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008/root_002_L_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002/root_002_R_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008/root_002_R_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004/root_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_007
+        weight: 1
+      - path: Circle_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: mightyAttack
+      takeName: mightyAttack
+      firstFrame: -1
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/root_001
+        weight: 1
+      - path: Armature/root/root_001/root_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002/root_001_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002/root_001_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002/root_002_L_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008/root_002_L_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002/root_002_R_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008/root_002_R_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004/root_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_007
+        weight: 1
+      - path: Circle_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: spell
+      takeName: spell
+      firstFrame: -1
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/root_001
+        weight: 1
+      - path: Armature/root/root_001/root_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002/root_001_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002/root_001_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002/root_002_L_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008/root_002_L_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002/root_002_R_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008/root_002_R_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004/root_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_007
+        weight: 1
+      - path: Circle_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: walk
+      takeName: walk
+      firstFrame: -1
+      lastFrame: 17
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/root
+        weight: 1
+      - path: Armature/root/root_001
+        weight: 1
+      - path: Armature/root/root_001/root_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_L/root_001_L_001/root_001_L_003/root_001_L_002/root_001_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_001_R/root_001_R_001/root_001_R_003/root_001_R_002/root_001_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L/root_002_L_001/root_002_L_002/root_002_L_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_008/root_002_L_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_007/root_002_L_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_006/root_002_L_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_005/root_002_L_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_L_003/root_002_L_004/root_002_L_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R/root_002_R_001/root_002_R_002/root_002_R_009
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_008/root_002_R_010
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_007/root_002_R_011
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_006/root_002_R_012
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_005/root_002_R_013
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_002_R_003/root_002_R_004/root_002_R_014
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_002/root_011/root_003/root_004/root_005
+        weight: 1
+      - path: Armature/root/root_001/root_006/root_007
+        weight: 1
+      - path: Circle_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

@@ -24,15 +24,15 @@ public class MapGeneration : MonoBehaviour{
 	private int resizeTheWall = 10;
 	private int nbrMinRandom = 12;
 	private int nbrMaxRandom = 24;
-	private int nbrMinByRoom = 2;
-	private int nbrMaxByRoom = 8;
+	private int nbrMinByRoom = 1;
+	private int nbrMaxByRoom = 3;
 	private bool needsOffset = true;
 	private float obstacleOffset = -5.4f;
 	List<int> listOfWalls;
 	public static int[,] mapArray;
-	int numberRooms = 3;
-	public static int mapSizeX = 8;
-	public static int mapSizeZ = 8;
+	int numberRooms = 4;
+	public static int mapSizeX = 10;
+	public static int mapSizeZ = 10;
 	
 	// network:
 	public static Vector3 playerStartPositionVector3;

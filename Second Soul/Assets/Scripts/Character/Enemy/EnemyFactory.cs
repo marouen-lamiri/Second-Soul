@@ -5,6 +5,7 @@ public class EnemyFactory : MonoBehaviour {
 
 	public SkeletalWarrior skeletonPrefab;
 	public Golem golemPrefab;
+	public Imp impPrefab;
 	int mobRadius;
 	/*private Vector3 spawnPosition = new Vector3 (341, 0, 984);
 	private Vector3 spawnPosition2 = new Vector3 (328, 0, 984);
@@ -42,9 +43,16 @@ public class EnemyFactory : MonoBehaviour {
 		}
 		else {
 			for (int i=0; i<mobSize; ++i) {
+				float changeOfSpawningImp = 0.3f;
+				bool createImpInstead = (Random.value < changeOfSpawningImp) ? true : false;
 				Vector2 offset = Random.insideUnitCircle * 3;
 				Vector3 spawnPosition = mobPosition + new Vector3 (offset.x, 0, offset.y);
-				spawn (spawnPosition, skeletonPrefab);
+				if(createImpInstead){
+					spawn (spawnPosition, impPrefab);
+				}
+				else{
+					spawn (spawnPosition, skeletonPrefab);
+				}
 			}
 		}
 	}

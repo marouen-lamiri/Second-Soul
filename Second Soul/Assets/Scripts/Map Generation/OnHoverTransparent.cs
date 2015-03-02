@@ -6,13 +6,18 @@ public class OnHoverTransparent : MonoBehaviour {
 	public LayerMask layer;
 	GameObject mainCamera;
 	GameObject lastObject;
-	Player player;
+	Fighter fighter;
+	Sorcerer sorcerer;
 	Color initialColor;
-	
+	Material material;
 	// Use this for initialization
 	void Start () {
-		initialColor = transform.renderer.material.color;
-		player = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
+		material = Instantiate (renderer.material) as Material;
+//		material.CopyPropertiesFromMaterial (renderer.material);
+		renderer.material = material;
+		initialColor = material.color;
+		fighter= GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
+		sorcerer= GameObject.FindObjectOfType(typeof(Sorcerer))as Sorcerer;
 		if(mainCamera == null){
 			mainCamera = GameObject.FindGameObjectWithTag("MainCamera") as GameObject;
 		}
@@ -20,16 +25,18 @@ public class OnHoverTransparent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate() {
-		if(mainCamera == null || player == null){
+		if(mainCamera == null || fighter == null || sorcerer == null){
 			mainCamera = GameObject.FindGameObjectWithTag("MainCamera") as GameObject;;
-			player = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
+			fighter = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
+			sorcerer= GameObject.FindObjectOfType(typeof(Sorcerer))as Sorcerer;
 		}
 		else{
+			Player player = (fighter.playerEnabled)? (Player) fighter : sorcerer;
 			if (Physics.Linecast (mainCamera.transform.position, player.transform.position, layer)) {
-				transform.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,0.5f);
+				material.color = new Color(initialColor.r,initialColor.g,initialColor.b,0f);
 			}
 			else{
-				transform.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,1f);
+				material.color = new Color(initialColor.r,initialColor.g,initialColor.b,1f);
 			}
 		}
 		
