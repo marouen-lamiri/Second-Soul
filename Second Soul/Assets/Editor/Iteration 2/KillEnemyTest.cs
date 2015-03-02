@@ -5,7 +5,7 @@ using UnityEngine;
 public class KillEnemyTest {
 	
 	public Fighter player = new Fighter ();
-	public Enemy enemy = new Enemy ();
+	public SkeletalWarrior enemy = new SkeletalWarrior ();
 	
 	[Test]
 	public void KillEnemy ([Random(1, 100, 2)] int initHealth, [Random(1, 20, 2)] int damageValue) {
