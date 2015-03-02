@@ -76,7 +76,6 @@ public class SorcererAI : MonoBehaviour {
 		//If the network is Client, don't give control of sorcerer to the AI
 		if(Network.isClient != true){
 			//If the network is Not Client and the number of Connections is more than 1, than don't give control to the AI
-			Debug.Log (Network.connections.GetLength(0));
 			if(Network.connections.GetLength(0) == 1){
 				return false;
 			}
@@ -165,7 +164,7 @@ public class SorcererAI : MonoBehaviour {
 				sorcerer.startMoving(fighter.transform.position + goalPosition);
 			}
 			//if the fighter is nearby, stop
-			else if (Vector3.Distance(sorcerer.transform.position,goalPosition) < 5){
+			else if (Vector3.Distance(sorcerer.transform.position,goalPosition) < 4){
 				sorcerer.stopMoving();
 			}
 		}
