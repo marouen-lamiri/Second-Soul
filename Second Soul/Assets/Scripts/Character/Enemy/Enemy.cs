@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : Character {
+public abstract class Enemy : Character {
 	
 	//Variable declaration
 	protected int strength; // base damage, armor, critt damage
@@ -94,15 +94,7 @@ public class Enemy : Character {
 		return attackPower;
 	}
 
-	protected virtual void initializePrimaryStats(){
-		strengthPerLvl = 1;
-		dexterityPerLvl = 1;
-		endurancePerLvl = 1;
-		
-		strength = 10;
-		dexterity = 10;
-		endurance = 10;
-	}
+	protected abstract void initializePrimaryStats ();
 
 	public void calculateSecondaryStats(){
 		armor += strength * armorBase;
@@ -122,6 +114,29 @@ public class Enemy : Character {
 		healthRegen += endurance * hpRegBase;
 		
 		health = maxHealth;
+	}
+	
+	public abstract void initializeSecondaryStats ();
+	
+	public virtual void initializeSecondaryStatsBase(){		
+		armorBase = 7;
+		fireResBase = 1;
+		coldResBase = 1;
+		lightResBase = 1;
+		
+		accurBase = 0.001f;
+		attSpeedBase = 0.02f;
+		
+		attPowerBase = 0.01f;
+		
+		critChanBase = 0.01f;
+		critDmgBase = 0.02f;
+		
+		attPowerBase = 0.025f;
+		
+		hpBase = 5;
+		
+		hpRegBase = 0.01f;
 	}
 
 	// Update is called once per frame
@@ -149,11 +164,11 @@ public class Enemy : Character {
 				hasAggro = true;
 			}
 			else{
-				wanderScript.wanderInCircle();
-				if(Vector3.Distance(wanderScript.wanderingObject.transform.position, transform.position)>arriveScript.arriveRadius){
-					startMoving(wanderScript.wanderingObject.transform.position);
-				}
+				idleLogic ();
 			}
+		}
+		else if (cannotMove ()) {
+			return;
 		}
 		else if(!inAttackRange (target.transform.position) && hasAggro){
 			chasingTarget = target.gameObject;
@@ -176,6 +191,17 @@ public class Enemy : Character {
 			}		
 
 		}	
+	}
+
+	protected virtual bool cannotMove(){
+		return false;
+	}
+
+	protected virtual void idleLogic (){
+		wanderScript.wanderInCircle();
+		if(Vector3.Distance(wanderScript.wanderingObject.transform.position, transform.position)>arriveScript.arriveRadius){
+			startMoving(wanderScript.wanderingObject.transform.position);
+		}
 	}
 
 	public bool hasDirectView(){

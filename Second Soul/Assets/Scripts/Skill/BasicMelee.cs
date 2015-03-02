@@ -15,7 +15,8 @@ public class BasicMelee : BasicAttack {
 		if(fighterNetworkScript != null){
 			fighterNetworkScript = (FighterNetworkScript)gameObject.GetComponent<FighterNetworkScript> ();
 		}
-		impactTime = 1/caster.attackSpeed;
+		skillLength = 1/caster.attackSpeed;
+		impactTime = .38f;//this is subjective. the percentage of time in the animation in which it "looks" like damage was dealt
 	}
 	
 	// Update is called once per frame
