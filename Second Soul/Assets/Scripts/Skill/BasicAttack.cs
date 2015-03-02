@@ -6,7 +6,7 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	public Character caster; // protected
 	
 	protected float impactTime;
-	//public bool impacted;
+	protected Character delayedTarget;
 	
 	public float skillLength;
 	//public float skillDurationLeft;
@@ -14,7 +14,7 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 
 	// Use this for initialization
 	void Start () {
-		//skillStart ();
+
 	}
 
 	// Update is called once per frame
@@ -27,14 +27,15 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	public void useSkill(){
 		skillStart ();
 		rayCast ();
+		delayedTarget = caster.target;
 		if ((caster.target == null && caster.GetType().IsSubclassOf(typeof(Player)) && !caster.attackLocked()) || !caster.inAttackRange (caster.target.transform.position)) {
 			Player player = (Player) caster;
 			player.startMoving(targetPosition);
 			return;
 		}
-		if(caster.GetType().IsSubclassOf(typeof(Player))){
-			Player player = (Player)caster;
-			player.stopMoving ();
+		else if(caster.inAttackRange (caster.target.transform.position) && caster.moving){
+			caster.stopMoving();
+			caster.attacking = true;
 		}
 
 		transform.LookAt (caster.target.transform.position);
@@ -52,18 +53,47 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 		caster.skillDurationLeft = skillLength;
 		StartCoroutine(applyAttackDamage(caster.target, DamageType.Physical));
 	}
+	public bool canFinishAttack(){
+		if (delayedTarget != null && caster.inAttackRange (delayedTarget.transform.position)) {
+			return true;
+		}
+		return false;
+	}
+
+	public void finishAttack(){//this is for when you click an enemy and then you expect to attack it when you make it there without clikcing again
+		if (caster.attackClip != null) {
+			animation [caster.attackClip.name].normalizedSpeed = 1 / impactTime;
+		}
+		if (caster.attackClip != null) {
+			skillLength = animation [caster.attackClip.name].length;
+		}
+		caster.stopMoving();
+		caster.attacking = true;
+
+		if (caster.attackClip != null) {
+			animation [caster.attackClip.name].normalizedSpeed = 1 / impactTime;
+		}
+		if (caster.attackClip != null) {
+			skillLength = animation [caster.attackClip.name].length;
+		}
+
+		caster.skillDurationLeft = skillLength;
+		StartCoroutine(applyAttackDamage(delayedTarget, DamageType.Physical));
+	}
 	
 	public void rayCast(){
 		RaycastHit[] hits;
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		hits = Physics.RaycastAll(ray.origin,ray.direction, 1000);
+		int rayDistance = 1000;
+		hits = Physics.RaycastAll(ray.origin,ray.direction, rayDistance);
+		string floor = "Floor";
 		for (int i = 0; i < hits.Length; ++i) {
 			GameObject hit = hits[i].collider.gameObject;
-			if(hit.GetComponent<Character>()!=null && (hit.GetComponent<Character>().GetType().IsSubclassOf(typeof(Enemy)) || hit.GetComponent<Character>().GetType() == typeof(Enemy))){
+			if(hit.GetComponent<Character>()!=null && (hit.GetComponent<Character>().GetType().IsSubclassOf(typeof(Enemy)))){
 				targetPosition = hit.transform.position;
 				return;
 			}
-			else if(hit.CompareTag("Floor")){
+			else if(hit.CompareTag(floor)){
 				targetPosition = hits[i].point;
 			}
 		}
@@ -79,7 +109,6 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 		}
 	}
 	public abstract void animateAttack ();
-
 	
 	IEnumerator applyAttackDamage(Character delayedTarget, DamageType type){
 		yield return new WaitForSeconds(skillLength * impactTime);

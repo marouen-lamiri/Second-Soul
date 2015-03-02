@@ -26,9 +26,9 @@ public class GolemAnimationManager : MonoBehaviour {
 		animator.SetBool (AnimationParameters.isDead.ToString (), golem.isDead());
 		animator.SetBool (AnimationParameters.moving.ToString (), golem.moving);
 		animator.SetBool (AnimationParameters.attacking.ToString(), golem.inAttackRange());
-		animator.animation [attackOne].speed = golem.attackSpeed;
-		animator.animation [attackTwo].speed = golem.attackSpeed;
-		attack.skillLength = animator.animation [attackOne].length;
+		//animator.animation [attackOne].speed = golem.attackSpeed;
+		//animator.animation [attackTwo].speed = golem.attackSpeed;
+	//	attack.skillLength = animator.animation [attackOne].length;
 	}
 }
 

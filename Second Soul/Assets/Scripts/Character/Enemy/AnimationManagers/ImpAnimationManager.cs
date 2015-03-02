@@ -12,7 +12,7 @@ public class ImpAnimationManager : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		imp = GetComponentInParent<Imp> ();
 		attack = imp.GetComponent<BasicMelee> ();
-		attackString = "Attack";
+		attackString = "Spell";
 	}
 	
 	// Update is called once per frame
@@ -24,8 +24,8 @@ public class ImpAnimationManager : MonoBehaviour {
 		animator.SetBool (AnimationParameters.isDead.ToString (), imp.isDead());
 		animator.SetBool (AnimationParameters.moving.ToString (), imp.moving);
 		animator.SetBool (AnimationParameters.attacking.ToString(), imp.inAttackRange());
-		animator.animation [attackString].speed = imp.attackSpeed;
-		attack.skillLength = animator.animation [attackString].length;
+		//animator.animation [attackString].speed = imp.attackSpeed;
+		//attack.skillLength = animator.animation [attackString].length;
 	}
 }
 //This would be required if we need different animation information in the future

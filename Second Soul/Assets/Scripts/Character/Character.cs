@@ -12,6 +12,7 @@ public abstract class Character : MonoBehaviour {
 	SorcererAI ai;
 	public CharacterController controller;
 	private CharacterNetworkScript playerNetworkScript;
+	protected BasicAttack basicAttackScript;
 
 	//pathfinding related
 	protected Grid grid;
@@ -109,6 +110,7 @@ public abstract class Character : MonoBehaviour {
 
 	public float speed;
 	public bool moving;
+	public bool attacking;
 	public GameObject chasingTarget;
 	
 	
@@ -145,6 +147,7 @@ public abstract class Character : MonoBehaviour {
 		alignScript = GetComponent<Align> ();
 		ai = GetComponent<SorcererAI>();
 		playerNetworkScript = GetComponent<CharacterNetworkScript>();
+		basicAttackScript = GetComponent<BasicAttack> ();
 
 		sphere = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 		sphere.renderer.castShadows = false;
@@ -155,6 +158,8 @@ public abstract class Character : MonoBehaviour {
 
 
 		accuracy = 0.8f;
+
+		attacking = false;
 	}
 	
 	// Update is called once per frame
@@ -162,6 +167,7 @@ public abstract class Character : MonoBehaviour {
 		characterUpdate ();
 	}
 	protected void characterUpdate(){
+		attacking = false;
 		if (transform.FindChild ("Sphere") != null) {
 			transform.FindChild ("Sphere").transform.position = new Vector3 (transform.position.x, 10.0f, transform.position.z);
 		}
@@ -344,14 +350,16 @@ public abstract class Character : MonoBehaviour {
 	protected void moveToPosition(){
 		//getting next position
 		Vector3 destination;
-		//temporary comment
 		bool hit = Physics.Linecast(transform.position, goalPosition);
-//		bool hit = false;
 
-
-		if(grid == null || pathing == null){
+		if(grid == null || pathing == null || basicAttackScript == null){
 			grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 			pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
+			basicAttackScript = GetComponent<BasicAttack>();
+		}
+		if(basicAttackScript.canFinishAttack()){
+			basicAttackScript.finishAttack();
+				return;
 		}
 		if (!hit) {
 			destination = goalPosition;
@@ -386,7 +394,7 @@ public abstract class Character : MonoBehaviour {
 			steeringScript.setTarget (destination);
 		}
 
-		if(transform.tag != "Enemy" && /*(ai == null || !ai.enabled) && */ Vector3.Distance(previousGoal, goalPosition) > 2){
+		if(transform.tag != typeof(Enemy).ToString() && (ai == null || !ai.enabled) && Vector3.Distance(previousGoal, goalPosition) > 2){
 			previousGoal = goalPosition;
 			clickedPosition = Instantiate (clickAnimation, goalPosition, Quaternion.Euler(180,0,0)) as GameObject;
 			
@@ -435,8 +443,8 @@ public abstract class Character : MonoBehaviour {
 		//CancelInvoke("applyAttackDamage");
 		//StopCoroutine(applyAttackDamage(target));
 		animateDie();
-		
-		if (dieClip != null && animation[dieClip.name].time > animation[dieClip.name].length * 0.80) {
+		float endofClip = 0.80f;
+		if (dieClip != null && animation[dieClip.name].time > animation[dieClip.name].length * endofClip) {
 			animation[dieClip.name].speed = 0;
 		}
 	}
