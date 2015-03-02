@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Grid : MonoBehaviour {
 
-	// Use this for initialization
+	//Variable declaration
 	public LayerMask unwalkableMask; 
 	public Vector2 gridWorldSize;
 	public float nodeRadius;
@@ -25,6 +25,7 @@ public class Grid : MonoBehaviour {
 		sorcerer.setGrid (this);
 	}
 
+	//Retrieves neighbouring nodes
 	public List<Node> getNeighbours(Node node) {
 		List<Node> neighbours = new List<Node>();
 		
@@ -45,6 +46,7 @@ public class Grid : MonoBehaviour {
 		return neighbours;
 	}
 
+	//Converts a a worldPosition to a nodePosition
 	public Node nodeFromWorld(Vector3 worldPosition){
 		float percentX = (worldPosition.x) / gridWorldSize.x;
 		float percentY = (worldPosition.z) / gridWorldSize.y;
@@ -68,6 +70,7 @@ public class Grid : MonoBehaviour {
 	}
 
 	void createGrid(){
+		//create the grid to be used in the pathfinding
 		grid = new Node[gridSizeX, gridSizeY];
 		Vector3 worldBottomLeft = transform.position;
 
@@ -81,8 +84,9 @@ public class Grid : MonoBehaviour {
 	}
 	
 	void OnDrawGizmos() {
-		Gizmos.DrawWireCube(transform.position,new Vector3(gridWorldSize.x,1,gridWorldSize.y));
-		
+		Gizmos.DrawWireCube(transform.position,new Vector3(gridWorldSize.x,1,gridWorldSize.y)); //shows cubes in editor mode to help visualize the nodes
+
+		//simply draws the nodes, red is unwalkable, white is walkable
 		if (grid != null) {
 			foreach (Node n in grid) {
 				Gizmos.color = (n.walkable)?Color.white:Color.red;

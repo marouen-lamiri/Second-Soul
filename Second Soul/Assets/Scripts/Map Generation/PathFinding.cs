@@ -16,14 +16,11 @@ public class PathFinding : MonoBehaviour {
 		target.setPathing (this);
 	}
 	
-	void FixedUpdate() {
-		//findPath(seeker.transform.position,target.transform.position);
-	}
-	
 	public void findPath(Vector3 startPos, Vector3 targetPos) {
 		Node startNode = grid.nodeFromWorld(startPos);
 		Node targetNode = grid.nodeFromWorld(targetPos);
-		int limitedTrial = 2000;
+		//this can be changed, it's purpose is not to allow an infinite loop to occur in case of an impossible path, althought this shouldn't happen, it is present for emergency
+		int limitedTrial = 2000; 
 		
 		List<Node> openSet = new List<Node>();
 		HashSet<Node> closedSet = new HashSet<Node>();
@@ -70,7 +67,8 @@ public class PathFinding : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	//Reverse path since path finding gives the opposite path 
 	void RetracePath(Node startNode, Node endNode) {
 		List<Node> path = new List<Node>();
 		Node currentNode = endNode;
