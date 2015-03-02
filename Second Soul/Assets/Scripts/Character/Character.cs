@@ -331,7 +331,14 @@ public abstract class Character : MonoBehaviour {
 	}
 	
 	public bool inAttackRange(Vector3 targetPosition){
-		return Vector3.Distance(targetPosition, transform.position) <= attackRange;
+		float distance = Vector3.Distance (targetPosition, transform.position);
+		bool inRange = distance <= attackRange;
+		return inRange;
+		//return Vector3.Distance(targetPosition, transform.position) <= attackRange;
+	}
+
+	public bool inAttackRange(){
+		return Vector3.Distance(target.transform.position, transform.position) <= attackRange;
 	}
 
 	protected void moveToPosition(){
@@ -429,7 +436,7 @@ public abstract class Character : MonoBehaviour {
 		//StopCoroutine(applyAttackDamage(target));
 		animateDie();
 		
-		if (animation[dieClip.name].time > animation[dieClip.name].length * 0.80) {
+		if (dieClip != null && animation[dieClip.name].time > animation[dieClip.name].length * 0.80) {
 			animation[dieClip.name].speed = 0;
 		}
 	}
@@ -451,18 +458,30 @@ public abstract class Character : MonoBehaviour {
 	}
 	
 	public void animateIdle(){
+		if (idleClip == null) {
+			return;
+		}
 		animation.CrossFade(idleClip.name);
 	}
 	
 	public void animateRun(){
+		if (runClip == null) {
+			return;
+		}
 		animation.CrossFade(runClip.name);
 	}
 	
 	public void animateAttack(){
+		if (attackClip == null) {
+			return;
+		}
 		animation.CrossFade (attackClip.name);
 	}
 	
 	public void animateDie(){
+		if (dieClip == null) {
+			return;
+		}
 		animation.CrossFade (dieClip.name);
 	}
 }

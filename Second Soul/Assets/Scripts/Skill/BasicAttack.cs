@@ -8,7 +8,7 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 	protected float impactTime;
 	//public bool impacted;
 	
-	protected float skillLength;
+	public float skillLength;
 	//public float skillDurationLeft;
 	protected Vector3 targetPosition;
 
@@ -37,14 +37,19 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 			player.stopMoving ();
 		}
 
-		skillLength = animation[caster.attackClip.name].length;
 		transform.LookAt (caster.target.transform.position);
 		caster.animateAttack();
 		animateAttack ();
 		//it'll look wrong because of the animation time, but I want to make attack speed will work. I'm still trying to make it look better
 		//caster.skillDurationLeft = skillLength;
-		caster.skillDurationLeft = impactTime;
-		animation [caster.attackClip.name].normalizedSpeed = 1/impactTime;
+		if (caster.attackClip != null) {
+			animation [caster.attackClip.name].normalizedSpeed = 1 / impactTime;
+		}
+		if (caster.attackClip != null) {
+			skillLength = animation [caster.attackClip.name].length;
+		}
+		
+		caster.skillDurationLeft = skillLength;
 		StartCoroutine(applyAttackDamage(caster.target, DamageType.Physical));
 	}
 	

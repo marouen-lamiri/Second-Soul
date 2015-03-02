@@ -115,6 +115,29 @@ public abstract class Enemy : Character {
 		
 		health = maxHealth;
 	}
+	
+	public abstract void initializeSecondaryStats ();
+	
+	public virtual void initializeSecondaryStatsBase(){		
+		armorBase = 7;
+		fireResBase = 1;
+		coldResBase = 1;
+		lightResBase = 1;
+		
+		accurBase = 0.001f;
+		attSpeedBase = 0.02f;
+		
+		attPowerBase = 0.01f;
+		
+		critChanBase = 0.01f;
+		critDmgBase = 0.02f;
+		
+		attPowerBase = 0.025f;
+		
+		hpBase = 5;
+		
+		hpRegBase = 0.01f;
+	}
 
 	// Update is called once per frame
 	void FixedUpdate (){
@@ -144,6 +167,9 @@ public abstract class Enemy : Character {
 				idleLogic ();
 			}
 		}
+		else if (cannotMove ()) {
+			return;
+		}
 		else if(!inAttackRange (target.transform.position) && hasAggro){
 			chasingTarget = target.gameObject;
 			startMoving(target.transform.position);
@@ -165,6 +191,10 @@ public abstract class Enemy : Character {
 			}		
 
 		}	
+	}
+
+	protected virtual bool cannotMove(){
+		return false;
 	}
 
 	protected virtual void idleLogic (){

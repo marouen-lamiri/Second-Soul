@@ -10,8 +10,6 @@ public abstract class Player : Character {
 	public int nextLevelXP; // xp need for next level --remove public
 	
 	//public bool busyHUD; // global state variable to disable movements if HUD elements are open
-	
-	public bool attacking;
 
 	public int pickUpRange;
 	

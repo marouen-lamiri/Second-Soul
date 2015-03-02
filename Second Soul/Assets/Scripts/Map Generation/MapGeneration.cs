@@ -25,6 +25,7 @@ public class MapGeneration : MonoBehaviour
     List<int> listOfWalls;
     public static int[,] mapArray;
     int numberRooms = 5;
+	int mobSize = 5;
     public static int mapSizeX = 8;
     public static int mapSizeZ = 8;
 
@@ -110,7 +111,7 @@ public class MapGeneration : MonoBehaviour
 				    && map[i - 1, j - 1] != EnemyIdentifier && map[i,j] != wallIdentifier && map[i-1,j-1] != wallIdentifier && map[i-1,j] != wallIdentifier &&  map[i,j-1] != wallIdentifier){
                     map[i, j] = EnemyIdentifier;
                     Vector3 spawnLocation = new Vector3(i * 10, 0, j * 10);
-                    enemyfactory.spawnMob(spawnLocation, 5);
+                    enemyfactory.spawnMob(spawnLocation, mobSize);
                     nbrEnemies--;
                     nbrEnemiesByRoom--;
                     if (nbrEnemiesByRoom == 0) {
