@@ -11,7 +11,6 @@ public class MapGeneration : MonoBehaviour{
 	public GameObject crystalPrefab;
 	public GameObject statuePrefab;
 	public GameObject RegularEnemy;
-	public Enemy enemyPrefab;
 	public EnemyFactory enemyfactory;
 	public ItemHolder itemHolderPrefab;
 	public LootFactory lootFactory;
@@ -44,7 +43,6 @@ public class MapGeneration : MonoBehaviour{
 		if (Network.isServer){
 			fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));
 			sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
-			enemyfactory.setFactoryVariables(enemyPrefab, fighter, sorcerer);
 			lootFactory.setFactoryVariables(itemHolderPrefab, fighter);
 			mapArray = generateMap(mapSizeX, mapSizeZ, numberRooms, fighter.gameObject, sorcerer.gameObject);
 			buildMap(mapArray);
@@ -116,7 +114,7 @@ public class MapGeneration : MonoBehaviour{
 				    && map[i - 1, j - 1] != EnemyIdentifier && map[i,j] != wallIdentifier && map[i-1,j-1] != wallIdentifier && map[i-1,j] != wallIdentifier &&  map[i,j-1] != wallIdentifier){
 					map[i, j] = EnemyIdentifier;
 					Vector3 spawnLocation = new Vector3(i * resizeTheWall, 0, j * resizeTheWall);
-					//enemyfactory.spawnMob(spawnLocation, nbrEnemiesInMob);
+					enemyfactory.spawnMob(spawnLocation, nbrEnemiesInMob);
 					nbrEnemies--;
 					nbrEnemiesByRoom--;
 					if (nbrEnemiesByRoom == 0) {
@@ -145,25 +143,25 @@ public class MapGeneration : MonoBehaviour{
 		
 		if (map[i - 1, j] == emptySlotIdentifier){
 			map[i,j] = wallIdentifier;
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x, 0, position.z + 5), Quaternion.Euler(0, 180, 0), 2) as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x, 0, position.z + resizeTheWall/2), Quaternion.Euler(0, 180, 0), 2) as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map[i + 1, j] == emptySlotIdentifier){
 			map[i,j] = wallIdentifier;
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + 10, 0, position.z + 5), new Quaternion(), 2) as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + resizeTheWall, 0, position.z + resizeTheWall/2), new Quaternion(), 2) as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map[i, j - 1] == emptySlotIdentifier){
 			map[i,j] = wallIdentifier;
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + 5, 0, position.z), Quaternion.Euler(0, ObstacleIdentifier, 0), 2) as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + resizeTheWall/2, 0, position.z), Quaternion.Euler(0, ObstacleIdentifier, 0), 2) as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
 		if (map[i, j + 1] == emptySlotIdentifier){
 			map[i,j] = wallIdentifier;
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + 5, 0, position.z + 10), Quaternion.Euler(0, -ObstacleIdentifier, 0), 2) as GameObject;
+			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + resizeTheWall/2, 0, position.z + resizeTheWall), Quaternion.Euler(0, -ObstacleIdentifier, 0), 2) as GameObject;
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
