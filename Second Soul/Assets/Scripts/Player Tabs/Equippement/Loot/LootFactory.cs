@@ -59,10 +59,10 @@ public class LootFactory : MonoBehaviour {
 			System.Type itemType = null;
 			
 			Vector3 dropPosition = originPostion;
-			int xRoll = Random.Range(-100, 100);
-			int yRoll = Random.Range(-100, 100);
+			int xRoll = Random.Range(-200, 200);
+			int zRoll = Random.Range(-200, 200);
 			dropPosition.x += (xRoll / 100);
-			dropPosition.y += (yRoll / 100);
+			dropPosition.z += (zRoll / 100);
 			
 			int itemRoll = Random.Range(1, weightSum);
 			Debug.Log ("item roll is: " + itemRoll);

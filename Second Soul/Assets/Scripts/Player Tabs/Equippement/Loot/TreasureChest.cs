@@ -41,6 +41,7 @@ public class TreasureChest : MonoBehaviour {
 			}
 		}
 		opened = true;
+		Destroy (gameObject);
 	}
 	
 	void OnMouseDrag(){
