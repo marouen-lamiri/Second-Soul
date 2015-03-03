@@ -21,6 +21,9 @@ public class FireballBehavior : ParticleBehavior {
 		if (caster == null) {
 			return;
 		}
+		if (fireballSkill == null) {
+			fireballSkill = (FireballSkill)skill;
+		}
 		if(Vector3.Distance(originalSpawn, transform.position) < fireballSkill.travelDistance){
 			float oldY = transform.position.y;
 			transform.position += Time.deltaTime * fireballSkill.speed * transform.forward;

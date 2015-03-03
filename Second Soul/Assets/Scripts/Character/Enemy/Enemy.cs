@@ -77,6 +77,16 @@ public abstract class Enemy : Character {
 		arriveScript = GetComponent<Arrive> ();
 	}
 
+	public override bool criticalHitCheck(){
+		int randomRoll = Random.Range (1, 100);
+		if (randomRoll <= criticalChance * 100) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public override double getDamage(){
 		if (criticalHitCheck ()) {
 			return attackPower*criticalDamage;
@@ -159,6 +169,9 @@ public abstract class Enemy : Character {
 	}
 	
 	public void enemyAI(){
+		bool tst1 = inAttackRange (target.transform.position);
+		bool tst2 = !attackLocked();
+		////
 		if(!hasAggro){
 			if(inAwareRadius() && hasDirectView()){
 				hasAggro = true;
@@ -170,18 +183,18 @@ public abstract class Enemy : Character {
 		else if (cannotMove ()) {
 			return;
 		}
-		else if(!inAttackRange (target.transform.position) && hasAggro){
+		else if(!inAttackRange () && hasAggro){
 			chasingTarget = target.gameObject;
 			startMoving(target.transform.position);
 			if(outAggroRange()){
 				loseAggro();
 			}
 		} 
-		else if(inAttackRange (target.transform.position) && !attackLocked()){
+		//else if(inAttackRange (target.transform.position) && !attackLocked()){
+		else if(inAttackRange () && !actionLocked()){
 			//meshAgent.Stop(true);
 			stopMoving ();
-			activeSkill1.setCaster(this);
-			activeSkill1.useSkill();
+			attackTarget();
 
 			// networking: event listener to RPC the attack anim
 			if(enemyNetworkScript != null) {
@@ -191,6 +204,11 @@ public abstract class Enemy : Character {
 			}		
 
 		}	
+	}
+
+	protected virtual void attackTarget(){
+		activeSkill1.setCaster(this);
+		activeSkill1.useSkill();
 	}
 
 	protected virtual bool cannotMove(){
