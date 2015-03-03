@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class DatabaseInventory : MonoBehaviour {
 
 	// Use this for initialization
-	private int interval = 300;
+	private int interval = 3000;
 	private int count;
 	private Slot [,] inventorySlots;
 	private List<Item> inventoryItems;

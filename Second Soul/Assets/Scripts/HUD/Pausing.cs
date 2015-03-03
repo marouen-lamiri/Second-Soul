@@ -6,6 +6,12 @@ public class Pausing : MonoBehaviour {
 	//Variables
 	bool isPaused;
 	int TimeScale;
+	int pausedTime = 0;
+	int regualrTime = 1;
+	float buttonWidth = 200; 
+	float buttonHeight = 50;
+	float widthOffset = 75;
+	float heightOffset = 25;
 	FighterNetworkScript fighterNetworkScript;
 
 	void Start() {
@@ -26,14 +32,14 @@ public class Pausing : MonoBehaviour {
 	public void Pause(){
 		if (isPaused == true)
 		{
-			Time.timeScale = 1;
-			TimeScale = 1;
+			Time.timeScale = regualrTime;
+			TimeScale = regualrTime;
 			isPaused = false;
 		}
 		else
 		{
-			Time.timeScale = 0;
-			TimeScale = 0;
+			Time.timeScale = pausedTime;
+			TimeScale = pausedTime;
 			isPaused = true;
 		}
 	}
@@ -41,7 +47,8 @@ public class Pausing : MonoBehaviour {
 	void OnGUI() {
 		if(isPaused)
 		{
-			GUI.Label (new Rect (Screen.width/2 - 75, Screen.height/2 - 25, 200, 100),"<Color=red><size=40>-Paused-</size></Color>");
+			//size = 40 cannot be replaced with an int or float, it has to be an exact value
+			GUI.Label (new Rect (Screen.width/2 - widthOffset, Screen.height/2 - heightOffset, buttonWidth, buttonHeight),"<Color=red><size=40>-Paused-</size></Color>");
 		}
 	}
 

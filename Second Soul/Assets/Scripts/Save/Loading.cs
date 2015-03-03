@@ -9,8 +9,19 @@ public class Loading: MonoBehaviour
 	public GUIStyle loadingStyle;
 	static Loading instance;
 	static bool checkState;
+	float positionX = 0.5f;
+	float positionY = 0.5f;
+	float positionZ = 1f;
 	float halfBar = 200;
 	float offset = 90;
+	float buttonWidth = 200;
+	float buttonHeight = 50;
+	float buttonWidthOffset = 75;
+	float heightForPart1 = 10;
+	float heightForPart2 = 20;
+	float offsetForPart1 = 15;
+	float offsetForPart2 = 10;
+	int loadingPercentage = 99;
 	static float BarFullness;
 
 
@@ -23,7 +34,7 @@ public class Loading: MonoBehaviour
 		instance = this;
 		gameObject.AddComponent<GUITexture>().enabled = false;
 		guiTexture.texture = texture;
-		transform.position = new Vector3(0.5f, 0.5f, 1f);
+		transform.position = new Vector3(positionX, positionY, positionZ);
 		DontDestroyOnLoad(this);
 	}
 
@@ -39,9 +50,9 @@ public class Loading: MonoBehaviour
 
 	void OnGUI(){
 		if(checkState){
-			GUI.Label (new Rect(Screen.width/2 - 75, Screen.height/2 - 50, 200, 50), "Loading: "+ Application.GetStreamProgressForLevel(1) * 99 + "%", loadingStyle);
-			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar,  Screen.height/2 + 15, BarFullness * (halfBar + halfBar), 10), fullBar);
-			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar - offset/2,  Screen.height/2 + 10 , halfBar + halfBar + offset, 20), emptyBar);
+			GUI.Label (new Rect(Screen.width/2 - buttonWidthOffset, Screen.height/2 - buttonHeight, buttonWidth, buttonHeight), "Loading: "+ Application.GetStreamProgressForLevel(1) * loadingPercentage + "%", loadingStyle);
+			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar,  Screen.height/2 + offsetForPart1, BarFullness * (halfBar + halfBar), heightForPart1), fullBar);
+			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar - offset/2,  Screen.height/2 + offsetForPart2 , halfBar + halfBar + offset, heightForPart2), emptyBar);
 		}
 	}
 
