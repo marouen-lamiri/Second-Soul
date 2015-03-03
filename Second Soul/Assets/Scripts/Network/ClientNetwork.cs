@@ -491,7 +491,7 @@ public class ClientNetwork : MonoBehaviour {
 					Loading.show ();
 
 					// connect only the server, no client:
-					//Network.InitializeServer (10, port, false); // also to replace with real master server call StartServer();
+					StartServer (); //Network.InitializeServer (10, port, false); // also to replace with real master server call StartServer();
 					displayChat = true;
 					
 					//network instantiate both the fighter and sorcerer:
