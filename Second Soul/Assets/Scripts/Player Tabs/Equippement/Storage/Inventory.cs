@@ -7,14 +7,17 @@ public class Inventory : Storage
 
 	public int slotsOffsetX;
 	public int slotsOffsetY;
+	
+	public int guiDepth = 1;
+	
 	DatabaseInventory database;
 
 	// Use this for initialization
 	void Awake(){
 		//position.x = Screen.width - position.width;
 		//position.y = Screen.height - position.height - Screen.height * 0.2f;
-		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		player2 = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		//player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		//player2 = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		//was this next line supposed to be commented out? it was, but it seems essential. Not having it broke loot pickup for me. Was this meant to be initialized elsewhere?
 		//player.inventory = this;
 	}
@@ -28,15 +31,10 @@ public class Inventory : Storage
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
-
+	void Update () {
 		if (Input.GetKeyDown ("i")) {
-			shownInventory();
+			toggleTab();
 		}
-	}
-
-	public void sayhi(){
-		Debug.Log ("works");
 	}
 	
 	void setSlots(){
@@ -56,23 +54,18 @@ public class Inventory : Storage
 		addInventoryItem(4, 2, new Axe());
 	}
 	
-	void shownInventory(){
-		if (isInventoryOn) {
-			isInventoryOn = false;
-		}
-		else {
-			isInventoryOn = true;
-		}
+	protected void toggleTab(){
+		isInventoryOn = !isInventoryOn;
 	}
 	
 	void OnGUI(){
+		GUI.depth = guiDepth;
 		if (isInventoryOn) {
 			drawInventory ();
 			//drawSlots ();
 			drawItems ();
 			detectGUIAction ();
 			drawHoverItem();
-			//Debug.Log("id: " + GUIUtility.hotControl);
 			//Debug.Log (itemPickedUp);
 		}
 	}

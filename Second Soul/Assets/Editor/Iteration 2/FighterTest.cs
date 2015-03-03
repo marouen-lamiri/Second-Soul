@@ -4,7 +4,7 @@ using NUnit.Framework;
 public class PlayerCombatTest {
 
 	public Fighter player = new Fighter ();
-	public Enemy enemy = new Enemy ();
+	public SkeletalWarrior enemy = new SkeletalWarrior ();
 
 	[Test]
 	public void DamageEnemy ([Random(1, 100, 5)] int initHealth, [Random(1, 20, 5)] int damageValue) {

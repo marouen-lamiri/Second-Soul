@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : Character {
+public abstract class Enemy : Character {
 	
 	//Variable declaration
 	protected int strength; // base damage, armor, critt damage
@@ -16,6 +16,7 @@ public class Enemy : Character {
 	public int experienceBase;
 	
 	public Sorcerer sorcerer;
+	
 	public float aggroRange;
 	public bool hasAggro;
 	
@@ -28,6 +29,8 @@ public class Enemy : Character {
 	ISkill activeSkill1;
 	
 	public float dropRate;
+	
+	CapsuleCollider collider;
 
 	// scripts of same GameObject
 	protected EnemyNetworkScript enemyNetworkScript;
@@ -39,6 +42,7 @@ public class Enemy : Character {
 		enemyStart ();
 	}
 	protected void enemyStart(){
+		
 		characterStart ();
 		sphere.renderer.material.color = Color.red;
 		grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
@@ -47,28 +51,40 @@ public class Enemy : Character {
 		xpGiven = false;
 		lootGiven = false;
 		
+		// networking: makes sure each enemy is properly instantiated even on another game instance that didn't run the EnemyFactory code.
+		target = (Fighter) GameObject.FindObjectOfType (typeof (Fighter)); // for the enemies perspective target is always fighter
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+
+		
+		level = target.level;
 		initializePrimaryStats();
 		initializeSecondaryStatsBase();
 		initializeSecondaryStats();
 		calculateSecondaryStats();
-		
-		level = target.level;
 		health = maxHealth;
 		energy = maxEnergy;
+		
 		activeSkill1 = (BasicMelee)GetComponent<BasicMelee>();
 
-		// networking: makes sure each enemy is properly instantiated even on another game instance that didn't run the EnemyFactory code.
-		target = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		this.target = target;
-		this.sorcerer = sorcerer;
+		
 		this.transform.parent = GameObject.Find("Enemies").transform;
 
 		// networking:
 		enemyNetworkScript = (EnemyNetworkScript)GetComponent<EnemyNetworkScript> ();
 		
+		collider = GetComponent<CapsuleCollider>();
 		wanderScript = GetComponent<Wander> ();
 		arriveScript = GetComponent<Arrive> ();
+	}
+
+	public override bool criticalHitCheck(){
+		int randomRoll = Random.Range (1, 100);
+		if (randomRoll <= criticalChance * 100) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public override double getDamage(){
@@ -88,15 +104,7 @@ public class Enemy : Character {
 		return attackPower;
 	}
 
-	protected virtual void initializePrimaryStats(){
-		strengthPerLvl = 1;
-		dexterityPerLvl = 1;
-		endurancePerLvl = 1;
-		
-		strength = 10;
-		dexterity = 10;
-		endurance = 10;
-	}
+	protected abstract void initializePrimaryStats ();
 
 	public void calculateSecondaryStats(){
 		armor += strength * armorBase;
@@ -117,6 +125,29 @@ public class Enemy : Character {
 		
 		health = maxHealth;
 	}
+	
+	public abstract void initializeSecondaryStats ();
+	
+	public virtual void initializeSecondaryStatsBase(){		
+		armorBase = 7;
+		fireResBase = 1;
+		coldResBase = 1;
+		lightResBase = 1;
+		
+		accurBase = 0.001f;
+		attSpeedBase = 0.02f;
+		
+		attPowerBase = 0.01f;
+		
+		critChanBase = 0.01f;
+		critDmgBase = 0.02f;
+		
+		attPowerBase = 0.025f;
+		
+		hpBase = 5;
+		
+		hpRegBase = 0.01f;
+	}
 
 	// Update is called once per frame
 	void FixedUpdate (){
@@ -126,41 +157,44 @@ public class Enemy : Character {
 		characterUpdate ();
 		if (!isDead ()) {
 			level = target.level;
-			calculateXPWorth();
 			enemyAI ();
 		} 
 		else {
 			dieMethod();
 			giveLoot(dropRate, transform.position);
+			calculateXPWorth();
 			giveXP();
 			destroySelf();
 		}
 	}
 	
 	public void enemyAI(){
+		bool tst1 = inAttackRange (target.transform.position);
+		bool tst2 = !attackLocked();
+		////
 		if(!hasAggro){
 			if(inAwareRadius() && hasDirectView()){
 				hasAggro = true;
 			}
 			else{
-				wanderScript.wanderInCircle();
-				if(Vector3.Distance(wanderScript.wanderingObject.transform.position, transform.position)>arriveScript.arriveRadius){
-					startMoving(wanderScript.wanderingObject.transform.position);
-				}
+				idleLogic ();
 			}
 		}
-		else if(!inAttackRange (target.transform.position) && hasAggro){
+		else if (cannotMove ()) {
+			return;
+		}
+		else if(!inAttackRange () && hasAggro){
 			chasingTarget = target.gameObject;
 			startMoving(target.transform.position);
 			if(outAggroRange()){
 				loseAggro();
 			}
 		} 
-		else if(inAttackRange (target.transform.position) && !attackLocked()){
+		//else if(inAttackRange (target.transform.position) && !attackLocked()){
+		else if(inAttackRange () && !actionLocked()){
 			//meshAgent.Stop(true);
 			stopMoving ();
-			activeSkill1.setCaster(this);
-			activeSkill1.useSkill();
+			attackTarget();
 
 			// networking: event listener to RPC the attack anim
 			if(enemyNetworkScript != null) {
@@ -170,6 +204,22 @@ public class Enemy : Character {
 			}		
 
 		}	
+	}
+
+	protected virtual void attackTarget(){
+		activeSkill1.setCaster(this);
+		activeSkill1.useSkill();
+	}
+
+	protected virtual bool cannotMove(){
+		return false;
+	}
+
+	protected virtual void idleLogic (){
+		wanderScript.wanderInCircle();
+		if(Vector3.Distance(wanderScript.wanderingObject.transform.position, transform.position)>arriveScript.arriveRadius){
+			startMoving(wanderScript.wanderingObject.transform.position);
+		}
 	}
 
 	public bool hasDirectView(){
@@ -218,10 +268,14 @@ public class Enemy : Character {
 	
 	void giveXP(){
 		if(!xpGiven){
-			Debug.Log (experienceWorth);
+			Debug.Log ("enemy experience worth: " + experienceWorth);
 			//UnityNotificationBar.UNotify("Gained " + experienceWorth + " Experience"); //although this might appear false in Mono-Develop, it actually works as an external asset
-			target.gainExperience(experienceWorth/2);//divided by 2 because of xp split. we can always adjust the experienceWorth if necessary
-			sorcerer.gainExperience(experienceWorth/2);
+			if(target.playerEnabled){
+				target.gainExperience(experienceWorth);
+			}
+			if(sorcerer.playerEnabled){
+				sorcerer.gainExperience(experienceWorth);
+			}
 		}
 		xpGiven = true;
 	}
@@ -250,10 +304,11 @@ public class Enemy : Character {
 
 	public void destroySelf(){
 		Destroy(controller);
-		Destroy (this.GetComponent<CapsuleCollider>());
+		Destroy (collider);
 		if (transform.FindChild ("Sphere") != null) {
 			Destroy (transform.FindChild ("Sphere").gameObject);
 		}
+		Destroy(this);
 	}
 	
 	void OnMouseDrag(){

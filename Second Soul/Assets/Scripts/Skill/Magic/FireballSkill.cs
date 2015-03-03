@@ -32,20 +32,26 @@ public class FireballSkill : ProjectileSkill {
 	
 	public override void useSkill ()
 	{	
-		rayCast ();
-		if(caster.GetType().IsSubclassOf(typeof(Player))){
-			Player player = (Player)caster;
-			player.stopMoving ();
+		caster.stopMoving();
+		if (caster.GetType ().IsSubclassOf (typeof(Enemy))) {
+			targetPosition = caster.target.transform.position;
 		}
+		else if(caster.GetType().IsSubclassOf(typeof(Player))){
+			rayCast ();
+
+		}
+		caster.attacking = true;
 		damage = caster.spellPower * damageModifier;
 		castTime = caster.castSpeed;
 		skillLength = 1/castTime;
 		damage = caster.getDamage() * damageModifier;
-		
+
 		caster.transform.LookAt (targetPosition);
 		caster.animateAttack();
 		caster.skillDurationLeft = skillLength;
-		animation [caster.attackClip.name].normalizedSpeed = castTime;
+		if (caster.attackClip != null) {
+			animation [caster.attackClip.name].normalizedSpeed = castTime;
+		}
 		StartCoroutine(shootFireball());
 	}
 

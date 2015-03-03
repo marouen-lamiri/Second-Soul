@@ -41,6 +41,7 @@ public class CycloneSkill : AreaRangedSkill {
 	IEnumerator shootCyclone(){
 		yield return new WaitForSeconds(skillLength);
 		if(caster.loseEnergy (energyCost)){
+			Debug.Log ("Cyclone");
 			CycloneBehavior cyclone = Network.Instantiate(cyclonePrefab, targetPosition, caster.transform.rotation, 4)as CycloneBehavior;
 			cyclone.startBehaviour(caster,this);
 		}

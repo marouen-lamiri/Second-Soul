@@ -15,7 +15,7 @@ public class Chest : Armor {
 	public override void equip(){
 		//Debug.Log(FighterItems.chestSlot.position);
 		foreach(EquipSlot slot in Storage.equipSlots){
-			if(slot.type == this.GetType().ToString()){
+			if(slot.type == this.GetType()){
 				this.position = slot.position;	
 				Storage.equipItems.Add(this);
 				slot.item = this;
@@ -41,10 +41,6 @@ public class Chest : Armor {
 	
 	public override int getHeight(){
 		return ChestModel.getHeight();
-	}
-
-	public override string getTypeAsString(){
-		return "Chest";
 	}
 
 	public override int getX(){

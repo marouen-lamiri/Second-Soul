@@ -27,6 +27,7 @@ public class DatabaseFighter : MonoBehaviour {
 		PlayerPrefs.SetInt ("Strength", fighter.getStrength ());
 		PlayerPrefs.SetInt ("Dexterity", fighter.getDexterity ());
 		PlayerPrefs.SetInt ("Endurance", fighter.getEndurance ());
+		PlayerPrefs.SetInt ("Level", fighter.getLevel());
 	}
 	
 	public void readPrimaryStats(){
@@ -34,8 +35,10 @@ public class DatabaseFighter : MonoBehaviour {
 		fighter.setStrength((int) PlayerPrefs.GetInt("Strength"));
 		fighter.setDexterity((int) PlayerPrefs.GetInt("Dexterity"));
 		fighter.setEndurance((int) PlayerPrefs.GetInt("Endurance"));
+		fighter.setLevel((int)PlayerPrefs.GetInt("Level"));
+		fighter.calculateNewPrimaryStats();
 		fighter.calculateSecondaryStats();
-		fighter.calculateLevel();
+		//fighter.calculateLevel();
 		fighter.calculateNextLevelXP();
 	}
 }

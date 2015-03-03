@@ -21,6 +21,8 @@ public class FighterItems : EquippedItems {
 	public int weaponPixelHeight;
 	public int weaponPixelWidth;
 	
+	public int guiDepth = 0;
+	
 	// Use this for initialization
 	public void Start () {
 		setSlots();
@@ -32,17 +34,19 @@ public class FighterItems : EquippedItems {
 	}
 	
 	void setSlots(){
+		// FIXME: MAYBE DEPEND ON THE ENABLED/ACTIVE PLAYER IF SO ADD if(playeEnabled)
 		position.x = Screen.width - position.width;
 		position.y = Screen.height - position.height - Screen.height * 0.2f;
-		chestSlot = new EquipSlot(new Rect(chestOffsetX + position.x, chestOffsetY + position.y, chestPixelHeight, chestPixelWidth), "Chest");
-		bootsSlot = new EquipSlot(new Rect(), "Boots");
-		weaponSlot = new EquipSlot(new Rect(weaponOffsetX + position.x, weaponOffsetY + position.y, weaponPixelHeight, weaponPixelWidth), "Weapon");
+		chestSlot = new EquipSlot(new Rect(chestOffsetX + position.x, chestOffsetY + position.y, chestPixelHeight, chestPixelWidth), typeof(Chest));
+		bootsSlot = new EquipSlot(new Rect(), typeof(Boots));
+		weaponSlot = new EquipSlot(new Rect(weaponOffsetX + position.x, weaponOffsetY + position.y, weaponPixelHeight, weaponPixelWidth), typeof(Weapon));
 		equipSlots.Add(chestSlot);
 		equipSlots.Add(bootsSlot);
 		equipSlots.Add(weaponSlot); // set to dynamic weapon then have weapon check parent to make sure its a weapon
 	}
 
 	void OnGUI(){
+		GUI.depth = guiDepth;
 		if (isInventoryOn) {
 			drawEquippedItems();
 			//detectGUIAction();

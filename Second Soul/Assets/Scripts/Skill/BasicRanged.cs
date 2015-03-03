@@ -8,11 +8,15 @@ public class BasicRanged : BasicAttack {
 	// Use this for initialization
 	void Start () {
 		//skillStart ();
+		sorcererNetworkScript = null;
 	}
 	
 	public override void skillStart(){
-		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
-		impactTime = 1/caster.castSpeed;
+		if (sorcererNetworkScript != null){
+			sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
+		}
+		skillLength = 1/caster.castSpeed;
+		impactTime = .38f;//this is subjective. the percentage of time in the animation in which it "looks" like damage was dealt
 	}
 	
 	// Update is called once per frame
