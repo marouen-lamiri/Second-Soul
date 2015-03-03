@@ -13,7 +13,7 @@ public class SorcererAI : MonoBehaviour {
 	private bool status;
 	private float timeOut;
 	private float timeOutReset = 4f;
-	private float basicTimeOutReset = 0.5f;
+	private float basicTimeOutReset = 2f;
 	private Vector3 direction;
 	private ISkill skill1;
 	private int randomMinValue = 0;
@@ -41,11 +41,13 @@ public class SorcererAI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log ("Move!");
+		print ("Move");
 		startAI ();
 	}
 
 	void startAI(){
-		if(checkAIPlayingStatus()){
+		if(true){
 			fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 			sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 			setAISkillSet();
@@ -57,15 +59,15 @@ public class SorcererAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		timeOut --;
+		Debug.Log (timeOut);
 		checkWhoHadControl();
 		//checks that there is a grid instance (for pathfinding), if not, retrieve the grid
 		if(grid == null){
 			grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 		}
-		if(grid != null){
-			movingAI();
-			timeOut -= Time.deltaTime;
-		}
+		movingAI();
+
 	}
 
 	void checkWhoHadControl(){
@@ -128,47 +130,53 @@ public class SorcererAI : MonoBehaviour {
 		//checks if there is a player controlling the sorcerer
 		if(checkAIPlayingStatus()){
 			int randomTech = Random.Range(randomMinValue,randomMaxValue);
-			if(nearestEnemy == null){
-				nearestEnemy = checkNearestEnemy();
-			}
+			nearestEnemy = checkNearestEnemy();
 			//checks if there is a nearby enemy in respect to the fighter, otherwise it will ignore any enemies
-			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < 5 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < 10 ){
+			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < radiusCheck * 2 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < radiusCheck * 2 ){
+				Debug.Log ("In the Loop");
 				sorcerer.stopMoving();
 				//will decide what to use based on probability, which can be tweeked
 				//randomTech determines the next attack
 				//This represents the default attack
 				if(randomTech <= basicRanged && timeOut <= 0){
+					Debug.Log ("Attack Normal");
 					sorcerer.activeSkill5.useSkill();
 					timeOut = basicTimeOutReset;
 				}
 				//skill chance of happeining is 2%
 				if((randomTech == skillThreshold1 || randomTech == skillThreshold1 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+					Debug.Log ("Skill 2 Normal");
 					sorcerer.activeSkill2.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 2%
 				if((randomTech == skillThreshold2 || randomTech == skillThreshold2 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+					Debug.Log ("Skill 3 Normal");
 					sorcerer.activeSkill3.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 2%
 				if((randomTech == skillThreshold3 || randomTech == skillThreshold3 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+					Debug.Log ("Skill 4 Normal");
 					sorcerer.activeSkill4.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 2%
 				if((randomTech == skillThreshold4 || randomTech == skillThreshold4 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+					Debug.Log ("Skill 5 Normal");
 					sorcerer.activeSkill1.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 2%
 				if(fighter.health < fighter.maxHealth * 0.50 && fighter.energy >= energyCheck && (randomTech > basicRanged && randomTech < healValue) && timeOut <= 0){
+					Debug.Log ("Skill 6 Normal");
 					sorcerer.activeSkill6.useSkill();
 					timeOut = basicTimeOutReset;
 				}
 			}
 			//if the fighter is too far, go to him, ignore everyone else
 			else if(Vector3.Distance (fighter.transform.position, sorcerer.transform.position)> radiusCheck){
+				Debug.Log ("In the Moving Loop");
 				//Determine the direction in which the sorcerer moves, he has to be close to the fighter
 				direction = sorcerer.transform.position - fighter.transform.position;
 				direction.Normalize();
