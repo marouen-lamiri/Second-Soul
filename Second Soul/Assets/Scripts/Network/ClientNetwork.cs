@@ -74,6 +74,20 @@ public class ClientNetwork : MonoBehaviour {
 	// master server:
 	private const string typeName = "SecondSoul";
 	private const string gameName = "RoomName";
+
+	private int hostButtonsPositionX;
+	private int hostButtonsPositionY;
+	private int hostButtonsHeight;
+	private int hostButtonsWidth;
+	private int hostButtonsSpacing;
+
+	private int connectAsClientButtonDistanceAwayFromCenterOfScreenX;
+	private int connectAsClientButtonDistanceAwayFromCenterOfScreenY;
+	private int connectAsClientButtonPositionX;
+	private int connectAsClientButtonPositionY;
+	private int connectAsClientButtonWidth;
+	private int connectAsClientButtonHeight;
+
 	
 	private void StartServer()
 	{
@@ -114,6 +128,7 @@ public class ClientNetwork : MonoBehaviour {
 	
 	public void Awake() {
 
+		// chat & network window widgets:
 		networkWindowX = 0;//Screen.width - 500;
 		networkWindowY = Screen.height - 150;//10;
 
@@ -136,6 +151,21 @@ public class ClientNetwork : MonoBehaviour {
 		networkWindowButtonHeight = 25;
 		networkWindowButtonsOffsetX = chatTextAreaOffsetX + chatTextAreaWidth;
 		networkWindowButtonsOffsetY = chatTextAreaOffsetY;
+
+		// connection buttons:
+		connectAsClientButtonDistanceAwayFromCenterOfScreenX = 75;
+		connectAsClientButtonDistanceAwayFromCenterOfScreenY = 100;
+		connectAsClientButtonPositionX = Screen.width / 2 + connectAsClientButtonDistanceAwayFromCenterOfScreenX;
+		connectAsClientButtonPositionY = Screen.height / 2 + connectAsClientButtonDistanceAwayFromCenterOfScreenY;
+		connectAsClientButtonWidth = 150;
+		connectAsClientButtonHeight = 50;
+
+		// master server room list buttons:
+		hostButtonsPositionX = connectAsClientButtonPositionX + connectAsClientButtonWidth + 10; // put the list to the right of the client connection button.
+		hostButtonsPositionY = connectAsClientButtonPositionY; // 100;
+		hostButtonsHeight = connectAsClientButtonHeight - 10;
+		hostButtonsWidth = connectAsClientButtonWidth - 30;
+		hostButtonsSpacing = connectAsClientButtonHeight;
 
 
 		//AddNetworkView();
@@ -319,29 +349,6 @@ public class ClientNetwork : MonoBehaviour {
 	
 
 	void OnGUI() {
-
-		// master server:
-		if (!Network.isClient && !Network.isServer)
-		{
-			//print ("what???????????????????");
-			//server:
-			if (GUI.Button(new Rect(0, 0, 250, 100), "Start Server"))
-				StartServer();
-			//client
-			if (GUI.Button(new Rect(250, 0, 250, 100), "Refresh Hosts"))
-				RefreshHostList();
-			
-			if (hostList != null)
-			{
-				for (int i = 0; i < hostList.Length; i++)
-				{
-					if (GUI.Button(new Rect(0, 100 + (110 * i), 300, 100), hostList[i].gameName))
-						JoinServer(hostList[i]);
-				}
-			}
-		}
-		
-		
 		
 		GUI.skin.button = style;
 
@@ -420,9 +427,9 @@ public class ClientNetwork : MonoBehaviour {
 			
 			// button to connect as a client:
 			if (Network.peerType == NetworkPeerType.Disconnected) {
-				if (GUI.Button (new Rect (Screen.width / 2 + 75, Screen.height / 2 + 100, 150, 50), "Connect as a Client")) {
+				if (GUI.Button (new Rect (connectAsClientButtonPositionX, connectAsClientButtonPositionY, connectAsClientButtonWidth, connectAsClientButtonHeight), "Connect as a Client")) {
 					Loading.show ();
-					//ConnectToServer (); // to replace with the real master server code above. 
+					RefreshHostList(); //ConnectToServer (); // to replaced with the real master server code above. 
 					displayChat = true;
 
 				}
@@ -492,6 +499,26 @@ public class ClientNetwork : MonoBehaviour {
 					NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
 					
 					
+				}
+			}
+		}
+
+		// master server:
+		if (!Network.isClient && !Network.isServer)
+		{
+			//			//server:
+			//			if (GUI.Button(new Rect(0, 0, 250, 100), "Start Server"))
+			//				StartServer();
+			//			//client
+			//			if (GUI.Button(new Rect(250, 0, 250, 100), "Refresh Hosts"))
+			//				RefreshHostList();
+			
+			if (hostList != null)
+			{
+				for (int i = 0; i < hostList.Length; i++)
+				{
+					if (GUI.Button(new Rect(hostButtonsPositionX, hostButtonsPositionY + ((hostButtonsHeight+hostButtonsSpacing) * i), hostButtonsWidth, hostButtonsHeight), hostList[i].gameName))
+						JoinServer(hostList[i]);
 				}
 			}
 		}
