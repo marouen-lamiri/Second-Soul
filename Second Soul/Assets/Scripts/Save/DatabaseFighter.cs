@@ -4,8 +4,9 @@ using System.Collections;
 public class DatabaseFighter : MonoBehaviour {
 	
 	// Use this for initialization
-	int interval = 300;
+	int interval = 3000;
 	int count;
+	int reset = 0;
 	public Character player;
 	private Fighter fighter;
 	
@@ -18,7 +19,7 @@ public class DatabaseFighter : MonoBehaviour {
 		if(count == interval){
 			savePrimaryStats();
 			UnityNotificationBar.UNotify("Saved Fighter Stats"); //although this might appear false in Mono-Develop, it actually works as an external asset
-			count = 0;
+			count = reset;
 		}
 		count++;
 	}

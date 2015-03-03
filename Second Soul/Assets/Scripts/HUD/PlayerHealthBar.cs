@@ -13,6 +13,10 @@ public class PlayerHealthBar : MonoBehaviour {
 	double healthPercent;
 	float ratioWidth;
 	float ratioHeight;
+	float offset = 11f;
+	float multiplierOffset = 0.244f;
+	float defaultWidth = 1366f;
+	float minValue = 0.5f;
 	private Fighter player;
 	//Initialization of variables
 	void Start () {
@@ -26,9 +30,9 @@ public class PlayerHealthBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		hp = player.health;
-		ratioWidth = (Screen.width/1366f);
-		if(ratioWidth < 0.5f ){
-			ratioWidth = 0.5f;
+		ratioWidth = (Screen.width/defaultWidth);
+		if(ratioWidth < minValue ){
+			ratioWidth = minValue;
 		}
 	}
 	//Display health bar in GUI
@@ -47,7 +51,7 @@ public class PlayerHealthBar : MonoBehaviour {
 		globeHeight= (float) healthPercent*globeSize;
 		//Drawing health Bar
 		//GUI.Box(new Rect(Screen.width * (0.60f), (Screen.height-(globeHeight+2f)), initialGlobeSize, initialGlobeHeight), background);
-		GUI.BeginGroup(new Rect(Screen.width * 0.244f * ratioWidth, Screen.height-(globeHeight-11f), globeSize, globeSize));
+		GUI.BeginGroup(new Rect(Screen.width * multiplierOffset * ratioWidth, Screen.height-(globeHeight-offset), globeSize, globeSize));
 		GUI.DrawTexture(new Rect(0, (-globeSize+globeHeight), globeSize, globeSize),globePic);
 		GUI.EndGroup();
 	}

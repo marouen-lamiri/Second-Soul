@@ -16,6 +16,17 @@ public class SorcererAI : MonoBehaviour {
 	private float basicTimeOutReset = 0.5f;
 	private Vector3 direction;
 	private ISkill skill1;
+	private int randomMinValue = 0;
+	private int randomMaxValue = 200;
+	private int basicRanged = 180;
+	private int skillThreshold1 = 193;
+	private int skillThreshold2 = 195;
+	private int skillThreshold3 = 197;
+	private int skillThreshold4 = 199;
+	private int skillThreshold5 = 194;
+	private int healValue = 192;
+	private float energyCheck = 20f;
+	private float radiusCheck = 5f;
 	private string skill1Name = "IceShardSkill";
 	private ISkill skill2;
 	private string skill2Name = "FireballSkill"; 
@@ -116,47 +127,48 @@ public class SorcererAI : MonoBehaviour {
 	void movingAI(){
 		//checks if there is a player controlling the sorcerer
 		if(checkAIPlayingStatus()){
-			int randomTech = Random.Range(0,200);
-			nearestEnemy = checkNearestEnemy();
+			int randomTech = Random.Range(randomMinValue,randomMaxValue);
+			if(nearestEnemy == null){
+				nearestEnemy = checkNearestEnemy();
+			}
 			//checks if there is a nearby enemy in respect to the fighter, otherwise it will ignore any enemies
 			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < 5 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < 10 ){
 				sorcerer.stopMoving();
 				//will decide what to use based on probability, which can be tweeked
 				//randomTech determines the next attack
 				//This represents the default attack
-				if(randomTech <= 180 && timeOut <= 0){
-					Debug.Log ("Attack For God's sake");
+				if(randomTech <= basicRanged && timeOut <= 0){
 					sorcerer.activeSkill5.useSkill();
 					timeOut = basicTimeOutReset;
 				}
 				//skill chance of happeining is 2%
-				if((randomTech == 193 || randomTech == 194) && fighter.energy > 20 && timeOut <= 0){
+				if((randomTech == skillThreshold1 || randomTech == skillThreshold1 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
 					sorcerer.activeSkill2.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 2%
-				if((randomTech == 195 || randomTech == 196) && fighter.energy > 20 && timeOut <= 0){
+				if((randomTech == skillThreshold2 || randomTech == skillThreshold2 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
 					sorcerer.activeSkill3.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 2%
-				if((randomTech == 197 || randomTech == 198) && fighter.energy >= 20 && timeOut <= 0){
+				if((randomTech == skillThreshold3 || randomTech == skillThreshold3 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
 					sorcerer.activeSkill4.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 2%
-				if((randomTech == 199 || randomTech == 200) && fighter.energy >= 20 && timeOut <= 0){
+				if((randomTech == skillThreshold4 || randomTech == skillThreshold4 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
 					sorcerer.activeSkill1.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 2%
-				if(fighter.health < fighter.maxHealth * 0.50 && fighter.energy >= 10 && (randomTech > 180 && randomTech < 192) && timeOut <= 0){
+				if(fighter.health < fighter.maxHealth * 0.50 && fighter.energy >= energyCheck && (randomTech > basicRanged && randomTech < healValue) && timeOut <= 0){
 					sorcerer.activeSkill6.useSkill();
 					timeOut = basicTimeOutReset;
 				}
 			}
 			//if the fighter is too far, go to him, ignore everyone else
-			else if(Vector3.Distance (fighter.transform.position, sorcerer.transform.position)>=5){
+			else if(Vector3.Distance (fighter.transform.position, sorcerer.transform.position)> radiusCheck){
 				//Determine the direction in which the sorcerer moves, he has to be close to the fighter
 				direction = sorcerer.transform.position - fighter.transform.position;
 				direction.Normalize();
@@ -164,51 +176,17 @@ public class SorcererAI : MonoBehaviour {
 				sorcerer.startMoving(fighter.transform.position + goalPosition);
 			}
 			//if the fighter is nearby, stop
-			else if (Vector3.Distance(sorcerer.transform.position,goalPosition) < 4){
+			else if (Vector3.Distance(sorcerer.transform.position,goalPosition) < radiusCheck){
 				sorcerer.stopMoving();
 			}
 		}
 	}
-
-//	public void setActiveSkillsForAI(SkillNode skillNode1, SkillNode skillNode2,SkillNode skillNode3,SkillNode skillNode4, SkillNode skillNode5, SkillNode skillNode6){
-//		//Set Skill 1
-//		sorcerer.activeSkill1 = skillNode1;
-//		sorcerer.activeSkill1 = sorcerer.gameObject.GetComponent(skillNode1.skillType) as ISkill;
-//		Debug.Log(sorcerer.activeSkill1 + " : " + skillNode1.skillType);
-//		sorcerer.activeSkill1.setCaster(sorcerer);
-//		//set Skill 2
-//		sorcerer.activeSkill1 = skillNode2;
-//		sorcerer.activeSkill1 = sorcerer.gameObject.GetComponent(skillNode2.skillType) as ISkill;
-//		Debug.Log(sorcerer.activeSkill2 + " : " + skillNode2.skillType);
-//		sorcerer.activeSkill1.setCaster(sorcerer);
-//		//Set Skill 3
-//		sorcerer.activeSkill1 = skillNode3;
-//		sorcerer.activeSkill1 = sorcerer.gameObject.GetComponent(skillNode3.skillType) as ISkill;
-//		Debug.Log(sorcerer.activeSkill3 + " : " + skillNode3.skillType);
-//		sorcerer.activeSkill1.setCaster(sorcerer);
-//		//Set Skill 4
-//		sorcerer.activeSkill1 = skillNode4;
-//		sorcerer.activeSkill1 = sorcerer.gameObject.GetComponent(skillNode4.skillType) as ISkill;
-//		Debug.Log(sorcerer.activeSkill4 + " : " + skillNode4.skillType);
-//		sorcerer.activeSkill1.setCaster(sorcerer);
-//		//Set Skill 5
-//		sorcerer.activeSkill1 = skillNode5;
-//		sorcerer.activeSkill1 = sorcerer.gameObject.GetComponent(skillNode5.skillType) as ISkill;
-//		Debug.Log(sorcerer.activeSkill5 + " : " + skillNode5.skillType);
-//		sorcerer.activeSkill1.setCaster(sorcerer);
-//		//Set Skill 6
-//		sorcerer.activeSkill1 = skillNode6;
-//		sorcerer.activeSkill1 = sorcerer.gameObject.GetComponent(skillNode6.skillType) as ISkill;
-//		Debug.Log(sorcerer.activeSkill6 + " : " + skillNode6.skillType);
-//		sorcerer.activeSkill1.setCaster(sorcerer);
-//	}
-
+	
 	//Determine if there is a closeby enemy
 	public Enemy checkNearestEnemy(){
 		float nearestDistanceSqr = Mathf.Infinity;
 		Enemy[] allEnemies =  GameObject.FindObjectsOfType<Enemy>();
 		Enemy nearestObj = null;
-
 
 		foreach (Enemy enemy in allEnemies){
 			

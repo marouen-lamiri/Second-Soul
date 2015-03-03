@@ -3,9 +3,9 @@ using System.Collections;
 
 public class ClientNetwork : MonoBehaviour {
 	
-	public string serverIP = "127.0.0.1";
-	public string serverLocalIP;
-	public int port = 25000;
+//	public string serverIP = "127.0.0.1";
+//	public string serverLocalIP;
+//	public int port = 25000;
 	private string _messageLog = "";
 	string someInfo = "";
 	private NetworkPlayer _myNetworkPlayer;
@@ -70,8 +70,65 @@ public class ClientNetwork : MonoBehaviour {
 	private int framesCounterBeforeFadeOutChat = 0;
 	private int numberOfFramesToWaitBeforeFadingOutChat = 800;
 
+
+	// master server:
+	private const string typeName = "SecondSoul";
+	private const string gameName = "RoomName";
+
+	private int hostButtonsPositionX;
+	private int hostButtonsPositionY;
+	private int hostButtonsHeight;
+	private int hostButtonsWidth;
+	private int hostButtonsSpacing;
+
+	private int connectAsClientButtonDistanceAwayFromCenterOfScreenX;
+	private int connectAsClientButtonDistanceAwayFromCenterOfScreenY;
+	private int connectAsClientButtonPositionX;
+	private int connectAsClientButtonPositionY;
+	private int connectAsClientButtonWidth;
+	private int connectAsClientButtonHeight;
+
+	
+	private void StartServer()
+	{
+		Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
+		MasterServer.RegisterHost(typeName, gameName);
+	}
+	void OnServerInitialized()
+	{
+		Debug.Log("Server Initializied");
+	}
+	// master server client:
+	private HostData[] hostList;
+	
+	private void RefreshHostList()
+	{
+		MasterServer.RequestHostList(typeName);
+	}
+	
+	void OnMasterServerEvent(MasterServerEvent msEvent)
+	{
+		if (msEvent == MasterServerEvent.HostListReceived)
+			hostList = MasterServer.PollHostList();
+		print ("OnMasterServerEvent fired !!!!!!!!!!!!!! ");
+	}
+	private void JoinServer(HostData hostData)
+	{
+		Network.Connect(hostData);
+	}
+	
+//	void OnConnectedToServer()
+//	{
+//		Debug.Log("Server Joined");
+//	}
+
+
+
+	
+	
 	public void Awake() {
 
+		// chat & network window widgets:
 		networkWindowX = 0;//Screen.width - 500;
 		networkWindowY = Screen.height - 150;//10;
 
@@ -94,6 +151,21 @@ public class ClientNetwork : MonoBehaviour {
 		networkWindowButtonHeight = 25;
 		networkWindowButtonsOffsetX = chatTextAreaOffsetX + chatTextAreaWidth;
 		networkWindowButtonsOffsetY = chatTextAreaOffsetY;
+
+		// connection buttons:
+		connectAsClientButtonDistanceAwayFromCenterOfScreenX = 75;
+		connectAsClientButtonDistanceAwayFromCenterOfScreenY = 100;
+		connectAsClientButtonPositionX = Screen.width / 2 + connectAsClientButtonDistanceAwayFromCenterOfScreenX;
+		connectAsClientButtonPositionY = Screen.height / 2 + connectAsClientButtonDistanceAwayFromCenterOfScreenY;
+		connectAsClientButtonWidth = 150;
+		connectAsClientButtonHeight = 50;
+
+		// master server room list buttons:
+		hostButtonsPositionX = connectAsClientButtonPositionX + connectAsClientButtonWidth + 10; // put the list to the right of the client connection button.
+		hostButtonsPositionY = connectAsClientButtonPositionY; // 100;
+		hostButtonsHeight = connectAsClientButtonHeight - 10;
+		hostButtonsWidth = connectAsClientButtonWidth - 30;
+		hostButtonsSpacing = connectAsClientButtonHeight;
 
 
 		//AddNetworkView();
@@ -124,9 +196,13 @@ public class ClientNetwork : MonoBehaviour {
 
 		// toggle display chat window:
 		if(Input.GetKeyDown ("enter") || Input.GetKeyDown ("return")){ //if(Input.GetKeyDown ("n")){
-			displayChat = !displayChat;
+			//displayChat = !displayChat;
+			displayChat = true;
 			framesCounterBeforeFadeOutChat = 0;
-			GUI.FocusControl("ChatBox"); // not always working why?
+			if(displayChat) {
+				GUI.FocusControl("ChatBox"); // not always working why?
+			}
+
 		}
 		if(textFieldString != textFieldStringInPreviousFrame) {
 			framesCounterBeforeFadeOutChat = 0;
@@ -184,7 +260,14 @@ public class ClientNetwork : MonoBehaviour {
 			// if player choose to play as Client, instantiate sorcerer:
 			if(Network.isClient){
 				transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
-				Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+				if(sorcererWasCreated) {
+					SorcererInstanceManager.createAndSwapNewSorcerer(); // 
+					//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+				}
+				else {
+					SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
+					//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+				}
 				sorcererWasCreated = true;
 			}
 
@@ -273,7 +356,7 @@ public class ClientNetwork : MonoBehaviour {
 	
 
 	void OnGUI() {
-
+		
 		GUI.skin.button = style;
 
 		if(!Application.isLoadingLevel){
@@ -283,7 +366,7 @@ public class ClientNetwork : MonoBehaviour {
 				GUI.Box(new Rect(0.1f, 0.1f, Screen.width - 0.1f, Screen.height - 0.1f),"Second Soul", background);
 				GUI.Label (new Rect(Screen.width / 2 - 150, Screen.height/2 + 25, 300, 50),"<Size=30>Network Choices</Size>",style);
 				if (GUI.Button (new Rect (Screen.width / 2 - 225, Screen.height/2 + 100, 150, 50), "Connect as a server", style)) {
-					Network.InitializeServer (10, port, false);
+					StartServer();
 					displayChat = true;
 				}
 			}
@@ -310,6 +393,10 @@ public class ClientNetwork : MonoBehaviour {
 						// Network.Destroy(GetComponent<NetworkView>().viewID);
 						//Destroy(sorcerer.gameObject);
 						//3- remove the client from the network -- disconnect it.
+
+						//instead: swap them with the manager:
+						SorcererInstanceManager.createAndSwapNewSorcerer(); // now server owns a newly created sorcerer.
+
 						if (Network.connections.Length == 1) {
 							Debug.Log("Disconnecting: " + Network.connections[0].ipAddress + ":" + Network.connections[0].port);
 							Network.CloseConnection(Network.connections[0], true);
@@ -338,7 +425,7 @@ public class ClientNetwork : MonoBehaviour {
 					//bool isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
 					bool isEnterPressed = (Event.current.type == EventType.keyUp) && (Event.current.keyCode == KeyCode.Return);
 					//GUI.GetNameOfFocusedControl() == "input" && Event.current.keyCode == KeyCode.Return
-					if (isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box") && textFieldString != "") {
+					if ((isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box")) && textFieldString != "") {
 						//_messageLog += textFieldString + "\n";
 						SendInfoToClient(textFieldString);
 						textFieldString = "";
@@ -351,16 +438,16 @@ public class ClientNetwork : MonoBehaviour {
 			
 			// button to connect as a client:
 			if (Network.peerType == NetworkPeerType.Disconnected) {
-				if (GUI.Button (new Rect (Screen.width / 2 + 75, Screen.height / 2 + 100, 150, 50), "Connect as a Client")) {
+				if (GUI.Button (new Rect (connectAsClientButtonPositionX, connectAsClientButtonPositionY, connectAsClientButtonWidth, connectAsClientButtonHeight), "Connect as a Client")) {
 					Loading.show ();
-					ConnectToServer ();
+					RefreshHostList(); //ConnectToServer (); // to replaced with the real master server code above. 
 					displayChat = true;
 
 				}
 			}
 			
 			// after connecting if you're a client:
-			if(displayChat &&  !(Application.loadedLevelName != "StartScreen")) {
+			if(displayChat) { // &&  !(Application.loadedLevelName != "StartScreen")
 				if (Network.peerType == NetworkPeerType.Client) {
 					GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client", labelStyle);
 					
@@ -404,7 +491,7 @@ public class ClientNetwork : MonoBehaviour {
 					Loading.show ();
 
 					// connect only the server, no client:
-					Network.InitializeServer (10, port, false);
+					StartServer (); //Network.InitializeServer (10, port, false); // also to replace with real master server call StartServer();
 					displayChat = true;
 					
 					//network instantiate both the fighter and sorcerer:
@@ -414,7 +501,14 @@ public class ClientNetwork : MonoBehaviour {
 					
 					// always create the sorcerer before the fighter.
 					transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
-					Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+					if(sorcererWasCreated) {
+						SorcererInstanceManager.createAndSwapNewSorcerer(); // 
+						//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+					}
+					else {
+						SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
+						//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+					}
 					sorcererWasCreated = true;
 					
 					lines = Network.Instantiate (linesPrefab,transform.position,transform.rotation,7)as GameObject;
@@ -426,16 +520,36 @@ public class ClientNetwork : MonoBehaviour {
 				}
 			}
 		}
+
+		// master server:
+		if (!Network.isClient && !Network.isServer)
+		{
+			//			//server:
+			//			if (GUI.Button(new Rect(0, 0, 250, 100), "Start Server"))
+			//				StartServer();
+			//			//client
+			//			if (GUI.Button(new Rect(250, 0, 250, 100), "Refresh Hosts"))
+			//				RefreshHostList();
+			
+			if (hostList != null)
+			{
+				for (int i = 0; i < hostList.Length; i++)
+				{
+					if (GUI.Button(new Rect(hostButtonsPositionX, hostButtonsPositionY + ((hostButtonsHeight+hostButtonsSpacing) * i), hostButtonsWidth, hostButtonsHeight), hostList[i].gameName))
+						JoinServer(hostList[i]);
+				}
+			}
+		}
 		
 	}
 	
 	// for client:
-	private void ConnectToServer() {
-		Network.Connect(serverIP, port);
-		if (!Network.isClient) {
-			//Network.Connect(serverLocalIP,port);
-		}
-	}
+//	private void ConnectToServer() {
+//		Network.Connect(serverIP, port);
+//		if (!Network.isClient) {
+//			//Network.Connect(serverLocalIP,port);
+//		}
+//	}
 	
 	// for server:
 	void OnPlayerConnected(NetworkPlayer player) {

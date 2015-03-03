@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ApplicationQuit : MonoBehaviour {
 
+	string escape = "escape";
+
 	// Use this for initialization
 	void Start () {
 	
@@ -10,7 +12,7 @@ public class ApplicationQuit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (Input.GetKeyDown ("escape")) {
+		if (Input.GetKeyDown (escape)) {
 			Application.Quit();
 		}
 	}

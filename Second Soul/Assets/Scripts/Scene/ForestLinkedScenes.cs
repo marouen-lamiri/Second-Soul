@@ -5,6 +5,8 @@ public class ForestLinkedScenes : MonoBehaviour {
 
 	public Fighter fPosition;
 	public Sorcerer sPosition;
+	Vector3 fInitial = new Vector3 (75, 0, 75);
+	Vector3 sInitial = new Vector3 (72, 0, 72);
 	string playerTag = "Player";
 	string sceneName = "Town";
 
@@ -12,8 +14,8 @@ public class ForestLinkedScenes : MonoBehaviour {
 	void Start () {
 		fPosition = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sPosition = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-		fPosition.transform.position = new Vector3 (75, 0, 75);
-		sPosition.transform.position = new Vector3 (72, 0, 72);
+		fPosition.transform.position = fInitial;
+		sPosition.transform.position = sInitial;
 	}
 	
 	// Update is called once per frame

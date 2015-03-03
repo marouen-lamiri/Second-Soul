@@ -4,8 +4,9 @@ using System.Collections;
 public class DatabaseSorcerer : MonoBehaviour {
 	
 	// Use this for initialization
-	int interval = 300;
+	int interval = 3000;
 	int count;
+	int reset = 0;
 	public Character player;
 	private Sorcerer sorcerer;
 	private Fighter fighter;
@@ -22,7 +23,7 @@ public class DatabaseSorcerer : MonoBehaviour {
 			//Debug.Log ("Save Sorcerer's Primary Stats!");
 			savePrimaryStats();
 			UnityNotificationBar.UNotify("Saved Sorcerer Stats"); //although this might appear false in Mono-Develop, it actually works as an external asset
-			count = 0;
+			count = reset;
 		}
 		count++;
 	}

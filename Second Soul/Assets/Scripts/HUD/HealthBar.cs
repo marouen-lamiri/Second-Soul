@@ -10,6 +10,7 @@ public class HealthBar : MonoBehaviour {
 	public Rect healthFrameRect;
 	float healthFrameWidth;
 	float healthFrameHeight;
+	float height = 10f;
 	
 	public Texture2D healthFill;
 	public Rect healthFillRect;
@@ -53,11 +54,11 @@ public class HealthBar : MonoBehaviour {
 		}
 	}
 	void drawHealthFrame(){
-		healthFrameRect.Set (Screen.width/2-healthFrameWidth/2, 10, healthFrameWidth, healthFrameHeight);
+		healthFrameRect.Set (Screen.width/2-healthFrameWidth/2, height, healthFrameWidth, healthFrameHeight);
 		GUI.DrawTexture (healthFrameRect, healthFrame);
 	}
 	void drawHealthBar(){
-		healthFillRect.Set (Screen.width/2-healthFillWidth/2, 10+healthFrameHeight/4, healthFillWidth*healthPercent, healthFillHeight);
+		healthFillRect.Set (Screen.width/2-healthFillWidth/2, height+healthFrameHeight/4, healthFillWidth*healthPercent, healthFillHeight);
 		GUI.DrawTexture (healthFillRect, healthFill);
 	}
 }
