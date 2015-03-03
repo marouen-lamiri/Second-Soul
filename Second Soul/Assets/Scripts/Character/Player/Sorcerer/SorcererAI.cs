@@ -12,7 +12,7 @@ public class SorcererAI : MonoBehaviour {
 	private Enemy lockedOn;
 	private bool status;
 	private float timeOut;
-	private float timeOutReset = 4f;
+	private float timeOutReset = 5f;
 	private float basicTimeOutReset = 2f;
 	private Vector3 direction;
 	private ISkill skill1;
@@ -59,7 +59,7 @@ public class SorcererAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		timeOut --;
+		timeOut=- Time.deltaTime;
 		Debug.Log (timeOut);
 		checkWhoHadControl();
 		//checks that there is a grid instance (for pathfinding), if not, retrieve the grid
