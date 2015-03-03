@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ItemHolder : MonoBehaviour {
 
@@ -8,7 +9,8 @@ public class ItemHolder : MonoBehaviour {
 	public Item item;
 	// Use this for initialization
 	void Start () {
-		player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		findEnabledPlayer();
+		//player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		//item = (Item) System.Activator.CreateInstance(System.Type.GetType("Chest"));
 		//item = itemRand();
 	}
@@ -16,6 +18,15 @@ public class ItemHolder : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+	
+	private void findEnabledPlayer(){
+		Player[] players = (Player[]) GameObject.FindObjectsOfType(typeof(Player));
+		foreach(Player p in players){
+			if(p.enabled){
+				player = p;
+			}
+		}
 	}
 	
 	public void getPickedUp(){
