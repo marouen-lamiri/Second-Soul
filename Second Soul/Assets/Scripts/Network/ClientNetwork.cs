@@ -317,6 +317,10 @@ public class ClientNetwork : MonoBehaviour {
 						// Network.Destroy(GetComponent<NetworkView>().viewID);
 						//Destroy(sorcerer.gameObject);
 						//3- remove the client from the network -- disconnect it.
+
+						//instead: swap them with the manager:
+						SorcererInstanceManager.createAndSwapNewSorcerer(); // now server owns a newly created sorcerer.
+
 						if (Network.connections.Length == 1) {
 							Debug.Log("Disconnecting: " + Network.connections[0].ipAddress + ":" + Network.connections[0].port);
 							Network.CloseConnection(Network.connections[0], true);
@@ -345,7 +349,7 @@ public class ClientNetwork : MonoBehaviour {
 					//bool isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
 					bool isEnterPressed = (Event.current.type == EventType.keyUp) && (Event.current.keyCode == KeyCode.Return);
 					//GUI.GetNameOfFocusedControl() == "input" && Event.current.keyCode == KeyCode.Return
-					if (isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box") && textFieldString != "") {
+					if ((isEnterPressed || GUI.Button (new Rect (chatSendButtonOffsetX, chatSendButtonOffsetY, chatSendButtonWidth, chatSendButtonHeight), "Send", "box")) && textFieldString != "") {
 						//_messageLog += textFieldString + "\n";
 						SendInfoToClient(textFieldString);
 						textFieldString = "";
@@ -367,7 +371,7 @@ public class ClientNetwork : MonoBehaviour {
 			}
 			
 			// after connecting if you're a client:
-			if(displayChat &&  !(Application.loadedLevelName != "StartScreen")) {
+			if(displayChat) {// &&  !(Application.loadedLevelName != "StartScreen")
 				if (Network.peerType == NetworkPeerType.Client) {
 					GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client", labelStyle);
 					
