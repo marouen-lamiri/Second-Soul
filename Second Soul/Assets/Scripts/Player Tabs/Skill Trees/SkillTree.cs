@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public abstract class SkillTree : MonoBehaviour {
-
+	
 	protected Player player;
 	protected ActionBar actionBar;
-
+	
 	public bool isSkillOpen;
 	
 	public Rect position;

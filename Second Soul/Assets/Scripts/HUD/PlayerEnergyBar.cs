@@ -13,6 +13,10 @@ public class PlayerEnergyBar : MonoBehaviour {
 	double energyPercent;
 	float ratioWidth;
 	float ratioHeight;
+	float offset = 8f;
+	float multiplierOffset = 0.636f;
+	float screenDefaultWidth = 1366f;
+	float minValue = 0.5f;
 	private Fighter player;
 	//Initialization of variables
 	void Start (){
@@ -26,9 +30,9 @@ public class PlayerEnergyBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update (){
 		energy = player.energy;
-		ratioWidth = (Screen.width/1366f);
-		if(ratioWidth < 0.5f ){
-			ratioWidth = 0.5f;
+		ratioWidth = (Screen.width/screenDefaultWidth);
+		if(ratioWidth < minValue ){
+			ratioWidth = minValue;
 		}
 	}
 
@@ -48,7 +52,7 @@ public class PlayerEnergyBar : MonoBehaviour {
 		globeHeight = (float) energyPercent*globeSize;
 		//Drawing Energy Bar
 		//GUI.Box(new Rect(Screen.width * (0.6435f), (Screen.height-(globeHeight+2f)), initialGlobeSize, initialGlobeHeight), background);
-		GUI.BeginGroup(new Rect(Screen.width * (0.636f), (Screen.height-(globeHeight-8f)), globeSize, globeSize));
+		GUI.BeginGroup(new Rect(Screen.width * multiplierOffset, (Screen.height-(globeHeight-offset)), globeSize, globeSize));
 		GUI.DrawTexture(new Rect(0, (-globeSize+globeHeight), globeSize, globeSize),globePic);
 		GUI.EndGroup();
 

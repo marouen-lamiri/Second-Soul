@@ -5,10 +5,11 @@ public class SceneChanger : MonoBehaviour {
 
 	public string gameSceneToLoad;
 	Fighter fighter;
+	float randomPosition = 75;
 	// Use this for initialization
 	void Start () {
 		fighter = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
-		fighter.transform.position = new Vector3(75,fighter.transform.position.y,75);
+		fighter.transform.position = new Vector3(randomPosition,fighter.transform.position.y,randomPosition);
 	}
 	
 	// Update is called once per frame

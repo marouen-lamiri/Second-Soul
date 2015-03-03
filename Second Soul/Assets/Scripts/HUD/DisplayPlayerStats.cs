@@ -13,6 +13,11 @@ public class DisplayPlayerStats : MonoBehaviour {
 	float width = 225f;
 	float basicScreenHeight = 320;
 	float basicScreenWidth = 797;
+	float boxPercentage = 0.005f;
+	float boxHeight = 0.01f;
+	float labelHeight = 0.03f;
+	float labelHeightReset = 0.03f;
+	float heightIncrease = 0.05f;
 	float ratioWidth;
 	float ratioHeight;
 	float nbrOfDraws = 5; //value has to be changed depending on the number of labels to be drawn
@@ -41,14 +46,20 @@ public class DisplayPlayerStats : MonoBehaviour {
 	void OnGUI () {
 		GUI.skin.font = myFont;
 		GUI.skin.box = style;
+		labelHeight = labelHeightReset;
 		if (isStatsDisplayed) {
-			GUI.Box (new Rect (Screen.width * 0.005f, Screen.height * 0.01f, width  * ratioWidth, height * nbrOfDraws * ratioHeight), "");
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.03f, width , height * ratioHeight), "<Size=20><Color=black>-Character Stats-</Color></Size>", labelStyle);
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.08f, width , height * ratioHeight), "<Color=black>Health: </Color>" + (int)player.health + "/" + (int)player.maxHealth, labelStyle);
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.13f, width , height * ratioHeight), "<Color=black>Energy: </Color>" + (int)player.energy  + "/" + (int)player.maxEnergy, labelStyle); 
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.18f, width , height * ratioHeight), "<Color=black>Speed: </Color>" + player.speed, labelStyle);
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.23f, width , height * ratioHeight), "<Color=black>Defense: </Color>" + player.armor, labelStyle);
-			GUI.Label (new Rect (Screen.width * 0.01f, Screen.height * 0.28f, width , height * ratioHeight), "<Color=black>Level: </Color>" + player.level, labelStyle);
+			GUI.Box (new Rect (Screen.width * boxPercentage, Screen.height * boxHeight, width  * ratioWidth, height * nbrOfDraws * ratioHeight), "");
+			GUI.Label (new Rect (Screen.width * boxPercentage * 2, Screen.height * labelHeight, width , height * ratioHeight), "<Size=20><Color=black>-Character Stats-</Color></Size>", labelStyle);
+			labelHeight =+ heightIncrease;
+			GUI.Label (new Rect (Screen.width * boxPercentage * 2, Screen.height * labelHeight, width , height * ratioHeight), "<Color=black>Health: </Color>" + (int)player.health + "/" + (int)player.maxHealth, labelStyle);
+			labelHeight =+ heightIncrease;
+			GUI.Label (new Rect (Screen.width * boxPercentage * 2, Screen.height * labelHeight, width , height * ratioHeight), "<Color=black>Energy: </Color>" + (int)player.energy  + "/" + (int)player.maxEnergy, labelStyle); 
+			labelHeight =+ heightIncrease;
+			GUI.Label (new Rect (Screen.width * boxPercentage * 2, Screen.height * labelHeight, width , height * ratioHeight), "<Color=black>Speed: </Color>" + player.speed, labelStyle);
+			labelHeight =+ heightIncrease;
+			GUI.Label (new Rect (Screen.width * boxPercentage * 2, Screen.height * labelHeight, width , height * ratioHeight), "<Color=black>Defense: </Color>" + player.armor, labelStyle);
+			labelHeight =+ heightIncrease;
+			GUI.Label (new Rect (Screen.width * boxPercentage * 2, Screen.height * labelHeight, width , height * ratioHeight), "<Color=black>Level: </Color>" + player.level, labelStyle);
 		}
 	}
 
