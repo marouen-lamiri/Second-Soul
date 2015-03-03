@@ -38,8 +38,8 @@ public class Fighter : Player{
 		activeSkill5 = null;
 		activeSkill6 = null;
 		
-		playerStart ();
 		initializePlayer();
+		playerStart ();
 		initializeLevel();
 		initializePrimaryStats();
 		initializeSecondaryStatsBase();
