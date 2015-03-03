@@ -184,7 +184,14 @@ public class ClientNetwork : MonoBehaviour {
 			// if player choose to play as Client, instantiate sorcerer:
 			if(Network.isClient){
 				transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
-				Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+				if(sorcererWasCreated) {
+					SorcererInstanceManager.createAndSwapNewSorcerer(); // 
+					//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+				}
+				else {
+					SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
+					//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+				}
 				sorcererWasCreated = true;
 			}
 
@@ -414,7 +421,14 @@ public class ClientNetwork : MonoBehaviour {
 					
 					// always create the sorcerer before the fighter.
 					transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
-					Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+					if(sorcererWasCreated) {
+						SorcererInstanceManager.createAndSwapNewSorcerer(); // 
+						//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+					}
+					else {
+						SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
+						//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
+					}
 					sorcererWasCreated = true;
 					
 					lines = Network.Instantiate (linesPrefab,transform.position,transform.rotation,7)as GameObject;
