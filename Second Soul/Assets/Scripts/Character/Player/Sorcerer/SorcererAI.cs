@@ -84,7 +84,7 @@ public class SorcererAI : MonoBehaviour {
 	}
 
 	//Checks if a player is in game or not
-	bool checkAIPlayingStatus(){
+	public bool checkAIPlayingStatus(){
 		//If the network is Client, don't give control of sorcerer to the AI
 		if(Network.isClient != true){
 			//If the network is Not Client and the number of Connections is more than 1, than don't give control to the AI
