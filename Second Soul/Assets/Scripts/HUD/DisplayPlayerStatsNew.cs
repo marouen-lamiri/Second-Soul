@@ -194,6 +194,7 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 		if (isStatsPressed == true)
 		{
 			isStatsPressed = false;
+			isSecondaryStatsPressed = false;
 		}
 		else
 		{
