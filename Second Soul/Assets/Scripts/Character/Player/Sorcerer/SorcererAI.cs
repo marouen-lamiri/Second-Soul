@@ -12,8 +12,8 @@ public class SorcererAI : MonoBehaviour {
 	private Enemy lockedOn;
 	private bool status;
 	private float timeOut;
-	private float timeOutReset = 4f;
-	private float basicTimeOutReset = 0.5f;
+	private float timeOutReset = 5f;
+	private float basicTimeOutReset = 2f;
 	private Vector3 direction;
 	private ISkill skill1;
 	private int randomMinValue = 0;
@@ -41,6 +41,8 @@ public class SorcererAI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log ("Move!");
+		print ("Move");
 		startAI ();
 	}
 
@@ -57,15 +59,14 @@ public class SorcererAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		timeOut=- Time.deltaTime;
 		checkWhoHadControl();
 		//checks that there is a grid instance (for pathfinding), if not, retrieve the grid
 		if(grid == null){
 			grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 		}
-		if(grid != null){
-			movingAI();
-			timeOut -= Time.deltaTime;
-		}
+		movingAI();
+
 	}
 
 	void checkWhoHadControl(){
@@ -83,7 +84,7 @@ public class SorcererAI : MonoBehaviour {
 	}
 
 	//Checks if a player is in game or not
-	bool checkAIPlayingStatus(){
+	public bool checkAIPlayingStatus(){
 		//If the network is Client, don't give control of sorcerer to the AI
 		if(Network.isClient != true){
 			//If the network is Not Client and the number of Connections is more than 1, than don't give control to the AI
@@ -128,41 +129,46 @@ public class SorcererAI : MonoBehaviour {
 		//checks if there is a player controlling the sorcerer
 		if(checkAIPlayingStatus()){
 			int randomTech = Random.Range(randomMinValue,randomMaxValue);
-			if(nearestEnemy == null){
-				nearestEnemy = checkNearestEnemy();
-			}
+			nearestEnemy = checkNearestEnemy();
 			//checks if there is a nearby enemy in respect to the fighter, otherwise it will ignore any enemies
-			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < 5 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < 10 ){
+			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < radiusCheck * 2 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < radiusCheck * 2 ){
+				Debug.Log ("In the Loop");
 				sorcerer.stopMoving();
 				//will decide what to use based on probability, which can be tweeked
 				//randomTech determines the next attack
 				//This represents the default attack
 				if(randomTech <= basicRanged && timeOut <= 0){
+					Debug.Log ("Attack Normal");
 					sorcerer.activeSkill5.useSkill();
 					timeOut = basicTimeOutReset;
 				}
-				//skill chance of happeining is 2%
-				if((randomTech == skillThreshold1 || randomTech == skillThreshold1 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+				//skill chance of happeining is 0.5%
+				if((randomTech == skillThreshold1) && fighter.energy >= energyCheck && timeOut <= 0){
+					Debug.Log ("Skill 2 Normal");
 					sorcerer.activeSkill2.useSkill();
 					timeOut = timeOutReset;
 				}
-				//skill chance of happeining is 2%
-				if((randomTech == skillThreshold2 || randomTech == skillThreshold2 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+				//skill chance of happeining is 0.5%
+				if((randomTech == skillThreshold2) && fighter.energy >= energyCheck && timeOut <= 0){
+					Debug.Log ("Skill 3 Normal");
 					sorcerer.activeSkill3.useSkill();
 					timeOut = timeOutReset;
 				}
-				//skill chance of happeining is 2%
-				if((randomTech == skillThreshold3 || randomTech == skillThreshold3 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+				//skill chance of happeining is 0.5%
+				if((randomTech == skillThreshold3) && fighter.energy >= energyCheck && timeOut <= 0){
+					Debug.Log ("Skill 4 Normal");
 					sorcerer.activeSkill4.useSkill();
 					timeOut = timeOutReset;
 				}
-				//skill chance of happeining is 2%
-				if((randomTech == skillThreshold4 || randomTech == skillThreshold4 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+				//skill chance of happeining is 0.5%
+				if((randomTech == skillThreshold4) && fighter.energy >= energyCheck && timeOut <= 0){
+					Debug.Log ("Skill 5 Normal");
 					sorcerer.activeSkill1.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 2%
 				if(fighter.health < fighter.maxHealth * 0.50 && fighter.energy >= energyCheck && (randomTech > basicRanged && randomTech < healValue) && timeOut <= 0){
+					Debug.Log ("Skill 6 Normal");
 					sorcerer.activeSkill6.useSkill();
 					timeOut = basicTimeOutReset;
 				}

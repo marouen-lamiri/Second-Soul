@@ -29,6 +29,7 @@ public abstract class Player : Character {
 	public ISkill activeSkill6;
 	
 	public ItemHolder lootItem;
+	public TreasureChest treasureChest;
 
 	// networking:
 	protected FighterNetworkScript fighterNetworkScript;
@@ -83,6 +84,7 @@ public abstract class Player : Character {
 	protected void initializePlayer () {
 		target = null;
 		lootItem = null;
+		treasureChest = null;
 		startPosition = transform.position;
 	}
 	
@@ -158,17 +160,24 @@ public abstract class Player : Character {
 	}
 	
 	protected void lootLogic(){
+		// handles picking up dropped items
 		if(lootItem != null){
 			if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))){
 				pickUpItem();
 			}
-		}		
+		}
+		// handles opening chests
+		if(treasureChest != null){
+			if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))){
+				openChest();
+			}
+		}
 	}
 
 	public void pickUpItem(){
-		if(inPickupRange()){
+		if(inPickupRange(lootItem.transform.position)){
 			if(inventory.takeItem(lootItem.item)){
-			lootItem.getPickedUp();
+				lootItem.getPickedUp();
 			}
 		}
 		else{
@@ -176,8 +185,18 @@ public abstract class Player : Character {
 		}
 	}
 	
-	public bool inPickupRange(){
-		return Vector3.Distance(lootItem.transform.position, transform.position) <= pickUpRange;
+	public void openChest(){
+		Debug.Log(treasureChest + " I GET HER");
+		if(inPickupRange(treasureChest.transform.position)){
+			treasureChest.openChest();
+		}
+		else{
+			startMoving(treasureChest.transform.position);
+		}
+	}
+	
+	public bool inPickupRange(Vector3 objectPos){
+		return Vector3.Distance(objectPos, transform.position) <= pickUpRange;
 	}
 	
 	//ADD CONDITIONS FOR ANY NEW OBJECTS THAT WOULD MAKE PLAY BUSY

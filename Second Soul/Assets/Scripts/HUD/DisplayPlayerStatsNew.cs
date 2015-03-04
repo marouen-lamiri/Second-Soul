@@ -2,85 +2,180 @@
 using System.Collections;
 
 public class DisplayPlayerStatsNew : MonoBehaviour {
-
+	
 	// Constants
-	public const int BOX_WIDTH         = 150;
-	public const int LABEL_WIDTH       = 150;
-	public const int BUTTON_WIDTH      = 70;
-	public const int LABEL_HEIGHT      = 20;
-	public const int BUTTON_HEIGHT     = 20;
-	public const int SPACE_BETWEEN     = 5;
-
+	public const int BOX_WIDTH     = 200;
+	public const int LABEL_WIDTH   = 150;
+	public const int BUTTON_WIDTH  = 70;
+	public const int LABEL_HEIGHT  = 20;
+	public const int BUTTON_HEIGHT = 20;
+	public const int SPACE_BETWEEN = 5;
+	
+	// Instances refering to the objects.
+	private Fighter  fighter;
+	private Sorcerer sorcerer;
+	
 	// Variable related to the scroll-bar.
 	public Vector2 scrollPosition = Vector2.zero;
-
+	
 	// Variable responsible for hiding/unhiding the menu.
 	bool isStatsPressed;
 	bool isSecondaryStatsPressed;
-
+	
 	// Label style.
 	public GUIStyle labelStyle;
-
+	
 	// Labels and Buttons
-	enum primaryStatsLabels {Level, Class, Strength, Dexterity, Endurance, Health, Energy};
-	enum secondaryStatsLabels {Armor, FireResistance, ColdResistance, LightningtResistance, Accuracy,
-								AttackSpeed, CastSpeed, Cdr, CriticalChance, CriticalDamage, AttackPower, 
-								SpellCriticalChance, SpellCriticalDamage, SpellPower, Health, MaxHealth, 
-								Energy, MaxEnergy, HealthRegen, EnergyRegen};
+	enum primaryStatsLabelsFighter {Level, Class, Strength, Dexterity, Endurance, Health, Energy};
+	enum primaryStatsLabelsSorcerer {Level, Class, Intelligence, Wisdom, Spirit, Health, Energy};
+	
+	// Primary Stats tooltips for both Fighter and Sorcerer.
+	public string tooltip_Level  = "Level tooltip ...";
+	public string tooltip_Class  = "Class tooltip ...";
+	public string tooltip_Health = "Health tooltip ...";
+	public string tooltip_Energy = "Energy tooltip ...";
+	// Fighter's Primary Stats tooltips.
+	public string tooltip_Strength  = "Strength tooltip ...";
+	public string tooltip_Dexterity = "Dexterity tooltip ...";
+	public string tooltip_Endurance = "Endurance tooltip ...";
+	// Sorcerer's Primary Stats tooltips.
+	public string tooltip_Intelligence = "Intelligence tooltip ...";
+	public string tooltip_Wisdom       = "Wisdom tooltip ...";
+	public string tooltip_Spirit       = "Spirit tooltip ...";
+	
+	enum secondaryStatsLabelsFighter {Armor, FireResistance, ColdResistance, LightningtResistance, Accuracy, AttackSpeed, 
+		Cdr, CriticalChance, CriticalDamage, AttackPower, HealthRegen, EnergyRegen};
+	enum secondaryStatsLabelsSorcerer {Accuracy, CastSpeed, SpellCriticalChance, SpellCriticalDamage, SpellPower};
+	
+	// Secondary Stats tooltips for both Fighter and Sorcerer.
+	public string tooltip_Armor                = "Armor tooltip ...";
+	public string tooltip_FireResistance       = "FireResistance tooltip ...";
+	public string tooltip_ColdResistance       = "ColdResistance tooltip ...";
+	public string tooltip_LightningtResistance = "LightningtResistance tooltip ...";
+	public string tooltip_Accuracy             = "Accuracy tooltip ...";
+	public string tooltip_AttackSpeed          = "AttackSpeed tooltip ...";
+	public string tooltip_CastSpeed            = "CastSpeed tooltip ...";
+	public string tooltip_Cdr                  = "Cdr tooltip ...";
+	public string tooltip_CriticalChance       = "CriticalChance tooltip ...";
+	public string tooltip_CriticalDamage       = "CriticalDamage tooltip ...";
+	public string tooltip_AttackPower          = "AttackPower tooltip ...";
+	public string tooltip_SpellCriticalChance  = "SpellCriticalChance tooltip ...";
+	public string tooltip_SpellCriticalDamage  = "SpellCriticalDamage tooltip ...";
+	public string tooltip_SpellPower           = "SpellPower tooltip ...";
+	public string tooltip_HealthRegen          = "HealthRegen tooltip ...";
+	public string tooltip_EnergyRegen          = "EnergyRegen tooltip ...";
+	
 	enum primaryStatsButtons {Details};
-
+	
 	// Containers for Primary and Secondary Stats' tooltips.
 	Hashtable primaryStatsTooltip;
 	Hashtable secondaryStatsTooltip;
-
-	// Lengths of the all enums.
-	int primaryLength   = System.Enum.GetValues (typeof(primaryStatsLabels)).Length;
-	int secondaryLength = System.Enum.GetValues (typeof(secondaryStatsLabels)).Length;
-	int primaryButtonsLength   = System.Enum.GetValues (typeof(primaryStatsButtons)).Length;
+	
+	// Containers for Primary and Secondary Stats' values.
+	string[] primaryStatsValues;
+	string[] secondaryStatsValues;
 	
 	// Arrays with the names of all enums.
-	string[] namesPrimary   = System.Enum.GetNames(typeof(primaryStatsLabels));
-	string[] namesSecondary = System.Enum.GetNames(typeof(secondaryStatsLabels));
-	string[] namesPrimaryButtons   = System.Enum.GetNames(typeof(primaryStatsButtons));
-
+	string[] namesPrimary;
+	string[] namesSecondary;
+	string[] namesPrimaryButtons = System.Enum.GetNames(typeof(primaryStatsButtons));
+	
 	void Start ()
 	{
+		// Getting the reference of Fighter and Sorcerer.
+		fighter  = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof(Sorcerer));
+		
+		// TOOLTIPS
+		// Primary and Secondary Stats tool-tip initialization.
+		primaryStatsTooltip   = new Hashtable ();
+		secondaryStatsTooltip = new Hashtable ();
+		
 		/* Setting up the tool-tips for Primary and Secondary Stats. */
-
-		// Primary Stats tool-tip information.
-		primaryStatsTooltip   = new Hashtable();
-
-		primaryStatsTooltip.Add (primaryStatsLabels.Level, "Level is ...");
-		primaryStatsTooltip.Add (primaryStatsLabels.Class, "Class is ...");
-		primaryStatsTooltip.Add (primaryStatsLabels.Strength, "Strength is ...");
-		primaryStatsTooltip.Add (primaryStatsLabels.Dexterity, "Dexterity is ...");
-		primaryStatsTooltip.Add (primaryStatsLabels.Endurance, "Endurance is ...");
-		primaryStatsTooltip.Add (primaryStatsLabels.Health, "Health is ...");
-		primaryStatsTooltip.Add (primaryStatsLabels.Energy, "Energy is ...");
-
-		// Secondary/Detailed Stats tool-tip information.
-		secondaryStatsTooltip = new Hashtable();
-
-		secondaryStatsTooltip.Add (secondaryStatsLabels.Armor, "Armor is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.FireResistance, "FireResistance is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.ColdResistance, "ColdResistance is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.LightningtResistance, "LightningtResistance is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.Accuracy, "Accuracy is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.AttackSpeed, "AttackSpeed is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.CastSpeed, "CastSpeed is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.Cdr, "Cdr is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.CriticalChance, "CriticalChance is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.CriticalDamage, "CriticalDamage is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.AttackPower, "AttackPower is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.SpellCriticalChance, "SpellCriticalChance is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.SpellCriticalDamage, "SpellCriticalDamage is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.SpellPower, "SpellPower is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.Health, "Health is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.MaxHealth, "MaxHealth is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.Energy, "Energy is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.MaxEnergy, "MaxEnergy is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.HealthRegen, "HealthRegen is ...");
-		secondaryStatsTooltip.Add (secondaryStatsLabels.EnergyRegen, "EnergyRegen is ...");
+		if (fighter.playerEnabled)
+		{
+			// Is Fighter.
+			namesPrimary = System.Enum.GetNames(typeof(primaryStatsLabelsFighter));
+			primaryStatsTooltip.Add (namesPrimary [0], tooltip_Level);
+			primaryStatsTooltip.Add (namesPrimary [1], tooltip_Class);
+			primaryStatsTooltip.Add (namesPrimary [2], tooltip_Strength);
+			primaryStatsTooltip.Add (namesPrimary [3], tooltip_Dexterity);
+			primaryStatsTooltip.Add (namesPrimary [4], tooltip_Endurance);
+			primaryStatsTooltip.Add (namesPrimary [5], tooltip_Health);
+			primaryStatsTooltip.Add (namesPrimary [6], tooltip_Energy);
+			
+			primaryStatsValues = new string[namesPrimary.Length];
+			primaryStatsValues [0] = namesPrimary [0] + ": " + fighter.level;
+			primaryStatsValues [1] = namesPrimary [1] + ": " + fighter.GetType ();
+			primaryStatsValues [2] = namesPrimary [2] + ": " + fighter.getStrength ();
+			primaryStatsValues [3] = namesPrimary [3] + ": " + fighter.getDexterity ();
+			primaryStatsValues [4] = namesPrimary [4] + ": " + fighter.getEndurance ();
+			primaryStatsValues [5] = namesPrimary [5] + ": " + fighter.maxHealth;
+			primaryStatsValues [6] = namesPrimary [6] + ": " + fighter.maxEnergy;
+			
+			namesSecondary = System.Enum.GetNames(typeof(secondaryStatsLabelsFighter));
+			secondaryStatsTooltip.Add (namesSecondary [0], tooltip_Armor);
+			secondaryStatsTooltip.Add (namesSecondary [1], tooltip_FireResistance);
+			secondaryStatsTooltip.Add (namesSecondary [2], tooltip_ColdResistance);
+			secondaryStatsTooltip.Add (namesSecondary [3], tooltip_LightningtResistance);
+			secondaryStatsTooltip.Add (namesSecondary [4], tooltip_Accuracy);
+			secondaryStatsTooltip.Add (namesSecondary [5], tooltip_AttackSpeed);
+			secondaryStatsTooltip.Add (namesSecondary [6], tooltip_Cdr);
+			secondaryStatsTooltip.Add (namesSecondary [7], tooltip_CriticalChance);
+			secondaryStatsTooltip.Add (namesSecondary [8], tooltip_CriticalDamage);
+			secondaryStatsTooltip.Add (namesSecondary [9], tooltip_AttackPower);
+			secondaryStatsTooltip.Add (namesSecondary [10], tooltip_HealthRegen);
+			secondaryStatsTooltip.Add (namesSecondary [11], tooltip_EnergyRegen);
+			
+			secondaryStatsValues = new string[namesSecondary.Length];
+			secondaryStatsValues [0] = namesSecondary [0] + ": " + fighter.armor;
+			secondaryStatsValues [1] = namesSecondary [1] + ": " + fighter.fireResistance;
+			secondaryStatsValues [2] = namesSecondary [2] + ": " + fighter.coldResistance;
+			secondaryStatsValues [3] = namesSecondary [3] + ": " + fighter.lightningtResistance;
+			secondaryStatsValues [4] = namesSecondary [4] + ": " + fighter.accuracy;
+			secondaryStatsValues [5] = namesSecondary [5] + ": " + fighter.attackSpeed;
+			secondaryStatsValues [6] = namesSecondary [6] + ": " + fighter.cdr;
+			secondaryStatsValues [7] = namesSecondary [7] + ": " + fighter.criticalChance;
+			secondaryStatsValues [8] = namesSecondary [8] + ": " + fighter.criticalDamage;
+			secondaryStatsValues [9] = namesSecondary [9] + ": " + fighter.attackPower;
+			secondaryStatsValues [10] = namesSecondary [10] + ": " + fighter.healthRegen;
+			secondaryStatsValues [11] = namesSecondary [11] + ": " + fighter.energyRegen;
+		}
+		else
+		{
+			// Is Sorcerer.
+			namesPrimary   = System.Enum.GetNames(typeof(primaryStatsLabelsSorcerer));
+			primaryStatsTooltip.Add (namesPrimary [0], tooltip_Level);
+			primaryStatsTooltip.Add (namesPrimary [1], tooltip_Class);
+			primaryStatsTooltip.Add (namesPrimary [2], tooltip_Intelligence);
+			primaryStatsTooltip.Add (namesPrimary [3], tooltip_Wisdom);
+			primaryStatsTooltip.Add (namesPrimary [4], tooltip_Spirit);
+			primaryStatsTooltip.Add (namesPrimary [5], tooltip_Health);
+			primaryStatsTooltip.Add (namesPrimary [6], tooltip_Energy);
+			
+			primaryStatsValues = new string[namesPrimary.Length];
+			primaryStatsValues [0] = namesPrimary [0] + ": " + sorcerer.level;
+			primaryStatsValues [1] = namesPrimary [1] + ": " + sorcerer.GetType ();
+			primaryStatsValues [2] = namesPrimary [2] + ": " + sorcerer.getIntelligence ();
+			primaryStatsValues [3] = namesPrimary [3] + ": " + sorcerer.getWisdom ();
+			primaryStatsValues [4] = namesPrimary [4] + ": " + sorcerer.getSpirit ();
+			primaryStatsValues [5] = namesPrimary [5] + ": " + sorcerer.maxHealth;
+			primaryStatsValues [6] = namesPrimary [6] + ": " + sorcerer.maxEnergy;
+			
+			namesSecondary = System.Enum.GetNames(typeof(secondaryStatsLabelsSorcerer));
+			secondaryStatsTooltip.Add (namesSecondary [0], tooltip_Accuracy);
+			secondaryStatsTooltip.Add (namesSecondary [1], tooltip_CastSpeed);
+			secondaryStatsTooltip.Add (namesSecondary [2], tooltip_SpellCriticalChance);
+			secondaryStatsTooltip.Add (namesSecondary [3], tooltip_SpellCriticalDamage);
+			secondaryStatsTooltip.Add (namesSecondary [4], tooltip_SpellPower);
+			
+			secondaryStatsValues = new string[namesSecondary.Length];
+			secondaryStatsValues [0] = namesSecondary [0] + ": " + fighter.accuracy;
+			secondaryStatsValues [1] = namesSecondary [1] + ": " + fighter.castSpeed;
+			secondaryStatsValues [2] = namesSecondary [2] + ": " + fighter.spellCriticalChance;
+			secondaryStatsValues [3] = namesSecondary [3] + ": " + fighter.spellCriticalDamage;
+			secondaryStatsValues [4] = namesSecondary [4] + ": " + fighter.spellPower;
+		}
 	}
 	
 	// Update is called once per frame, checks if 's'-key is pressed.
@@ -90,7 +185,7 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 		if(Input.GetKeyDown("s"))
 		{
 			PlayerStats();
-		}
+		}		
 	}
 	
 	public void PlayerStats ()
@@ -99,6 +194,7 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 		if (isStatsPressed == true)
 		{
 			isStatsPressed = false;
+			isSecondaryStatsPressed = false;
 		}
 		else
 		{
@@ -109,8 +205,8 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 	// Returning the height of the box that contains the Primary Stats' Labels and Buttons.
 	private int getBoxHeight (int numberLabels, int numberButtons)
 	{
-		int preferableBoxHeight = (numberLabels * LABEL_HEIGHT) + ((numberLabels + 1) * SPACE_BETWEEN) + (numberButtons * (BUTTON_HEIGHT + SPACE_BETWEEN));
-
+		int preferableBoxHeight = ((numberLabels + 1) * LABEL_HEIGHT) + ((numberLabels + 1) * SPACE_BETWEEN) + (numberButtons * (BUTTON_HEIGHT + SPACE_BETWEEN));
+		
 		return preferableBoxHeight;
 	}
 	
@@ -122,25 +218,30 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 		
 		// Box position.
 		var boxWidthPosition  = screenWidth50 - BOX_WIDTH / 2;
-		var boxHeightPosition = screenHeight50 - getBoxHeight(primaryLength, primaryButtonsLength) / 2;
-
+		var boxHeightPosition = screenHeight50 - getBoxHeight(namesPrimary.Length, namesPrimaryButtons.Length) / 2;
+		var boxHeightPositionLabel = boxHeightPosition + LABEL_HEIGHT;
+		
+		int leftShift   = 5;
+		int bottomShift = 2;
+		
 		if(isStatsPressed)
 		{
 			// Drawing the Box with Primary Stats.
-			GUI.Box(new Rect(boxWidthPosition, boxHeightPosition, BOX_WIDTH, getBoxHeight(primaryLength, primaryButtonsLength)), /*"Primary Stats"*/"");
-
+			GUI.Box(new Rect(boxWidthPosition, boxHeightPosition, BOX_WIDTH, getBoxHeight(namesPrimary.Length, namesPrimaryButtons.Length)), /*"Primary Stats"*/"");
+			
 			int i;
 			// Drawing the Lables.
-			for (i = 0; i < primaryLength; i++)
+			for (i = 0; i < namesPrimary.Length; i++)
 			{
-				GUI.Label(new Rect (boxWidthPosition + SPACE_BETWEEN, boxHeightPosition + (i * LABEL_HEIGHT) + ((i + 1) * SPACE_BETWEEN), LABEL_WIDTH, LABEL_HEIGHT), new GUIContent(namesPrimary[i], (string)primaryStatsTooltip[(primaryStatsLabels)System.Enum.Parse(typeof(primaryStatsLabels), namesPrimary[i])])/*, labelStyle*/);
+				GUI.Label(new Rect (boxWidthPosition + SPACE_BETWEEN * leftShift, boxHeightPositionLabel + (i * LABEL_HEIGHT) + ((i + 1) * SPACE_BETWEEN), LABEL_WIDTH, LABEL_HEIGHT), 
+				          new GUIContent(primaryStatsValues[i], (string)primaryStatsTooltip[namesPrimary[i]])/*, labelStyle*/);
 			}
-
+			
 			int j;
 			// Drawing the Buttons.
-			for (j = 0; j < primaryButtonsLength; j++)
+			for (j = 0; j < namesPrimaryButtons.Length; j++)
 			{
-				if (GUI.Button(new Rect (boxWidthPosition + BOX_WIDTH - BUTTON_WIDTH - SPACE_BETWEEN, boxHeightPosition + (i * LABEL_HEIGHT) + ((i + 1) * SPACE_BETWEEN), BUTTON_WIDTH, BUTTON_HEIGHT), namesPrimaryButtons[j]))
+				if (GUI.Button(new Rect (boxWidthPosition + BOX_WIDTH - BUTTON_WIDTH - SPACE_BETWEEN, boxHeightPositionLabel + (i * LABEL_HEIGHT) + ((i + 1) * SPACE_BETWEEN), BUTTON_WIDTH, BUTTON_HEIGHT), namesPrimaryButtons[j]))
 				{
 					// Details
 					if (string.Equals(namesPrimaryButtons[j], System.Enum.GetName(typeof(primaryStatsButtons), primaryStatsButtons.Details)))
@@ -157,38 +258,43 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 					}
 				}
 			}
-
+			
 			if (isSecondaryStatsPressed)
 			{
 				// Drawing the Box with Secondary Stats.
-				GUI.Box(new Rect(boxWidthPosition - BOX_WIDTH, boxHeightPosition, BOX_WIDTH, getBoxHeight(primaryLength, primaryButtonsLength)), /*"Secondary Stats"*/"");
-
+				GUI.Box(new Rect(boxWidthPosition - BOX_WIDTH, boxHeightPosition, BOX_WIDTH, getBoxHeight(namesPrimary.Length, namesPrimaryButtons.Length)), /*"Secondary Stats"*/"");
+				
 				// Drawing the Scroll-bar and Labels.
-				scrollPosition = GUI.BeginScrollView(new Rect(boxWidthPosition - BOX_WIDTH, boxHeightPosition, BOX_WIDTH, getBoxHeight(primaryLength, primaryButtonsLength)), scrollPosition, new Rect(0, 0, BOX_WIDTH - 20, getBoxHeight(secondaryLength, 0)));
-
+				scrollPosition = GUI.BeginScrollView(new Rect(boxWidthPosition - BOX_WIDTH, boxHeightPositionLabel, BOX_WIDTH, getBoxHeight(namesPrimary.Length, namesPrimaryButtons.Length) - bottomShift * LABEL_HEIGHT), scrollPosition, new Rect(0, 0, BOX_WIDTH - 20, getBoxHeight(namesSecondary.Length, 0)));
+				
 				int k;
 				// Drawing the Secondary Lables.
-				for (k = 0; k < secondaryLength; k++)
+				for (k = 0; k < namesSecondary.Length; k++)
 				{
-					GUI.Label(new Rect (SPACE_BETWEEN, (k * LABEL_HEIGHT) + ((k + 1) * SPACE_BETWEEN), LABEL_WIDTH, LABEL_HEIGHT), new GUIContent(namesSecondary[k], (string)secondaryStatsTooltip[(secondaryStatsLabels)System.Enum.Parse(typeof(secondaryStatsLabels), namesSecondary[k])])/*, labelStyle*/);
+					GUI.Label(new Rect (SPACE_BETWEEN * leftShift, (k * LABEL_HEIGHT) + ((k + 1) * SPACE_BETWEEN), LABEL_WIDTH, LABEL_HEIGHT), 
+					          new GUIContent(secondaryStatsValues[k], (string)secondaryStatsTooltip[namesSecondary[k]])/*, labelStyle*/);
 				}
 				
 				GUI.EndScrollView();
 			}
-
+			
 			// Displaying the tooltip.
 			displayTooltip();
 		}
 	}
-
+	
 	private void displayTooltip()
 	{
+		int leftShift   = 5;
+		int topShift    = 2;
+		int resizeRatio = 2;
+		
 		float x = Event.current.mousePosition.x;
 		float y = Event.current.mousePosition.y; 
 		
 		if (GUI.tooltip != "")
-			GUI.Box(new Rect(x - SPACE_BETWEEN, y - 2 * SPACE_BETWEEN, LABEL_WIDTH * 2, LABEL_HEIGHT * 2), "");
+			GUI.Box(new Rect(x - SPACE_BETWEEN, y - (topShift * SPACE_BETWEEN), resizeRatio * LABEL_WIDTH, resizeRatio * LABEL_HEIGHT), "");
 		
-		GUI.Label(new Rect(x, y - 2 * SPACE_BETWEEN, LABEL_WIDTH * 2, LABEL_HEIGHT * 2), GUI.tooltip);
+		GUI.Label(new Rect(x + (leftShift * SPACE_BETWEEN), y - (topShift * SPACE_BETWEEN), resizeRatio * LABEL_WIDTH, resizeRatio * LABEL_HEIGHT), GUI.tooltip);
 	}
 }
