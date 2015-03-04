@@ -142,26 +142,26 @@ public class SorcererAI : MonoBehaviour {
 					sorcerer.activeSkill5.useSkill();
 					timeOut = basicTimeOutReset;
 				}
-				//skill chance of happeining is 2%
-				if((randomTech == skillThreshold1 || randomTech == skillThreshold1 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+				//skill chance of happeining is 0.5%
+				if((randomTech == skillThreshold1) && fighter.energy >= energyCheck && timeOut <= 0){
 					Debug.Log ("Skill 2 Normal");
 					sorcerer.activeSkill2.useSkill();
 					timeOut = timeOutReset;
 				}
-				//skill chance of happeining is 2%
-				if((randomTech == skillThreshold2 || randomTech == skillThreshold2 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+				//skill chance of happeining is 0.5%
+				if((randomTech == skillThreshold2) && fighter.energy >= energyCheck && timeOut <= 0){
 					Debug.Log ("Skill 3 Normal");
 					sorcerer.activeSkill3.useSkill();
 					timeOut = timeOutReset;
 				}
-				//skill chance of happeining is 2%
-				if((randomTech == skillThreshold3 || randomTech == skillThreshold3 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+				//skill chance of happeining is 0.5%
+				if((randomTech == skillThreshold3) && fighter.energy >= energyCheck && timeOut <= 0){
 					Debug.Log ("Skill 4 Normal");
 					sorcerer.activeSkill4.useSkill();
 					timeOut = timeOutReset;
 				}
-				//skill chance of happeining is 2%
-				if((randomTech == skillThreshold4 || randomTech == skillThreshold4 + 1) && fighter.energy >= energyCheck && timeOut <= 0){
+				//skill chance of happeining is 0.5%
+				if((randomTech == skillThreshold4) && fighter.energy >= energyCheck && timeOut <= 0){
 					Debug.Log ("Skill 5 Normal");
 					sorcerer.activeSkill1.useSkill();
 					timeOut = timeOutReset;
