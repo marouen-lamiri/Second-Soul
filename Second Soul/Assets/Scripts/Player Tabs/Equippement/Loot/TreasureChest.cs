@@ -3,17 +3,18 @@ using System.Collections;
 
 public class TreasureChest : MonoBehaviour {
 
-	public AnimationClip openClip;
-	public Animator animator;
+	Animator animator;
 	
 	public Player player;
-	
+	string openedAnimator;
 	private bool opened;
 
 	// Use this for initialization
 	void Start () {
 		opened = false;
 		findEnabledPlayer();
+		animator = GetComponent<Animator> ();
+		openedAnimator = "opened";
 		//animation.Play (openClip.name);
 		//animator.Play("treasurechest_openAvatar");
 		//player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
@@ -39,9 +40,11 @@ public class TreasureChest : MonoBehaviour {
 			for(int i = 0; i < itemsToDrop; i++){
 				LootFactory.determineDrop(1, transform.position);
 			}
+			
+			opened = true;
+			animator.SetBool (openedAnimator, opened);
 		}
-		opened = true;
-		Destroy (gameObject);
+		//Destroy (gameObject);
 	}
 	
 	void OnMouseDrag(){
