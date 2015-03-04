@@ -47,7 +47,7 @@ public class SorcererAI : MonoBehaviour {
 	void startAI(){
 		if(checkAIPlayingStatus()){
 			fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-			sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+			sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 			setAISkillSet();
 			nearestEnemy = checkNearestEnemy();
 			timeOut = basicTimeOutReset;

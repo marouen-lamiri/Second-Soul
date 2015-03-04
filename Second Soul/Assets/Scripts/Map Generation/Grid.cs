@@ -20,7 +20,7 @@ public class Grid : MonoBehaviour {
 		gridSizeY = Mathf.RoundToInt(gridWorldSize.y/nodeDiameter); 
 		createGrid();
 		Fighter fighter = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
-		Sorcerer sorcerer = GameObject.FindObjectOfType(typeof(Sorcerer))as Sorcerer;
+		Sorcerer sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // Sorcerer sorcerer = GameObject.FindObjectOfType(typeof(Sorcerer))as Sorcerer;
 		fighter.setGrid (this);
 		sorcerer.setGrid (this);
 	}

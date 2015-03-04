@@ -88,6 +88,8 @@ public class ClientNetwork : MonoBehaviour {
 	private int connectAsClientButtonWidth;
 	private int connectAsClientButtonHeight;
 
+	// jump in game:
+	SorcererInstanceManager sim;
 	
 	private void StartServer()
 	{
@@ -96,7 +98,7 @@ public class ClientNetwork : MonoBehaviour {
 	}
 	void OnServerInitialized()
 	{
-		Debug.Log("Server Initializied");
+		Debug.Log("Server Initialized");
 	}
 	// master server client:
 	private HostData[] hostList;
@@ -128,6 +130,20 @@ public class ClientNetwork : MonoBehaviour {
 	
 	public void Awake() {
 
+		//jump in game:
+		if(sim == null) {
+			//GameObject network = GameObject.FindObjectOfType(typeof (Network));
+			//Transform parent_ = transform.parent;
+			sim = GetComponentInParent<SorcererInstanceManager>();
+			if(sim == null){
+				sim = GetComponent<SorcererInstanceManager> ();
+				if(sim == null) {
+					print ("hey");
+					sim = (SorcererInstanceManager)GameObject.FindObjectOfType(typeof (SorcererInstanceManager));
+				}
+			}
+		}
+		
 		// chat & network window widgets:
 		networkWindowX = 0;//Screen.width - 500;
 		networkWindowY = Screen.height - 150;//10;
@@ -193,7 +209,7 @@ public class ClientNetwork : MonoBehaviour {
 	}
 
 	public void Update() {
-
+		
 		// toggle display chat window:
 		if(Input.GetKeyDown ("enter") || Input.GetKeyDown ("return")){ //if(Input.GetKeyDown ("n")){
 			//displayChat = !displayChat;
@@ -264,7 +280,7 @@ public class ClientNetwork : MonoBehaviour {
 					SorcererInstanceManager.createAndSwapNewSorcerer(); // 
 					//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
 				}
-				else {
+				else { // this is for the case: in start menu, first connection:
 					SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
 					//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
 				}
@@ -395,7 +411,7 @@ public class ClientNetwork : MonoBehaviour {
 						//3- remove the client from the network -- disconnect it.
 
 						//instead: swap them with the manager:
-						SorcererInstanceManager.createAndSwapNewSorcerer(); // now server owns a newly created sorcerer.
+						//SorcererInstanceManager.createAndSwapNewSorcerer(); // now server owns a newly created sorcerer. // no need to make the server own it. the network instance works great for all purposes.
 
 						if (Network.connections.Length == 1) {
 							Debug.Log("Disconnecting: " + Network.connections[0].ipAddress + ":" + Network.connections[0].port);
@@ -536,7 +552,10 @@ public class ClientNetwork : MonoBehaviour {
 				for (int i = 0; i < hostList.Length; i++)
 				{
 					if (GUI.Button(new Rect(hostButtonsPositionX, hostButtonsPositionY + ((hostButtonsHeight+hostButtonsSpacing) * i), hostButtonsWidth, hostButtonsHeight), hostList[i].gameName))
+					{
+						sim.onClientConnects();
 						JoinServer(hostList[i]);
+					}
 				}
 			}
 		}
@@ -561,8 +580,8 @@ public class ClientNetwork : MonoBehaviour {
 	{
 		Debug.Log("Host Destroyed disconnected Player"+player.ipAddress);
 		
-		Network.RemoveRPCs(player, 0);
-		Network.DestroyPlayerObjects(player);
+//		Network.RemoveRPCs(player, 0);
+//		Network.DestroyPlayerObjects(player);
 		
 		//PlayerCamera.CameraTarget=transform;
 	}
@@ -606,7 +625,7 @@ public class ClientNetwork : MonoBehaviour {
 	}
 	void OnDisconnectedToServer() {
 		_messageLog += "Disconnected from server" + "\n";
-		Network.Destroy (playerPrefab.gameObject);
+		//Network.Destroy (playerPrefab.gameObject);
 		isConnectedToServer = false;
 	}
 	

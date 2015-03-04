@@ -10,7 +10,7 @@ public class PathFinding : MonoBehaviour {
 	
 	void Awake() {
 		seeker = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
-		target = GameObject.FindObjectOfType (typeof(Sorcerer))as Sorcerer;
+		target = (Sorcerer)SorcererInstanceManager.getSorcerer (); // target = GameObject.FindObjectOfType (typeof(Sorcerer))as Sorcerer;
 		grid = GetComponent<Grid>();
 		seeker.setPathing (this);
 		target.setPathing (this);

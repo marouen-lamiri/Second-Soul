@@ -13,7 +13,7 @@ public class LinkedSceneForest : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		fPosition = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sPosition = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		sPosition = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sPosition = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		fPosition.transform.position = fInitial;
 		sPosition.transform.position = sInitial;
 	}

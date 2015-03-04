@@ -12,7 +12,7 @@ public class DatabaseSorcerer : MonoBehaviour {
 	private Fighter fighter;
 	
 	void Start () {
-		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 	}
 	
@@ -39,7 +39,7 @@ public class DatabaseSorcerer : MonoBehaviour {
 		if(fighter == null) {
 			fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		}
-		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		sorcerer.setIntelligence((int) PlayerPrefs.GetInt("Intelligence"));
 		sorcerer.setWisdom((int) PlayerPrefs.GetInt("Wisdom"));
 		sorcerer.setSpirit((int) PlayerPrefs.GetInt("Spirit"));

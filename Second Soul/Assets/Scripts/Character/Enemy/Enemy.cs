@@ -53,7 +53,7 @@ public abstract class Enemy : Character {
 		
 		// networking: makes sure each enemy is properly instantiated even on another game instance that didn't run the EnemyFactory code.
 		target = (Fighter) GameObject.FindObjectOfType (typeof (Fighter)); // for the enemies perspective target is always fighter
-		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 
 		
 		level = target.level;

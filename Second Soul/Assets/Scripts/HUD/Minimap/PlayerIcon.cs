@@ -8,7 +8,7 @@ public class PlayerIcon : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 	}
 	
 	// Update is called once per frame

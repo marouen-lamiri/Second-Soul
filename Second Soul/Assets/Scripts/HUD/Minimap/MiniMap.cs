@@ -12,7 +12,7 @@ public class MiniMap : MonoBehaviour {
 	List<GameObject> enemySpheres = new List<GameObject>();
 	void Start(){
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 
 		if(Network.isServer) {
 			buildMinimap ();
