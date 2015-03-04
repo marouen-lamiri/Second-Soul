@@ -166,7 +166,6 @@ public abstract class Player : Character {
 				pickUpItem();
 			}
 		}
-		Debug.Log(treasureChest);
 		// handles opening chests
 		if(treasureChest != null){
 			if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))){

@@ -60,7 +60,6 @@ public class SorcererAI : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		timeOut=- Time.deltaTime;
-		Debug.Log (timeOut);
 		checkWhoHadControl();
 		//checks that there is a grid instance (for pathfinding), if not, retrieve the grid
 		if(grid == null){
@@ -176,7 +175,6 @@ public class SorcererAI : MonoBehaviour {
 			}
 			//if the fighter is too far, go to him, ignore everyone else
 			else if(Vector3.Distance (fighter.transform.position, sorcerer.transform.position)> radiusCheck){
-				Debug.Log ("In the Moving Loop");
 				//Determine the direction in which the sorcerer moves, he has to be close to the fighter
 				direction = sorcerer.transform.position - fighter.transform.position;
 				direction.Normalize();
