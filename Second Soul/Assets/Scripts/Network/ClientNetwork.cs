@@ -2,10 +2,17 @@ using UnityEngine;
 using System.Collections;
 
 public class ClientNetwork : MonoBehaviour {
-	
-//	public string serverIP = "127.0.0.1";
-//	public string serverLocalIP;
-//	public int port = 25000;
+
+	// Old code to keep to use a localhost connection on one computer:
+	//	public string serverIP = "127.0.0.1";
+	//	public string serverLocalIP;
+	//	public int port = 25000;
+
+	// master server connection variables
+	private int connections = 4;
+	private int masterServerPort = 25000;
+
+	// 
 	private string _messageLog = "";
 	string someInfo = "";
 	private NetworkPlayer _myNetworkPlayer;
@@ -88,19 +95,50 @@ public class ClientNetwork : MonoBehaviour {
 	private int connectAsClientButtonWidth;
 	private int connectAsClientButtonHeight;
 
-	// jump in game:
-	SorcererInstanceManager sim;
+	private int connectAsServerButtonDistanceAwayFromCenterOfScreenX;
+	private int connectAsServerButtonDistanceAwayFromCenterOfScreenY;
+	private int connectAsServerButtonPositionX;
+	private int connectAsServerButtonPositionY;
+	private int connectAsServerButtonWidth;
+	private int connectAsServerButtonHeight;
+
+	private float SecondSoulLabelPositionX = 0.1f;
+	private float SecondSoulLabelPositionY = 0.1f;
+	private float SecondSoulLabelWitdh = Screen.width - 0.1f;
+	private float SecondSoulLabelHeight = Screen.height - 0.1f;
+	private string SecondSoulLabel = "Second Soul";
+
+	private int networkChoicesLabelPositionX = Screen.width / 2 - 150;
+	private int networkChoicesLabelPositionY = Screen.height/2 + 25;
+	private int networkChoicesLabelHeight = 300;
+	private int networkChoicesLabelWidth = 50;
+	private string networkChoicesLabel = "<Size=30>Network Choices</Size>";
+
+	private int onePlayerModeButtonPositionX = Screen.width / 2 - 75;
+	private int onePlayerModeButtonPositionY = Screen.height / 2 + 100;
+	private int onePlayerModeButtonWidth = 150;
+	private int onePlayerModeButtonHeight = 50;
+
 	
+	// jump in game:
+	private SorcererInstanceManager sim;
+
+	// more magic numbers strings:
+	private string chatBoxGUIName = "ChatBox";
+	private string StartScreenOfficialSceneName = "StartScreen";
+	private int numberOfFramesToWaitBeforeServerLoadsGameScene = 700; 
+	
+	// master server server methods:
 	private void StartServer()
 	{
-		Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
+		Network.InitializeServer(connections, masterServerPort, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
 	}
 	void OnServerInitialized()
 	{
 		Debug.Log("Server Initialized");
 	}
-	// master server client:
+	// master server client methods:
 	private HostData[] hostList;
 	
 	private void RefreshHostList()
@@ -118,16 +156,8 @@ public class ClientNetwork : MonoBehaviour {
 	{
 		Network.Connect(hostData);
 	}
-	
-//	void OnConnectedToServer()
-//	{
-//		Debug.Log("Server Joined");
-//	}
 
 
-
-	
-	
 	public void Awake() {
 
 		//jump in game:
@@ -137,8 +167,9 @@ public class ClientNetwork : MonoBehaviour {
 			sim = GetComponentInParent<SorcererInstanceManager>();
 			if(sim == null){
 				sim = GetComponent<SorcererInstanceManager> ();
+				//sim = GameObject.FindObjectOfType(typeof (SorcererInstanceManager));
 				if(sim == null) {
-					print ("hey");
+					print ("Hey the Network game object is probably missing in this scene. (If it's the case the chat won't work).");
 					sim = (SorcererInstanceManager)GameObject.FindObjectOfType(typeof (SorcererInstanceManager));
 				}
 			}
@@ -176,6 +207,31 @@ public class ClientNetwork : MonoBehaviour {
 		connectAsClientButtonWidth = 150;
 		connectAsClientButtonHeight = 50;
 
+		connectAsServerButtonDistanceAwayFromCenterOfScreenX = -225;
+		connectAsServerButtonDistanceAwayFromCenterOfScreenY = 100;
+		connectAsServerButtonPositionX = Screen.width / 2 + connectAsServerButtonDistanceAwayFromCenterOfScreenX;
+		connectAsServerButtonPositionY = Screen.height / 2 + connectAsServerButtonDistanceAwayFromCenterOfScreenY;
+		connectAsServerButtonWidth = 150;
+		connectAsServerButtonHeight = 50;
+		
+		SecondSoulLabelPositionX = 0.1f;
+		SecondSoulLabelPositionY = 0.1f;
+		SecondSoulLabelWitdh = Screen.width - 0.1f;
+		SecondSoulLabelHeight = Screen.height - 0.1f;
+		SecondSoulLabel = "Second Soul";
+
+		networkChoicesLabelPositionX = Screen.width / 2 - 150;
+		networkChoicesLabelPositionY = Screen.height/2 + 25;
+		networkChoicesLabelHeight = 300;
+		networkChoicesLabelWidth = 50;
+		networkChoicesLabel = "<Size=30>Network Choices</Size>";
+
+		onePlayerModeButtonPositionX = Screen.width / 2 - 75;
+		onePlayerModeButtonPositionY = Screen.height / 2 + 100;
+		onePlayerModeButtonWidth = 150;
+		onePlayerModeButtonHeight = 50;
+
+		
 		// master server room list buttons:
 		hostButtonsPositionX = connectAsClientButtonPositionX + connectAsClientButtonWidth + 10; // put the list to the right of the client connection button.
 		hostButtonsPositionY = connectAsClientButtonPositionY; // 100;
@@ -216,7 +272,7 @@ public class ClientNetwork : MonoBehaviour {
 			displayChat = true;
 			framesCounterBeforeFadeOutChat = 0;
 			if(displayChat) {
-				GUI.FocusControl("ChatBox"); // not always working why?
+				GUI.FocusControl(chatBoxGUIName); // not always working why?
 			}
 
 		}
@@ -234,14 +290,13 @@ public class ClientNetwork : MonoBehaviour {
 			displayChat = false;
 		}
 
-
 		// generate the map only after the players have been created (because they are needed for some reason for the map generation code:
 		bool serverAndClientAreBothConnected = Network.connections.Length != 0; // 0 length means no connection, i.e. no client connected to server.
-		if(serverAndClientAreBothConnected && Application.loadedLevelName == "StartScreen" && bothPlayerAndSorcererWereFound) {	// && Network.isServer
+		if(serverAndClientAreBothConnected && Application.loadedLevelName == StartScreenOfficialSceneName && bothPlayerAndSorcererWereFound) {	// && Network.isServer
 
 			if(Network.isServer) {
 				framesToWait++;
-				if(framesToWait > 700) {
+				if(framesToWait > numberOfFramesToWaitBeforeServerLoadsGameScene) {
 					Loading.show ();
 					// load the game scene: the map and players (fighter and sorcerer) should be kept, using DontDestroyOnLoad
 					NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1); //NetworkingCollaboration
@@ -257,7 +312,7 @@ public class ClientNetwork : MonoBehaviour {
 
 		//===================
 		// client --> logic for creating (different types of) sorcerer:
-		if (Application.loadedLevelName == "StartScreen" && !sorcererWasCreated) { //Network.isClient && 
+		if (Application.loadedLevelName == StartScreenOfficialSceneName && !sorcererWasCreated) { //Network.isClient && 
 
 			//  --> moved out of if(isClient), because we still want the server to be able to determine the sorcerer's type for 1 player mode.
 			if(classChooser.sorcererSelectionStrings[classChooser.sorcererSelection]=="Mage"){
@@ -292,7 +347,7 @@ public class ClientNetwork : MonoBehaviour {
 
 		// ------------------
 		// server --> logic for creating (different types of) fighter:
-		if(Application.loadedLevelName == "StartScreen" && !playerWasCreated) { //Network.isServer && 
+		if(Application.loadedLevelName == StartScreenOfficialSceneName && !playerWasCreated) { //Network.isServer && 
 
 			// --> moved out of if(isServer), since we want the server to be able to set the type of fighter even before connecting as a server.
 			if(classChooser.fighterSelectionStrings[classChooser.fighterSelection]=="Berserker"){
@@ -320,7 +375,7 @@ public class ClientNetwork : MonoBehaviour {
 
 		// =======================\
 		// client and server --> logic for keeping fighter and sorcerer across scenes (dontdestroyonload):
-		if(Application.loadedLevelName == "StartScreen") { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
+		if(Application.loadedLevelName == StartScreenOfficialSceneName) { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
 
 			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
 			Fighter fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));	
@@ -376,12 +431,15 @@ public class ClientNetwork : MonoBehaviour {
 		GUI.skin.button = style;
 
 		if(!Application.isLoadingLevel){
+
+			// =========================
+
 			// button to connect as server:
 			background.fontSize = 100 * Screen.height/598;
 			if (Network.peerType == NetworkPeerType.Disconnected) {
-				GUI.Box(new Rect(0.1f, 0.1f, Screen.width - 0.1f, Screen.height - 0.1f),"Second Soul", background);
-				GUI.Label (new Rect(Screen.width / 2 - 150, Screen.height/2 + 25, 300, 50),"<Size=30>Network Choices</Size>",style);
-				if (GUI.Button (new Rect (Screen.width / 2 - 225, Screen.height/2 + 100, 150, 50), "Connect as a server", style)) {
+				GUI.Box(new Rect(SecondSoulLabelPositionX, SecondSoulLabelPositionY, SecondSoulLabelWitdh, SecondSoulLabelHeight),SecondSoulLabel, background);
+				GUI.Label (new Rect(networkChoicesLabelPositionX, networkChoicesLabelPositionY, networkChoicesLabelHeight, networkChoicesLabelWidth), networkChoicesLabel, style);
+				if (GUI.Button (new Rect (connectAsServerButtonPositionX, connectAsServerButtonPositionY, connectAsServerButtonWidth, connectAsServerButtonHeight), "Connect as a server", style)) {
 					StartServer();
 					displayChat = true;
 				}
@@ -434,7 +492,7 @@ public class ClientNetwork : MonoBehaviour {
 					//styleDefaultTextArea
 
 					// chat text input:
-					GUI.SetNextControlName("ChatBox");
+					GUI.SetNextControlName(chatBoxGUIName);
 					textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatInputWidth, chatInputHeight), textFieldString); // style // "box"
 
 					//bool isEnterPressed = (Event.current.Equals (Event.KeyboardEvent("return")));
@@ -479,7 +537,7 @@ public class ClientNetwork : MonoBehaviour {
 					}
 
 					// chat text input:
-					GUI.SetNextControlName("ChatBox");
+					GUI.SetNextControlName(chatBoxGUIName);
 					textFieldString = GUI.TextField(new Rect(networkWindowX + chatInputOffsetX, networkWindowY + chatInputOffsetY, chatTextAreaWidth + chatInputOffsetX, chatInputHeight), textFieldString); // style // "box"
 
 					//var isEnterPressed = (Event.current.type == EventType.KeyDown) && (Event.current.keyCode == KeyCode.Return);
@@ -502,7 +560,7 @@ public class ClientNetwork : MonoBehaviour {
 
 			// button to play one player mode:
 			if (Network.peerType == NetworkPeerType.Disconnected) {
-				if (GUI.Button (new Rect (Screen.width / 2 - 75, Screen.height / 2 + 100, 150, 50), "1 Player Mode")) {
+				if (GUI.Button (new Rect (onePlayerModeButtonPositionX, onePlayerModeButtonPositionY, onePlayerModeButtonWidth, onePlayerModeButtonHeight), "1 Player Mode")) {
 
 					Loading.show ();
 
@@ -537,16 +595,9 @@ public class ClientNetwork : MonoBehaviour {
 			}
 		}
 
-		// master server:
+		// master server: show list of available rooms:
 		if (!Network.isClient && !Network.isServer)
 		{
-			//			//server:
-			//			if (GUI.Button(new Rect(0, 0, 250, 100), "Start Server"))
-			//				StartServer();
-			//			//client
-			//			if (GUI.Button(new Rect(250, 0, 250, 100), "Refresh Hosts"))
-			//				RefreshHostList();
-			
 			if (hostList != null)
 			{
 				for (int i = 0; i < hostList.Length; i++)
@@ -561,14 +612,16 @@ public class ClientNetwork : MonoBehaviour {
 		}
 		
 	}
-	
+
+	// Old code to keep to use a localhost connection:
+
 	// for client:
-//	private void ConnectToServer() {
-//		Network.Connect(serverIP, port);
-//		if (!Network.isClient) {
-//			//Network.Connect(serverLocalIP,port);
-//		}
-//	}
+	//	private void ConnectToServer() {
+	//		Network.Connect(serverIP, port);
+	//		if (!Network.isClient) {
+	//			//Network.Connect(serverLocalIP,port);
+	//		}
+	//	}
 	
 	// for server:
 	void OnPlayerConnected(NetworkPlayer player) {
@@ -662,6 +715,8 @@ public class ClientNetwork : MonoBehaviour {
 		Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
 		sorcerer.transform.position = positionVector3;
 		sorcererPositionWasUpdated = true;
+
+		// if the sorcerer is around the origin, even if not exactly on it:
 		if(sorcerer.transform.position.x > 1.0f || sorcerer.transform.position.x  < -1.0f){
 			//sorcererPositionWasSent = true;
 			networkView.RPC ("setServerBoolean",RPCMode.All); // RPCMode.Server --> now All so that it works in 1 player mode too: server calling iself to set that boolean.
