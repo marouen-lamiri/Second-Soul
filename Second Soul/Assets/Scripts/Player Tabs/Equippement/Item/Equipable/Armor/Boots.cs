@@ -4,12 +4,29 @@ using System.Collections;
 [System.Serializable]
 public class Boots : Armor {
 
+	public int price = 150;
+	public string description = "Boots used for all exploration as they are made of the most durable materials " +
+		"found in the world";
+	public string itemName = "Adventure Boots";
+
 	public Boots(){
 		
 	}
 	
 	public override void useItem(){
 		equip ();
+	}
+
+	public override int getPrice(){
+		return price;
+	}
+
+	public override string getString(){
+		return itemName;
+	}
+	
+	public override string getDescription(){
+		return description;
 	}
 	
 	public override void equip(){

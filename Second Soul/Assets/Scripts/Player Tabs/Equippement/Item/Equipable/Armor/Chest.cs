@@ -4,12 +4,29 @@ using System.Collections;
 [System.Serializable]
 public class Chest : Armor {
 
+	public int price = 150;
+	public string description = "This Chest Plate has been always used in wartime, and is said to have said billons " +
+		"during the thousand year war against the demon country, Elexia";
+	public string itemName = "Warrior Chest Plate";
+
 	public Chest() : base(){
 
 	}
 	
 	public override void useItem(){
 		equip ();
+	}
+
+	public override int getPrice(){
+		return price;
+	}
+
+	public override string getString(){
+		return itemName;
+	}
+	
+	public override string getDescription(){
+		return description;
 	}
 	
 	public override void equip(){

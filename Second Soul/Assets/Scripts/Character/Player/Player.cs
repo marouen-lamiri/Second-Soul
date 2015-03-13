@@ -8,7 +8,7 @@ public abstract class Player : Character {
 	protected float baseFactorXP = 1.5f;
 	public int totalXP; // total experience --remove public
 	public int nextLevelXP; // xp need for next level --remove public
-	
+	private string townSceneName = "Town";
 	//public bool busyHUD; // global state variable to disable movements if HUD elements are open
 
 	public int pickUpRange;
@@ -18,6 +18,7 @@ public abstract class Player : Character {
 	public Inventory inventory;
 	public SkillTree skillTree;
 	public ActionBar actionBar;
+	public Shop shop;
 	
 	public int usableSkillPoints;
 	
@@ -46,6 +47,7 @@ public abstract class Player : Character {
 		characterStart ();
 		initializeActionBar();
 		initializeInventory();
+		initializeShop();
 		initiazlieNetwork();
 		// Mini map float ball color
 		sphere.renderer.material.color = Color.blue;
@@ -69,6 +71,12 @@ public abstract class Player : Character {
 			actionBar = (ActionBar) GameObject.FindObjectOfType (typeof (ActionBar));
 			actionBar.setPlayer(this);
 			actionBar.initializeBasicAttack();
+		}
+	}
+
+	protected void initializeShop(){
+		if(playerEnabled && Application.loadedLevelName == townSceneName){
+			shop = (Shop) GameObject.FindObjectOfType (typeof (Shop));
 		}
 	}
 	
@@ -200,7 +208,7 @@ public abstract class Player : Character {
 	}
 	
 	//ADD CONDITIONS FOR ANY NEW OBJECTS THAT WOULD MAKE PLAY BUSY
-	protected bool busyHUD(){
+	public bool busyHUD(){
 		if(playerEnabled){
 			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp());
 		}
