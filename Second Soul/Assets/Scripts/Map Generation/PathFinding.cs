@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class PathFinding : MonoBehaviour {
 	
 	private Player seeker, target;
-	
+	int maxTrial = 2000;
+
 	Grid grid;
 	
 	void Awake() {
@@ -15,56 +16,72 @@ public class PathFinding : MonoBehaviour {
 		seeker.setPathing (this);
 		target.setPathing (this);
 	}
+
+	public void StartFindPath(Vector3 startPos, Vector3 targetPos){
+		//StartCoroutine(findPath(startPos, targetPos));
+	}
 	
 	public void findPath(Vector3 startPos, Vector3 targetPos) {
+
+//		Vector3 [] waypoints = new Vector3[0];
+//		bool pathSuccess = false;
 		Node startNode = grid.nodeFromWorld(startPos);
 		Node targetNode = grid.nodeFromWorld(targetPos);
 		//this can be changed, it's purpose is not to allow an infinite loop to occur in case of an impossible path, althought this shouldn't happen, it is present for emergency
-		int limitedTrial = 2000; 
-		
-		List<Node> openSet = new List<Node>();
-		HashSet<Node> closedSet = new HashSet<Node>();
-		openSet.Add(startNode);
+		int limitedTrial = maxTrial; 
+		if(startNode.walkable && targetNode.walkable){
+			Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
+			HashSet<Node> closedSet = new HashSet<Node>();
+			openSet.Add(startNode);
 
-		while (openSet.Count > 0) {
-			Node currentNode = openSet[0];
-			for (int i = 1; i < openSet.Count; i ++) {
-				if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost) {
-						currentNode = openSet[i];
-				}
-			}
-			
-			openSet.Remove(currentNode);
-			closedSet.Add(currentNode);
-			
-			if (currentNode == targetNode) {
-				RetracePath(startNode,targetNode);
-				grid.worldFromNode(grid.path);
-				return;
-			}
+			while (openSet.Count > 0) {
+				Node currentNode = openSet.removeFirst();
 
-			foreach (Node neighbour in grid.getNeighbours(currentNode)) {
-				if (!neighbour.walkable || closedSet.Contains(neighbour)) {
-					continue;
-				}
+	//			for (int i = 1; i < openSet.Count; i ++) {
+	//				if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost) {
+	//						currentNode = openSet[i];
+	//				}
+	//			}
+	//			
+	//			openSet.Remove(currentNode);
+				closedSet.Add(currentNode);
 				
-				int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
-				if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour)) {
-					neighbour.gCost = newMovementCostToNeighbour;
-					neighbour.hCost = GetDistance(neighbour, targetNode);
-					neighbour.parent = currentNode;
-					
-					if (!openSet.Contains(neighbour)){
-						openSet.Add(neighbour);
-					}
+				if (currentNode == targetNode) {
+					//pathSuccess = true;
+					RetracePath(startNode,targetNode);
+					grid.worldFromNode(grid.path);
+					break;
+				}
 
+				foreach (Node neighbour in grid.getNeighbours(currentNode)) {
+					if (!neighbour.walkable || closedSet.Contains(neighbour)) {
+						continue;
+					}
+					
+					int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
+					if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour)) {
+						neighbour.gCost = newMovementCostToNeighbour;
+						neighbour.hCost = GetDistance(neighbour, targetNode);
+						neighbour.parent = currentNode;
+						
+						if (!openSet.Contains(neighbour)){
+							openSet.Add(neighbour);
+						}
+						else{
+							openSet.UpdateItem(neighbour);
+						}
+					}
 					if(limitedTrial <= 0){
-						limitedTrial = 2000;
+						limitedTrial = maxTrial;
+						grid.path = null;
 						return;
 					}
 					limitedTrial--;
 				}
 			}
+		}
+		else{
+			grid.path = null;
 		}
 	}
 
