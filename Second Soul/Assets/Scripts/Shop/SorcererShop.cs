@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class SorcererShop : Shop {
 	
-	private bool sorcererShop;
+	public static bool sorcererShop;
+	private bool full;
 	private int selectedItem = 4;
 	private int size = 4;
 	private Inventory inventory;
@@ -34,22 +35,13 @@ public class SorcererShop : Shop {
 	public bool checkStatus(){
 		return sorcererShop && Network.isClient;
 	}
-
-	public override void clicked(){
-		if (Input.GetMouseButtonDown(0)) {
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-			if (Physics.Raycast(ray, out hit, distance)){
-				if (hit.transform.name == shopDoor){
-					sorcererShop = true;
-				}
-			}
-		}
-	}
 		
 	string checkEnough(){
 		if(buyable){
 			return buyButton;
+		}
+		else if(full){
+			return inventoryFull;
 		}
 		return notEnough;
 	}
@@ -70,7 +62,6 @@ public class SorcererShop : Shop {
 	}
 	
 	void OnGUI(){
-		clicked();
 		if(checkStatus()){
 			GUI.Box (new Rect(boxStartPositionWidth,boxStartPositionHeight,boxWidth,boxHeight), "", styleBox);
 			if(selectedItem < size){
@@ -81,9 +72,13 @@ public class SorcererShop : Shop {
 			}
 			if(GUI.Button (new Rect(buyBoxStartPositionWidth, buyBoxStartPositionHeight, buyItemBoxWidth, buyItemBoxHeight), checkEnough())){
 				if(Sorcerer.soulShards >= sell[selectedItem].getPrice()){
-					Sorcerer.soulShards = Sorcerer.soulShards - sell[selectedItem].getPrice();
-					inventory.takeItem(sell[selectedItem]);
-					recreateItem();
+					if(inventory.takeItem(sell[selectedItem])){
+						Sorcerer.soulShards = Sorcerer.soulShards - sell[selectedItem].getPrice();
+						recreateItem();
+					}
+					else{
+						full = true;
+					}
 				}
 				else{
 					buyable = false;
@@ -95,18 +90,22 @@ public class SorcererShop : Shop {
 			
 			GUI.Label (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset/2, regularItemBoxWidth, regularItemBoxHeight), greetingMessage, standartSkin);
 			if(GUI.Button (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset * 2, regularItemBoxWidth, regularItemBoxHeight), sell[healthIndex].getString(), buttonStyle)){
+				full = false;
 				buyable = true;
 				selectedItem = healthIndex;
 			}
 			if(GUI.Button (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset * 3, regularItemBoxWidth, regularItemBoxHeight), sell[manaIndex].getString(), buttonStyle)){
+				full = false;
 				buyable = true;
 				selectedItem = manaIndex;
 			}
 			if(GUI.Button (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset * 4, regularItemBoxWidth, regularItemBoxHeight), sell[amuletIndex].getString(), buttonStyle)){
+				full = false;
 				buyable = true;
 				selectedItem = amuletIndex;
 			}
 			if(GUI.Button (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset * 5, regularItemBoxWidth, regularItemBoxHeight), sell[ringIndex].getString(), buttonStyle)){
+				full = false;
 				buyable = true;
 				selectedItem = ringIndex;
 			}

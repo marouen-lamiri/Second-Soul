@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class FighterShop : Shop {
 	
-	private bool fighterShop;
+	public static bool fighterShop;
 	private bool buyable = true;
+	private bool full = false;
 	private int size = 7;
 	private int selectedItem = 7;
 	private Inventory inventory;
@@ -42,20 +43,13 @@ public class FighterShop : Shop {
 		if(buyable){
 			return buyButton;
 		}
+		else if(full){
+			return inventoryFull;
+		}
 		return notEnough;
 	}
 
-	public override void clicked(){
-		if (Input.GetMouseButtonDown(0)) {
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-			if (Physics.Raycast(ray, out hit, distance)){
-				if (hit.transform.name == shopDoor){
-					fighterShop = true;
-				}
-			}
-		}
-	}
+
 
 	void recreateItem(){
 		if(selectedItem == healthIndex){
@@ -80,7 +74,6 @@ public class FighterShop : Shop {
 
 	// Update is called once per frame
 	void OnGUI () {
-		clicked();
 		if(checkStatus()){
 			GUI.Box (new Rect(boxStartPositionWidth,boxStartPositionHeight,boxWidth,boxHeight), "", styleBox);
 			if(selectedItem < size){
@@ -91,9 +84,13 @@ public class FighterShop : Shop {
 			}
 			if(GUI.Button (new Rect(buyBoxStartPositionWidth, buyBoxStartPositionHeight, buyItemBoxWidth, buyItemBoxHeight), checkEnough())){
 				if(Fighter.gold >= sell[selectedItem].getPrice()){
-					Fighter.gold = Fighter.gold - sell[selectedItem].getPrice();
-					inventory.takeItem(sell[selectedItem]);
-					recreateItem();
+					if(inventory.takeItem(sell[selectedItem])){
+						Fighter.gold = Fighter.gold - sell[selectedItem].getPrice();
+						recreateItem();
+					}
+					else{
+						full = true;
+					}
 				}
 				else{
 					buyable = false;
@@ -105,26 +102,32 @@ public class FighterShop : Shop {
 			
 			GUI.Label (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset/2, regularItemBoxWidth, regularItemBoxHeight), greetingMessage, standartSkin);
 			if(GUI.Button (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset * 2, regularItemBoxWidth, regularItemBoxHeight), sell[healthIndex].getString(), buttonStyle)){
+				full = false;
 				buyable = true;
 				selectedItem = healthIndex;
 			}
 			if(GUI.Button (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset * 3, regularItemBoxWidth, regularItemBoxHeight), sell[manaIndex].getString(), buttonStyle)){
+				full = false;
 				buyable = true;
 				selectedItem = manaIndex;
 			}
 			if(GUI.Button (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset * 4, regularItemBoxWidth, regularItemBoxHeight), sell[swordIndex].getString(), buttonStyle)){
+				full = false;
 				buyable = true;
 				selectedItem = swordIndex;
 			}
 			if(GUI.Button (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset * 5, regularItemBoxWidth, regularItemBoxHeight), sell[axeIndex].getString(), buttonStyle)){
+				full = false;
 				buyable = true;
 				selectedItem = axeIndex;
 			}
 			if(GUI.Button (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset * 6, regularItemBoxWidth, regularItemBoxHeight), sell[chestIndex].getString(), buttonStyle)){
+				full = false;
 				buyable = true;
 				selectedItem = chestIndex;
 			}
 			if(GUI.Button (new Rect(regularItemPositionWidth, regularItemPositionHeight + offset * 7, regularItemBoxWidth, regularItemBoxHeight), sell[bootsIndex].getString(), buttonStyle)){
+				full = false;
 				buyable = true;
 				selectedItem = bootsIndex;
 			}
