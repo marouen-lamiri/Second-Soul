@@ -13,6 +13,7 @@ public abstract class Character : MonoBehaviour {
 	public CharacterController controller;
 	private CharacterNetworkScript playerNetworkScript;
 	protected BasicAttack basicAttackScript;
+	public static int gold; //money for the fighter
 
 	//pathfinding related
 	protected Grid grid;
@@ -240,6 +241,10 @@ public abstract class Character : MonoBehaviour {
 		
 		hpRegBase = 0.01f;
 		enRegBase = 0.01f;
+	}
+
+	public void gainGold(int money){
+		gold =+ money;
 	}
 	
 	public bool hitCheck(){

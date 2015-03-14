@@ -4,9 +4,17 @@ using System.Collections.Generic;
 public class Inventory : Storage 
 {
 	public Texture2D image;
+	public GUIStyle currencyStyle;
+	public Texture2D goldImage;
+	public Texture2D soulImage;
 
 	public int slotsOffsetX;
 	public int slotsOffsetY;
+
+	public int labelPositionHeight;
+	public int labelPositionWidth;
+	public int labelWidth = 25;
+	public int labelHeight = 25;
 	
 	public int guiDepth = 1;
 	
@@ -66,6 +74,7 @@ public class Inventory : Storage
 			drawItems ();
 			detectGUIAction ();
 			drawHoverItem();
+			writeMoney();
 			//Debug.Log (itemPickedUp);
 		}
 	}
@@ -91,6 +100,17 @@ public class Inventory : Storage
 		for(int i = 0; i < inventoryItems.Count; i++){
 			inventoryItems[i].position = new Rect(6 + slotsOffsetX + position.x + inventoryItems[i].x * slotWidth, 6 + slotsOffsetY + position.y + inventoryItems[i].y * slotHeight,inventoryItems[i].width * slotWidth - 12,inventoryItems[i].height * slotHeight - 12);
 			GUI.DrawTexture(inventoryItems[i].position, inventoryItems[i].getImage());
+		}
+	}
+
+	void writeMoney(){
+		if(Network.isServer){
+			GUI.Label(new Rect(position.x + labelPositionWidth, position.y + labelPositionHeight, labelWidth, labelHeight), Fighter.gold + "", currencyStyle);
+			GUI.Label(new Rect(position.x + labelPositionWidth + labelWidth, position.y + labelPositionHeight - labelHeight/8, labelWidth, labelHeight), goldImage);
+		}
+		else if(Network.isClient){
+			GUI.Label(new Rect(position.x + labelPositionWidth, position.y + labelPositionHeight, labelWidth, labelHeight), Sorcerer.soulShards + "", currencyStyle);
+			GUI.Label(new Rect(position.x + labelPositionWidth + labelWidth, position.y + labelPositionHeight - labelHeight/8, labelWidth, labelHeight), soulImage);
 		}
 	}
 }

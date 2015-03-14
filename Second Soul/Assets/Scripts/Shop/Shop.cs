@@ -51,9 +51,14 @@ public abstract class Shop : MonoBehaviour {
 
 	//Strings to be used in the GUI
 	protected string buyButton = "Buy";
+	protected string notEnough = "Not Enough";
 	protected string closeButton = "close";
 	protected string sellButton = "Sell";
+	protected string shopDoor = "ShopDoor";
 	protected string greetingMessage = "What would you like to buy?";
+
+	//Int
+	protected int distance = 1000;
 
 	//Shared Methods
 	protected int retrieveItemPrice(Item item){
@@ -89,6 +94,8 @@ public abstract class Shop : MonoBehaviour {
 	public bool inWidthBoundaries(){
 		return (Input.mousePosition.x > boxWidth && Input.mousePosition.x < boxWidth + boxStartPositionWidth);
 	}
+
+	public abstract void clicked();
 
 	public abstract bool shopEnabled();
 
