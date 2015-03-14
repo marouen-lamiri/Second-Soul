@@ -67,6 +67,9 @@ public class Inventory : Storage
 	}
 	
 	void OnGUI(){
+		centeredStyle = GUI.skin.GetStyle("textarea");
+		centeredStyle.fontSize = 16;
+		centeredStyle.wordWrap = true;
 		GUI.depth = guiDepth;
 		if (isInventoryOn) {
 			drawInventory ();

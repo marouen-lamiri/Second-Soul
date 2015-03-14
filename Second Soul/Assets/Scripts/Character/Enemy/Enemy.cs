@@ -175,7 +175,7 @@ public abstract class Enemy : Character {
 	}
 
 	public void calculatePrize(){
-		prize = (level * prizeBase) + (prizeBase * experienceBase)/level;
+		prize = (level + prizeLevelBonus) * prizeBase;
 	}
 
 	public void prizeCurrency(){

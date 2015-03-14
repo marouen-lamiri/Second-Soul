@@ -9,9 +9,17 @@ public class HealthPotion : Potion {
 		"It has elven tears in it as it's healing agent and is said to be the most " +
 		"powerful medicine in the world.";
 	public string itemName = "Health Potion";
+	public int healingPortion;
+	public string methodToCall = "healCharacter";
 
 	public HealthPotion() : base(){
 	
+	}
+
+	public override void setPlayer(){
+		if(player == null){
+			player = (Character)GameObject.FindObjectOfType(typeof(Character));
+		}
 	}
 
 	public override void useItem(){
@@ -31,11 +39,12 @@ public class HealthPotion : Potion {
 	}
 	
 	public override void consume(){
-		GameObject player = GameObject.FindGameObjectWithTag("Player");
-		if (player != null) {
-			player.SendMessage("healCharacter", 100);
-			Debug.Log ("Heal");
-		}
+		setPlayer();
+		player.SendMessage(methodToCall, determineAmount());
+	}
+
+	public override int determineAmount(){
+		return healingPortion = (int) player.maxHealth/3;
 	}
 	
 	public override Texture2D getImage(){

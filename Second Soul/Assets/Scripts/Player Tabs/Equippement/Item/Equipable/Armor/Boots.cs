@@ -12,6 +12,12 @@ public class Boots : Armor {
 	public Boots(){
 		
 	}
+
+	public override void setPlayer(){
+		if(player == null){
+			player = (Character)GameObject.FindObjectOfType(typeof(Character));
+		}
+	}
 	
 	public override void useItem(){
 		equip ();
@@ -30,11 +36,11 @@ public class Boots : Armor {
 	}
 	
 	public override void equip(){
-		
+
 	}
 	
 	public override void unequip(){
-		
+
 	}
 	
 	public override Texture2D getImage(){

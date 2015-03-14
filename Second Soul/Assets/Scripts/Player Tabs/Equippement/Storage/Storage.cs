@@ -7,6 +7,12 @@ public class Storage : MonoBehaviour {
 
 	public Rect position;
 
+	//Gui Messages
+	protected string priceMessage = "\nThe Price in Store: ";
+	protected string statsMessage = "\nBelow are the stats it effects:\n";
+	protected int width = 200;
+	protected int height = 150;
+
 	//different item collections
 	protected static List<Item> inventoryItems = new List<Item>();
 	public static List<Item> equipItems = new List<Item>();
@@ -31,10 +37,11 @@ public class Storage : MonoBehaviour {
 	//slot pixel dimensions
 	public int slotWidth;
 	public int slotHeight;
+	protected GUIStyle centeredStyle;
 
 	// Use this for initialization
-	void Start () {
-	
+	void Awake () {
+
 	}
 	
 	// Update is called once per frame
@@ -107,7 +114,8 @@ public class Storage : MonoBehaviour {
 		for(int i = 0; i < inventoryItems.Count; i++){
 			if(!itemPickedUp && inventoryItems[i].position.Contains(mousePositionInInventory())){
 				targetItem = inventoryItems[i];
-				Debug.Log("on inventory item hover " + targetItem);
+				drawItemBox(targetItem);
+				//Debug.Log("on inventory item hover " + targetItem);
 				return;
 			}
 			else if(!itemPickedUp){
@@ -224,6 +232,10 @@ public class Storage : MonoBehaviour {
 				return; 
 			}
 		}
+	}
+
+	protected void drawItemBox(Item item){
+		GUI.Box (new Rect(item.position.x - width + slotWidth, item.position.y + slotHeight, width, height), item.getDescription() + priceMessage + item.getPrice(), centeredStyle);
 	}
 	
 	protected void resetTargetItem(){

@@ -11,6 +11,12 @@ public class Sword : Weapon {
 	public Sword(){
 		
 	}
+
+	public override void setPlayer(){
+		if(player == null){
+			player = (Character)GameObject.FindObjectOfType(typeof(Character));
+		}
+	}
 	
 	public override void useItem(){
 		equip ();
