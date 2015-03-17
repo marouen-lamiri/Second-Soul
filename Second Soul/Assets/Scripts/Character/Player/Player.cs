@@ -110,7 +110,6 @@ public abstract class Player : Character {
 	protected void playerLogic () {
 		if (!isDead()){
 			//Debug.Log( this.GetType() + " am i busy: " + busyHUD());
-			// FIXME: other scripts using busyHUD setting it to false right away
 			if(!busyHUD()){
 				attackLogic ();
 				lootLogic();

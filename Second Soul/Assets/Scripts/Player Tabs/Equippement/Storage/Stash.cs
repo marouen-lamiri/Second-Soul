@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Stash : MonoBehaviour {
+public class Stash : Storage {
 
+	public Texture2D image;
+	
 	// Use this for initialization
 	void Start () {
 	
