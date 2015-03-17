@@ -90,7 +90,17 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 		// Primary and Secondary Stats tool-tip initialization.
 		primaryStatsTooltip   = new Hashtable ();
 		secondaryStatsTooltip = new Hashtable ();
-		
+	}
+	
+	// Update is called once per frame, checks if 's'-key is pressed.
+	void Update ()
+	{
+		// Catches the 's'-key press.
+		if(Input.GetKeyDown("s"))
+		{
+			PlayerStats();
+		}
+
 		/* Setting up the tool-tips for Primary and Secondary Stats. */
 		if (fighter.playerEnabled)
 		{
@@ -170,22 +180,12 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 			secondaryStatsTooltip.Add (namesSecondary [4], tooltip_SpellPower);
 			
 			secondaryStatsValues = new string[namesSecondary.Length];
-			secondaryStatsValues [0] = namesSecondary [0] + ": " + fighter.accuracy;
-			secondaryStatsValues [1] = namesSecondary [1] + ": " + fighter.castSpeed;
-			secondaryStatsValues [2] = namesSecondary [2] + ": " + fighter.spellCriticalChance;
-			secondaryStatsValues [3] = namesSecondary [3] + ": " + fighter.spellCriticalDamage;
-			secondaryStatsValues [4] = namesSecondary [4] + ": " + fighter.spellPower;
+			secondaryStatsValues [0] = namesSecondary [0] + ": " + sorcerer.accuracy;
+			secondaryStatsValues [1] = namesSecondary [1] + ": " + sorcerer.castSpeed;
+			secondaryStatsValues [2] = namesSecondary [2] + ": " + sorcerer.spellCriticalChance;
+			secondaryStatsValues [3] = namesSecondary [3] + ": " + sorcerer.spellCriticalDamage;
+			secondaryStatsValues [4] = namesSecondary [4] + ": " + sorcerer.spellPower;
 		}
-	}
-	
-	// Update is called once per frame, checks if 's'-key is pressed.
-	void Update ()
-	{
-		// Catches the 's'-key press.
-		if(Input.GetKeyDown("s"))
-		{
-			PlayerStats();
-		}		
 	}
 	
 	public void PlayerStats ()
