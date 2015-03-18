@@ -37,7 +37,7 @@ public class Priest : Sorcerer {
 
 	public override void initializeSecondaryStats(){
 		
-		castSpeed = 1f;
+		castSpeed = .6f;
 		cdr = 0f;
 		
 		spellCriticalChance = 0.1f;

@@ -75,7 +75,7 @@ public class Imp : Enemy {
 		lightningtResistance = 10;
 		
 		accuracy = 0.8f;
-		castSpeed = 1.3f;
+		castSpeed = .5f;
 		
 		spellCriticalChance = 0.3f;
 		spellCriticalDamage = 2.5f;

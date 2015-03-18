@@ -36,7 +36,7 @@ public class Mage : Sorcerer {
 
 	public override void initializeSecondaryStats(){
 	
-		castSpeed = 2f;
+		castSpeed = 2.8f;
 		cdr = 0.15f;
 		
 		spellCriticalChance = 0.2f;
