@@ -90,18 +90,8 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 		// Primary and Secondary Stats tool-tip initialization.
 		primaryStatsTooltip   = new Hashtable ();
 		secondaryStatsTooltip = new Hashtable ();
-	}
-	
-	// Update is called once per frame, checks if 's'-key is pressed.
-	void Update ()
-	{
-		// Catches the 's'-key press.
-		if(Input.GetKeyDown("s"))
-		{
-			PlayerStats();
-		}
 
-		/* Setting up the tool-tips for Primary and Secondary Stats. */
+		// Initializing the stats for Fighter and Sorcerer.
 		if (fighter.playerEnabled)
 		{
 			// Is Fighter.
@@ -115,14 +105,7 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 			primaryStatsTooltip.Add (namesPrimary [6], tooltip_Energy);
 			
 			primaryStatsValues = new string[namesPrimary.Length];
-			primaryStatsValues [0] = namesPrimary [0] + ": " + fighter.level;
-			primaryStatsValues [1] = namesPrimary [1] + ": " + fighter.GetType ();
-			primaryStatsValues [2] = namesPrimary [2] + ": " + fighter.getStrength ();
-			primaryStatsValues [3] = namesPrimary [3] + ": " + fighter.getDexterity ();
-			primaryStatsValues [4] = namesPrimary [4] + ": " + fighter.getEndurance ();
-			primaryStatsValues [5] = namesPrimary [5] + ": " + fighter.maxHealth;
-			primaryStatsValues [6] = namesPrimary [6] + ": " + fighter.maxEnergy;
-			
+
 			namesSecondary = System.Enum.GetNames(typeof(secondaryStatsLabelsFighter));
 			secondaryStatsTooltip.Add (namesSecondary [0], tooltip_Armor);
 			secondaryStatsTooltip.Add (namesSecondary [1], tooltip_FireResistance);
@@ -138,6 +121,53 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 			secondaryStatsTooltip.Add (namesSecondary [11], tooltip_EnergyRegen);
 			
 			secondaryStatsValues = new string[namesSecondary.Length];
+		}
+		else
+		{
+			// Is Sorcerer.
+			namesPrimary   = System.Enum.GetNames(typeof(primaryStatsLabelsSorcerer));
+			primaryStatsTooltip.Add (namesPrimary [0], tooltip_Level);
+			primaryStatsTooltip.Add (namesPrimary [1], tooltip_Class);
+			primaryStatsTooltip.Add (namesPrimary [2], tooltip_Intelligence);
+			primaryStatsTooltip.Add (namesPrimary [3], tooltip_Wisdom);
+			primaryStatsTooltip.Add (namesPrimary [4], tooltip_Spirit);
+			primaryStatsTooltip.Add (namesPrimary [5], tooltip_Health);
+			primaryStatsTooltip.Add (namesPrimary [6], tooltip_Energy);
+			
+			primaryStatsValues = new string[namesPrimary.Length];
+
+			namesSecondary = System.Enum.GetNames(typeof(secondaryStatsLabelsSorcerer));
+			secondaryStatsTooltip.Add (namesSecondary [0], tooltip_Accuracy);
+			secondaryStatsTooltip.Add (namesSecondary [1], tooltip_CastSpeed);
+			secondaryStatsTooltip.Add (namesSecondary [2], tooltip_SpellCriticalChance);
+			secondaryStatsTooltip.Add (namesSecondary [3], tooltip_SpellCriticalDamage);
+			secondaryStatsTooltip.Add (namesSecondary [4], tooltip_SpellPower);
+			
+			secondaryStatsValues = new string[namesSecondary.Length];
+		}
+	}
+	
+	// Update is called once per frame, checks if 's'-key is pressed.
+	void Update ()
+	{
+		// Catches the 's'-key press.
+		if(Input.GetKeyDown("s"))
+		{
+			PlayerStats();
+		}
+
+		/* Setting up the tool-tips for Primary and Secondary Stats. */
+		if (fighter.playerEnabled)
+		{
+			// Is Fighter.
+			primaryStatsValues [0] = namesPrimary [0] + ": " + fighter.level;
+			primaryStatsValues [1] = namesPrimary [1] + ": " + fighter.GetType ();
+			primaryStatsValues [2] = namesPrimary [2] + ": " + fighter.getStrength ();
+			primaryStatsValues [3] = namesPrimary [3] + ": " + fighter.getDexterity ();
+			primaryStatsValues [4] = namesPrimary [4] + ": " + fighter.getEndurance ();
+			primaryStatsValues [5] = namesPrimary [5] + ": " + (int)fighter.health + " / " + fighter.maxHealth;
+			primaryStatsValues [6] = namesPrimary [6] + ": " + (int)fighter.energy + " / " + fighter.maxEnergy;
+			
 			secondaryStatsValues [0] = namesSecondary [0] + ": " + fighter.armor;
 			secondaryStatsValues [1] = namesSecondary [1] + ": " + fighter.fireResistance;
 			secondaryStatsValues [2] = namesSecondary [2] + ": " + fighter.coldResistance;
@@ -154,32 +184,14 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 		else
 		{
 			// Is Sorcerer.
-			namesPrimary   = System.Enum.GetNames(typeof(primaryStatsLabelsSorcerer));
-			primaryStatsTooltip.Add (namesPrimary [0], tooltip_Level);
-			primaryStatsTooltip.Add (namesPrimary [1], tooltip_Class);
-			primaryStatsTooltip.Add (namesPrimary [2], tooltip_Intelligence);
-			primaryStatsTooltip.Add (namesPrimary [3], tooltip_Wisdom);
-			primaryStatsTooltip.Add (namesPrimary [4], tooltip_Spirit);
-			primaryStatsTooltip.Add (namesPrimary [5], tooltip_Health);
-			primaryStatsTooltip.Add (namesPrimary [6], tooltip_Energy);
-			
-			primaryStatsValues = new string[namesPrimary.Length];
 			primaryStatsValues [0] = namesPrimary [0] + ": " + sorcerer.level;
 			primaryStatsValues [1] = namesPrimary [1] + ": " + sorcerer.GetType ();
 			primaryStatsValues [2] = namesPrimary [2] + ": " + sorcerer.getIntelligence ();
 			primaryStatsValues [3] = namesPrimary [3] + ": " + sorcerer.getWisdom ();
 			primaryStatsValues [4] = namesPrimary [4] + ": " + sorcerer.getSpirit ();
-			primaryStatsValues [5] = namesPrimary [5] + ": " + sorcerer.maxHealth;
-			primaryStatsValues [6] = namesPrimary [6] + ": " + sorcerer.maxEnergy;
+			primaryStatsValues [5] = namesPrimary [5] + ": " + (int)sorcerer.health + " / " + sorcerer.maxHealth;
+			primaryStatsValues [6] = namesPrimary [6] + ": " + (int)sorcerer.energy + " / " + sorcerer.maxEnergy;
 			
-			namesSecondary = System.Enum.GetNames(typeof(secondaryStatsLabelsSorcerer));
-			secondaryStatsTooltip.Add (namesSecondary [0], tooltip_Accuracy);
-			secondaryStatsTooltip.Add (namesSecondary [1], tooltip_CastSpeed);
-			secondaryStatsTooltip.Add (namesSecondary [2], tooltip_SpellCriticalChance);
-			secondaryStatsTooltip.Add (namesSecondary [3], tooltip_SpellCriticalDamage);
-			secondaryStatsTooltip.Add (namesSecondary [4], tooltip_SpellPower);
-			
-			secondaryStatsValues = new string[namesSecondary.Length];
 			secondaryStatsValues [0] = namesSecondary [0] + ": " + sorcerer.accuracy;
 			secondaryStatsValues [1] = namesSecondary [1] + ": " + sorcerer.castSpeed;
 			secondaryStatsValues [2] = namesSecondary [2] + ": " + sorcerer.spellCriticalChance;
