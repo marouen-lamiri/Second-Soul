@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LinkedSceneForest : MonoBehaviour {
+public class LinkedSceneForest : MonoBehaviour, ISorcererSubscriber {
 
 	Fighter fPosition;
 	Sorcerer sPosition;
@@ -12,6 +12,9 @@ public class LinkedSceneForest : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		fPosition = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sPosition = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sPosition = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		fPosition.transform.position = fInitial;
@@ -28,4 +31,14 @@ public class LinkedSceneForest : MonoBehaviour {
 			NetworkLevelLoader.Instance.LoadLevel(sceneName,1);
 		}
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sPosition = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }

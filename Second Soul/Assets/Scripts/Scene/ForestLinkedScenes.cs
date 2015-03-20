@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ForestLinkedScenes : MonoBehaviour {
+public class ForestLinkedScenes : MonoBehaviour, ISorcererSubscriber {
 
 	public Fighter fPosition;
 	public Sorcerer sPosition;
@@ -12,6 +12,9 @@ public class ForestLinkedScenes : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		fPosition = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sPosition = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sPosition = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		fPosition.transform.position = fInitial;
@@ -28,4 +31,14 @@ public class ForestLinkedScenes : MonoBehaviour {
 			NetworkLevelLoader.Instance.LoadLevel(sceneName,1);
 		}
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sPosition = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class MapGeneration : MonoBehaviour{
+public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 	
 	// Use this for initialization
 	public GameObject wallPrefab;
@@ -39,10 +39,13 @@ public class MapGeneration : MonoBehaviour{
 	public static bool mapGenerationCompleted;
 	
 	void Awake(){
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		mapGenerationCompleted = false;
 		if (Network.isServer){
-			fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));
-			sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+			fighter = (Fighter)GameObject.FindObjectOfType (typeof (Fighter));
+			sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof (Sorcerer));
 			lootFactory.setFactoryVariables(itemHolderPrefab, fighter);
 			mapArray = generateMap(mapSizeX, mapSizeZ, numberRooms, fighter.gameObject, sorcerer.gameObject);
 			buildMap(mapArray);
@@ -395,6 +398,15 @@ public class MapGeneration : MonoBehaviour{
 			}
 		}
 		return nbrRoomFound;
+	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
 	}
 }
 

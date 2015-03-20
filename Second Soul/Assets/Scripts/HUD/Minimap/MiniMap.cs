@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MiniMap : MonoBehaviour {
+public class MiniMap : MonoBehaviour, ISorcererSubscriber {
 
 	private Fighter fighter;   // The Fighter from the scene.
 	private Sorcerer sorcerer; // The Sorcerer from the scene.
@@ -10,7 +10,11 @@ public class MiniMap : MonoBehaviour {
 	List<GameObject> spheres = new List<GameObject>();
 	List<GameObject> playerSpheres = new List<GameObject>();
 	List<GameObject> enemySpheres = new List<GameObject>();
+
 	void Start(){
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 
@@ -98,5 +102,14 @@ public class MiniMap : MonoBehaviour {
 	void moveMiniMapCamera(Vector3 position)
 	{
 		this.transform.position = new Vector3 (position.x, transform.position.y, position.z);
+	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Grid : MonoBehaviour {
+public class Grid : MonoBehaviour, ISorcererSubscriber {
 
 	//Variable declaration
 	public LayerMask unwalkableMask; 
@@ -14,13 +14,19 @@ public class Grid : MonoBehaviour {
 	float nodeDiameter;
 	int gridSizeX, gridSizeY;
 
+	// for jump into game, need to make sorcerer a member variable:
+	public Sorcerer sorcerer;
+
 	void Start(){
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		nodeDiameter = nodeRadius*2;
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x/nodeDiameter); 
 		gridSizeY = Mathf.RoundToInt(gridWorldSize.y/nodeDiameter); 
 		createGrid();
 		Fighter fighter = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
-		Sorcerer sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // Sorcerer sorcerer = GameObject.FindObjectOfType(typeof(Sorcerer))as Sorcerer;
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // Sorcerer sorcerer = GameObject.FindObjectOfType (typeof (Sorcerer))as Sorcerer;
 		fighter.setGrid (this);
 		sorcerer.setGrid (this);
 	}
@@ -97,4 +103,14 @@ public class Grid : MonoBehaviour {
 			}
 		}
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }

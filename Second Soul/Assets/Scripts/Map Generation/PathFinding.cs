@@ -2,13 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PathFinding : MonoBehaviour {
+public class PathFinding : MonoBehaviour, ISorcererSubscriber {
 	
 	private Player seeker, target;
 	
 	Grid grid;
 	
 	void Awake() {
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		seeker = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
 		target = (Sorcerer)SorcererInstanceManager.getSorcerer (); // target = GameObject.FindObjectOfType (typeof(Sorcerer))as Sorcerer;
 		grid = GetComponent<Grid>();
@@ -91,4 +94,14 @@ public class PathFinding : MonoBehaviour {
 			return 14*dstY + 10* (dstX-dstY);
 		return 14*dstX + 10 * (dstY-dstX);
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.target = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }

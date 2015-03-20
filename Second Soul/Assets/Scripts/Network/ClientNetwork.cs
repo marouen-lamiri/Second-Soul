@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ClientNetwork : MonoBehaviour {
+public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	// Old code to keep to use a localhost connection on one computer:
 	//	public string serverIP = "127.0.0.1";
@@ -120,8 +120,9 @@ public class ClientNetwork : MonoBehaviour {
 	private int onePlayerModeButtonHeight = 50;
 
 	
-	// jump in game:
+	// jump into game:
 	private SorcererInstanceManager sim;
+	private Sorcerer sorcerer; // needs to be a variable now so it can be set by the ISorcerer function.
 
 	// more magic numbers strings:
 	private string chatBoxGUIName = "ChatBox";
@@ -160,7 +161,9 @@ public class ClientNetwork : MonoBehaviour {
 
 	public void Awake() {
 
-		//jump in game:
+		subscribeToSorcererInstancePublisher (); // jump into game
+
+		//jump into game:
 		if(sim == null) {
 			//GameObject network = GameObject.FindObjectOfType(typeof (Network));
 			//Transform parent_ = transform.parent;
@@ -377,7 +380,7 @@ public class ClientNetwork : MonoBehaviour {
 		// client and server --> logic for keeping fighter and sorcerer across scenes (dontdestroyonload):
 		if(Application.loadedLevelName == StartScreenOfficialSceneName) { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
 
-			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof (Sorcerer)); //sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // 
 			Fighter fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));	
 
 			//GameObject lines = GameObject.Find ("lines");
@@ -409,7 +412,7 @@ public class ClientNetwork : MonoBehaviour {
 		// server --> send 
 		if (Network.isServer && MapGeneration.mapGenerationCompleted && !sorcererPositionWasSent) { // 
 			OnSorcererPositionDeterminedAfterMapCreation(MapGeneration.playerStartPositionVector3);
-			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof (Sorcerer)); //sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // 
 			//sorcererPositionWasSent = true;
 		}
 
@@ -460,7 +463,7 @@ public class ClientNetwork : MonoBehaviour {
 					
 					if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 4, networkWindowButtonWidth, networkWindowButtonHeight), "Remove Client")) {
 						//find the sorcerer:
-						Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;
+						Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer)) as Sorcerer; //sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // 
 						//1-create the sorcerer copy --> Instantiate(...) 
 						//Instantiate (sorcerer);
 						//2-Network.Destroy the other one
@@ -604,7 +607,10 @@ public class ClientNetwork : MonoBehaviour {
 				{
 					if (GUI.Button(new Rect(hostButtonsPositionX, hostButtonsPositionY + ((hostButtonsHeight+hostButtonsSpacing) * i), hostButtonsWidth, hostButtonsHeight), hostList[i].gameName))
 					{
-						sim.onClientConnects();
+						if(sim != null) {
+							//sim.onClientConnects();
+							onClientConnects();
+						}
 						JoinServer(hostList[i]);
 					}
 				}
@@ -712,7 +718,7 @@ public class ClientNetwork : MonoBehaviour {
 		positionVector3.y = float.Parse(positions[1]);
 		positionVector3.z = float.Parse(positions[2]);
 		
-		Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+		Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof (Sorcerer)); //sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // 
 		sorcerer.transform.position = positionVector3;
 		sorcererPositionWasUpdated = true;
 
@@ -752,6 +758,33 @@ public class ClientNetwork : MonoBehaviour {
 		//statsDisplayScript.boolChange ();
 		//print ("toggle stats displayed WORKED");
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
+	
+	// ================================================
+	[RPC]
+	public void onClientConnects() {
+		//if(networkView.isMine){
+		networkView.RPC("startDoCheckForNewSorcererNetworkInstantiatedByClient", RPCMode.All, "hello");//RPCMode.Others);
+		//print ("hello");
+		//}
+	}
+
+	[RPC]
+	void startDoCheckForNewSorcererNetworkInstantiatedByClient(string s) {
+		print ("RECEIVED !!!!!! "+s);
+		SorcererInstanceManager.doCheckForNewSorcererNetworkInstantiatedByClient = true;
+	}
+
+
 	
 }
 

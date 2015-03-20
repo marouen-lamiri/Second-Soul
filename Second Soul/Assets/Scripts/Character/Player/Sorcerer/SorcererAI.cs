@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SorcererAI : MonoBehaviour {
+public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	
 	private Fighter fighter;
 	private Sorcerer sorcerer;
@@ -41,6 +41,7 @@ public class SorcererAI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		subscribeToSorcererInstancePublisher (); // jump into game
 		Debug.Log ("Move!");
 		print ("Move");
 		startAI ();
@@ -206,4 +207,14 @@ public class SorcererAI : MonoBehaviour {
 		}
 		return nearestObj;
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }
