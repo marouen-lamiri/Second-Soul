@@ -4,6 +4,9 @@ using System.Collections;
 public class OnHoverTransparent : MonoBehaviour {
 	
 	public LayerMask layer;
+	public static int counter;
+	public Material invisibleMaterial;
+	public Material wallMaterial;
 	GameObject mainCamera;
 	GameObject lastObject;
 	Fighter fighter;
@@ -32,11 +35,17 @@ public class OnHoverTransparent : MonoBehaviour {
 		}
 		else{
 			Player player = (fighter.playerEnabled)? (Player) fighter : sorcerer;
-			if (Physics.Linecast (mainCamera.transform.position, player.transform.position, layer)) {
-				material.color = new Color(initialColor.r,initialColor.g,initialColor.b,0f);
+			Debug.DrawLine(player.transform.position, mainCamera.transform.position);
+			RaycastHit hit; 
+			if (Physics.Linecast (player.transform.position, mainCamera.transform.position, out hit,layer) &&
+			    hit.collider.gameObject == this.gameObject) {
+				//this.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,0f);
+				//counter++;
+				this.gameObject.renderer.material = invisibleMaterial;
 			}
 			else{
-				material.color = new Color(initialColor.r,initialColor.g,initialColor.b,1f);
+				//this.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,1f);
+				this.gameObject.renderer.material = wallMaterial;
 			}
 		}
 		
