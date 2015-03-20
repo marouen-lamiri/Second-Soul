@@ -400,7 +400,9 @@ public abstract class Character : MonoBehaviour {
 
 		if(transform.tag != typeof(Enemy).ToString() && (ai == null || !ai.enabled) && Vector3.Distance(previousGoal, goalPosition) > 2){
 			previousGoal = goalPosition;
-			clickedPosition = Instantiate (clickAnimation, goalPosition, Quaternion.Euler(180,0,0)) as GameObject;
+			if(clickedPosition == null){
+				clickedPosition = Instantiate (clickAnimation, goalPosition, Quaternion.Euler(180,0,0)) as GameObject;
+			}
 			
 		}
 

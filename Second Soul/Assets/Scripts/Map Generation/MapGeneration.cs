@@ -105,10 +105,10 @@ public class MapGeneration : MonoBehaviour{
 
 	int[,] treasureSpawner(int[,] map){
 		int nbrTreasure = Random.Range(nbrMinByRoom, nbrMaxByRoom);
-		while(nbrTreasure <= 0){
+		while(nbrTreasure > 0){
 			int x = Random.Range(0, mapSizeX);
 			int z = Random.Range(0, mapSizeZ);
-			Vector3 position = new Vector3(x * resizeTheWall, 1, z * resizeTheWall);
+			Vector3 position = new Vector3(x * resizeTheWall, 0, z * resizeTheWall);
 			if(map[x,z] != emptySlotIdentifier && map[x,z] < ObstacleIdentifier){
 				map[x,z] = ObstacleIdentifier;
 				GameObject treasure = Network.Instantiate(treasureChest, position, Quaternion.Euler (0,0,0), 2) as GameObject;
