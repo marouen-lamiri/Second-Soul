@@ -21,7 +21,7 @@ public class Loading: MonoBehaviour
 	float heightForPart2 = 20;
 	float offsetForPart1 = 15;
 	float offsetForPart2 = 10;
-	int loadingPercentage = 99;
+	int loadingPercentage = 100;
 	static float BarFullness;
 
 
@@ -43,18 +43,18 @@ public class Loading: MonoBehaviour
 			BarFullness = 0;
 			hide();
 		}
-		else{
-			BarFullness = Application.GetStreamProgressForLevel(1);
-		}
+//		else{
+//			BarFullness = Application.GetStreamProgressForLevel(1);
+//		}
 	}
 
-	void OnGUI(){
-		if(checkState){
-			GUI.Label (new Rect(Screen.width/2 - buttonWidthOffset, Screen.height/2 - buttonHeight, buttonWidth, buttonHeight), "Loading: "+ Application.GetStreamProgressForLevel(1) * loadingPercentage + "%", loadingStyle);
-			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar,  Screen.height/2 + offsetForPart1, BarFullness * (halfBar + halfBar), heightForPart1), fullBar);
-			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar - offset/2,  Screen.height/2 + offsetForPart2 , halfBar + halfBar + offset, heightForPart2), emptyBar);
-		}
-	}
+//	void OnGUI(){
+//		if(checkState){
+//			GUI.Label (new Rect(Screen.width/2 - buttonWidthOffset, Screen.height/2 - buttonHeight, buttonWidth, buttonHeight), "Loading: "+ Application.LoadLevelAsync("Forest") * loadingPercentage + "%", loadingStyle);
+//			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar,  Screen.height/2 + offsetForPart1, BarFullness * (halfBar + halfBar), heightForPart1), fullBar);
+//			GUI.DrawTexture(new Rect(Screen.width/2 - halfBar - offset/2,  Screen.height/2 + offsetForPart2 , halfBar + halfBar + offset, heightForPart2), emptyBar);
+//		}
+//	}
 
 	public static void show(){
 		if (!InstanceExists())
