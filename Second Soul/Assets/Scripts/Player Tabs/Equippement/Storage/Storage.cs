@@ -283,8 +283,8 @@ public class Storage : MonoBehaviour {
 	
 	public bool inBoundaries(){
 		//lock player movement within HUD bounds
+		//Debug.Log("inv on: " + isInventoryOn);
 		return (inWidthBoundaries() && inHeightBoundaries() && isInventoryOn);
-		Debug.Log("inv on: " + isInventoryOn);
 	}
 	
 	protected bool inWidthBoundaries(){
