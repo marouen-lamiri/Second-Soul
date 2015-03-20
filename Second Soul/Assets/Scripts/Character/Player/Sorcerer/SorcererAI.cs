@@ -31,7 +31,7 @@ public class SorcererAI : MonoBehaviour {
 	private ISkill skill2;
 	private string skill2Name = "FireballSkill"; 
 	private ISkill skill3;
-	private string skill3Name = "LightningStormSkill";
+	private string skill3Name = "LightningStrike";
 	private ISkill skill4;
 	private string skill4Name = "CycloneSkill";
 	private ISkill skill5;
