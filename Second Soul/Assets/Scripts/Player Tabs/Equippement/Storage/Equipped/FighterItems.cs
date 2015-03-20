@@ -48,13 +48,13 @@ public class FighterItems : EquippedItems {
 	void OnGUI(){
 		GUI.depth = guiDepth;
 		if (isInventoryOn) {
-			drawEquippedItems();
+			drawItems();
 			//detectGUIAction();
 			//Debug.Log(chestSlot.position);
 		}
 	}
 
-	void drawEquippedItems(){
+	protected override void drawItems(){
 		//Debug.Log("I happen");
 		foreach(Item item in equipItems){
 			GUI.DrawTexture(item.position, item.getImage());

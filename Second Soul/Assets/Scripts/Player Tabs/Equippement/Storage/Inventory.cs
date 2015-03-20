@@ -99,9 +99,12 @@ public class Inventory : Storage
 		GUI.DrawTexture(position, image);
 	}
 
-	void drawItems(){
+	protected override void drawItems(){
 		for(int i = 0; i < inventoryItems.Count; i++){
-			inventoryItems[i].position = new Rect(6 + slotsOffsetX + position.x + inventoryItems[i].x * slotWidth, 6 + slotsOffsetY + position.y + inventoryItems[i].y * slotHeight,inventoryItems[i].width * slotWidth - 12,inventoryItems[i].height * slotHeight - 12);
+			inventoryItems[i].position = new Rect(6 + slotsOffsetX + position.x + inventoryItems[i].x * slotWidth, 
+													6 + slotsOffsetY + position.y + inventoryItems[i].y * slotHeight, 
+													inventoryItems[i].width * slotWidth - 12, 
+													inventoryItems[i].height * slotHeight - 12);
 			GUI.DrawTexture(inventoryItems[i].position, inventoryItems[i].getImage());
 		}
 	}

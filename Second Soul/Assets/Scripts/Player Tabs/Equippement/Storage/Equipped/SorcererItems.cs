@@ -29,4 +29,8 @@ public class SorcererItems : EquippedItems {
 	void Update () {
 	
 	}
+	
+	protected override void drawItems (){
+		//throw new System.NotImplementedException ();
+	}
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class EquippedItems : Storage {
+public abstract class EquippedItems : Storage {
 
 	//public static List<Item> equipItems = new List<Item>();
 	
@@ -19,6 +19,6 @@ public class EquippedItems : Storage {
 	
 	}
 	
-	
+	protected override abstract void drawItems();
 	
 }
