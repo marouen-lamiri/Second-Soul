@@ -183,12 +183,9 @@ public abstract class SkillTree : MonoBehaviour {
 	
 	public bool inBoundaries(){
 		//lock player movement within HUD bounds
-		if(inWidthBoundaries() && inHeightBoundaries()){
-			return true;
-		}
-		else{
-			return false;
-		}
+		//Debug.Log("inv on: " + isSkillOpen);
+		return (inWidthBoundaries() && inHeightBoundaries() && isSkillOpen);
+		
 	}
 	
 	protected bool inWidthBoundaries(){

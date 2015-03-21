@@ -13,6 +13,8 @@ public class Fighter : Player{
 	protected int dexterityPerLvl;
 	protected int endurancePerLvl;
 
+
+
 	public DatabaseFighter database;
 	
 	//FighterNetworkScript fighterNetworkScript; // is "already serialized" in parent class Player.cs.
@@ -45,6 +47,7 @@ public class Fighter : Player{
 		initializeSecondaryStatsBase();
 		initializeSecondaryStats();
 		calculateSecondaryStats();
+		initializeMoney();
 		
 		health = maxHealth;
 		energy = maxEnergy;
@@ -54,7 +57,7 @@ public class Fighter : Player{
 
 		//networking:
 		fighterNetworkScript = (FighterNetworkScript)GameObject.FindObjectOfType (typeof(FighterNetworkScript));
-		database.readPrimaryStats();
+		//database.readPrimaryStats();
 	}
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -67,6 +70,12 @@ public class Fighter : Player{
 			playerEnabled = !playerEnabled;
 		}
 		playerLogic();
+	}
+
+	protected void initializeMoney(){
+		if(level <= 1){
+			gold = 300; 
+		}
 	}
 	
 	protected virtual void initializePrimaryStats(){

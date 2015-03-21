@@ -28,7 +28,7 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 		skillStart ();
 		rayCast ();
 		delayedTarget = caster.target;
-		if ((caster.target == null && caster.GetType().IsSubclassOf(typeof(Player)) && !caster.attackLocked()) || !caster.inAttackRange (caster.target.transform.position)) {
+		if ((caster.target == null && caster.GetType().IsSubclassOf(typeof(Player)) && !caster.attackLocked()) || (caster.target != null && !caster.inAttackRange (caster.target.transform.position))) {
 			Player player = (Player) caster;
 			player.startMoving(targetPosition);
 			return;

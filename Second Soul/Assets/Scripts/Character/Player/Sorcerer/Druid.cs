@@ -36,7 +36,7 @@ public class Druid : Sorcerer {
 
 	public override void initializeSecondaryStats(){
 		
-		castSpeed = 3f;
+		castSpeed = 1f;
 		cdr = 0.3f;
 
 		spellCriticalChance = 0.3f;

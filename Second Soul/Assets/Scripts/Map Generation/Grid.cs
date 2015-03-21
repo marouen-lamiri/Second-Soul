@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,6 +16,12 @@ public class Grid : MonoBehaviour, ISorcererSubscriber {
 
 	// for jump into game, need to make sorcerer a member variable:
 	public Sorcerer sorcerer;
+
+	public int MaxSize{
+		get{
+			return gridSizeX * gridSizeY;
+		}
+	}
 
 	void Start(){
 

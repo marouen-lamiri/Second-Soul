@@ -4,12 +4,35 @@ using System.Collections;
 [System.Serializable]
 public class Axe : Weapon {
 
+	public int price = 150;
+	public string description = "This axe is used to cut down trees, kill animals and even warfare. " +
+		"Its a terrific allrounder that can be used in everyday life";
+	public string itemName = "Wood cutting Axe";
+
 	public Axe(){
 		
+	}
+
+	public override void setPlayer(){
+		if(player == null){
+			player = (Character)GameObject.FindObjectOfType(typeof(Character));
+		}
 	}
 	
 	public override void useItem(){
 		equip ();
+	}
+
+	public override int getPrice(){
+		return price;
+	}
+
+	public override string getString(){
+		return itemName;
+	}
+	
+	public override string getDescription(){
+		return description;
 	}
 	
 	public override void equip(){

@@ -12,6 +12,8 @@ public class Sorcerer : Player {
 	protected int wisdomPerLvl;
 	protected int spiritPerLvl;
 
+	public static int soulShards; //Money for the sorcerer;
+
 	protected Fighter fighter;
 
 	public DatabaseSorcerer database;
@@ -56,7 +58,7 @@ public class Sorcerer : Player {
 	
 		//networking:
 		sorcererNetworkScript = (SorcererNetworkScript)gameObject.GetComponent<SorcererNetworkScript> ();
-		database.readPrimaryStats();
+		//database.readPrimaryStats();
 	}
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -77,6 +79,12 @@ public class Sorcerer : Player {
 		intelligence = 10;
 		wisdom = 10;
 		spirit = 10;
+	}
+
+	protected void initializeMoney(){
+		if(level <= 1){
+			soulShards = 300;
+		}
 	}
 
 	public override bool criticalHitCheck(){
@@ -108,6 +116,10 @@ public class Sorcerer : Player {
 
 	public Fighter getFighter(){
 		return fighter;
+	}
+
+	public void gainSouls(int souls){
+		soulShards =+ souls;
 	}
 
 	public override void levelUp(){

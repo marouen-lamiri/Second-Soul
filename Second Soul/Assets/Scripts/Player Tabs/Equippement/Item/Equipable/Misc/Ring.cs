@@ -4,14 +4,37 @@ using System.Collections;
 [System.Serializable]
 public class Ring : Misc {
 
+	public int price = 150;
+	public string description = "This ring has been used by magicians for its durability" +
+		"during the thousand year war against the demon country, Elexia";
+	public string itemName = "Magicians Pride";
+
 	public Ring(){
 		
+	}
+
+	public override void setPlayer(){
+		if(player == null){
+			player = (Character)GameObject.FindObjectOfType(typeof(Character));
+		}
 	}
 
 	public override void useItem(){
 		equip ();
 	}
+
+	public override int getPrice(){
+		return price;
+	}
+
+	public override string getString(){
+		return itemName;
+	}
 	
+	public override string getDescription(){
+		return description;
+	}
+
 	public override void equip(){
 		//Debug.Log(FighterItems.chestSlot.position);
 		foreach(EquipSlot slot in Storage.equipSlots){

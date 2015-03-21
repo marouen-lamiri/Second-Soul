@@ -1,6 +1,32 @@
 fileFormatVersion: 2
 guid: a4d3765b2b1add743afb7f019a2614cc
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: flare_armor_0_0
+    21300002: Regular Shirt
+    21300004: Regular Gloves
+    21300006: Regular Pants
+    21300008: Regular Flip Flops
+    21300010: Assassin hood
+    21300012: Assassin Shirt
+    21300014: Assassin Hand Guards
+    21300016: Assassin pants
+    21300018: Assassin Boots
+    21300020: Mercenary Hood
+    21300022: Mercenary Armor
+    21300024: Mercenary Hand Guards
+    21300026: Mercenary Pants
+    21300028: Mercenary Boots
+    21300030: Knight Hood
+    21300032: Knight Armor
+    21300034: Knight Hand Guards
+    21300036: Knight Pants
+    21300038: Knight Boots
+    21300040: General Helmet
+    21300042: General Armor
+    21300044: General Hand Guards
+    21300046: General Pants
+    21300048: General Boots
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -35,6 +61,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
@@ -50,6 +77,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Regular Shirt
       rect:
         serializedVersion: 2
@@ -59,6 +87,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Regular Gloves
       rect:
         serializedVersion: 2
@@ -68,6 +97,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Regular Pants
       rect:
         serializedVersion: 2
@@ -77,6 +107,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Regular Flip Flops
       rect:
         serializedVersion: 2
@@ -86,6 +117,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Assassin hood
       rect:
         serializedVersion: 2
@@ -95,6 +127,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Assassin Shirt
       rect:
         serializedVersion: 2
@@ -104,6 +137,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Assassin Hand Guards
       rect:
         serializedVersion: 2
@@ -113,6 +147,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Assassin pants
       rect:
         serializedVersion: 2
@@ -122,6 +157,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Assassin Boots
       rect:
         serializedVersion: 2
@@ -131,6 +167,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Mercenary Hood
       rect:
         serializedVersion: 2
@@ -140,6 +177,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Mercenary Armor
       rect:
         serializedVersion: 2
@@ -149,6 +187,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Mercenary Hand Guards
       rect:
         serializedVersion: 2
@@ -158,6 +197,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Mercenary Pants
       rect:
         serializedVersion: 2
@@ -167,6 +207,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Mercenary Boots
       rect:
         serializedVersion: 2
@@ -176,6 +217,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Knight Hood
       rect:
         serializedVersion: 2
@@ -185,6 +227,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Knight Armor
       rect:
         serializedVersion: 2
@@ -194,6 +237,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Knight Hand Guards
       rect:
         serializedVersion: 2
@@ -203,6 +247,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Knight Pants
       rect:
         serializedVersion: 2
@@ -212,6 +257,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Knight Boots
       rect:
         serializedVersion: 2
@@ -221,6 +267,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: General Helmet
       rect:
         serializedVersion: 2
@@ -230,6 +277,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: General Armor
       rect:
         serializedVersion: 2
@@ -239,6 +287,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: General Hand Guards
       rect:
         serializedVersion: 2
@@ -248,6 +297,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: General Pants
       rect:
         serializedVersion: 2
@@ -257,6 +307,7 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: General Boots
       rect:
         serializedVersion: 2
@@ -266,5 +317,6 @@ TextureImporter:
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

@@ -13,6 +13,7 @@ public abstract class Character : MonoBehaviour {
 	public CharacterController controller;
 	private CharacterNetworkScript playerNetworkScript;
 	protected BasicAttack basicAttackScript;
+	public static int gold; //money for the fighter
 
 	//pathfinding related
 	protected Grid grid;
@@ -241,6 +242,10 @@ public abstract class Character : MonoBehaviour {
 		hpRegBase = 0.01f;
 		enRegBase = 0.01f;
 	}
+
+	public void gainGold(int money){
+		gold =+ money;
+	}
 	
 	public bool hitCheck(){
 		int randomRoll = Random.Range (1, 100);
@@ -378,11 +383,10 @@ public abstract class Character : MonoBehaviour {
 			}
 
 			List<Vector3> path = grid.worldFromNode(grid.path);
-			if(path == null){
+			if(path == null || grid.path == null || path.Count <= 1 || grid.path.Count <= 1){
 				destination = transform.position;
 			}
-
-			if (path.Count > 1) {
+			else if (path.Count > 1) {
 				destination = path [1];//because path[0] is where you are now, and path[1] is the immediately next step
 				arriveScript.enabled = false;
 			}

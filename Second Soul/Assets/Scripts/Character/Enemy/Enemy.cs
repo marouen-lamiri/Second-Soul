@@ -14,6 +14,8 @@ public abstract class Enemy : Character, ISorcererSubscriber {
 
 	public int experienceWorth;
 	public int experienceBase;
+	public int prizeBase = 25;
+	public int prizeLevelBonus = 2;
 	
 	public Sorcerer sorcerer;
 	
@@ -22,6 +24,8 @@ public abstract class Enemy : Character, ISorcererSubscriber {
 	
 	public bool xpGiven;
 	public bool lootGiven;
+	public bool prizeGiven;
+	public int prize;
 
 	public int assigner;
 	int id;
@@ -164,11 +168,31 @@ public abstract class Enemy : Character, ISorcererSubscriber {
 			dieMethod();
 			giveLoot(dropRate, transform.position);
 			calculateXPWorth();
+			calculatePrize();
+			prizeCurrency();
 			giveXP();
 			destroySelf();
 		}
 	}
-	
+
+	public void calculatePrize(){
+		prize = (level + prizeLevelBonus) * prizeBase;
+	}
+
+	public void prizeCurrency(){
+		if(!prizeGiven){
+			Debug.Log ("enemy experience worth: " + experienceWorth);
+			//UnityNotificationBar.UNotify("Gained " + experienceWorth + " Experience"); //although this might appear false in Mono-Develop, it actually works as an external asset
+			if(target.playerEnabled){
+				target.gainGold(prize);
+			}
+			if(sorcerer.playerEnabled){
+				sorcerer.gainSouls(prize);
+			}
+		}
+		prizeGiven = true;
+	}
+
 	public void enemyAI(){
 		bool tst1 = inAttackRange (target.transform.position);
 		bool tst2 = !attackLocked();
