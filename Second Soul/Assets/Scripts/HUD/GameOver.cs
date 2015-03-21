@@ -63,7 +63,7 @@ public class GameOver : MonoBehaviour {
 
 	public void Respawn (){
 		restoreHealthAndEnergy ();
-		player.transform.position = new Vector3(player.getInitialPositionX(), player.getInitialPositionY(), player.getInitialPositionZ());
+		//player.transform.position = new Vector3(player.getInitialPositionX(), player.getInitialPositionY(), player.getInitialPositionZ());
 		player.isDead ();
 		Death ();
 	}

@@ -88,11 +88,11 @@ public abstract class Shop : MonoBehaviour {
 	}
 
 	public bool inHeightBoundaries(){
-		return (Input.mousePosition.x > boxHeight && Input.mousePosition.x < boxHeight + boxStartPositionHeight);
+		return (Input.mousePosition.y > boxStartPositionHeight && Input.mousePosition.y < boxHeight + boxStartPositionHeight);
 	}
 
 	public bool inWidthBoundaries(){
-		return (Input.mousePosition.x > boxWidth && Input.mousePosition.x < boxWidth + boxStartPositionWidth);
+		return (Input.mousePosition.x > boxStartPositionWidth && Input.mousePosition.x < boxWidth + boxStartPositionWidth);
 	}
 
 	public abstract bool shopEnabled();
