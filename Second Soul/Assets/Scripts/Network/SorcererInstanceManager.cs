@@ -232,7 +232,9 @@ public class SorcererInstanceManager : MonoBehaviour {
 			Fighter fighter = (Fighter)GameObject.FindObjectOfType (typeof(Fighter));
 			Destroy (fighter.gameObject); // TODO optimize for speed by passing a pointer to the fighter from the network script (when it creates the fighter).
 
-			//TODO: bring back to start menu scene:
+			// bring back start menu scene when disconnected:
+			NetworkLevelLoader.Instance.LoadLevel(ClientNetwork.StartScreenOfficialSceneName, 1);
+			
 
 		}
 		
