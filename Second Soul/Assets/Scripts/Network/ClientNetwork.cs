@@ -126,7 +126,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	// more magic numbers strings:
 	private string chatBoxGUIName = "ChatBox";
-	private string StartScreenOfficialSceneName = "StartScreen";
+	public static string StartScreenOfficialSceneName = "StartScreen";
 	private int numberOfFramesToWaitBeforeServerLoadsGameScene = 700; 
 	
 	// master server server methods:
@@ -704,7 +704,6 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 			_messageLog += "Disconnected from server" + "\n";
 			//Network.Destroy (playerPrefab.gameObject);
-			SorcererInstanceManager.DestroySorcerer();
 			
 		}
 

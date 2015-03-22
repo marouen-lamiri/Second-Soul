@@ -198,7 +198,7 @@ public class SorcererInstanceManager : MonoBehaviour {
 		//}
 
 		doLateSorcererDetection = true;
-		
+
 	}
 	void OnPlayerDisconnected (NetworkPlayer player)
 	{
@@ -215,7 +215,28 @@ public class SorcererInstanceManager : MonoBehaviour {
 		//PlayerCamera.CameraTarget=transform;
 	}
 
+	// -------- for client:
+	void OnDisconnectedFromServer(NetworkDisconnection info) {
+		
 
+		if (Network.isServer)
+			Debug.Log("Local server connection disconnected");
+		else if (info == NetworkDisconnection.LostConnection)
+			Debug.Log("Lost connection to the server");
+		else {
+			Debug.Log("Successfully diconnected from the server");
+			//Network.Destroy (playerPrefab.gameObject);
+			SorcererInstanceManager.DestroySorcerer();
+
+			// FIX: fighter duplicated on the client side after reconnecting:
+			Fighter fighter = (Fighter)GameObject.FindObjectOfType (typeof(Fighter));
+			Destroy (fighter.gameObject); // TODO optimize for speed by passing a pointer to the fighter from the network script (when it creates the fighter).
+
+			//TODO: bring back to start menu scene:
+
+		}
+		
+	}
 
 
 
