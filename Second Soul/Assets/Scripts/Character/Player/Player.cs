@@ -90,7 +90,9 @@ public abstract class Player : Character {
 	}
 
 	protected bool checkShops(){
-		return (mainShop.shopEnabled() || sellShop.shopEnabled() || fighterShop.shopEnabled() || sorcererShop.shopEnabled());
+		if(Application.loadedLevelName == townSceneName)
+			return (mainShop.shopEnabled() || sellShop.shopEnabled() || fighterShop.shopEnabled() || sorcererShop.shopEnabled());
+		return false;
 	}
 
 	protected void initializeTeleporter(){
@@ -227,8 +229,11 @@ public abstract class Player : Character {
 	
 	//ADD CONDITIONS FOR ANY NEW OBJECTS THAT WOULD MAKE PLAY BUSY
 	public bool busyHUD(){
-		if(playerEnabled){
+		if(playerEnabled && shop != null){
 			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || checkShops() || teleporter.checkBoundaries());
+		}
+		else if(playerEnabled){
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp());
 		}
 		return false;
 	}
