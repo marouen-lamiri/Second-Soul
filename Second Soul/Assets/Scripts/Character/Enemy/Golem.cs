@@ -42,6 +42,8 @@ public class Golem : Enemy {
 		maxHealth = 600;
 		
 		healthRegen = 0.5f;
+
+
 	}
 
 	protected override bool cannotMove(){

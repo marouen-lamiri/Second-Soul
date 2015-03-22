@@ -125,7 +125,7 @@ public class SorcererAI : MonoBehaviour {
 	//gives the orders to the AI
 	void movingAI(){
 		//checks if there is a player controlling the sorcerer
-		if(checkAIPlayingStatus()){
+		if(checkAIPlayingStatus() && determineNextMove()){
 			int randomTech = Random.Range(randomMinValue,randomMaxValue);
 			nearestEnemy = checkNearestEnemy();
 			sorcerer.target = nearestEnemy;
@@ -178,6 +178,15 @@ public class SorcererAI : MonoBehaviour {
 				sorcerer.stopMoving();
 			}
 		}
+	}
+
+	//Determine if the sorcerer is going to perform an action 
+	public bool determineNextMove(){
+		int randomTech = Random.Range(randomMinValue, randomMaxValue);
+		if(randomTech >= 190){
+			return true;
+		}
+		return false;
 	}
 	
 	//Determine if there is a closeby enemy

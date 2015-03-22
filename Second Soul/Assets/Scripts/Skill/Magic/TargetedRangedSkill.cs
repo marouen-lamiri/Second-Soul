@@ -26,7 +26,10 @@ public abstract class TargetedRangedSkill : RangedSkill {
 				return;
 			}
 		}
-		targetCharacter = AIRayCast (targetCharacter);
+		if(this.caster.gameObject.tag == "Player")
+			targetCharacter = AIRayCast (targetCharacter);
+		else
+			targetCharacter = EnemyRayCast (targetCharacter);
 
 	}
 
@@ -35,6 +38,10 @@ public abstract class TargetedRangedSkill : RangedSkill {
 		if (ai != null && ai.enabled == true) {
 			return ai.checkNearestEnemy();
 		}
+		return targetCharacter;
+	}
+
+	protected Character EnemyRayCast (Character targetCharacter){
 		return targetCharacter;
 	}
 }
