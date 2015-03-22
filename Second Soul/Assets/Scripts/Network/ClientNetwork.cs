@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
@@ -123,6 +124,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 	// jump into game:
 	private SorcererInstanceManager sim;
 	private Sorcerer sorcerer; // needs to be a variable now so it can be set by the ISorcerer function.
+	private bool serverIsInStartScene = false;
 
 	// more magic numbers strings:
 	private string chatBoxGUIName = "ChatBox";
@@ -134,10 +136,11 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 	{
 		Network.InitializeServer(connections, masterServerPort, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
+
 	}
 	void OnServerInitialized()
 	{
-		Debug.Log("Server Initialized");
+		Debug.Log("Server Initialized.");
 	}
 	// master server client methods:
 	private HostData[] hostList;
@@ -151,11 +154,15 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 	{
 		if (msEvent == MasterServerEvent.HostListReceived)
 			hostList = MasterServer.PollHostList();
-		print ("OnMasterServerEvent fired !!!!!!!!!!!!!! ");
+		Debug.Log("OnMasterServerEvent fired. ");
 	}
 	private void JoinServer(HostData hostData)
 	{
 		Network.Connect(hostData);
+
+		// detect if we are jumping into a new game (still in start menu) or not:
+		// if yes, don't run usual code in this script to place sorcerer and fighter after map creation:
+		detectIfServerIsInStartMenu ();
 	}
 
 
@@ -581,14 +588,8 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 					
 					// always create the sorcerer before the fighter.
 					transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
-					if(sorcererWasCreated) {
-						SorcererInstanceManager.createAndSwapNewSorcerer(); // 
-						//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-					}
-					else {
-						SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
-						//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-					}
+					SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
+					//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
 					sorcererWasCreated = true;
 					
 					lines = Network.Instantiate (linesPrefab,transform.position,transform.rotation,7)as GameObject;
@@ -789,6 +790,28 @@ void SendInfoToClient(string msg) {
 		SorcererInstanceManager.subscribe (this);
 	}
 
+	// for getting position of old sorcerer for jump into game:
+	[RPC]
+	public void detectIfServerIsInStartMenu () {
+		networkView.RPC("returnWhetherGameIsNewIeInStartScene", RPCMode.Server);//RPCMode.Others);
+
+	}
+	[RPC]
+	public void returnWhetherGameIsInStartScene() {
+		networkView.RPC("setClientVarServerIsInStartMenu", RPCMode.All);//RPCMode.Others);
+	}
+	[RPC]
+	public void setClientVarServerIsInStartMenu(string booleanString) {
+
+		bool flag;
+		if (Boolean.TryParse(booleanString, out flag)) {
+			Debug.Log (booleanString + " --> parsed to --> " + flag);
+			this.serverIsInStartScene = flag;
+		}
+		else
+			Debug.Log ("Unable to parse --> " + booleanString);
+	}
+	
 	
 	// ================================================
 //	[RPC]

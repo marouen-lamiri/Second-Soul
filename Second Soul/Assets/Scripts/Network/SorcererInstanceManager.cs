@@ -12,6 +12,25 @@ public class SorcererInstanceManager : MonoBehaviour {
 	private static int numberOfFramesForLateSorcDetect = 2000;
 	private static int frameCounterForLateSorcDetect = 0;
 
+	/**
+	 * 
+	 * To be used by any class that uses the sorcerer (i.e. any class that .finds the sorcerer or uses .getSorcerer())
+	 * each of these classes now needs to implement an interface: SorcererSubscriber and implement a method: updateMySorcerer() that the publish method will call below:
+	 * 
+	 */
+	public static void subscribe(ISorcererSubscriber subscriber) {
+		subscriberList.Add (subscriber);
+	}
+	
+	private static void publishNewSorcererInstance() {
+		foreach(ISorcererSubscriber subscriber in subscriberList) {
+			print (subscriber);
+			subscriber.updateMySorcerer(SorcererInstanceManager.sorcerer);
+		}
+	}
+
+
+	// ===================================
 	void Awake() {
 		SorcererInstanceManager.checkForNewSorcererNetworkInstantiatedByClient();
 		//sorcererAIGameObjectToDestroy = -1;
@@ -56,6 +75,12 @@ public class SorcererInstanceManager : MonoBehaviour {
 
 	}
 
+	// ======================
+	/**
+	 * 
+	 * 
+	 * 
+	 */
 	public static void checkForNewSorcererNetworkInstantiatedByClient() {
 
 		Sorcerer[] sorcerers = GameObject.FindObjectsOfType<Sorcerer>(); // no, really just get the sorcerer when a client connects, end of story. // TODO optimize with FindGameObjectsWithTag instead.
@@ -85,21 +110,16 @@ public class SorcererInstanceManager : MonoBehaviour {
 		}
 
 	}
-	
-	// To be used by any class that uses the sorcerer (i.e. any class that .finds the sorcerer or uses .getSorcerer())
-	// each of these classes now needs to implement an interface: SorcererSubscriber and implement a method: updateMySorcerer() that the publish method will call below:
-	public static void subscribe(ISorcererSubscriber subscriber) {
-		subscriberList.Add (subscriber);
-	}
 
-	public static void publishNewSorcererInstance() {
-		foreach(ISorcererSubscriber subscriber in subscriberList) {
-			print (subscriber);
-			subscriber.updateMySorcerer(SorcererInstanceManager.sorcerer);
-		}
-	}
-
-	// all methods that did: GameObject.FindObjectOfType (typeof (Sorcerer)) now call getSorcerer() instead of doing .find sorcerer 
+	/**
+	 * 
+	 * all methods that did: GameObject.FindObjectOfType (typeof (Sorcerer)) 
+	 * 	... now call getSorcerer() instead of doing .find sorcerer 
+	 * 
+	 *  (exception to this: classes that .find the sorcerer in the start menu scene, like DatabaseSorcerer.cs 
+	 *  ... but they still need to implement ISorcererSubscriber.cs)
+	 * 
+	 */ 
 	public static Sorcerer getSorcerer() {
 		if(SorcererInstanceManager.sorcerer == null) {
 			print ("no sorcerer was found in the game.");
@@ -109,20 +129,21 @@ public class SorcererInstanceManager : MonoBehaviour {
 		return SorcererInstanceManager.sorcerer;
 	}
 
-	// to use when a client reconnects and wants to take over existing sorcerer, re-create it at the exact same position and rotation
-	public static void createAndSwapNewSorcerer() {
 
-		// copy old sorcerer so the server owns it
-		// publish that copy to all
-		// destroy old sorcerer
-
-		Sorcerer s = Network.Instantiate(SorcererInstanceManager.sorcerer, SorcererInstanceManager.sorcerer.transform.position, SorcererInstanceManager.sorcerer.transform.rotation, 0) as Sorcerer;
-		swapSorcerers (s);
-		
-	}
-
-	//to use when first time connecting in the start menu scene, allows to place the sorcerer
+	/**
+	 * 
+	 * --> allows to place the sorcerer on map with params.
+	 * 
+	 * use null params when a client reconnects and wants to take over existing sorcerer, (will re-create it at the same position and rotation)
+	 * use also when connecting for first time in the start menu scene, allows to place the sorcerer with params
+	 * 
+	*/
 	public static void createAndSwapNewSorcerer(Sorcerer sorcererPrefab, Transform transf) {
+
+		// important, to get the old sorcerer's (AI) position, so we can create the new one at the right position:
+		// but if we do things like that (instead of getting the old sorcerer's position with an rpc call)
+		// then we need to NOT removeRPCs for the old sorcerer on the server side, so we can detect it from the client.
+		checkForNewSorcererNetworkInstantiatedByClient ();
 		
 		// copy old sorcerer so the server owns it
 		// publish that copy to all
@@ -131,8 +152,22 @@ public class SorcererInstanceManager : MonoBehaviour {
 		// debug:
 		Sorcerer[] sorcerers = GameObject.FindObjectsOfType<Sorcerer>(); 
 		print (sorcerers.Length);
+	
+		Sorcerer s;
 
-		Sorcerer s = Network.Instantiate(sorcererPrefab, transf.position, transf.rotation, 0) as Sorcerer;
+		if(sorcererPrefab != null && transf != null) {
+			s = Network.Instantiate(sorcererPrefab, transf.position, transf.rotation, 0) as Sorcerer;
+		}
+		else if (SorcererInstanceManager.sorcerer != null) {
+			// place new sorcerer where old sorcerer is before swaping/destroying it:
+			// (this else if actually never runs, we need to set its position in swapSorcerers() on the server side, 
+			// because we usually don't have the old sorcerer on the client side when reconnecting)
+			s = Network.Instantiate(sorcererPrefab, SorcererInstanceManager.sorcerer.transform.position, SorcererInstanceManager.sorcerer.transform.rotation, 0) as Sorcerer;
+		}
+		else {
+			// else use some defaults: new Vector3(2,0,0) at map origin:
+			s = Network.Instantiate(sorcererPrefab, new Vector3(2,0,0), Quaternion.identity, 0) as Sorcerer;
+		}
 
 		// debug:
 		sorcerers = GameObject.FindObjectsOfType<Sorcerer>(); 
@@ -142,12 +177,19 @@ public class SorcererInstanceManager : MonoBehaviour {
 		
 	}
 
-	// replace old with new sorcerer:
+	// helper: replace old with new sorcerer:
 	private static void swapSorcerers(Sorcerer newSorcerer) {
 
 		if(SorcererInstanceManager.sorcerer != null) {
-			//Network.RemoveRPCs(SorcererInstanceManager.sorcerer.networkView.viewID); // essential, otherwise a new client would get all old sorcerer created, see: http://answers.unity3d.com/questions/293129/networkdestroy-doesnt-remove-objects-on-other-syst.html 
+
+			//before destroying, try placing the new one at the old position and rotation:
+			// (this approach also isn't sufficient because it will only position the sorcerer correctly on the server instance
+			// which is the slave game instance for the sorcerer, will be overriden as soon as player moves sorcerer on client)
+			newSorcerer.transform.position = SorcererInstanceManager.sorcerer.transform.position;
+			newSorcerer.transform.rotation = SorcererInstanceManager.sorcerer.transform.rotation;
+
 			Network.Destroy (SorcererInstanceManager.sorcerer.networkView.viewID);
+
 		}
 		SorcererInstanceManager.sorcerer = newSorcerer;
 		
@@ -207,11 +249,8 @@ public class SorcererInstanceManager : MonoBehaviour {
 		//sorcererAIGameObjectToDestroy = player;
 		
 		Network.RemoveRPCs(player, 0); // NB beware confusion here, player here is a client player -- i.e. a sorcerer!
-		Network.RemoveRPCs (SorcererInstanceManager.getSorcerer().networkView.viewID); // avoid that the client when reconnecting gets the server's sorcerer, in addition to his.
-		//Network.DestroyPlayerObjects(player);
-		//Network.Destroy (playerPrefab.gameObject);//?
-		
-		
+		Network.RemoveRPCs (SorcererInstanceManager.getSorcerer().networkView.viewID); // avoid that the client when reconnecting gets the server's sorcerer (now an AI), in addition to his.
+
 		//PlayerCamera.CameraTarget=transform;
 	}
 
