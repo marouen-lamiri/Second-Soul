@@ -134,6 +134,6 @@ public abstract class CharacterNetworkScript : MonoBehaviour {
 	}
 	[RPC]
 	void triggerRunAnim() {
-		characterScript.animateRun ();
+		characterScript.animateRun ();// can be null on server side sometimes, if client is already in game scene but not server.
 	}
 }

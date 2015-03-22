@@ -15,7 +15,7 @@ public class DatabaseSorcerer : MonoBehaviour, ISorcererSubscriber {
 
 		subscribeToSorcererInstancePublisher (); // jump into game
 
-		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer)); //sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // 
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 	}
 	
