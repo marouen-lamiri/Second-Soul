@@ -13,7 +13,8 @@ public class MapGeneration : MonoBehaviour{
 	public GameObject statuePrefab;
 	public GameObject RegularEnemy;
 	public GameObject treasureChest;
-	public GameObject teleportingCauldron;
+	public GameObject teleportingStartCauldron;
+	public GameObject teleportingEndCauldron;
 	public EnemyFactory enemyfactory;
 	public ItemHolder itemHolderPrefab;
 	public LootFactory lootFactory;
@@ -29,8 +30,12 @@ public class MapGeneration : MonoBehaviour{
 	private int nbrMaxRandom = 12;
 	private int nbrMinByRoom = 2;
 	private int nbrMaxByRoom = 4;
+	private int minDistance = 20;
+	private int layerNumber = 8;
 	private bool needsOffset = true;
 	private float obstacleOffset = -5.4f;
+	private bool teleporterStartSet = false;
+	private bool teleporterEndSet = false;
 	List<int> listOfWalls;
 	public static int[,] mapArray;
 	int numberRooms = 12;
@@ -89,14 +94,39 @@ public class MapGeneration : MonoBehaviour{
 			for (int j = 0; j < mapSizeZ; j++){
 				if (map[i, j] != emptySlotIdentifier && map[i - 1, j] != emptySlotIdentifier && map[i, j - 1] != emptySlotIdentifier && map[i, j] != charIdentifier && map[i, j] != EnemyIdentifier && map[i - 1, j] != EnemyIdentifier &&
 				    map[i, j - 1] != EnemyIdentifier && map[i, j - 1] != EnemyIdentifier && map[i - 1, j - 1] != EnemyIdentifier && map[i,j] != wallIdentifier && map[i-1,j-1] != wallIdentifier && map[i-1,j] != wallIdentifier
-				    && map[i,j-1] != wallIdentifier) {
+				    && map[i,j-1] != wallIdentifier && LayerMask.GetMask() != layerNumber) {
 					map[i, j] = charIdentifier;
 					float offset = Random.Range (1,3);
 					playerStartPositionVector3 = new Vector3(i * resizeTheWall + offset, 0.08f, j * resizeTheWall + offset);
+					if(!teleporterStartSet){
+						Network.Instantiate(teleportingStartCauldron, new Vector3(i * resizeTheWall + offset ,-2,j * resizeTheWall + offset), new Quaternion(),2);
+						teleporterStartSet = true;
+					}
 					player.transform.position = playerStartPositionVector3;
 					fighter.setInitialPosition(playerStartPositionVector3);
 					i = mapSizeX;
 					j = mapSizeZ;
+				}
+			}
+		}
+		return map;
+	}
+
+	int[,] mapEndPosition(int[,] map){
+		for (int i = 0; i < mapSizeX; i++){
+			for (int j = 0; j < mapSizeZ; j++){
+				if (map[i, j] != emptySlotIdentifier && map[i - 1, j] != emptySlotIdentifier && map[i, j - 1] != emptySlotIdentifier && map[i, j] != charIdentifier && map[i, j] != EnemyIdentifier && map[i - 1, j] != EnemyIdentifier &&
+				    map[i - 1, j - 1] != emptySlotIdentifier && map[i - 2, j - 2] != emptySlotIdentifier && map[i, j - 1] != emptySlotIdentifier &&
+				    map[i, j - 1] != EnemyIdentifier && map[i, j - 1] != EnemyIdentifier && map[i - 1, j - 1] != EnemyIdentifier && map[i,j] != wallIdentifier && map[i-1,j-1] != wallIdentifier && map[i-1,j] != wallIdentifier
+				    && map[i,j-1] != wallIdentifier && LayerMask.GetMask() != layerNumber)  {
+					map[i, j] = charIdentifier;
+					if(!teleporterEndSet){
+						Network.Instantiate(teleportingEndCauldron, new Vector3(i * resizeTheWall,-2,j * resizeTheWall), new Quaternion(), 2);
+						teleporterEndSet = true;
+					}
+					i = mapSizeX;
+					j = mapSizeZ;
+					return map;
 				}
 			}
 		}
@@ -109,7 +139,7 @@ public class MapGeneration : MonoBehaviour{
 			int x = Random.Range(0, mapSizeX);
 			int z = Random.Range(0, mapSizeZ);
 			Vector3 position = new Vector3(x * resizeTheWall, 0, z * resizeTheWall);
-			if(map[x,z] != emptySlotIdentifier && map[x,z] < ObstacleIdentifier){
+			if(map[x,z] != emptySlotIdentifier && map[x,z] < ObstacleIdentifier && LayerMask.GetMask() != layerNumber){
 				map[x,z] = ObstacleIdentifier;
 				GameObject treasure = Network.Instantiate(treasureChest, position, Quaternion.Euler (0,0,0), 2) as GameObject;
 				treasure.transform.parent = GameObject.Find("Obstacles").transform;
@@ -131,7 +161,7 @@ public class MapGeneration : MonoBehaviour{
 				if (map[i, j] != emptySlotIdentifier && map[i - 1, j] != emptySlotIdentifier && map[i, j - 1] != emptySlotIdentifier && nbrEnemies != emptySlotIdentifier && nbrEnemiesByRoom != emptySlotIdentifier
 				    && previousRoomNumber != map[i, j] && map[i, j] != charIdentifier && map[i, j] != EnemyIdentifier && map[i - 1, j] != EnemyIdentifier && map[i, j - 1] != EnemyIdentifier
 				    && map[i - 2, j] != EnemyIdentifier && map[i, j - 2] != EnemyIdentifier && map[i, j - 1] != EnemyIdentifier && map[i, j - 2] != EnemyIdentifier
-				    && map[i - 1, j - 1] != EnemyIdentifier && map[i,j] != wallIdentifier && map[i-1,j-1] != wallIdentifier && map[i-1,j] != wallIdentifier &&  map[i,j-1] != wallIdentifier){
+				    && map[i - 1, j - 1] != EnemyIdentifier && map[i,j] != wallIdentifier && map[i-1,j-1] != wallIdentifier && map[i-1,j] != wallIdentifier &&  map[i,j-1] != wallIdentifier && LayerMask.GetMask() != layerNumber){
 					map[i, j] = EnemyIdentifier;
 					Vector3 spawnLocation = new Vector3(i * resizeTheWall, 0, j * resizeTheWall);
 					enemyfactory.spawnMob(spawnLocation, nbrEnemiesInMob);
@@ -307,6 +337,7 @@ public class MapGeneration : MonoBehaviour{
 			genMap = generateObstacles(genMap, statuePrefab, false);
 			genMap = playerStartPosition(genMap, player);
 			genMap = treasureSpawner(genMap);
+			genMap = mapEndPosition(genMap);
 			
 			genMap = playerStartPosition(genMap, player2); // now setting a private var for the player2 position, because we need to send it over the network so the right instance sets its position.
 			ClientNetwork clientNetwork = (ClientNetwork)GameObject.FindObjectOfType(typeof(ClientNetwork));

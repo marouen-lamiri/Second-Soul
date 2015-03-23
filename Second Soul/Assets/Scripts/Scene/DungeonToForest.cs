@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ForestToDungeon : SceneManager {
+public class DungeonToForest : SceneManager {
 
 	public GUIStyle buttons;
 	protected Fighter fPosition;
 	protected Sorcerer sPosition;
 	protected string playerTag = "Player";
-	protected string sceneName = "SkillTree";
-	protected string teleporter = "Teleporter2";
-
+	protected string sceneName = "Forest";
+	protected string teleporter = "Teleporter";
+	protected string greeting = "Do you want to go back to the forest?";
+	
 	
 	// Use this for initialization
 	void Start () {
@@ -31,7 +32,7 @@ public class ForestToDungeon : SceneManager {
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, distance)){
 				if (hit.transform.tag == teleporter){
-					Debug.Log ("Dungeon");
+					Debug.Log ("Forest Link");
 					showMenu = true;
 				}
 			}
