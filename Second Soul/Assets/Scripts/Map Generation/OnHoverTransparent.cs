@@ -39,13 +39,13 @@ public class OnHoverTransparent : MonoBehaviour {
 			RaycastHit hit; 
 			if (Physics.Linecast (player.transform.position, mainCamera.transform.position, out hit,layer) &&
 			    hit.collider.gameObject == this.gameObject) {
-				this.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,0f);
+				//this.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,0f);
 				//counter++;
-				//this.gameObject.renderer.material = invisibleMaterial;
+				this.gameObject.renderer.material = invisibleMaterial;
 			}
 			else{
-				this.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,1f);
-				//this.gameObject.renderer.material = wallMaterial;
+				//this.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,1f);
+				this.gameObject.renderer.material = wallMaterial;
 			}
 		}
 		

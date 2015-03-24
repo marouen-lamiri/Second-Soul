@@ -93,8 +93,9 @@ public class MapGeneration : MonoBehaviour{
 		for (int i = 0; i < mapSizeX; i++){
 			for (int j = 0; j < mapSizeZ; j++){
 				if (map[i, j] != emptySlotIdentifier && map[i - 1, j] != emptySlotIdentifier && map[i, j - 1] != emptySlotIdentifier && map[i, j] != charIdentifier && map[i, j] != EnemyIdentifier && map[i - 1, j] != EnemyIdentifier &&
-				    map[i, j - 1] != EnemyIdentifier && map[i, j - 1] != EnemyIdentifier && map[i - 1, j - 1] != EnemyIdentifier && map[i,j] != wallIdentifier && map[i-1,j-1] != wallIdentifier && map[i-1,j] != wallIdentifier
-				    && map[i,j-1] != wallIdentifier && LayerMask.GetMask() != layerNumber) {
+				    map[i, j - 1] != EnemyIdentifier && map[i - 1, j - 1] != EnemyIdentifier && map[i,j] != wallIdentifier && map[i-1,j-1] != wallIdentifier && map[i-1,j] != wallIdentifier
+				    && map[i,j-1] != wallIdentifier && map[i,j] < ObstacleIdentifier && map[i-1,j] < ObstacleIdentifier 
+				    && map[i,j-1] < ObstacleIdentifier && map[i-1,j-1] < ObstacleIdentifier && LayerMask.GetMask() != layerNumber) {
 					map[i, j] = charIdentifier;
 					float offset = Random.Range (1,3);
 					playerStartPositionVector3 = new Vector3(i * resizeTheWall + offset, 0.08f, j * resizeTheWall + offset);
@@ -139,7 +140,9 @@ public class MapGeneration : MonoBehaviour{
 			int x = Random.Range(0, mapSizeX);
 			int z = Random.Range(0, mapSizeZ);
 			Vector3 position = new Vector3(x * resizeTheWall, 0, z * resizeTheWall);
-			if(map[x,z] != emptySlotIdentifier && map[x,z] < ObstacleIdentifier && LayerMask.GetMask() != layerNumber){
+			if(map[x,z] != emptySlotIdentifier && map[x,z] < ObstacleIdentifier && LayerMask.GetMask() != layerNumber 
+			   && map[x-1,z] != emptySlotIdentifier && map[x,z-1] < ObstacleIdentifier && map[x-1,z-1] < ObstacleIdentifier
+			   && map[x-1,z] != charIdentifier && map[x,z-1] != charIdentifier && map[x-1,z-1] != charIdentifier){
 				map[x,z] = ObstacleIdentifier;
 				GameObject treasure = Network.Instantiate(treasureChest, position, Quaternion.Euler (0,0,0), 2) as GameObject;
 				treasure.transform.parent = GameObject.Find("Obstacles").transform;
@@ -204,30 +207,31 @@ public class MapGeneration : MonoBehaviour{
 	//Checks all 4 directions
 	void buildWalls(int[,] map, int i, int j){
 		Vector3 position = new Vector3(i * resizeTheWall, 0, j * resizeTheWall);
-		
-		if (map[i - 1, j] == emptySlotIdentifier){
-			map[i,j] = wallIdentifier;
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x, 0, position.z + resizeTheWall/2), Quaternion.Euler(0, 180, 0), 2) as GameObject;
-			wall.transform.parent = GameObject.Find("Walls").transform;
-			DontDestroyOnLoad(wall.transform.gameObject);
-		}
-		if (map[i + 1, j] == emptySlotIdentifier){
-			map[i,j] = wallIdentifier;
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + resizeTheWall, 0, position.z + resizeTheWall/2), new Quaternion(), 2) as GameObject;
-			wall.transform.parent = GameObject.Find("Walls").transform;
-			DontDestroyOnLoad(wall.transform.gameObject);
-		}
-		if (map[i, j - 1] == emptySlotIdentifier){
-			map[i,j] = wallIdentifier;
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + resizeTheWall/2, 0, position.z), Quaternion.Euler(0, ObstacleIdentifier, 0), 2) as GameObject;
-			wall.transform.parent = GameObject.Find("Walls").transform;
-			DontDestroyOnLoad(wall.transform.gameObject);
-		}
-		if (map[i, j + 1] == emptySlotIdentifier){
-			map[i,j] = wallIdentifier;
-			GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + resizeTheWall/2, 0, position.z + resizeTheWall), Quaternion.Euler(0, -ObstacleIdentifier, 0), 2) as GameObject;
-			wall.transform.parent = GameObject.Find("Walls").transform;
-			DontDestroyOnLoad(wall.transform.gameObject);
+		if(i+1 < mapSizeX && j+1 < mapSizeZ){
+			if (map[i - 1, j] == emptySlotIdentifier){
+				map[i,j] = wallIdentifier;
+				GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x, 0, position.z + resizeTheWall/2), Quaternion.Euler(0, 180, 0), 2) as GameObject;
+				wall.transform.parent = GameObject.Find("Walls").transform;
+				DontDestroyOnLoad(wall.transform.gameObject);
+			}
+			if (map[i + 1, j] == emptySlotIdentifier){
+				map[i,j] = wallIdentifier;
+				GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + resizeTheWall, 0, position.z + resizeTheWall/2), new Quaternion(), 2) as GameObject;
+				wall.transform.parent = GameObject.Find("Walls").transform;
+				DontDestroyOnLoad(wall.transform.gameObject);
+			}
+			if (map[i, j - 1] == emptySlotIdentifier){
+				map[i,j] = wallIdentifier;
+				GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + resizeTheWall/2, 0, position.z), Quaternion.Euler(0, ObstacleIdentifier, 0), 2) as GameObject;
+				wall.transform.parent = GameObject.Find("Walls").transform;
+				DontDestroyOnLoad(wall.transform.gameObject);
+			}
+			if (map[i, j + 1] == emptySlotIdentifier){
+				map[i,j] = wallIdentifier;
+				GameObject wall = Network.Instantiate(wallPrefab, new Vector3(position.x + resizeTheWall/2, 0, position.z + resizeTheWall), Quaternion.Euler(0, -ObstacleIdentifier, 0), 2) as GameObject;
+				wall.transform.parent = GameObject.Find("Walls").transform;
+				DontDestroyOnLoad(wall.transform.gameObject);
+			}
 		}
 	}
 	
