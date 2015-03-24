@@ -57,8 +57,8 @@ public class Inventory : Storage
 	void addSampleItems(){
 		addItem(0, 0, new Chest(), inventorySlots, inventoryItems);
 		addItem(2, 2, new HealthPotion(), inventorySlots, inventoryItems);
-		addItem(2, 3, new ManaPotion(), inventorySlots, inventoryItems);
-		addItem(3, 3, new Ring(), inventorySlots, inventoryItems);
+		//addItem(2, 3, new ManaPotion(), inventorySlots, inventoryItems);
+		//addItem(3, 3, new Ring(), inventorySlots, inventoryItems);
 		addItem(4, 2, new Axe(), inventorySlots, inventoryItems);
 	}
 	

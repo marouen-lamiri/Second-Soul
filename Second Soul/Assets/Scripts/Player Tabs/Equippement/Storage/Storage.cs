@@ -107,17 +107,33 @@ public abstract class Storage : MonoBehaviour {
 	}
 	
 	protected void detectGUIAction(){
-		if(inBoundaries()){
-			if(inInventoryBoundaries()){
-				onInventoryItemHover();
+		if(inInventoryBoundaries()){
+			onInventoryItemHover();
+		}
+		else if(inEquippedBoundaries()){
+			onEquippedItemHover();
+		}
+		else if(inStashBoundaries()){
+			Debug.Log("in stash bounds");
+			onStashItemHover();
+		}
+		if(targetItem != null){
+			detectItemActions();
+		}
+		//detectMouseAction();
+	}
+	
+	void onStashItemHover(){
+		for(int i = 0; i < stashItems.Count; i++){
+			if(!itemPickedUp && stashItems[i].position.Contains(mousePositionInInventory())){
+				targetItem = stashItems[i];
+				drawItemHoverTooltip(targetItem);
+				Debug.Log("on stash item hover " + targetItem);
+				return;
 			}
-			else if(inEquippedBoundaries()){
-				onEquippedItemHover();
+			else if(!itemPickedUp){
+				targetItem = null;
 			}
-			if(targetItem != null){
-				detectItemActions();
-			}
-			//detectMouseAction();
 		}
 	}
 	
@@ -125,7 +141,7 @@ public abstract class Storage : MonoBehaviour {
 		for(int i = 0; i < inventoryItems.Count; i++){
 			if(!itemPickedUp && inventoryItems[i].position.Contains(mousePositionInInventory())){
 				targetItem = inventoryItems[i];
-				drawItemBox(targetItem);
+				drawItemHoverTooltip(targetItem);
 				//Debug.Log("on inventory item hover " + targetItem);
 				return;
 			}
@@ -178,8 +194,13 @@ public abstract class Storage : MonoBehaviour {
 		}	
 	}
 	
+	void pickUpStashItem(){
+		removeItem(targetItem, stashSlots, stashItems);
+		itemPickedUp = true;
+	}
+	
 	void pickUpInventoryItem(){
-		removeInventoryItem(targetItem);
+		removeItem(targetItem, inventorySlots, inventoryItems);
 		itemPickedUp = true;
 	}
 	
@@ -222,17 +243,17 @@ public abstract class Storage : MonoBehaviour {
 	
 	void useItem(){
 		targetItem.useItem();
-		removeInventoryItem(targetItem);
+		removeItem(targetItem, inventorySlots, inventoryItems);
 		resetTargetItem();
 	}
 	
-	void removeInventoryItem(Item item){
+	void removeItem(Item item, Slot[,] slots, List<Item> items){
 		for(int x = item.x; x < item.x + item.width; x++){
 			for(int y = item.y; y < item.y + item.height; y++) {
-				inventorySlots[x,y].occupied = false;
+				slots[x,y].occupied = false;
 			}
 		}
-		inventoryItems.Remove(item);
+		items.Remove(item);
 	}
 	
 	void removeEquipItem(Item item){
@@ -245,7 +266,7 @@ public abstract class Storage : MonoBehaviour {
 		}
 	}
 
-	protected void drawItemBox(Item item){
+	protected void drawItemHoverTooltip(Item item){
 		GUI.Box (new Rect(item.position.x - width + slotWidth, item.position.y + slotHeight, width, height), item.getDescription() + priceMessage + item.getPrice(), centeredStyle);
 	}
 	
