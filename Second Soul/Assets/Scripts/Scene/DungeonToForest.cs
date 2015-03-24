@@ -27,7 +27,7 @@ public class DungeonToForest : SceneManager {
 	}
 	
 	void clicked(){
-		if (Input.GetMouseButtonDown(0)) {
+		if (Input.GetMouseButtonDown(0) && !showMenu) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, distance)){
