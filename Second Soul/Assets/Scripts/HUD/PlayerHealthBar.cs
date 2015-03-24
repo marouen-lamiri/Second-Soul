@@ -37,22 +37,24 @@ public class PlayerHealthBar : MonoBehaviour {
 	}
 	//Display health bar in GUI
 	void OnGUI(){
-		//determine the remain percentange of health Bar
-		healthPercent = hp/maxhp;
-		if(healthPercent<0)
-		{
-			healthPercent = 0;
+		if(!Application.isLoadingLevel){
+			//determine the remain percentange of health Bar
+			healthPercent = hp/maxhp;
+			if(healthPercent<0)
+			{
+				healthPercent = 0;
+			}
+			if(healthPercent> 1)
+			{
+				healthPercent = 1;
+			}
+			//Draw the appropriate amount of health bar
+			globeHeight= (float) healthPercent*globeSize;
+			//Drawing health Bar
+			//GUI.Box(new Rect(Screen.width * (0.60f), (Screen.height-(globeHeight+2f)), initialGlobeSize, initialGlobeHeight), background);
+			GUI.BeginGroup(new Rect(Screen.width * multiplierOffset * ratioWidth, Screen.height-(globeHeight-offset), globeSize, globeSize));
+			GUI.DrawTexture(new Rect(0, (-globeSize+globeHeight), globeSize, globeSize),globePic);
+			GUI.EndGroup();
 		}
-		if(healthPercent> 1)
-		{
-			healthPercent = 1;
-		}
-		//Draw the appropriate amount of health bar
-		globeHeight= (float) healthPercent*globeSize;
-		//Drawing health Bar
-		//GUI.Box(new Rect(Screen.width * (0.60f), (Screen.height-(globeHeight+2f)), initialGlobeSize, initialGlobeHeight), background);
-		GUI.BeginGroup(new Rect(Screen.width * multiplierOffset * ratioWidth, Screen.height-(globeHeight-offset), globeSize, globeSize));
-		GUI.DrawTexture(new Rect(0, (-globeSize+globeHeight), globeSize, globeSize),globePic);
-		GUI.EndGroup();
 	}
 }
