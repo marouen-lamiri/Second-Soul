@@ -233,7 +233,7 @@ public abstract class Player : Character {
 			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || checkShops() || teleporter.checkBoundaries());
 		}
 		else if(playerEnabled){
-			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp());
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || teleporter.checkBoundaries());
 		}
 		return false;
 	}

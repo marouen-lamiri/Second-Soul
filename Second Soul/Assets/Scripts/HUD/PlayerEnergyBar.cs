@@ -38,23 +38,24 @@ public class PlayerEnergyBar : MonoBehaviour {
 
 	//Draw Energy Bar
 	void OnGUI () {
-		//Determining the health (through Percentage)
-		energyPercent = energy/maxEnergy;
-		if(energyPercent < 0)
-		{
-			energyPercent = 0;
+		if(!Application.isLoadingLevel){
+			//Determining the health (through Percentage)
+			energyPercent = energy/maxEnergy;
+			if(energyPercent < 0)
+			{
+				energyPercent = 0;
+			}
+			if(energyPercent > 1)
+			{
+				energyPercent = 1;
+			}
+			//Draw the appropriate amount of health bar
+			globeHeight = (float) energyPercent*globeSize;
+			//Drawing Energy Bar
+			//GUI.Box(new Rect(Screen.width * (0.6435f), (Screen.height-(globeHeight+2f)), initialGlobeSize, initialGlobeHeight), background);
+			GUI.BeginGroup(new Rect(Screen.width * multiplierOffset, (Screen.height-(globeHeight-offset)), globeSize, globeSize));
+			GUI.DrawTexture(new Rect(0, (-globeSize+globeHeight), globeSize, globeSize),globePic);
+			GUI.EndGroup();
 		}
-		if(energyPercent > 1)
-		{
-			energyPercent = 1;
-		}
-		//Draw the appropriate amount of health bar
-		globeHeight = (float) energyPercent*globeSize;
-		//Drawing Energy Bar
-		//GUI.Box(new Rect(Screen.width * (0.6435f), (Screen.height-(globeHeight+2f)), initialGlobeSize, initialGlobeHeight), background);
-		GUI.BeginGroup(new Rect(Screen.width * multiplierOffset, (Screen.height-(globeHeight-offset)), globeSize, globeSize));
-		GUI.DrawTexture(new Rect(0, (-globeSize+globeHeight), globeSize, globeSize),globePic);
-		GUI.EndGroup();
-
 	}
 }

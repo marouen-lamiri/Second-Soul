@@ -11,16 +11,17 @@ public class CameraControl : MonoBehaviour {
 	float distance;
 	float height;
 	float idealRatio;
-
+	float angle;
 	Fighter fighter;
 	Sorcerer sorcerer;
 	// Use this for initialization
 	void Start () {
 		fighter = GameObject.FindObjectOfType<Fighter> ();
-		sorcerer = GameObject.FindObjectOfType<Sorcerer> ();
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer ();
 		idealRatio = maxHeight / maxDistance;
 		height = maxHeight;
 		distance = maxDistance;
+		angle = 45f;
 	}
 	
 	// Update is called once per frame
@@ -40,7 +41,7 @@ public class CameraControl : MonoBehaviour {
 		}
 		height = idealRatio * distance;
 
-		Transform target = (fighter.enabled) ? fighter.transform : sorcerer.transform;
+		Transform target = (fighter.playerEnabled) ? fighter.transform : sorcerer.transform;
 		// Calculate the current rotation angles
 		var wantedHeight = target.position.y + height;
 
@@ -56,7 +57,7 @@ public class CameraControl : MonoBehaviour {
 		
 		// Set the height of the camera
 		transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
-		
+		transform.RotateAround (target.position, new Vector3 (0, 1, 0), angle);
 		// Always look at the target
 		transform.LookAt (target);
 	}

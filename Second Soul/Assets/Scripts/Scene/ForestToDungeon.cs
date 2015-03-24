@@ -30,7 +30,8 @@ public class ForestToDungeon : SceneManager {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, distance)){
-				if (hit.transform.name == teleporter){
+				if (hit.transform.tag == teleporter){
+					Debug.Log ("Dungeon");
 					showMenu = true;
 				}
 			}
