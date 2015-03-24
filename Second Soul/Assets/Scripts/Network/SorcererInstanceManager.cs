@@ -9,7 +9,7 @@ public class SorcererInstanceManager : MonoBehaviour {
 	private static List<ISorcererSubscriber> subscriberList = new List<ISorcererSubscriber> (); // needs early init because everyone calls subscribe(this) in their Awake() or Start() methods.
 	private static NetworkPlayer sorcererAIGameObjectToDestroy;
 	private static bool doLateSorcererDetection;
-	private static int numberOfFramesForLateSorcDetect = 500;
+	private static int numberOfFramesForLateSorcDetect = 100;
 	private static int frameCounterForLateSorcDetect = 0;
 
 	/**

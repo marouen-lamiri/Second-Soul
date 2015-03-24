@@ -541,7 +541,8 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 					if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 1, 150, networkWindowButtonHeight), "Logout")) {
 						Network.Disconnect();
 						// also destroy the player game object here, since OnPlayerDisconnected only works on the server side, which means the player will be destroyed for everyone except the one who created it.
-						
+
+						// send RPC to simulate a "remove client" from the server.
 					}
 					
 					if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 2, 150, networkWindowButtonHeight), "SendHello to server")) {
