@@ -15,9 +15,11 @@ public abstract class Player : Character {
 	
 	protected GameObject skillTreeGameObject;
 
+	public Stash stash;
 	public Inventory inventory;
 	public SkillTree skillTree;
 	public ActionBar actionBar;
+	
 	public MainShopMenu mainShop;
 	public FighterShop fighterShop;
 	public SorcererShop sorcererShop;
@@ -52,6 +54,7 @@ public abstract class Player : Character {
 		characterStart ();
 		initializeActionBar();
 		initializeInventory();
+		initializeStash();
 		initiazlieNetwork();
 		// Mini map float ball color
 		sphere.renderer.material.color = Color.blue;
@@ -105,6 +108,13 @@ public abstract class Player : Character {
 		if(playerEnabled){
 			inventory = (Inventory) GameObject.FindObjectOfType (typeof (Inventory));
 			inventory.setPlayer(this);
+		}
+	}
+	
+	protected void initializeStash(){
+		if(playerEnabled){
+			stash = (Stash) GameObject.FindObjectOfType (typeof (Stash));
+			stash.setPlayer(this);
 		}
 	}
 	
@@ -214,7 +224,7 @@ public abstract class Player : Character {
 	}
 	
 	public void openChest(){
-		Debug.Log(treasureChest + " I GET HER");
+		Debug.Log(treasureChest + " I GET HERE");
 		if(inPickupRange(treasureChest.transform.position)){
 			treasureChest.openChest();
 		}
@@ -230,10 +240,10 @@ public abstract class Player : Character {
 	//ADD CONDITIONS FOR ANY NEW OBJECTS THAT WOULD MAKE PLAY BUSY
 	public bool busyHUD(){
 		if(playerEnabled && shop != null){
-			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || checkShops() || teleporter.checkBoundaries());
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || checkShops() || teleporter.checkBoundaries());
 		}
-		else if(playerEnabled){
-			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || teleporter.checkBoundaries());
+		if(playerEnabled){
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || teleporter.checkBoundaries());
 		}
 		return false;
 	}

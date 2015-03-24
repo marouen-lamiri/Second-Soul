@@ -22,6 +22,7 @@ public class TreasureChest : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log ("player is " + player);
 	}
 	
 	private void findEnabledPlayer(){

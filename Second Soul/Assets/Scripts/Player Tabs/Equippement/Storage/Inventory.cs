@@ -55,11 +55,11 @@ public class Inventory : Storage
 	}
 	
 	void addSampleItems(){
-		addInventoryItem(0, 0, new Chest());
-		addInventoryItem(2, 2, new HealthPotion());
-		addInventoryItem(2, 3, new ManaPotion());
-		addInventoryItem(3, 3, new Ring());
-		addInventoryItem(4, 2, new Axe());
+		addItem(0, 0, new Chest(), inventorySlots, inventoryItems);
+		addItem(2, 2, new HealthPotion(), inventorySlots, inventoryItems);
+		//addItem(2, 3, new ManaPotion(), inventorySlots, inventoryItems);
+		//addItem(3, 3, new Ring(), inventorySlots, inventoryItems);
+		addItem(4, 2, new Axe(), inventorySlots, inventoryItems);
 	}
 	
 	protected void toggleTab(){
@@ -85,10 +85,10 @@ public class Inventory : Storage
 	public bool takeItem(Item item){
 		int newX;
 		int newY;
-		if (!firstAvailableInventorySlots (out newX, out newY, item)) {
+		if (!firstAvailableSlots (out newX, out newY, item, inventorySlots, inventoryStorageWidth, inventoryStorageHeight)) {
 			return false;
 		}
-		addInventoryItem(newX, newY, item);
+		addItem(newX, newY, item, inventorySlots, inventoryItems);
 		return true;
 	}
 

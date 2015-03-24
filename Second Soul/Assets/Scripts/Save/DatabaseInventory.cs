@@ -77,35 +77,35 @@ public class DatabaseInventory : MonoBehaviour {
 		Item item;
 		if(PlayerPrefs.GetString("Fighter Item type" + i) == "ManaPotion"){
 			item = new ManaPotion();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString("Fighter Item type"  + i) == "HealthPotion"){
 			item = new HealthPotion();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString("Fighter Item type"  + i) == "Axe"){
 			item = new Axe();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString( "Fighter Item type" + i) == "Ring"){
 			item = new Ring();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString("Fighter Item type" + i) == "Chest"){
 			item = new Chest();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString("Fighter Item type" + i) == "Boots"){
 			item = new Boots();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString("Fighter Item type"  + i) == "Amulet"){
 			item = new Amulet();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString( "Fighter Item type" + i) == "Sword"){
 			item = new Sword();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 	}
 
@@ -113,35 +113,35 @@ public class DatabaseInventory : MonoBehaviour {
 		Item item;
 		if(PlayerPrefs.GetString("Sorcerer Item type" + i) == "ManaPotion"){
 			item = new ManaPotion();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString("Sorcerer Item type"  + i) == "HealthPotion"){
 			item = new HealthPotion();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString("Sorcerer Item type"  + i) == "Axe"){
 			item = new Axe();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString("Sorcerer Item type" + i) == "Ring"){
 			item = new Ring();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString("Sorcerer Item type" + i) == "Chest"){
 			item = new Chest();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString("Sorcerer Item type" + i) == "Boots"){
 			item = new Boots();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString("Sorcerer Item type"  + i) == "Amulet"){
 			item = new Amulet();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 		else if(PlayerPrefs.GetString( "Sorcerer Item type" + i) == "Sword"){
 			item = new Sword();
-			inventory.addInventoryItem(x,y,item);
+			inventory.addItem(x,y,item, inventorySlots, inventoryItems);
 		}
 	}
 
