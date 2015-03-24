@@ -351,12 +351,12 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 		} 
 		//debug:
-		if(SorcererInstanceManager.getSorcerer() == null) {
-			print ("sorcerer IS ABSENT, is null in sorcererInstanaceManager in update funciton.");
-		} else {
-			print ("sorcerer IS PRESENT, is NOT null in sorcererInstanaceManager in update funciton");
-		}
-
+		//		if(SorcererInstanceManager.getSorcerer() == null) {
+		//			print ("sorcerer IS ABSENT, is null in sorcererInstanaceManager in update funciton.");
+		//		} else {
+		//			print ("sorcerer IS PRESENT, is NOT null in sorcererInstanaceManager in update funciton");
+		//		}
+			
 
 		// ------------------
 		// server --> logic for creating (different types of) fighter:

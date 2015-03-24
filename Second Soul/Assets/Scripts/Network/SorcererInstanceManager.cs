@@ -53,12 +53,12 @@ public class SorcererInstanceManager : MonoBehaviour {
 		} else {
 			print (" DEBUG sorcerer WAS found in the game.");
 		}
-		Sorcerer[] sorcerers = GameObject.FindObjectsOfType<Sorcerer>(); 
-		print ("sorcerers.Length -> "+sorcerers.Length);
+		//Sorcerer[] sorcerers = GameObject.FindObjectsOfType<Sorcerer>(); 
+		//print ("sorcerers.Length -> "+sorcerers.Length);
 
 		// late sorcerer detection --> it takes a while after OnClientConnect before the network.instantiated sorcerer shows up (and that .length == 2)
 		if(doLateSorcererDetection) {
-			Debug.Log ("IN LATE DETECT SORCERER NOW.");
+			//Debug.Log ("IN LATE DETECT SORCERER NOW.");
 			if(frameCounterForLateSorcDetect > numberOfFramesForLateSorcDetect) {
 				checkForNewSorcererNetworkInstantiatedByClient();
 				doLateSorcererDetection = false;
