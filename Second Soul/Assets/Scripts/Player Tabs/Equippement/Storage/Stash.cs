@@ -10,7 +10,8 @@ public class Stash : Storage {
 	
 	// Use this for initialization
 	void Start () {
-	
+		setSlots();
+		addSampleItems();
 	}
 	
 	// Update is called once per frame
@@ -22,6 +23,21 @@ public class Stash : Storage {
 	
 	protected void toggleTab(){
 		isStashOn = !isStashOn;
+	}
+	
+	void setSlots(){
+		stashSlots = new Slot[stashStorageWidth, stashStorageHeight];
+		for(int x = 0; x < stashStorageWidth ; x++){
+			for(int y = 0; y < stashStorageHeight ; y++){
+				stashSlots[x,y] = new Slot(new Rect(slotsOffsetX + slotWidth*x, slotsOffsetY + slotHeight*y, slotWidth, slotHeight));
+			}
+		}
+	}
+	
+	void addSampleItems(){
+		addItem(0, 0, new Chest(), stashSlots, stashItems);
+		addItem(0, 2, new HealthPotion(), stashSlots, stashItems);
+		addItem(0, 3, new Axe(), stashSlots, stashItems);
 	}
 	
 	void OnGUI(){

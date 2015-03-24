@@ -21,7 +21,7 @@ public abstract class Storage : MonoBehaviour {
 	//slots for different storage types
 	protected static Slot[,] inventorySlots;
 	public static List<EquipSlot> equipSlots = new List<EquipSlot>();
-	public static List<EquipSlot> stashSlots = new List<EquipSlot>();
+	public static Slot[,] stashSlots;
 	
 	// in number of slots
 	protected int inventoryStorageWidth = 6;
@@ -71,19 +71,19 @@ public abstract class Storage : MonoBehaviour {
 		}
 	}
 	
-	bool availableInventorySlots(int x, int y, Item item){
-		if(x + item.width > inventoryStorageWidth){
+	bool availableSlots(int x, int y, Item item, Slot[,] slots, int storageWidth, int storageHeight){
+		if(x + item.width > storageWidth){
 			//Debug.Log("Out of X bounds");
 			return false;
 		}
-		else if(y + item.height > inventoryStorageHeight){
+		else if(y + item.height > storageHeight){
 			//Debug.Log("Out of Y bounds");
 			return false;
 		}
 		
 		for(int sX = x; sX < item.width + x; sX++){
 			for(int sY = y; sY < item.height + y ; sY++){
-				if(inventorySlots[sX,sY].occupied){
+				if(slots[sX,sY].occupied){
 					//Debug.Log("breaks" + x + " , " + y);
 					return false;
 				}
@@ -93,15 +93,15 @@ public abstract class Storage : MonoBehaviour {
 		return true;
 	}
 
-	public void addInventoryItem(int x, int y, Item item){
+	public void addItem(int x, int y, Item item, Slot[,] slots, List<Item> items){
 		//Debug.Log("comes"+ x + " , " + y);
 		item.x = x;
 		item.y = y;
-		inventoryItems.Add(item);
+		items.Add(item);
 		
 		for(int sX = x; sX < item.width + x; sX++){
 			for(int sY = y; sY < item.height + y ; sY++){
-					inventorySlots[sX,sY].occupied = true;
+				slots[sX,sY].occupied = true;
 			}
 		}
 	}
@@ -193,15 +193,15 @@ public abstract class Storage : MonoBehaviour {
 			for(int y = 0; y < inventoryStorageHeight ; y++){
 				Rect slot = new Rect(position.x + inventorySlots[x,y].position.x, position.y + inventorySlots[x,y].position.y, slotWidth, slotHeight);
 				if(slot.Contains(mousePositionInInventory())){
-					if(availableInventorySlots(x, y, targetItem)){
-						addInventoryItem(x, y, targetItem);
+					if(availableSlots(x, y, targetItem, inventorySlots, inventoryStorageWidth, inventoryStorageHeight)){
+						addItem(x, y, targetItem, inventorySlots, inventoryItems);
 						resetTargetItem();
 						return;
 					}
 				}
 			}
 		}
-		addInventoryItem(targetItem.x, targetItem.y, targetItem);
+		addItem(targetItem.x, targetItem.y, targetItem, inventorySlots, inventoryItems);
 		resetTargetItem();
 	}
 	
@@ -215,8 +215,8 @@ public abstract class Storage : MonoBehaviour {
 		}
 		int newX;
 		int newY;
-		firstAvailableInventorySlots(out newX, out newY, targetItem);
-		addInventoryItem(newX, newY, targetItem);
+		firstAvailableSlots(out newX, out newY, targetItem, inventorySlots, inventoryStorageWidth, inventoryStorageHeight);
+		addItem(newX, newY, targetItem, inventorySlots, inventoryItems);
 		resetTargetItem();
 	}
 	
@@ -254,17 +254,17 @@ public abstract class Storage : MonoBehaviour {
 		targetItem = null;
 	}
 	
- 	public bool firstAvailableInventorySlots( out int startX, out int startY, Item item ){
+	public bool firstAvailableSlots(out int startX, out int startY, Item item, Slot[,] slots, int storageWidth, int storageHeight){
 		bool validPostion;
-		for(int x = 0; x < inventoryStorageWidth ; x++){
+		for(int x = 0; x < storageWidth ; x++){
 			startX = x;
-			for(int y = 0; y < inventoryStorageHeight ; y++){
+			for(int y = 0; y < storageHeight ; y++){
 				startY = y;
 				validPostion = true;
 				for(int x2 = x; x2 < x + item.width; x2++){
 					for(int y2 = y; y2 < y + item.height; y2++){
-						if(x2 < inventoryStorageWidth && y2 < inventoryStorageHeight){
-							if(inventorySlots[x2,y2].occupied){
+						if(x2 < storageWidth && y2 < storageHeight){
+							if(slots[x2,y2].occupied){
 								validPostion = false;
 							}
 						}
@@ -295,14 +295,28 @@ public abstract class Storage : MonoBehaviour {
 	public bool inBoundaries(){
 		//lock player movement within HUD bounds
 		//Debug.Log("inv on: " + isInventoryOn);
-		return (inWidthBoundaries() && inHeightBoundaries() && isInventoryOn);
+		return (inInventoryWidthBoundaries() && inInventoryHeightBoundaries() && isInventoryOn);
 	}
 	
-	protected bool inWidthBoundaries(){
+	public bool inStashBoundaries(){
+		//lock player movement within HUD bounds
+		//Debug.Log("inv on: " + isInventoryOn);
+		return (inStashWidthBoundaries() && inStashHeightBoundaries() && isStashOn);
+	}
+	
+	protected bool inInventoryWidthBoundaries(){
 		return (Input.mousePosition.x > position.x && Input.mousePosition.x < position.x + position.width);
 	}
 	
-	protected bool inHeightBoundaries(){
+	protected bool inInventoryHeightBoundaries(){
+		return (Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height);
+	}
+	
+	protected bool inStashWidthBoundaries(){
+		return (Input.mousePosition.x > position.x && Input.mousePosition.x < position.x + position.width);
+	}
+	
+	protected bool inStashHeightBoundaries(){
 		return (Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height);
 	}
 	
