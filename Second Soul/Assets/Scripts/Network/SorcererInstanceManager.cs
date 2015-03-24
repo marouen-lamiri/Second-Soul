@@ -48,11 +48,13 @@ public class SorcererInstanceManager : MonoBehaviour {
 	
 	void Update () {
 
-		if(SorcererInstanceManager.sorcerer == null) {
-			print (" DEBUG NO sorcerer was found in the game.");
-		} else {
-			print (" DEBUG sorcerer WAS found in the game.");
-		}
+		// debug:
+		//		if(SorcererInstanceManager.sorcerer == null) {
+		//			print (" DEBUG NO sorcerer was found in the game.");
+		//		} else {
+		//			print (" DEBUG sorcerer WAS found in the game.");
+		//		}
+
 		//Sorcerer[] sorcerers = GameObject.FindObjectsOfType<Sorcerer>(); 
 		//print ("sorcerers.Length -> "+sorcerers.Length);
 
@@ -123,11 +125,11 @@ public class SorcererInstanceManager : MonoBehaviour {
 	 * 
 	 */ 
 	public static Sorcerer getSorcerer() {
-		if(SorcererInstanceManager.sorcerer == null) {
-			print ("no sorcerer was found in the game.");
-			string name = Application.loadedLevelName;
-			print (name);
-		}
+		//		if(SorcererInstanceManager.sorcerer == null) {
+		//			print ("no sorcerer was found in the game.");
+		//			string name = Application.loadedLevelName;
+		//			print (name);
+		//		}
 		return SorcererInstanceManager.sorcerer;
 	}
 
