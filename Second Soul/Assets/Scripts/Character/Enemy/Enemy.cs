@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Enemy : Character {
-	
+public abstract class Enemy : Character, ISorcererSubscriber {
+
 	//Variable declaration
 	protected int strength; // base damage, armor, critt damage
 	protected int dexterity; // attack speed, crit chance, accuracy
@@ -43,6 +43,7 @@ public abstract class Enemy : Character {
 	
 	// Use this for initialization
 	void Start (){
+		subscribeToSorcererInstancePublisher (); // jump into game
 		enemyStart ();
 	}
 	protected void enemyStart(){
@@ -365,4 +366,13 @@ public abstract class Enemy : Character {
 			sorcerer.target = null;
 		//}
 	}	
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Forest : MonoBehaviour {
+public class Forest : MonoBehaviour, ISorcererSubscriber {
 
 	GameObject magicCircle;
 	GameObject magicCircle2;
@@ -14,8 +14,11 @@ public class Forest : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		fPosition = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sPosition = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		sPosition = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sPosition = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		if(Application.levelCount - 1 == previousSceneTown){
 			magicCircle = GameObject.Find(circleTown);
 			fPosition.transform.position = magicCircle.transform.position + new Vector3(6,0,6);
@@ -33,4 +36,14 @@ public class Forest : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sPosition = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }

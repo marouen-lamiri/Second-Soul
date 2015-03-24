@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OnHoverTransparent : MonoBehaviour {
+public class OnHoverTransparent : MonoBehaviour, ISorcererSubscriber {
 	
 	public LayerMask layer;
 	public static int counter;
@@ -13,14 +13,18 @@ public class OnHoverTransparent : MonoBehaviour {
 	Sorcerer sorcerer;
 	Color initialColor;
 	Material material;
+
 	// Use this for initialization
 	void Start () {
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		material = Instantiate (renderer.material) as Material;
 //		material.CopyPropertiesFromMaterial (renderer.material);
 		renderer.material = material;
 		initialColor = material.color;
 		fighter= GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
-		sorcerer= GameObject.FindObjectOfType(typeof(Sorcerer))as Sorcerer;
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer= GameObject.FindObjectOfType (typeof (Sorcerer))as Sorcerer;
 		if(mainCamera == null){
 			mainCamera = GameObject.FindGameObjectWithTag("MainCamera") as GameObject;
 		}
@@ -31,7 +35,7 @@ public class OnHoverTransparent : MonoBehaviour {
 		if(mainCamera == null || fighter == null || sorcerer == null){
 			mainCamera = GameObject.FindGameObjectWithTag("MainCamera") as GameObject;;
 			fighter = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
-			sorcerer= GameObject.FindObjectOfType(typeof(Sorcerer))as Sorcerer;
+			sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer= GameObject.FindObjectOfType (typeof (Sorcerer))as Sorcerer;
 		}
 		else{
 			Player player = (fighter.playerEnabled)? (Player) fighter : sorcerer;
@@ -50,4 +54,14 @@ public class OnHoverTransparent : MonoBehaviour {
 		}
 		
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+	
 }

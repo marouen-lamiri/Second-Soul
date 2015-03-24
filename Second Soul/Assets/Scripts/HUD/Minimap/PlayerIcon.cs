@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerIcon : MonoBehaviour {
+public class PlayerIcon : MonoBehaviour, ISorcererSubscriber {
 
 	private Fighter fighter;
 	private Sorcerer sorcerer;
+
 	// Use this for initialization
 	void Start () {
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 	}
@@ -19,5 +23,14 @@ public class PlayerIcon : MonoBehaviour {
 		else {
 			transform.rotation = sorcerer.transform.rotation;
 		}
+	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
 	}
 }

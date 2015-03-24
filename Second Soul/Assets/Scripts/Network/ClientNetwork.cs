@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
-public class ClientNetwork : MonoBehaviour {
+public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	// Old code to keep to use a localhost connection on one computer:
 	//	public string serverIP = "127.0.0.1";
@@ -120,12 +121,14 @@ public class ClientNetwork : MonoBehaviour {
 	private int onePlayerModeButtonHeight = 50;
 
 	
-	// jump in game:
+	// jump into game:
 	private SorcererInstanceManager sim;
+	private Sorcerer sorcerer; // needs to be a variable now so it can be set by the ISorcerer function.
+	private bool serverIsInStartScene = false;
 
 	// more magic numbers strings:
 	private string chatBoxGUIName = "ChatBox";
-	private string StartScreenOfficialSceneName = "StartScreen";
+	public static string StartScreenOfficialSceneName = "StartScreen";
 	private int numberOfFramesToWaitBeforeServerLoadsGameScene = 700; 
 	
 	// master server server methods:
@@ -133,10 +136,11 @@ public class ClientNetwork : MonoBehaviour {
 	{
 		Network.InitializeServer(connections, masterServerPort, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
+
 	}
 	void OnServerInitialized()
 	{
-		Debug.Log("Server Initialized");
+		Debug.Log("Server Initialized.");
 	}
 	// master server client methods:
 	private HostData[] hostList;
@@ -150,17 +154,23 @@ public class ClientNetwork : MonoBehaviour {
 	{
 		if (msEvent == MasterServerEvent.HostListReceived)
 			hostList = MasterServer.PollHostList();
-		print ("OnMasterServerEvent fired !!!!!!!!!!!!!! ");
+		Debug.Log("OnMasterServerEvent fired. ");
 	}
 	private void JoinServer(HostData hostData)
 	{
 		Network.Connect(hostData);
+
+		// detect if we are jumping into a new game (still in start menu) or not:
+		// if yes, don't run usual code in this script to place sorcerer and fighter after map creation:
+		detectIfServerIsInStartMenu ();
 	}
 
 
 	public void Awake() {
 
-		//jump in game:
+		subscribeToSorcererInstancePublisher (); // jump into game
+
+		//jump into game:
 		if(sim == null) {
 			//GameObject network = GameObject.FindObjectOfType(typeof (Network));
 			//Transform parent_ = transform.parent;
@@ -312,7 +322,7 @@ public class ClientNetwork : MonoBehaviour {
 
 		//===================
 		// client --> logic for creating (different types of) sorcerer:
-		if (Application.loadedLevelName == StartScreenOfficialSceneName && !sorcererWasCreated) { //Network.isClient && 
+		if (SorcererInstanceManager.getSorcerer() == null) {// Application.loadedLevelName == StartScreenOfficialSceneName && !sorcererWasCreated) { //Network.isClient && 
 
 			//  --> moved out of if(isClient), because we still want the server to be able to determine the sorcerer's type for 1 player mode.
 			if(classChooser.sorcererSelectionStrings[classChooser.sorcererSelection]=="Mage"){
@@ -331,19 +341,22 @@ public class ClientNetwork : MonoBehaviour {
 			// if player choose to play as Client, instantiate sorcerer:
 			if(Network.isClient){
 				transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
-				if(sorcererWasCreated) {
-					SorcererInstanceManager.createAndSwapNewSorcerer(); // 
-					//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-				}
-				else { // this is for the case: in start menu, first connection:
-					SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
-					//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-				}
+				// this is for the case: in start menu, first connection:
+				SorcererInstanceManager.checkForNewSorcererNetworkInstantiatedByClient();
+				SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
+				//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
 				sorcererWasCreated = true;
 			}
 
 
 		} 
+		//debug:
+		//		if(SorcererInstanceManager.getSorcerer() == null) {
+		//			print ("sorcerer IS ABSENT, is null in sorcererInstanaceManager in update funciton.");
+		//		} else {
+		//			print ("sorcerer IS PRESENT, is NOT null in sorcererInstanaceManager in update funciton");
+		//		}
+			
 
 		// ------------------
 		// server --> logic for creating (different types of) fighter:
@@ -375,10 +388,10 @@ public class ClientNetwork : MonoBehaviour {
 
 		// =======================\
 		// client and server --> logic for keeping fighter and sorcerer across scenes (dontdestroyonload):
-		if(Application.loadedLevelName == StartScreenOfficialSceneName) { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
+		//if(Application.loadedLevelName == StartScreenOfficialSceneName) { //&& (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer)).name != "Sorcerer"
 
-			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
-			Fighter fighter = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));	
+			Sorcerer sorcerer2 = (Sorcerer)GameObject.FindObjectOfType (typeof (Sorcerer)); //sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // 
+			Fighter fighter2 = (Fighter)GameObject.FindObjectOfType(typeof(Fighter));	
 
 			//GameObject lines = GameObject.Find ("lines");
 			if(lines != null){
@@ -394,22 +407,22 @@ public class ClientNetwork : MonoBehaviour {
 				lines2.name = "lines";
 			}
 			
-			if(sorcerer != null && fighter != null) {
-				DontDestroyOnLoad (sorcerer);
-				DontDestroyOnLoad (fighter);
-				sorcerer.name = "Sorcerer";
-				fighter.name = "Fighter";
+			if(sorcerer2 != null && fighter2 != null) {
+				DontDestroyOnLoad (sorcerer2);
+				DontDestroyOnLoad (fighter2);
+				sorcerer2.name = "Sorcerer";
+				fighter2.name = "Fighter";
 				bothPlayerAndSorcererWereFound = true;
 			}
 			
 
-		}
+		//}
 
 		//=========================
 		// server --> send 
 		if (Network.isServer && MapGeneration.mapGenerationCompleted && !sorcererPositionWasSent) { // 
 			OnSorcererPositionDeterminedAfterMapCreation(MapGeneration.playerStartPositionVector3);
-			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+			Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof (Sorcerer)); //sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // 
 			//sorcererPositionWasSent = true;
 		}
 
@@ -460,7 +473,7 @@ public class ClientNetwork : MonoBehaviour {
 					
 					if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 4, networkWindowButtonWidth, networkWindowButtonHeight), "Remove Client")) {
 						//find the sorcerer:
-						Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;
+						Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer)) as Sorcerer; //sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // 
 						//1-create the sorcerer copy --> Instantiate(...) 
 						//Instantiate (sorcerer);
 						//2-Network.Destroy the other one
@@ -575,14 +588,8 @@ public class ClientNetwork : MonoBehaviour {
 					
 					// always create the sorcerer before the fighter.
 					transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
-					if(sorcererWasCreated) {
-						SorcererInstanceManager.createAndSwapNewSorcerer(); // 
-						//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-					}
-					else {
-						SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
-						//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
-					}
+					SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
+					//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
 					sorcererWasCreated = true;
 					
 					lines = Network.Instantiate (linesPrefab,transform.position,transform.rotation,7)as GameObject;
@@ -604,7 +611,11 @@ public class ClientNetwork : MonoBehaviour {
 				{
 					if (GUI.Button(new Rect(hostButtonsPositionX, hostButtonsPositionY + ((hostButtonsHeight+hostButtonsSpacing) * i), hostButtonsWidth, hostButtonsHeight), hostList[i].gameName))
 					{
-						sim.onClientConnects();
+						if(sim != null) {
+							//sim.onClientConnects();
+
+						}
+						//onClientConnects();
 						JoinServer(hostList[i]);
 					}
 				}
@@ -628,15 +639,19 @@ public class ClientNetwork : MonoBehaviour {
 		AskClientForInfo(player);
 		//print ();
 		SendInfoToClient ("Received Info from Client");
+
 	}
 	void OnPlayerDisconnected (NetworkPlayer player)
 	{
 		Debug.Log("Host Destroyed disconnected Player"+player.ipAddress);
 		
-//		Network.RemoveRPCs(player, 0);
-//		Network.DestroyPlayerObjects(player);
-		
-		//PlayerCamera.CameraTarget=transform;
+		//Network.RemoveRPCs(player, 0); // NB beware confusion here, player here is a client player -- i.e. a sorcerer!
+		//Network.RemoveRPCs (SorcererInstanceManager.getSorcerer().networkView.viewID); // avoid that the client when reconnecting gets the server's sorcerer, in addition to his.
+		//Network.DestroyPlayerObjects(player);
+		//Network.Destroy (playerPrefab.gameObject);//?
+
+	
+	//PlayerCamera.CameraTarget=transform;
 	}
 	
 	// for server:
@@ -676,16 +691,29 @@ public class ClientNetwork : MonoBehaviour {
 		_messageLog += "Connected to server" + "\n";
 		isConnectedToServer = true;
 	}
-	void OnDisconnectedToServer() {
-		_messageLog += "Disconnected from server" + "\n";
-		//Network.Destroy (playerPrefab.gameObject);
+	void OnDisconnectedFromServer(NetworkDisconnection info) {
+
 		isConnectedToServer = false;
+
+		//-----
+		if (Network.isServer)
+			Debug.Log("Local server connection disconnected");
+		else if (info == NetworkDisconnection.LostConnection)
+				Debug.Log("Lost connection to the server");
+		else {
+			Debug.Log("Successfully diconnected from the server");
+
+			_messageLog += "Disconnected from server" + "\n";
+			//Network.Destroy (playerPrefab.gameObject);
+			
+		}
+
 	}
-	
-	[RPC]
-	void SendInfoToClient(string msg) {
-		msg = "SERVER: " + msg;
-		networkView.RPC("ReceiveInfoFromServer", RPCMode.Others, msg);
+
+[RPC]
+void SendInfoToClient(string msg) {
+	msg = "SERVER: " + msg;
+	networkView.RPC("ReceiveInfoFromServer", RPCMode.Others, msg);
 		print (msg);
 		_messageLog += msg + "\n";
 	}
@@ -712,7 +740,7 @@ public class ClientNetwork : MonoBehaviour {
 		positionVector3.y = float.Parse(positions[1]);
 		positionVector3.z = float.Parse(positions[2]);
 		
-		Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType(typeof(Sorcerer));
+		Sorcerer sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof (Sorcerer)); //sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // 
 		sorcerer.transform.position = positionVector3;
 		sorcererPositionWasUpdated = true;
 
@@ -752,6 +780,57 @@ public class ClientNetwork : MonoBehaviour {
 		//statsDisplayScript.boolChange ();
 		//print ("toggle stats displayed WORKED");
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
+	// for getting position of old sorcerer for jump into game:
+	[RPC]
+	public void detectIfServerIsInStartMenu () {
+		networkView.RPC("returnWhetherGameIsNewIeInStartScene", RPCMode.Server);//RPCMode.Others);
+
+	}
+	[RPC]
+	public void returnWhetherGameIsInStartScene() {
+		networkView.RPC("setClientVarServerIsInStartMenu", RPCMode.All);//RPCMode.Others);
+	}
+	[RPC]
+	public void setClientVarServerIsInStartMenu(string booleanString) {
+
+		bool flag;
+		if (Boolean.TryParse(booleanString, out flag)) {
+			Debug.Log (booleanString + " --> parsed to --> " + flag);
+			this.serverIsInStartScene = flag;
+		}
+		else
+			Debug.Log ("Unable to parse --> " + booleanString);
+	}
+	
+	
+	// ================================================
+//	[RPC]
+//	public void onClientConnects() {
+//		//if(networkView.isMine){
+//		networkView.RPC("startDoCheckForNewSorcererNetworkInstantiatedByClient", RPCMode.All, "hello");//RPCMode.Others);
+//		//print ("hello");
+//		//}
+//		SorcererInstanceManager.checkForNewSorcererNetworkInstantiatedByClient(); 
+//	}
+//
+//	[RPC]
+//	void startDoCheckForNewSorcererNetworkInstantiatedByClient(string s) {
+//		print ("RECEIVED !!!!!! "+s);
+//		SorcererInstanceManager.doCheckForNewSorcererNetworkInstantiatedByClient = true;
+//		SorcererInstanceManager.checkForNewSorcererNetworkInstantiatedByClient(); 
+//	}
+
+
 	
 }
 

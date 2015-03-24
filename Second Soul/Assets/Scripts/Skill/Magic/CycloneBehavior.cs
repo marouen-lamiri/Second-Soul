@@ -1,21 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CycloneBehavior : ParticleBehavior {
+public class CycloneBehavior : ParticleBehavior, ISorcererSubscriber {
 
 	float timeToDestroy;
 	
 	public CycloneSkill cycloneSkill;
 	public Vector3 originalSpawn;
+
+	private Sorcerer sorcerer;
 	
 	// Use this for initialization
 	void Start () {
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		transform.position = new Vector3 (transform.position.x, 0.5f, transform.position.z);
 		originalSpawn = transform.position;
 		
 		timeToDestroy = 10f;
 
-		Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer)) as Sorcerer;
 		this.cycloneSkill = sorcerer.GetComponent<CycloneSkill>();
 	}
 	
@@ -52,5 +57,15 @@ public class CycloneBehavior : ParticleBehavior {
 		//fireball network stuff has to be resolved eventually, but it does not cause any problems
 		Destroy (gameObject);
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }
 

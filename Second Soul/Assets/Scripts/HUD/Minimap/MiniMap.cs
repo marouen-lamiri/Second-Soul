@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class MiniMap : MonoBehaviour {
+public class MiniMap : MonoBehaviour, ISorcererSubscriber {
 
 	private Fighter fighter;   // The Fighter from the scene.
 	private Sorcerer sorcerer; // The Sorcerer from the scene.
@@ -10,13 +10,18 @@ public class MiniMap : MonoBehaviour {
 	List<GameObject> spheres = new List<GameObject>();
 	List<GameObject> playerSpheres = new List<GameObject>();
 	List<GameObject> enemySpheres = new List<GameObject>();
+	Player target;
+
 	void Start(){
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
-
-		if(Network.isServer) {
-			buildMinimap ();
-		}
+		target = (fighter.playerEnabled) ? (Player) fighter : sorcerer;
+//		if(Network.isServer) {
+//			buildMinimap ();
+//		}
 
 	}
 
@@ -82,21 +87,31 @@ public class MiniMap : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		if (Network.isServer)
-		{
-			// Adjusting the MiniMap camera to the Fighter position.
-			this.moveMiniMapCamera(fighter.transform.position);
-		}
-		else 
-		{
-			// Adjusting the MiniMap camera to the Sorcerer position.
-			this.moveMiniMapCamera(sorcerer.transform.position);
-		}
+		this.transform.position = new Vector3 (target.transform.position.x, transform.position.y, target.transform.position.z);
+//		if (fighter.playerEnabled)
+//		{
+//			// Adjusting the MiniMap camera to the Fighter position.
+//			this.moveMiniMapCamera(fighter.transform.position);
+//		}
+//		else 
+//		{
+//			// Adjusting the MiniMap camera to the Sorcerer position.
+//			this.moveMiniMapCamera(sorcerer.transform.position);
+//		}
 	}
 
 	// Move the MiniMap's camera to the entered position.
 	void moveMiniMapCamera(Vector3 position)
 	{
 		this.transform.position = new Vector3 (position.x, transform.position.y, position.z);
+	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
 	}
 }

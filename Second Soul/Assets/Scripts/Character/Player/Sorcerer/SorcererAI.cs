@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SorcererAI : MonoBehaviour {
+public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	
 	private Fighter fighter;
 	private Sorcerer sorcerer;
@@ -207,4 +207,14 @@ public class SorcererAI : MonoBehaviour {
 		}
 		return nearestObj;
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }

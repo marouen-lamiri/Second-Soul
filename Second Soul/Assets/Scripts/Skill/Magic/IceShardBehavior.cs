@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IceShardBehavior : ParticleBehavior {
+public class IceShardBehavior : ParticleBehavior, ISorcererSubscriber {
 
 	bool explode;
 	float timeToDestroy;
@@ -9,9 +9,14 @@ public class IceShardBehavior : ParticleBehavior {
 	public IceShardSkill iceSkill;
 	public Vector3 originalSpawn;
 	Component[] fireballComponents;
+
+	private Sorcerer sorcerer;
 	
 	// Use this for initialization
 	void Start () {
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		transform.position = new Vector3 (transform.position.x, 0.5f, transform.position.z);
 		originalSpawn = transform.position;
 		explode = false;
@@ -19,7 +24,7 @@ public class IceShardBehavior : ParticleBehavior {
 		timeToDestroy = 10f;
 		
 		//fix:
-		Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer)) as Sorcerer;
 		this.iceSkill = sorcerer.GetComponent<IceShardSkill>();
 	}
 	
@@ -64,4 +69,14 @@ public class IceShardBehavior : ParticleBehavior {
 		//fireball network stuff has to be resolved eventually, but it does not cause any problems
 		Destroy (gameObject);
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }

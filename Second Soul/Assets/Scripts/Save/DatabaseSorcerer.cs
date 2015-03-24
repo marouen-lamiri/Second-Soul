@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DatabaseSorcerer : MonoBehaviour {
+public class DatabaseSorcerer : MonoBehaviour, ISorcererSubscriber {
 	
 	// Use this for initialization
 	int interval = 3000;
@@ -12,7 +12,10 @@ public class DatabaseSorcerer : MonoBehaviour {
 	private Fighter fighter;
 	
 	void Start () {
-		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
+		sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer)); //sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // 
 		fighter = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 	}
 	
@@ -48,4 +51,14 @@ public class DatabaseSorcerer : MonoBehaviour {
 		sorcerer.calculateLevel();
 		sorcerer.calculateNextLevelXP();
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }

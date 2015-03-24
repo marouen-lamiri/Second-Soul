@@ -1,21 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LightningStormBehavior : ParticleBehavior {
+public class LightningStormBehavior : ParticleBehavior, ISorcererSubscriber {
 
 	float timeToDestroy;
 	
 	public LightningStormSkill lightningStormSkill;
 	public Vector3 originalSpawn;
+
+	private Sorcerer sorcerer;
 	
 	// Use this for initialization
 	void Start () {
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		transform.position = new Vector3 (transform.position.x, 0.5f, transform.position.z);
 		originalSpawn = transform.position;
 		
 		timeToDestroy = 10f;
 		
-		Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType(typeof(Sorcerer)) as Sorcerer;
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // Sorcerer sorcerer = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer)) as Sorcerer;
 		this.lightningStormSkill = sorcerer.GetComponent<LightningStormSkill>();
 	}
 	
@@ -52,4 +57,14 @@ public class LightningStormBehavior : ParticleBehavior {
 		//fireball network stuff has to be resolved eventually, but it does not cause any problems
 		Destroy (gameObject);
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }

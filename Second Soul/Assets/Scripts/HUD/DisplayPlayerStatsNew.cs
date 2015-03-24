@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DisplayPlayerStatsNew : MonoBehaviour {
+public class DisplayPlayerStatsNew : MonoBehaviour, ISorcererSubscriber {
 	
 	// Constants
 	public const int BOX_WIDTH     = 200;
@@ -82,9 +82,11 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 	
 	void Start ()
 	{
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		// Getting the reference of Fighter and Sorcerer.
 		fighter  = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof(Sorcerer));
+		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); //sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof (Sorcerer));
 		
 		// TOOLTIPS
 		// Primary and Secondary Stats tool-tip initialization.
@@ -309,4 +311,14 @@ public class DisplayPlayerStatsNew : MonoBehaviour {
 		
 		GUI.Label(new Rect(x + (leftShift * SPACE_BETWEEN), y - (topShift * SPACE_BETWEEN), resizeRatio * LABEL_WIDTH, resizeRatio * LABEL_HEIGHT), GUI.tooltip);
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sorcerer = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class LinkedSceneForest : SceneManager {
+public class LinkedSceneForest : SceneManager, ISorcererSubscriber {
 
 	public GUIStyle buttons;
 	protected Fighter fPosition;
@@ -14,6 +14,9 @@ public class LinkedSceneForest : SceneManager {
 	
 	// Use this for initialization
 	void Start () {
+
+		subscribeToSorcererInstancePublisher (); // jump into game
+
 		fPosition = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
 		sPosition = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sPosition = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 		fPosition.transform.position = fInitial;
@@ -55,4 +58,14 @@ public class LinkedSceneForest : SceneManager {
 			showMenu = !showMenu;
 		}
 	}
+
+	// ------- for jump into game: ----------
+	public void updateMySorcerer(Sorcerer newSorcerer) {
+		this.sPosition = newSorcerer;
+	}
+
+	public void subscribeToSorcererInstancePublisher() {
+		SorcererInstanceManager.subscribe (this);
+	}
+
 }
