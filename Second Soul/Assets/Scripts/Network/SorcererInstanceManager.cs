@@ -47,12 +47,7 @@ public class SorcererInstanceManager : MonoBehaviour {
 	}
 	
 	void Update () {
-
-		if(SorcererInstanceManager.sorcerer == null) {
-			print (" DEBUG NO sorcerer was found in the game.");
-		} else {
-			print (" DEBUG sorcerer WAS found in the game.");
-		}
+		
 		//Sorcerer[] sorcerers = GameObject.FindObjectsOfType<Sorcerer>(); 
 		//print ("sorcerers.Length -> "+sorcerers.Length);
 
