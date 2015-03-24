@@ -656,6 +656,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 	}
 	
 	// for server:
+	[RPC]
 	void AskClientForInfo(NetworkPlayer player) {
 		networkView.RPC("SetPlayerInfo", player, player);
 	}
@@ -711,8 +712,8 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	}
 
-[RPC]
-void SendInfoToClient(string msg) {
+	[RPC]
+	void SendInfoToClient(string msg) {
 	msg = "SERVER: " + msg;
 	networkView.RPC("ReceiveInfoFromServer", RPCMode.Others, msg);
 		print (msg);
@@ -812,6 +813,46 @@ void SendInfoToClient(string msg) {
 		else
 			Debug.Log ("Unable to parse --> " + booleanString);
 	}
+
+	// called from SorcererInstanceManager.swapSorcerers():
+	[RPC]
+	public void changeSorcererPositionOnClient(Transform newTransf){
+		string positionAndRotationAsString = newTransf.position.x + "," + newTransf.rotation.y + "," + newTransf.position.z + "," + newTransf.rotation.w + "," + newTransf.rotation.x + "," + newTransf.rotation.y + "," + newTransf.rotation.z;
+		networkView.RPC ("changeSorcererPosition", RPCMode.All, positionAndRotationAsString);
+	}
+	
+	[RPC]
+	public void changeSorcererPosition(string positionAndRotationAsString){
+		//parse string:
+		string[] positionAndRotationAsSplitArray = positionAndRotationAsString.Split(',');
+		float[] positionAndRotationAsSplitArrayOfFloats = new float[7];
+
+		// set position :
+		try {
+			positionAndRotationAsSplitArrayOfFloats[0] = float.Parse (positionAndRotationAsSplitArray[0]);
+			positionAndRotationAsSplitArrayOfFloats[1] = float.Parse (positionAndRotationAsSplitArray[1]);
+			positionAndRotationAsSplitArrayOfFloats[2] = float.Parse (positionAndRotationAsSplitArray[2]);
+			SorcererInstanceManager.sorcerer.transform.position = new Vector3 (positionAndRotationAsSplitArrayOfFloats [0], positionAndRotationAsSplitArrayOfFloats [1], positionAndRotationAsSplitArrayOfFloats [2]);
+			Debug.Log("could successfully set new sorcerer's position to old's.");
+		} catch (Exception ex) {
+			Debug.Log("could not set new sorcerer's position to old's.");
+		}
+
+		// set rotation
+		try {
+			positionAndRotationAsSplitArrayOfFloats [3] = float.Parse (positionAndRotationAsSplitArray [3]);
+			positionAndRotationAsSplitArrayOfFloats [4] = float.Parse (positionAndRotationAsSplitArray [4]);
+			positionAndRotationAsSplitArrayOfFloats [5] = float.Parse (positionAndRotationAsSplitArray [5]);
+			positionAndRotationAsSplitArrayOfFloats [6] = float.Parse (positionAndRotationAsSplitArray [6]);
+			SorcererInstanceManager.sorcerer.transform.rotation = new Quaternion (positionAndRotationAsSplitArrayOfFloats [3], positionAndRotationAsSplitArrayOfFloats [4], positionAndRotationAsSplitArrayOfFloats [5], positionAndRotationAsSplitArrayOfFloats [6]);
+			Debug.Log("could successfully set new sorcerer's rotation to old's.");
+		} catch (Exception ex) {
+			Debug.Log("could not set new sorcerer's rotation to old's.");
+		}
+
+		
+	}
+
 	
 	
 	// ================================================
