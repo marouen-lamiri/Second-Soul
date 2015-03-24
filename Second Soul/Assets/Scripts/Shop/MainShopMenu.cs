@@ -14,13 +14,35 @@ public class MainShopMenu : MonoBehaviour {
 	protected bool showMenu;
 	public GUIStyle buttons;
 
+	public bool inBoundaries(){
+		//lock player movement within HUD bounds
+		if(inWidthBoundaries() && inHeightBoundaries()){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public bool shopEnabled(){
+		return showMenu && inBoundaries();
+	}
+	
+	public bool inHeightBoundaries(){
+		return (Input.mousePosition.y >  Screen.height/3 + Screen.height/32 && Input.mousePosition.y <  Screen.height/3 + Screen.height/32 + Screen.height/3);
+	}
+	
+	public bool inWidthBoundaries(){
+		return (Input.mousePosition.x > Screen.width/3 - Screen.width/36 && Input.mousePosition.x < Screen.width/3 + Screen.width/22 + Screen.width/3 - Screen.width/36);
+	}
+
 	void OnGUI(){
 		clicked();
 		if(showMenu){
 			GUIStyle centeredStyle = GUI.skin.GetStyle("textarea");
 			centeredStyle.alignment = TextAnchor.UpperCenter;
 			centeredStyle.fontSize = sizeFont;
-			GUI.Box (new Rect (Screen.width/3 - Screen.width/36, Screen.height/3 + Screen.height/32, Screen.width/3  + Screen.width/22, Screen.height/3), greeting, centeredStyle);
+			GUI.Box (new Rect (Screen.width/3 - Screen.width/36, Screen.height/3 + Screen.height/32, Screen.width/3 + Screen.width/22, Screen.height/3), greeting, centeredStyle);
 			if(GUI.Button (new Rect (Screen.width/3, Screen.height/3 + Screen.height/12, Screen.width/3, Screen.height/12), buyOption, buttons)){
 				showMenu = !showMenu;
 				if(Network.isServer){

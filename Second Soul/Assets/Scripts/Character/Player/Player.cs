@@ -18,7 +18,12 @@ public abstract class Player : Character {
 	public Inventory inventory;
 	public SkillTree skillTree;
 	public ActionBar actionBar;
+	public MainShopMenu mainShop;
+	public FighterShop fighterShop;
+	public SorcererShop sorcererShop;
+	public SellShop sellShop;
 	public Shop shop;
+	public SceneManager teleporter;
 	
 	public int usableSkillPoints;
 	
@@ -47,7 +52,6 @@ public abstract class Player : Character {
 		characterStart ();
 		initializeActionBar();
 		initializeInventory();
-		initializeShop();
 		initiazlieNetwork();
 		// Mini map float ball color
 		sphere.renderer.material.color = Color.blue;
@@ -59,6 +63,8 @@ public abstract class Player : Character {
 	}
 	protected void playerUpdate(){
 		characterUpdate ();
+		initializeShop();
+		initializeTeleporter();
 		//Debug.Log (inventory);
 	}
 	
@@ -76,7 +82,22 @@ public abstract class Player : Character {
 
 	protected void initializeShop(){
 		if(playerEnabled && Application.loadedLevelName == townSceneName){
-			shop = (Shop) GameObject.FindObjectOfType (typeof (Shop));
+			mainShop = (MainShopMenu) GameObject.FindObjectOfType (typeof (MainShopMenu));
+			sellShop = (SellShop) GameObject.FindObjectOfType (typeof (SellShop));
+			fighterShop = (FighterShop) GameObject.FindObjectOfType (typeof (FighterShop));
+			sorcererShop = (SorcererShop) GameObject.FindObjectOfType (typeof (SorcererShop));
+		}
+	}
+
+	protected bool checkShops(){
+		if(Application.loadedLevelName == townSceneName)
+			return (mainShop.shopEnabled() || sellShop.shopEnabled() || fighterShop.shopEnabled() || sorcererShop.shopEnabled());
+		return false;
+	}
+
+	protected void initializeTeleporter(){
+		if(playerEnabled){
+			teleporter = (SceneManager) GameObject.FindObjectOfType (typeof (SceneManager));
 		}
 	}
 	
@@ -208,7 +229,10 @@ public abstract class Player : Character {
 	
 	//ADD CONDITIONS FOR ANY NEW OBJECTS THAT WOULD MAKE PLAY BUSY
 	public bool busyHUD(){
-		if(playerEnabled){
+		if(playerEnabled && shop != null){
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || checkShops() || teleporter.checkBoundaries());
+		}
+		else if(playerEnabled){
 			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp());
 		}
 		return false;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Storage : MonoBehaviour {
+public abstract class Storage : MonoBehaviour {
 	protected Player player;
 	protected Player player2;
 
@@ -16,16 +16,23 @@ public class Storage : MonoBehaviour {
 	//different item collections
 	protected static List<Item> inventoryItems = new List<Item>();
 	public static List<Item> equipItems = new List<Item>();
+	public static List<Item> stashItems = new List<Item>();
 	
 	//slots for different storage types
 	protected static Slot[,] inventorySlots;
 	public static List<EquipSlot> equipSlots = new List<EquipSlot>();
+	public static List<EquipSlot> stashSlots = new List<EquipSlot>();
 	
 	// in number of slots
 	protected int inventoryStorageWidth = 6;
 	protected int inventoryStorageHeight = 4;
+	
+	// in number of slots
+	protected int stashStorageWidth = 6;
+	protected int stashStorageHeight = 9;
 
 	protected static bool isInventoryOn;
+	protected static bool isStashOn;
 	
 	//used for targeting and picking up (hovering) item
 	protected Item targetItem;
@@ -50,10 +57,14 @@ public class Storage : MonoBehaviour {
 	}
 	
 	protected void initializeVariables(){
+		isStashOn = false;
 		isInventoryOn = false;
 		targetItem = null;
 		itemPickedUp = false;
-	}	
+	}
+	
+	protected abstract void drawItems();	
+		
 	protected void drawHoverItem(){
 		if (itemPickedUp) {
 			GUI.DrawTexture (new Rect(Input.mousePosition.x - hoverOffset, Screen.height - Input.mousePosition.y - hoverOffset, targetItem.width * slotWidth, targetItem.height * slotHeight), targetItem.getImage());

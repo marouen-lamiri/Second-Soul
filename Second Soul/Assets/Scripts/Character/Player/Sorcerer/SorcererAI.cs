@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,7 +12,7 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	private Enemy lockedOn;
 	private bool status;
 	private float timeOut;
-	private float timeOutReset = 5f;
+	private float timeOutReset = 8f;
 	private float basicTimeOutReset = 2f;
 	private Vector3 direction;
 	private ISkill skill1;
@@ -31,7 +31,7 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	private ISkill skill2;
 	private string skill2Name = "FireballSkill"; 
 	private ISkill skill3;
-	private string skill3Name = "LightningStormSkill";
+	private string skill3Name = "LightningStrike";
 	private ISkill skill4;
 	private string skill4Name = "CycloneSkill";
 	private ISkill skill5;
@@ -41,9 +41,6 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 
 	// Use this for initialization
 	void Start () {
-		subscribeToSorcererInstancePublisher (); // jump into game
-		Debug.Log ("Move!");
-		print ("Move");
 		startAI ();
 	}
 
@@ -128,48 +125,42 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	//gives the orders to the AI
 	void movingAI(){
 		//checks if there is a player controlling the sorcerer
-		if(checkAIPlayingStatus()){
+		if(checkAIPlayingStatus() && determineNextMove()){
 			int randomTech = Random.Range(randomMinValue,randomMaxValue);
 			nearestEnemy = checkNearestEnemy();
+			sorcerer.target = nearestEnemy;
 			//checks if there is a nearby enemy in respect to the fighter, otherwise it will ignore any enemies
 			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < radiusCheck * 2 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < radiusCheck * 2 ){
-				Debug.Log ("In the Loop");
 				sorcerer.stopMoving();
 				//will decide what to use based on probability, which can be tweeked
 				//randomTech determines the next attack
 				//This represents the default attack
 				if(randomTech <= basicRanged && timeOut <= 0){
-					Debug.Log ("Attack Normal");
 					sorcerer.activeSkill5.useSkill();
 					timeOut = basicTimeOutReset;
 				}
 				//skill chance of happeining is 0.5%
 				if((randomTech == skillThreshold1) && fighter.energy >= energyCheck && timeOut <= 0){
-					Debug.Log ("Skill 2 Normal");
 					sorcerer.activeSkill2.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 0.5%
 				if((randomTech == skillThreshold2) && fighter.energy >= energyCheck && timeOut <= 0){
-					Debug.Log ("Skill 3 Normal");
 					sorcerer.activeSkill3.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 0.5%
 				if((randomTech == skillThreshold3) && fighter.energy >= energyCheck && timeOut <= 0){
-					Debug.Log ("Skill 4 Normal");
 					sorcerer.activeSkill4.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 0.5%
 				if((randomTech == skillThreshold4) && fighter.energy >= energyCheck && timeOut <= 0){
-					Debug.Log ("Skill 5 Normal");
 					sorcerer.activeSkill1.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 2%
 				if(fighter.health < fighter.maxHealth * 0.50 && fighter.energy >= energyCheck && (randomTech > basicRanged && randomTech < healValue) && timeOut <= 0){
-					Debug.Log ("Skill 6 Normal");
 					sorcerer.activeSkill6.useSkill();
 					timeOut = basicTimeOutReset;
 				}
@@ -187,6 +178,15 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 				sorcerer.stopMoving();
 			}
 		}
+	}
+
+	//Determine if the sorcerer is going to perform an action 
+	public bool determineNextMove(){
+		int randomTech = Random.Range(randomMinValue, randomMaxValue);
+		if(randomTech >= 190){
+			return true;
+		}
+		return false;
 	}
 	
 	//Determine if there is a closeby enemy

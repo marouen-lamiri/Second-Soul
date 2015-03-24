@@ -7,8 +7,8 @@ public class Forest : MonoBehaviour, ISorcererSubscriber {
 	GameObject magicCircle2;
 	Fighter fPosition;
 	Sorcerer sPosition;
-	string circleTown = "CircleTown";
-	string circleDungeon = "CircleDungeon";
+	string circleTown = "TempleTown";
+	string circleDungeon = "TempleDungeon";
 	int previousSceneTown = 3;
 	int previousSceneDungeon = 1;
 

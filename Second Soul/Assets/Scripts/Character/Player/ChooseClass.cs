@@ -48,7 +48,10 @@ public class ChooseClass : MonoBehaviour {
 	}
 
 	void OnGUI () {
-		if(!Application.isLoadingLevel){
+		// to show the start menu only when no Sorcerer is instantiated --> && SorcererInstanceManager.getSorcerer() == null 
+		// this *probably* won't allow the player to choose what type of sorcerer if a sorcerer already exists. 
+		// (since the sorcerer is only null when starting the game, won't be null after being destroyed)
+		if(!Application.isLoadingLevel && SorcererInstanceManager.getSorcerer() == null){ 
 			GUI.skin.button = style;
 			//background.height = Screen.width * 99 / 100;
 

@@ -40,6 +40,11 @@ public abstract class RangedSkill : MonoBehaviour, ISkill {
 		}
 		return targetPosition;
 	}
+
+	protected virtual Vector3 EnemyRayCast (Vector3 targetCharacter){
+		return targetCharacter;
+	}
+
 	public void setCaster(Character caster){
 		this.caster = caster;
 	}

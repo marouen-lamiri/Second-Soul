@@ -9,7 +9,7 @@ public class SorcererInstanceManager : MonoBehaviour {
 	private static List<ISorcererSubscriber> subscriberList = new List<ISorcererSubscriber> (); // needs early init because everyone calls subscribe(this) in their Awake() or Start() methods.
 	private static NetworkPlayer sorcererAIGameObjectToDestroy;
 	private static bool doLateSorcererDetection;
-	private static int numberOfFramesForLateSorcDetect = 2000;
+	private static int numberOfFramesForLateSorcDetect = 500;
 	private static int frameCounterForLateSorcDetect = 0;
 
 	/**
@@ -58,6 +58,7 @@ public class SorcererInstanceManager : MonoBehaviour {
 
 		// late sorcerer detection --> it takes a while after OnClientConnect before the network.instantiated sorcerer shows up (and that .length == 2)
 		if(doLateSorcererDetection) {
+			Debug.Log ("IN LATE DETECT SORCERER NOW.");
 			if(frameCounterForLateSorcDetect > numberOfFramesForLateSorcDetect) {
 				checkForNewSorcererNetworkInstantiatedByClient();
 				doLateSorcererDetection = false;
@@ -86,6 +87,7 @@ public class SorcererInstanceManager : MonoBehaviour {
 		Sorcerer[] sorcerers = GameObject.FindObjectsOfType<Sorcerer>(); // no, really just get the sorcerer when a client connects, end of story. // TODO optimize with FindGameObjectsWithTag instead.
 		//sorcerers = GameObject.FindGameObjectsWithTag ("Sorcerer");
 		if(sorcerers.Length == 2) {
+			Debug.Log ("2 SORCERERS FOUND -- THE OLDER ONE SHOULD BE DELETED SOON.");
 			// get the one that is not the same reference as the one we already have.
 			bool indexZeroIsOldSorcerer = Object.ReferenceEquals(sorcerers[0], SorcererInstanceManager.sorcerer);
 			//bool OneIsNewSorcerer = Object.ReferenceEquals(sorcerers[1], SorcererInstanceManager.sorcerer);

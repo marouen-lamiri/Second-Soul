@@ -6,11 +6,14 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 	
 	// Use this for initialization
 	public GameObject wallPrefab;
+	public GameObject outsidePrefab;
 	public GameObject obstaclePrefab;
 	public GameObject torchPrefab;
 	public GameObject crystalPrefab;
 	public GameObject statuePrefab;
 	public GameObject RegularEnemy;
+	public GameObject treasureChest;
+	public GameObject teleportingCauldron;
 	public EnemyFactory enemyfactory;
 	public ItemHolder itemHolderPrefab;
 	public LootFactory lootFactory;
@@ -22,15 +25,15 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 	private int ObstacleIdentifier = 90;
 	private int emptySlotIdentifier = 0;
 	private int resizeTheWall = 10;
-	private int nbrMinRandom = 12;
-	private int nbrMaxRandom = 24;
-	private int nbrMinByRoom = 1;
-	private int nbrMaxByRoom = 3;
+	private int nbrMinRandom = 6;
+	private int nbrMaxRandom = 12;
+	private int nbrMinByRoom = 2;
+	private int nbrMaxByRoom = 4;
 	private bool needsOffset = true;
 	private float obstacleOffset = -5.4f;
 	List<int> listOfWalls;
 	public static int[,] mapArray;
-	int numberRooms = 4;
+	int numberRooms = 12;
 	public static int mapSizeX = 10;
 	public static int mapSizeZ = 10;
 	
@@ -102,6 +105,23 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 		}
 		return map;
 	}
+
+	int[,] treasureSpawner(int[,] map){
+		int nbrTreasure = Random.Range(nbrMinByRoom, nbrMaxByRoom);
+		while(nbrTreasure > 0){
+			int x = Random.Range(0, mapSizeX);
+			int z = Random.Range(0, mapSizeZ);
+			Vector3 position = new Vector3(x * resizeTheWall, 0, z * resizeTheWall);
+			if(map[x,z] != emptySlotIdentifier && map[x,z] < ObstacleIdentifier){
+				map[x,z] = ObstacleIdentifier;
+				GameObject treasure = Network.Instantiate(treasureChest, position, Quaternion.Euler (0,0,0), 2) as GameObject;
+				treasure.transform.parent = GameObject.Find("Obstacles").transform;
+				DontDestroyOnLoad(treasure.transform.gameObject);
+				nbrTreasure--;
+			}
+		}
+		return map;
+	}
 	
 	
 	int[,] enemySpawnLocation(int[,] map){
@@ -136,7 +156,21 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 				if (map[i, j] != emptySlotIdentifier){
 					buildWalls(map, i, j);
 				}
+				else{
+					buildOutside(map, i, j);
+				}
 			}
+		}
+	}
+
+	void buildOutside(int[,] map, int i, int j){
+		Vector3 position = new Vector3(i * resizeTheWall, 0, j * resizeTheWall);
+		
+		if (map[i, j] == emptySlotIdentifier){
+			map[i,j] = emptySlotIdentifier;
+			GameObject outside = Network.Instantiate(outsidePrefab, new Vector3(position.x + resizeTheWall/2, 0, position.z + resizeTheWall/2), Quaternion.Euler(0, 180, 0), 2) as GameObject;
+			outside.transform.parent = GameObject.Find("Walls").transform;
+			DontDestroyOnLoad(outside.transform.gameObject);
 		}
 	}
 	
@@ -168,7 +202,6 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 			wall.transform.parent = GameObject.Find("Walls").transform;
 			DontDestroyOnLoad(wall.transform.gameObject);
 		}
-		
 	}
 	
 	int[,] createDungeonHalls(int[,] map, int sizeX, int sizeZ, int numberRooms){
@@ -276,6 +309,7 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 			genMap = generateObstacles(genMap, obstaclePrefab, needsOffset);
 			genMap = generateObstacles(genMap, statuePrefab, false);
 			genMap = playerStartPosition(genMap, player);
+			genMap = treasureSpawner(genMap);
 			
 			genMap = playerStartPosition(genMap, player2); // now setting a private var for the player2 position, because we need to send it over the network so the right instance sets its position.
 			ClientNetwork clientNetwork = (ClientNetwork)GameObject.FindObjectOfType(typeof(ClientNetwork));
@@ -294,16 +328,16 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 		int previousRoomNumber = 0;
 		for (int i = 0; i < mapSizeX; i = Random.Range(i, i + 3)){
 			for (int j = 0; j < mapSizeZ; j = Random.Range(j, j + 3)){
-				if(j >= mapSizeZ || i >= mapSizeX){
+				if(j >= mapSizeZ || i >= mapSizeX || j+3 > mapSizeZ || i+3 > mapSizeX){
 					return map;
 				}
 				else if (map[i, j] != emptySlotIdentifier && map[i - 1, j] != emptySlotIdentifier && map[i, j - 1] != emptySlotIdentifier
-				         && map[i - 1, j - 1] != emptySlotIdentifier && map[i + 1, j + 1] != emptySlotIdentifier && nbrObstacles != emptySlotIdentifier
-				         && map[i - 1, j + 1] != emptySlotIdentifier && map[i + 1, j - 1] != emptySlotIdentifier && map[i - 2, j + 1] != emptySlotIdentifier 
-				         && map[i + 2, j - 1] != emptySlotIdentifier && nbrObstaclesByRoom != emptySlotIdentifier && previousRoomNumber != map[i, j] 
+				         && map[i - 1, j - 1] != emptySlotIdentifier && map[i, j] != emptySlotIdentifier && nbrObstacles != emptySlotIdentifier
+				         && map[i - 1, j] != emptySlotIdentifier && map[i, j - 1] != emptySlotIdentifier && map[i - 2, j] != emptySlotIdentifier 
+				         && map[i, j - 1] != emptySlotIdentifier && nbrObstaclesByRoom != emptySlotIdentifier && previousRoomNumber != map[i, j] 
 				         && map[i, j] != charIdentifier && map[i, j] != EnemyIdentifier && map[i - 1, j] != EnemyIdentifier
-				         && map[i, j - 1] != EnemyIdentifier && map[i + 1, j] != EnemyIdentifier && map[i, j - 1] != EnemyIdentifier
-				         && map[i - 1, j - 1] != EnemyIdentifier && map[i + 1, j + 1] != EnemyIdentifier && map[i, j] != ObstacleIdentifier){
+				         && map[i, j - 1] != EnemyIdentifier && map[i, j] != EnemyIdentifier && map[i, j - 1] != EnemyIdentifier
+				         && map[i - 1, j - 1] != EnemyIdentifier && map[i, j] != EnemyIdentifier && map[i, j] != ObstacleIdentifier){
 					map[i, j] = ObstacleIdentifier;
 					GameObject mapObject;
 					if (type){
@@ -345,8 +379,8 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 		
 		for (int i = 0; i < squaresToGenerate; i++){
 			// Calculate random room size and position. Make sure the room is inside the map.
-			int roomSizeX = Random.Range(3, sizeX / mapSizeX);
-			int roomSizeZ = Random.Range(3, sizeZ / mapSizeZ);
+			int roomSizeX = Random.Range(2, sizeX / mapSizeX);
+			int roomSizeZ = Random.Range(2, sizeZ / mapSizeZ);
 			int roomPosX = Random.Range(1, sizeX - roomSizeX);
 			int roomPosZ = Random.Range(1, sizeZ - roomSizeZ);
 			
