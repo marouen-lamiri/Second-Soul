@@ -10,6 +10,7 @@ public class playerPosition : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log ("Am i second?");
 		fighter = (Fighter)GameObject.FindObjectOfType (typeof (Fighter));
 		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer ();
 		fighter.transform.position = initialFighterPosition;

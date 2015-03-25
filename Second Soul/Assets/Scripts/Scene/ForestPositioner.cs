@@ -5,8 +5,8 @@ public class ForestPositioner : MonoBehaviour {
 
 	private Fighter fighter;
 	private Sorcerer sorcerer;
-	private Vector3 initialFighterPosition = new Vector3(100,0,27);
-	private Vector3 initialSorcererPosition = new Vector3(99,0,22);
+	private Vector3 initialFighterPosition = new Vector3(93,0,57);
+	private Vector3 initialSorcererPosition = new Vector3(95,0,56);
 	
 	// Use this for initialization
 	void Start () {
