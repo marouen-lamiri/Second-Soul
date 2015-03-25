@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public class SorcererInstanceManager : MonoBehaviour {
 
-	private static Sorcerer sorcerer;
+	public static Sorcerer sorcerer; // TODO change back to private
 	public static bool doCheckForNewSorcererNetworkInstantiatedByClient;
 	private static List<ISorcererSubscriber> subscriberList = new List<ISorcererSubscriber> (); // needs early init because everyone calls subscribe(this) in their Awake() or Start() methods.
 	private static NetworkPlayer sorcererAIGameObjectToDestroy;
 	private static bool doLateSorcererDetection;
-	private static int numberOfFramesForLateSorcDetect = 500;
+	private static int numberOfFramesForLateSorcDetect = 100;
 	private static int frameCounterForLateSorcDetect = 0;
 
 	/**
@@ -186,11 +186,20 @@ public class SorcererInstanceManager : MonoBehaviour {
 
 		if(SorcererInstanceManager.sorcerer != null) {
 
-			//before destroying, try placing the new one at the old position and rotation:
-			// (this approach also isn't sufficient because it will only position the sorcerer correctly on the server instance
+			// before destroying, try placing the new one at the old position and rotation:
+			// (this isn't sufficient because it will only position the sorcerer correctly on the server instance
 			// which is the slave game instance for the sorcerer, will be overriden as soon as player moves sorcerer on client)
 			newSorcerer.transform.position = SorcererInstanceManager.sorcerer.transform.position;
 			newSorcerer.transform.rotation = SorcererInstanceManager.sorcerer.transform.rotation;
+			// So --> also send an RPC to send the position on the client, which is the master game instance for the sorcerer:
+			ClientNetwork clientNetScript = (ClientNetwork)GameObject.FindObjectOfType(typeof(ClientNetwork));
+			clientNetScript.changeSorcererPositionOnClient(SorcererInstanceManager.sorcerer.transform);
+
+			// do the same for the fighter:
+			if(Network.isServer) {
+				Fighter fighter = (Fighter)GameObject.FindObjectOfType (typeof(Fighter));
+				clientNetScript.changeFighterPositionOnClient(fighter.transform);
+			}
 
 			Network.Destroy (SorcererInstanceManager.sorcerer.networkView.viewID);
 
@@ -298,5 +307,6 @@ public class SorcererInstanceManager : MonoBehaviour {
 //	void startDoCheckForNewSorcererNetworkInstantiatedByClient() {
 //		doCheckForNewSorcererNetworkInstantiatedByClient = true;
 //	}
+
 
 }

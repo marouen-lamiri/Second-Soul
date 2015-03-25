@@ -31,7 +31,6 @@ public class ForestToDungeon : SceneManager {
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, distance)){
 				if (hit.transform.tag == teleporter){
-					Debug.Log ("Dungeon");
 					showMenu = true;
 				}
 			}
@@ -44,6 +43,7 @@ public class ForestToDungeon : SceneManager {
 		centeredStyle.fontSize = sizeFont;
 		GUI.Box (new Rect (Screen.width/3 - Screen.width/36, Screen.height/3 + Screen.height/32, Screen.width/3  + Screen.width/22, Screen.height/3), greeting, centeredStyle);
 		if(GUI.Button (new Rect (Screen.width/3, Screen.height/3 + Screen.height/12, Screen.width/3, Screen.height/12), okMessage, buttons)){
+			Debug.Log ("Forest to Dungeon!");
 			NetworkLevelLoader.Instance.LoadLevel(sceneName,1);
 		}
 		if(GUI.Button (new Rect (Screen.width/3, Screen.height/3 + 2 * Screen.height/12, Screen.width/3, Screen.height/12), noMessage, buttons)){
