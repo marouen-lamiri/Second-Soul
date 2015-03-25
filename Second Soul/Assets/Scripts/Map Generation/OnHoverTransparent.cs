@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class OnHoverTransparent : MonoBehaviour, ISorcererSubscriber {
 	
-	public LayerMask layer;
-	public static int counter;
+	public LayerMask checkLayers;
+	public LayerMask visibleLayer;
+	public LayerMask invisibleLayer;
 	public Material invisibleMaterial;
 	public Material wallMaterial;
 	GameObject mainCamera;
@@ -39,17 +41,19 @@ public class OnHoverTransparent : MonoBehaviour, ISorcererSubscriber {
 		}
 		else{
 			Player player = (fighter.playerEnabled)? (Player) fighter : sorcerer;
-			Debug.DrawLine(player.transform.position, mainCamera.transform.position);
-			RaycastHit hit; 
-			if (Physics.Linecast (player.transform.position, mainCamera.transform.position, out hit,layer) &&
-			    hit.collider.gameObject == this.gameObject) {
-				//this.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,0f);
-				//counter++;
-				this.gameObject.renderer.material = invisibleMaterial;
+			float distance = 1000;
+			RaycastHit[] hits = Physics.RaycastAll (mainCamera.transform.position, player.transform.position, distance,checkLayers);
+			List<GameObject> gameObjects = new List<GameObject>();
+			foreach(RaycastHit hit in hits){
+				gameObjects.Add(hit.collider.gameObject);
 			}
-			else{
-				//this.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,1f);
-				this.gameObject.renderer.material = wallMaterial;
+			foreach(GameObject gO in gameObjects){
+				if (gO == this.gameObject){
+					this.gameObject.layer = invisibleLayer ;
+				}
+				else{
+					this.gameObject.layer = visibleLayer;
+					}
 			}
 		}
 		
