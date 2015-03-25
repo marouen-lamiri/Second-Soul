@@ -2,6 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System;
 
+/**
+ * 
+ * This class provides functionality for:
+ * - connecting / disconnecting a server (fighter) and a client (sorcerer) over the internet,
+ * - the chat.
+ * 
+ */ 
 public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	// Old code to keep to use a localhost connection on one computer:
@@ -130,6 +137,8 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 	private string chatBoxGUIName = "ChatBox";
 	public static string StartScreenOfficialSceneName = "StartScreen";
 	private int numberOfFramesToWaitBeforeServerLoadsGameScene = 700; 
+	private Vector3 fighterInitialPositionInStartMenu = new Vector3(-2,0,0); // put the fighter to the left under the fighter buttons
+	private Vector3 sorcererInitialPositionInStartMenu = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
 	
 	// master server server methods:
 	private void StartServer()
@@ -340,7 +349,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 			// if player choose to play as Client, instantiate sorcerer:
 			if(Network.isClient){
-				transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
+				transform.position = sorcererInitialPositionInStartMenu;
 				// this is for the case: in start menu, first connection:
 				SorcererInstanceManager.checkForNewSorcererNetworkInstantiatedByClient();
 				SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
@@ -378,7 +387,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 			// if player choose to play as Server, instantiate fighter:
 			if(Network.isServer) {
-				transform.position = new Vector3(-2,0,0); // put the fighter to the left under the fighter buttons
+				transform.position = fighterInitialPositionInStartMenu;
 				Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
 				playerWasCreated = true;
 				
@@ -583,12 +592,12 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 					displayChat = true;
 					
 					//network instantiate both the fighter and sorcerer:
-					transform.position = new Vector3(-2,0,0); // put the fighter to the left under the fighter buttons
+					transform.position = fighterInitialPositionInStartMenu;
 					Fighter fighter = (Fighter) Network.Instantiate(playerPrefab, transform.position, transform.rotation, 0) as Fighter; //as Fighter; // N.B. place the network game object exactly where you want to spawn players.
 					playerWasCreated = true;
 					
 					// always create the sorcerer before the fighter.
-					transform.position = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
+					transform.position = sorcererInitialPositionInStartMenu;
 					SorcererInstanceManager.createAndSwapNewSorcerer(sorcererPrefab, this.transform); // 
 					//Sorcerer sorcerer = (Sorcerer) Network.Instantiate(sorcererPrefab, transform.position, transform.rotation, 0) as Sorcerer; //as Sorcerer; // N.B. place the network game object exactly where you want to spawn players.
 					sorcererWasCreated = true;
@@ -625,6 +634,10 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 		
 	}
 
+
+
+	// ========================== RPC functions for connection and chat: ==========================
+
 	// Old code to keep to use a localhost connection:
 
 	// for client:
@@ -651,8 +664,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 		//Network.DestroyPlayerObjects(player);
 		//Network.Destroy (playerPrefab.gameObject);//?
 
-	
-	//PlayerCamera.CameraTarget=transform;
+		//PlayerCamera.CameraTarget=transform;
 	}
 	
 	// for server:
@@ -697,7 +709,6 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 		isConnectedToServer = false;
 
-		//-----
 		if (Network.isServer)
 			Debug.Log("Local server connection disconnected");
 		else if (info == NetworkDisconnection.LostConnection)
@@ -709,7 +720,6 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 			//Network.Destroy (playerPrefab.gameObject);
 			
 		}
-
 	}
 
 	[RPC]
@@ -724,7 +734,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 	void OnLevelWasLoaded(int level) {
 	}
 
-	//============= RPC functions called from elsewhere in the code. ====================
+	//============= RPC functions for special events (can be called from elsewhere in the code). ====================
 	[RPC]
 	public void OnSorcererPositionDeterminedAfterMapCreation(Vector3 position) {
 		//if (networkView.isMine) {
@@ -823,34 +833,50 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 	
 	[RPC]
 	public void changeSorcererPosition(string positionAndRotationAsString){
+		setGameObjectPositionAndRotationFromSerializedParams (SorcererInstanceManager.sorcerer, positionAndRotationAsString);
+	}
+
+	// same but for fighter:
+	[RPC]
+	public void changeFighterPositionOnClient(Transform newTransf){
+		string positionAndRotationAsString = newTransf.position.x + "," + newTransf.rotation.y + "," + newTransf.position.z + "," + newTransf.rotation.w + "," + newTransf.rotation.x + "," + newTransf.rotation.y + "," + newTransf.rotation.z;
+		networkView.RPC ("changeFighterPosition", RPCMode.All, positionAndRotationAsString);
+	}
+	
+	[RPC]
+	public void changeFighterPosition(string positionAndRotationAsString){
+		Fighter fighter = (Fighter)GameObject.FindObjectOfType (typeof(Fighter));
+		setGameObjectPositionAndRotationFromSerializedParams (fighter, positionAndRotationAsString);
+	}
+
+	private void setGameObjectPositionAndRotationFromSerializedParams (Player obj, string positionAndRotationAsString) {
 		//parse string:
 		string[] positionAndRotationAsSplitArray = positionAndRotationAsString.Split(',');
 		float[] positionAndRotationAsSplitArrayOfFloats = new float[7];
-
+		
 		// set position :
 		try {
 			positionAndRotationAsSplitArrayOfFloats[0] = float.Parse (positionAndRotationAsSplitArray[0]);
 			positionAndRotationAsSplitArrayOfFloats[1] = float.Parse (positionAndRotationAsSplitArray[1]);
 			positionAndRotationAsSplitArrayOfFloats[2] = float.Parse (positionAndRotationAsSplitArray[2]);
-			SorcererInstanceManager.sorcerer.transform.position = new Vector3 (positionAndRotationAsSplitArrayOfFloats [0], positionAndRotationAsSplitArrayOfFloats [1], positionAndRotationAsSplitArrayOfFloats [2]);
+			obj.transform.position = new Vector3 (positionAndRotationAsSplitArrayOfFloats [0], positionAndRotationAsSplitArrayOfFloats [1], positionAndRotationAsSplitArrayOfFloats [2]);
 			Debug.Log("could successfully set new sorcerer's position to old's.");
 		} catch (Exception ex) {
-			Debug.Log("could not set new sorcerer's position to old's.");
+			Debug.Log("could not set new sorcerer's (or fighter's) position to old's.");
 		}
-
+		
 		// set rotation
 		try {
 			positionAndRotationAsSplitArrayOfFloats [3] = float.Parse (positionAndRotationAsSplitArray [3]);
 			positionAndRotationAsSplitArrayOfFloats [4] = float.Parse (positionAndRotationAsSplitArray [4]);
 			positionAndRotationAsSplitArrayOfFloats [5] = float.Parse (positionAndRotationAsSplitArray [5]);
 			positionAndRotationAsSplitArrayOfFloats [6] = float.Parse (positionAndRotationAsSplitArray [6]);
-			SorcererInstanceManager.sorcerer.transform.rotation = new Quaternion (positionAndRotationAsSplitArrayOfFloats [3], positionAndRotationAsSplitArrayOfFloats [4], positionAndRotationAsSplitArrayOfFloats [5], positionAndRotationAsSplitArrayOfFloats [6]);
+			obj.transform.rotation = new Quaternion (positionAndRotationAsSplitArrayOfFloats [3], positionAndRotationAsSplitArrayOfFloats [4], positionAndRotationAsSplitArrayOfFloats [5], positionAndRotationAsSplitArrayOfFloats [6]);
 			Debug.Log("could successfully set new sorcerer's rotation to old's.");
 		} catch (Exception ex) {
-			Debug.Log("could not set new sorcerer's rotation to old's.");
+			Debug.Log("could not set new sorcerer's (or fighter's) rotation to old's.");
 		}
 
-		
 	}
 
 	

@@ -195,6 +195,12 @@ public class SorcererInstanceManager : MonoBehaviour {
 			ClientNetwork clientNetScript = (ClientNetwork)GameObject.FindObjectOfType(typeof(ClientNetwork));
 			clientNetScript.changeSorcererPositionOnClient(SorcererInstanceManager.sorcerer.transform);
 
+			// do the same for the fighter:
+			if(Network.isServer) {
+				Fighter fighter = (Fighter)GameObject.FindObjectOfType (typeof(Fighter));
+				clientNetScript.changeFighterPositionOnClient(fighter.transform);
+			}
+
 			Network.Destroy (SorcererInstanceManager.sorcerer.networkView.viewID);
 
 		}

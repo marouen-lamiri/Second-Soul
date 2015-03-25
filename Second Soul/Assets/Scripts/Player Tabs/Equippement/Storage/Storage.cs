@@ -114,7 +114,6 @@ public abstract class Storage : MonoBehaviour {
 			onEquippedItemHover();
 		}
 		else if(inStashBoundaries()){
-			Debug.Log("in stash bounds");
 			onStashItemHover();
 		}
 		if(targetItem != null){
@@ -128,7 +127,7 @@ public abstract class Storage : MonoBehaviour {
 			if(!itemPickedUp && stashItems[i].position.Contains(mousePositionInInventory())){
 				targetItem = stashItems[i];
 				drawItemHoverTooltip(targetItem);
-				Debug.Log("on stash item hover " + targetItem);
+				//Debug.Log("on stash item hover " + targetItem);
 				return;
 			}
 			else if(!itemPickedUp){
@@ -173,6 +172,9 @@ public abstract class Storage : MonoBehaviour {
 			else if(inEquippedBoundaries()){
 				pickUpEquippedItem();
 			}
+			else if(inStashBoundaries()){
+				pickUpStashItem();
+			}
 		}
 		else if(itemPickedUp && (Input.GetMouseButtonUp(0) )){//|| Input.GetMouseButtonDown(0))){ // try to get click to select
 			Debug.Log ("you let go of item");
@@ -182,14 +184,20 @@ public abstract class Storage : MonoBehaviour {
 			else if(inEquippedBoundaries()){
 				dropEquipItem();
 			}
+			else if(inStashBoundaries()){
+				dropStashItem();
+			}
 		}
 		if(Input.GetMouseButtonDown(1)){ //Use item (consume/equip/etc..)
 			Debug.Log ("Using item");
 			if(inInventoryBoundaries()){
-				useItem();
+				useInventoryItem();
 			}
 			else if(inEquippedBoundaries()){
-				//do nithing... or unequip?
+				//do nothing... or unequip?
+			}
+			else if(inStashBoundaries()){
+				useStashItem();
 			}
 		}	
 	}
@@ -222,7 +230,30 @@ public abstract class Storage : MonoBehaviour {
 				}
 			}
 		}
-		addItem(targetItem.x, targetItem.y, targetItem, inventorySlots, inventoryItems);
+		int newX;
+		int newY;
+		firstAvailableSlots(out newX, out newY, targetItem, inventorySlots, inventoryStorageWidth, inventoryStorageHeight);
+		addItem(newX, newY, targetItem, inventorySlots, inventoryItems);
+		resetTargetItem();
+	}
+	
+	void dropStashItem(){
+		for(int x = 0; x < stashStorageWidth ; x++){
+			for(int y = 0; y < stashStorageHeight ; y++){
+				Rect slot = new Rect(0 + stashSlots[x,y].position.x, position.y + stashSlots[x,y].position.y, slotWidth, slotHeight);
+				if(slot.Contains(mousePositionInInventory())){
+					if(availableSlots(x, y, targetItem, stashSlots, stashStorageWidth, stashStorageHeight)){
+						addItem(x, y, targetItem, stashSlots, stashItems);
+						resetTargetItem();
+						return;
+					}
+				}
+			}
+		}
+		int newX;
+		int newY;
+		firstAvailableSlots(out newX, out newY, targetItem, stashSlots, stashStorageWidth, stashStorageHeight);
+		addItem(newX, newY, targetItem, stashSlots, stashItems);
 		resetTargetItem();
 	}
 	
@@ -241,9 +272,28 @@ public abstract class Storage : MonoBehaviour {
 		resetTargetItem();
 	}
 	
-	void useItem(){
-		targetItem.useItem();
-		removeItem(targetItem, inventorySlots, inventoryItems);
+	void useInventoryItem(){
+		if(isStashOn){
+			removeItem(targetItem, inventorySlots, inventoryItems);
+			int newX;
+			int newY;
+			firstAvailableSlots(out newX, out newY, targetItem, stashSlots, stashStorageWidth, stashStorageHeight);
+			addItem(newX, newY, targetItem, stashSlots, stashItems);
+			resetTargetItem();
+		}
+		else{
+			targetItem.useItem();
+			removeItem(targetItem, inventorySlots, inventoryItems);
+			resetTargetItem();
+		}
+	}
+	
+	void useStashItem(){
+		removeItem(targetItem, stashSlots, stashItems);
+		int newX;
+		int newY;
+		firstAvailableSlots(out newX, out newY, targetItem, inventorySlots, inventoryStorageWidth, inventoryStorageHeight);
+		addItem(newX, newY, targetItem, inventorySlots, inventoryItems);
 		resetTargetItem();
 	}
 	
@@ -333,8 +383,9 @@ public abstract class Storage : MonoBehaviour {
 		return (Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height);
 	}
 	
+	//this only works since inventory is same size as stash, try to refactor stash to function independently of inventory
 	protected bool inStashWidthBoundaries(){
-		return (Input.mousePosition.x > position.x && Input.mousePosition.x < position.x + position.width);
+		return (Input.mousePosition.x > 0 && Input.mousePosition.x < 0 + position.width);
 	}
 	
 	protected bool inStashHeightBoundaries(){
@@ -342,11 +393,11 @@ public abstract class Storage : MonoBehaviour {
 	}
 	
 	protected bool inEquippedBoundaries(){
-		return (Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height/1.8f);
+		return (inInventoryWidthBoundaries() && Screen.height - Input.mousePosition.y > position.y && Screen.height - Input.mousePosition.y < position.y + position.height/1.8f);
 	}
 	
 	protected bool inInventoryBoundaries(){
-		return (Screen.height - Input.mousePosition.y > position.y + position.height/1.8f && Screen.height - Input.mousePosition.y < position.y + position.height);
+		return (inInventoryWidthBoundaries() && Screen.height - Input.mousePosition.y > position.y + position.height/1.8f && Screen.height - Input.mousePosition.y < position.y + position.height);
 	}
 	
 	protected static bool validEquipSlot(EquipSlot slot, Item item){
