@@ -824,7 +824,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 			Debug.Log ("Unable to parse --> " + booleanString);
 	}
 
-	// called from SorcererInstanceManager.swapSorcerers():
+	// set sorcerer position -- called from SorcererInstanceManager.swapSorcerers():
 	[RPC]
 	public void changeSorcererPositionOnClient(Transform newTransf){
 		string positionAndRotationAsString = newTransf.position.x + "," + newTransf.rotation.y + "," + newTransf.position.z + "," + newTransf.rotation.w + "," + newTransf.rotation.x + "," + newTransf.rotation.y + "," + newTransf.rotation.z;
@@ -836,7 +836,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 		setGameObjectPositionAndRotationFromSerializedParams (SorcererInstanceManager.sorcerer, positionAndRotationAsString);
 	}
 
-	// same but for fighter:
+	// set fighter position -- same but for fighter:
 	[RPC]
 	public void changeFighterPositionOnClient(Transform newTransf){
 		string positionAndRotationAsString = newTransf.position.x + "," + newTransf.rotation.y + "," + newTransf.position.z + "," + newTransf.rotation.w + "," + newTransf.rotation.x + "," + newTransf.rotation.y + "," + newTransf.rotation.z;
@@ -849,6 +849,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 		setGameObjectPositionAndRotationFromSerializedParams (fighter, positionAndRotationAsString);
 	}
 
+	// helper:
 	private void setGameObjectPositionAndRotationFromSerializedParams (Player obj, string positionAndRotationAsString) {
 		//parse string:
 		string[] positionAndRotationAsSplitArray = positionAndRotationAsString.Split(',');
@@ -879,6 +880,29 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	}
 
+
+
+	// set animation on sorcerer:
+	[RPC]
+	public void setSorcerersCurrentAnimationOnClient(string animationStateName){
+		Debug.Log ("IN setSorcerersCurrentAnimation() NOW");
+		networkView.RPC ("setSorcerersCurrentAnimation", RPCMode.All, animationStateName);
+	}
+	
+	[RPC]
+	public void setSorcerersCurrentAnimation(string animationStateName){
+		Debug.Log ("IN setSorcerersCurrentAnimation() NOW");
+		if(Network.isClient) {
+			Sorcerer sorcerer = SorcererInstanceManager.getSorcerer ();
+			//if(animationStateName == ) {}
+			
+			//sorcerer.animateIdle (); // doesn't work -- it's not an animation problem! it's something else!
+			//sorcerer.goalPosition = new Vector3 (sorcerer.goalPosition.x + 1.1f, sorcerer.goalPosition.y + 1.1f, sorcerer.goalPosition.z + 1.1f);
+			//sorcerer.moving = true;
+			sorcerer.startMoving(new Vector3 (sorcerer.goalPosition.x + 1.1f, sorcerer.goalPosition.y + 1.1f, sorcerer.goalPosition.z + 1.1f));
+			Debug.Log ("IN setSorcerersCurrentAnimation() NOW // IF STATEMENT RAN ENTIRELY.");
+		}
+	}
 	
 	
 	// ================================================

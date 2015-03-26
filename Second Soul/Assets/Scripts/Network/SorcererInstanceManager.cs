@@ -186,7 +186,8 @@ public class SorcererInstanceManager : MonoBehaviour {
 
 		if(SorcererInstanceManager.sorcerer != null) {
 
-			// before destroying, try placing the new one at the old position and rotation:
+			// -------------------------
+			// before destroying, place the new one at the old position and rotation:
 			// (this isn't sufficient because it will only position the sorcerer correctly on the server instance
 			// which is the slave game instance for the sorcerer, will be overriden as soon as player moves sorcerer on client)
 			newSorcerer.transform.position = SorcererInstanceManager.sorcerer.transform.position;
@@ -195,6 +196,14 @@ public class SorcererInstanceManager : MonoBehaviour {
 			ClientNetwork clientNetScript = (ClientNetwork)GameObject.FindObjectOfType(typeof(ClientNetwork));
 			clientNetScript.changeSorcererPositionOnClient(SorcererInstanceManager.sorcerer.transform);
 
+			// FIX: also make sure they appear with the right animation, 
+			// e.g. usually standing up, not dead lying on the ground (which is the default right now it seems after placing a player object):
+			//Animation a = SorcererInstanceManager.sorcerer.animation;
+			string animationName = findFirstActiveAnimationOnGameObject(SorcererInstanceManager.sorcerer);
+			clientNetScript.setSorcerersCurrentAnimationOnClient (animationName);
+
+
+			// --------------------------
 			// do the same for the fighter:
 			if(Network.isServer) {
 				Fighter fighter = (Fighter)GameObject.FindObjectOfType (typeof(Fighter));
@@ -236,7 +245,32 @@ public class SorcererInstanceManager : MonoBehaviour {
 	}
 
 
-	// -----------------
+	// =====================
+	// helpers:
+	private static string findFirstActiveAnimationOnGameObject(Player player) {
+		//		foreach (AnimationState s in player.animation) {
+		//			if (s.enabled) {
+		//				return s;
+		//			}
+		//		}
+		//
+		//		return null;
+
+		//
+		foreach(AnimationState anim in player.animation) {
+			if(player.animation.IsPlaying(anim.name)) {
+				return anim.name;
+			}
+		}
+		return string.Empty;
+	}
+
+
+
+
+
+
+	// ----------------- framework callbacks: ----------------- 
 	// for server:
 	void OnPlayerConnected(NetworkPlayer player) {
 
