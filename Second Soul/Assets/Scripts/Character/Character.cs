@@ -17,7 +17,7 @@ public abstract class Character : MonoBehaviour {
 	public static int gold; //money for the fighter
 
 	//pathfinding related
-	protected Grid grid;
+	public Grid grid;
 	protected PathFinding pathing;
 	private List<Vector3> path;
 
@@ -162,6 +162,7 @@ public abstract class Character : MonoBehaviour {
 		accuracy = 0.8f;
 
 		attacking = false;
+		stopMoving ();
 	}
 	
 	// Update is called once per frame
@@ -363,6 +364,14 @@ public abstract class Character : MonoBehaviour {
 			pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
 			basicAttackScript = GetComponent<BasicAttack>();
 		}
+		//check if pathfinding acutally failed
+		if (pathing.pathFindingFailed) {
+			//reset
+			stopMoving();
+			goalPosition = transform.position;
+			pathing.pathFindingFailed = false;
+			return;
+		}
 		if(basicAttackScript.canFinishAttack()){
 			basicAttackScript.finishAttack();
 				return;
@@ -379,6 +388,14 @@ public abstract class Character : MonoBehaviour {
 		else {
 
 			pathing.findPath(transform.position, goalPosition);
+			//check if pathfinding acutally failed
+			if (pathing.pathFindingFailed) {
+				//reset
+				stopMoving();
+				goalPosition = transform.position;
+				pathing.pathFindingFailed = false;
+				return;
+			}
 			if(previousGoal == null){
 				previousGoal = goalPosition;
 			}
@@ -386,6 +403,8 @@ public abstract class Character : MonoBehaviour {
 			List<Vector3> path = grid.worldFromNode(grid.path);
 			if(path == null || grid.path == null || path.Count <= 1 || grid.path.Count <= 1){
 				destination = transform.position;
+				stopMoving();
+				return;
 			}
 			else if (path.Count > 1) {
 				destination = path [1];//because path[0] is where you are now, and path[1] is the immediately next step
@@ -410,7 +429,11 @@ public abstract class Character : MonoBehaviour {
 		if (steeringScript.Velocity.magnitude > 0) {
 			alignScript.interpolatedChangeInOrientation (steeringScript.Velocity);
 		}
-
+		if(grid.nodeFromWorld(transform.position)==grid.nodeFromWorld(goalPosition)){
+			stopMoving();
+			animateIdle();
+			return;
+		}
 		steeringScript.steeringUpdate ();
 				
 		animateRun();
@@ -437,13 +460,15 @@ public abstract class Character : MonoBehaviour {
 		}
 	}
 	public void startMoving(Vector3 position){
+		//start
 		moving = true;
 		goalPosition = position;
 	}
 	
 	public void stopMoving(){
 		moving = false;
-		goalPosition = transform.position;
+		steeringScript.ResetVelocities ();
+		animateIdle ();
 	}
 
 	public void dieMethod(){

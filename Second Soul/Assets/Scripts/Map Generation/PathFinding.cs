@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class PathFinding : MonoBehaviour, ISorcererSubscriber {
 	
 	private Player seeker, target;
+	public bool pathFindingFailed;
 	int maxTrial = 2000;
 
 	Grid grid;
@@ -18,6 +19,8 @@ public class PathFinding : MonoBehaviour, ISorcererSubscriber {
 		grid = GetComponent<Grid>();
 		seeker.setPathing (this);
 		target.setPathing (this);
+
+		pathFindingFailed = false;
 	}
 
 	public void StartFindPath(Vector3 startPos, Vector3 targetPos){
@@ -28,6 +31,7 @@ public class PathFinding : MonoBehaviour, ISorcererSubscriber {
 
 //		Vector3 [] waypoints = new Vector3[0];
 //		bool pathSuccess = false;
+		pathFindingFailed = false;
 		Node startNode = grid.nodeFromWorld(startPos);
 		Node targetNode = grid.nodeFromWorld(targetPos);
 		//this can be changed, it's purpose is not to allow an infinite loop to occur in case of an impossible path, althought this shouldn't happen, it is present for emergency
@@ -76,7 +80,9 @@ public class PathFinding : MonoBehaviour, ISorcererSubscriber {
 					}
 					if(limitedTrial <= 0){
 						limitedTrial = maxTrial;
+
 						grid.path = null;
+						pathFindingFailed = true;
 						return;
 					}
 					limitedTrial--;

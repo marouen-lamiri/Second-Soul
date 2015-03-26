@@ -27,6 +27,7 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	private int healValue = 192;
 	private float energyCheck = 20f;
 	private float radiusCheck = 5f;
+	int counter = 0;
 	private string skill1Name = "IceShardSkill";
 	private ISkill skill2;
 	private string skill2Name = "FireballSkill"; 
@@ -58,7 +59,7 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		timeOut=- Time.fixedDeltaTime;
+		timeOut=- 0.5f;
 		checkWhoHadControl();
 		//checks that there is a grid instance (for pathfinding), if not, retrieve the grid
 		if(grid == null){
@@ -127,7 +128,6 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	void movingAI(){
 		//checks if there is a player controlling the sorcerer
 		if(checkAIPlayingStatus()){
-			Debug.Log (timeOut);
 			int randomTech = Random.Range(randomMinValue,randomMaxValue);
 			nearestEnemy = checkNearestEnemy();
 			sorcerer.target = nearestEnemy;
@@ -139,27 +139,29 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 				//will decide what to use based on probability, which can be tweeked
 				//randomTech determines the next attack
 				//This represents the default attack
-				if(randomTech <= basicRanged && timeOut < 0){
+				if(randomTech <= basicRanged && timeOut < 0 && determineNextAttack()){
 					sorcerer.activeSkill5.useSkill();
+					counter++;
+					Debug.Log (counter);
 					timeOut = basicTimeOutReset;
 				}
 				//skill chance of happeining is 0.5%
-				if((randomTech == skillThreshold1) && fighter.energy >= energyCheck && timeOut < 0){
+				if((randomTech == skillThreshold1) && fighter.energy >= energyCheck && timeOut < 0 && determineNextAttack()){
 					sorcerer.activeSkill2.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 0.5%
-				if((randomTech == skillThreshold2) && fighter.energy >= energyCheck && timeOut < 0){
+				if((randomTech == skillThreshold2) && fighter.energy >= energyCheck && timeOut < 0 && determineNextAttack()){
 					sorcerer.activeSkill3.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 0.5%
-				if((randomTech == skillThreshold3) && fighter.energy >= energyCheck && timeOut < 0 ){
+				if((randomTech == skillThreshold3) && fighter.energy >= energyCheck && timeOut < 0 && determineNextAttack()){
 					sorcerer.activeSkill4.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 0.5%
-				if((randomTech == skillThreshold4) && fighter.energy >= energyCheck && timeOut <= 0){
+				if((randomTech == skillThreshold4) && fighter.energy >= energyCheck && timeOut <= 0 && determineNextAttack()){
 					sorcerer.activeSkill1.useSkill();
 					timeOut = timeOutReset;
 				}
@@ -180,6 +182,11 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 			//if the fighter is nearby, stop
 			else if (Vector3.Distance(sorcerer.transform.position,goalPosition) < radiusCheck){
 				sorcerer.stopMoving();
+			}
+			else if(nearestEnemy != null){ 
+				if(nearestEnemy.isDead()){
+					sorcerer.animateIdle();
+				}
 			}
 		}
 	}

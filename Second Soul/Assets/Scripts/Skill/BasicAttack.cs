@@ -93,7 +93,7 @@ public abstract class BasicAttack : MonoBehaviour, ISkill {
 				targetPosition = hit.transform.position;
 				return;
 			}
-			else if(hit.CompareTag(floor)){
+			else if(hit.CompareTag(floor) && (caster.grid.nodeFromWorld(hits[i].point).walkable)){
 				targetPosition = hits[i].point;
 			}
 		}
