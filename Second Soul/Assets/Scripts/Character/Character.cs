@@ -358,7 +358,6 @@ public abstract class Character : MonoBehaviour {
 		//getting next position
 		Vector3 destination;
 		bool hit = Physics.Linecast(transform.position, goalPosition, obstacles);
-
 		if(grid == null || pathing == null || basicAttackScript == null){
 			grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
 			pathing = (PathFinding)GameObject.FindObjectOfType (typeof(PathFinding));
@@ -374,7 +373,7 @@ public abstract class Character : MonoBehaviour {
 		}
 		if(basicAttackScript.canFinishAttack()){
 			basicAttackScript.finishAttack();
-				return;
+			return;
 		}
 		if (!hit) {
 			destination = goalPosition;
@@ -403,8 +402,8 @@ public abstract class Character : MonoBehaviour {
 			List<Vector3> path = grid.worldFromNode(grid.path);
 			if(path == null || grid.path == null || path.Count <= 1 || grid.path.Count <= 1){
 				destination = transform.position;
-				stopMoving();
-				return;
+//				stopMoving();
+//				return;
 			}
 			else if (path.Count > 1) {
 				destination = path [1];//because path[0] is where you are now, and path[1] is the immediately next step
@@ -431,7 +430,6 @@ public abstract class Character : MonoBehaviour {
 		}
 		if(grid.nodeFromWorld(transform.position)==grid.nodeFromWorld(goalPosition)){
 			stopMoving();
-			animateIdle();
 			return;
 		}
 		steeringScript.steeringUpdate ();
