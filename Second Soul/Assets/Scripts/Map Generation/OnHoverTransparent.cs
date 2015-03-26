@@ -1,33 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class OnHoverTransparent : MonoBehaviour, ISorcererSubscriber {
 	
-	public LayerMask layer;
-	public static int counter;
-	public Material invisibleMaterial;
-	public Material wallMaterial;
+	public LayerMask checkLayers;
+	string visibleLayerName;
+	string invisibleLayerName;
+	public LayerMask visibleLayer;
+	public LayerMask invisibleLayer;
 	GameObject mainCamera;
 	GameObject lastObject;
 	Fighter fighter;
 	Sorcerer sorcerer;
-	Color initialColor;
-	Material material;
+	List<GameObject> invisibleList;
 
 	// Use this for initialization
 	void Start () {
 
 		subscribeToSorcererInstancePublisher (); // jump into game
-
-		material = Instantiate (renderer.material) as Material;
-//		material.CopyPropertiesFromMaterial (renderer.material);
-		renderer.material = material;
-		initialColor = material.color;
 		fighter= GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
 		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer= GameObject.FindObjectOfType (typeof (Sorcerer))as Sorcerer;
 		if(mainCamera == null){
 			mainCamera = GameObject.FindGameObjectWithTag("MainCamera") as GameObject;
 		}
+		invisibleList = new List<GameObject>();
+		visibleLayerName = "Structure";
+		invisibleLayerName = "unwalkable";
 	}
 	
 	// Update is called once per frame
@@ -39,18 +38,26 @@ public class OnHoverTransparent : MonoBehaviour, ISorcererSubscriber {
 		}
 		else{
 			Player player = (fighter.playerEnabled)? (Player) fighter : sorcerer;
-			Debug.DrawLine(player.transform.position, mainCamera.transform.position);
-			RaycastHit hit; 
-			if (Physics.Linecast (player.transform.position, mainCamera.transform.position, out hit,layer) &&
-			    hit.collider.gameObject == this.gameObject) {
-				//this.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,0f);
-				//counter++;
-				this.gameObject.renderer.material = invisibleMaterial;
+			float distance = Vector3.Distance(mainCamera.transform.position,player.transform.position);
+			RaycastHit[] hits = Physics.RaycastAll (mainCamera.transform.position, player.transform.position, distance,checkLayers);
+			foreach (GameObject gO in invisibleList){
+				gO.layer = LayerMask.NameToLayer(visibleLayerName);
 			}
-			else{
-				//this.renderer.material.color = new Color(initialColor.r,initialColor.g,initialColor.b,1f);
-				this.gameObject.renderer.material = wallMaterial;
+			invisibleList = new List<GameObject>();
+			foreach(RaycastHit hit in hits){
+				if(Vector3.Distance (mainCamera.transform.position,hit.collider.gameObject.transform.position)<distance){
+					hit.collider.gameObject.layer = LayerMask.NameToLayer(invisibleLayerName);
+					invisibleList.Add(hit.collider.gameObject);
+				}
 			}
+//			foreach(GameObject gO in gameObjects){
+//				if (gO == this.gameObject){
+//					this.gameObject.layer = invisibleLayer.value;
+//				}
+//				else{
+//					this.gameObject.layer = visibleLayer.value;
+//					}
+//			}
 		}
 		
 	}

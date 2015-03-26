@@ -54,7 +54,6 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 		if (Network.isServer){
 			fighter = (Fighter)GameObject.FindObjectOfType (typeof (Fighter));
 			sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer = (Sorcerer)GameObject.FindObjectOfType (typeof (Sorcerer));
-			lootFactory.setFactoryVariables(itemHolderPrefab, fighter);
 			mapArray = generateMap(mapSizeX, mapSizeZ, numberRooms, fighter.gameObject, sorcerer.gameObject);
 			buildMap(mapArray);
 			mapGenerationCompleted = true; // signal for client network to set the sorcerer's position with rpc call

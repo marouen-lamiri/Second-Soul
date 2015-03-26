@@ -12,7 +12,7 @@ public class DisplayPlayerStatsNew : MonoBehaviour, ISorcererSubscriber {
 	public const int SPACE_BETWEEN = 5;
 	
 	// Instances refering to the objects.
-	private Fighter  fighter;
+	private Fighter fighter;
 	private Sorcerer sorcerer;
 	
 	// Variable related to the scroll-bar.

@@ -592,31 +592,28 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 			}
 
-			// ------------- textArea draw, and fade out: ------------------
+			// ------------- textArea draw, and fade out: ------------------a
 			// fade out chat's textArea using transparency:
 			if(!displayChat) {
 				if(numberOfFramesAfterChatButtonsWereHiddenBecauseInactive < numberOfFramesForChatTextAreaFadeOutDuration) {
 					numberOfFramesAfterChatButtonsWereHiddenBecauseInactive++;
-					
 					float a = chatTextAreaColor.a;
-					print ("TRANSPARENCY: --> "+a);
 					a -= 0.01f; // 0.1f;
-					
-					//GUI.backgroundColor = new Color(GUI.backgroundColor.r, GUI.backgroundColor.g, GUI.backgroundColor.b, a);
-
-					//GUI.color = new Color( 1, 1, 1, 0.5f ); 
-
 					chatTextAreaColor = new Color (GUI.color.r, GUI.color.g, GUI.color.b, a);
-
 				}
 			}
 			GUI.color = chatTextAreaColor;
 
 			// draw chat text area:
 			if((Network.isClient || Network.isServer)) {
+
+				//scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(100), GUILayout.Height(100));
+
 				// GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
 				// GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
 				GUI.TextArea(new Rect(networkWindowX + chatInputOffsetX, chatTextAreaOffsetY, chatTextAreaWidth, chatTextAreaHeight), _messageLog); // style // "box"
+
+				//GUILayout.EndScrollView();
 			}
 
 			// reset default color for other GUI components:
@@ -943,6 +940,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 			//sorcerer.animateIdle (); // doesn't work -- it's not an animation problem! it's something else!
 			//sorcerer.goalPosition = new Vector3 (sorcerer.goalPosition.x + 1.1f, sorcerer.goalPosition.y + 1.1f, sorcerer.goalPosition.z + 1.1f);
 			//sorcerer.moving = true;
+
 			sorcerer.startMoving(new Vector3 (sorcerer.goalPosition.x + 1.1f, sorcerer.goalPosition.y + 1.1f, sorcerer.goalPosition.z + 1.1f));
 			Debug.Log ("IN setSorcerersCurrentAnimation() NOW // IF STATEMENT RAN ENTIRELY.");
 		}

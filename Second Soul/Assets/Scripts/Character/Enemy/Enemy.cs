@@ -18,6 +18,7 @@ public abstract class Enemy : Character, ISorcererSubscriber {
 	public int prizeLevelBonus = 2;
 	
 	public Sorcerer sorcerer;
+	LootFactory lootFactory;
 	
 	public float aggroRange;
 	public bool hasAggro;
@@ -55,6 +56,7 @@ public abstract class Enemy : Character, ISorcererSubscriber {
 		experienceBase = 25;
 		xpGiven = false;
 		lootGiven = false;
+		lootFactory = GameObject.FindObjectOfType<LootFactory> ();
 		
 		// networking: makes sure each enemy is properly instantiated even on another game instance that didn't run the EnemyFactory code.
 		target = (Fighter) GameObject.FindObjectOfType (typeof (Fighter)); // for the enemies perspective target is always fighter
@@ -307,7 +309,7 @@ public abstract class Enemy : Character, ISorcererSubscriber {
 	
 	void giveLoot(float dropRate, Vector3 position){
 		if(!lootGiven && networkView.isMine){
-			LootFactory.determineDrop(dropRate, position);
+			lootFactory.determineDrop(dropRate, position);
 		}
 		lootGiven = true;
 	}

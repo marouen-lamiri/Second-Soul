@@ -13,6 +13,7 @@ public class DungeonToBoss : SceneManager {
 	protected string sceneName = "SkillTree";
 	protected string sceneNameBoss = "BossScene";
 	protected string teleporter = "Teleporter2";
+	protected string greeting= "Would you like to teleport to the Boss location?";
 	
 	
 	// Use this for initialization
@@ -47,13 +48,8 @@ public class DungeonToBoss : SceneManager {
 		centeredStyle.fontSize = sizeFont;
 		GUI.Box (new Rect (Screen.width/3 - Screen.width/36, Screen.height/3 + Screen.height/32, Screen.width/3  + Screen.width/22, Screen.height/3), greeting, centeredStyle);
 		if(GUI.Button (new Rect (Screen.width/3, Screen.height/3 + Screen.height/12, Screen.width/3, Screen.height/12), okMessage, buttons)){
-			int randomTech = Random.Range (minPossibility, maxPossibility);
-			if(randomTech == averagePossibility){
-				NetworkLevelLoader.Instance.LoadLevel(sceneNameBoss,1);
-			}
-			else{
-				NetworkLevelLoader.Instance.LoadLevel(sceneName,1);
-			}
+			Debug.Log ("scene name: " + sceneNameBoss);
+			NetworkLevelLoader.Instance.LoadLevel(sceneNameBoss,1);
 		}
 		if(GUI.Button (new Rect (Screen.width/3, Screen.height/3 + 2 * Screen.height/12, Screen.width/3, Screen.height/12), noMessage, buttons)){
 			showMenu = !showMenu;

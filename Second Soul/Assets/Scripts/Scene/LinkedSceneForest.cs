@@ -6,8 +6,8 @@ public class LinkedSceneForest : SceneManager, ISorcererSubscriber {
 	public GUIStyle buttons;
 	protected Fighter fPosition;
 	protected Sorcerer sPosition;
-	protected Vector3 fInitial = new Vector3 (75, 0, 75);
-	protected Vector3 sInitial = new Vector3 (72, 0, 72);
+	protected Vector3 fInitial = new Vector3 (100, 0, 27);
+	protected Vector3 sInitial = new Vector3 (99, 0, 22);
 	protected string playerTag = "Player";
 	protected string sceneName = "Forest";
 	protected string teleporter = "Teleporter";
@@ -37,6 +37,7 @@ public class LinkedSceneForest : SceneManager, ISorcererSubscriber {
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, distance)){
 				if (hit.transform.name == teleporter){
+					Debug.Log ("pressed");
 					showMenu = true;
 				}
 			}

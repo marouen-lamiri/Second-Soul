@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Grid : MonoBehaviour, ISorcererSubscriber {
 
 	//Variable declaration
-	public LayerMask unwalkableMask; 
+	public LayerMask unwalkableMask;
 	public Vector2 gridWorldSize;
 	public float nodeRadius;
 	Node[,] grid;

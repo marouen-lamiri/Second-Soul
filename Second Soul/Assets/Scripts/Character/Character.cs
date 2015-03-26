@@ -10,6 +10,7 @@ public abstract class Character : MonoBehaviour {
 	SteeringAgent steeringScript;
 	Align alignScript;
 	SorcererAI ai;
+	public LayerMask obstacles;
 	public CharacterController controller;
 	private CharacterNetworkScript playerNetworkScript;
 	protected BasicAttack basicAttackScript;
@@ -355,7 +356,7 @@ public abstract class Character : MonoBehaviour {
 	protected void moveToPosition(){
 		//getting next position
 		Vector3 destination;
-		bool hit = Physics.Linecast(transform.position, goalPosition);
+		bool hit = Physics.Linecast(transform.position, goalPosition, obstacles);
 
 		if(grid == null || pathing == null || basicAttackScript == null){
 			grid = (Grid)GameObject.FindObjectOfType (typeof(Grid));
@@ -371,10 +372,10 @@ public abstract class Character : MonoBehaviour {
 			arriveScript.enabled = (steeringScript.Velocity.magnitude>=speed/2)?true:false;
 			steeringScript.setTarget (goalPosition);
 		}
-		else if(Physics.Linecast(transform.position, goalPosition, 1000)){
-			animateIdle();
-			return;
-		}
+//		else if(Physics.Linecast(transform.position, goalPosition, obstacles)){
+//			animateIdle();
+//			return;
+//		}
 		else {
 
 			pathing.findPath(transform.position, goalPosition);
