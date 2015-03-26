@@ -554,7 +554,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 			if (Network.peerType == NetworkPeerType.Disconnected) {
 				if (GUI.Button (new Rect (connectAsClientButtonPositionX, connectAsClientButtonPositionY, connectAsClientButtonWidth, connectAsClientButtonHeight), "Connect as a Client")) {
 					Loading.show ();
-					//RefreshHostList(); //TODO this is master server code.
+					//RefreshHostList(); //TODO this is master server code to uncomment back in.
 					ConnectToServer (); // to replaced with the real master server code above. 
 					displayChat = true;
 
@@ -639,7 +639,8 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 					Loading.show ();
 
 					// connect only the server, no client:
-					StartServer (); //Network.InitializeServer (10, port, false); // also to replace with real master server call StartServer();
+					// StartServer (); //TODO uncomment this is the master server code
+					Network.InitializeServer (10, port, false); // also to replace with real master server call StartServer();
 					displayChat = false; // changed from true to false so the chat isn't showing by default.
 					
 					//network instantiate both the fighter and sorcerer:
@@ -695,7 +696,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 		private void ConnectToServer() {
 			Network.Connect(serverIP, port);
 			if (!Network.isClient) {
-				//Network.Connect(serverLocalIP,port);
+				Network.Connect(serverLocalIP,port);
 			}
 		}
 	
