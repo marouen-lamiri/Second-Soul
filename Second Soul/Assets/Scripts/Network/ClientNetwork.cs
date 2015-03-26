@@ -76,7 +76,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 	public GUIStyle background;
 	float backgroundBox = 100f;
 
-	bool displayChat;
+	public bool displayChat;
 
 	string textFieldString = "--";
 	string textFieldStringInPreviousFrame;
@@ -139,6 +139,12 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 	private int numberOfFramesToWaitBeforeServerLoadsGameScene = 700; 
 	private Vector3 fighterInitialPositionInStartMenu = new Vector3(-2,0,0); // put the fighter to the left under the fighter buttons
 	private Vector3 sorcererInitialPositionInStartMenu = new Vector3(2,0,0); // put the sorcerer to the right under the sorcerer buttons
+
+	// for chat texteArea fade out:
+	private int numberOfFramesAfterChatButtonsWereHiddenBecauseInactive = numberOfFramesForChatTextAreaFadeOutDuration + 1;
+	private static int numberOfFramesForChatTextAreaFadeOutDuration = 500;
+	private Color defaultGUIBackgroundColor;
+	private Color chatTextAreaColor;
 	
 	// master server server methods:
 	private void StartServer()
@@ -271,13 +277,21 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 		framesToWaitForFocusCorrectCharacter = 0;
 
-		displayChat = true;
+		displayChat = false; // changed from true to false, so by default it's not showing when entering a new scene
 
 		Input.eatKeyPressOnTextFieldFocus = true; // to allow detecting enter key when the chat input field is focused.
 		//styleDefaultTextArea = GUI.skin.textArea; 
 
+		// this is for hidding the chat's input textBar
 		framesCounterBeforeFadeOutChat = 0;
 		numberOfFramesToWaitBeforeFadingOutChat = 800;
+
+		// this is for hidding the chat's textArea
+		numberOfFramesAfterChatButtonsWereHiddenBecauseInactive = numberOfFramesForChatTextAreaFadeOutDuration + 1; // by default it's already invisible.
+		defaultGUIBackgroundColor = GUI.backgroundColor;
+		// at first, set the chat's textArea as invisible, completely transparent.
+		chatTextAreaColor = new Color(defaultGUIBackgroundColor.r, defaultGUIBackgroundColor.g, defaultGUIBackgroundColor.b, 0.0f); // 1.0f;
+	
 	} 
 
 	public void Start() {
@@ -290,9 +304,12 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 			//displayChat = !displayChat;
 			displayChat = true;
 			framesCounterBeforeFadeOutChat = 0;
-			if(displayChat) {
-				GUI.FocusControl(chatBoxGUIName); // not always working why?
-			}
+			GUI.FocusControl(chatBoxGUIName); // not always working why?
+
+			// for chat's textArea fade out: on Return / Entre key pressed, reset the transparency value to 1.
+			chatTextAreaColor = new Color(defaultGUIBackgroundColor.r, defaultGUIBackgroundColor.g, defaultGUIBackgroundColor.b, 1.0f); // 1.0f;
+			// reset counter for fade out to be done later:
+			numberOfFramesAfterChatButtonsWereHiddenBecauseInactive = 0;
 
 		}
 		if(textFieldString != textFieldStringInPreviousFrame) {
@@ -575,10 +592,34 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 			}
 
-			// chat text area:
-			//GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
-			//GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
-			GUI.TextArea(new Rect(networkWindowX + chatInputOffsetX, chatTextAreaOffsetY, chatTextAreaWidth, chatTextAreaHeight), _messageLog); // style // "box"
+			// ------------- textArea draw, and fade out: ------------------a
+			// fade out chat's textArea using transparency:
+			if(!displayChat) {
+				if(numberOfFramesAfterChatButtonsWereHiddenBecauseInactive < numberOfFramesForChatTextAreaFadeOutDuration) {
+					numberOfFramesAfterChatButtonsWereHiddenBecauseInactive++;
+					float a = chatTextAreaColor.a;
+					a -= 0.01f; // 0.1f;
+					chatTextAreaColor = new Color (GUI.color.r, GUI.color.g, GUI.color.b, a);
+				}
+			}
+			GUI.color = chatTextAreaColor;
+
+			// draw chat text area:
+			if((Network.isClient || Network.isServer)) {
+
+				//scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(100), GUILayout.Height(100));
+
+				// GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
+				// GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
+				GUI.TextArea(new Rect(networkWindowX + chatInputOffsetX, chatTextAreaOffsetY, chatTextAreaWidth, chatTextAreaHeight), _messageLog); // style // "box"
+
+				//GUILayout.EndScrollView();
+			}
+
+			// reset default color for other GUI components:
+			GUI.color = defaultGUIBackgroundColor;
+			// --------------------------------------------------
+
 
 
 			// button to play one player mode:
@@ -589,7 +630,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 					// connect only the server, no client:
 					StartServer (); //Network.InitializeServer (10, port, false); // also to replace with real master server call StartServer();
-					displayChat = true;
+					displayChat = false; // changed from true to false so the chat isn't showing by default.
 					
 					//network instantiate both the fighter and sorcerer:
 					transform.position = fighterInitialPositionInStartMenu;
@@ -824,7 +865,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 			Debug.Log ("Unable to parse --> " + booleanString);
 	}
 
-	// called from SorcererInstanceManager.swapSorcerers():
+	// set sorcerer position -- called from SorcererInstanceManager.swapSorcerers():
 	[RPC]
 	public void changeSorcererPositionOnClient(Transform newTransf){
 		string positionAndRotationAsString = newTransf.position.x + "," + newTransf.rotation.y + "," + newTransf.position.z + "," + newTransf.rotation.w + "," + newTransf.rotation.x + "," + newTransf.rotation.y + "," + newTransf.rotation.z;
@@ -836,7 +877,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 		setGameObjectPositionAndRotationFromSerializedParams (SorcererInstanceManager.sorcerer, positionAndRotationAsString);
 	}
 
-	// same but for fighter:
+	// set fighter position -- same but for fighter:
 	[RPC]
 	public void changeFighterPositionOnClient(Transform newTransf){
 		string positionAndRotationAsString = newTransf.position.x + "," + newTransf.rotation.y + "," + newTransf.position.z + "," + newTransf.rotation.w + "," + newTransf.rotation.x + "," + newTransf.rotation.y + "," + newTransf.rotation.z;
@@ -849,6 +890,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 		setGameObjectPositionAndRotationFromSerializedParams (fighter, positionAndRotationAsString);
 	}
 
+	// helper:
 	private void setGameObjectPositionAndRotationFromSerializedParams (Player obj, string positionAndRotationAsString) {
 		//parse string:
 		string[] positionAndRotationAsSplitArray = positionAndRotationAsString.Split(',');
@@ -879,6 +921,30 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	}
 
+
+
+	// set animation on sorcerer:
+	[RPC]
+	public void setSorcerersCurrentAnimationOnClient(string animationStateName){
+		Debug.Log ("IN setSorcerersCurrentAnimation() NOW");
+		networkView.RPC ("setSorcerersCurrentAnimation", RPCMode.All, animationStateName);
+	}
+	
+	[RPC]
+	public void setSorcerersCurrentAnimation(string animationStateName){
+		Debug.Log ("IN setSorcerersCurrentAnimation() NOW");
+		if(Network.isClient) {
+			Sorcerer sorcerer = SorcererInstanceManager.getSorcerer ();
+			//if(animationStateName == ) {}
+			
+			//sorcerer.animateIdle (); // doesn't work -- it's not an animation problem! it's something else!
+			//sorcerer.goalPosition = new Vector3 (sorcerer.goalPosition.x + 1.1f, sorcerer.goalPosition.y + 1.1f, sorcerer.goalPosition.z + 1.1f);
+			//sorcerer.moving = true;
+
+			sorcerer.startMoving(new Vector3 (sorcerer.goalPosition.x + 1.1f, sorcerer.goalPosition.y + 1.1f, sorcerer.goalPosition.z + 1.1f));
+			Debug.Log ("IN setSorcerersCurrentAnimation() NOW // IF STATEMENT RAN ENTIRELY.");
+		}
+	}
 	
 	
 	// ================================================

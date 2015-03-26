@@ -150,32 +150,32 @@ public class DatabaseInventory : MonoBehaviour {
 		Item item;
 		if(PlayerPrefs.GetString("Equiped Item type" + i) == "Axe"){
 			item = new Axe();
-			item.useItem();
+			item.useItem(player);
 			//add item to axe slot
 		}
 		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Ring"){
 			item = new Ring();
-			item.useItem();
+			item.useItem(player);
 			//add item to ring slot);
 		}
 		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Chest"){
 			item = new Chest();
-			item.useItem();
+			item.useItem(player);
 			//add item to chest slot
 		}
 		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Boots"){
 			item = new Boots();
-			item.useItem();
+			item.useItem(player);
 			//add item to boots slot
 		}
 		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Amulet"){
 			item = new Amulet();
-			item.useItem();
+			item.useItem(player);
 			//add item to amulet slot
 		}
 		else if(PlayerPrefs.GetString("Equiped Item type" + i) == "Sword"){
 			item = new Sword();
-			item.useItem();
+			item.useItem(player);
 			//add item to sword slot
 		}
 	}

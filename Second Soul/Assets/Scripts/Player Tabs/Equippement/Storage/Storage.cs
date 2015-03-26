@@ -260,7 +260,7 @@ public abstract class Storage : MonoBehaviour {
 	void dropEquipItem(){
 		foreach(EquipSlot slot in equipSlots){
 			if(slot.position.Contains(mousePositionInInventory()) && validEquipSlot(slot, targetItem)){
-				targetItem.useItem();
+				targetItem.useItem(player);
 				resetTargetItem();
 				return;
 			}
@@ -282,7 +282,7 @@ public abstract class Storage : MonoBehaviour {
 			resetTargetItem();
 		}
 		else{
-			targetItem.useItem();
+			targetItem.useItem(player);
 			removeItem(targetItem, inventorySlots, inventoryItems);
 			resetTargetItem();
 		}
@@ -400,7 +400,7 @@ public abstract class Storage : MonoBehaviour {
 		return (inInventoryWidthBoundaries() && Screen.height - Input.mousePosition.y > position.y + position.height/1.8f && Screen.height - Input.mousePosition.y < position.y + position.height);
 	}
 	
-	protected static bool validEquipSlot(EquipSlot slot, Item item){
+	public static bool validEquipSlot(EquipSlot slot, Item item){
 		return (item.GetType().IsSubclassOf(slot.type) || item.GetType() == slot.type);
 		/*if(slot.type == typeof(Weapon)){
 			return (slot.type == targetItem.GetType().BaseType);

@@ -16,7 +16,7 @@ Platform assembly: C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(laste
 Loading C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
 Platform assembly: C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.052 seconds
+- Completed reload, in  0.056 seconds
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -30,19 +30,119 @@ The class named 'EquippedItems' is abstract. The script class can't be abstract!
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Server Initialized.
+OnMasterServerEvent fired. 
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
- 0 sorcerer found
+Can't send RPC function since no connection was started.
  
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+(Filename:  Line: 2463)
 
-0
+Can't send RPC function since no connection was started.
  
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+(Filename:  Line: 2463)
+
+View ID SceneID: 4 Level Prefix: 1 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'SetPlayerInfo' because the networkView 'SceneID: 4 Level Prefix: 1' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID SceneID: 4 Level Prefix: 1 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'ReceiveInfoFromServer' because the networkView 'SceneID: 4 Level Prefix: 1' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 
 1
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
@@ -50,9 +150,173 @@ Network (ClientNetwork)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-1
+Database (DatabaseSorcerer)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Received state update for view id' AllocatedID: 150' but the NetworkView doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID SceneID: 4 Level Prefix: 1 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Received state update for view id' SceneID: 4 Level Prefix: 1' but the NetworkView doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Player.busyHUD () [0x00000] in <filename unknown>:0 
+  at Player.playerLogic () [0x00000] in <filename unknown>:0 
+  at Sorcerer.sorcererUpdate () [0x00000] in <filename unknown>:0 
+  at Mage.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 
 WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
 The tree Bush5 must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
@@ -63,440 +327,4024 @@ The tree RockMesh must use the Nature/Soft Occlusion shader. Otherwise billboard
  
 (Filename:  Line: 80)
 
-UnloadTime: 1.424738 ms
+UnloadTime: 2.601050 ms
 Unloading 8 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 14693.
-Total: 2.204346 ms (FindLiveObjects: 0.368039 ms CreateObjectMapping: 0.103688 ms MarkObjects: 0.738910 ms  DeleteObjects: 0.266475 ms)
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 15014.
+Total: 2.995985 ms (FindLiveObjects: 0.623190 ms CreateObjectMapping: 0.171280 ms MarkObjects: 1.313265 ms  DeleteObjects: 0.380425 ms)
 
 WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
-OnMasterServerEvent fired. 
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 150 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 150' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CharacterNetworkScript.changeHealthPoints (System.String healthValue) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+could successfully set new sorcerer's position to old's.
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-UnloadTime: 10.192225 ms
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 424 unused Assets to reduce memory usage. Loaded Objects now: 6214.
-Total: 4.943412 ms (FindLiveObjects: 0.176588 ms CreateObjectMapping: 0.059452 ms MarkObjects: 1.911683 ms  DeleteObjects: 2.153740 ms)
-
-4
+could successfully set new sorcerer's rotation to old's.
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
-Unity Notification Bar Constructor Initialized..
+Internal RPC error. Invalid RPC index, function not registered.
+ 
+(Filename:  Line: 2463)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CharacterNetworkScript.changeHealthPoints (System.String healthValue) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+1
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Platform assembly: C:\Users\Marouen's Laptop\Documents\Project-Second-Soul(lastest)\Second Soul\TestingSorcererMovement_Data\Managed\Boo.Lang.dll (this message is harmless)
-Dungeon
+2
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+could successfully set new sorcerer's position to old's.
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+could successfully set new sorcerer's rotation to old's.
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+null
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+null
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+null
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+Network (ClientNetwork)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+AStar (PathFinding)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-UnloadTime: 5.682322 ms
-Hey the Network game object is probably missing in this scene. (If it's the case the chat won't work).
+Teleporter (LinkedSceneForest)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 107 unused Assets to reduce memory usage. Loaded Objects now: 10917.
-Total: 6.922334 ms (FindLiveObjects: 0.294077 ms CreateObjectMapping: 0.098025 ms MarkObjects: 4.404092 ms  DeleteObjects: 1.428985 ms)
-
-WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
-Dungeon
+Mini Map (MiniMap)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+Display Stats (DisplayPlayerStatsNew)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+playerIcon (PlayerIcon)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+Main Camera (OnHoverTransparent)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+AStar (Grid)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+Database (DatabaseSorcerer)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+2
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Dungeon
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+could successfully set new sorcerer's position to old's.
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-UnloadTime: 4.561570 ms
-Hey the Network game object is probably missing in this scene. (If it's the case the chat won't work).
+could successfully set new sorcerer's rotation to old's.
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
+Internal RPC error. Invalid RPC index, function not registered.
  
-(Filename:  Line: 1998)
+(Filename:  Line: 2463)
 
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
  
-(Filename:  Line: 1998)
+(Filename:  Line: -1)
 
-Default clip could not be found in attached animations list.
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
  
-(Filename:  Line: 395)
+(Filename:  Line: -1)
 
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
  
-(Filename:  Line: 1998)
+(Filename:  Line: -1)
 
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
  
-(Filename:  Line: 1998)
+(Filename:  Line: -1)
 
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'Attack1' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-The AnimationClip 'Attack2' used by the Animation component 'RockGolem' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-The AnimationClip 'spell' used by the Animation component 'daemon4_0' must be marked as Legacy.
- 
-(Filename:  Line: 1998)
-
-Default clip could not be found in attached animations list.
- 
-(Filename:  Line: 395)
-
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 121 unused Assets to reduce memory usage. Loaded Objects now: 9832.
-Total: 7.080166 ms (FindLiveObjects: 0.289831 ms CreateObjectMapping: 0.098733 ms MarkObjects: 5.136986 ms  DeleteObjects: 0.856046 ms)
-
-WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
-Local server connection disconnected
+1
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Network (ClientNetwork)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (PathFinding)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Teleporter (LinkedSceneForest)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Mini Map (MiniMap)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Display Stats (DisplayPlayerStatsNew)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+playerIcon (PlayerIcon)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Main Camera (OnHoverTransparent)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (Grid)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Database (DatabaseSorcerer)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+View ID AllocatedID: 152 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'changeHealthPoints' because the networkView 'AllocatedID: 152' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 152 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Received state update for view id' AllocatedID: 152' but the NetworkView doesn't exist
+ 
+(Filename:  Line: 2474)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Internal RPC error. Invalid RPC index, function not registered.
+ 
+(Filename:  Line: 2463)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CharacterNetworkScript.changeHealthPoints (System.String healthValue) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+1
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Network (ClientNetwork)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (PathFinding)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Teleporter (LinkedSceneForest)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Mini Map (MiniMap)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Display Stats (DisplayPlayerStatsNew)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+playerIcon (PlayerIcon)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Main Camera (OnHoverTransparent)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (Grid)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Database (DatabaseSorcerer)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+View ID AllocatedID: 153 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 153' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 153 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 153' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 153 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 153' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 153 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 153' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 153 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'changeHealthPoints' because the networkView 'AllocatedID: 153' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 153 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 153' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 153 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 153' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 153 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerRunAnim' because the networkView 'AllocatedID: 153' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+View ID AllocatedID: 153 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'triggerIdleAnim' because the networkView 'AllocatedID: 153' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Internal RPC error. Invalid RPC index, function not registered.
+ 
+(Filename:  Line: 2463)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CharacterNetworkScript.changeHealthPoints (System.String healthValue) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+1
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Network (ClientNetwork)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (PathFinding)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Teleporter (LinkedSceneForest)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Mini Map (MiniMap)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Display Stats (DisplayPlayerStatsNew)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+playerIcon (PlayerIcon)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Main Camera (OnHoverTransparent)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (Grid)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Database (DatabaseSorcerer)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+View ID AllocatedID: 154 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'changeHealthPoints' because the networkView 'AllocatedID: 154' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Internal RPC error. Invalid RPC index, function not registered.
+ 
+(Filename:  Line: 2463)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CharacterNetworkScript.changeHealthPoints (System.String healthValue) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+1
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Network (ClientNetwork)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (PathFinding)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Teleporter (LinkedSceneForest)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Mini Map (MiniMap)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Display Stats (DisplayPlayerStatsNew)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+playerIcon (PlayerIcon)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Main Camera (OnHoverTransparent)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (Grid)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Database (DatabaseSorcerer)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+View ID AllocatedID: 155 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Received state update for view id' AllocatedID: 155' but the NetworkView doesn't exist
+ 
+(Filename:  Line: 2474)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CharacterNetworkScript.changeHealthPoints (System.String healthValue) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Internal RPC error. Invalid RPC index, function not registered.
+ 
+(Filename:  Line: 2463)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+1
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Network (ClientNetwork)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (PathFinding)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Teleporter (LinkedSceneForest)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Mini Map (MiniMap)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Display Stats (DisplayPlayerStatsNew)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+playerIcon (PlayerIcon)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Main Camera (OnHoverTransparent)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (Grid)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Database (DatabaseSorcerer)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CharacterNetworkScript.changeHealthPoints (System.String healthValue) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Internal RPC error. Invalid RPC index, function not registered.
+ 
+(Filename:  Line: 2463)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at PlayerIcon.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+1
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's position to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+could successfully set new sorcerer's rotation to old's.
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Network (ClientNetwork)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (PathFinding)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Teleporter (LinkedSceneForest)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Mini Map (MiniMap)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Display Stats (DisplayPlayerStatsNew)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+playerIcon (PlayerIcon)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Main Camera (OnHoverTransparent)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+AStar (Grid)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+null
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Database (DatabaseSorcerer)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+2
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+View ID AllocatedID: 157 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1681)
+
+Could't invoke RPC function 'changeHealthPoints' because the networkView 'AllocatedID: 157' doesn't exist
+ 
+(Filename:  Line: 2474)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at MiniMap.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Component:InternalGetTransform ()
+  at UnityEngine.Component.get_transform () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Successfully diconnected from the server
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Successfully diconnected from the server
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Failed to send remove RPCs command to network
+ 
+(Filename:  Line: 2463)
+
+Couldn't send RPC function '__RPCNetworkDestroy'
+
+ 
+(Filename:  Line: 2463)
+
+False
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+The class named 'EquippedItems' is abstract. The script class can't be abstract!
+ 
+(Filename:  Line: 1638)
+
+UnloadTime: 12.417098 ms
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 768 unused Assets to reduce memory usage. Loaded Objects now: 2076.
+Total: 5.814675 ms (FindLiveObjects: 0.260105 ms CreateObjectMapping: 0.174465 ms MarkObjects: 2.196914 ms  DeleteObjects: 2.819751 ms)
 

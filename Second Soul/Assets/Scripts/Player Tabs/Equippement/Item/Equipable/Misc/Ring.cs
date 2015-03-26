@@ -19,9 +19,9 @@ public class Ring : Misc {
 		}
 	}
 
-	public override void useItem(){
+	/*public override void useItem(){
 		equip ();
-	}
+	}*/
 
 	public override int getPrice(){
 		return price;
@@ -35,7 +35,7 @@ public class Ring : Misc {
 		return description;
 	}
 
-	public override void equip(){
+	/*public override void equip(){
 		//Debug.Log(FighterItems.chestSlot.position);
 		foreach(EquipSlot slot in Storage.equipSlots){
 			if(slot.type == this.GetType()){
@@ -45,14 +45,14 @@ public class Ring : Misc {
 				/*Storage.equipSlots.Remove(slot);
 				FighterItems.chestSlot.item = this;
 				Storage.equipSlots.Add(FighterItems.chestSlot);*/
-				return;
+				/*return;
 			}
 		}
-	}
+	}*/
 	
-	public override void unequip(){
+	/*public override void unequip(){
 		
-	}
+	}*/
 	
 	public override Texture2D getImage(){
 		return RingModel.getImage();

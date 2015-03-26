@@ -19,9 +19,9 @@ public class Boots : Armor {
 		}
 	}
 	
-	public override void useItem(){
-		equip ();
-	}
+	/*public override void useItem(Inventory inventory){
+		equip (inventory);
+	}*/
 
 	public override int getPrice(){
 		return price;
@@ -35,13 +35,13 @@ public class Boots : Armor {
 		return description;
 	}
 	
-	public override void equip(){
+	/*public override void equip(){
 
-	}
+	}*/
 	
-	public override void unequip(){
+	/*public override void unequip(Inventory inventory){
 
-	}
+	}*/
 	
 	public override Texture2D getImage(){
 		return BootsModel.getImage();
