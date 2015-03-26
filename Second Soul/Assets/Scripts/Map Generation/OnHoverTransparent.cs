@@ -7,29 +7,22 @@ public class OnHoverTransparent : MonoBehaviour, ISorcererSubscriber {
 	public LayerMask checkLayers;
 	public LayerMask visibleLayer;
 	public LayerMask invisibleLayer;
-	public Material invisibleMaterial;
-	public Material wallMaterial;
 	GameObject mainCamera;
 	GameObject lastObject;
 	Fighter fighter;
 	Sorcerer sorcerer;
-	Color initialColor;
-	Material material;
+	List<GameObject> invisibleList;
 
 	// Use this for initialization
 	void Start () {
 
 		subscribeToSorcererInstancePublisher (); // jump into game
-
-		material = Instantiate (renderer.material) as Material;
-//		material.CopyPropertiesFromMaterial (renderer.material);
-		renderer.material = material;
-		initialColor = material.color;
 		fighter= GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
 		sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sorcerer= GameObject.FindObjectOfType (typeof (Sorcerer))as Sorcerer;
 		if(mainCamera == null){
 			mainCamera = GameObject.FindGameObjectWithTag("MainCamera") as GameObject;
 		}
+		invisibleList = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
@@ -43,18 +36,22 @@ public class OnHoverTransparent : MonoBehaviour, ISorcererSubscriber {
 			Player player = (fighter.playerEnabled)? (Player) fighter : sorcerer;
 			float distance = 1000;
 			RaycastHit[] hits = Physics.RaycastAll (mainCamera.transform.position, player.transform.position, distance,checkLayers);
-			List<GameObject> gameObjects = new List<GameObject>();
+			foreach (GameObject gO in invisibleList){
+				gO.layer = visibleLayer.value;
+			}
+			invisibleList = new List<GameObject>();
 			foreach(RaycastHit hit in hits){
-				gameObjects.Add(hit.collider.gameObject);
+				hit.collider.gameObject.layer = invisibleLayer.value;
+				invisibleList.Add(hit.collider.gameObject);
 			}
-			foreach(GameObject gO in gameObjects){
-				if (gO == this.gameObject){
-					this.gameObject.layer = invisibleLayer ;
-				}
-				else{
-					this.gameObject.layer = visibleLayer;
-					}
-			}
+//			foreach(GameObject gO in gameObjects){
+//				if (gO == this.gameObject){
+//					this.gameObject.layer = invisibleLayer.value;
+//				}
+//				else{
+//					this.gameObject.layer = visibleLayer.value;
+//					}
+//			}
 		}
 		
 	}
