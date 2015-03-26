@@ -6,18 +6,21 @@ public class TreasureChest : MonoBehaviour {
 	Animator animator;
 	
 	public Player player;
+	LootFactory lootFactory;
 	string openedAnimator;
+	string itemDropMethod;
+	float itemDropDelay;
 	private bool opened;
 
 	// Use this for initialization
 	void Start () {
 		opened = false;
 		findEnabledPlayer();
+		lootFactory = GameObject.FindObjectOfType<LootFactory> ();
 		animator = GetComponent<Animator> ();
 		openedAnimator = "opened";
-		//animation.Play (openClip.name);
-		//animator.Play("treasurechest_openAvatar");
-		//player = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
+		itemDropMethod = "delayedItemDrop";
+		itemDropDelay = 1.5f;
 	}
 	
 	// Update is called once per frame
@@ -28,7 +31,7 @@ public class TreasureChest : MonoBehaviour {
 	private void findEnabledPlayer(){
 		Player[] players = (Player[]) GameObject.FindObjectsOfType(typeof(Player));
 		foreach(Player p in players){
-			if(p.enabled){
+			if(p.playerEnabled){
 				player = p;
 			}
 		}
@@ -36,17 +39,18 @@ public class TreasureChest : MonoBehaviour {
 	
 	public void openChest(){
 		if(!opened){
-			int itemsToDrop = Random.Range(1,3);
-			for(int i = 0; i < itemsToDrop; i++){
-				LootFactory.determineDrop(1, transform.position);
-			}
-			
+			Invoke(itemDropMethod,itemDropDelay);		
 			opened = true;
 			animator.SetBool (openedAnimator, opened);
 		}
 		//Destroy (gameObject);
 	}
-	
+	void delayedItemDrop(){
+		int itemsToDrop = Random.Range(1,3);
+		for(int i = 0; i < itemsToDrop; i++){
+			lootFactory.determineDrop(1, transform.position);
+		}
+	}
 	void OnMouseDrag(){
 		player.treasureChest = this;
 	}

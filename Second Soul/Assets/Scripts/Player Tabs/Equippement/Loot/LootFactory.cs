@@ -5,8 +5,8 @@ using System.Reflection;
 
 public class LootFactory : MonoBehaviour {
 	
-	public static Player player;
-	public static ItemHolder itemHolderPrefab;
+	Player player;
+	public ItemHolder itemHolderPrefab;
 	
 	private static Dictionary<System.Type, LootWeights> items;
 	private static int weightSum;
@@ -26,17 +26,16 @@ public class LootFactory : MonoBehaviour {
 	void Start () {
 		items = new Dictionary<System.Type, LootWeights>();
 		initializeItemsAndWeights();
+		Fighter fighter = GameObject.FindObjectOfType(typeof(Fighter))as Fighter;
+		Sorcerer sorcerer = (Sorcerer)SorcererInstanceManager.getSorcerer ();
+		player = (fighter.playerEnabled)? (Player) fighter : sorcerer;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-	
-	public void setFactoryVariables(ItemHolder i, Player p){
-		itemHolderPrefab = i;
-		player = p;
-	}
+
 	
 	void initializeItemsAndWeights(){
 		weightSum = 0;
@@ -52,7 +51,7 @@ public class LootFactory : MonoBehaviour {
 		items.Add(type, new LootWeights(weight, weightSum));
 	}
 	
-	public static void determineDrop(float dropRate, Vector3 originPostion){
+	public void determineDrop(float dropRate, Vector3 originPostion){
 		int dropRoll = Random.Range(1,100);
 		
 		if(dropRoll <= (int)(dropRate * 100)){

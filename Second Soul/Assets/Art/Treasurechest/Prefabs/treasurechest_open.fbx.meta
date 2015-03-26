@@ -888,7 +888,387 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 180
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: group_cpin
+        weight: 1
+      - path: group_cpin/polySurface174
+        weight: 1
+      - path: group_cpin/polySurface175
+        weight: 1
+      - path: group_cpin/polySurface176
+        weight: 1
+      - path: group_cpin/polySurface177
+        weight: 1
+      - path: group_cpin/polySurface178
+        weight: 1
+      - path: group_cpin/polySurface179
+        weight: 1
+      - path: group_cpin/polySurface180
+        weight: 1
+      - path: group_cpin/polySurface181
+        weight: 1
+      - path: group_cpin/polySurface182
+        weight: 1
+      - path: group_cpin/polySurface183
+        weight: 1
+      - path: group_cpin/polySurface184
+        weight: 1
+      - path: group_cpin/polySurface185
+        weight: 1
+      - path: group_cpin/polySurface186
+        weight: 1
+      - path: group_cpin/polySurface187
+        weight: 1
+      - path: group_cpin/polySurface188
+        weight: 1
+      - path: group_cpin/polySurface189
+        weight: 1
+      - path: group_cpin/polySurface190
+        weight: 1
+      - path: group_cpin/polySurface191
+        weight: 1
+      - path: group_cpin/polySurface192
+        weight: 1
+      - path: group_cpin/polySurface193
+        weight: 1
+      - path: group_cpin/polySurface194
+        weight: 1
+      - path: group_cpin/polySurface195
+        weight: 1
+      - path: group_cpin/polySurface196
+        weight: 1
+      - path: group_cpin/polySurface197
+        weight: 1
+      - path: group_cpin/polySurface198
+        weight: 1
+      - path: group_cpin/polySurface199
+        weight: 1
+      - path: group_cpin/polySurface200
+        weight: 1
+      - path: group_cpin/polySurface201
+        weight: 1
+      - path: group_cpin/polySurface202
+        weight: 1
+      - path: group_cpin/polySurface203
+        weight: 1
+      - path: group_cpin/polySurface204
+        weight: 1
+      - path: group_cpin/polySurface205
+        weight: 1
+      - path: group_cpin/polySurface206
+        weight: 1
+      - path: group_cpin/polySurface207
+        weight: 1
+      - path: group_cpin/polySurface208
+        weight: 1
+      - path: group_cpin/polySurface209
+        weight: 1
+      - path: group_cpin/polySurface210
+        weight: 1
+      - path: group_cpin/polySurface211
+        weight: 1
+      - path: group_cpin/polySurface212
+        weight: 1
+      - path: group_cpin/polySurface213
+        weight: 1
+      - path: group_cpin/polySurface214
+        weight: 1
+      - path: group_cpin/polySurface215
+        weight: 1
+      - path: group_cpin/polySurface216
+        weight: 1
+      - path: group_cpin/polySurface217
+        weight: 1
+      - path: group_cpin/polySurface218
+        weight: 1
+      - path: group_cpin/polySurface219
+        weight: 1
+      - path: group_cpin/polySurface220
+        weight: 1
+      - path: group_cpin/polySurface221
+        weight: 1
+      - path: group_cpin/polySurface222
+        weight: 1
+      - path: group_cpin/polySurface223
+        weight: 1
+      - path: group_cpin/polySurface224
+        weight: 1
+      - path: group_cpin/polySurface225
+        weight: 1
+      - path: group_cpin/polySurface226
+        weight: 1
+      - path: group_cpin/polySurface227
+        weight: 1
+      - path: group_cpin/polySurface228
+        weight: 1
+      - path: group_cpin/polySurface229
+        weight: 1
+      - path: group_cpin/polySurface230
+        weight: 1
+      - path: group_cpin/polySurface231
+        weight: 1
+      - path: group_cpin/polySurface232
+        weight: 1
+      - path: group_cpin/polySurface233
+        weight: 1
+      - path: group_cpin/polySurface234
+        weight: 1
+      - path: group_cpin/polySurface235
+        weight: 1
+      - path: group_cpin/polySurface236
+        weight: 1
+      - path: group_cpin/polySurface237
+        weight: 1
+      - path: group_cpin/polySurface238
+        weight: 1
+      - path: group_cpin/polySurface239
+        weight: 1
+      - path: group_cpin/polySurface240
+        weight: 1
+      - path: group_cpin/polySurface241
+        weight: 1
+      - path: group_cpin/polySurface242
+        weight: 1
+      - path: group_cpin/polySurface243
+        weight: 1
+      - path: group_cpin/polySurface244
+        weight: 1
+      - path: group_cpin/polySurface245
+        weight: 1
+      - path: group_cpin/polySurface246
+        weight: 1
+      - path: group_cpin/polySurface247
+        weight: 1
+      - path: group_cpin/polySurface248
+        weight: 1
+      - path: group_cpin/polySurface249
+        weight: 1
+      - path: group_cpin/polySurface250
+        weight: 1
+      - path: group_cpin/polySurface251
+        weight: 1
+      - path: group_cpin/polySurface252
+        weight: 1
+      - path: group_cpin/polySurface253
+        weight: 1
+      - path: group_cpin/polySurface254
+        weight: 1
+      - path: group_cpin/polySurface255
+        weight: 1
+      - path: group_cpin/polySurface256
+        weight: 1
+      - path: group_cpin/polySurface257
+        weight: 1
+      - path: group_cpin/polySurface258
+        weight: 1
+      - path: group_cpin/polySurface259
+        weight: 1
+      - path: group_cpin/polySurface260
+        weight: 1
+      - path: group_cpin/polySurface261
+        weight: 1
+      - path: group_cpin/polySurface262
+        weight: 1
+      - path: group_cpin/polySurface263
+        weight: 1
+      - path: group_cpin/polySurface264
+        weight: 1
+      - path: group_cpin/polySurface265
+        weight: 1
+      - path: group_cpin/polySurface266
+        weight: 1
+      - path: group_cpin/polySurface267
+        weight: 1
+      - path: group_cpin/polySurface268
+        weight: 1
+      - path: group_cpin/polySurface269
+        weight: 1
+      - path: group_cpin/polySurface270
+        weight: 1
+      - path: group_cpin/polySurface271
+        weight: 1
+      - path: group_cpin/polySurface272
+        weight: 1
+      - path: group_cpin/polySurface273
+        weight: 1
+      - path: group_cpin/polySurface274
+        weight: 1
+      - path: group_cpin/polySurface275
+        weight: 1
+      - path: group_cpin/polySurface276
+        weight: 1
+      - path: group_cpin/polySurface277
+        weight: 1
+      - path: group_cpin/polySurface278
+        weight: 1
+      - path: group_cpin/polySurface279
+        weight: 1
+      - path: group_cpin/polySurface280
+        weight: 1
+      - path: group_cpin/polySurface281
+        weight: 1
+      - path: group_cpin/polySurface282
+        weight: 1
+      - path: group_cpin/polySurface283
+        weight: 1
+      - path: group_cpin/polySurface284
+        weight: 1
+      - path: group_cpin/polySurface285
+        weight: 1
+      - path: group_cpin/polySurface286
+        weight: 1
+      - path: group_cpin/polySurface287
+        weight: 1
+      - path: group_cpin/polySurface288
+        weight: 1
+      - path: group_cpin/polySurface289
+        weight: 1
+      - path: group_cpin/polySurface290
+        weight: 1
+      - path: group_cpin/polySurface291
+        weight: 1
+      - path: group_cpin/polySurface292
+        weight: 1
+      - path: group_cpin/polySurface293
+        weight: 1
+      - path: group_cpin/polySurface294
+        weight: 1
+      - path: group_cpin/polySurface295
+        weight: 1
+      - path: group_cpin/polySurface296
+        weight: 1
+      - path: group_cpin/polySurface297
+        weight: 1
+      - path: group_cpin/polySurface298
+        weight: 1
+      - path: group_cpin/polySurface299
+        weight: 1
+      - path: group_cpin/polySurface300
+        weight: 1
+      - path: group_cpin/polySurface301
+        weight: 1
+      - path: group_cpin/polySurface302
+        weight: 1
+      - path: group_cpin/polySurface303
+        weight: 1
+      - path: group_cpin/polySurface304
+        weight: 1
+      - path: group_cpin/polySurface305
+        weight: 1
+      - path: group_cpin/polySurface306
+        weight: 1
+      - path: group_cpin/polySurface307
+        weight: 1
+      - path: group_cpin/polySurface308
+        weight: 1
+      - path: group_cpin/polySurface309
+        weight: 1
+      - path: group_cpin/polySurface310
+        weight: 1
+      - path: group_cpin/polySurface311
+        weight: 1
+      - path: group_cpin/polySurface312
+        weight: 1
+      - path: group_cpin/polySurface313
+        weight: 1
+      - path: group_cpin/polySurface314
+        weight: 1
+      - path: group_cpin/polySurface315
+        weight: 1
+      - path: group_cpin/polySurface316
+        weight: 1
+      - path: group_cpin/polySurface317
+        weight: 1
+      - path: group_cpin/polySurface318
+        weight: 1
+      - path: group_cpin/polySurface319
+        weight: 1
+      - path: group_cpin/polySurface320
+        weight: 1
+      - path: group_cpin/polySurface321
+        weight: 1
+      - path: group_cpin/polySurface322
+        weight: 1
+      - path: group_cpin/polySurface323
+        weight: 1
+      - path: group_cpin/polySurface324
+        weight: 1
+      - path: group_cpin/polySurface325
+        weight: 1
+      - path: group_cpin/polySurface326
+        weight: 1
+      - path: group_cpin/polySurface327
+        weight: 1
+      - path: group_cpin/polySurface328
+        weight: 1
+      - path: group_cpin/polySurface329
+        weight: 1
+      - path: group_cpin/polySurface330
+        weight: 1
+      - path: group_cpin/polySurface331
+        weight: 1
+      - path: group_cpin/polySurface332
+        weight: 1
+      - path: group_cpin/polySurface333
+        weight: 1
+      - path: group_cpin/polySurface334
+        weight: 1
+      - path: group_cpin/polySurface335
+        weight: 1
+      - path: group_cpin/polySurface336
+        weight: 1
+      - path: group_cpin/polySurface337
+        weight: 1
+      - path: group_cpin/polySurface338
+        weight: 1
+      - path: group_cpin/polySurface339
+        weight: 1
+      - path: group_cpin/polySurface340
+        weight: 1
+      - path: group_cpin/polySurface341
+        weight: 1
+      - path: group_cpin/polySurface342
+        weight: 1
+      - path: group_treasurechest
+        weight: 1
+      - path: group_treasurechest/group_huta
+        weight: 1
+      - path: group_treasurechest/group_huta/obj_huta
+        weight: 1
+      - path: group_treasurechest/group_huta/obj_jou
+        weight: 1
+      - path: group_treasurechest/obj_hako
+        weight: 1
+      - path: joint1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
