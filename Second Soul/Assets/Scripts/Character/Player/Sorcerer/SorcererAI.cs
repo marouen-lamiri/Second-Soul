@@ -12,8 +12,8 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	private Enemy lockedOn;
 	private bool status;
 	private float timeOut;
-	private float timeOutReset = 8f;
-	private float basicTimeOutReset = 2f;
+	private float timeOutReset = 10f;
+	private float basicTimeOutReset = 5f;
 	private Vector3 direction;
 	private ISkill skill1;
 	private int randomMinValue = 0;
@@ -125,37 +125,39 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	//gives the orders to the AI
 	void movingAI(){
 		//checks if there is a player controlling the sorcerer
-		if(checkAIPlayingStatus() && determineNextMove()){
+		if(checkAIPlayingStatus()){
 			int randomTech = Random.Range(randomMinValue,randomMaxValue);
 			nearestEnemy = checkNearestEnemy();
 			sorcerer.target = nearestEnemy;
 			//checks if there is a nearby enemy in respect to the fighter, otherwise it will ignore any enemies
-			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < radiusCheck * 2 && timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < radiusCheck * 2 ){
+			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < radiusCheck * 2 &&
+			   timeOut <= 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < radiusCheck * 2 
+			   && determineNextMove()){
 				sorcerer.stopMoving();
 				//will decide what to use based on probability, which can be tweeked
 				//randomTech determines the next attack
 				//This represents the default attack
-				if(randomTech <= basicRanged && timeOut <= 0){
+				if(randomTech <= basicRanged && timeOut <= 0 && determineNextAttack()){
 					sorcerer.activeSkill5.useSkill();
 					timeOut = basicTimeOutReset;
 				}
 				//skill chance of happeining is 0.5%
-				if((randomTech == skillThreshold1) && fighter.energy >= energyCheck && timeOut <= 0){
+				if((randomTech == skillThreshold1) && fighter.energy >= energyCheck && timeOut <= 0 && determineNextAttack()){
 					sorcerer.activeSkill2.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 0.5%
-				if((randomTech == skillThreshold2) && fighter.energy >= energyCheck && timeOut <= 0){
+				if((randomTech == skillThreshold2) && fighter.energy >= energyCheck && timeOut <= 0 && determineNextAttack()){
 					sorcerer.activeSkill3.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 0.5%
-				if((randomTech == skillThreshold3) && fighter.energy >= energyCheck && timeOut <= 0){
+				if((randomTech == skillThreshold3) && fighter.energy >= energyCheck && timeOut <= 0 && determineNextAttack()){
 					sorcerer.activeSkill4.useSkill();
 					timeOut = timeOutReset;
 				}
 				//skill chance of happeining is 0.5%
-				if((randomTech == skillThreshold4) && fighter.energy >= energyCheck && timeOut <= 0){
+				if((randomTech == skillThreshold4) && fighter.energy >= energyCheck && timeOut <= 0 && determineNextAttack()){
 					sorcerer.activeSkill1.useSkill();
 					timeOut = timeOutReset;
 				}
@@ -183,7 +185,16 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	//Determine if the sorcerer is going to perform an action 
 	public bool determineNextMove(){
 		int randomTech = Random.Range(randomMinValue, randomMaxValue);
-		if(randomTech >= 190){
+		if(randomTech >= 160){
+			return true;
+		}
+		return false;
+	}
+
+	//Determine if the sorcerer is going to perform an action 
+	public bool determineNextAttack(){
+		int randomTech = Random.Range(randomMinValue, randomMaxValue);
+		if(randomTech >= 80){
 			return true;
 		}
 		return false;
