@@ -6,6 +6,7 @@ public class TreasureChest : MonoBehaviour {
 	Animator animator;
 	
 	public Player player;
+	LootFactory lootFactory;
 	string openedAnimator;
 	private bool opened;
 
@@ -13,6 +14,7 @@ public class TreasureChest : MonoBehaviour {
 	void Start () {
 		opened = false;
 		findEnabledPlayer();
+		lootFactory = GameObject.FindObjectOfType<LootFactory> ();
 		animator = GetComponent<Animator> ();
 		openedAnimator = "opened";
 		//animation.Play (openClip.name);
@@ -38,7 +40,7 @@ public class TreasureChest : MonoBehaviour {
 		if(!opened){
 			int itemsToDrop = Random.Range(1,3);
 			for(int i = 0; i < itemsToDrop; i++){
-				LootFactory.determineDrop(1, transform.position);
+				lootFactory.determineDrop(1, transform.position);
 			}
 			
 			opened = true;
