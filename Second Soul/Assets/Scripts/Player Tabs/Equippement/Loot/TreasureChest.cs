@@ -30,7 +30,7 @@ public class TreasureChest : MonoBehaviour {
 	private void findEnabledPlayer(){
 		Player[] players = (Player[]) GameObject.FindObjectsOfType(typeof(Player));
 		foreach(Player p in players){
-			if(p.enabled){
+			if(p.playerEnabled){
 				player = p;
 			}
 		}
