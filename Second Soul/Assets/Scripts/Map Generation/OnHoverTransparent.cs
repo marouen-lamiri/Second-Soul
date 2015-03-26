@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class OnHoverTransparent : MonoBehaviour, ISorcererSubscriber {
 	
 	public LayerMask checkLayers;
+	string visibleLayerName;
+	string invisibleLayerName;
 	public LayerMask visibleLayer;
 	public LayerMask invisibleLayer;
 	GameObject mainCamera;
@@ -23,6 +25,8 @@ public class OnHoverTransparent : MonoBehaviour, ISorcererSubscriber {
 			mainCamera = GameObject.FindGameObjectWithTag("MainCamera") as GameObject;
 		}
 		invisibleList = new List<GameObject>();
+		visibleLayerName = "Structure";
+		invisibleLayerName = "unwalkable";
 	}
 	
 	// Update is called once per frame
@@ -34,15 +38,17 @@ public class OnHoverTransparent : MonoBehaviour, ISorcererSubscriber {
 		}
 		else{
 			Player player = (fighter.playerEnabled)? (Player) fighter : sorcerer;
-			float distance = 1000;
+			float distance = Vector3.Distance(mainCamera.transform.position,player.transform.position);
 			RaycastHit[] hits = Physics.RaycastAll (mainCamera.transform.position, player.transform.position, distance,checkLayers);
 			foreach (GameObject gO in invisibleList){
-				gO.layer = visibleLayer.value;
+				gO.layer = LayerMask.NameToLayer(visibleLayerName);
 			}
 			invisibleList = new List<GameObject>();
 			foreach(RaycastHit hit in hits){
-				hit.collider.gameObject.layer = invisibleLayer.value;
-				invisibleList.Add(hit.collider.gameObject);
+				if(Vector3.Distance (mainCamera.transform.position,hit.collider.gameObject.transform.position)<distance){
+					hit.collider.gameObject.layer = LayerMask.NameToLayer(invisibleLayerName);
+					invisibleList.Add(hit.collider.gameObject);
+				}
 			}
 //			foreach(GameObject gO in gameObjects){
 //				if (gO == this.gameObject){
