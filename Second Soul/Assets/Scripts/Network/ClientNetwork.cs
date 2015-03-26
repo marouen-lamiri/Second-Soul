@@ -603,17 +603,25 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 				}
 			}
 			GUI.color = chatTextAreaColor;
+			GUI.backgroundColor = defaultGUIBackgroundColor;
 
 			// draw chat text area:
 			if((Network.isClient || Network.isServer)) {
 
-				//scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(100), GUILayout.Height(100));
+				// this now just serves as a background for the chat labels: (since I can't make a textArea scrollable, only textLabels)
+				GUI.TextArea(new Rect(networkWindowX + chatInputOffsetX, chatTextAreaOffsetY, chatTextAreaWidth, chatTextAreaHeight), ""); // style // "box"
 
-				// GUI.TextArea(new Rect(250, 100, 300, 100), _messageLog, labelStyle);
-				// GUI.TextArea(new Rect(networkWindowX + 175, networkWindowY, chatTextAreaWidth, 125), _messageLog, style); // style // "box"
-				GUI.TextArea(new Rect(networkWindowX + chatInputOffsetX, chatTextAreaOffsetY, chatTextAreaWidth, chatTextAreaHeight), _messageLog); // style // "box"
+				// scrollable area:
+				GUILayout.BeginArea (new Rect(networkWindowX + chatInputOffsetX, chatTextAreaOffsetY, chatTextAreaWidth, chatTextAreaHeight));
+				Vector2 scrollPosition = new Vector2(networkWindowX + chatInputOffsetX, Mathf.Infinity);
+				scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(chatTextAreaWidth), GUILayout.Height(chatTextAreaHeight));
 
-				//GUILayout.EndScrollView();
+				// setting the "y" value of scrollPosition puts the scrollbar at the bottom
+				scrollPosition = new Vector2(scrollPosition.x, Mathf.Infinity);
+				GUILayout.Label (_messageLog);
+				GUILayout.EndScrollView();
+				GUILayout.EndArea ();
+
 			}
 
 			// reset default color for other GUI components:
