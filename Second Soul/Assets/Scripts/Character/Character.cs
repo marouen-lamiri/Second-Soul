@@ -372,10 +372,10 @@ public abstract class Character : MonoBehaviour {
 			arriveScript.enabled = (steeringScript.Velocity.magnitude>=speed/2)?true:false;
 			steeringScript.setTarget (goalPosition);
 		}
-		else if(Physics.Linecast(transform.position, goalPosition, obstacles)){
-			animateIdle();
-			return;
-		}
+//		else if(Physics.Linecast(transform.position, goalPosition, obstacles)){
+//			animateIdle();
+//			return;
+//		}
 		else {
 
 			pathing.findPath(transform.position, goalPosition);
