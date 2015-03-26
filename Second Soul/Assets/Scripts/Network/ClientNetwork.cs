@@ -13,8 +13,8 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	// Old code to keep to use a localhost connection on one computer:
 	// TODO remove 
-		public string serverIP = "127.0.0.1";
-		public string serverLocalIP;
+		//public string serverIP = "127.0.0.1";
+		public string serverLocalIP = "172.30.77.43"; // change this depending on the network, get it by running ipconfig in command line and get IPv4 address.
 		public int port = 25000;
 
 	// master server connection variables
@@ -480,7 +480,8 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 				GUI.Box(new Rect(SecondSoulLabelPositionX, SecondSoulLabelPositionY, SecondSoulLabelWitdh, SecondSoulLabelHeight),SecondSoulLabel, background);
 				GUI.Label (new Rect(networkChoicesLabelPositionX, networkChoicesLabelPositionY, networkChoicesLabelHeight, networkChoicesLabelWidth), networkChoicesLabel, style);
 				if (GUI.Button (new Rect (connectAsServerButtonPositionX, connectAsServerButtonPositionY, connectAsServerButtonWidth, connectAsServerButtonHeight), "Connect as a server", style)) {
-					StartServer();
+					// StartServer (); //TODO uncomment this is the master server code
+					Network.InitializeServer (10, port, false); // also to replace with real master server call StartServer();
 					displayChat = true;
 				}
 			}
@@ -694,7 +695,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	// for client: TODO comment back in:
 		private void ConnectToServer() {
-			Network.Connect(serverIP, port);
+			//Network.Connect(serverIP, port);
 			if (!Network.isClient) {
 				Network.Connect(serverLocalIP,port);
 			}
