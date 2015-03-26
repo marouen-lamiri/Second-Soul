@@ -3,6 +3,6 @@ using System.Collections;
 
 public interface IEquipable {
 	
-	void equip();
-	void unequip();
+	void equip(Player player);
+	void unequip(Player player);
 }

@@ -10,7 +10,7 @@ public class EquipSlot : Slot{
 	
 	public EquipSlot(Rect position) : base(position)
 	{
-	
+		this.item = null;
 	}
 	
 	public EquipSlot(Rect position, Item item ) : base(position)
@@ -21,5 +21,6 @@ public class EquipSlot : Slot{
 	public EquipSlot(Rect position, System.Type type ) : base(position)
 	{
 		this.type = type;
+		this.item = null;
 	}
 }
