@@ -19,9 +19,9 @@ public class Axe : Weapon {
 		}
 	}
 	
-	public override void useItem(){
+	/*public override void useItem(){
 		equip ();
-	}
+	}*/
 
 	public override int getPrice(){
 		return price;
@@ -35,24 +35,25 @@ public class Axe : Weapon {
 		return description;
 	}
 	
-	public override void equip(){
+	//moved up to weapon
+	/*public override void equip(){
 		//Debug.Log(FighterItems.chestSlot.position);
 		foreach(EquipSlot slot in Storage.equipSlots){
-			if(slot.type == this.GetType().BaseType){
+			if(Storage.validEquipSlot(slot, this)){
 				this.position = slot.position;	
 				Storage.equipItems.Add(this);
 				slot.item = this;
 				/*Storage.equipSlots.Remove(slot);
 				FighterItems.chestSlot.item = this;
 				Storage.equipSlots.Add(FighterItems.chestSlot);*/
-				return;
+				/*return;
 			}
 		}
-	}
+	}*/
 	
-	public override void unequip(){
+	/*public override void unequip(){
 		
-	}
+	}*/
 	
 	public override Texture2D getImage(){
 		return AxeModel.getImage();

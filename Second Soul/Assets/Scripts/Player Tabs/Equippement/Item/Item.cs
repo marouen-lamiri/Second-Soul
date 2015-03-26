@@ -22,7 +22,7 @@ public abstract class Item{
 	}
 
 	public abstract int getPrice();
-	public abstract void useItem();
+	public abstract void useItem(Player player);
 	public abstract Texture2D getImage();
 	public abstract int getWidth();
 	public abstract int getHeight();

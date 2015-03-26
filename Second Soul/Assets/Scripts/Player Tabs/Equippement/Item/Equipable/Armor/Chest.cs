@@ -19,9 +19,9 @@ public class Chest : Armor {
 		}
 	}
 
-	public override void useItem(){
-		equip ();
-	}
+	/*public override void useItem(Inventory inventory){
+		equip (inventory);
+	}*/
 
 	public override int getPrice(){
 		return price;
@@ -35,24 +35,24 @@ public class Chest : Armor {
 		return description;
 	}
 	
-	public override void equip(){
+	/*public override void equip(){
 		//Debug.Log(FighterItems.chestSlot.position);
 		foreach(EquipSlot slot in Storage.equipSlots){
-			if(slot.type == this.GetType()){
+			if(Storage.validEquipSlot(slot, this)){
 				this.position = slot.position;	
 				Storage.equipItems.Add(this);
 				slot.item = this;
 				/*Storage.equipSlots.Remove(slot);
 				FighterItems.chestSlot.item = this;
 				Storage.equipSlots.Add(FighterItems.chestSlot);*/
-				return;
+				/*return;
 			}
 		}
-	}
+	}*/
 	
-	public override void unequip(){
+	/*public override void unequip(Inventory inventory){
 	
-	}
+	}*/
 	
 	public override Texture2D getImage(){
 		return ChestModel.getImage();

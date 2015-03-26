@@ -16,8 +16,8 @@ public class ManaPotion : Potion {
 	
 	}
 
-	public override void useItem(){
-		consume ();
+	public override void useItem(Player player){
+		consume (player);
 	}
 
 	public override int getPrice(){
@@ -38,8 +38,8 @@ public class ManaPotion : Potion {
 		}
 	}
 
-	public override void consume(){
-		setPlayer();
+	public override void consume(Player player){
+		//setPlayer();
 		player.SendMessage(methodToCall, determineAmount());
 	}
 	

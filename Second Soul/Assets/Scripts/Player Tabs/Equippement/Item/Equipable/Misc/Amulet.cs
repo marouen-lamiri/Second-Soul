@@ -19,9 +19,9 @@ public class Amulet : Misc {
 		}
 	}
 
-	public override void useItem(){
-		equip ();
-	}
+	/*public override void useItem(Inventory inventory){
+		equip (inventory);
+	}*/
 
 	public override int getPrice(){
 		return price;
@@ -35,13 +35,13 @@ public class Amulet : Misc {
 		return description;
 	}
 	
-	public override void equip(){
+	/*public override void equip(){
 		
-	}
+	}*/
 	
-	public override void unequip(){
+	/*public override void unequip(){
 		
-	}
+	}*/
 	
 	public override Texture2D getImage(){
 		return AmuletModel.getImage();

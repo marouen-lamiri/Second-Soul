@@ -3,5 +3,5 @@ using System.Collections;
 
 public interface IConsumable {
 
-	void consume();
+	void consume(Player player);
 }

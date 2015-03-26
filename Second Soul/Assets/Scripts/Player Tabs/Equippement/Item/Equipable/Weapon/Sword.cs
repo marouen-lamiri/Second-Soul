@@ -18,9 +18,9 @@ public class Sword : Weapon {
 		}
 	}
 	
-	public override void useItem(){
+	/*public override void useItem(){
 		equip ();
-	}
+	}*/
 
 	public override int getPrice(){
 		return price;
@@ -34,13 +34,13 @@ public class Sword : Weapon {
 		return description;
 	}
 	
-	public override void equip(){
+	/*public override void equip(){
 		
-	}
+	}*/
 	
-	public override void unequip(){
+	/*public override void unequip(){
 		
-	}
+	}*/
 	
 	public override Texture2D getImage(){
 		return SwordModel.getImage();
