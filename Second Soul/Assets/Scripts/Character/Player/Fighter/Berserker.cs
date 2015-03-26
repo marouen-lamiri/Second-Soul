@@ -25,18 +25,18 @@ public class Berserker : Fighter {
 	}
 
 	protected override void initializePrimaryStats(){
-		strengthPerLvl = 3;
-		dexterityPerLvl = 2;
-		endurancePerLvl = 1;
+		strengthPerLvl = 5;
+		dexterityPerLvl = 3;
+		endurancePerLvl = 2;
 		
-		strength = 20;
-		dexterity = 15;
-		endurance = 10;
+		strength = 30;
+		dexterity = 25;
+		endurance = 40;
 	}
 
 	public override void initializeSecondaryStats(){
-		armor = 70;
-		fireResistance = 10;
+		armor = 200;
+		fireResistance = 30;
 		coldResistance = 10;
 		lightningtResistance = 10;
 		
@@ -46,9 +46,9 @@ public class Berserker : Fighter {
 		criticalChance = 0.3f;
 		criticalDamage = 2.5f;
 		
-		attackPower = 20f;
+		attackPower = 60f;
 
-		maxHealth = 200;
+		maxHealth = 1400;
 		
 		healthRegen = 0.5f;
 	}

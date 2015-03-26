@@ -242,8 +242,11 @@ public abstract class Player : Character {
 		if(playerEnabled && shop != null){
 			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || checkShops() || teleporter.checkBoundaries());
 		}
-		if(playerEnabled){
+		if(playerEnabled && teleporter != null){
 			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || teleporter.checkBoundaries());
+		}
+		if(playerEnabled){
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries());
 		}
 		return false;
 	}
