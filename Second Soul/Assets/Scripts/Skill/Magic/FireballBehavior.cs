@@ -8,6 +8,8 @@ public class FireballBehavior : ParticleBehavior {
 	public FireballSkill fireballSkill;
 	public Vector3 originalSpawn;
 	Component[] fireballComponents;
+	float travelDistance;
+	float speed;
 
 	// Use this for initialization
 	void Start () {
@@ -18,15 +20,19 @@ public class FireballBehavior : ParticleBehavior {
 	
 	// Update is called once per frame
 	void Update () {
-		if (caster == null) {
-			return;
-		}
-		if (fireballSkill == null) {
+		if (fireballSkill == null && caster != null) {
 			fireballSkill = (FireballSkill)skill;
 		}
-		if(Vector3.Distance(originalSpawn, transform.position) < fireballSkill.travelDistance){
+		if (caster == null && (travelDistance == null || speed == null)) {
+			return;
+		}
+		else{
+			travelDistance = fireballSkill.travelDistance;
+			speed = fireballSkill.speed;
+		}
+		if(Vector3.Distance(originalSpawn, transform.position) < travelDistance){
 			float oldY = transform.position.y;
-			transform.position += Time.deltaTime * fireballSkill.speed * transform.forward;
+			transform.position += Time.deltaTime * speed * transform.forward;
 			transform.position = new Vector3(transform.position.x, oldY, transform.position.z);
 		}
 		else{
@@ -40,14 +46,14 @@ public class FireballBehavior : ParticleBehavior {
 			return;
 		}
 //		this means that if the caster is a player, and the skill hit an enemy
-		if (caster.gameObject.GetComponent<Character> ().GetType ().IsSubclassOf (typeof(Player))){
+		if (casterType.IsSubclassOf (typeof(Player))){
 			if( !character.GetType ().IsSubclassOf (typeof(Player))){
-				character.takeDamage (skill.damage, skill.damageType);
+				character.takeDamage (damage, damageType);
 			}
 		} 
 		else {
 			if( character.GetType ().IsSubclassOf (typeof(Player))){
-				character.takeDamage (skill.damage, skill.damageType);
+				character.takeDamage (damage, damageType);
 			}
 		}
 	}
