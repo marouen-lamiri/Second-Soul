@@ -26,10 +26,10 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 	private int ObstacleIdentifier = 90;
 	private int emptySlotIdentifier = 0;
 	private int resizeTheWall = 10;
-	private int nbrMinRandom = 6;
-	private int nbrMaxRandom = 12;
-	private int nbrMinByRoom = 2;
-	private int nbrMaxByRoom = 4;
+	private int nbrMinRandom = 12;
+	private int nbrMaxRandom = 18;
+	private int nbrMinByRoom = 4;
+	private int nbrMaxByRoom = 6;
 	private int minDistance = 20;
 	private int layerNumber = 8;
 	private bool needsOffset = true;
@@ -142,14 +142,16 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 			int x = Random.Range(0, mapSizeX);
 			int z = Random.Range(0, mapSizeZ);
 			Vector3 position = new Vector3(x * resizeTheWall, 0, z * resizeTheWall);
-			if(map[x,z] != emptySlotIdentifier && map[x,z] < ObstacleIdentifier && LayerMask.GetMask() != layerNumber 
-			   && map[x-1,z] != emptySlotIdentifier && map[x,z-1] < ObstacleIdentifier && map[x-1,z-1] < ObstacleIdentifier
-			   && map[x-1,z] != charIdentifier && map[x,z-1] != charIdentifier && map[x-1,z-1] != charIdentifier){
-				map[x,z] = ObstacleIdentifier;
-				GameObject treasure = Network.Instantiate(treasureChest, position, Quaternion.Euler (0,0,0), 2) as GameObject;
-				treasure.transform.parent = GameObject.Find("Obstacles").transform;
-				DontDestroyOnLoad(treasure.transform.gameObject);
-				nbrTreasure--;
+			if(x < mapSizeX && z < mapSizeZ){
+				if(map[x,z] != emptySlotIdentifier && map[x,z] < ObstacleIdentifier && LayerMask.GetMask() != layerNumber 
+				   && map[x-1,z] != emptySlotIdentifier && map[x,z-1] < ObstacleIdentifier && map[x-1,z-1] < ObstacleIdentifier
+				   && map[x-1,z] != charIdentifier && map[x,z-1] != charIdentifier && map[x-1,z-1] != charIdentifier){
+					map[x,z] = ObstacleIdentifier;
+					GameObject treasure = Network.Instantiate(treasureChest, position, Quaternion.Euler (0,0,0), 2) as GameObject;
+					treasure.transform.parent = GameObject.Find("Obstacles").transform;
+					DontDestroyOnLoad(treasure.transform.gameObject);
+					nbrTreasure--;
+				}
 			}
 		}
 		return map;
@@ -305,7 +307,9 @@ public class MapGeneration : MonoBehaviour, ISorcererSubscriber {
 						zAdjusted = z;
 					}
 					if (map[(int)corridorEnds[i].x - xAdjusted, (int)corridorEnds[i].y - zAdjusted] == 0){
-						map[(int)corridorEnds[i].x - xAdjusted, (int)corridorEnds[i].y - zAdjusted] = -1;
+						if (map[(int)corridorStarts[i].x + xAdjusted, (int)corridorStarts[i].y + zAdjusted] == 0){
+							map[(int)corridorStarts[i].x + xAdjusted, (int)corridorStarts[i].y + zAdjusted] = -1;
+						}
 					}
 				}
 			}
