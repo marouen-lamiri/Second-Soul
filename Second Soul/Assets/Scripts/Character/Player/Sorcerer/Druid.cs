@@ -25,42 +25,42 @@ public class Druid : Sorcerer {
 	}
 
 	protected override void initializePrimaryStats(){
-		intelligencePerLvl = 1;
-		wisdomPerLvl = 3;
-		spiritPerLvl = 2;
+		intelligencePerLvl = 3;
+		wisdomPerLvl = 2;
+		spiritPerLvl = 1;
 		
-		intelligence = 10;
-		wisdom = 20;
-		spirit = 15;
+		intelligence = 20;
+		wisdom = 15;
+		spirit = 10;
 	}
-
+	
 	public override void initializeSecondaryStats(){
 		
-		castSpeed = 1f;
-		cdr = 0.3f;
-
-		spellCriticalChance = 0.3f;
-		spellCriticalDamage = 1.5f;
+		castSpeed = 2.8f;
+		cdr = 0.15f;
 		
-		spellPower = 10f;
+		spellCriticalChance = 0.2f;
+		spellCriticalDamage = 2.0f;
 		
-		fighter.maxEnergy = 200;
+		spellPower = 20f;
 		
-		energyRegen = 0.75f;
+		fighter.maxEnergy = 100;
+		
+		energyRegen = 0.5f;
 	}
 	
 	public override void initializeSecondaryStatsBase(){		
 		
-		castSpeedBase = 0.03f;
-		cdrBase = 0.03f;
+		castSpeedBase = 0.02f;
+		cdrBase = 0.02f;
 		
-		spCritChanBase = 0.02f;
-		spCritDmgBase = 0.01f;
+		spCritChanBase = 0.01f;
+		spCritDmgBase = 0.03f;
 		
-		spPowerBase = 0.01f;
+		spPowerBase = 0.03f;
 		
-		enBase = 3;
+		enBase = 2;
 		
-		enRegBase = 0.02f;
+		enRegBase = 0.01f;
 	}
 }

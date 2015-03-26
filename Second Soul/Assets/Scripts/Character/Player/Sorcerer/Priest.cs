@@ -26,42 +26,42 @@ public class Priest : Sorcerer {
 	}
 
 	protected override void initializePrimaryStats(){
-		intelligencePerLvl = 2;
-		wisdomPerLvl = 1;
-		spiritPerLvl = 3;
+		intelligencePerLvl = 3;
+		wisdomPerLvl = 2;
+		spiritPerLvl = 1;
 		
-		intelligence = 15;
-		wisdom = 10;
-		spirit = 20;
+		intelligence = 20;
+		wisdom = 15;
+		spirit = 10;
 	}
-
+	
 	public override void initializeSecondaryStats(){
 		
-		castSpeed = .6f;
-		cdr = 0f;
+		castSpeed = 2.8f;
+		cdr = 0.15f;
 		
-		spellCriticalChance = 0.1f;
-		spellCriticalDamage = 1.5f;
+		spellCriticalChance = 0.2f;
+		spellCriticalDamage = 2.0f;
 		
-		spellPower = 15.0f;
+		spellPower = 20f;
 		
-		fighter.maxEnergy = 300;
+		fighter.maxEnergy = 100;
 		
-		energyRegen = 1.0f;
+		energyRegen = 0.5f;
 	}
 	
 	public override void initializeSecondaryStatsBase(){		
 		
-		castSpeedBase = 0.01f;
-		cdrBase = 0.01f;
+		castSpeedBase = 0.02f;
+		cdrBase = 0.02f;
 		
-		spCritChanBase = 0.005f;
-		spCritDmgBase = 0.02f;
+		spCritChanBase = 0.01f;
+		spCritDmgBase = 0.03f;
 		
-		spPowerBase = 0.02f;
+		spPowerBase = 0.03f;
 		
-		enBase = 4;
+		enBase = 2;
 		
-		enRegBase = 0.03f;
+		enRegBase = 0.01f;
 	}
 }

@@ -25,52 +25,52 @@ public class Knight : Fighter {
 	}
 
 	protected override void initializePrimaryStats(){
-		strengthPerLvl = 2;
-		dexterityPerLvl = 1;
-		endurancePerLvl = 3;
+		strengthPerLvl = 5;
+		dexterityPerLvl = 3;
+		endurancePerLvl = 2;
 		
-		strength = 15;
-		dexterity = 10;
-		endurance = 20;
+		strength = 30;
+		dexterity = 25;
+		endurance = 40;
 	}
-
+	
 	public override void initializeSecondaryStats(){
-		armor = 60;
-		fireResistance = 15;
-		coldResistance = 15;
-		lightningtResistance = 15;
+		armor = 200;
+		fireResistance = 30;
+		coldResistance = 10;
+		lightningtResistance = 10;
 		
-		accuracy = 0.6f;
-		attackSpeed = 0.8f;
+		accuracy = 0.8f;
+		attackSpeed = 1.3f;
 		
-		criticalChance = 0.1f;
-		criticalDamage = 2.0f;
+		criticalChance = 0.3f;
+		criticalDamage = 2.5f;
 		
-		attackPower = 15.0f;
+		attackPower = 60f;
 		
-		maxHealth = 300;
+		maxHealth = 1400;
 		
-		healthRegen = 1.0f;
+		healthRegen = 0.5f;
 	}
 	
 	public override void initializeSecondaryStatsBase(){		
-		armorBase = 6;
-		fireResBase = 3;
-		coldResBase = 3;
-		lightResBase = 3;
+		armorBase = 7;
+		fireResBase = 1;
+		coldResBase = 1;
+		lightResBase = 1;
 		
-		accurBase = 0.0008f;
-		attSpeedBase = 0.008f;
+		accurBase = 0.001f;
+		attSpeedBase = 0.02f;
 		
 		attPowerBase = 0.01f;
 		
-		critChanBase = 0.005f;
-		critDmgBase = 0.015f;
+		critChanBase = 0.01f;
+		critDmgBase = 0.02f;
 		
-		attPowerBase = 0.018f;
+		attPowerBase = 0.025f;
 		
-		hpBase = 10;
+		hpBase = 5;
 		
-		hpRegBase = 0.03f;
+		hpRegBase = 0.01f;
 	}
 }
