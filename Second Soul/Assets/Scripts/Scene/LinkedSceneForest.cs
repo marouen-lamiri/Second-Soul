@@ -37,6 +37,7 @@ public class LinkedSceneForest : SceneManager, ISorcererSubscriber {
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, distance)){
 				if (hit.transform.name == teleporter){
+					Debug.Log ("pressed");
 					showMenu = true;
 				}
 			}
