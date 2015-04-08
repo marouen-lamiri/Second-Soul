@@ -78,7 +78,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	public bool displayChat;
 
-	string textFieldString = "--";
+	string textFieldString = "";
 	string textFieldStringInPreviousFrame;
 	bool selectTextField = true;
 
@@ -304,7 +304,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 			//displayChat = !displayChat;
 			displayChat = true;
 			framesCounterBeforeFadeOutChat = 0;
-			GUI.FocusControl(chatBoxGUIName); // not always working why?
+			//GUI.FocusControl(chatBoxGUIName); // not working here, has to be done in on GUI within if Network.isClient == true ... why?
 
 			// for chat's textArea fade out: on Return / Entre key pressed, reset the transparency value to 1.
 			chatTextAreaColor = new Color(defaultGUIBackgroundColor.r, defaultGUIBackgroundColor.g, defaultGUIBackgroundColor.b, 1.0f); // 1.0f;
@@ -487,6 +487,11 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 			// after connecting: if you're a server:
 			if(displayChat) {
 				if (Network.peerType == NetworkPeerType.Server) {
+
+					// focus the chat, only works if done here, reason unknown:
+					GUI.FocusControl(chatBoxGUIName); // not always working why?
+
+
 					GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 0, networkWindowButtonWidth, networkWindowButtonHeight), "Server", labelStyle);
 					GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 1, networkWindowButtonWidth, networkWindowButtonHeight), "Clients attached: " + Network.connections.Length, labelStyle);
 					
@@ -542,6 +547,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 						//_messageLog += textFieldString + "\n";
 						SendInfoToClient(textFieldString);
 						textFieldString = "";
+
 					}
 				}
 
@@ -562,6 +568,10 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 			// after connecting if you're a client:
 			if(displayChat) { // &&  !(Application.loadedLevelName != "StartScreen")
 				if (Network.peerType == NetworkPeerType.Client) {
+
+					// focus the chat, only works if done here, reason unknown:
+					GUI.FocusControl(chatBoxGUIName); // not always working why?
+
 					GUI.Label(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 0, 150, networkWindowButtonHeight), "client", labelStyle);
 					
 					if (GUI.Button(new Rect(networkWindowButtonsOffsetX, networkWindowButtonsOffsetY + networkWindowButtonHeight * 1, 150, networkWindowButtonHeight), "Logout")) {
@@ -586,6 +596,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 						//_messageLog += textFieldString + "\n";
 						SendInfoToServer(textFieldString);
 						textFieldString = "";
+
 					}
 					
 				}
@@ -680,7 +691,8 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 				}
 			}
 		}
-		
+
+
 	}
 
 
