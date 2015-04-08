@@ -284,7 +284,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 		// this is for hidding the chat's input textBar
 		framesCounterBeforeFadeOutChat = 0;
-		numberOfFramesToWaitBeforeFadingOutChat = 800;
+		numberOfFramesToWaitBeforeFadingOutChat = 100;//800;
 
 		// this is for hidding the chat's textArea
 		numberOfFramesAfterChatButtonsWereHiddenBecauseInactive = numberOfFramesForChatTextAreaFadeOutDuration + 1; // by default it's already invisible.
@@ -299,7 +299,7 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	public void Update() {
 		
-		// toggle display chat window:
+		// display chat window on enter:
 		if(Input.GetKeyDown ("enter") || Input.GetKeyDown ("return")){ //if(Input.GetKeyDown ("n")){
 			//displayChat = !displayChat;
 			displayChat = true;
@@ -310,13 +310,16 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 			chatTextAreaColor = new Color(defaultGUIBackgroundColor.r, defaultGUIBackgroundColor.g, defaultGUIBackgroundColor.b, 1.0f); // 1.0f;
 			// reset counter for fade out to be done later:
 			numberOfFramesAfterChatButtonsWereHiddenBecauseInactive = 0;
-
 		}
 		if(textFieldString != textFieldStringInPreviousFrame) {
 			framesCounterBeforeFadeOutChat = 0;
 			textFieldStringInPreviousFrame = textFieldString;
 		}
-
+		// hide when pressing escape:
+		if(textFieldString.Contains(""+(char)27)) {
+			displayChat = false;
+		}
+		
 		// make chat control disappear after a few seconds, but keep the textarea:
 		//print ("HAI --> "+GUI.GetNameOfFocusedControl());
 		if(displayChat == true && framesCounterBeforeFadeOutChat < numberOfFramesToWaitBeforeFadingOutChat ) { // GUI.GetNameOfFocusedControl() != "ChatBox" --> not working !
@@ -549,6 +552,12 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 						textFieldString = "";
 
 					}
+
+					// hide chat on pressing escape:
+					bool isEscapePressed = (Event.current.type == EventType.keyUp) && (Event.current.keyCode == KeyCode.Escape);
+					if(isEscapePressed) {
+						displayChat = false;
+					}
 				}
 
 			}
@@ -597,6 +606,12 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 						SendInfoToServer(textFieldString);
 						textFieldString = "";
 
+					}
+
+					// hide chat on pressing escape:
+					bool isEscapePressed = (Event.current.type == EventType.keyUp) && (Event.current.keyCode == KeyCode.Escape);
+					if(isEscapePressed) {
+						displayChat = false;
 					}
 					
 				}
