@@ -36,7 +36,11 @@ public class InGameMenu : MonoBehaviour {
 			GameMenu();
 		}
 	}
-	
+
+	public bool inBoundaries(){
+		return isMenuPressed;
+	}
+
 	public void GameMenu ()
 	{
 		// Toggling (hiding/unhiding) the menu.
