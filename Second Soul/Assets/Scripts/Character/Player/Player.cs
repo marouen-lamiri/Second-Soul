@@ -26,6 +26,7 @@ public abstract class Player : Character {
 	public SellShop sellShop;
 	public Shop shop;
 	public SceneManager teleporter;
+	public InGameMenu gameMenu;
 	
 	public int usableSkillPoints;
 	
@@ -68,6 +69,7 @@ public abstract class Player : Character {
 		characterUpdate ();
 		initializeShop();
 		initializeTeleporter();
+		initializeInGameMenu();
 		//Debug.Log (inventory);
 	}
 	
@@ -103,7 +105,13 @@ public abstract class Player : Character {
 			teleporter = (SceneManager) GameObject.FindObjectOfType (typeof (SceneManager));
 		}
 	}
-	
+
+	protected void initializeInGameMenu(){
+		if(playerEnabled){
+			gameMenu = (InGameMenu) GameObject.FindObjectOfType (typeof (InGameMenu));
+		}
+	}
+
 	protected void initializeInventory(){
 		if(playerEnabled){
 			inventory = (Inventory) GameObject.FindObjectOfType (typeof (Inventory));
@@ -247,6 +255,9 @@ public abstract class Player : Character {
 		}
 		if(playerEnabled){
 			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries());
+		}
+		if(playerEnabled && gameMenu != null){
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || gameMenu.inBoundaries());
 		}
 		return false;
 	}
