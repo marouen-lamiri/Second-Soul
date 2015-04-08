@@ -201,7 +201,11 @@ public class DisplayPlayerStatsNew : MonoBehaviour, ISorcererSubscriber {
 			secondaryStatsValues [4] = namesSecondary [4] + ": " + sorcerer.spellPower;
 		}
 	}
-	
+
+	public bool inBoundaries(){
+		return isStatsPressed;
+	}
+
 	public void PlayerStats ()
 	{
 		// Toggling (hiding/unhiding) the primary stats.

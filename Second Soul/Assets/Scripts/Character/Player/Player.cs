@@ -27,6 +27,7 @@ public abstract class Player : Character {
 	public Shop shop;
 	public SceneManager teleporter;
 	public InGameMenu gameMenu;
+	public DisplayPlayerStatsNew displayStats;
 	
 	public int usableSkillPoints;
 	
@@ -70,6 +71,7 @@ public abstract class Player : Character {
 		initializeShop();
 		initializeTeleporter();
 		initializeInGameMenu();
+		initializeDisplayStats();
 		//Debug.Log (inventory);
 	}
 	
@@ -109,6 +111,12 @@ public abstract class Player : Character {
 	protected void initializeInGameMenu(){
 		if(playerEnabled){
 			gameMenu = (InGameMenu) GameObject.FindObjectOfType (typeof (InGameMenu));
+		}
+	}
+
+	protected void initializeDisplayStats(){
+		if(playerEnabled){
+			displayStats = (DisplayPlayerStatsNew) GameObject.FindObjectOfType (typeof (DisplayPlayerStatsNew));
 		}
 	}
 
@@ -248,18 +256,25 @@ public abstract class Player : Character {
 	//ADD CONDITIONS FOR ANY NEW OBJECTS THAT WOULD MAKE PLAY BUSY
 	public bool busyHUD(){
 		if(playerEnabled && (mainShop != null || sellShop != null || sorcererShop != null || fighterShop != null)){
-			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || checkShops() || teleporter.checkBoundaries() || gameMenu.inBoundaries());
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || checkShops() || teleporter.checkBoundaries() || gameMenu.inBoundaries() || displayStats.inBoundaries());
 		}
+
 		if(playerEnabled && teleporter != null){
-			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || teleporter.checkBoundaries() || gameMenu.inBoundaries());;
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || teleporter.checkBoundaries() || gameMenu.inBoundaries() || displayStats.inBoundaries());
 		}
 
 		if(playerEnabled && gameMenu != null){
-			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || gameMenu.inBoundaries());
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || gameMenu.inBoundaries() || displayStats.inBoundaries());
 		}
+
+		if(playerEnabled && displayStats != null){
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || displayStats.inBoundaries());
+		}
+
 		if(playerEnabled){
 			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries());
 		}
+
 		return false;
 	}
 }
