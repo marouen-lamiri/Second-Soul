@@ -87,7 +87,6 @@ public class ElementalDemon : Enemy {
 		if (roarClip == null) {
 			return;
 		}
-		rigidbody.
 		animation.CrossFade(roarClip.name);
 	}
 

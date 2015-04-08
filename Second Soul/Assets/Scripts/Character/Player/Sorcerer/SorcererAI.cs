@@ -28,6 +28,7 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	private float energyCheck = 20f;
 	private float radiusCheck = 5f;
 	int counter = 0;
+	bool justAttacked = false;
 	private string skill1Name = "IceShardSkill";
 	private ISkill skill2;
 	private string skill2Name = "FireballSkill"; 
@@ -134,15 +135,13 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 			//checks if there is a nearby enemy in respect to the fighter, otherwise it will ignore any enemies
 			if(nearestEnemy != null && Vector3.Distance (fighter.transform.position, nearestEnemy.transform.position) < radiusCheck * 2 &&
 			   timeOut < 0 &&  !(nearestEnemy.isDead()) && Vector3.Distance (fighter.transform.position, sorcerer.transform.position) < radiusCheck * 2 
-			   && determineNextMove() && !sorcerer.attackLocked()){
+			   && determineNextMove() && (!animation.isPlaying || !animation.IsPlaying("run"))){
 				sorcerer.stopMoving();
 				//will decide what to use based on probability, which can be tweeked
 				//randomTech determines the next attack
 				//This represents the default attack
 				if(randomTech <= basicRanged && timeOut < 0 && determineNextAttack()){
 					sorcerer.activeSkill5.useSkill();
-					counter++;
-					Debug.Log (counter);
 					timeOut = basicTimeOutReset;
 				}
 				//skill chance of happeining is 0.5%
@@ -194,7 +193,7 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	//Determine if the sorcerer is going to perform an action 
 	public bool determineNextMove(){
 		int randomTech = Random.Range(randomMinValue, randomMaxValue);
-		if(randomTech >= 160){
+		if(randomTech >= 3*randomMaxValue/4){
 			return true;
 		}
 		return false;
@@ -203,7 +202,7 @@ public class SorcererAI : MonoBehaviour, ISorcererSubscriber {
 	//Determine if the sorcerer is going to perform an action 
 	public bool determineNextAttack(){
 		int randomTech = Random.Range(randomMinValue, randomMaxValue);
-		if(randomTech >= 120){
+		if(randomTech <= randomMaxValue/4){
 			return true;
 		}
 		return false;

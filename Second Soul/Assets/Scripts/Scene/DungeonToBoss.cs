@@ -19,7 +19,8 @@ public class DungeonToBoss : SceneManager {
 	// Use this for initialization
 	void Start () {
 		fPosition = (Fighter) GameObject.FindObjectOfType (typeof (Fighter));
-		sPosition = (Sorcerer)SorcererInstanceManager.getSorcerer (); // sPosition = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
+		sPosition = (Sorcerer)SorcererInstanceManager.getSorcerer ();
+		// sPosition = (Sorcerer) GameObject.FindObjectOfType (typeof (Sorcerer));
 	}
 	
 	// Update is called once per frame

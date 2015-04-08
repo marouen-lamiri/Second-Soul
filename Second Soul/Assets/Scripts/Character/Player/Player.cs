@@ -239,7 +239,7 @@ public abstract class Player : Character {
 	
 	//ADD CONDITIONS FOR ANY NEW OBJECTS THAT WOULD MAKE PLAY BUSY
 	public bool busyHUD(){
-		if(playerEnabled && shop != null){
+		if(playerEnabled && (mainShop != null || sellShop != null || sorcererShop != null || fighterShop != null)){
 			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || checkShops() || teleporter.checkBoundaries());
 		}
 		if(playerEnabled && teleporter != null){

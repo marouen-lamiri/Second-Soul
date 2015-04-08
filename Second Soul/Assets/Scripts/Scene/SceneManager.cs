@@ -10,6 +10,12 @@ public class SceneManager : MonoBehaviour {
 	protected int distance = 1000;
 	protected bool showMenu = false;
 	protected int sizeFont = 16;
+	protected SteeringAgent agent;
+
+	void Awake(){
+		agent = GameObject.FindObjectOfType(typeof(SteeringAgent))as SteeringAgent;
+		agent.ResetVelocities();
+	}
 
 	// Update is called once per frame
 	public bool checkBoundaries () {

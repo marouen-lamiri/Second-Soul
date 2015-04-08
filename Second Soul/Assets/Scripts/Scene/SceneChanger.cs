@@ -20,6 +20,7 @@ public class SceneChanger : MonoBehaviour {
 		else if(Application.loadedLevelName == forestScene){
 			fighter.transform.position = new Vector3(randomPositionForestX,fighter.transform.position.y,randomPositionForestZ);
 		}
+
 	}
 	
 	// Update is called once per frame
@@ -28,6 +29,5 @@ public class SceneChanger : MonoBehaviour {
 			Loading.show ();
 			NetworkLevelLoader.Instance.LoadLevel(gameSceneToLoad,1);
 		}
-
 	}
 }
