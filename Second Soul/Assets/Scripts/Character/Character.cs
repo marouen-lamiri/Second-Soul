@@ -174,7 +174,7 @@ public abstract class Character : MonoBehaviour {
 		if (transform.FindChild ("Sphere") != null) {
 			transform.FindChild ("Sphere").transform.position = new Vector3 (transform.position.x, 10.0f, transform.position.z);
 		}
-		if (moving) {
+		if (moving && !Application.isLoadingLevel) {
 			moveToPosition();
 		}
 	}
@@ -454,9 +454,13 @@ public abstract class Character : MonoBehaviour {
 			} else {
 				print("No fighterNetworkScript nor sorcererNetworkScript attached to player.");
 			}
-			
 		}
 	}
+
+	public void transitionToNewScene(){
+		stopMoving();
+	}
+
 	public void startMoving(Vector3 position){
 		//start
 		moving = true;

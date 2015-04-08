@@ -12,9 +12,10 @@ using System;
 public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	// Old code to keep to use a localhost connection on one computer:
-	//	public string serverIP = "127.0.0.1";
-	//	public string serverLocalIP;
-	//	public int port = 25000;
+	// TODO remove 
+		public string serverIP = "127.0.0.1";
+		public string serverLocalIP;
+		public int port = 25000;
 
 	// master server connection variables
 	private int connections = 4;
@@ -568,7 +569,8 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 			if (Network.peerType == NetworkPeerType.Disconnected) {
 				if (GUI.Button (new Rect (connectAsClientButtonPositionX, connectAsClientButtonPositionY, connectAsClientButtonWidth, connectAsClientButtonHeight), "Connect as a Client")) {
 					Loading.show ();
-					RefreshHostList(); //ConnectToServer (); // to replaced with the real master server code above. 
+					//RefreshHostList(); //TODO this is master server code.
+					ConnectToServer (); // to replaced with the real master server code above. 
 					displayChat = true;
 
 				}
@@ -716,13 +718,13 @@ public class ClientNetwork : MonoBehaviour, ISorcererSubscriber {
 
 	// Old code to keep to use a localhost connection:
 
-	// for client:
-	//	private void ConnectToServer() {
-	//		Network.Connect(serverIP, port);
-	//		if (!Network.isClient) {
-	//			//Network.Connect(serverLocalIP,port);
-	//		}
-	//	}
+	// for client: TODO comment back in:
+		private void ConnectToServer() {
+			Network.Connect(serverIP, port);
+			if (!Network.isClient) {
+				//Network.Connect(serverLocalIP,port);
+			}
+		}
 	
 	// for server:
 	void OnPlayerConnected(NetworkPlayer player) {

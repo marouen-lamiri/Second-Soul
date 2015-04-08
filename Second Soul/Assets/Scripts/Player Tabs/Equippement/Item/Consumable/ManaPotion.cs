@@ -16,7 +16,14 @@ public class ManaPotion : Potion {
 	
 	}
 
+	public override void setPlayer(){
+		if(player == null){
+			player = (Character)GameObject.FindObjectOfType(typeof(Character));
+		}
+	}
+
 	public override void useItem(Player player){
+		setPlayer();
 		consume (player);
 	}
 
@@ -32,14 +39,7 @@ public class ManaPotion : Potion {
 		return description;
 	}
 
-	public override void setPlayer(){
-		if(player == null){
-			player = (Character)GameObject.FindObjectOfType(typeof(Character));
-		}
-	}
-
 	public override void consume(Player player){
-		//setPlayer();
 		player.SendMessage(methodToCall, determineAmount());
 	}
 	

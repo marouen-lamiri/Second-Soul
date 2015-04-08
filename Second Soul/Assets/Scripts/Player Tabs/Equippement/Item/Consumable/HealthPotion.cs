@@ -23,6 +23,7 @@ public class HealthPotion : Potion {
 	}
 
 	public override void useItem(Player player){
+		setPlayer();
 		consume (player);
 	}
 
