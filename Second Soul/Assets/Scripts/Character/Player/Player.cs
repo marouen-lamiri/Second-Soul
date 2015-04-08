@@ -248,16 +248,17 @@ public abstract class Player : Character {
 	//ADD CONDITIONS FOR ANY NEW OBJECTS THAT WOULD MAKE PLAY BUSY
 	public bool busyHUD(){
 		if(playerEnabled && (mainShop != null || sellShop != null || sorcererShop != null || fighterShop != null)){
-			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || checkShops() || teleporter.checkBoundaries());
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || checkShops() || teleporter.checkBoundaries() || gameMenu.inBoundaries());
 		}
 		if(playerEnabled && teleporter != null){
-			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || teleporter.checkBoundaries());
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || teleporter.checkBoundaries() || gameMenu.inBoundaries());;
+		}
+
+		if(playerEnabled && gameMenu != null){
+			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || gameMenu.inBoundaries());
 		}
 		if(playerEnabled){
 			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries());
-		}
-		if(playerEnabled && gameMenu != null){
-			return (actionBar.inBoundaries() || skillTree.inBoundaries() || inventory.inBoundaries() || inventory.isItemPickedUp() || stash.inStashBoundaries() || gameMenu.inBoundaries());
 		}
 		return false;
 	}
